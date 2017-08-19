@@ -1,0 +1,1350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Engine">
+      <UniqueIdentifier>{653334d9-1851-4d3e-85f1-e1916af3239f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format">
+      <UniqueIdentifier>{0f4458ba-5946-43a7-a9d1-c6e80f5fb708}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Helper">
+      <UniqueIdentifier>{e8751408-846d-46b1-9b82-f9e3d418718e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Intermediate">
+      <UniqueIdentifier>{8205212a-f8ff-4715-aa6f-3f5ba3c46269}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine">
+      <UniqueIdentifier>{4eb09414-fc68-4322-b88c-1d8c80be2629}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format">
+      <UniqueIdentifier>{de757f13-d0b4-4ead-9b5c-3f49942fbd47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Helper">
+      <UniqueIdentifier>{62a9f4a5-87ae-4829-b60e-a9f4fb1aad47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Intermediate">
+      <UniqueIdentifier>{a560381f-c09e-4211-ade1-b9b1e53e260a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\RAGE">
+      <UniqueIdentifier>{4d2a4860-ae04-4a08-a813-ccceba5c1087}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\RW">
+      <UniqueIdentifier>{63264162-918d-4a90-b126-bcecfabf8dfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\RW">
+      <UniqueIdentifier>{a6ef537e-1d53-4a73-9ea3-4ef6614f7c01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\RAGE">
+      <UniqueIdentifier>{8291e259-79de-44f3-8b66-6cabc6bf3e13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\RW\Entries">
+      <UniqueIdentifier>{afa78563-5d51-48d4-aa2d-4ea8bcb53fc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\RW\Pools">
+      <UniqueIdentifier>{a677b146-5e67-4bc6-93ac-3c19c4b1495a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\RW\Sections">
+      <UniqueIdentifier>{522919d1-1665-442d-b040-75f574648fa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\RW\Sections\Partial">
+      <UniqueIdentifier>{590834a8-595f-4abf-890b-790d11815344}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\RW\Entries\2dEffects">
+      <UniqueIdentifier>{ba653763-2806-45b9-a70d-940355e2b1ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\RW\Entries">
+      <UniqueIdentifier>{71483803-abe3-41cb-a7ce-5b1542114bcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\RW\Sections">
+      <UniqueIdentifier>{208da9ca-dad8-476b-a9d5-5465e791ae82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\RW\Pools">
+      <UniqueIdentifier>{2ffebf24-d6f6-432b-a87f-eb7cd9dc261f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\RW\Entries\2dEffects">
+      <UniqueIdentifier>{2c1cb350-2173-4067-8926-26d271cb170d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\RW\Sections\Partial">
+      <UniqueIdentifier>{75be6046-e6b5-4786-99d4-9b53aa8ce749}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Helper\SectionLines">
+      <UniqueIdentifier>{e23f21c3-a99d-4889-b8ca-12c55fcc5127}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Helper\SectionLines">
+      <UniqueIdentifier>{f748fa62-02ba-495d-b861-ef15364bd155}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Helper\SectionLines\Entry">
+      <UniqueIdentifier>{8651bdc0-ac66-4fc2-b251-7a4c53b9993f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Helper\SectionLines\Entry">
+      <UniqueIdentifier>{e34d6efa-22a2-49e6-a315-4e7c5e1249bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Intermediate\Model">
+      <UniqueIdentifier>{a697f25d-cf99-4b6f-91c3-eb75cfecd2f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Intermediate\Texture">
+      <UniqueIdentifier>{eac692ac-973c-4e29-a330-555c7091cff0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Intermediate\Texture">
+      <UniqueIdentifier>{f44d2272-922f-4f51-b97a-b6ad840370c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Intermediate\Model">
+      <UniqueIdentifier>{a0ce3e30-404b-480a-9636-83c00cc8f44b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Intermediate\Model\Data">
+      <UniqueIdentifier>{333cfb74-2787-41c4-8648-2dca88e4c3ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Intermediate\Texture\Data">
+      <UniqueIdentifier>{527febd2-0c25-4815-bb46-55e3eea86275}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Intermediate\Model\Data">
+      <UniqueIdentifier>{75c84ca1-7576-470c-aa6e-e4a5a7dcd057}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Intermediate\Texture\Data">
+      <UniqueIdentifier>{0d5a55e7-271e-411b-b7d5-d96754acbb72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\COL">
+      <UniqueIdentifier>{e1730e50-5379-42a2-939d-7159a6a6b3df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\DAT">
+      <UniqueIdentifier>{29bbb064-f376-4300-9442-20de08760708}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\DFF">
+      <UniqueIdentifier>{dd1ac400-652a-4b89-a4e4-055c5a2e2bb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\IDE">
+      <UniqueIdentifier>{100d3630-1295-499f-bc9d-ce117de86a3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\IMG">
+      <UniqueIdentifier>{25f3a7e9-900d-4ec9-bba3-36980ad973f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\IPL">
+      <UniqueIdentifier>{a380b3be-94e0-4d9b-9312-e1f2da0cbfbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\TXD">
+      <UniqueIdentifier>{1d455d1e-8056-4d59-87dd-2c7d4adfcd8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\WDR">
+      <UniqueIdentifier>{a79fb958-59df-4b67-b1e6-fa8d4c5cac88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\WTD">
+      <UniqueIdentifier>{a43e2771-4fe9-4d98-a4a1-6c259210caa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\COL">
+      <UniqueIdentifier>{31df0c38-9068-426d-a942-c4d0690166b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\DAT">
+      <UniqueIdentifier>{cb008c59-74cb-4b79-9b2f-076a66cc0e27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\IDE">
+      <UniqueIdentifier>{c6880017-483d-4f47-8bb2-44d379628211}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\IPL">
+      <UniqueIdentifier>{acfc5f02-acaf-4b20-8769-786cdbc31dea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\IMG">
+      <UniqueIdentifier>{c0498d39-80da-438e-8f82-6be87d7b3363}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\DFF">
+      <UniqueIdentifier>{8a9310f0-96e1-483d-9fa0-0cbcd353348c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\TXD">
+      <UniqueIdentifier>{5d514dac-0ee8-46c0-9fd6-f1efeed08e31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\WDR">
+      <UniqueIdentifier>{3c0b296f-b273-4e3d-bab3-87a9ea5327f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\WTD">
+      <UniqueIdentifier>{d41e473d-fb9d-4983-860e-ba8c230b162e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\DAT\Animgrp">
+      <UniqueIdentifier>{972ff0cf-29ea-4f8f-acd1-a582bc0ad069}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\DAT\CAPS">
+      <UniqueIdentifier>{7dcf71a1-144e-428b-9d12-483ed1fc3fe4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\DAT\Chase">
+      <UniqueIdentifier>{578706f4-e143-4558-b0b0-8b8d030079d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\DAT\Loader">
+      <UniqueIdentifier>{eff17f09-d8f2-447a-9243-9f6d2aa3f370}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\DAT\Path">
+      <UniqueIdentifier>{67753bb9-0e28-492e-8a6a-d77b747b17b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\DAT\ScriptPath">
+      <UniqueIdentifier>{e4ec07b0-7f99-4643-9f92-111c9172a965}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\DAT\Waterpro">
+      <UniqueIdentifier>{a351e0a9-0045-4815-a3e0-bc754e61ee8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\DAT\Animgrp">
+      <UniqueIdentifier>{f9c04bdf-e393-4845-8791-a3494a47bd77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\DAT\CAPS">
+      <UniqueIdentifier>{c98da82b-9e4c-4620-a4dd-400defbf0c4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\DAT\Chase">
+      <UniqueIdentifier>{fcb5c541-b966-4a8b-9b71-040ff30dd362}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\DAT\Loader">
+      <UniqueIdentifier>{3e71968b-a28a-48b4-a79f-0d4ca73b8f4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\DAT\Path">
+      <UniqueIdentifier>{e1461582-ba22-4961-b1f8-1bfc2d72e384}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\DAT\ScriptPath">
+      <UniqueIdentifier>{b23dc082-b987-40e1-a74f-4b789b39ee44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\DAT\Waterpro">
+      <UniqueIdentifier>{5c3d0ba5-d480-45c4-8c77-18e293841c8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\IDE\Entry">
+      <UniqueIdentifier>{3710b18b-3e77-48a1-8459-b5d5fcd0c940}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\IDE\Entry">
+      <UniqueIdentifier>{84d2aae4-d1eb-4848-8681-b52c65344310}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\IDE\Entry\DataEntry">
+      <UniqueIdentifier>{22ac3fdc-4da5-429a-ab7d-60be7a38a68a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\IDE\Entry\DataEntry">
+      <UniqueIdentifier>{579c5553-4360-4b55-b41d-d43b361e787f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\IDE\Entry\DataEntry\2DFX">
+      <UniqueIdentifier>{ab160c43-45b9-4d2a-9d99-1b33c6516ddb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\IDE\Entry\DataEntry\PATH">
+      <UniqueIdentifier>{9945ba81-e838-4dc0-b06d-c77bcfad0ed2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\IDE\Entry\DataEntry\2DFX">
+      <UniqueIdentifier>{c7be671f-0d50-4791-a47e-8bf471de9b36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\IDE\Entry\DataEntry\PATH">
+      <UniqueIdentifier>{564f2915-b11f-45f0-b39f-b00c0c2acab7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\IMG\Fastman92">
+      <UniqueIdentifier>{bc58b73c-1190-4a5b-a1e0-996013335636}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\IMG\Regular">
+      <UniqueIdentifier>{9abd0d0a-5130-4658-8d01-495aa37241f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\IMG\Regular\Raw">
+      <UniqueIdentifier>{02468607-2a07-4dd1-9659-cfb078ecb8f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\IMG\Fastman92">
+      <UniqueIdentifier>{1b4e8129-95d5-4cf2-a55f-2beb3fb4b063}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\IMG\Regular">
+      <UniqueIdentifier>{42358ec1-01fa-4b82-b250-d73475860ee9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\IMG\Regular\Raw">
+      <UniqueIdentifier>{e6ad1e6c-5240-4a14-9a9f-d3f99279f162}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\IPL\Entry">
+      <UniqueIdentifier>{707c6f04-1cec-47ea-9b81-5c97c8b298df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\IPL\Entry\DataEntry">
+      <UniqueIdentifier>{44cb0c17-63da-4fa8-9cc6-127e8bcb03aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\IPL\Entry\DataEntry\PATH">
+      <UniqueIdentifier>{5dd1f8c2-a349-444b-a277-1b88547daa2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\IPL\Entry">
+      <UniqueIdentifier>{4e779277-e76c-4f0c-a62e-65f90caeb71f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\IPL\Entry\DataEntry">
+      <UniqueIdentifier>{99d89a00-0893-44b6-ae5d-b9b1ea787912}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\IPL\Entry\DataEntry\PATH">
+      <UniqueIdentifier>{73ffe003-3bf4-4e3e-ac7e-21c0d7fab122}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\WTD\Raw">
+      <UniqueIdentifier>{e0edd66d-8fb1-4d5a-bd30-eb00208ddbef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\WTD\Raw">
+      <UniqueIdentifier>{beb5aa5b-4300-4500-a6dd-9aa95bd57c61}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\COL\CCOLEntry.cpp">
+      <Filter>Source Files\Format\COL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\COL\CCOLFormat.cpp">
+      <Filter>Source Files\Format\COL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\COL\CCOLManager.cpp">
+      <Filter>Source Files\Format\COL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\COL\CCOLVersionManager.cpp">
+      <Filter>Source Files\Format\COL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Animgrp\CDATAnimgrpEntry.cpp">
+      <Filter>Source Files\Format\DAT\Animgrp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Animgrp\CDATAnimgrpFormat.cpp">
+      <Filter>Source Files\Format\DAT\Animgrp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Animgrp\CDATAnimgrpSection.cpp">
+      <Filter>Source Files\Format\DAT\Animgrp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\CAPS\CDATCAPSFormat.cpp">
+      <Filter>Source Files\Format\DAT\CAPS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Chase\CDATChaseEntry.cpp">
+      <Filter>Source Files\Format\DAT\Chase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Chase\CDATChaseFormat.cpp">
+      <Filter>Source Files\Format\DAT\Chase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Loader\CDATLoaderFormat.cpp">
+      <Filter>Source Files\Format\DAT\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Loader\CDATLoaderManager.cpp">
+      <Filter>Source Files\Format\DAT\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Path\CDATPathFormat.cpp">
+      <Filter>Source Files\Format\DAT\Path</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Path\CDATPathManager.cpp">
+      <Filter>Source Files\Format\DAT\Path</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\ScriptPath\CDATScriptPathEntry.cpp">
+      <Filter>Source Files\Format\DAT\ScriptPath</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\ScriptPath\CDATScriptPathFormat.cpp">
+      <Filter>Source Files\Format\DAT\ScriptPath</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Waterpro\CDATWaterproFormat.cpp">
+      <Filter>Source Files\Format\DAT\Waterpro</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Waterpro\CDATWaterproEntry.cpp">
+      <Filter>Source Files\Format\DAT\Waterpro</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DFF\CDFFManager.cpp">
+      <Filter>Source Files\Format\DFF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DFF\CDFFFormat.cpp">
+      <Filter>Source Files\Format\DFF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_AGRPS.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_AMAT.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_ANIM.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_CARS.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_HAND.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_HIER.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_LINK.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_LODM.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_MLO.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_OBJS.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_PATH.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_PEDS.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_TANM.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_TOBJ.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_TREE.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_TXDP.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_UnknownSection.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_VNOD.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_WEAP.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_WorldPoint.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Audio.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_BouyancyAttr.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Escalator.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Explosion.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Ladder.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Light.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_LightShaft.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Particle.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Ped.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_ProcObject.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_ScrollBar.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_SpawnPoint.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_SunReflection.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_SwayableAttr.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Unknown1.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_WalkDontWalkAttr.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\PATH\CIDEEntry_PATH_Node.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry\PATH</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\PATH\CIDEEntry_PATH_Group.cpp">
+      <Filter>Source Files\Format\IDE\Entry\DataEntry\PATH</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_2DFX.cpp">
+      <Filter>Source Files\Format\IDE\Entry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\CIDEEntry_Section.cpp">
+      <Filter>Source Files\Format\IDE\Entry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\CIDEEntry_Other.cpp">
+      <Filter>Source Files\Format\IDE\Entry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\CIDEEntry.cpp">
+      <Filter>Source Files\Format\IDE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\CIDEFormat.cpp">
+      <Filter>Source Files\Format\IDE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\CIDEManager.cpp">
+      <Filter>Source Files\Format\IDE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\CIMGPeekData.cpp">
+      <Filter>Source Files\Format\IMG\Regular</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\CIMGEntry.cpp">
+      <Filter>Source Files\Format\IMG\Regular</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\CIMGFormat.cpp">
+      <Filter>Source Files\Format\IMG\Regular</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\CIMGManager.cpp">
+      <Filter>Source Files\Format\IMG\Regular</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Intermediate\Model\CIntermediateModelFormat.cpp">
+      <Filter>Source Files\Intermediate\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Intermediate\Texture\CIntermediateTextureFormat.cpp">
+      <Filter>Source Files\Intermediate\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_2DFX.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_AUZO.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_BLOK.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_CARS.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_CULL.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_ENEX.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_GRGE.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_INST.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_JUMP.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_LINK.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_LODM.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_MLOPLUS.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_MULT.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_MZON.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_OCCL.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_PATH.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_PICK.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_RTFX.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_SLOW.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_TCYC.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_UnknownSection.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_VNOD.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_ZONE.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\PATH\CIPLEntry_PATH_Group.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry\PATH</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\PATH\CIPLEntry_PATH_Node.cpp">
+      <Filter>Source Files\Format\IPL\Entry\DataEntry\PATH</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\CIPLEntry_Other.cpp">
+      <Filter>Source Files\Format\IPL\Entry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\CIPLEntry_Section.cpp">
+      <Filter>Source Files\Format\IPL\Entry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\CIPLEntry.cpp">
+      <Filter>Source Files\Format\IPL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\CIPLFormat.cpp">
+      <Filter>Source Files\Format\IPL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\CIPLManager.cpp">
+      <Filter>Source Files\Format\IPL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RAGE\CRageManager.cpp">
+      <Filter>Source Files\Engine\RAGE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RAGE\CRageResourceType.cpp">
+      <Filter>Source Files\Engine\RAGE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RAGE\CRageResourceTypeManager.cpp">
+      <Filter>Source Files\Engine\RAGE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_CoverPoint.cpp">
+      <Filter>Source Files\Engine\RW\Entries\2dEffects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_EnterExit.cpp">
+      <Filter>Source Files\Engine\RW\Entries\2dEffects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_Escalator.cpp">
+      <Filter>Source Files\Engine\RW\Entries\2dEffects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_Light.cpp">
+      <Filter>Source Files\Engine\RW\Entries\2dEffects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_ParticleEffect.cpp">
+      <Filter>Source Files\Engine\RW\Entries\2dEffects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_PedAttractor.cpp">
+      <Filter>Source Files\Engine\RW\Entries\2dEffects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_SlotmachineWheel.cpp">
+      <Filter>Source Files\Engine\RW\Entries\2dEffects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_StreetSign.cpp">
+      <Filter>Source Files\Engine\RW\Entries\2dEffects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_SunGlare.cpp">
+      <Filter>Source Files\Engine\RW\Entries\2dEffects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\C2dEffect.cpp">
+      <Filter>Source Files\Engine\RW\Entries</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\CRWEntry_TextureNative_MipMap.cpp">
+      <Filter>Source Files\Engine\RW\Entries</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\CRWFormat.cpp">
+      <Filter>Source Files\Engine\RW</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\CRWManager.cpp">
+      <Filter>Source Files\Engine\RW</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\CRWSection.cpp">
+      <Filter>Source Files\Engine\RW</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\CRWVersion.cpp">
+      <Filter>Source Files\Engine\RW</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\CRWSectionContainer.cpp">
+      <Filter>Source Files\Engine\RW</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\CRWVersionManager.cpp">
+      <Filter>Source Files\Engine\RW</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_2dEffect.cpp">
+      <Filter>Source Files\Engine\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Atomic.cpp">
+      <Filter>Source Files\Engine\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_BinMeshPLG.cpp">
+      <Filter>Source Files\Engine\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Clump.cpp">
+      <Filter>Source Files\Engine\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Extension.cpp">
+      <Filter>Source Files\Engine\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_ExtraVertColour.cpp">
+      <Filter>Source Files\Engine\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Frame.cpp">
+      <Filter>Source Files\Engine\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_FrameList.cpp">
+      <Filter>Source Files\Engine\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Geometry.cpp">
+      <Filter>Source Files\Engine\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_GeometryList.cpp">
+      <Filter>Source Files\Engine\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Light.cpp">
+      <Filter>Source Files\Engine\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Material.cpp">
+      <Filter>Source Files\Engine\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_MaterialList.cpp">
+      <Filter>Source Files\Engine\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_String.cpp">
+      <Filter>Source Files\Engine\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Texture.cpp">
+      <Filter>Source Files\Engine\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_TextureDictionary.cpp">
+      <Filter>Source Files\Engine\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_TextureNative.cpp">
+      <Filter>Source Files\Engine\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_UnknownSection.cpp">
+      <Filter>Source Files\Engine\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Helper\SectionLines\CSectionLinesFormat.cpp">
+      <Filter>Source Files\Helper\SectionLines</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Helper\SectionLines\CSectionLinesEntry.cpp">
+      <Filter>Source Files\Helper\SectionLines</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Helper\SectionLines\Entry\CSectionLinesEntry_Data.cpp">
+      <Filter>Source Files\Helper\SectionLines\Entry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Helper\SectionLines\Entry\CSectionLinesEntry_Other.cpp">
+      <Filter>Source Files\Helper\SectionLines\Entry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\TXD\CTXDManager.cpp">
+      <Filter>Source Files\Format\TXD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\TXD\CTXDFormat.cpp">
+      <Filter>Source Files\Format\TXD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\WDR\CWDRFormat.cpp">
+      <Filter>Source Files\Format\WDR</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\WDR\CWDRManager.cpp">
+      <Filter>Source Files\Format\WDR</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\WTD\CWTDEntry.cpp">
+      <Filter>Source Files\Format\WTD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\WTD\CWTDFormat.cpp">
+      <Filter>Source Files\Format\WTD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\WTD\CWTDManager.cpp">
+      <Filter>Source Files\Format\WTD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\WTD\CWTDMipmap.cpp">
+      <Filter>Source Files\Format\WTD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\CGameFormat.cpp">
+      <Filter>Source Files\Format</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\e2DFXType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\CCOLEntry.h">
+      <Filter>Header Files\Format\COL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\CCOLFormat.h">
+      <Filter>Header Files\Format\COL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\CCOLManager.h">
+      <Filter>Header Files\Format\COL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\CCOLVersion.h">
+      <Filter>Header Files\Format\COL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\CCOLVersionManager.h">
+      <Filter>Header Files\Format\COL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Animgrp\CDATAnimgrpEntry.h">
+      <Filter>Header Files\Format\DAT\Animgrp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Animgrp\CDATAnimgrpFormat.h">
+      <Filter>Header Files\Format\DAT\Animgrp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Animgrp\CDATAnimgrpSection.h">
+      <Filter>Header Files\Format\DAT\Animgrp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\CAPS\CDATCAPSFormat.h">
+      <Filter>Header Files\Format\DAT\CAPS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Chase\CDATChaseEntry.h">
+      <Filter>Header Files\Format\DAT\Chase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Chase\CDATChaseEntry_Raw.h">
+      <Filter>Header Files\Format\DAT\Chase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Chase\CDATChaseFormat.h">
+      <Filter>Header Files\Format\DAT\Chase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Loader\CDATLoaderEntry.h">
+      <Filter>Header Files\Format\DAT\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Loader\CDATLoaderFormat.h">
+      <Filter>Header Files\Format\DAT\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Loader\CDATLoaderManager.h">
+      <Filter>Header Files\Format\DAT\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\CDATPathEntry.h">
+      <Filter>Header Files\Format\DAT\Path</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\CDATPathFormat.h">
+      <Filter>Header Files\Format\DAT\Path</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\CDATPathManager.h">
+      <Filter>Header Files\Format\DAT\Path</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\ScriptPath\CDATScriptPathEntry.h">
+      <Filter>Header Files\Format\DAT\ScriptPath</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\ScriptPath\CDATScriptPathFormat.h">
+      <Filter>Header Files\Format\DAT\ScriptPath</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Waterpro\CDATWaterproEntry.h">
+      <Filter>Header Files\Format\DAT\Waterpro</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Waterpro\CDATWaterproFormat.h">
+      <Filter>Header Files\Format\DAT\Waterpro</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Pools\C2dEffectsPool.h">
+      <Filter>Header Files\Engine\RW\Pools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\C2dEffect.h">
+      <Filter>Header Files\Engine\RW\Entries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DFF\CDFFFormat.h">
+      <Filter>Header Files\Format\DFF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DFF\CDFFManager.h">
+      <Filter>Header Files\Format\DFF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\CIDEEntry.h">
+      <Filter>Header Files\Format\IDE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_2DFX.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_WorldPoint.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Audio.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_BouyancyAttr.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Escalator.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Explosion.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Ladder.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Light.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_LightShaft.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Particle.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Ped.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_ProcObject.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_ScrollBar.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_SpawnPoint.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_SunReflection.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_SwayableAttr.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Unknown1.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_WalkDontWalkAttr.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry\2DFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\PATH\CIDEEntry_PATH_Node.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry\PATH</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\PATH\CIDEEntry_PATH_Group.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry\PATH</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_AGRPS.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_AMAT.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_ANIM.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_CARS.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_HAND.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_HIER.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_LINK.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_LODM.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_MLO.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_OBJS.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_PATH.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_PEDS.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_TANM.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_TOBJ.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_TREE.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_TXDP.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_UnknownSection.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_VNOD.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_WEAP.h">
+      <Filter>Header Files\Format\IDE\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\CIDEEntry_Data.h">
+      <Filter>Header Files\Format\IDE\Entry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\CIDEEntry_Other.h">
+      <Filter>Header Files\Format\IDE\Entry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\CIDEEntry_Section.h">
+      <Filter>Header Files\Format\IDE\Entry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\CIDEFormat.h">
+      <Filter>Header Files\Format\IDE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\CIDEManager.h">
+      <Filter>Header Files\Format\IDE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\eIDESection.h">
+      <Filter>Header Files\Format\IDE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\eIDEPathType.h">
+      <Filter>Header Files\Format\IDE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Fastman92\CIMGEntry_Fastman92.h">
+      <Filter>Header Files\Format\IMG\Fastman92</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Fastman92\CIMGFormat_VersionFastman92_Header1.h">
+      <Filter>Header Files\Format\IMG\Fastman92</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Fastman92\CIMGFormat_VersionFastman92_Header2.h">
+      <Filter>Header Files\Format\IMG\Fastman92</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Fastman92\eIMGVersionFastman92CompressionAlgorithm.h">
+      <Filter>Header Files\Format\IMG\Fastman92</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\CIMGEntry.h">
+      <Filter>Header Files\Format\IMG\Regular</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\CIMGFormat.h">
+      <Filter>Header Files\Format\IMG\Regular</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\CIMGManager.h">
+      <Filter>Header Files\Format\IMG\Regular</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\CIMGPeekData.h">
+      <Filter>Header Files\Format\IMG\Regular</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\eIMGVersion.h">
+      <Filter>Header Files\Format\IMG\Regular</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\eIMGEntryProperty.h">
+      <Filter>Header Files\Format\IMG\Regular</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\Raw\CIMGEntry_Version1Or2.h">
+      <Filter>Header Files\Format\IMG\Regular\Raw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\Raw\CIMGEntry_Version3.h">
+      <Filter>Header Files\Format\IMG\Regular\Raw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\Raw\CIMGFormat_Version2_Header1.h">
+      <Filter>Header Files\Format\IMG\Regular\Raw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\Raw\CIMGFormat_Version3_Header1.h">
+      <Filter>Header Files\Format\IMG\Regular\Raw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Model\Data\CIntermediateBoundingObject.h">
+      <Filter>Header Files\Intermediate\Model\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Model\Data\CIntermediateGeometry.h">
+      <Filter>Header Files\Intermediate\Model\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Model\Data\CIntermediateIndexData.h">
+      <Filter>Header Files\Intermediate\Model\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Model\CIntermediateModel.h">
+      <Filter>Header Files\Intermediate\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Model\CIntermediateModelFormat.h">
+      <Filter>Header Files\Intermediate\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Texture\CIntermediateTextureFormat.h">
+      <Filter>Header Files\Intermediate\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Texture\CIntermediateTexture.h">
+      <Filter>Header Files\Intermediate\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Texture\Data\CIntermediateTextureMipmap.h">
+      <Filter>Header Files\Intermediate\Texture\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Model\Data\CIntermediateVertexData.h">
+      <Filter>Header Files\Intermediate\Model\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Model\Data\eIntermediateBoundingObjectType.h">
+      <Filter>Header Files\Intermediate\Model\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\CIPLEntry.h">
+      <Filter>Header Files\Format\IPL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_2DFX.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_AUZO.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_BLOK.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_CARS.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_CULL.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_ENEX.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_GRGE.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_INST.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_JUMP.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_LINK.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_LODM.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_MLOPLUS.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_MULT.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_MZON.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_OCCL.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_PATH.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_PICK.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_RTFX.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_SLOW.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_TCYC.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_UnknownSection.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_VNOD.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_ZONE.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\PATH\CIPLEntry_PATH_Node.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry\PATH</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\PATH\CIPLEntry_PATH_Group.h">
+      <Filter>Header Files\Format\IPL\Entry\DataEntry\PATH</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\CIPLEntry_Section.h">
+      <Filter>Header Files\Format\IPL\Entry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\CIPLEntry_Data.h">
+      <Filter>Header Files\Format\IPL\Entry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\CIPLEntry_Other.h">
+      <Filter>Header Files\Format\IPL\Entry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\CIPLManager.h">
+      <Filter>Header Files\Format\IPL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\CIPLFormat.h">
+      <Filter>Header Files\Format\IPL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\eIPLSection.h">
+      <Filter>Header Files\Format\IPL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\eIPLPathType.h">
+      <Filter>Header Files\Format\IPL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RAGE\CRageManager.h">
+      <Filter>Header Files\Engine\RAGE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RAGE\CRageResourceTypeManager.h">
+      <Filter>Header Files\Engine\RAGE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RAGE\CRageResourceType.h">
+      <Filter>Header Files\Engine\RAGE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_CoverPoint.h">
+      <Filter>Header Files\Engine\RW\Entries\2dEffects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_EnterExit.h">
+      <Filter>Header Files\Engine\RW\Entries\2dEffects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_Escalator.h">
+      <Filter>Header Files\Engine\RW\Entries\2dEffects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_Light.h">
+      <Filter>Header Files\Engine\RW\Entries\2dEffects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_ParticleEffect.h">
+      <Filter>Header Files\Engine\RW\Entries\2dEffects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_PedAttractor.h">
+      <Filter>Header Files\Engine\RW\Entries\2dEffects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_SlotmachineWheel.h">
+      <Filter>Header Files\Engine\RW\Entries\2dEffects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_StreetSign.h">
+      <Filter>Header Files\Engine\RW\Entries\2dEffects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_SunGlare.h">
+      <Filter>Header Files\Engine\RW\Entries\2dEffects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\CRWEntry_TextureNative_MipMap.h">
+      <Filter>Header Files\Engine\RW\Entries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\CRWEntry_BinMeshPLG_Mesh.h">
+      <Filter>Header Files\Engine\RW\Entries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWFormat.h">
+      <Filter>Header Files\Engine\RW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\Partial\CRWGeometryBoundingInfo.h">
+      <Filter>Header Files\Engine\RW\Sections\Partial</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWSection.h">
+      <Filter>Header Files\Engine\RW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWManager.h">
+      <Filter>Header Files\Engine\RW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_2dEffect.h">
+      <Filter>Header Files\Engine\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Atomic.h">
+      <Filter>Header Files\Engine\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_BinMeshPLG.h">
+      <Filter>Header Files\Engine\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Clump.h">
+      <Filter>Header Files\Engine\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Extension.h">
+      <Filter>Header Files\Engine\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_ExtraVertColour.h">
+      <Filter>Header Files\Engine\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Frame.h">
+      <Filter>Header Files\Engine\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_FrameList.h">
+      <Filter>Header Files\Engine\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Geometry.h">
+      <Filter>Header Files\Engine\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_GeometryList.h">
+      <Filter>Header Files\Engine\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Light.h">
+      <Filter>Header Files\Engine\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Material.h">
+      <Filter>Header Files\Engine\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_MaterialList.h">
+      <Filter>Header Files\Engine\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_String.h">
+      <Filter>Header Files\Engine\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Texture.h">
+      <Filter>Header Files\Engine\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_TextureDictionary.h">
+      <Filter>Header Files\Engine\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_TextureNative.h">
+      <Filter>Header Files\Engine\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_UnknownSection.h">
+      <Filter>Header Files\Engine\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWSectionDepthData.h">
+      <Filter>Header Files\Engine\RW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWSectionContainer.h">
+      <Filter>Header Files\Engine\RW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWVersion.h">
+      <Filter>Header Files\Engine\RW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWVersionManager.h">
+      <Filter>Header Files\Engine\RW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Helper\SectionLines\CSectionLinesEntry.h">
+      <Filter>Header Files\Helper\SectionLines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Helper\SectionLines\CSectionLinesFormat.h">
+      <Filter>Header Files\Helper\SectionLines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Helper\SectionLines\eSectionLinesEntryType.h">
+      <Filter>Header Files\Helper\SectionLines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Helper\SectionLines\Entry\CSectionLinesEntry_Other.h">
+      <Filter>Header Files\Helper\SectionLines\Entry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Helper\SectionLines\Entry\CSectionLinesEntry_Data.h">
+      <Filter>Header Files\Helper\SectionLines\Entry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\TXD\CTXDManager.h">
+      <Filter>Header Files\Format\TXD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\TXD\CTXDFormat.h">
+      <Filter>Header Files\Format\TXD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\TXD\eTXDRasterDataFormat.h">
+      <Filter>Header Files\Format\TXD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CTextureEntry.h">
+      <Filter>Header Files\Engine\RW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WDR\CWDRBlock_Geometry.h">
+      <Filter>Header Files\Format\WDR</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WDR\CWDRBlock_IndexData.h">
+      <Filter>Header Files\Format\WDR</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WDR\CWDRBlock_Model.h">
+      <Filter>Header Files\Format\WDR</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WDR\CWDRBlock_VertexData.h">
+      <Filter>Header Files\Format\WDR</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WDR\CWDRBoundingObject.h">
+      <Filter>Header Files\Format\WDR</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WDR\CWDRFormat.h">
+      <Filter>Header Files\Format\WDR</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WDR\CWDRManager.h">
+      <Filter>Header Files\Format\WDR</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WTD\CWTDEntry.h">
+      <Filter>Header Files\Format\WTD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WTD\CWTDFormat.h">
+      <Filter>Header Files\Format\WTD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WTD\CWTDManager.h">
+      <Filter>Header Files\Format\WTD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WTD\CWTDMipmap.h">
+      <Filter>Header Files\Format\WTD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WTD\Raw\CWTDEntry_RG.h">
+      <Filter>Header Files\Format\WTD\Raw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WTD\Raw\CWTDFormat_Header1.h">
+      <Filter>Header Files\Format\WTD\Raw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WTD\Raw\CWTDFormat_Header2.h">
+      <Filter>Header Files\Format\WTD\Raw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\eCOLVersion.h">
+      <Filter>Header Files\Format\COL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\TShapes.h">
+      <Filter>Header Files\Format\COL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Loader\eDATLoaderEntryType.h">
+      <Filter>Header Files\Format\DAT\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\eDATPathFormat.h">
+      <Filter>Header Files\Format\DAT\Path</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RAGE\eRageResourceType.h">
+      <Filter>Header Files\Engine\RAGE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\eRWSection.h">
+      <Filter>Header Files\Engine\RW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\eRWVersion.h">
+      <Filter>Header Files\Engine\RW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\eRWVersionType.h">
+      <Filter>Header Files\Engine\RW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\bxgi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\CGameFormat.h">
+      <Filter>Header Files\Format</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

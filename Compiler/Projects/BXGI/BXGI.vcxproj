@@ -1,0 +1,489 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{1ED5D0AD-4FA6-433C-890D-B1E495DEF417}</ProjectGuid>
+    <RootNamespace>BXGI</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>..\..\..\Code\BXGI\;../../../../BXCF/Code/BXCF/;../../../../BXCF/Code/BXCF.ThirdParty/;$(IncludePath)</IncludePath>
+    <OutDir>..\..\..\..\_Output\Lib\BXGI\BXGI\$(Configuration)\</OutDir>
+    <IntDir>..\..\..\..\_Output\Intermediate\BXGI\BXGI\$(Configuration)\</IntDir>
+    <TargetName>BXGI</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\..\..\_Output\Lib\BXGI\BXGI\$(Configuration)\</OutDir>
+    <IntDir>..\..\..\..\_Output\Intermediate\BXGI\BXGI\$(Configuration)\</IntDir>
+    <TargetName>BXGI</TargetName>
+    <IncludePath>..\..\..\Code\BXGI\;../../../../BXCF/Code/BXCF/;../../../../BXCF/Code/BXCF.ThirdParty/;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\BXGI\bxgi.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\CGameFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Model\CIntermediateModel.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Model\CIntermediateModelFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Model\Data\CIntermediateBoundingObject.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Model\Data\CIntermediateGeometry.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Model\Data\CIntermediateIndexData.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Model\Data\CIntermediateVertexData.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Model\Data\eIntermediateBoundingObjectType.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Texture\CIntermediateTexture.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Texture\CIntermediateTextureFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Texture\Data\CIntermediateTextureMipmap.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RAGE\CRageManager.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RAGE\CRageResourceType.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RAGE\CRageResourceTypeManager.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RAGE\eRageResourceType.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWManager.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWSection.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWSectionContainer.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWSectionDepthData.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWVersion.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWVersionManager.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CTextureEntry.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_CoverPoint.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_EnterExit.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_Escalator.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_Light.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_ParticleEffect.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_PedAttractor.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_SlotmachineWheel.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_StreetSign.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_SunGlare.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\C2dEffect.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\CRWEntry_BinMeshPLG_Mesh.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\CRWEntry_TextureNative_MipMap.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\eRWSection.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\eRWVersion.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\eRWVersionType.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Pools\C2dEffectsPool.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_2dEffect.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Atomic.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_BinMeshPLG.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Clump.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Extension.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_ExtraVertColour.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Frame.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_FrameList.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Geometry.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_GeometryList.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Light.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Material.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_MaterialList.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_String.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Texture.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_TextureDictionary.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_TextureNative.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_UnknownSection.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\Partial\CRWGeometryBoundingInfo.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\CCOLEntry.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\CCOLFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\CCOLManager.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\CCOLVersion.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\CCOLVersionManager.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\eCOLVersion.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\TShapes.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Animgrp\CDATAnimgrpEntry.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Animgrp\CDATAnimgrpFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Animgrp\CDATAnimgrpSection.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\CAPS\CDATCAPSFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Chase\CDATChaseEntry.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Chase\CDATChaseEntry_Raw.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Chase\CDATChaseFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Loader\CDATLoaderEntry.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Loader\CDATLoaderFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Loader\CDATLoaderManager.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Loader\eDATLoaderEntryType.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\CDATPathEntry.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\CDATPathFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\CDATPathManager.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\eDATPathFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\ScriptPath\CDATScriptPathEntry.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\ScriptPath\CDATScriptPathFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Waterpro\CDATWaterproEntry.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Waterpro\CDATWaterproFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DFF\CDFFFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DFF\CDFFManager.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\e2DFXType.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Helper\SectionLines\CSectionLinesEntry.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Helper\SectionLines\CSectionLinesFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Helper\SectionLines\Entry\CSectionLinesEntry_Data.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Helper\SectionLines\Entry\CSectionLinesEntry_Other.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Helper\SectionLines\eSectionLinesEntryType.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\CIDEEntry.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\CIDEFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\CIDEManager.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\eIDEPathType.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\eIDESection.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\CIDEEntry_Data.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\CIDEEntry_Other.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\CIDEEntry_Section.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Audio.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_BouyancyAttr.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Escalator.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Explosion.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Ladder.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Light.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_LightShaft.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Particle.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Ped.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_ProcObject.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_ScrollBar.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_SpawnPoint.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_SunReflection.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_SwayableAttr.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Unknown1.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_WalkDontWalkAttr.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_WorldPoint.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_2DFX.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_AGRPS.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_AMAT.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_ANIM.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_CARS.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_HAND.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_HIER.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_LINK.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_LODM.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_MLO.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_OBJS.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_PATH.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_PEDS.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_TANM.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_TOBJ.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_TREE.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_TXDP.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_UnknownSection.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_VNOD.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_WEAP.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\PATH\CIDEEntry_PATH_Group.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\PATH\CIDEEntry_PATH_Node.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\CIMGEntry.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\CIMGFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\CIMGManager.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\CIMGPeekData.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\eIMGEntryProperty.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\eIMGVersion.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Fastman92\CIMGEntry_Fastman92.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Fastman92\CIMGFormat_VersionFastman92_Header1.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Fastman92\CIMGFormat_VersionFastman92_Header2.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Fastman92\eIMGVersionFastman92CompressionAlgorithm.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\Raw\CIMGEntry_Version1Or2.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\Raw\CIMGEntry_Version3.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\Raw\CIMGFormat_Version2_Header1.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\Raw\CIMGFormat_Version3_Header1.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\CIPLEntry.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\CIPLFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\CIPLManager.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\eIPLPathType.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\eIPLSection.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\CIPLEntry_Data.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\CIPLEntry_Other.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\CIPLEntry_Section.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_2DFX.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_AUZO.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_BLOK.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_CARS.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_CULL.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_ENEX.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_GRGE.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_INST.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_JUMP.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_LINK.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_LODM.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_MLOPLUS.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_MULT.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_MZON.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_OCCL.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_PATH.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_PICK.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_RTFX.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_SLOW.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_TCYC.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_UnknownSection.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_VNOD.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_ZONE.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\PATH\CIPLEntry_PATH_Group.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\PATH\CIPLEntry_PATH_Node.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\TXD\CTXDFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\TXD\CTXDManager.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\TXD\eTXDRasterDataFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WDR\CWDRBlock_Geometry.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WDR\CWDRBlock_IndexData.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WDR\CWDRBlock_Model.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WDR\CWDRBlock_VertexData.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WDR\CWDRBoundingObject.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WDR\CWDRFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WDR\CWDRManager.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WTD\CWTDEntry.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WTD\CWTDFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WTD\CWTDManager.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WTD\CWTDMipmap.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WTD\Raw\CWTDEntry_RG.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WTD\Raw\CWTDFormat_Header1.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\WTD\Raw\CWTDFormat_Header2.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\CGameFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Intermediate\Model\CIntermediateModelFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Intermediate\Texture\CIntermediateTextureFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RAGE\CRageManager.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RAGE\CRageResourceType.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RAGE\CRageResourceTypeManager.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\CRWFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\CRWManager.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\CRWSection.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\CRWSectionContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\CRWVersion.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\CRWVersionManager.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_CoverPoint.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_EnterExit.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_Escalator.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_Light.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_ParticleEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_PedAttractor.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_SlotmachineWheel.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_StreetSign.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_SunGlare.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\C2dEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\CRWEntry_TextureNative_MipMap.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_2dEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Atomic.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_BinMeshPLG.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Clump.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Extension.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_ExtraVertColour.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Frame.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_FrameList.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Geometry.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_GeometryList.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Light.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Material.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_MaterialList.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_String.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Texture.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_TextureDictionary.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_TextureNative.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_UnknownSection.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\COL\CCOLEntry.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\COL\CCOLFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\COL\CCOLManager.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\COL\CCOLVersionManager.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Animgrp\CDATAnimgrpEntry.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Animgrp\CDATAnimgrpFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Animgrp\CDATAnimgrpSection.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\CAPS\CDATCAPSFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Chase\CDATChaseEntry.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Chase\CDATChaseFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Loader\CDATLoaderFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Loader\CDATLoaderManager.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Path\CDATPathFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Path\CDATPathManager.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\ScriptPath\CDATScriptPathEntry.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\ScriptPath\CDATScriptPathFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Waterpro\CDATWaterproEntry.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Waterpro\CDATWaterproFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DFF\CDFFFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DFF\CDFFManager.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Helper\SectionLines\CSectionLinesEntry.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Helper\SectionLines\CSectionLinesFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Helper\SectionLines\Entry\CSectionLinesEntry_Data.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Helper\SectionLines\Entry\CSectionLinesEntry_Other.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\CIDEEntry.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\CIDEFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\CIDEManager.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\CIDEEntry_Other.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\CIDEEntry_Section.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Audio.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_BouyancyAttr.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Escalator.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Explosion.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Ladder.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Light.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_LightShaft.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Particle.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Ped.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_ProcObject.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_ScrollBar.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_SpawnPoint.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_SunReflection.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_SwayableAttr.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_Unknown1.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_WalkDontWalkAttr.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\2DFX\CIDEEntry_2DFX_WorldPoint.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_2DFX.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_AGRPS.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_AMAT.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_ANIM.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_CARS.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_HAND.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_HIER.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_LINK.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_LODM.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_MLO.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_OBJS.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_PATH.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_PEDS.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_TANM.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_TOBJ.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_TREE.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_TXDP.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_UnknownSection.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_VNOD.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\CIDEEntry_WEAP.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\PATH\CIDEEntry_PATH_Group.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\Entry\DataEntry\PATH\CIDEEntry_PATH_Node.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\CIMGEntry.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\CIMGFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\CIMGManager.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\CIMGPeekData.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\CIPLEntry.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\CIPLFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\CIPLManager.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\CIPLEntry_Other.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\CIPLEntry_Section.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_2DFX.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_AUZO.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_BLOK.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_CARS.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_CULL.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_ENEX.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_GRGE.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_INST.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_JUMP.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_LINK.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_LODM.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_MLOPLUS.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_MULT.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_MZON.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_OCCL.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_PATH.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_PICK.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_RTFX.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_SLOW.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_TCYC.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_UnknownSection.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_VNOD.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\CIPLEntry_ZONE.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\PATH\CIPLEntry_PATH_Group.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IPL\Entry\DataEntry\PATH\CIPLEntry_PATH_Node.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\TXD\CTXDFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\TXD\CTXDManager.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\WDR\CWDRFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\WDR\CWDRManager.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\WTD\CWTDEntry.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\WTD\CWTDFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\WTD\CWTDManager.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\WTD\CWTDMipmap.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
