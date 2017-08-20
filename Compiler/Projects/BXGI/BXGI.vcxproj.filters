@@ -49,34 +49,16 @@
     <Filter Include="Source Files\Engine\RAGE">
       <UniqueIdentifier>{8291e259-79de-44f3-8b66-6cabc6bf3e13}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Engine\RW\Entries">
-      <UniqueIdentifier>{afa78563-5d51-48d4-aa2d-4ea8bcb53fc9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Engine\RW\Pools">
-      <UniqueIdentifier>{a677b146-5e67-4bc6-93ac-3c19c4b1495a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Engine\RW\Sections">
-      <UniqueIdentifier>{522919d1-1665-442d-b040-75f574648fa2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Engine\RW\Sections\Partial">
+    <Filter Include="Source Files\Format\RW\Sections\Partial">
       <UniqueIdentifier>{590834a8-595f-4abf-890b-790d11815344}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Engine\RW\Entries\2dEffects">
+    <Filter Include="Source Files\Format\RW\Entries\2dEffects">
       <UniqueIdentifier>{ba653763-2806-45b9-a70d-940355e2b1ec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Engine\RW\Entries">
-      <UniqueIdentifier>{71483803-abe3-41cb-a7ce-5b1542114bcb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Engine\RW\Sections">
-      <UniqueIdentifier>{208da9ca-dad8-476b-a9d5-5465e791ae82}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Engine\RW\Pools">
-      <UniqueIdentifier>{2ffebf24-d6f6-432b-a87f-eb7cd9dc261f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Engine\RW\Entries\2dEffects">
+    <Filter Include="Header Files\Format\RW\Entries\2dEffects">
       <UniqueIdentifier>{2c1cb350-2173-4067-8926-26d271cb170d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Engine\RW\Sections\Partial">
+    <Filter Include="Header Files\Format\RW\Sections\Partial">
       <UniqueIdentifier>{75be6046-e6b5-4786-99d4-9b53aa8ce749}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Helper\SectionLines">
@@ -276,6 +258,36 @@
     </Filter>
     <Filter Include="Source Files\Format\WTD\Raw">
       <UniqueIdentifier>{beb5aa5b-4300-4500-a6dd-9aa95bd57c61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\RW">
+      <UniqueIdentifier>{eeab3a8d-87fc-4924-8d64-d90b28e224a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\RW">
+      <UniqueIdentifier>{4fc69a7f-2ff7-4e58-b47c-94facd21e9fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\RW\Entries">
+      <UniqueIdentifier>{2c320ba3-85a9-4287-a83d-8f83eb88f024}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\RW\Entries">
+      <UniqueIdentifier>{229bd2eb-37e1-4ddb-9b5e-090143824dde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\RW\Sections">
+      <UniqueIdentifier>{12c49df1-90cf-476b-bf7e-7767bae0ac0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\RW\Pools">
+      <UniqueIdentifier>{edbafb7a-c062-4f86-a21c-c9d5818ac003}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\RW\Pools">
+      <UniqueIdentifier>{f399e8c3-96e7-4060-9e01-caa1f24f38c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\RW\Sections">
+      <UniqueIdentifier>{eaf7d121-add7-455a-b542-b5e7caa0f0f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\RW\Entries\2dEffects">
+      <UniqueIdentifier>{142ed847-9758-4526-9d2c-a00287cee100}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\RW\Entries\2dEffects">
+      <UniqueIdentifier>{39379146-caa7-4f03-a38a-96f8a292fa8a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -588,110 +600,32 @@
     <ClCompile Include="..\..\..\Code\BXGI\Engine\RAGE\CRageResourceTypeManager.cpp">
       <Filter>Source Files\Engine\RAGE</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_CoverPoint.cpp">
-      <Filter>Source Files\Engine\RW\Entries\2dEffects</Filter>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Entries\2dEffects\CRWEntry_2dEffect_CoverPoint.cpp">
+      <Filter>Source Files\Format\RW\Entries\2dEffects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_EnterExit.cpp">
-      <Filter>Source Files\Engine\RW\Entries\2dEffects</Filter>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Entries\2dEffects\CRWEntry_2dEffect_EnterExit.cpp">
+      <Filter>Source Files\Format\RW\Entries\2dEffects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_Escalator.cpp">
-      <Filter>Source Files\Engine\RW\Entries\2dEffects</Filter>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Entries\2dEffects\CRWEntry_2dEffect_Escalator.cpp">
+      <Filter>Source Files\Format\RW\Entries\2dEffects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_Light.cpp">
-      <Filter>Source Files\Engine\RW\Entries\2dEffects</Filter>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Entries\2dEffects\CRWEntry_2dEffect_Light.cpp">
+      <Filter>Source Files\Format\RW\Entries\2dEffects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_ParticleEffect.cpp">
-      <Filter>Source Files\Engine\RW\Entries\2dEffects</Filter>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Entries\2dEffects\CRWEntry_2dEffect_ParticleEffect.cpp">
+      <Filter>Source Files\Format\RW\Entries\2dEffects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_PedAttractor.cpp">
-      <Filter>Source Files\Engine\RW\Entries\2dEffects</Filter>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Entries\2dEffects\CRWEntry_2dEffect_PedAttractor.cpp">
+      <Filter>Source Files\Format\RW\Entries\2dEffects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_SlotmachineWheel.cpp">
-      <Filter>Source Files\Engine\RW\Entries\2dEffects</Filter>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Entries\2dEffects\CRWEntry_2dEffect_SlotmachineWheel.cpp">
+      <Filter>Source Files\Format\RW\Entries\2dEffects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_StreetSign.cpp">
-      <Filter>Source Files\Engine\RW\Entries\2dEffects</Filter>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Entries\2dEffects\CRWEntry_2dEffect_StreetSign.cpp">
+      <Filter>Source Files\Format\RW\Entries\2dEffects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_SunGlare.cpp">
-      <Filter>Source Files\Engine\RW\Entries\2dEffects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\C2dEffect.cpp">
-      <Filter>Source Files\Engine\RW\Entries</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Entries\CRWEntry_TextureNative_MipMap.cpp">
-      <Filter>Source Files\Engine\RW\Entries</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\CRWFormat.cpp">
-      <Filter>Source Files\Engine\RW</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\CRWManager.cpp">
-      <Filter>Source Files\Engine\RW</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\CRWSection.cpp">
-      <Filter>Source Files\Engine\RW</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\CRWVersion.cpp">
-      <Filter>Source Files\Engine\RW</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\CRWSectionContainer.cpp">
-      <Filter>Source Files\Engine\RW</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\CRWVersionManager.cpp">
-      <Filter>Source Files\Engine\RW</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_2dEffect.cpp">
-      <Filter>Source Files\Engine\RW\Sections</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Atomic.cpp">
-      <Filter>Source Files\Engine\RW\Sections</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_BinMeshPLG.cpp">
-      <Filter>Source Files\Engine\RW\Sections</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Clump.cpp">
-      <Filter>Source Files\Engine\RW\Sections</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Extension.cpp">
-      <Filter>Source Files\Engine\RW\Sections</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_ExtraVertColour.cpp">
-      <Filter>Source Files\Engine\RW\Sections</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Frame.cpp">
-      <Filter>Source Files\Engine\RW\Sections</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_FrameList.cpp">
-      <Filter>Source Files\Engine\RW\Sections</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Geometry.cpp">
-      <Filter>Source Files\Engine\RW\Sections</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_GeometryList.cpp">
-      <Filter>Source Files\Engine\RW\Sections</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Light.cpp">
-      <Filter>Source Files\Engine\RW\Sections</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Material.cpp">
-      <Filter>Source Files\Engine\RW\Sections</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_MaterialList.cpp">
-      <Filter>Source Files\Engine\RW\Sections</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_String.cpp">
-      <Filter>Source Files\Engine\RW\Sections</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Texture.cpp">
-      <Filter>Source Files\Engine\RW\Sections</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_TextureDictionary.cpp">
-      <Filter>Source Files\Engine\RW\Sections</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_TextureNative.cpp">
-      <Filter>Source Files\Engine\RW\Sections</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_UnknownSection.cpp">
-      <Filter>Source Files\Engine\RW\Sections</Filter>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Entries\2dEffects\CRWEntry_2dEffect_SunGlare.cpp">
+      <Filter>Source Files\Format\RW\Entries\2dEffects</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\BXGI\Helper\SectionLines\CSectionLinesFormat.cpp">
       <Filter>Source Files\Helper\SectionLines</Filter>
@@ -732,11 +666,86 @@
     <ClCompile Include="..\..\..\Code\BXGI\Format\CGameFormat.cpp">
       <Filter>Source Files\Format</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_2dEffect.cpp">
+      <Filter>Source Files\Format\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_Atomic.cpp">
+      <Filter>Source Files\Format\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_BinMeshPLG.cpp">
+      <Filter>Source Files\Format\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_Clump.cpp">
+      <Filter>Source Files\Format\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_Extension.cpp">
+      <Filter>Source Files\Format\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_ExtraVertColour.cpp">
+      <Filter>Source Files\Format\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_Frame.cpp">
+      <Filter>Source Files\Format\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_FrameList.cpp">
+      <Filter>Source Files\Format\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_Geometry.cpp">
+      <Filter>Source Files\Format\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_GeometryList.cpp">
+      <Filter>Source Files\Format\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_Light.cpp">
+      <Filter>Source Files\Format\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_Material.cpp">
+      <Filter>Source Files\Format\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_MaterialList.cpp">
+      <Filter>Source Files\Format\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_String.cpp">
+      <Filter>Source Files\Format\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_Texture.cpp">
+      <Filter>Source Files\Format\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_TextureDictionary.cpp">
+      <Filter>Source Files\Format\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_TextureNative.cpp">
+      <Filter>Source Files\Format\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_UnknownSection.cpp">
+      <Filter>Source Files\Format\RW\Sections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Entries\C2dEffect.cpp">
+      <Filter>Source Files\Format\RW\Entries</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Entries\CRWEntry_TextureNative_MipMap.cpp">
+      <Filter>Source Files\Format\RW\Entries</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\CRWFormat.cpp">
+      <Filter>Source Files\Format\RW</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\CRWSection.cpp">
+      <Filter>Source Files\Format\RW</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\CRWSectionContainer.cpp">
+      <Filter>Source Files\Format\RW</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\CRWManager.cpp">
+      <Filter>Source Files\Engine\RW</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\CRWVersion.cpp">
+      <Filter>Source Files\Engine\RW</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\CRWVersionManager.cpp">
+      <Filter>Source Files\Engine\RW</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Code\BXGI\Format\e2DFXType.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\COL\CCOLEntry.h">
       <Filter>Header Files\Format\COL</Filter>
     </ClInclude>
@@ -802,12 +811,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Waterpro\CDATWaterproFormat.h">
       <Filter>Header Files\Format\DAT\Waterpro</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Pools\C2dEffectsPool.h">
-      <Filter>Header Files\Engine\RW\Pools</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\C2dEffect.h">
-      <Filter>Header Files\Engine\RW\Entries</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\DFF\CDFFFormat.h">
       <Filter>Header Files\Format\DFF</Filter>
@@ -1136,116 +1139,35 @@
     <ClInclude Include="..\..\..\Code\BXGI\Engine\RAGE\CRageResourceType.h">
       <Filter>Header Files\Engine\RAGE</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_CoverPoint.h">
-      <Filter>Header Files\Engine\RW\Entries\2dEffects</Filter>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Entries\2dEffects\CRWEntry_2dEffect_CoverPoint.h">
+      <Filter>Header Files\Format\RW\Entries\2dEffects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_EnterExit.h">
-      <Filter>Header Files\Engine\RW\Entries\2dEffects</Filter>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Entries\2dEffects\CRWEntry_2dEffect_EnterExit.h">
+      <Filter>Header Files\Format\RW\Entries\2dEffects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_Escalator.h">
-      <Filter>Header Files\Engine\RW\Entries\2dEffects</Filter>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Entries\2dEffects\CRWEntry_2dEffect_Escalator.h">
+      <Filter>Header Files\Format\RW\Entries\2dEffects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_Light.h">
-      <Filter>Header Files\Engine\RW\Entries\2dEffects</Filter>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Entries\2dEffects\CRWEntry_2dEffect_Light.h">
+      <Filter>Header Files\Format\RW\Entries\2dEffects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_ParticleEffect.h">
-      <Filter>Header Files\Engine\RW\Entries\2dEffects</Filter>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Entries\2dEffects\CRWEntry_2dEffect_ParticleEffect.h">
+      <Filter>Header Files\Format\RW\Entries\2dEffects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_PedAttractor.h">
-      <Filter>Header Files\Engine\RW\Entries\2dEffects</Filter>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Entries\2dEffects\CRWEntry_2dEffect_PedAttractor.h">
+      <Filter>Header Files\Format\RW\Entries\2dEffects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_SlotmachineWheel.h">
-      <Filter>Header Files\Engine\RW\Entries\2dEffects</Filter>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Entries\2dEffects\CRWEntry_2dEffect_SlotmachineWheel.h">
+      <Filter>Header Files\Format\RW\Entries\2dEffects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_StreetSign.h">
-      <Filter>Header Files\Engine\RW\Entries\2dEffects</Filter>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Entries\2dEffects\CRWEntry_2dEffect_StreetSign.h">
+      <Filter>Header Files\Format\RW\Entries\2dEffects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\2dEffects\CRWEntry_2dEffect_SunGlare.h">
-      <Filter>Header Files\Engine\RW\Entries\2dEffects</Filter>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Entries\2dEffects\CRWEntry_2dEffect_SunGlare.h">
+      <Filter>Header Files\Format\RW\Entries\2dEffects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\CRWEntry_TextureNative_MipMap.h">
-      <Filter>Header Files\Engine\RW\Entries</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Entries\CRWEntry_BinMeshPLG_Mesh.h">
-      <Filter>Header Files\Engine\RW\Entries</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWFormat.h">
-      <Filter>Header Files\Engine\RW</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\Partial\CRWGeometryBoundingInfo.h">
-      <Filter>Header Files\Engine\RW\Sections\Partial</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWSection.h">
-      <Filter>Header Files\Engine\RW</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWManager.h">
-      <Filter>Header Files\Engine\RW</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_2dEffect.h">
-      <Filter>Header Files\Engine\RW\Sections</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Atomic.h">
-      <Filter>Header Files\Engine\RW\Sections</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_BinMeshPLG.h">
-      <Filter>Header Files\Engine\RW\Sections</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Clump.h">
-      <Filter>Header Files\Engine\RW\Sections</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Extension.h">
-      <Filter>Header Files\Engine\RW\Sections</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_ExtraVertColour.h">
-      <Filter>Header Files\Engine\RW\Sections</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Frame.h">
-      <Filter>Header Files\Engine\RW\Sections</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_FrameList.h">
-      <Filter>Header Files\Engine\RW\Sections</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Geometry.h">
-      <Filter>Header Files\Engine\RW\Sections</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_GeometryList.h">
-      <Filter>Header Files\Engine\RW\Sections</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Light.h">
-      <Filter>Header Files\Engine\RW\Sections</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Material.h">
-      <Filter>Header Files\Engine\RW\Sections</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_MaterialList.h">
-      <Filter>Header Files\Engine\RW\Sections</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_String.h">
-      <Filter>Header Files\Engine\RW\Sections</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_Texture.h">
-      <Filter>Header Files\Engine\RW\Sections</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_TextureDictionary.h">
-      <Filter>Header Files\Engine\RW\Sections</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_TextureNative.h">
-      <Filter>Header Files\Engine\RW\Sections</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\Sections\CRWSection_UnknownSection.h">
-      <Filter>Header Files\Engine\RW\Sections</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWSectionDepthData.h">
-      <Filter>Header Files\Engine\RW</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWSectionContainer.h">
-      <Filter>Header Files\Engine\RW</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWVersion.h">
-      <Filter>Header Files\Engine\RW</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWVersionManager.h">
-      <Filter>Header Files\Engine\RW</Filter>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Sections\Partial\CRWGeometryBoundingInfo.h">
+      <Filter>Header Files\Format\RW\Sections\Partial</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Helper\SectionLines\CSectionLinesEntry.h">
       <Filter>Header Files\Helper\SectionLines</Filter>
@@ -1270,9 +1192,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\TXD\eTXDRasterDataFormat.h">
       <Filter>Header Files\Format\TXD</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CTextureEntry.h">
-      <Filter>Header Files\Engine\RW</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\WDR\CWDRBlock_Geometry.h">
       <Filter>Header Files\Format\WDR</Filter>
@@ -1331,7 +1250,103 @@
     <ClInclude Include="..\..\..\Code\BXGI\Engine\RAGE\eRageResourceType.h">
       <Filter>Header Files\Engine\RAGE</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\eRWSection.h">
+    <ClInclude Include="..\..\..\Code\BXGI\bxgi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\CGameFormat.h">
+      <Filter>Header Files\Format</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_2dEffect.h">
+      <Filter>Header Files\Format\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_Atomic.h">
+      <Filter>Header Files\Format\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_BinMeshPLG.h">
+      <Filter>Header Files\Format\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_Clump.h">
+      <Filter>Header Files\Format\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_Extension.h">
+      <Filter>Header Files\Format\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_ExtraVertColour.h">
+      <Filter>Header Files\Format\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_Frame.h">
+      <Filter>Header Files\Format\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_FrameList.h">
+      <Filter>Header Files\Format\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_Geometry.h">
+      <Filter>Header Files\Format\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_GeometryList.h">
+      <Filter>Header Files\Format\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_Light.h">
+      <Filter>Header Files\Format\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_Material.h">
+      <Filter>Header Files\Format\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_MaterialList.h">
+      <Filter>Header Files\Format\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_String.h">
+      <Filter>Header Files\Format\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_Texture.h">
+      <Filter>Header Files\Format\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_TextureDictionary.h">
+      <Filter>Header Files\Format\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_TextureNative.h">
+      <Filter>Header Files\Format\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_UnknownSection.h">
+      <Filter>Header Files\Format\RW\Sections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Pools\C2dEffectsPool.h">
+      <Filter>Header Files\Format\RW\Pools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Entries\C2dEffect.h">
+      <Filter>Header Files\Format\RW\Entries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Entries\CRWEntry_BinMeshPLG_Mesh.h">
+      <Filter>Header Files\Format\RW\Entries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Entries\CRWEntry_TextureNative_MipMap.h">
+      <Filter>Header Files\Format\RW\Entries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\CRWFormat.h">
+      <Filter>Header Files\Format\RW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\CRWSection.h">
+      <Filter>Header Files\Format\RW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\CRWSectionContainer.h">
+      <Filter>Header Files\Format\RW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\CRWSectionDepthData.h">
+      <Filter>Header Files\Format\RW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\CTextureEntry.h">
+      <Filter>Header Files\Format\RW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\eRWSection.h">
+      <Filter>Header Files\Format\RW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWManager.h">
+      <Filter>Header Files\Engine\RW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWVersion.h">
+      <Filter>Header Files\Engine\RW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWVersionManager.h">
       <Filter>Header Files\Engine\RW</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\eRWVersion.h">
@@ -1340,10 +1355,7 @@
     <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\eRWVersionType.h">
       <Filter>Header Files\Engine\RW</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\bxgi.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Format\CGameFormat.h">
+    <ClInclude Include="..\..\..\Code\BXGI\Format\e2DFXType.h">
       <Filter>Header Files\Format</Filter>
     </ClInclude>
   </ItemGroup>

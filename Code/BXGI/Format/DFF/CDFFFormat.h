@@ -2,8 +2,8 @@
 #define CDFFFormat_H
 
 #include "bxgi.h"
-#include "Engine/RW/CRWFormat.h"
-#include "Engine/RW/CRWSection.h"
+#include "Format/RW/CRWFormat.h"
+#include "Format/RW/CRWSection.h"
 #include "Intermediate/Model/CIntermediateModelFormat.h"
 #include <string>
 #include <vector>

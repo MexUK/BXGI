@@ -28,32 +28,32 @@ public:
 	void					unserializeVersionFastman92(bxgi::CIMGEntry_Fastman92 *pRawIMGEntry);
 
 	void					setIMGFile(bxgi::CIMGFormat *pIMGFile) { m_pIMGFile = pIMGFile; }
-	bxgi::CIMGFormat*				getIMGFile(void) { return m_pIMGFile; }
+	bxgi::CIMGFormat*		getIMGFile(void) { return m_pIMGFile; }
 
 	void					setEntryOffset(uint32 uiEntryOffsetInBytes) { m_uiEntryOffset = uiEntryOffsetInBytes; } // in bytes
-	uint32					getEntryOffset(void) { return m_uiEntryOffset; } // in bytes
+	inline uint32			getEntryOffset(void) { return m_uiEntryOffset; } // in bytes
 	void					setEntryOffsetInSectors(uint32 uiEntryOffsetInSectors) { m_uiEntryOffset = bxcf::CMath::convertSectorsToBytes(uiEntryOffsetInSectors); } // in sectors (1 sector = 2048 bytes)
-	uint32					getEntryOffsetInSectors(void) { return bxcf::CMath::convertBytesToSectors(m_uiEntryOffset); } // in sectors (1 sector = 2048 bytes)
+	inline uint32			getEntryOffsetInSectors(void) { return bxcf::CMath::convertBytesToSectors(m_uiEntryOffset); } // in sectors (1 sector = 2048 bytes)
 
 	void					setEntrySize(uint32 uiEntrySize); // in bytes
-	uint32					getEntrySize(void) { return m_uiEntrySize; } // in bytes
+	inline uint32			getEntrySize(void) { return m_uiEntrySize; } // in bytes
 	uint32					getPaddedEntrySize(void); // in bytes
 	void					setEntrySizeInSectors(uint32 uiEntrySizeInSectors) { m_uiEntrySize = bxcf::CMath::convertSectorsToBytes(uiEntrySizeInSectors); } // in sectors (1 sector = 2048 bytes)
-	uint32					getEntrySizeInSectors(void) { return bxcf::CMath::convertBytesToSectors(getPaddedEntrySize()); } // in sectors (1 sector = 2048 bytes)
+	inline uint32			getEntrySizeInSectors(void) { return bxcf::CMath::convertBytesToSectors(getPaddedEntrySize()); } // in sectors (1 sector = 2048 bytes)
 
 	void					setEntryName(std::string& strEntryName) { m_strEntryName = strEntryName; } // dynamic length
-	std::string&			getEntryName(void) { return m_strEntryName; }  // dynamic length
+	inline std::string&		getEntryName(void) { return m_strEntryName; }  // dynamic length
 
 	void					setEntryExtension(std::string& strEntryExtension) { m_strEntryExtension = strEntryExtension; }
 	std::string&			getEntryExtension(void) { return m_strEntryExtension; }
 
 	void					setRWVersionByVersionCC(uint32 uiRWVersionCC);
 	void					setRWVersion(bxgi::CRWVersion *pRWVersion) { m_pRWVersion = pRWVersion; }
-	bxgi::CRWVersion*				getRWVersion(void) { return m_pRWVersion; }
+	bxgi::CRWVersion*		getRWVersion(void) { return m_pRWVersion; }
 
 	void					setRageResourceTypeByIdentifier(uint32 uiResourceType);
 	void					setRageResourceType(bxgi::CRageResourceType *pRageResourceType) { m_pRageResourceType = pRageResourceType; }
-	bxgi::CRageResourceType*		getRageResourceType(void) { return m_pRageResourceType; }
+	bxgi::CRageResourceType*	getRageResourceType(void) { return m_pRageResourceType; }
 
 	void					setFlags(uint32 usFlags) { m_uiFlags = usFlags; }
 	uint32					getFlags(void) { return m_uiFlags; }
@@ -68,7 +68,7 @@ public:
 	//bool					isCompressed(void) { return getCompression() != 0; } // old
 
 	void					setCompressionAlgorithmId(bxcf::eCompressionAlgorithm eCompressionAlgorithmValue) { m_eCompressionAlgorithm = eCompressionAlgorithmValue; }
-	bxcf::eCompressionAlgorithm	getCompressionAlgorithmId(void) { return m_eCompressionAlgorithm; }
+	bxcf::eCompressionAlgorithm		getCompressionAlgorithmId(void) { return m_eCompressionAlgorithm; }
 	bool					isCompressed(void) { return m_eCompressionAlgorithm != bxcf::COMPRESSION_UNKNOWN && m_eCompressionAlgorithm != bxcf::COMPRESSION_NONE; }
 
 	void					setCompressionLevel(uint32 uiCompressionLevel) { m_uiCompressionLevel = uiCompressionLevel; }

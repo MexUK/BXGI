@@ -3,7 +3,7 @@
 #include "CTXDManager.h"
 #include "Static/CDebug.h"
 #include "Engine/RW/CRWManager.h"
-#include "Engine/RW/eRWSection.h"
+#include "Format/RW/eRWSection.h"
 #include "Engine/RW/CRWVersionManager.h"
 #include "Static/CPath.h"
 #include "Static/CFile.h"
@@ -14,7 +14,7 @@
 #include "Intermediate/Texture/Data/CIntermediateTextureMipmap.h"
 #include "Image/CImageManager.h"
 #include "Image/CImageFile.h"
-#include "Engine/RW/Sections/CRWSection_TextureNative.h"
+#include "Format/RW/Sections/CRWSection_TextureNative.h"
 #include "Type/Vector/Vec2u16.h"
 
 using namespace std;

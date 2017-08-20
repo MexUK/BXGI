@@ -1,6 +1,6 @@
 #include "CRWManager.h"
 #include "CRWVersionManager.h"
-#include "CRWSection.h"
+#include "Format/RW/CRWSection.h"
 #include "Localization/CLocalizationManager.h"
 #include "Static/CString2.h"
 

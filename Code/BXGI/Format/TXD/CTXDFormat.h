@@ -2,8 +2,8 @@
 #define CTXDFormat_H
 
 #include "bxgi.h"
-#include "Engine/RW/CRWFormat.h"
-#include "Engine/RW/CRWSection.h"
+#include "Format/RW/CRWFormat.h"
+#include "Format/RW/CRWSection.h"
 #include "Collection/Games/ePlatformedGame.h"
 #include "Image/eRasterDataFormat.h"
 #include "Engine/RW/eRWVersion.h"

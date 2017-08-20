@@ -4,7 +4,7 @@
 #include <DXGIFormat.h>
 #include "CTXDManager.h"
 #include "CTXDFormat.h"
-#include "Engine/RW/Sections/CRWSection_TextureNative.h"
+#include "Format/RW/Sections/CRWSection_TextureNative.h"
 #include "Stream/CDataReader.h"
 #include "Static/CString2.h"
 #include "Engine/RW/CRWManager.h"
