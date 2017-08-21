@@ -29,7 +29,7 @@ void							CRWSection_Geometry::unserialize(void)
 {
 	CDataReader *pDataReader = CDataReader::get();
 
-	uint32 uiTemp1 = pDataReader->getSeek();
+	//uint32 uiTemp1 = pDataReader->getSeek();
 
 	/*
 	todo - also update some methods and remove old properties etc
@@ -109,9 +109,9 @@ void							CRWSection_Geometry::unserialize(void)
 		}
 	}
 
-	uint32 uiTemp2 = pDataReader->getSeek();
+	//uint32 uiTemp2 = pDataReader->getSeek();
 
-	uint32 uiByteCountRead = uiTemp2 - uiTemp1;
+	//uint32 uiByteCountRead = uiTemp2 - uiTemp1;
 	//CDebug::log("Geometry uiByteCountRead: " + CString2::toString(uiByteCountRead));
 }
 

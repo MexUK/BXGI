@@ -2,6 +2,8 @@
 
 namespace bxgi
 {
+	enum EEvents;
+
 	class CGameManager;
 	class CGame;
 	enum eGame;

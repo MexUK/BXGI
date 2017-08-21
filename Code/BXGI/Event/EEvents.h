@@ -1,6 +1,8 @@
 #pragma once
 
-enum EEvents
+#include "bxgi.h"
+
+enum bxgi::EEvents
 {
 	// IMG
 	UNSERIALIZE_IMG_ENTRY,

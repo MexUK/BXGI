@@ -469,7 +469,7 @@ void							CRWSection_TextureNative::serializeHeader_Direct3D(void)
 	pDataWriter->writeUint16((uint16)(getImageSize().x));
 	pDataWriter->writeUint16((uint16)(getImageSize().y));
 	pDataWriter->writeUint8(getBPP());
-	pDataWriter->writeUint8(getMipMaps().getEntryCount());
+	pDataWriter->writeUint8((uint8)getMipMaps().getEntryCount());
 	pDataWriter->writeUint8(getRasterType());
 	if (m_uiPlatformId == 9)
 	{

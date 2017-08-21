@@ -178,27 +178,27 @@ void				CRWSectionContainer::serializeRWSectionContainer(CRWSectionContainer *pR
 	CDataWriter *pDataWriter = CDataWriter::get();
 	for (CRWSection *pRWSection : pRWSectionContainer->getEntries())
 	{
-		uint32 uiSeek1 = pDataWriter->getSeek();
+		uint64 uiSeek1 = pDataWriter->getSeek();
 		pRWSection->CRWSection::serialize();	// base method,              RW section header
-		uint32 uiSeek2 = pDataWriter->getSeek();
+		uint64 uiSeek2 = pDataWriter->getSeek();
 		pRWSection->serialize();				// derived method (virtual), RW section body
-		uint32 uiSeek3 = pDataWriter->getSeek();
+		uint64 uiSeek3 = pDataWriter->getSeek();
 
 		if (!pRWSection->isUnknownSection())
 		{
 			serializeRWSectionContainer(pRWSection);
 		}
-		uint32 uiSeek4 = pDataWriter->getSeek();
+		uint64 uiSeek4 = pDataWriter->getSeek();
 		
-		uint32 uiSectionByteCount = uiSeek4 - uiSeek1;
-		uint32 uiSectionStructByteCount = uiSeek3 - uiSeek2;
+		uint64 uiSectionByteCount = uiSeek4 - uiSeek1;
+		uint64 uiSectionStructByteCount = uiSeek3 - uiSeek2;
 
 		if (!pRWSection->isSectionHeaderSkipped())
 		{
 			uiSectionByteCount -= 12;
 		}
 
-		pRWSection->fillPlaceholdersForSerialization(uiSectionByteCount, uiSectionStructByteCount);
+		pRWSection->fillPlaceholdersForSerialization((uint32)uiSectionByteCount, (uint32)uiSectionStructByteCount);
 	}
 }
 

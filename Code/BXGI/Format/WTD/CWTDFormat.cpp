@@ -48,7 +48,7 @@ void					CWTDFormat::unserialize(void)
 	RG_CWTDFormat_Header2 *pHeader2 = pDataReader->readStruct<RG_CWTDFormat_Header2>();
 	//pHeader2->m_uiHashTableOffset = CString2::swapEndian(pHeader2->m_uiHashTableOffset); // todo - is this code needed?
 	pHeader2->m_uiHashTableOffset = convertULongToOffset(pHeader2->m_uiHashTableOffset);
-	pHeader2->m_usTextureCount = convertULongToOffset(pHeader2->m_usTextureCount);
+	pHeader2->m_usTextureCount = (uint16) convertULongToOffset(pHeader2->m_usTextureCount);
 	pHeader2->m_uiTextureListOffset = convertULongToOffset(pHeader2->m_uiTextureListOffset);
 
 	// texture hashes
