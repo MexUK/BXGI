@@ -152,7 +152,7 @@ eIMGVersion		CIMGManager::detectIMGVersion(string& strIMGFilePath, string& strHe
 	return IMG_UNKNOWN;
 }
 
-bool			CIMGManager::detectIMGEncryptionState(std::string& strIMGFilePath)
+bool			CIMGManager::detectIMGEncryptionState(string& strIMGFilePath)
 {
 	string strHeader16B = CFile::getFileSubContent(strIMGFilePath, 0, 16, true);
 	string strHeader4B = strHeader16B.substr(0, 4);
@@ -172,7 +172,7 @@ bool			CIMGManager::detectIMGEncryptionState(std::string& strIMGFilePath)
 	return false;
 }
 
-uint32	CIMGManager::getIMGEntryCount(std::string& strIMGFilePath, eIMGVersion eVersion)
+uint32	CIMGManager::getIMGEntryCount(string& strIMGFilePath, eIMGVersion eVersion)
 {
 	if (eVersion == IMG_UNKNOWN)
 	{

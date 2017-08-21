@@ -392,7 +392,7 @@ bool				CIMGEntry::canBeRead(void)
 	return true;
 }
 
-std::string				CIMGEntry::getVersionText(void)
+string				CIMGEntry::getVersionText(void)
 {
 	if (getIMGFile()->getVersion() == IMG_3)
 	{

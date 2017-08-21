@@ -1231,8 +1231,8 @@ map<string, pair<uint32, EFileType>, SortByStringKey>		CIMGFormat::getFileTypedV
 
 vector<string>			CIMGFormat::getEntryVersions(vector<eCOLVersion>& vecCOLVersions, vector<eRWVersion>& vecRWVersions)
 {
-	unordered_map<std::string, eCOLVersion> umapCOLEntryExtensions;
-	unordered_map<std::string, eRWVersion> umapRWEntryExtensions;
+	unordered_map<string, eCOLVersion> umapCOLEntryExtensions;
+	unordered_map<string, eRWVersion> umapRWEntryExtensions;
 	for (CIMGEntry* pIMGEntry : getEntries())
 	{
 		string

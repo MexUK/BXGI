@@ -137,7 +137,7 @@ bool				CTXDFormat::isTextureNameValid(string& strTextureName, bool bIsAlphaText
 	}
 }
 
-bool				CTXDFormat::isTextureResolutionValid(uint16 usWidth, uint16 usHeight, std::vector<ePlatformedGame>& vecGames)
+bool				CTXDFormat::isTextureResolutionValid(uint16 usWidth, uint16 usHeight, vector<ePlatformedGame>& vecGames)
 {
 	// ensure width and height are both even
 	if ((usWidth % 2) == 1 || (usHeight % 2) == 1)
@@ -185,7 +185,7 @@ bool				CTXDFormat::isTXDSizeValid(uint32 uiFileSize)
 	return uiFileSize <= (200 * 1024 * 1024); // 200 MB
 }
 
-bool				CTXDFormat::isTextureCountValid(uint32 uiTextureCount, std::vector<ePlatformedGame>& vecGames)
+bool				CTXDFormat::isTextureCountValid(uint32 uiTextureCount, vector<ePlatformedGame>& vecGames)
 {
 	for (auto ePlatformedGame : vecGames)
 	{
