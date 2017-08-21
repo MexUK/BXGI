@@ -5,7 +5,7 @@
 #include "Format/CFormatManager.h"
 #include "Object/CSingleton.h"
 #include "eDATLoaderEntryType.h"
-#include "Collection/Games/ePlatformedGame.h"
+#include "Games/ePlatformedGame.h"
 #include <string>
 
 class bxgi::CDATLoaderFormat;
@@ -19,7 +19,7 @@ public:
 	void						uninit(void);
 
 	static eDATLoaderEntryType	getDATEntryTypeFromString(std::string strType);
-	static std::string			getDefaultGameDATSubPath(bxcf::ePlatformedGame ePlatformedGameValue);
+	static std::string			getDefaultGameDATSubPath(bxgi::ePlatformedGame ePlatformedGameValue);
 };
 
 #endif

@@ -7,7 +7,7 @@
 #include "CRWSectionContainer.h"
 #include "Engine/RW/CRWVersion.h"
 #include "Format/RW/eRWSection.h"
-#include "Collection/Games/ePlatformedGame.h"
+#include "Games/ePlatformedGame.h"
 #include <vector>
 #include <unordered_map>
 
@@ -39,8 +39,8 @@ public:
 	void												fixAlphaTextureStates(void);
 	bool												doesHaveTextureWithInvalidTXDRasterDataFormat(void);
 
-	void												setGames(std::vector<bxcf::ePlatformedGame> vecGames) { m_vecGames = vecGames; }
-	std::vector<bxcf::ePlatformedGame>&				getGames(void) { return m_vecGames; }
+	void												setGames(std::vector<bxgi::ePlatformedGame> vecGames) { m_vecGames = vecGames; }
+	std::vector<bxgi::ePlatformedGame>&				getGames(void) { return m_vecGames; }
 
 private:
 	void												unserialize(void);
@@ -51,7 +51,7 @@ private:
 private:
 	CRWVersion*											m_pRWVersion;
 	std::vector<bxgi::CTextureEntry*>							m_vecTextureEntries; // todo - inconsisteny in func name: Entry - remove word: Entry
-	std::vector<bxcf::ePlatformedGame>					m_vecGames;
+	std::vector<bxgi::ePlatformedGame>					m_vecGames;
 	std::unordered_map<std::string, bxgi::CTextureEntry*>		m_umapTexturesByNameUpper;
 };
 

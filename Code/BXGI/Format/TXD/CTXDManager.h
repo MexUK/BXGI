@@ -6,7 +6,7 @@
 #include "Object/CSingleton.h"
 #include "eTXDRasterDataFormat.h"
 #include "Image/eRasterDataFormat.h"
-#include "Collection/Games/ePlatformedGame.h"
+#include "Games/ePlatformedGame.h"
 #include "Image/eDXTCompressionType.h"
 #include "Platform/Hardware/ePlatform.h"
 #include <string>

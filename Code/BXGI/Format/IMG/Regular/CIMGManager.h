@@ -7,7 +7,7 @@
 #include "Object/CSingleton.h"
 #include "CIMGFormat.h"
 #include "Engine/RAGE/CRageResourceType.h"
-#include "Collection/Games/ePlatformedGame.h"
+#include "Games/ePlatformedGame.h"
 #include <string>
 #include <vector>
 
@@ -32,7 +32,7 @@ public:
 	static std::string					encryptVersion3IMGString(std::string strData);
 	static std::string					decryptVersion3IMGString(std::string strData);
 
-	static std::vector<std::string>		getDefaultGameIMGSubPaths(bxcf::ePlatformedGame ePlatformedGameValue);
+	static std::vector<std::string>		getDefaultGameIMGSubPaths(bxgi::ePlatformedGame ePlatformedGameValue);
 
 	static std::string					getCompressionTypeText(bxcf::eCompressionAlgorithm eCompressionAlgorithmValue);
 	static std::string					getEncryptionText(bool bIsEncrypted);

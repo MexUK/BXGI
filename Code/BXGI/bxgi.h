@@ -2,6 +2,12 @@
 
 namespace bxgi
 {
+	class CGameManager;
+	class CGame;
+	enum eGame;
+	enum eGameFlag;
+	enum ePlatformedGame;
+
 	class CRageManager;
 	class CRageResourceType;
 	class CRageResourceTypeManager;

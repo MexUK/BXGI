@@ -6,7 +6,7 @@
 #include "Object/CSingleton.h"
 #include "eCOLVersion.h"
 #include "CCOLVersion.h"
-#include "Collection/Games/ePlatformedGame.h"
+#include "Games/ePlatformedGame.h"
 #include "CCOLEntry.h"
 #include <string>
 #include <unordered_map>

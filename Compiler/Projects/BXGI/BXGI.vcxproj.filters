@@ -289,6 +289,24 @@
     <Filter Include="Header Files\Format\RW\Entries\2dEffects">
       <UniqueIdentifier>{39379146-caa7-4f03-a38a-96f8a292fa8a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Games">
+      <UniqueIdentifier>{94c62f16-a1be-497d-aa45-82a801ada0e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Games">
+      <UniqueIdentifier>{c1733b80-1206-43c5-985c-991db5bf46af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{79f2b815-b2ea-4960-bb05-62c4dd1cd1c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{1931f4b7-d295-45c7-95dd-1acfd29eb0de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Event">
+      <UniqueIdentifier>{d914ad39-2b89-4ceb-880f-267e030e5c64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Event">
+      <UniqueIdentifier>{23fc71b2-8909-4cc6-9bf0-9791fed9eef8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\BXGI\Format\COL\CCOLEntry.cpp">
@@ -743,6 +761,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\BXGI\Engine\RW\CRWVersionManager.cpp">
       <Filter>Source Files\Engine\RW</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Game\CGameManager.cpp">
+      <Filter>Source Files\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1357,6 +1378,24 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\e2DFXType.h">
       <Filter>Header Files\Format</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Games\eGameFlag.h">
+      <Filter>Header Files\Games</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Games\ePlatformedGame.h">
+      <Filter>Header Files\Games</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Games\eGame.h">
+      <Filter>Header Files\Games</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Game\CGame.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Game\CGameManager.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Event\EEvents.h">
+      <Filter>Header Files\Event</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

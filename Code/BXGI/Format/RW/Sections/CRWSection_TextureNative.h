@@ -5,7 +5,7 @@
 #include "Format/RW/CRWSection.h"
 #include "Pool/CVectorPool.h"
 #include "Image/eDXTCompressionType.h"
-#include "Collection/Games/ePlatformedGame.h"
+#include "Games/ePlatformedGame.h"
 #include "Image/eRasterDataFormat.h"
 #include "Format/RW/Entries/CRWEntry_TextureNative_MipMap.h"
 #include "Type/Vector/Vec2u.h"
@@ -21,7 +21,7 @@ public:
 	void						unserialize(void);
 	void						serialize(void);
 	
-	void						convertToGame(bxcf::ePlatformedGame ePlatformedGame, std::vector<std::string>& vecMipmapsRemoved);
+	void						convertToGame(bxgi::ePlatformedGame ePlatformedGame, std::vector<std::string>& vecMipmapsRemoved);
 	void						convertToRasterDataFormat(bxcf::eRasterDataFormat eRasterDataFormatValue, std::vector<std::string>& vecMipmapsRemoved);
 
 	bool						doesHaveValidTXDRasterDataFormat(void);

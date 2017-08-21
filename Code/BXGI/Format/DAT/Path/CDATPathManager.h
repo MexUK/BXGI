@@ -5,7 +5,7 @@
 #include "Format/CFormatManager.h"
 #include "Object/CSingleton.h"
 #include "Type/Vector/Vec2f.h"
-#include "Collection/Games/ePlatformedGame.h"
+#include "Games/ePlatformedGame.h"
 #include <string>
 #include <vector>
 

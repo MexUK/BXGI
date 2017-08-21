@@ -4,7 +4,7 @@
 #include "bxgi.h"
 #include "eRWVersion.h"
 #include "eRWVersionType.h"
-#include "Collection/Games/ePlatformedGame.h"
+#include "Games/ePlatformedGame.h"
 #include <string>
 #include <vector>
 
@@ -18,8 +18,8 @@ public:
 		m_uiVersionGames(0)
 	{};
 
-	bxcf::ePlatformedGame					getFirstGame(void);
-	std::vector<bxcf::ePlatformedGame>		getGames(void);
+	bxgi::ePlatformedGame					getFirstGame(void);
+	std::vector<bxgi::ePlatformedGame>		getGames(void);
 
 	void							unload(void) {}
 
@@ -44,7 +44,7 @@ public:
 	void							setLocalizationKey(std::string strLocalizationKey) { m_strLocalizationKey = strLocalizationKey; }
 	std::string						getLocalizationKey(void) { return m_strLocalizationKey; }
 
-	bool							doesGameUseVersion(bxcf::ePlatformedGame ePlatformedGameValue) { return (m_uiVersionGames & ePlatformedGameValue) == ePlatformedGameValue; }
+	bool							doesGameUseVersion(bxgi::ePlatformedGame ePlatformedGameValue) { return (m_uiVersionGames & ePlatformedGameValue) == ePlatformedGameValue; }
 
 	std::string						getText(void);
 

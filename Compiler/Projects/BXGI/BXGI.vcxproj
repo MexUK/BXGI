@@ -126,7 +126,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\BXGI\bxgi.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Event\EEvents.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\CGameFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Games\eGame.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Games\eGameFlag.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Games\ePlatformedGame.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Game\CGame.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Game\CGameManager.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Model\CIntermediateModel.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Model\CIntermediateModelFormat.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Model\Data\CIntermediateBoundingObject.h" />
@@ -144,7 +150,7 @@
     <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWManager.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWVersion.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWVersionManager.h" />
-	<ClInclude Include="..\..\..\Code\BXGI\Engine\RW\eRWVersion.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\eRWVersion.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\eRWVersionType.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Entries\2dEffects\CRWEntry_2dEffect_CoverPoint.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Entries\2dEffects\CRWEntry_2dEffect_EnterExit.h" />
@@ -178,12 +184,12 @@
     <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_TextureNative.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Sections\CRWSection_UnknownSection.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Sections\Partial\CRWGeometryBoundingInfo.h" />
-	<ClInclude Include="..\..\..\Code\BXGI\Format\RW\CRWFormat.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\CRWFormat.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\RW\CRWSection.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\RW\CRWSectionContainer.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\RW\CRWSectionDepthData.h" />
-	<ClInclude Include="..\..\..\Code\BXGI\Format\RW\CTextureEntry.h" />
-	<ClInclude Include="..\..\..\Code\BXGI\Format\RW\eRWSection.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\CTextureEntry.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\eRWSection.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\COL\CCOLEntry.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\COL\CCOLFormat.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\COL\CCOLManager.h" />
@@ -332,6 +338,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\BXGI\Format\CGameFormat.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Game\CGameManager.cpp" />
     <ClCompile Include="..\..\..\Code\BXGI\Intermediate\Model\CIntermediateModelFormat.cpp" />
     <ClCompile Include="..\..\..\Code\BXGI\Intermediate\Texture\CIntermediateTextureFormat.cpp" />
     <ClCompile Include="..\..\..\Code\BXGI\Engine\RAGE\CRageManager.cpp" />

@@ -23,7 +23,7 @@ public:
 	static std::string								getRWVersionText(CRWVersion* pRWVersion) { return getRWVersionText(pRWVersion == nullptr ? RW_VERSION_UNKNOWN : pRWVersion->getVersionId()); }
 	static std::string								getRWVersionText(bxgi::eRWVersion eRWVersionValue);
 
-	std::string										getGameName(bxcf::ePlatformedGame ePlatformedGame);
+	std::string										getGameName(bxgi::ePlatformedGame ePlatformedGame);
 
 	void											setRWVersionCCForSerialization(uint32 uiRWVersionCC) { m_uiRWVersionCCForSerialization = uiRWVersionCC; }
 	uint32											getRWVersionCCForSerialization(void) { return m_uiRWVersionCCForSerialization; }

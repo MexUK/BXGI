@@ -19,7 +19,7 @@ public:
 
 	CRWVersion*										getEntryByVersionCC(uint32 uiVersionCC);
 	CRWVersion*										getEntryByVersionId(bxgi::eRWVersion eRWVersion);
-	CRWVersion*										getRWVersionFromGame(bxcf::ePlatformedGame ePlatformedGame);
+	CRWVersion*										getRWVersionFromGame(bxgi::ePlatformedGame ePlatformedGame);
 	std::unordered_map<uint32, std::vector<std::string>>		getVersionNames(void);
 
 private:
