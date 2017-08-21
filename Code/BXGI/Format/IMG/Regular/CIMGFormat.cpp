@@ -1,7 +1,7 @@
 #include "CIMGFormat.h"
+#include "bxgi.h"
 #include "Type/Types.h"
 #include "Event/Events.h"
-#include "Event/EEvents.h"
 #include "Event/EEvents.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
@@ -29,6 +29,7 @@
 #include "Format/EFileType.h"
 #include "Static/CStdVector.h"
 #include "Format/CGameFormat.h"
+#include "CIMGEntry.h"
 #include <set>
 #include <algorithm>
 
@@ -535,7 +536,8 @@ void		CIMGFormat::unserializeRWVersions(void)
 	string strUncompressedEntryData;
 	bool bEntryIsCompressed;
 	EFileType uiFileType;
-	for (auto pIMGEntry : getEntries())
+	string strVersionCharacter;
+	for (CIMGEntry *pIMGEntry : getEntries())
 	{
 		uiFileType = CGameFormat::getRWFileType(pIMGEntry->getEntryExtension());
 		pIMGEntry->setFileType(uiFileType);
@@ -546,8 +548,10 @@ void		CIMGFormat::unserializeRWVersions(void)
 			strUncompressedEntryData = pIMGEntry->getEntryData();
 		}
 
-		if (uiFileType == MODEL || uiFileType == TEXTURE)
+		switch (uiFileType)
 		{
+		case MODEL:
+		case TEXTURE:
 			// RW file
 			if (bEntryIsCompressed)
 			{
@@ -563,11 +567,9 @@ void		CIMGFormat::unserializeRWVersions(void)
 				pDataReader->setSeek(pIMGEntry->getEntryOffset() + 8);
 				pIMGEntry->setRawVersion(pDataReader->readUint32());
 			}
-		}
-		else if (uiFileType == COLLISION)
-		{
+			break;
+		case COLLISION:
 			// COL file
-			string strVersionCharacter;
 			if (bEntryIsCompressed)
 			{
 				// COL file - compressed
@@ -577,6 +579,7 @@ void		CIMGFormat::unserializeRWVersions(void)
 				}
 				else
 				{
+					strVersionCharacter = "";
 					pIMGEntry->setRawVersion(0);
 				}
 			}
@@ -598,12 +601,11 @@ void		CIMGFormat::unserializeRWVersions(void)
 					pIMGEntry->setRawVersion(CString2::toUint32(strVersionCharacter));
 				}
 			}
-		}
-		else if (uiFileType == ANIMATION)
-		{
+			break;
+		case ANIMATION:
 			// IFP file (animation)
 			pDataReader->setSeek(pIMGEntry->getEntryOffset() + 3);
-			string strVersionCharacter = pDataReader->readString(1);
+			strVersionCharacter = pDataReader->readString(1);
 			if (strVersionCharacter == "K")
 			{
 				pIMGEntry->setRawVersion(1);
@@ -612,6 +614,7 @@ void		CIMGFormat::unserializeRWVersions(void)
 			{
 				pIMGEntry->setRawVersion(CString2::toUint32(strVersionCharacter) - 1);
 			}
+			break;
 		}
 
 		Events::triggerVoidNoRef(UNSERIALIZE_IMG_ENTRY, this);

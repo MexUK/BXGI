@@ -66,30 +66,6 @@ CIMGEntry::CIMGEntry(CIMGFormat *pIMGFile) :
 {
 }
 
-void					CIMGEntry::unserializeVersion1Or2(RG_CIMGEntry_Version1Or2 *pRGIMGEntry)
-{
-	m_uiEntryOffset = CMath::convertSectorsToBytes(pRGIMGEntry->m_uiOffsetInSectors);
-	m_uiEntrySize = CMath::convertSectorsToBytes(pRGIMGEntry->m_uiSizeInSectors);
-	m_strEntryName = CString2::rtrimFromLeft(string((char*)pRGIMGEntry->m_szName));
-}
-
-void					CIMGEntry::unserializeVersion3(RG_CIMGEntry_Version3 *pRGIMGEntry)
-{
-	setRageResourceTypeByIdentifier(pRGIMGEntry->m_uiRageResourceTypeIdentifier);
-	m_uiEntryOffset = CMath::convertSectorsToBytes(pRGIMGEntry->m_uiOffsetInSectors);
-	m_uiEntrySize = CMath::convertSectorsToBytes(pRGIMGEntry->m_usSizeInSectors) - (pRGIMGEntry->m_usFlags & 2047);
-	m_uiFlags = pRGIMGEntry->m_usFlags;
-}
-
-void					CIMGEntry::unserializeVersionFastman92(CIMGEntry_Fastman92 *pRawIMGEntry)
-{
-	m_uiEntryOffset = CMath::convertSectorsToBytes(pRawIMGEntry->m_uiOffsetInSectors);
-	m_uiEntrySize = CMath::convertSectorsToBytes(pRawIMGEntry->m_uiSizeInSectors);
-	m_uiUncompressedSize = CMath::convertSectorsToBytes(pRawIMGEntry->m_uiUncompressedSizeInSectors);
-	m_eCompressionAlgorithm = CIMGFormat::getCompressionAlgorithmIdFromFastman92CompressionAlgorithmId((eIMGVersionFastman92CompressionAlgorithm)pRawIMGEntry->m_uiCompressionAlgorithmId);
-	m_strEntryName = CString2::rtrimFromLeft(string((char*)pRawIMGEntry->m_strName));
-}
-
 void					CIMGEntry::setEntrySize(uint32 uiEntrySize)
 {
 	m_uiEntrySize = uiEntrySize;

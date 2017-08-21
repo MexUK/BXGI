@@ -1,19 +1,20 @@
-#ifndef CIMGEntry_H
-#define CIMGEntry_H
+#pragma once
 
 #include "bxgi.h"
 #include "Compression/eCompressionAlgorithm.h"
-#include "Static/CMath.h"
 #include "Format/EFileType.h"
+#include "Format/IMG/Regular/Raw/CIMGEntry_Version1Or2.h"
+#include "Format/IMG/Regular/Raw/CIMGEntry_Version3.h"
+#include "Format/IMG/Fastman92/CIMGEntry_Fastman92.h"
+#include "Compression/eCompressionAlgorithm.h"
+#include "Static/CMath.h"
+#include "Static/CString2.h"
+#include "Format/IMG/Regular/CIMGFormat.h"
 #include <string>
 
-class bxgi::CIMGFormat;
 class bxgi::CRWVersion;
 class bxgi::CCOLVersion;
 class bxgi::CRageResourceType;
-struct bxgi::CIMGEntry_Fastman92;
-struct bxgi::RG_CIMGEntry_Version1Or2;
-struct bxgi::RG_CIMGEntry_Version3;
 
 class bxgi::CIMGEntry
 {
@@ -23,9 +24,9 @@ public:
 
 	void					unload(void) {}
 
-	void					unserializeVersion1Or2(bxgi::RG_CIMGEntry_Version1Or2 *pRGIMGEntry);
-	void					unserializeVersion3(bxgi::RG_CIMGEntry_Version3 *pRGIMGEntry);
-	void					unserializeVersionFastman92(bxgi::CIMGEntry_Fastman92 *pRawIMGEntry);
+	inline void				unserializeVersion1Or2(bxgi::RG_CIMGEntry_Version1Or2 *pRGIMGEntry);
+	inline void				unserializeVersion3(bxgi::RG_CIMGEntry_Version3 *pRGIMGEntry);
+	inline void				unserializeVersionFastman92(bxgi::CIMGEntry_Fastman92 *pRawIMGEntry);
 
 	void					setIMGFile(bxgi::CIMGFormat *pIMGFile) { m_pIMGFile = pIMGFile; }
 	bxgi::CIMGFormat*		getIMGFile(void) { return m_pIMGFile; }
@@ -44,8 +45,8 @@ public:
 	void					setEntryName(std::string& strEntryName) { m_strEntryName = strEntryName; } // dynamic length
 	inline std::string&		getEntryName(void) { return m_strEntryName; }  // dynamic length
 
-	void					setEntryExtension(std::string& strEntryExtension) { m_strEntryExtension = strEntryExtension; }
-	std::string&			getEntryExtension(void) { return m_strEntryExtension; }
+	inline void				setEntryExtension(std::string& strEntryExtension) { m_strEntryExtension = strEntryExtension; }
+	inline std::string&		getEntryExtension(void) { return m_strEntryExtension; }
 
 	void					setRWVersionByVersionCC(uint32 uiRWVersionCC);
 	void					setRWVersion(bxgi::CRWVersion *pRWVersion) { m_pRWVersion = pRWVersion; }
@@ -69,7 +70,7 @@ public:
 
 	void					setCompressionAlgorithmId(bxcf::eCompressionAlgorithm eCompressionAlgorithmValue) { m_eCompressionAlgorithm = eCompressionAlgorithmValue; }
 	bxcf::eCompressionAlgorithm		getCompressionAlgorithmId(void) { return m_eCompressionAlgorithm; }
-	bool					isCompressed(void) { return m_eCompressionAlgorithm != bxcf::COMPRESSION_UNKNOWN && m_eCompressionAlgorithm != bxcf::COMPRESSION_NONE; }
+	inline bool				isCompressed(void) { return m_eCompressionAlgorithm != bxcf::COMPRESSION_UNKNOWN && m_eCompressionAlgorithm != bxcf::COMPRESSION_NONE; }
 
 	void					setCompressionLevel(uint32 uiCompressionLevel) { m_uiCompressionLevel = uiCompressionLevel; }
 	uint32					getCompressionLevel(void) { return m_uiCompressionLevel; }
@@ -89,8 +90,8 @@ public:
 	void					setFileCreationDate(uint32 uiFileCreationDate) { m_uiFileCreationDate = uiFileCreationDate; }
 	uint32					getFileCreationDate(void) { return m_uiFileCreationDate; }
 
-	void					setRawVersion(uint32 uiRawVersion) { m_uiRawVersion = uiRawVersion; }
-	uint32					getRawVersion(void) { return m_uiRawVersion; }
+	inline void				setRawVersion(uint32 uiRawVersion) { m_uiRawVersion = uiRawVersion; }
+	inline uint32			getRawVersion(void) { return m_uiRawVersion; }
 
 	std::string				getVersionText(void);
 
@@ -116,8 +117,8 @@ public:
 	void					setCOLVersion(bxgi::CCOLVersion *pCOLVersion) { m_pCOLVersion = pCOLVersion; }
 	bxgi::CCOLVersion*		getCOLVersion(void) { return m_pCOLVersion; }
 	
-	void						setFileType(bxcf::fileType::EFileType uiFileType) { m_uiFileType = uiFileType; }
-	bxcf::fileType::EFileType	getFileType(void) { return m_uiFileType; }
+	inline void							setFileType(bxcf::fileType::EFileType uiFileType) { m_uiFileType = uiFileType; }
+	inline bxcf::fileType::EFileType	getFileType(void) { return m_uiFileType; }
 
 	void					applyCompression(bxcf::eCompressionAlgorithm eCompressionAlgorithmValue, uint32 uiCompressionLevel = 0);
 
@@ -156,4 +157,26 @@ private:
 	bxcf::fileType::EFileType	m_uiFileType;
 };
 
-#endif
+inline void					bxgi::CIMGEntry::unserializeVersion1Or2(bxgi::RG_CIMGEntry_Version1Or2 *pRGIMGEntry)
+{
+	m_uiEntryOffset = bxcf::CMath::convertSectorsToBytes(pRGIMGEntry->m_uiOffsetInSectors);
+	m_uiEntrySize = bxcf::CMath::convertSectorsToBytes(pRGIMGEntry->m_uiSizeInSectors);
+	m_strEntryName = bxcf::CString2::rtrimFromLeft(std::string((char*)pRGIMGEntry->m_szName));
+}
+
+inline void					bxgi::CIMGEntry::unserializeVersion3(bxgi::RG_CIMGEntry_Version3 *pRGIMGEntry)
+{
+	setRageResourceTypeByIdentifier(pRGIMGEntry->m_uiRageResourceTypeIdentifier);
+	m_uiEntryOffset = bxcf::CMath::convertSectorsToBytes(pRGIMGEntry->m_uiOffsetInSectors);
+	m_uiEntrySize = bxcf::CMath::convertSectorsToBytes(pRGIMGEntry->m_usSizeInSectors) - (pRGIMGEntry->m_usFlags & 2047);
+	m_uiFlags = pRGIMGEntry->m_usFlags;
+}
+
+inline void					bxgi::CIMGEntry::unserializeVersionFastman92(bxgi::CIMGEntry_Fastman92 *pRawIMGEntry)
+{
+	m_uiEntryOffset = bxcf::CMath::convertSectorsToBytes(pRawIMGEntry->m_uiOffsetInSectors);
+	m_uiEntrySize = bxcf::CMath::convertSectorsToBytes(pRawIMGEntry->m_uiSizeInSectors);
+	m_uiUncompressedSize = bxcf::CMath::convertSectorsToBytes(pRawIMGEntry->m_uiUncompressedSizeInSectors);
+	m_eCompressionAlgorithm = bxgi::CIMGFormat::getCompressionAlgorithmIdFromFastman92CompressionAlgorithmId((bxgi::eIMGVersionFastman92CompressionAlgorithm)pRawIMGEntry->m_uiCompressionAlgorithmId);
+	m_strEntryName = bxcf::CString2::rtrimFromLeft(std::string((char*)pRawIMGEntry->m_strName));
+}
