@@ -7,7 +7,6 @@
 #include "eCOLVersion.h"
 #include "CCOLVersion.h"
 #include "Games/ePlatformedGame.h"
-#include "CCOLEntry.h"
 #include <string>
 #include <unordered_map>
 

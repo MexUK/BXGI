@@ -4,7 +4,6 @@
 #include "bxgi.h"
 #include "Format/CFormatManager.h"
 #include "Object/CSingleton.h"
-#include <string>
 
 class bxgi::CWDRFormat;
 class bxgi::CIntermediateModelFormat;
@@ -17,7 +16,7 @@ public:
 	void								init(void);
 	void								uninit(void);
 
-	static bxgi::CWDRFormat*					convertIntermediateModelFileToWDRFile(bxgi::CIntermediateModelFormat *pGeneralModelFile);
+	static bxgi::CWDRFormat*			convertIntermediateModelFileToWDRFile(bxgi::CIntermediateModelFormat *pGeneralModelFile);
 
 	static uint32						getPackedOffset(uint32 uiOffset);
 	static uint32						getPackedDataOffset(uint32 uiOffset);

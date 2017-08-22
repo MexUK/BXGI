@@ -9,6 +9,7 @@
 #include "Format/RW/Sections/CRWSection_2dEffect.h"
 #include "Format/RW/Sections/CRWSection_Extension.h"
 #include "Static/CDebug.h"
+#include "Format/RW/CRWSection.h"
 
 using namespace std;
 using namespace bxgi;

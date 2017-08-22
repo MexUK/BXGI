@@ -6,7 +6,6 @@
 #include "Format/CFormat.h"
 #include "Pool/CVectorPool.h"
 #include "CDATScriptPathEntry.h"
-#include <vector>
 
 class bxgi::CDATScriptPathFormat : public bxcf::CFormat, public bxcf::CVectorPool<bxgi::CDATScriptPathEntry*>
 {

@@ -33,6 +33,7 @@
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 #include "Exception/eExceptionCode.h"
+#include <vector>
 
 using namespace std;
 using namespace bxcf;

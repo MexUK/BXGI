@@ -3,11 +3,7 @@
 
 #include "bxgi.h"
 #include "Format/RW/CRWSection.h"
-#include "Pool/CVectorPool.h"
 #include "Format/RW/Pools/C2dEffectsPool.h"
-#include "Type/Vector/Vec2f.h"
-#include "Type/Vector/Vec3f.h"
-#include <string>
 
 class bxgi::CRWSection_2dEffect : public bxgi::CRWSection
 {
@@ -18,10 +14,10 @@ public:
 	void							unserialize(void);
 	void							serialize(void);
 
-	bxgi::C2dEffectsPool*					get2dEffects(void) { return m_p2dEffectsPool; }
+	bxgi::C2dEffectsPool*			get2dEffects(void) { return m_p2dEffectsPool; }
 
 private:
-	bxgi::C2dEffectsPool*					m_p2dEffectsPool;
+	bxgi::C2dEffectsPool*			m_p2dEffectsPool;
 };
 
 #endif

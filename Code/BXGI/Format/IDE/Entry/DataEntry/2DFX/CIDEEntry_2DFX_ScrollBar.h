@@ -2,7 +2,6 @@
 #define CIDEEntry_2DFX_ScrollBar_H
 
 #include "Format/IDE/Entry/DataEntry/CIDEEntry_2DFX.h"
-#include <string>
 
 class bxgi::CIDEEntry_2DFX_ScrollBar : public bxgi::CIDEEntry_2DFX
 {

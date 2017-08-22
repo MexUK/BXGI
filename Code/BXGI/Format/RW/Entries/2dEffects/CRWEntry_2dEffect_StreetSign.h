@@ -17,10 +17,10 @@ public:
 	void							serialize(void);
 
 	void							setSize(bxcf::Vec2f& vecSize) { m_vecSize = vecSize; }
-	bxcf::Vec2f&						getSize(void) { return m_vecSize; }
+	bxcf::Vec2f&					getSize(void) { return m_vecSize; }
 
 	void							setRotation(bxcf::Vec3f& vecRotation) { m_vecRotation = vecRotation; }
-	bxcf::Vec3f&						getRotation(void) { return m_vecRotation; }
+	bxcf::Vec3f&					getRotation(void) { return m_vecRotation; }
 
 	void							setFlags(int16 uiFlags) { m_uiFlags = uiFlags; }
 	int16							getFlags(void) { return m_uiFlags; }

@@ -3,7 +3,6 @@
 
 #include "bxgi.h"
 #include "Format/RW/CRWSection.h"
-#include <string>
 
 class bxgi::CRWSection_Extension : public bxgi::CRWSection
 {

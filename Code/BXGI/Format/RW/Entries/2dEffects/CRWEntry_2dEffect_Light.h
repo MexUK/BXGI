@@ -79,8 +79,8 @@ private:
 	std::string						m_strShadowTexName;
 	uint8							m_ucShadowZDistance;
 	uint8							m_ucFlags2;
-	bxcf::Vec3u8						m_vecLookDirection;
-	bxcf::Vec2u8						m_vecPadding;
+	bxcf::Vec3u8					m_vecLookDirection;
+	bxcf::Vec2u8					m_vecPadding;
 };
 
 #endif

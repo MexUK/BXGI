@@ -3,6 +3,7 @@
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 #include "Exception/eExceptionCode.h"
+#include "Type/Vector/Vec3f.h"
 
 using namespace std;
 using namespace bxcf;

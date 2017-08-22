@@ -6,7 +6,6 @@
 #include "Object/CSingleton.h"
 #include "CWTDFormat.h"
 #include "d3d9.h"
-#include <string>
 
 class bxgi::CWTDEntry;
 class bxgi::CIntermediateTextureFormat;
@@ -21,7 +20,7 @@ public:
 
 	static uint32				getImageDataSize(CWTDEntry *pWTDEntry, bool bIncludeLevels);
 
-	bxgi::CWTDFormat*					convertIntermediateTextureFileToWTDFile(bxgi::CIntermediateTextureFormat *pIntermediateTextureFormat);
+	bxgi::CWTDFormat*			convertIntermediateTextureFileToWTDFile(bxgi::CIntermediateTextureFormat *pIntermediateTextureFormat);
 };
 
 #endif

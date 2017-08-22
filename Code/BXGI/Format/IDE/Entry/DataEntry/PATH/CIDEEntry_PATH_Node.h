@@ -4,7 +4,6 @@
 #include "bxgi.h"
 #include "Format/IDE/Entry/DataEntry/CIDEEntry_PATH.h"
 #include "Type/Vector/Vec3f.h"
-#include <string>
 
 class bxgi::CIDEEntry_PATH_Node : public bxgi::CIDEEntry_PATH
 {
@@ -34,7 +33,7 @@ public:
 	uint32							isCrossRoad(void) { return m_uiIsCrossRoad; }
 
 	void							setPosition(bxcf::Vec3f& vecPosition) { m_vecPosition = vecPosition; }
-	bxcf::Vec3f&						getPosition(void) { return m_vecPosition; }
+	bxcf::Vec3f&					getPosition(void) { return m_vecPosition; }
 
 	void							setUnknown1(float32 fUnknown1) { m_fUnknown1 = fUnknown1; }
 	float32							getUnknown1(void) { return m_fUnknown1; }

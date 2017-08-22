@@ -2,7 +2,6 @@
 #define CIPLFormat_H
 
 #include "bxgi.h"
-#include "Format/CFormat.h"
 #include "Helper/SectionLines/CSectionLinesFormat.h"
 #include "eIPLSection.h"
 #include "eIPLPathType.h"
@@ -10,7 +9,6 @@
 #include "Entry/CIPLEntry_Section.h"
 #include "Entry/CIPLEntry_Data.h"
 #include <string>
-#include <vector>
 
 class bxgi::CIPLFormat;
 class bxgi::CIPLEntry;
@@ -23,7 +21,7 @@ public:
 	void												setIsBinary(bool bState) { m_bIsBinary = bState; }
 	bool												isBinary(void) { return m_bIsBinary; }
 
-	bxgi::CIPLEntry_Data*										createDataEntry(eIPLSection eIDESectionValue, uint32 uiSectionSpecificType = 0);
+	bxgi::CIPLEntry_Data*								createDataEntry(eIPLSection eIDESectionValue, uint32 uiSectionSpecificType = 0);
 
 	eIPLSection											getSectionFromText(std::string strIPLSectionText);
 	std::string											getSectionText(eIPLSection eIPLSectionValue);
@@ -37,7 +35,7 @@ private:
 	void												unserializeBinary(void);
 	void												serializeBinary(void);
 
-	bxgi::CIPLEntry_Data*										unserializeDataEntry(eIPLSection eIPLSectionValue);
+	bxgi::CIPLEntry_Data*								unserializeDataEntry(eIPLSection eIPLSectionValue);
 
 	eIPLPathType										detectPATHType(void);
 

@@ -5,7 +5,6 @@
 #include "Type/Types.h"
 #include "Format/CFormat.h"
 #include "CDATAnimgrpSection.h"
-#include <vector>
 
 class bxgi::CDATAnimgrpFormat : public bxcf::CFormat, public bxcf::CVectorPool<bxgi::CDATAnimgrpSection*>
 {

@@ -5,8 +5,6 @@
 #include "Type/Types.h"
 #include "eIDESection.h"
 #include "Helper/SectionLines/CSectionLinesEntry.h"
-#include <string>
-#include <vector>
 
 class bxgi::CIDEFormat;
 

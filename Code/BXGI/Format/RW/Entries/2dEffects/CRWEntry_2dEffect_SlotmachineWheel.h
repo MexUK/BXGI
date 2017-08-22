@@ -4,7 +4,6 @@
 #include "bxgi.h"
 #include "Type/Types.h"
 #include "Format/RW/Entries/C2dEffect.h"
-#include <string>
 
 class bxgi::CRWEntry_2dEffect_SlotmachineWheel : public bxgi::C2dEffect
 {

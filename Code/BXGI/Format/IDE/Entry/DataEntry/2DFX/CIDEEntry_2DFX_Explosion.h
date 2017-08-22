@@ -3,7 +3,6 @@
 
 #include "bxgi.h"
 #include "Format/IDE/Entry/DataEntry/CIDEEntry_2DFX.h"
-#include <string>
 
 class bxgi::CIDEEntry_2DFX_Explosion : public bxgi::CIDEEntry_2DFX
 {

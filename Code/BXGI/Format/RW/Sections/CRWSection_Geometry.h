@@ -7,7 +7,6 @@
 #include "Partial/CRWGeometryBoundingInfo.h"
 #include "Type/Vector/Vec2f.h"
 #include "Type/Vector/Vec3f.h"
-#include "Type/Vector/Vec4f.h"
 #include "Type/Vector/Vec4u8.h"
 #include "Type/Vector/Vec4u16.h"
 #include <string>
@@ -26,7 +25,7 @@ public:
 
 	void							removePrelightning(void);
 
-	bxgi::CIntermediateGeometry*			convertToIntermediateGeometry(void);
+	bxgi::CIntermediateGeometry*	convertToIntermediateGeometry(void);
 
 	void							setFlags(uint32 uiFlags) { m_uiFlags = uiFlags; }
 	uint32							getFlags(void) { return m_uiFlags; }
@@ -59,19 +58,19 @@ public:
 	std::vector<bxcf::Vec4u8>&		getVertexColours(void) { return m_vecVertexColours; }
 
 	void							setTextureCoordinates(std::vector<bxcf::Vec2f>& vecTextureCoordinates) { m_vecTextureCoordinates = vecTextureCoordinates; }
-	std::vector<bxcf::Vec2f>&			getTextureCoordinates(void) { return m_vecTextureCoordinates; }
+	std::vector<bxcf::Vec2f>&		getTextureCoordinates(void) { return m_vecTextureCoordinates; }
 
 	void							setVertexIndices(std::vector<bxcf::Vec4u16>& vecVertexIndices) { m_vecVertexIndices = vecVertexIndices; }
 	std::vector<bxcf::Vec4u16>&		getVertexIndices(void) { return m_vecVertexIndices; }
 
 	void							setVertexPositions(std::vector<bxcf::Vec3f>& vecVertexPositions) { m_vecVertexPositions = vecVertexPositions; }
-	std::vector<bxcf::Vec3f>&			getVertexPositions(void) { return m_vecVertexPositions; }
+	std::vector<bxcf::Vec3f>&		getVertexPositions(void) { return m_vecVertexPositions; }
 
 	void							setVertexNormals(std::vector<bxcf::Vec3f>& vecVertexNormals) { m_vecVertexNormals = vecVertexNormals; }
-	std::vector<bxcf::Vec3f>&			getVertexNormals(void) { return m_vecVertexNormals; }
+	std::vector<bxcf::Vec3f>&		getVertexNormals(void) { return m_vecVertexNormals; }
 
 	void							setBoundingInfo(bxgi::CRWGeometryBoundingInfo& boundingInfo) { m_boundingInfo = boundingInfo; }
-	bxgi::CRWGeometryBoundingInfo&		getBoundingInfo(void) { return m_boundingInfo; }
+	bxgi::CRWGeometryBoundingInfo&	getBoundingInfo(void) { return m_boundingInfo; }
 
 private:
 	uint32							m_uiFlags;
@@ -86,12 +85,12 @@ private:
 	uint32							m_uiSpecularColour;
 	
 	std::vector<bxcf::Vec4u8>		m_vecVertexColours;
-	std::vector<bxcf::Vec2f>			m_vecTextureCoordinates;
+	std::vector<bxcf::Vec2f>		m_vecTextureCoordinates;
 	std::vector<bxcf::Vec4u16>		m_vecVertexIndices;
-	std::vector<bxcf::Vec3f>			m_vecVertexPositions;
-	std::vector<bxcf::Vec3f>			m_vecVertexNormals;
+	std::vector<bxcf::Vec3f>		m_vecVertexPositions;
+	std::vector<bxcf::Vec3f>		m_vecVertexNormals;
 
-	bxgi::CRWGeometryBoundingInfo			m_boundingInfo;
+	bxgi::CRWGeometryBoundingInfo	m_boundingInfo;
 };
 
 #endif

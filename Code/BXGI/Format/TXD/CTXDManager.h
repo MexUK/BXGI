@@ -10,7 +10,6 @@
 #include "Image/eDXTCompressionType.h"
 #include "Platform/Hardware/ePlatform.h"
 #include <string>
-#include <vector>
 
 class bxgi::CTXDFormat;
 class bxgi::CIntermediateTextureFormat;

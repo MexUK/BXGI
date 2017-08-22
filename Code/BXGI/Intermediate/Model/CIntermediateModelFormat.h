@@ -4,7 +4,6 @@
 #include "bxgi.h"
 #include "Pool/CVectorPool.h"
 #include "CIntermediateModel.h"
-#include <vector>
 
 class bxgi::CIntermediateModelFormat : public bxcf::CVectorPool<bxgi::CIntermediateModel*>
 {

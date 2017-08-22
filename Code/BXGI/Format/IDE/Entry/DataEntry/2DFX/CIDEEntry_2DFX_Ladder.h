@@ -4,7 +4,6 @@
 #include "bxgi.h"
 #include "Format/IDE/Entry/DataEntry/CIDEEntry_2DFX.h"
 #include "Type/Vector/Vec3f.h"
-#include <string>
 
 class bxgi::CIDEEntry_2DFX_Ladder : public bxgi::CIDEEntry_2DFX
 {

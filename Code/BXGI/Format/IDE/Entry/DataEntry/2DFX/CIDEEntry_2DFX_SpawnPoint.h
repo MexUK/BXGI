@@ -3,7 +3,6 @@
 
 #include "Format/IDE/Entry/DataEntry/CIDEEntry_2DFX.h"
 #include "Type/Vector/Vec4u.h"
-#include <string>
 
 class bxgi::CIDEEntry_2DFX_SpawnPoint: public bxgi::CIDEEntry_2DFX
 {

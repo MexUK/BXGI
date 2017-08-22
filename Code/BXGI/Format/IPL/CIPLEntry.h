@@ -5,8 +5,6 @@
 #include "Type/Types.h"
 #include "eIPLSection.h"
 #include "Helper/SectionLines/CSectionLinesEntry.h"
-#include <string>
-#include <vector>
 
 class bxgi::CIPLFormat;
 
