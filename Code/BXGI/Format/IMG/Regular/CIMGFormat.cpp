@@ -275,12 +275,6 @@ CIMGPeekData	CIMGFormat::peekIMGData(void)
 // header unserialization
 void		CIMGFormat::unserializeVersion1(void)
 {
-	//CDataReader *pDataReader = CDataReader::get(); // DIR file
-
-	//pDataReader->close();
-	//pDataReader->setFilePath(CPath::replaceFileExtensionWithCase(pDataReader->getFilePath(), "DIR"));
-	//pDataReader->open(doesFormatUseBinaryData());
-
 	// verify file size & fetch entry count
 	uint64 uiFileSize = m_reader.getDataLength();
 	if ((uiFileSize % 32) != 0)
@@ -314,15 +308,13 @@ void		CIMGFormat::unserializeVersion1(void)
 
 void		CIMGFormat::unserializeVersion2(void)
 {
-	CDataReader *pDataReader = CDataReader::get(); // IMG file
-
 	// read header 1
-	RG_CIMGFormat_Version2_Header1 *pHeader1 = pDataReader->readStruct<RG_CIMGFormat_Version2_Header1>();
+	RG_CIMGFormat_Version2_Header1 *pHeader1 = m_reader.readStruct<RG_CIMGFormat_Version2_Header1>();
 	uint32 uiEntryCount = pHeader1->m_uiEntryCount;
 
 	// load data from file into RG structs
 	RG_CIMGEntry_Version1Or2
-		*pRGIMGEntries = pDataReader->readStructMultiple<RG_CIMGEntry_Version1Or2>(uiEntryCount),
+		*pRGIMGEntries = m_reader.readStructMultiple<RG_CIMGEntry_Version1Or2>(uiEntryCount),
 		*pRGIMGActiveEntry = pRGIMGEntries;
 
 	// copy RG structs into wrapper structs

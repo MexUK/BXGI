@@ -19,8 +19,6 @@ using namespace std;
 using namespace bxcf;
 using namespace bxgi;
 
-bool g_bDefaultBool = false;
-
 CIMGManager::CIMGManager(void)
 {
 }

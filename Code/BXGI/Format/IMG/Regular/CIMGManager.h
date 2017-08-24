@@ -11,8 +11,6 @@
 #include <string>
 #include <vector>
 
-extern bool g_bDefaultBool;
-
 class bxgi::CIMGManager : public bxcf::CFormatManager<bxgi::CIMGFormat>, public bxcf::CSingleton<bxgi::CIMGManager>
 {
 public:
@@ -26,7 +24,7 @@ public:
 	static std::string					getVersionNameWithGames(bxgi::eIMGVersion eVersion, bool bIsEncrypted = false);
 	static uint32						getIMGEntryCount(std::string& strIMGFilePath, bxgi::eIMGVersion eIMGVersion = IMG_UNKNOWN);
 
-	static bxgi::eIMGVersion			detectIMGVersion(std::string& strIMGFilePath, std::string& strHeader16B = bxcf::g_strBlankString, bool& bIsEncryptedOut = g_bDefaultBool);
+	static bxgi::eIMGVersion			detectIMGVersion(std::string& strIMGFilePath, std::string& strHeader16B = bxcf::g_strBlankString, bool& bIsEncryptedOut = bxcf::g_bDefaultBool);
 	static bool							detectIMGEncryptionState(std::string& strIMGFilePath);
 
 	static std::string					encryptVersion3IMGString(std::string strData);
