@@ -66,9 +66,9 @@ void			CCOLManager::initGameMaterials(void)
 	*/
 }
 
-CCOLVersion*		CCOLManager::getCOLVersionFromFourCC(string strFourCC)
+eCOLVersion			CCOLManager::getCOLVersionFromFourCC(string strFourCC)
 {
-	eCOLVersion eCOLVersionValue = COL_UNKNOWN;
+	eCOLVersion eCOLVersionValue;
 	if (strFourCC == "COLL")
 	{
 		eCOLVersionValue = COL_1;
@@ -85,7 +85,11 @@ CCOLVersion*		CCOLManager::getCOLVersionFromFourCC(string strFourCC)
 	{
 		eCOLVersionValue = COL_4;
 	}
-	return get()->getVersionManager()->getEntryByVersionId(eCOLVersionValue);
+	else
+	{
+		eCOLVersionValue = COL_UNKNOWN;
+	}
+	return eCOLVersionValue;
 }
 
 string			CCOLManager::getCOLVersionText(eCOLVersion eCOLVersionValue)

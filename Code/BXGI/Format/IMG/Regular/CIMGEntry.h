@@ -48,10 +48,6 @@ public:
 	inline void				setEntryExtension(std::string& strEntryExtension) { m_strEntryExtension = strEntryExtension; }
 	inline std::string&		getEntryExtension(void) { return m_strEntryExtension; }
 
-	void					setRWVersionByVersionCC(uint32 uiRWVersionCC);
-	void					setRWVersion(bxgi::CRWVersion *pRWVersion) { m_pRWVersion = pRWVersion; }
-	bxgi::CRWVersion*		getRWVersion(void) { return m_pRWVersion; }
-
 	void					setRageResourceTypeByIdentifier(uint32 uiResourceType);
 	void					setRageResourceType(bxgi::CRageResourceType *pRageResourceType) { m_pRageResourceType = pRageResourceType; }
 	bxgi::CRageResourceType*	getRageResourceType(void) { return m_pRageResourceType; }
@@ -95,6 +91,13 @@ public:
 
 	std::string				getVersionText(void);
 
+	void					setCOLVersion(bxgi::eCOLVersion uiCOLVersion) { m_uiRawVersion = uiCOLVersion; }
+	bxgi::eCOLVersion		getCOLVersion(void) { return (bxgi::eCOLVersion) m_uiRawVersion; }
+
+	void					setRWVersionByVersionCC(uint32 uiRWVersionCC);
+	void					setRWVersion(uint32 uiRWVersion) { m_uiRawVersion = uiRWVersion; } // todo
+	uint32					getRWVersion(void) { return m_uiRawVersion; } // todo
+
 	void					setEntryData(std::string strEntryData, bool bIsNew = false);
 	std::string				getEntryData(void);
 	std::string				getEntrySubData(uint32 uiStart, uint32 uiLength);
@@ -113,9 +116,6 @@ public:
 	bool					isModelFile(void);
 	bool					isTextureFile(void);
 	bool					isCollisionFile(void);
-
-	void					setCOLVersion(bxgi::CCOLVersion *pCOLVersion) { m_pCOLVersion = pCOLVersion; }
-	bxgi::CCOLVersion*		getCOLVersion(void) { return m_pCOLVersion; }
 	
 	inline void							setFileType(bxcf::fileType::EFileType uiFileType) { m_uiFileType = uiFileType; }
 	inline bxcf::fileType::EFileType	getFileType(void) { return m_uiFileType; }
@@ -133,11 +133,6 @@ private:
 	std::string				m_strEntryName;
 	std::string				m_strEntryExtension;
 	uint32					m_uiFlags;
-	union
-	{
-		bxgi::CRWVersion*		m_pRWVersion; // version 1/2 IMG
-		bxgi::CCOLVersion*		m_pCOLVersion; // version 1/2 IMG
-	};
 	union {
 		struct { // IMG version 3 (encrypted / unencrypted)
 			bxgi::CRageResourceType*	m_pRageResourceType;

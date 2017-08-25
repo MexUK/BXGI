@@ -2,7 +2,7 @@
 
 #include "bxgi.h"
 
-enum bxgi::EEvents
+enum bxgi::EEvent
 {
 	// IMG
 	UNSERIALIZE_IMG_ENTRY = 10000,

@@ -18,7 +18,7 @@ public:
 
 	void							unload(void);
 
-	void							setCOLVersion(CCOLVersion *pCOLVersion);
+	void							setCOLVersion(eCOLVersion uiCOLVersion);
 
 	std::vector<std::string>		getModelNames(void);
 	bxgi::CCOLEntry*						getEntryByName(std::string strName);

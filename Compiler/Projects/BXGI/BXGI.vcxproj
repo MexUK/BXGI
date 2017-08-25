@@ -141,7 +141,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\BXGI\bxgi.h" />
-    <ClInclude Include="..\..\..\Code\BXGI\Event\EEvents.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Event\EEvent.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\CGameFormat.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Games\eGame.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Games\eGameFlag.h" />

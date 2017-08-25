@@ -2,7 +2,7 @@
 #include "bxgi.h"
 #include "Type/Types.h"
 #include "Event/Events.h"
-#include "Event/EEvents.h"
+#include "Event/EEvent.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 #include "CIMGManager.h"
@@ -1221,45 +1221,7 @@ map<string, pair<uint32, EFileType>, SortByStringKey>		CIMGFormat::getFileTypedV
 
 
 
-vector<string>			CIMGFormat::getEntryVersions(vector<eCOLVersion>& vecCOLVersions, vector<eRWVersion>& vecRWVersions)
-{
-	unordered_map<string, eCOLVersion> umapCOLEntryExtensions;
-	unordered_map<string, eRWVersion> umapRWEntryExtensions;
-	for (CIMGEntry* pIMGEntry : getEntries())
-	{
-		string
-			strEntryExtension = CString2::toUpperCase(CPath::getFileExtension(pIMGEntry->getEntryName())),
-			strEntryVersion;
-		if (strEntryExtension == "COL")
-		{
-			eCOLVersion eCOLVersionValue = pIMGEntry->getCOLVersion() == nullptr ? COL_UNKNOWN : pIMGEntry->getCOLVersion()->getVersionId();
-			strEntryVersion = eCOLVersionValue == COL_UNKNOWN ? CLocalizationManager::get()->getTranslatedText("UnknownVersion") : CCOLManager::getCOLVersionText(eCOLVersionValue);
-			umapCOLEntryExtensions[strEntryVersion] = eCOLVersionValue;
-		}
-		else if (strEntryExtension == "DFF" || strEntryExtension == "TXD")
-		{
-			eRWVersion eRWVersionValue = pIMGEntry->getRWVersion() == nullptr ? RW_VERSION_UNKNOWN : pIMGEntry->getRWVersion()->getVersionId();
-			strEntryVersion = pIMGEntry->getRWVersion() == nullptr ? CLocalizationManager::get()->getTranslatedText("UnknownVersion") : CRWManager::getRWVersionText(pIMGEntry->getRWVersion());
-			umapRWEntryExtensions[strEntryVersion] = eRWVersionValue;
-		}
-		else
-		{
-			strEntryVersion = CLocalizationManager::get()->getTranslatedText("UnknownVersion");
-		}
-	}
-	vector<string> vecEntryVersions;
-	for (auto it : umapCOLEntryExtensions)
-	{
-		vecEntryVersions.push_back(it.first);
-		vecCOLVersions.push_back(it.second);
-	}
-	for (auto it : umapRWEntryExtensions)
-	{
-		vecEntryVersions.push_back(it.first);
-		vecRWVersions.push_back(it.second);
-	}
-	return vecEntryVersions;
-}
+
 
 eCompressionAlgorithm								CIMGFormat::getCompressionAlgorithmIdFromFastman92CompressionAlgorithmId(eIMGVersionFastman92CompressionAlgorithm eFastman92CompressionAlgorithmId)
 {

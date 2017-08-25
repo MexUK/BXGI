@@ -65,7 +65,6 @@ public:
 	std::map<std::string, std::pair<uint32, bxcf::fileType::EFileType>, SortByStringKey>	getFileTypedVersionsAsMap(void);
 
 	uint32											getEntryExtensionCount(std::string strEntryExtension);
-	std::vector<std::string>						getEntryVersions(std::vector<bxgi::eCOLVersion>& vecCOLVersions, std::vector<bxgi::eRWVersion>& vecRWVersions);
 
 	static bxcf::eCompressionAlgorithm				getCompressionAlgorithmIdFromFastman92CompressionAlgorithmId(eIMGVersionFastman92CompressionAlgorithm eFastman92CompressionAlgorithmId);
 

@@ -1394,7 +1394,7 @@
     <ClInclude Include="..\..\..\Code\BXGI\Game\CGameManager.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Event\EEvents.h">
+    <ClInclude Include="..\..\..\Code\BXGI\Event\EEvent.h">
       <Filter>Header Files\Event</Filter>
     </ClInclude>
   </ItemGroup>

@@ -33,11 +33,7 @@ CIMGEntry::CIMGEntry(void) :
 	m_eCompressionAlgorithm(COMPRESSION_NONE),
 	m_uiCompressionLevel(0),
 	m_bIsEncrypted(false),
-
 	m_pRageResourceType(nullptr),
-	
-	m_pRWVersion(nullptr),
-	m_pCOLVersion(nullptr),
 	m_uiUncompressedSize(0),
 	m_uiFlags(0),
 	m_uiRawVersion(0)
@@ -55,11 +51,7 @@ CIMGEntry::CIMGEntry(CIMGFormat *pIMGFile) :
 	m_eCompressionAlgorithm(COMPRESSION_NONE),
 	m_uiCompressionLevel(0),
 	m_bIsEncrypted(false),
-
 	m_pRageResourceType(nullptr),
-
-	m_pRWVersion(nullptr),
-	m_pCOLVersion(nullptr),
 	m_uiUncompressedSize(0),
 	m_uiFlags(0),
 	m_uiFileType(bxcf::fileType::UNKNOWN)
@@ -265,7 +257,8 @@ uint32			CIMGEntry::getEntryDataPadLength(uint32 uiUnpaddedDataLength)
 
 void					CIMGEntry::setRWVersionByVersionCC(uint32 uiRWVersionCC)
 {
-	setRWVersion(CRWManager::get()->getVersionManager()->getEntryByVersionCC(uiRWVersionCC));
+	// todo
+	//setRWVersion(CRWManager::get()->getVersionManager()->getEntryByVersionCC(uiRWVersionCC));
 }
 
 void					CIMGEntry::setRageResourceTypeByIdentifier(uint32 uiResourceType)

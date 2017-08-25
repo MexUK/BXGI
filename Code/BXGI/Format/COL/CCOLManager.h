@@ -26,7 +26,7 @@ public:
 
 	bxgi::CCOLVersionManager*		getVersionManager(void) { return m_pVersionManager; }
 
-	static CCOLVersion*		getCOLVersionFromFourCC(std::string strFourCC);
+	static eCOLVersion		getCOLVersionFromFourCC(std::string strFourCC);
 	static std::string		getFourCCFromCOLVersion(eCOLVersion eCOLVersionValue);
 
 	static std::string		getCOLVersionText(eCOLVersion eCOLVersionValue);
