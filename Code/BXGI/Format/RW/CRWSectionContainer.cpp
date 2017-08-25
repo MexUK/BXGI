@@ -376,13 +376,13 @@ void					CRWSectionContainer::setNVCColours(vector<Vec4u8>& vecNVCColours)
 			CRWSection_Extension *pRWSection_Extension;
 			if (vecRWSections_Extension.size() == 0)
 			{
-				pRWSection_Extension = (CRWSection_Extension*)pRWSection1->addSection(RW_SECTION_EXTENSION, RW_VERSION_3_4_0_3); // todo - don't use hardcoded RW version
+				pRWSection_Extension = (CRWSection_Extension*)pRWSection1->addSection(RW_SECTION_EXTENSION, RW_3_4_0_3); // todo - don't use hardcoded RW version
 			}
 			else
 			{
 				pRWSection_Extension = (CRWSection_Extension*)vecRWSections_Extension[0];
 			}
-			CRWSection_ExtraVertColour *pRWSection_ExtraVertColour = (CRWSection_ExtraVertColour*)pRWSection_Extension->addSection(RW_SECTION_EXTRA_VERT_COLOUR, RW_VERSION_3_4_0_3); // todo - don't use hardcoded RW version
+			CRWSection_ExtraVertColour *pRWSection_ExtraVertColour = (CRWSection_ExtraVertColour*)pRWSection_Extension->addSection(RW_SECTION_EXTRA_VERT_COLOUR, RW_3_4_0_3); // todo - don't use hardcoded RW version
 			pRWSection_ExtraVertColour->setVertexColours(vecNVCColours);
 		}
 		else
@@ -422,13 +422,13 @@ void					CRWSectionContainer::set2dEffects(vector<vector<C2dEffect*>>& vec2dEffe
 			CRWSection_Extension *pRWSection_Extension;
 			if (vecRWSections_Extension.size() == 0)
 			{
-				pRWSection_Extension = (CRWSection_Extension*)pRWSection1->addSection(RW_SECTION_EXTENSION, RW_VERSION_3_4_0_3); // todo - don't use hardcoded RW version
+				pRWSection_Extension = (CRWSection_Extension*)pRWSection1->addSection(RW_SECTION_EXTENSION, RW_3_4_0_3); // todo - don't use hardcoded RW version
 			}
 			else
 			{
 				pRWSection_Extension = (CRWSection_Extension*)vecRWSections_Extension[0];
 			}
-			CRWSection_2dEffect *pRWSection_2dEffects = (CRWSection_2dEffect*)pRWSection_Extension->addSection(RW_SECTION_2D_EFFECT, RW_VERSION_3_4_0_3); // todo - don't use hardcoded RW version
+			CRWSection_2dEffect *pRWSection_2dEffects = (CRWSection_2dEffect*)pRWSection_Extension->addSection(RW_SECTION_2D_EFFECT, RW_3_4_0_3); // todo - don't use hardcoded RW version
 
 			for (auto p2dEffect : (ui2dEffectsSectionOccurrenceIndex < vec2dEffects.size() ? vec2dEffects[ui2dEffectsSectionOccurrenceIndex] : vec2dEffects[0]))
 			{

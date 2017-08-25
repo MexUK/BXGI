@@ -7,7 +7,7 @@
 #include "Object/CSingleton.h"
 #include "CIMGFormat.h"
 #include "Engine/RAGE/CRageResourceType.h"
-#include "Games/ePlatformedGame.h"
+#include "Game/ePlatformedGame.h"
 #include <string>
 #include <vector>
 

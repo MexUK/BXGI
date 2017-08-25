@@ -15,6 +15,8 @@ public:
 	void											init(void);
 	void											uninit(void);
 
+	CRWVersion*										addVersion(uint32 uiRawVersion, eRWVersion uiVersionId, bxcf::fileType::EFileType uiFileType, std::vector<bxgi::ePlatformedGame> vecPlatformedGames);
+
 	std::string										getVersionText(uint32 uiRawVersion);
 
 	CRWVersion*										getEntryByVersionCC(uint32 uiVersionCC);

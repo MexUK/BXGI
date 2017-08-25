@@ -25,7 +25,7 @@ void							CRWSection_UnknownSection::serialize(void)
 {
 	CDataWriter *pDataWriter = CDataWriter::get();
 
-	uint32 uiRWVersionCC = CRWManager::get()->getRWVersionCCForSerialization();
+	uint32 uiRWVersionCC = CRWManager::get()->getSerializationRWVersion();
 
 	/*
 	todo

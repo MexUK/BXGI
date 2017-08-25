@@ -54,11 +54,11 @@ string			CDATLoaderManager::getDefaultGameDATSubPath(ePlatformedGame ePlatformed
 {
 	switch (ePlatformedGameValue)
 	{
-	case PLATFORMED_GAME_PC_GTA_III:	return "data/gta3.dat";
-	case PLATFORMED_GAME_PC_GTA_VC:		return "data/gta_vc.dat";
-	case PLATFORMED_GAME_PC_GTA_SA:		return "data/gta.dat";
-	case PLATFORMED_GAME_PC_GTA_IV:		return "common/data/gta.dat";
-	case PLATFORMED_GAME_PC_SOL:		return "sol/gta_sol.dat";
+	case PC_GTA_III:	return "data/gta3.dat";
+	case PC_GTA_VC:		return "data/gta_vc.dat";
+	case PC_GTA_SA:		return "data/gta.dat";
+	case PC_GTA_IV:		return "common/data/gta.dat";
+	case PC_SOL:		return "sol/gta_sol.dat";
 	}
 	return "";
 }

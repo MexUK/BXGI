@@ -196,8 +196,8 @@ bool		CIMGFormat::unserialize2(void)
 // unserialization & serialization
 void		CIMGFormat::unserialize(void)
 {
-	unserializeHeaderComponents();
-	unserializeBodyComponents();
+	//unserializeHeaderComponents();
+	//unserializeBodyComponents();
 }
 void		CIMGFormat::serialize(void)
 {
@@ -207,9 +207,9 @@ void		CIMGFormat::serialize(void)
 // unserialization
 void		CIMGFormat::unserializeHeaderComponents(void)
 {
-	CIMGPeekData imgPeekData = peekIMGData();
-	setVersion(imgPeekData.getVersion());
-	setEncrypted(imgPeekData.isEncrypted());
+	//CIMGPeekData imgPeekData = peekIMGData();
+	//setVersion(imgPeekData.getVersion());
+	//setEncrypted(imgPeekData.isEncrypted());
 	switch (getVersion())
 	{
 	case IMG_1:
@@ -252,24 +252,6 @@ void		CIMGFormat::unserializeBodyComponents(void)
 		unserializeResourceTypes();
 		break;
 	}
-}
-
-CIMGPeekData	CIMGFormat::peekIMGData(void)
-{
-	CDataReader *pDataReader = CDataReader::get();
-
-	pDataReader->setPeek(true);
-	string strHeader16B = pDataReader->readString(16);
-	pDataReader->setPeek(false);
-	pDataReader->setSeek(0);
-
-	CIMGPeekData imgPeekData;
-	bool bIsEncryptedOut;
-	eIMGVersion eVersion = CIMGManager::detectIMGVersion(getFilePath(), strHeader16B, bIsEncryptedOut);
-	imgPeekData.setVersion(eVersion);
-	imgPeekData.setEncrypted(bIsEncryptedOut);
-
-	return imgPeekData;
 }
 
 // header unserialization

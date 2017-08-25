@@ -5,7 +5,7 @@
 #include "Format/CFormatManager.h"
 #include "Object/CSingleton.h"
 #include "eDATLoaderEntryType.h"
-#include "Games/ePlatformedGame.h"
+#include "Game/ePlatformedGame.h"
 #include <string>
 
 class bxgi::CDATLoaderFormat;

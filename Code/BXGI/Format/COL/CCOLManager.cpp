@@ -34,7 +34,7 @@ void			CCOLManager::initGameMaterials(void)
 {
 	// todo
 	/*
-	umapGameMaterialIds[GAME_III] = {
+	umapGameMaterialIds[GTA_III] = {
 		{ "grass", 2 },
 		{ "dirt", 3 },
 		{ "mud", 4 },
@@ -44,7 +44,7 @@ void			CCOLManager::initGameMaterials(void)
 		{ "hedge", 25 },
 		{ "stone", 26 }
 	};
-	umapGameMaterialIds[GAME_VC] = {
+	umapGameMaterialIds[GTA_VC] = {
 		{ "grass", 2 },
 		{ "dirt", 3 },
 		{ "mud", 4 },

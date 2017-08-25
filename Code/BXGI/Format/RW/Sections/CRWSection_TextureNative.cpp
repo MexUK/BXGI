@@ -817,7 +817,7 @@ void							CRWSection_TextureNative::convertToGame(ePlatformedGame ePlatformedGa
 {
 	switch (ePlatformedGame)
 	{
-	case PLATFORMED_GAME_PC_GTA_III:
+	case PC_GTA_III:
 		setPlatformId(8);
 		setFilterFlags(2);
 		setTXDRasterDataFormat(TXDRASTERDATAFORMAT_565);
@@ -827,7 +827,7 @@ void							CRWSection_TextureNative::convertToGame(ePlatformedGame ePlatformedGa
 
 		convertToRasterDataFormat(RASTERDATAFORMAT_DXT1, vecMipmapsRemoved);
 		break;
-	case PLATFORMED_GAME_PC_GTA_VC:
+	case PC_GTA_VC:
 		setPlatformId(8);
 		setFilterFlags(2);
 		setTXDRasterDataFormat(TXDRASTERDATAFORMAT_565);
@@ -837,7 +837,7 @@ void							CRWSection_TextureNative::convertToGame(ePlatformedGame ePlatformedGa
 
 		convertToRasterDataFormat(RASTERDATAFORMAT_DXT1, vecMipmapsRemoved);
 		break;
-	case PLATFORMED_GAME_PC_GTA_SA:
+	case PC_GTA_SA:
 		setPlatformId(9);
 		setFilterFlags(1);
 		setTXDRasterDataFormat(TXDRASTERDATAFORMAT_565);
@@ -847,7 +847,7 @@ void							CRWSection_TextureNative::convertToGame(ePlatformedGame ePlatformedGa
 
 		convertToRasterDataFormat(RASTERDATAFORMAT_DXT1, vecMipmapsRemoved);
 		break;
-	case PLATFORMED_GAME_ANDROID_GTA:
+	case ANDROID_GTA:
 		setPlatformId(8);
 		setFilterFlags(2);
 		setTXDRasterDataFormat(TXDRASTERDATAFORMAT_888);
@@ -857,7 +857,7 @@ void							CRWSection_TextureNative::convertToGame(ePlatformedGame ePlatformedGa
 
 		convertToRasterDataFormat(RASTERDATAFORMAT_BGR32, vecMipmapsRemoved);
 		break;
-	case PLATFORMED_GAME_XBOX_GTA:
+	case XBOX_GTA:
 		setPlatformId(5);
 		setFilterFlags(2);
 		setTXDRasterDataFormat(TXDRASTERDATAFORMAT_888);

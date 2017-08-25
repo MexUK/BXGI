@@ -330,15 +330,15 @@ vector<string>		CIMGManager::getDefaultGameIMGSubPaths(ePlatformedGame ePlatform
 	vector<string> vecGameIMGPaths;
 	switch (ePlatformedGameValue)
 	{
-	case PLATFORMED_GAME_PC_GTA_III:
+	case PC_GTA_III:
 		vecGameIMGPaths.push_back("models/gta3.img");
 		vecGameIMGPaths.push_back("models/txd.img");
 		break;
-	case PLATFORMED_GAME_PC_GTA_VC:
+	case PC_GTA_VC:
 		vecGameIMGPaths.push_back("models/gta3.img");
 		vecGameIMGPaths.push_back("anim/cuts.img");
 		break;
-	case PLATFORMED_GAME_PC_GTA_SA:
+	case PC_GTA_SA:
 		vecGameIMGPaths.push_back("models/gta3.img");
 		vecGameIMGPaths.push_back("models/cutscene.img");
 		vecGameIMGPaths.push_back("models/gta_int.img");
@@ -348,7 +348,7 @@ vector<string>		CIMGManager::getDefaultGameIMGSubPaths(ePlatformedGame ePlatform
 		vecGameIMGPaths.push_back("anim/anim.img");
 		vecGameIMGPaths.push_back("anim/cuts.img");
 		break;
-	case PLATFORMED_GAME_PC_SOL:
+	case PC_SOL:
 		vecGameIMGPaths.push_back("models/game.img");
 		break;
 	}

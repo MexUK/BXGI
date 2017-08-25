@@ -6,6 +6,7 @@ using namespace std;
 using namespace bxcf;
 using namespace bxgi;
 
+// initialization
 void											CCOLVersionManager::init(void)
 {
 	initCOLVersions();
@@ -16,33 +17,14 @@ void											CCOLVersionManager::uninit(void)
 	uninitCOLVersions();
 }
 
+// version initialization
 void											CCOLVersionManager::initCOLVersions(void)
 {
-	CCOLVersion *pCOLVersion = nullptr;
-
-	pCOLVersion = new CCOLVersion;
-	pCOLVersion->setVersionId(COL_1);
-	pCOLVersion->setText("COL 1 (GTA III)");
-	pCOLVersion->setLocalizationKey("COL_1");
-	addEntry(pCOLVersion);
-
-	pCOLVersion = new CCOLVersion;
-	pCOLVersion->setVersionId(COL_2);
-	pCOLVersion->setText("COL 2 (GTA VC)");
-	pCOLVersion->setLocalizationKey("COL_2");
-	addEntry(pCOLVersion);
-
-	pCOLVersion = new CCOLVersion;
-	pCOLVersion->setVersionId(COL_3);
-	pCOLVersion->setText("COL 3 (GTA SA)");
-	pCOLVersion->setLocalizationKey("COL_3");
-	addEntry(pCOLVersion);
-
-	pCOLVersion = new CCOLVersion;
-	pCOLVersion->setVersionId(COL_4);
-	pCOLVersion->setText("COL 4");
-	pCOLVersion->setLocalizationKey("COL_4");
-	addEntry(pCOLVersion);
+	addVersion(COL_UNKNOWN, "COL Unknown");
+	addVersion(COL_1, "COL 1", { GTA_III });
+	addVersion(COL_2, "COL 2", { GTA_VC });
+	addVersion(COL_3, "COL 3", { GTA_SA });
+	addVersion(COL_4, "COL 4");
 }
 
 void											CCOLVersionManager::uninitCOLVersions(void)
@@ -50,6 +32,18 @@ void											CCOLVersionManager::uninitCOLVersions(void)
 	removeAllEntries();
 }
 
+// add/remove version
+CCOLVersion*									CCOLVersionManager::addVersion(eCOLVersion uiCOLVersion, string strVersionText, vector<eGame> vecGames)
+{
+	CCOLVersion *pCOLVersion = new CCOLVersion;
+	pCOLVersion->setVersionId(uiCOLVersion);
+	pCOLVersion->setText(strVersionText);
+	pCOLVersion->setGames(vecGames);
+	addEntry(pCOLVersion);
+	return pCOLVersion;
+}
+
+// version text
 string											CCOLVersionManager::getVersionText(uint32 uiRawVersion)
 {
 	if (m_umapRawVersionTexts.count(uiRawVersion))
@@ -64,6 +58,7 @@ string											CCOLVersionManager::getVersionText(uint32 uiRawVersion)
 	}
 }
 
+// entry fetching
 CCOLVersion*									CCOLVersionManager::getEntryByVersionId(eCOLVersion eCOLVersionValue)
 {
 	for (CCOLVersion *pCOLVersion : getEntries())

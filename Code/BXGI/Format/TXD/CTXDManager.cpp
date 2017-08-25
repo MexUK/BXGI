@@ -38,10 +38,10 @@ CTXDFormat*				CTXDManager::createFormat(void)
 	CTXDFormat *pTXDFile = new CTXDFormat;
 	pTXDFile->setDeviceId(0);
 
-	CRWSection *pTextureDictionary = pTXDFile->addSection(RW_SECTION_TEXTURE_DICTIONARY, RW_VERSION_3_4_0_3); // todo - make RW version not fixed
-	CRWSection *pTextureNative = pTextureDictionary->addSection(RW_SECTION_TEXTURE_NATIVE, RW_VERSION_3_4_0_3); // todo - make RW version not fixed
-	CRWSection *pExtension1 = pTextureDictionary->addSection(RW_SECTION_EXTENSION, RW_VERSION_3_4_0_3); // todo - make RW version not fixed
-	CRWSection *pExtension2 = pTXDFile->addSection(RW_SECTION_EXTENSION, RW_VERSION_3_4_0_3); // todo - make RW version not fixed
+	CRWSection *pTextureDictionary = pTXDFile->addSection(RW_SECTION_TEXTURE_DICTIONARY, RW_3_4_0_3); // todo - make RW version not fixed
+	CRWSection *pTextureNative = pTextureDictionary->addSection(RW_SECTION_TEXTURE_NATIVE, RW_3_4_0_3); // todo - make RW version not fixed
+	CRWSection *pExtension1 = pTextureDictionary->addSection(RW_SECTION_EXTENSION, RW_3_4_0_3); // todo - make RW version not fixed
+	CRWSection *pExtension2 = pTXDFile->addSection(RW_SECTION_EXTENSION, RW_3_4_0_3); // todo - make RW version not fixed
 
 	return pTXDFile;
 }
@@ -49,7 +49,7 @@ CTXDFormat*				CTXDManager::createFormat(void)
 CTXDFormat*				CTXDManager::convertIntermediateTextureFileToTXDFile(bxgi::CIntermediateTextureFormat *pGeneralTextureFile)
 {
 	CTXDFormat *pTXDFile = createFormat();
-	pTXDFile->setRWVersion(CRWManager::get()->getVersionManager()->getRWVersionFromGame(PLATFORMED_GAME_PC_GTA_SA));
+	pTXDFile->setRWVersion(CRWManager::get()->getVersionManager()->getRWVersionFromGame(PC_GTA_SA));
 
 	for (CIntermediateTexture *pGeneralTexture : pGeneralTextureFile->getEntries())
 	{

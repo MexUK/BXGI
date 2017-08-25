@@ -70,7 +70,7 @@ void				CTXDFormat::convertToGame(ePlatformedGame ePlatformedGame, vector<string
 		vector<string> vecMipmapsRemoved;
 		pTexture->convertToGame(ePlatformedGame, vecMipmapsRemoved);
 		
-		if (ePlatformedGame == PLATFORMED_GAME_PC_GTA_SA)
+		if (ePlatformedGame == PC_GTA_SA)
 		{
 			m_usDeviceId = 2;
 		}
@@ -148,7 +148,7 @@ bool				CTXDFormat::isTextureResolutionValid(uint16 usWidth, uint16 usHeight, ve
 
 	for (auto ePlatformedGame : vecGames)
 	{
-		if (ePlatformedGame == PLATFORMED_GAME_PC_GTA_III || ePlatformedGame == PLATFORMED_GAME_PC_GTA_VC)
+		if (ePlatformedGame == PC_GTA_III || ePlatformedGame == PC_GTA_VC)
 		{
 			// III/VC - 8x8 to 4096x4096
 			if (usWidth < 8 || usWidth > 4096 || usHeight < 8 || usHeight > 4096)
@@ -161,7 +161,7 @@ bool				CTXDFormat::isTextureResolutionValid(uint16 usWidth, uint16 usHeight, ve
 				return true;
 			}
 		}
-		else if (ePlatformedGame == PLATFORMED_GAME_PC_GTA_SA)
+		else if (ePlatformedGame == PC_GTA_SA)
 		{
 			// SA - 16x16 to 2048x2048
 			if (usWidth < 16 || usWidth > 2048 || usHeight < 16 || usHeight > 2048)
@@ -201,11 +201,11 @@ bool				CTXDFormat::isTextureCountValid(uint32 uiTextureCount, vector<ePlatforme
 
 uint32		CTXDFormat::getMaxTextureCountForGame(ePlatformedGame ePlatformedGame)
 {
-	if (ePlatformedGame == PLATFORMED_GAME_PC_GTA_III || ePlatformedGame == PLATFORMED_GAME_PC_GTA_VC)
+	if (ePlatformedGame == PC_GTA_III || ePlatformedGame == PC_GTA_VC)
 	{
 		return 128;
 	}
-	else if (ePlatformedGame == PLATFORMED_GAME_PC_GTA_SA)
+	else if (ePlatformedGame == PC_GTA_SA)
 	{
 		return 64;
 	}

@@ -62,7 +62,7 @@ void				CRWSection::serialize(void)
 	*/
 	
 	CDataWriter *pDataWriter = CDataWriter::get();
-	uint32 uiVersionCC = CRWManager::get()->getRWVersionCCForSerialization();
+	uint32 uiVersionCC = CRWManager::get()->getSerializationRWVersion();
 	
 	if (!isSectionHeaderSkipped())
 	{

@@ -124,7 +124,7 @@ void							CRWSection_Geometry::serialize(void)
 	pDataWriter->writeUint32(m_uiVertexCount);
 	pDataWriter->writeUint32(m_uiFrameCount);
 
-	uint32 uiRWVersionCC = CRWManager::get()->getRWVersionCCForSerialization();
+	uint32 uiRWVersionCC = CRWManager::get()->getSerializationRWVersion();
 	if (CRWVersion::unpackVersionStamp(uiRWVersionCC) < 0x34000)
 	{
 		pDataWriter->writeUint32(m_uiAmbientColour);

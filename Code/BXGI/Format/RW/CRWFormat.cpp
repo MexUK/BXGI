@@ -27,7 +27,7 @@ void					CRWFormat::unserialize(void)
 
 	if (getRWVersion() != nullptr)
 	{
-		setGames(getRWVersion()->getGames());
+		setPlatformedGames(getRWVersion()->getPlatformedGames());
 	}
 
 	if (doesHaveTextureWithInvalidTXDRasterDataFormat())
@@ -41,14 +41,14 @@ void					CRWFormat::serialize(void)
 	uint32 uiRWVersionCC;
 	if (getEntryCount() == 0)
 	{
-		uiRWVersionCC = CRWManager::get()->getVersionManager()->getEntryByVersionId(RW_VERSION_3_4_0_3)->getVersionCC();
+		uiRWVersionCC = CRWManager::get()->getVersionManager()->getEntryByVersionId(RW_3_4_0_3)->getRawVersion();
 	}
 	else
 	{
 		uiRWVersionCC = getEntryByIndex(0)->getSectionRWVersion();
 	}
 
-	CRWManager::get()->setRWVersionCCForSerialization(uiRWVersionCC);
+	CRWManager::get()->setSerializationRWVersion(uiRWVersionCC);
 
 	CRWSectionContainer::serialize();
 }

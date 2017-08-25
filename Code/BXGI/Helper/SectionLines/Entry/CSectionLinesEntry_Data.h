@@ -3,7 +3,7 @@
 
 #include "bxgi.h"
 #include "Type/Types.h"
-#include "Games/eGameFlag.h"
+#include "Game/eGameFlag.h"
 #include <string>
 
 class bxgi::CSectionLinesEntry_Data

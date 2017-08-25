@@ -289,12 +289,6 @@
     <Filter Include="Header Files\Format\RW\Entries\2dEffects">
       <UniqueIdentifier>{39379146-caa7-4f03-a38a-96f8a292fa8a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Games">
-      <UniqueIdentifier>{94c62f16-a1be-497d-aa45-82a801ada0e0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Games">
-      <UniqueIdentifier>{c1733b80-1206-43c5-985c-991db5bf46af}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Game">
       <UniqueIdentifier>{79f2b815-b2ea-4960-bb05-62c4dd1cd1c9}</UniqueIdentifier>
     </Filter>
@@ -500,9 +494,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\BXGI\Format\IDE\CIDEManager.cpp">
       <Filter>Source Files\Format\IDE</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\CIMGPeekData.cpp">
-      <Filter>Source Files\Format\IMG\Regular</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\CIMGEntry.cpp">
       <Filter>Source Files\Format\IMG\Regular</Filter>
@@ -765,6 +756,12 @@
     <ClCompile Include="..\..\..\Code\BXGI\Game\CGameManager.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Game\CGame.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Game\CPlatformedGame.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\BXGI\Format\COL\CCOLEntry.h">
@@ -999,9 +996,6 @@
       <Filter>Header Files\Format\IMG\Regular</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\CIMGManager.h">
-      <Filter>Header Files\Format\IMG\Regular</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\CIMGPeekData.h">
       <Filter>Header Files\Format\IMG\Regular</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\eIMGVersion.h">
@@ -1373,20 +1367,8 @@
     <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\eRWVersion.h">
       <Filter>Header Files\Engine\RW</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\eRWVersionType.h">
-      <Filter>Header Files\Engine\RW</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\e2DFXType.h">
       <Filter>Header Files\Format</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Games\eGameFlag.h">
-      <Filter>Header Files\Games</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Games\ePlatformedGame.h">
-      <Filter>Header Files\Games</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Games\eGame.h">
-      <Filter>Header Files\Games</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Game\CGame.h">
       <Filter>Header Files\Game</Filter>
@@ -1396,6 +1378,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Event\EEvent.h">
       <Filter>Header Files\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Game\CPlatformedGame.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Game\eGameFlag.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Game\ePlatformedGame.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Game\eGame.h">
+      <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

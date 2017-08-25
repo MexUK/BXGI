@@ -5,7 +5,7 @@
 #include "Format/RW/CRWSection.h"
 #include "Pool/CVectorPool.h"
 #include "Image/eDXTCompressionType.h"
-#include "Games/ePlatformedGame.h"
+#include "Game/ePlatformedGame.h"
 #include "Image/eRasterDataFormat.h"
 #include "Format/RW/Entries/CRWEntry_TextureNative_MipMap.h"
 #include "Type/Vector/Vec2u.h"

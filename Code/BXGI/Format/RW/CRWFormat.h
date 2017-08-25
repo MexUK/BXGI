@@ -7,7 +7,7 @@
 #include "CRWSectionContainer.h"
 #include "Engine/RW/CRWVersion.h"
 #include "Format/RW/eRWSection.h"
-#include "Games/ePlatformedGame.h"
+#include "Game/ePlatformedGame.h"
 #include <vector>
 #include <unordered_map>
 
@@ -39,8 +39,8 @@ public:
 	void												fixAlphaTextureStates(void);
 	bool												doesHaveTextureWithInvalidTXDRasterDataFormat(void);
 
-	void												setGames(std::vector<bxgi::ePlatformedGame> vecGames) { m_vecGames = vecGames; }
-	std::vector<bxgi::ePlatformedGame>&				getGames(void) { return m_vecGames; }
+	void												setPlatformedGames(std::vector<bxgi::ePlatformedGame> vecGames) { m_vecGames = vecGames; }
+	std::vector<bxgi::ePlatformedGame>&					getPlatformedGames(void) { return m_vecGames; }
 
 private:
 	void												unserialize(void);

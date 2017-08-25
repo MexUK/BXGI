@@ -4,7 +4,7 @@
 #include "bxgi.h"
 #include "Format/RW/CRWFormat.h"
 #include "Format/RW/CRWSection.h"
-#include "Games/ePlatformedGame.h"
+#include "Game/ePlatformedGame.h"
 #include "Image/eRasterDataFormat.h"
 #include "Engine/RW/eRWVersion.h"
 #include <string>
@@ -34,8 +34,8 @@ public:
 	static bool						isTextureCountValid(uint32 uiTextureCount, std::vector<bxgi::ePlatformedGame>& vecGames);
 	static uint32					getMaxTextureCountForGame(bxgi::ePlatformedGame ePlatformedGame);
 
-	void							setGames(std::vector<bxgi::ePlatformedGame>& vecGames) { m_vecGames = vecGames; }
-	std::vector<bxgi::ePlatformedGame>&	getGames(void) { return m_vecGames; }
+	void									setPlatformedGames(std::vector<bxgi::ePlatformedGame>& vecGames) { m_vecGames = vecGames; }
+	std::vector<bxgi::ePlatformedGame>&		getPlatformedGames(void) { return m_vecGames; }
 
 	void							setDeviceId(uint16 usDeviceId) { m_usDeviceId = usDeviceId; }
 	uint16							getDeviceId(void) { return m_usDeviceId; }

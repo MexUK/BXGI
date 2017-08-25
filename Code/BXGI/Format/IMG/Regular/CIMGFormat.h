@@ -7,7 +7,6 @@
 #include "Pool/CVectorPool.h"
 #include "eIMGVersion.h"
 #include "Engine/RW/eRWVersion.h"
-#include "CIMGPeekData.h"
 #include "Compression/eCompressionAlgorithm.h"
 #include "Format/IMG/Fastman92/eIMGVersionFastman92CompressionAlgorithm.h"
 #include "Format/COL/eCOLVersion.h"
@@ -112,8 +111,6 @@ private:
 	void											unserializeBodyComponents(void);
 
 	void											serializeHeaderAndBodyComponents(void);
-
-	bxgi::CIMGPeekData								peekIMGData(void);
 	
 	void											unserializeVersion1(void);
 	void											unserializeVersion2(void);

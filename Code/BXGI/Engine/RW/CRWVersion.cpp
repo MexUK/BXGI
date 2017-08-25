@@ -1,43 +1,51 @@
 ﻿#include "CRWVersion.h"
 #include "Static/CString2.h"
+#include "Engine/RW/CRWManager.h"
+#include "Engine/RW/CRWVersionManager.h"
+#include "Game/CGameManager.h"
 
 using namespace std;
 using namespace bxcf;
+using namespace bxcf::fileType;
 using namespace bxgi;
 
-string			CRWVersion::getText(void)
+CRWVersion::CRWVersion(void) :
+	m_uiRawVersion(0),
+	m_uiVersionId(UNKNOWN_RW_VERSION),
+	m_uiFileType(fileType::UNKNOWN)
 {
-	return "RW " + getVersionName() + " (" + getVersionGamesStr() + ")";
 }
 
-ePlatformedGame			CRWVersion::getFirstGame(void)
+// platformed game
+bool						CRWVersion::doesUsePlatformedGame(ePlatformedGame ePlatformedGameId)
 {
-	for (uint32 i = 1, j = 0xFFFFFFFF; i < j; i+=i)
+	return std::find(m_vecPlatformedGames.begin(), m_vecPlatformedGames.end(), ePlatformedGameId) != m_vecPlatformedGames.end();
+}
+
+// version text
+string						CRWVersion::getVersionText(void)
+{
+	return CRWManager::get()->getVersionManager()->getVersionText(m_uiRawVersion);
+}
+
+string						CRWVersion::getVersionTextWithGames(void)
+{
+	return getVersionText() + " (" + getGamesAsString() + ")";
+}
+
+// games for rw version
+string						CRWVersion::getGamesAsString(void)
+{
+	CGameManager *pGameManager = CGameManager::get();
+	vector<string> vecGames;
+	for (ePlatformedGame uiPlatformedGame : m_vecPlatformedGames)
 	{
-		if ((m_uiVersionGames & i) == i)
-		{
-			return (ePlatformedGame)i;
-		}
+		vecGames.push_back(pGameManager->getPlatformedGameText(uiPlatformedGame));
 	}
-	return PLATFORMED_GAME_UNKNOWN;
+	return CString2::join(vecGames, ",");
 }
 
-vector<ePlatformedGame>	CRWVersion::getGames(void)
-{
-	vector<ePlatformedGame> vecGames;
-	uint32 uiGame = 1;
-	for (uint32 i = 0, j = 32; i < j; i++)
-	{
-		if ((m_uiVersionGames & uiGame) == uiGame)
-		{
-			vecGames.push_back((ePlatformedGame) uiGame);
-		}
-		
-		uiGame += uiGame;
-	}
-	return vecGames;
-}
-
+// pack/unpack version
 uint32						CRWVersion::packVersionStamp(uint32 uiRWVersionNumber, uint32 uiRWBuildNumber)
 {
 	uint32 uiRWVersionPackedInt;

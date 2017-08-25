@@ -6,6 +6,7 @@ namespace bxgi
 
 	class CGameManager;
 	class CGame;
+	class CPlatformedGame;
 	enum eGame;
 	enum eGameFlag;
 	enum ePlatformedGame;
@@ -26,7 +27,6 @@ namespace bxgi
 	class CTextureEntry;
 	enum eRWSection;
 	enum eRWVersion;
-	enum eRWVersionType;
 	class CRWEntry_BinMeshPLG_Mesh;
 	class CRWEntry_TextureNative_MipMap;
 	class CRWEntry_2dEffect_CoverPoint;
@@ -176,7 +176,6 @@ namespace bxgi
 	class CIMGEntry;
 	class CIMGFormat;
 	class CIMGManager;
-	class CIMGPeekData;
 	enum eIMGEntryProperty;
 	enum eIMGVersion;
 	struct CIMGEntry_Fastman92;
