@@ -1,5 +1,4 @@
-#ifndef CRWEntry_2dEffect_Escalator_H
-#define CRWEntry_2dEffect_Escalator_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -32,5 +31,3 @@ private:
 	bxcf::Vec3f						m_vecEscalatorEnd; // (Z pos, matches top Z if escalator goes up, bottom Z if it goes down)
 	uint32							m_uiDirection;
 };
-
-#endif

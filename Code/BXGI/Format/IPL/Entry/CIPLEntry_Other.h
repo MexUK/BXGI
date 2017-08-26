@@ -1,5 +1,4 @@
-#ifndef CIPLEntry_Other_H
-#define CIPLEntry_Other_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/IPL/CIPLEntry.h"
@@ -17,5 +16,3 @@ public:
 	void							unserialize(void);
 	void							serialize(void);
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef CWTDMipmap_H
-#define CWTDMipmap_H
+#pragma once
 
 #include "bxgi.h"
 #include "Image/eRasterDataFormat.h"
@@ -32,5 +31,3 @@ private:
 	std::string					m_strRasterData;
 	uint16						m_usImageSize[2];
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef eGame_H
-#define eGame_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -15,5 +14,3 @@ enum bxgi::eGame : uint8
 	BULLY,
 	SOL
 };
-
-#endif

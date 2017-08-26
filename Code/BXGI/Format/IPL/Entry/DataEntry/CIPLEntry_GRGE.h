@@ -1,5 +1,4 @@
-#ifndef CIPLEntry_GRGE_H
-#define CIPLEntry_GRGE_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -51,5 +50,3 @@ private:
 	uint32						m_uiGarageType;
 	std::string					m_strGarageName;
 };
-
-#endif

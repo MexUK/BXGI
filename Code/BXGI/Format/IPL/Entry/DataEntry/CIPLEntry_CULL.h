@@ -1,5 +1,4 @@
-#ifndef CIPLEntry_CULL_H
-#define CIPLEntry_CULL_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -85,5 +84,3 @@ private:
 	uint32						m_uiBottom;
 	bxcf::Vec4f					m_vecMirrorParameters;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef CCOLVersionManager_H
-#define CCOLVersionManager_H
+#pragma once
 
 #include "bxgi.h"
 #include "Object/CManager.h"
@@ -30,5 +29,3 @@ private:
 private:
 	std::unordered_map<uint32, std::string>			m_umapRawVersionTexts;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef CRageResourceTypeManager_H
-#define CRageResourceTypeManager_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -21,5 +20,3 @@ public:
 private:
 	void											initRageResourceTypes(void);
 };
-
-#endif

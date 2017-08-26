@@ -1,5 +1,4 @@
-#ifndef CIPLEntry_CARS_H
-#define CIPLEntry_CARS_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -73,5 +72,3 @@ private:
 	uint32						m_uiUnknown1;
 	uint32						m_uiUnknown2;
 };
-
-#endif

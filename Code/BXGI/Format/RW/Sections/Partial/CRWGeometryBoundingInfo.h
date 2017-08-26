@@ -1,5 +1,4 @@
-#ifndef CRWGeometryBoundingInfo_H
-#define CRWGeometryBoundingInfo_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -33,5 +32,3 @@ private:
 	bool							m_bHasPosition;
 	bool							m_bHasNormals;
 };
-
-#endif

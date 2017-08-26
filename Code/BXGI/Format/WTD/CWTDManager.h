@@ -1,5 +1,4 @@
-#ifndef CWTDManager_H
-#define CWTDManager_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/CFormatManager.h"
@@ -22,5 +21,3 @@ public:
 
 	bxgi::CWTDFormat*			convertIntermediateTextureFileToWTDFile(bxgi::CIntermediateTextureFormat *pIntermediateTextureFormat);
 };
-
-#endif

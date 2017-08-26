@@ -1,5 +1,4 @@
-#ifndef CIntermediateModel_H
-#define CIntermediateModel_H
+#pragma once
 
 #include "bxgi.h"
 #include "Pool/CVectorPool.h"
@@ -10,5 +9,3 @@ class bxgi::CIntermediateModel : public bxcf::CVectorPool<bxgi::CIntermediateGeo
 public:
 	void								unload(void) {}
 };
-
-#endif

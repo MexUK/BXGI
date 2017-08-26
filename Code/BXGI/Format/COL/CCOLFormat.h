@@ -1,5 +1,4 @@
-#ifndef CCOLFormat_H
-#define CCOLFormat_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/CFormat.h"
@@ -31,5 +30,3 @@ private:
 	void							unserialize(void);
 	void							serialize(void);
 };
-
-#endif

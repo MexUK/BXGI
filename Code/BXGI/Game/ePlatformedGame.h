@@ -1,5 +1,4 @@
-#ifndef ePlatformedGame_H
-#define ePlatformedGame_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -19,5 +18,3 @@ enum bxgi::ePlatformedGame : uint16
 	ANDROID_GTA		= 128, // this is just temp here - coz its not really a game its a platform or something ...
 	XBOX_GTA		= 256 // this is just temp here too
 };
-
-#endif

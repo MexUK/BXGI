@@ -1,5 +1,4 @@
-#ifndef CRWSection_H
-#define CRWSection_H
+#pragma once
 
 #include "bxgi.h"
 #include "CRWSectionContainer.h"
@@ -66,5 +65,3 @@ private:
 	uint8													m_bSectionHeaderSkipped		: 1;
 	static std::unordered_map<bxgi::eRWSection, bool>		m_umapRWSectionsContainingStruct;
 };
-
-#endif

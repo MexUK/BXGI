@@ -1,5 +1,4 @@
-#ifndef CIPLEntry_MZON_H
-#define CIPLEntry_MZON_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -44,5 +43,3 @@ private:
 	uint32						m_uiLevel;
 	std::string					m_strZoneText;
 };
-
-#endif

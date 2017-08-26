@@ -1,5 +1,4 @@
-#ifndef CCOLManager_H
-#define CCOLManager_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/CFormatManager.h"
@@ -41,5 +40,3 @@ private:
 	
 	//std::unordered_map<ePlatformedGame, std::unordered_map<std::string, uint32>> umapGameMaterialIds; // todo
 };
-
-#endif

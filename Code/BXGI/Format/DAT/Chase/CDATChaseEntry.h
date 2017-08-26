@@ -1,5 +1,4 @@
-#ifndef CDATChaseEntry_H
-#define CDATChaseEntry_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -56,5 +55,3 @@ private:
 	int8					m_iHandbrakeUsed;
 	bxcf::Vec3f				m_vecPosition;
 };
-
-#endif

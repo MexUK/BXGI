@@ -1,5 +1,4 @@
-#ifndef CWTDEntry_H
-#define CWTDEntry_H
+#pragma once
 
 #include "bxgi.h"
 #include "CWTDMipmap.h"
@@ -49,5 +48,3 @@ private:
 	uint8						m_ucLevels;
 	uint32						m_uiTextureHash;
 };
-
-#endif

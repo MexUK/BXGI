@@ -1,5 +1,4 @@
-#ifndef CIDEFormat_H
-#define CIDEFormat_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -62,5 +61,3 @@ std::vector<EntryClass2*>						bxgi::CIDEFormat::getEntriesBySection(eIDESection
 		return vecDerivedEntries;
 	}
 }
-
-#endif

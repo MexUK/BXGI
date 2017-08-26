@@ -1,5 +1,4 @@
-#ifndef CWTDFormat_H
-#define CWTDFormat_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/CFormat.h"
@@ -34,5 +33,3 @@ private:
 
 	std::string					decompressWTDFormatData(uint32& uiSystemSegmentSize, uint32& uiGPUSegmentSize);
 };
-
-#endif

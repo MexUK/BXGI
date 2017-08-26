@@ -1,5 +1,4 @@
-#ifndef CRWSection_Atomic_H
-#define CRWSection_Atomic_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/RW/CRWSection.h"
@@ -30,5 +29,3 @@ private:
 	uint32							m_uiUnknown1;
 	uint32							m_uiUnknown2;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef CRWManager_H
-#define CRWManager_H
+#pragma once
 
 #include "bxgi.h"
 #include "Object/CSingleton.h"
@@ -31,5 +30,3 @@ private:
 	bxgi::CRWVersionManager*						m_pVersionManager;
 	uint32											m_uiSerializationRWVersion;
 };
-
-#endif

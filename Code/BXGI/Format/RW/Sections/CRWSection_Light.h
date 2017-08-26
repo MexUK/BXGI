@@ -1,5 +1,4 @@
-#ifndef CRWSection_Light_H
-#define CRWSection_Light_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/RW/CRWSection.h"
@@ -19,5 +18,3 @@ public:
 private:
 	std::string						m_strData;
 };
-
-#endif

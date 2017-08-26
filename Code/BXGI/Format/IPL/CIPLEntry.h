@@ -1,5 +1,4 @@
-#ifndef CIPLEntry_H
-#define CIPLEntry_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -13,5 +12,3 @@ class bxgi::CIPLEntry : public bxgi::CSectionLinesEntry<CIPLFormat, eIPLSection>
 public:
 	CIPLEntry(bxgi::CIPLFormat *pIPLFormat);
 };
-
-#endif

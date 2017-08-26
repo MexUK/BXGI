@@ -1,5 +1,4 @@
-#ifndef CRWSection_BinMeshPLG_H
-#define CRWSection_BinMeshPLG_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -32,5 +31,3 @@ private:
 	uint32										m_uiIndexCount;
 	std::vector<bxgi::CRWEntry_BinMeshPLG_Mesh*>		m_vecMeshes;
 };
-
-#endif

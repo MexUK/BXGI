@@ -1,5 +1,4 @@
-#ifndef CIDEEntry_Data_H
-#define CIDEEntry_Data_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/IDE/CIDEEntry.h"
@@ -14,5 +13,3 @@ public:
 		setSectionType(eIDESectionValue);
 	};
 };
-
-#endif

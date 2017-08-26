@@ -1,5 +1,4 @@
-#ifndef CIMGFormat_H
-#define CIMGFormat_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -138,5 +137,3 @@ private:
 	uint8											m_ucGameType;
 	uint8											m_bEncrypted : 1;
 };
-
-#endif

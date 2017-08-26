@@ -1,5 +1,4 @@
-#ifndef CIntermediateGeometry_H
-#define CIntermediateGeometry_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -60,5 +59,3 @@ private:
 	std::vector<bxgi::CIntermediateVertexData>	m_vecVertices;
 	std::vector<bxgi::CIntermediateIndexData>		m_vecTriangles;
 };
-
-#endif

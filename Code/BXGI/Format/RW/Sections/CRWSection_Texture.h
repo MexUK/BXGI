@@ -1,5 +1,4 @@
-#ifndef CRWSection_Texture_H
-#define CRWSection_Texture_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/RW/CRWSection.h"
@@ -22,5 +21,3 @@ private:
 	uint16							m_usFilterFlags;
 	uint16							m_usUnknown1;
 };
-
-#endif

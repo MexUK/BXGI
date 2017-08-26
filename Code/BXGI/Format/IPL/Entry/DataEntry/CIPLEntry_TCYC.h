@@ -1,5 +1,4 @@
-#ifndef CIPLEntry_TCYC_H
-#define CIPLEntry_TCYC_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Vector/Vec3f.h"
@@ -48,5 +47,3 @@ private:
 	uint32						m_uiTime;
 	uint32						m_uiDrawDistance;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef CIDEEntry_2DFX_Light_H
-#define CIDEEntry_2DFX_Light_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/IDE/Entry/DataEntry/CIDEEntry_2DFX.h"
@@ -72,5 +71,3 @@ private:
 	uint32						m_uiFlare;
 	uint32						m_uiDust;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef CIDEEntry_CARS_H
-#define CIDEEntry_CARS_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -132,5 +131,3 @@ private:
 	float32						m_fSwankness;
 	uint32						m_uiFlags;
 };
-
-#endif

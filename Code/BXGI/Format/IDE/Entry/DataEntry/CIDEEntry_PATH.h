@@ -1,5 +1,4 @@
-#ifndef CIDEEntry_PATH_H
-#define CIDEEntry_PATH_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -31,5 +30,3 @@ private:
 
 	bxgi::eIDEPathType					m_eIDEPathType;
 };
-
-#endif

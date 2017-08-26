@@ -1,5 +1,4 @@
-#ifndef CSectionLinesFormat_H
-#define CSectionLinesFormat_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/CFormat.h"
@@ -365,5 +364,3 @@ void				bxgi::CSectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEnt
 		std::sort(it.second.begin(), it.second.end(), sortSectionLinesEntries_ObjectID<FormatClass, EntryClass, DataEntryClass>);
 	}
 };
-
-#endif

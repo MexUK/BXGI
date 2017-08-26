@@ -1,5 +1,4 @@
-#ifndef CIntermediateTextureMipmap_H
-#define CIntermediateTextureMipmap_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -27,5 +26,3 @@ private:
 	bxcf::Vec2u16				m_vecSize;
 	std::string					m_strRasterData;
 };
-
-#endif

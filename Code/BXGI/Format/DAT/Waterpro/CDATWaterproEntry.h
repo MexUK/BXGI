@@ -1,5 +1,4 @@
-#ifndef CDATWaterproEntry_H
-#define CDATWaterproEntry_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -26,5 +25,3 @@ private:
 	bxcf::Vec2f				m_vecWaterZoneStart;
 	bxcf::Vec2f				m_vecWaterZoneEnd;
 };
-
-#endif

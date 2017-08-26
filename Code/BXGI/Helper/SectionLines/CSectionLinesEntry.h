@@ -1,5 +1,4 @@
-#ifndef CSectionLinesEntry_H
-#define CSectionLinesEntry_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -45,5 +44,3 @@ private:
 	std::string					m_strComment;
 	uint8						m_ucFormatType;
 };
-
-#endif

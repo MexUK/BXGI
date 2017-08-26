@@ -1,5 +1,4 @@
-#ifndef CIPLManager_H
-#define CIPLManager_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/CFormatManager.h"
@@ -15,5 +14,3 @@ public:
 	void					init(void);
 	void					uninit(void);
 };
-
-#endif

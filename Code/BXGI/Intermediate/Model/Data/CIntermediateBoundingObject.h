@@ -1,5 +1,4 @@
-#ifndef CIntermediateBoundingObject_H
-#define CIntermediateBoundingObject_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -69,5 +68,3 @@ private:
 		};
 	};
 };
-
-#endif

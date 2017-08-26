@@ -1,5 +1,4 @@
-#ifndef eDATLoaderEntryType_H
-#define eDATLoaderEntryType_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -21,5 +20,3 @@ enum bxgi::eDATLoaderEntryType : uint8
 	DAT_LOADER_SPLASH,
 	DAT_LOADER_EXIT
 };
-
-#endif

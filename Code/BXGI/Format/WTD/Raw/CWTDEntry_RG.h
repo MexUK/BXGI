@@ -1,5 +1,4 @@
-#ifndef CWTDEntry_RG_H
-#define CWTDEntry_RG_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -32,5 +31,3 @@ struct bxgi::RG_CWTDEntry
 	uint32					m_uiUnknown14;
 };
 #pragma pack(pop)
-
-#endif

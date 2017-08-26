@@ -1,5 +1,4 @@
-#ifndef CRWSection_TextureNative_H
-#define CRWSection_TextureNative_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/RW/CRWSection.h"
@@ -151,5 +150,3 @@ private:
 
 	bxcf::CVectorPool<bxgi::CRWEntry_TextureNative_MipMap*>	m_vecMipMaps;
 };
-
-#endif

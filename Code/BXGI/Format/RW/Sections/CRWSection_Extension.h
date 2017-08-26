@@ -1,5 +1,4 @@
-#ifndef CRWSection_Extension_H
-#define CRWSection_Extension_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/RW/CRWSection.h"
@@ -12,5 +11,3 @@ public:
 	void							unserialize(void);
 	void							serialize(void);
 };
-
-#endif

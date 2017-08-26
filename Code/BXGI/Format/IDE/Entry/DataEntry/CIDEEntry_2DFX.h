@@ -1,5 +1,4 @@
-#ifndef CIDEEntry_2DFX_H
-#define CIDEEntry_2DFX_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -76,5 +75,3 @@ private:
 		};
 	};
 };
-
-#endif

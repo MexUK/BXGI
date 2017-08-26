@@ -1,5 +1,4 @@
-#ifndef CIPLEntry_UnknownSection_H
-#define CIPLEntry_UnknownSection_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -23,5 +22,3 @@ public:
 private:
 	std::string					m_strLine;
 };
-
-#endif

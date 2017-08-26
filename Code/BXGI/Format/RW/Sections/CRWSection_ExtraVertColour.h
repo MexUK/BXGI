@@ -1,5 +1,4 @@
-#ifndef CRWSection_ExtraVertColour_H
-#define CRWSection_ExtraVertColour_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/RW/CRWSection.h"
@@ -23,5 +22,3 @@ private:
 	uint32							m_uiMagicNumber;
 	std::vector<bxcf::Vec4u8>		m_vecNightVertexColours;
 };
-
-#endif

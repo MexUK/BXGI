@@ -1,5 +1,4 @@
-#ifndef CIDEEntry_2DFX_ScrollBar_H
-#define CIDEEntry_2DFX_ScrollBar_H
+#pragma once
 
 #include "Format/IDE/Entry/DataEntry/CIDEEntry_2DFX.h"
 
@@ -14,5 +13,3 @@ public:
 	void						unserialize(void);
 	void						serialize(void);
 };
-
-#endif

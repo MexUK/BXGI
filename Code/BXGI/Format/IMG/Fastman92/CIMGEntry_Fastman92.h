@@ -1,5 +1,4 @@
-#ifndef CIMGEntry_Fastman92_H
-#define CIMGEntry_Fastman92_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -19,5 +18,3 @@ struct bxgi::CIMGEntry_Fastman92
 	uint8		m_strPad2[8];
 };
 #pragma pack(pop)
-
-#endif

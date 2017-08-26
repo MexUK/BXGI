@@ -1,5 +1,4 @@
-#ifndef CIDEEntry_2DFX_Ped_H
-#define CIDEEntry_2DFX_Ped_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/IDE/Entry/DataEntry/CIDEEntry_2DFX.h"
@@ -34,5 +33,3 @@ private:
 	bxcf::Vec3f					m_vecUnknown2;
 	bxcf::Vec3f					m_vecPedRotation;
 };
-
-#endif

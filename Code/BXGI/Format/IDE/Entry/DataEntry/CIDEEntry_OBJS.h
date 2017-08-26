@@ -1,5 +1,4 @@
-#ifndef CIDEEntry_OBJS_H
-#define CIDEEntry_OBJS_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -83,5 +82,3 @@ private:
 	float32						m_fBoundingSphereRadius;
 	std::string					m_strLODModel;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef CIPLEntry_Data_H
-#define CIPLEntry_Data_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/IPL/CIPLEntry.h"
@@ -14,5 +13,3 @@ public:
 		setSectionType(eIPLSectionValue);
 	};
 };
-
-#endif

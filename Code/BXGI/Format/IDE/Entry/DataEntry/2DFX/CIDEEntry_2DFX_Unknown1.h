@@ -1,5 +1,4 @@
-#ifndef CIDEEntry_2DFX_Unknown1_H
-#define CIDEEntry_2DFX_Unknown1_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/IDE/Entry/DataEntry/CIDEEntry_2DFX.h"
@@ -34,5 +33,3 @@ private:
 	bxcf::Vec3f					m_vecUnknown3;
 	uint32						m_uiUnknown4;
 };
-
-#endif

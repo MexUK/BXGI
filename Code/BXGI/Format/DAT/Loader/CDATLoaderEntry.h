@@ -1,5 +1,4 @@
-#ifndef CDATLoaderEntry_H
-#define CDATLoaderEntry_H
+#pragma once
 
 #include "bxgi.h"
 #include "eDATLoaderEntryType.h"
@@ -21,5 +20,3 @@ private:
 	eDATLoaderEntryType			m_eEntryType;
 	std::deque<std::string>		m_deqValues;
 };
-
-#endif

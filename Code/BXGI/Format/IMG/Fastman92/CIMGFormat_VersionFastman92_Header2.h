@@ -1,5 +1,4 @@
-#ifndef CIMGFormat_VersionFastman92_Header2_H
-#define CIMGFormat_VersionFastman92_Header2_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -12,5 +11,3 @@ struct bxgi::CIMGFormat_VersionFastman92_Header2
 	uint8		m_strReserved1[8];
 };
 #pragma pack(pop)
-
-#endif

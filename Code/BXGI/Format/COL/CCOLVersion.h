@@ -1,5 +1,4 @@
-#ifndef CCOLVersion_H
-#define CCOLVersion_H
+#pragma once
 
 #include "bxgi.h"
 #include "eCOLVersion.h"
@@ -24,5 +23,3 @@ private:
 	std::string			m_strText;
 	std::vector<eGame>	m_vecGames;
 };
-
-#endif

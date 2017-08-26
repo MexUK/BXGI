@@ -1,5 +1,4 @@
-#ifndef CIPLEntry_OCCL_H
-#define CIPLEntry_OCCL_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -62,5 +61,3 @@ private:
 	float32						m_fUnknown2;
 	uint32						m_uiUnknown3;
 };
-
-#endif

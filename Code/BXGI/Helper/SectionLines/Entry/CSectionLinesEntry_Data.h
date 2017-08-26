@@ -1,5 +1,4 @@
-#ifndef CSectionLinesEntry_Data_H
-#define CSectionLinesEntry_Data_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -22,5 +21,3 @@ public:
 private:
 	uint32						m_uiFormatGames;
 };
-
-#endif

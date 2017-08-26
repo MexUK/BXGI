@@ -1,5 +1,4 @@
-#ifndef CGame_H
-#define CGame_H
+#pragma once
 
 #include "bxgi.h"
 #include "Game/eGame.h"
@@ -22,5 +21,3 @@ private:
 	eGame					m_uiGameId;
 	std::string				m_strName;
 };
-
-#endif

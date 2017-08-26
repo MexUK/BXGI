@@ -1,5 +1,4 @@
-#ifndef eTXDRasterDataFormat_H
-#define eTXDRasterDataFormat_H
+#pragma once
 
 #include "bxgi.h"
 
@@ -22,5 +21,3 @@ enum bxgi::eTXDRasterDataFormat
 	TXDRASTERDATAFORMAT_PS2_SWIZZLEDNOHEADER	= 0x10000,
 	TXDRASTERDATAFORMAT_PS2_SWIZZLEDWITHHEADER	= 0x20000
 };
-
-#endif

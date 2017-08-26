@@ -1,5 +1,4 @@
-#ifndef CRWSection_UnknownSection_H
-#define CRWSection_UnknownSection_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/RW/CRWSection.h"
@@ -23,5 +22,3 @@ private:
 	uint32							m_uiActualSectionId;
 	std::string						m_strData;
 };
-
-#endif

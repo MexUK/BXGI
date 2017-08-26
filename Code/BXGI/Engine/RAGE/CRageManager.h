@@ -1,5 +1,4 @@
-#ifndef CRageManager_H
-#define CRageManager_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -31,5 +30,3 @@ public:
 private:
 	bxgi::CRageResourceTypeManager*					m_pResourceTypeManager;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef CIPLEntry_ZONE_H
-#define CIPLEntry_ZONE_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -51,5 +50,3 @@ private:
 	bxcf::Vec3f					m_vecTopRightPosition;
 	uint32						m_uiLevel;
 };
-
-#endif

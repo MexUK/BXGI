@@ -1,5 +1,4 @@
-#ifndef CDFFFormat_H
-#define CDFFFormat_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/RW/CRWFormat.h"
@@ -10,5 +9,3 @@ class bxgi::CDFFFormat : public bxgi::CRWFormat
 public:
 	bxgi::CIntermediateModelFormat*									convertToIntermediateModelFormat(void);
 };
-
-#endif

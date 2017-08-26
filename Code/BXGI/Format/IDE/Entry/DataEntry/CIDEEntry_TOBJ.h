@@ -1,5 +1,4 @@
-#ifndef CIDEEntry_TOBJ_H
-#define CIDEEntry_TOBJ_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -103,5 +102,3 @@ private:
 	std::string					m_strLODModel;
 	uint32						m_uiNightFlags;
 };
-
-#endif

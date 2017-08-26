@@ -1,5 +1,4 @@
-#ifndef CIPLEntry_RTFX_H
-#define CIPLEntry_RTFX_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -16,5 +15,3 @@ public:
 	void						unserialize(void);
 	void						serialize(void);
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef CIPLEntry_INST_H
-#define CIPLEntry_INST_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -62,5 +61,3 @@ private:
 	bxcf::Vec4f					m_vecRotation;
 	int32						m_iLOD;
 };
-
-#endif

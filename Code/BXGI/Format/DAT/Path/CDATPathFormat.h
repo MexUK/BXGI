@@ -1,5 +1,4 @@
-#ifndef CDATPathFormat_H
-#define CDATPathFormat_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/CFormat.h"
@@ -56,5 +55,3 @@ public: // todo - make this access specifier private
 	std::vector<bxgi::CDATEntry_Paths_General_NaviNode>		m_vecNaviNodes;
 	std::vector<bxgi::CDATEntry_Paths_General_Link>			m_vecLinks;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef CIDEEntry_HAND_H
-#define CIDEEntry_HAND_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -37,5 +36,3 @@ private:
 	std::string					m_strTXDName;
 	std::string					m_strUnknown1;
 };
-
-#endif

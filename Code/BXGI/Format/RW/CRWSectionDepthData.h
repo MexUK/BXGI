@@ -1,5 +1,4 @@
-#ifndef CRWSectionDepthData_H
-#define CRWSectionDepthData_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -28,5 +27,3 @@ private:
 	uint32					m_uiSectionSize;
 	uint32					m_uiSectionByteCountRead;
 };
-
-#endif

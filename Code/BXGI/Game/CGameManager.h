@@ -1,5 +1,4 @@
-#ifndef CGameManager_H
-#define CGameManager_H
+#pragma once
 
 #include "bxgi.h"
 #include "bxcf.h"
@@ -36,5 +35,3 @@ private:
 private:
 	bxcf::CVectorPool<bxgi::CPlatformedGame*>		m_vecPlatformedGames;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef CWDRManager_H
-#define CWDRManager_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/CFormatManager.h"
@@ -21,5 +20,3 @@ public:
 	static uint32						getPackedOffset(uint32 uiOffset);
 	static uint32						getPackedDataOffset(uint32 uiOffset);
 };
-
-#endif

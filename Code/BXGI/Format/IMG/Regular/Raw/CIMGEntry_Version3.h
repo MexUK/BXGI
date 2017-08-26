@@ -1,5 +1,4 @@
-#ifndef CIMGEntry_Version3_H
-#define CIMGEntry_Version3_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -14,5 +13,3 @@ struct bxgi::RG_CIMGEntry_Version3
 	uint16			m_usFlags;
 };
 #pragma pack(pop)
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef C2dEffect_H
-#define C2dEffect_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -40,5 +39,3 @@ private:
 	bxcf::Vec3f						m_vecPosition;
 	e2DFXType						m_e2DFXType;
 };
-
-#endif

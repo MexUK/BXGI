@@ -1,5 +1,4 @@
-#ifndef CIDEEntry_PATH_Node_H
-#define CIDEEntry_PATH_Node_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/IDE/Entry/DataEntry/CIDEEntry_PATH.h"
@@ -54,5 +53,3 @@ private:
 	uint32							m_uiLeftLaneCount;
 	uint32							m_uiRightLaneCount;
 };
-
-#endif

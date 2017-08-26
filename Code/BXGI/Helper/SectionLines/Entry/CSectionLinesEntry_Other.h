@@ -1,5 +1,4 @@
-#ifndef CSectionLinesEntry_Other_H
-#define CSectionLinesEntry_Other_H
+#pragma once
 
 #include "bxgi.h"
 #include <string>
@@ -13,5 +12,3 @@ public:
 private:
 	std::string					m_strLine;
 };
-
-#endif

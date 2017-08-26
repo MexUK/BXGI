@@ -1,5 +1,4 @@
-#ifndef CIPLEntry_PATH_Node_H
-#define CIPLEntry_PATH_Node_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -70,5 +69,3 @@ private:
 	uint32							m_uiFlags;
 	float32							m_fSpawnRate;
 };
-
-#endif

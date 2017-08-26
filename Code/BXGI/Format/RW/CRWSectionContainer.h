@@ -1,5 +1,4 @@
-#ifndef CRWSectionContainer_H
-#define CRWSectionContainer_H
+#pragma once
 
 #include "bxgi.h"
 #include "Pool/CVectorPool.h"
@@ -52,5 +51,3 @@ public:
 private:
 	bxgi::CRWSection*								m_pParentNode;
 };
-
-#endif

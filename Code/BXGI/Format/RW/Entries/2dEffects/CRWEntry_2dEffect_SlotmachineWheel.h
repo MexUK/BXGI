@@ -1,5 +1,4 @@
-#ifndef CRWEntry_2dEffect_SlotmachineWheel_H
-#define CRWEntry_2dEffect_SlotmachineWheel_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -19,5 +18,3 @@ public:
 private:
 	int32							m_iWheelIndex;
 };
-
-#endif

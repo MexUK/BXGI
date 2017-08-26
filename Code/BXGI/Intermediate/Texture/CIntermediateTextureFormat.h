@@ -1,5 +1,4 @@
-#ifndef CIntermediateTextureFormat_H
-#define CIntermediateTextureFormat_H
+#pragma once
 
 #include "bxgi.h"
 #include "Pool/CVectorPool.h"
@@ -10,5 +9,3 @@ class bxgi::CIntermediateTextureFormat : public bxcf::CVectorPool<bxgi::CInterme
 public:
 	void						unload(void);
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef TShapes_H
-#define TShapes_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Vector/Vec3f.h"
@@ -53,5 +52,3 @@ struct bxgi::TFace
 	uint32			m_uiC;
 	TSurface		m_surface;
 };
-
-#endif

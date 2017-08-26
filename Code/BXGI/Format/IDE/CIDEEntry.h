@@ -1,5 +1,4 @@
-#ifndef CIDEEntry_H
-#define CIDEEntry_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -13,5 +12,3 @@ class bxgi::CIDEEntry : public bxgi::CSectionLinesEntry<CIDEFormat, eIDESection>
 public:
 	CIDEEntry(CIDEFormat *pIDEFormat);
 };
-
-#endif

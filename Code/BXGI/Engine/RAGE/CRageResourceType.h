@@ -1,5 +1,4 @@
-#ifndef CRageResourceType_H
-#define CRageResourceType_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -32,5 +31,3 @@ private:
 	std::string					m_strName;
 	std::string					m_strFileExtension;
 };
-
-#endif

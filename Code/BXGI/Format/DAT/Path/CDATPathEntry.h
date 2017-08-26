@@ -1,5 +1,4 @@
-#ifndef CDATPathEntry_H
-#define CDATPathEntry_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -223,5 +222,3 @@ struct bxgi::CDATEntry_Paths_General_Link
 	uint8						m_ucLength;
 	uint8						m_ucPathIntersectionFlags;
 };
-
-#endif

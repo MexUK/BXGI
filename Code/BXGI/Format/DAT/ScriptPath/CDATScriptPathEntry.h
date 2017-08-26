@@ -1,5 +1,4 @@
-#ifndef CDATScriptPathEntry_H
-#define CDATScriptPathEntry_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -21,5 +20,3 @@ public:
 private:
 	bxcf::Vec3f				m_vecPosition;
 };
-
-#endif

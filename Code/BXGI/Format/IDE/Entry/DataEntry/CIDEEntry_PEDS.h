@@ -1,5 +1,4 @@
-#ifndef CIDEEntry_PEDS_H
-#define CIDEEntry_PEDS_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -113,5 +112,3 @@ private:
 	std::string					m_strFirstVoice;
 	std::string					m_strLastVoice;
 };
-
-#endif

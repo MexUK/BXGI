@@ -1,5 +1,4 @@
-#ifndef CIDEEntry_TXDP_H
-#define CIDEEntry_TXDP_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/IDE/Entry/CIDEEntry_Data.h"
@@ -27,5 +26,3 @@ private:
 	std::string					m_strTXDName;
 	std::string					m_strParentTXDName;
 };
-
-#endif

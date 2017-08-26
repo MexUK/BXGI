@@ -1,5 +1,4 @@
-#ifndef CRWSection_Geometry_H
-#define CRWSection_Geometry_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/RW/CRWSection.h"
@@ -92,5 +91,3 @@ private:
 
 	bxgi::CRWGeometryBoundingInfo	m_boundingInfo;
 };
-
-#endif

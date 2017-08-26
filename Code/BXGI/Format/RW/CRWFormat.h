@@ -1,5 +1,4 @@
-#ifndef CRWFormat_H
-#define CRWFormat_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -54,5 +53,3 @@ private:
 	std::vector<bxgi::ePlatformedGame>					m_vecGames;
 	std::unordered_map<std::string, bxgi::CTextureEntry*>		m_umapTexturesByNameUpper;
 };
-
-#endif

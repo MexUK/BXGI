@@ -1,5 +1,4 @@
-#ifndef eIDESection_H
-#define eIDESection_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -27,5 +26,3 @@ enum bxgi::eIDESection : uint8
 	IDE_SECTION_LODM,
 	IDE_SECTION_AGRPS
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef CIPLEntry_ENEX_H
-#define CIPLEntry_ENEX_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -86,5 +85,3 @@ private:
 	uint32						m_uiTimeOn;
 	uint32						m_uiTimeOff;
 };
-
-#endif

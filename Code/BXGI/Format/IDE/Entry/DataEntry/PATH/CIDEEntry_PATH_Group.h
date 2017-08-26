@@ -1,5 +1,4 @@
-#ifndef CIDEEntry_PATH_Group_H
-#define CIDEEntry_PATH_Group_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/IDE/Entry/DataEntry/CIDEEntry_PATH.h"
@@ -37,5 +36,3 @@ private:
 	uint32							m_uiObjectId;
 	std::string						m_strModelName;
 };
-
-#endif

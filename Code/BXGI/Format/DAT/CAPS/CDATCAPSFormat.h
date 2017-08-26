@@ -1,5 +1,4 @@
-#ifndef CDATCAPSFormat_H
-#define CDATCAPSFormat_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -31,5 +30,3 @@ private:
 	uint32					m_uiOptimalRasterFormatForTextures_Greyscale;
 	uint32					m_uiOptimalRasterFormatForTextures_Palette256;
 };
-
-#endif

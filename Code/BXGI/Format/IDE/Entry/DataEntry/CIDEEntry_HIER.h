@@ -1,5 +1,4 @@
-#ifndef CIDEEntry_HIER_H
-#define CIDEEntry_HIER_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -33,5 +32,3 @@ private:
 	std::string					m_strModelName;
 	std::string					m_strTXDName;
 };
-
-#endif

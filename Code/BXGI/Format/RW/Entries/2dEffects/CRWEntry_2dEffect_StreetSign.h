@@ -1,5 +1,4 @@
-#ifndef CRWEntry_2dEffect_StreetSign_H
-#define CRWEntry_2dEffect_StreetSign_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -34,5 +33,3 @@ private:
 	uint16							m_uiFlags;
 	std::string						m_strText[4];
 };
-
-#endif

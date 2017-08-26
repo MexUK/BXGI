@@ -1,5 +1,4 @@
-#ifndef CTXDFormat_H
-#define CTXDFormat_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/RW/CRWFormat.h"
@@ -44,5 +43,3 @@ private:
 	std::vector<bxgi::ePlatformedGame>	m_vecGames;
 	uint16							m_usDeviceId;
 };
-
-#endif

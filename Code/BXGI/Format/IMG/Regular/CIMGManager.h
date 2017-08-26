@@ -1,5 +1,4 @@
-#ifndef CIMGManager_H
-#define CIMGManager_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -37,5 +36,3 @@ public:
 
 	CIMGFormat*							parseViaFile(std::string& strFilePath);
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef CDATLoaderFormat_H
-#define CDATLoaderFormat_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/CFormat.h"
@@ -36,5 +35,3 @@ private:
 
 	void									unserializeLine(void);
 };
-
-#endif

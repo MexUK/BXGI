@@ -1,5 +1,4 @@
-#ifndef CIntermediateIndexData_H
-#define CIntermediateIndexData_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -21,5 +20,3 @@ public:
 private:
 	bxcf::Vec3u						m_vecVertexIndices;
 };
-
-#endif

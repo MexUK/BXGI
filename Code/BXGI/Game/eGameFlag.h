@@ -1,5 +1,4 @@
-#ifndef eGameFlag_H
-#define eGameFlag_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -12,5 +11,3 @@ enum bxgi::eGameFlag : uint8
 	GAME_FLAG_GTA_SA	= 4,
 	GAME_FLAG_GTA_IV	= 8
 };
-
-#endif

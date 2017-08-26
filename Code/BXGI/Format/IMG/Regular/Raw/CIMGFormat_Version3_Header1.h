@@ -1,5 +1,4 @@
-#ifndef CIMGFormat_Version3_Header1_H
-#define CIMGFormat_Version3_Header1_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -15,5 +14,3 @@ struct bxgi::RG_CIMGFormat_Version3_Header1
 	uint16			m_usUnknown;
 };
 #pragma pack(pop)
-
-#endif

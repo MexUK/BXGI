@@ -1,5 +1,4 @@
-#ifndef CRWEntry_TextureNative_MipMap_H
-#define CRWEntry_TextureNative_MipMap_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -48,5 +47,3 @@ private:
 	bxcf::Vec2u						m_vecSwizzledImageSize;
 	std::string					m_strRasterData;
 };
-
-#endif

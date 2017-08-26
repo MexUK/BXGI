@@ -1,5 +1,4 @@
-#ifndef CIPLEntry_JUMP_H
-#define CIPLEntry_JUMP_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -50,5 +49,3 @@ private:
 	bxcf::Vec3f					m_vecCameraPosition;
 	uint32						m_uiReward;
 };
-
-#endif

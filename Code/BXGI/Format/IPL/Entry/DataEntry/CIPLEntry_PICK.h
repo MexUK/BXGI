@@ -1,5 +1,4 @@
-#ifndef CIPLEntry_PICK_H
-#define CIPLEntry_PICK_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -28,5 +27,3 @@ private:
 	uint32						m_uiWeaponId;
 	bxcf::Vec3f					m_vecPosition;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef CIDEEntry_LODM_H
-#define CIDEEntry_LODM_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -16,5 +15,3 @@ public:
 	void						unserialize(void);
 	void						serialize(void);
 };
-
-#endif

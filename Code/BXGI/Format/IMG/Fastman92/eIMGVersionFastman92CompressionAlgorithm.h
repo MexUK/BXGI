@@ -1,5 +1,4 @@
-#ifndef eIMGVersionFastman92CompressionAlgorithm_H
-#define eIMGVersionFastman92CompressionAlgorithm_H
+#pragma once
 
 #include "bxgi.h"
 
@@ -10,5 +9,3 @@ enum bxgi::eIMGVersionFastman92CompressionAlgorithm // todo - rename other enum 
 	IMGFASTMAN92COMPRESSIONALGORITHzLIB,
 	IMGFASTMAN92COMPRESSIONALGORITHM_LZ4,
 };
-
-#endif

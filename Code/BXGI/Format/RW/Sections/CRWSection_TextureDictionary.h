@@ -1,5 +1,4 @@
-#ifndef CRWSection_TextureDictionary_H
-#define CRWSection_TextureDictionary_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/RW/CRWSection.h"
@@ -18,5 +17,3 @@ public:
 private:
 	uint16							m_usDeviceId;
 };
-
-#endif

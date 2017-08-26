@@ -1,5 +1,4 @@
-#ifndef CIDEEntry_WEAP_H
-#define CIDEEntry_WEAP_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -54,5 +53,3 @@ private:
 	// GTA III era only
 	uint32						m_uiObjectId;
 };
-
-#endif

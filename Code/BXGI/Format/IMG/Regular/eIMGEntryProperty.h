@@ -1,5 +1,4 @@
-#ifndef eIMGEntryProperty_H
-#define eIMGEntryProperty_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -14,5 +13,3 @@ enum bxgi::eIMGEntryProperty : uint8
 	IMG_ENTRY_SIZE,
 	IMG_ENTRY_TYPE
 };
-
-#endif

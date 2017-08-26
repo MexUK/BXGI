@@ -1,5 +1,4 @@
-#ifndef eIPLSection_H
-#define eIPLSection_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -30,5 +29,3 @@ enum bxgi::eIPLSection : uint8
 	IPL_SECTION_SLOW,
 	IPL_SECTION_RTFX
 };
-
-#endif

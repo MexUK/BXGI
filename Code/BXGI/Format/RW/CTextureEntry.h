@@ -1,5 +1,4 @@
-#ifndef CTextureEntry_H
-#define CTextureEntry_H
+#pragma once
 
 #include "bxgi.h"
 #include <string>
@@ -45,5 +44,3 @@ private:
 	std::string			m_strAlphaPath;
 	bxgi::CRWSection_Texture*	m_pRWTextureSection;
 };
-
-#endif

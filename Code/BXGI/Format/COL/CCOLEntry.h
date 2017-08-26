@@ -1,5 +1,4 @@
-#ifndef CCOLEntry_H
-#define CCOLEntry_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Vector/Vec3f.h"
@@ -188,5 +187,3 @@ private:
 	std::vector<TFace>		m_vecShadowMeshFaces;
 	TBounds					m_boundingObjects;
 };
-
-#endif

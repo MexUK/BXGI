@@ -1,5 +1,4 @@
-#ifndef CIMGFormat_Version2_Header1_H
-#define CIMGFormat_Version2_Header1_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -11,5 +10,3 @@ struct bxgi::RG_CIMGFormat_Version2_Header1
 	uint32			m_uiEntryCount;
 };
 #pragma pack(pop)
-
-#endif

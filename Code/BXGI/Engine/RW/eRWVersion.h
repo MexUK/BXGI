@@ -1,5 +1,4 @@
-#ifndef eRWVersion_H
-#define eRWVersion_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -22,5 +21,3 @@ enum bxgi::eRWVersion : uint8
 	RW_3_7_0_2,
 	RW_4_3_3_46
 };
-
-#endif

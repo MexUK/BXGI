@@ -1,5 +1,4 @@
-#ifndef CDATWaterproFormat_H
-#define CDATWaterproFormat_H
+#pragma once
 
 #define MAX_WATER_LEVEL_COUNT 48
 
@@ -28,5 +27,3 @@ private:
 	std::vector<uint8>		m_vecVisibleWaterLevelMap;
 	std::vector<uint8>		m_vecPhysicalWaterLevelMap;
 };
-
-#endif

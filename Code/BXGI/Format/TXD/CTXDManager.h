@@ -1,5 +1,4 @@
-#ifndef CTXDManager_H
-#define CTXDManager_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/CFormatManager.h"
@@ -30,5 +29,3 @@ public:
 	static std::string			getTXDRasterFormatText(uint32 uiTXDRasterDataFormatValue, bxcf::eDXTCompressionType eDXTCompressionTypeValue);
 	static bxcf::ePlatform		getPlatformFromTXDPlatformId(uint32 uiTXDPlatformId);
 };
-
-#endif

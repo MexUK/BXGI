@@ -1,5 +1,4 @@
-#ifndef CIDEEntry_Section_H
-#define CIDEEntry_Section_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/IDE/CIDEEntry.h"
@@ -16,5 +15,3 @@ public:
 	void					unserialize(void);
 	void					serialize(void);
 };
-
-#endif

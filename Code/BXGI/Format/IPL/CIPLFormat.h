@@ -1,5 +1,4 @@
-#ifndef CIPLFormat_H
-#define CIPLFormat_H
+#pragma once
 
 #include "bxgi.h"
 #include "Helper/SectionLines/CSectionLinesFormat.h"
@@ -42,5 +41,3 @@ private:
 private:
 	uint8												m_bIsBinary : 1;
 };
-
-#endif

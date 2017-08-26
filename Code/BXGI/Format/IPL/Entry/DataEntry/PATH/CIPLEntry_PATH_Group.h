@@ -1,5 +1,4 @@
-#ifndef CIPLEntry_PATH_Group_H
-#define CIPLEntry_PATH_Group_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -33,5 +32,3 @@ private:
 	std::string						m_strGroupType;
 	int32							m_iMinusOne;
 };
-
-#endif

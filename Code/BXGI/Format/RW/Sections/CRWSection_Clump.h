@@ -1,5 +1,4 @@
-#ifndef CRWSection_Clump_H
-#define CRWSection_Clump_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/RW/CRWSection.h"
@@ -28,5 +27,3 @@ private:
 	uint32							m_uiLightCount;
 	uint32							m_uiCameraCount;
 };
-
-#endif

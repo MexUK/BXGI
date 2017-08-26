@@ -1,5 +1,4 @@
-#ifndef CRWVersion_H
-#define CRWVersion_H
+#pragma once
 
 #include "bxgi.h"
 #include "eRWVersion.h"
@@ -45,5 +44,3 @@ private:
 	bxcf::fileType::EFileType				m_uiFileType;				// e.g. MODEL
 	std::vector<ePlatformedGame>			m_vecPlatformedGames;		// e.g. PC_GTA_III, PC_GTA_VC
 };
-
-#endif

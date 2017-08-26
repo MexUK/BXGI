@@ -1,5 +1,4 @@
-#ifndef CRWSection_MaterialList_H
-#define CRWSection_MaterialList_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/RW/CRWSection.h"
@@ -23,5 +22,3 @@ private:
 	uint32							m_uiMaterialCount;
 	std::string						m_strReservedValues;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef CRWSection_FrameList_H
-#define CRWSection_FrameList_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/RW/CRWSection.h"
@@ -23,5 +22,3 @@ private:
 	uint32							m_uiFrameCount;
 	std::string						m_strFrameData;
 };
-
-#endif

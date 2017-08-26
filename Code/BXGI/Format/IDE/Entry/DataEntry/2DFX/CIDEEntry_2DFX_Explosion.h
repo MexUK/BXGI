@@ -1,5 +1,4 @@
-#ifndef CIDEEntry_2DFX_Explosion_H
-#define CIDEEntry_2DFX_Explosion_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/IDE/Entry/DataEntry/CIDEEntry_2DFX.h"
@@ -38,5 +37,3 @@ private:
 	uint32						m_uiUnknown3;
 	uint32						m_uiUnknown4;
 };
-
-#endif

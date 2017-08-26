@@ -1,5 +1,4 @@
-#ifndef CIDEEntry_2DFX_Ladder_H
-#define CIDEEntry_2DFX_Ladder_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/IDE/Entry/DataEntry/CIDEEntry_2DFX.h"
@@ -39,5 +38,3 @@ private:
 	bxcf::Vec3f					m_vecClimbDirectionPosition;
 	uint32						m_uiFlags;
 };
-
-#endif

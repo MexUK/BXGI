@@ -1,5 +1,4 @@
-#ifndef CIPLEntry_AUZO_H
-#define CIPLEntry_AUZO_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -52,5 +51,3 @@ private:
 	bxcf::Vec3f					m_vecCenterPosition;
 	float32						m_fRadius;
 };
-
-#endif

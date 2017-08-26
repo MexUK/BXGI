@@ -1,5 +1,4 @@
-#ifndef CRWEntry_BinMeshPLG_Mesh_H
-#define CRWEntry_BinMeshPLG_Mesh_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Types.h"
@@ -26,5 +25,3 @@ private:
 	uint32							m_uiMaterialIndex;
 	std::vector<uint32>				m_vecVertexIndices;
 };
-
-#endif

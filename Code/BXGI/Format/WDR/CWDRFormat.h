@@ -1,5 +1,4 @@
-#ifndef CWDRFormat_H
-#define CWDRFormat_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/CFormat.h"
@@ -28,5 +27,3 @@ public: // todo - make the properties private
 	bxgi::CWDRBoundingObject					m_boundingObject;
 	std::vector<bxgi::CWDRBlock_Model*>		m_vecModels;
 };
-
-#endif

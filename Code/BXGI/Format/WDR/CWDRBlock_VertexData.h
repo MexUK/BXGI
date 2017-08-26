@@ -1,5 +1,4 @@
-#ifndef CWDRBlock_VertexData_H
-#define CWDRBlock_VertexData_H
+#pragma once
 
 #include "bxgi.h"
 #include "Type/Vector/Vec2f.h"
@@ -14,5 +13,3 @@ public:
 	bxcf::Vec2f					m_vecTextureCoordinates;
 	float32						m_fNormals2[4];
 };
-
-#endif

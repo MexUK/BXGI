@@ -1,5 +1,4 @@
-#ifndef CRWSection_Material_H
-#define CRWSection_Material_H
+#pragma once
 
 #include "bxgi.h"
 #include "Format/RW/CRWSection.h"
@@ -42,5 +41,3 @@ private:
 	float32							m_fSpecular;
 	float32							m_fDiffuse;
 };
-
-#endif
