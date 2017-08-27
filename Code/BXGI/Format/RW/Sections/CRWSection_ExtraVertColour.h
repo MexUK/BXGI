@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "Format/RW/CRWSection.h"
 #include "Type/Vector/Vec4u8.h"
 

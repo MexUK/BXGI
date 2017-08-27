@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "CWTDMipmap.h"
 #include "Pool/CVectorPool.h"
 #include "Image/eRasterDataFormat.h"

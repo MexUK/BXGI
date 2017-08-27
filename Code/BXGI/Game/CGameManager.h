@@ -1,7 +1,7 @@
 #pragma once
 
-#include "bxgi.h"
-#include "bxcf.h"
+#include "nsbxgi.h"
+#include "nsbxcf.h"
 #include "Object/CManager.h"
 #include "Object/CSingleton.h"
 #include "Pool/CVectorPool.h"

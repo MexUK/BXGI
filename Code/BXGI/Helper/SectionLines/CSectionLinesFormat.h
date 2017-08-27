@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "Format/CFormat.h"
 #include "Format/e2DFXType.h"
 #include <string>

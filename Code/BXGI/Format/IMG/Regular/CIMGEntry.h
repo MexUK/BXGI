@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "Compression/eCompressionAlgorithm.h"
 #include "Format/EFileType.h"
 #include "Format/IMG/Regular/Raw/CIMGEntry_Version1Or2.h"

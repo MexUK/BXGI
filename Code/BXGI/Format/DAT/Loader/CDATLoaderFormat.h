@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "Format/CFormat.h"
 #include "Pool/CVectorPool.h"
 #include "eDATLoaderEntryType.h"

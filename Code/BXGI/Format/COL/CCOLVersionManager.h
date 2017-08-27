@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "Object/CManager.h"
 #include "eCOLVersion.h"
 #include "Pool/CVectorPool.h"

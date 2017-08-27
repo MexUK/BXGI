@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "Type/Types.h"
 #include "Format/RW/CRWSection.h"
 #include "Format/RW/Entries/CRWEntry_BinMeshPLG_Mesh.h"

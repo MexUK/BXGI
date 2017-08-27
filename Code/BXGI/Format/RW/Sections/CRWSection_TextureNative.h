@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "Format/RW/CRWSection.h"
 #include "Pool/CVectorPool.h"
 #include "Image/eDXTCompressionType.h"

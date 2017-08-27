@@ -1,5 +1,5 @@
 #include "CPlatformedGame.h"
-#include "bxgi.h"
+#include "nsbxgi.h"
 
 using namespace bxgi;
 

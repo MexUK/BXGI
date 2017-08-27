@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 
 enum bxgi::eIMGVersionFastman92CompressionAlgorithm // todo - rename other enum with algoruthm in it to not have Id at the end
 {

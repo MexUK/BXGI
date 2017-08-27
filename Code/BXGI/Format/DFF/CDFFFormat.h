@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "Format/RW/CRWFormat.h"
 #include "Intermediate/Model/CIntermediateModelFormat.h"
 

@@ -2,7 +2,7 @@
 
 #define MAX_WATER_LEVEL_COUNT 48
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "Type/Types.h"
 #include "Format/CFormat.h"
 #include "CDATWaterproEntry.h"

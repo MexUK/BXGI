@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "Helper/SectionLines/CSectionLinesFormat.h"
 #include "eIPLSection.h"
 #include "eIPLPathType.h"

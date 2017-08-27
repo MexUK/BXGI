@@ -1,5 +1,5 @@
 #include "CGame.h"
-#include "bxgi.h"
+#include "nsbxgi.h"
 
 using namespace bxgi;
 

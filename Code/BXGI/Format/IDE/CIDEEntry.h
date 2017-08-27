@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "Type/Types.h"
 #include "eIDESection.h"
 #include "Helper/SectionLines/CSectionLinesEntry.h"

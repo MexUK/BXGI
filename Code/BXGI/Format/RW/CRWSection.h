@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "CRWSectionContainer.h"
 #include "Format/RW/eRWSection.h"
 #include "Engine/RW/eRWVersion.h"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "Type/Types.h"
 #include "Format/IPL/Entry/DataEntry/CIPLEntry_PATH.h"
 #include "Type/Vector/Vec3f.h"

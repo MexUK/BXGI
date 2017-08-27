@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "Pool/CVectorPool.h"
 #include "Format/RW/Entries/C2dEffect.h"
 

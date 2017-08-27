@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "eRWVersion.h"
 #include "Game/ePlatformedGame.h"
 #include "Format/EFileType.h"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "Type/Vector/Vec2f.h"
 #include "Type/Vector/Vec3f.h"
 

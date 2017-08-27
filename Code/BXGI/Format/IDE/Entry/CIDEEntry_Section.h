@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "Format/IDE/CIDEEntry.h"
 
 class bxgi::CIDEFormat;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 
 enum bxgi::eRageResourceType : uint8
 {

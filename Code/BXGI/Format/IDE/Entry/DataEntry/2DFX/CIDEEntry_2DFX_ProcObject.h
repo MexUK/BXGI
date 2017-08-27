@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "Format/IDE/Entry/DataEntry/CIDEEntry_2DFX.h"
 
 class bxgi::CIDEEntry_2DFX_ProcObject : public bxgi::CIDEEntry_2DFX

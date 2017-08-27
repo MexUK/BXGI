@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "Type/Types.h"
 #include "Helper/SectionLines/CSectionLinesFormat.h"
 //#include "eDataType.h" // todo - no idea why this include is needed - it makes eIDESection underlined when not here

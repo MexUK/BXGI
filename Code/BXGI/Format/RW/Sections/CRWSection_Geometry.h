@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "Format/RW/CRWSection.h"
 #include "Format/RW/eRWSection.h"
 #include "Partial/CRWGeometryBoundingInfo.h"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "Format/IDE/CIDEEntry.h"
 #include "Helper/SectionLines/Entry/CSectionLinesEntry_Data.h"
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "eDATLoaderEntryType.h"
 #include <string>
 #include <deque>

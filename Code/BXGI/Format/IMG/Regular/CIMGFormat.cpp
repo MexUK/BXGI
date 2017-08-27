@@ -1,5 +1,5 @@
 #include "CIMGFormat.h"
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "Type/Types.h"
 #include "Event/Events.h"
 #include "Event/EEvent.h"

@@ -140,7 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Code\BXGI\bxgi.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\nsbxgi.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Event\EEvent.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\CGameFormat.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Game\CGame.h" />

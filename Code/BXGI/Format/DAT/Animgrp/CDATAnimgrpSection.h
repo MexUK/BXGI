@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bxgi.h"
+#include "nsbxgi.h"
 #include "Type/Types.h"
 #include "Pool/CVectorPool.h"
 #include "CDATAnimgrpEntry.h"
