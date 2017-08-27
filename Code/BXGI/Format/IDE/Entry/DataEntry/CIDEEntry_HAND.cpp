@@ -1,10 +1,16 @@
 #include "CIDEEntry_HAND.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_HAND::CIDEEntry_HAND(CIDEFormat *pIDEFormat) :
+	CIDEEntry_Data(pIDEFormat, IDE_SECTION_HAND),
+	m_uiObjectId(0)
+{
+}
 
 void			CIDEEntry_HAND::unserialize(void)
 {

@@ -7,10 +7,7 @@
 class bxgi::CIPLEntry_VNOD : public bxgi::CIPLEntry_Data
 {
 public:
-	CIPLEntry_VNOD(bxgi::CIPLFormat *pIPLFormat) :
-		CIPLEntry_Data(pIPLFormat, IPL_SECTION_VNOD)
-	{
-	};
+	CIPLEntry_VNOD(bxgi::CIPLFormat *pIPLFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

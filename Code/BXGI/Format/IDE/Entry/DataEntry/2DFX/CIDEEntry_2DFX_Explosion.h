@@ -6,14 +6,7 @@
 class bxgi::CIDEEntry_2DFX_Explosion : public bxgi::CIDEEntry_2DFX
 {
 public:
-	CIDEEntry_2DFX_Explosion(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_2DFX(pIDEFormat, bxgi::_2DFX_EXPLOSION),
-		m_uiUnknown1(0),
-		m_uiUnknown2(0),
-		m_uiUnknown3(0),
-		m_uiUnknown4(0)
-	{
-	};
+	CIDEEntry_2DFX_Explosion(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

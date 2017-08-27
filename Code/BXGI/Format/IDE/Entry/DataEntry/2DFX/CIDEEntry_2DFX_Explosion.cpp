@@ -1,10 +1,19 @@
 #include "CIDEEntry_2DFX_Explosion.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_2DFX_Explosion::CIDEEntry_2DFX_Explosion(CIDEFormat *pIDEFormat) :
+	CIDEEntry_2DFX(pIDEFormat, _2DFX_EXPLOSION),
+	m_uiUnknown1(0),
+	m_uiUnknown2(0),
+	m_uiUnknown3(0),
+	m_uiUnknown4(0)
+{
+}
 
 void			CIDEEntry_2DFX_Explosion::unserialize(void)
 {

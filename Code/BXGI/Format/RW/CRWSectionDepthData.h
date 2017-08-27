@@ -6,11 +6,7 @@
 class bxgi::CRWSectionDepthData
 {
 public:
-	CRWSectionDepthData(void) :
-		m_uiSectionId(0),
-		m_uiSectionSize(0),
-		m_uiSectionByteCountRead(0)
-	{};
+	CRWSectionDepthData(void);
 
 	void					setSectionId(uint32 uiSectionId) { m_uiSectionId = uiSectionId; }
 	uint32					getSectionId(void) { return m_uiSectionId; }

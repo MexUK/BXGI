@@ -1,10 +1,18 @@
 #include "CIDEEntry_2DFX_Unknown1.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_2DFX_Unknown1::CIDEEntry_2DFX_Unknown1(CIDEFormat *pIDEFormat) :
+	CIDEEntry_2DFX(pIDEFormat, _2DFX_UNKNOWN_1),
+	m_uiUnknown2(0),
+	m_vecUnknown3{ 0.0f, 0.0f, 0.0f },
+	m_uiUnknown4(0)
+{
+}
 
 void			CIDEEntry_2DFX_Unknown1::unserialize(void)
 {

@@ -7,10 +7,7 @@
 class bxgi::CIDEEntry_VNOD : public bxgi::CIDEEntry_Data
 {
 public:
-	CIDEEntry_VNOD(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_Data(pIDEFormat, IDE_SECTION_VNOD)
-	{
-	};
+	CIDEEntry_VNOD(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

@@ -6,11 +6,17 @@
 #include "Sections/CRWSection_TextureNative.h"
 #include "CTextureEntry.h"
 #include "Static/CString2.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 
 using namespace std;
 using namespace bxcf;
 using namespace bxgi;
+
+CRWFormat::CRWFormat(void) :
+	CFormat(true, bxcf::LITTLE_ENDIAN),
+	m_pRWVersion(nullptr)
+{
+}
 
 void					CRWFormat::unserialize(void)
 {
@@ -92,9 +98,9 @@ void					CRWFormat::loadTextureEntries(void)
 	}
 }
 
-void									CRWFormat::setRWVersion(CRWVersion *pRWVersion, eRWSection eRWSectionValue)
+void									CRWFormat::setRWVersion(CRWVersion *pRWVersion, ERWSection ERWSectionValue)
 {
-	if (eRWSectionValue == -1)
+	if (ERWSectionValue == -1)
 	{
 		m_pRWVersion = pRWVersion;
 	}
@@ -104,9 +110,9 @@ void									CRWFormat::setRWVersion(CRWVersion *pRWVersion, eRWSection eRWSecti
 	}
 }
 
-CRWVersion*								CRWFormat::getRWVersion(eRWSection eRWSectionValue)
+CRWVersion*								CRWFormat::getRWVersion(ERWSection ERWSectionValue)
 {
-	if (eRWSectionValue == -1)
+	if (ERWSectionValue == -1)
 	{
 		return m_pRWVersion;
 	}

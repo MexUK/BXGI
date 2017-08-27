@@ -11,7 +11,7 @@ struct bxgi::CIMGEntry_Fastman92
 	uint16		m_usPaddedBytesCountInAlignedOriginalSize;
 	uint32		m_uiSizeInSectors;
 	uint16		m_usPaddedBytesCountInAlignedPackedSize;
-	uint32		m_uiCompressionAlgorithmId	: 4; // eIMGVersionFastman92CompressionAlgorithm
+	uint32		m_uiCompressionAlgorithmId	: 4; // EIMGVersionFastman92CompressionAlgorithm
 	uint32		m_uiEncryptionAlgorithmId	: 4;
 	uint32		m_uiPad1					: 24;
 	uint8		m_strName[40];

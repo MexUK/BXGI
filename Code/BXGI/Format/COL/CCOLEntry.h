@@ -64,8 +64,8 @@ public:
 	void				setCOLFile(CCOLFormat *pCOLFile) { m_pCOLFile = pCOLFile; }
 	CCOLFormat*			getCOLFile(void) { return m_pCOLFile; }
 
-	void				setCOLVersion(eCOLVersion uiCOLVersion) { m_uiCOLVersion = uiCOLVersion; }
-	eCOLVersion			getCOLVersion(void) { return m_uiCOLVersion; }
+	void				setCOLVersion(ECOLVersion uiCOLVersion) { m_uiCOLVersion = uiCOLVersion; }
+	ECOLVersion			getCOLVersion(void) { return m_uiCOLVersion; }
 
 	void				setModelName(std::string& strModelName) { m_strModelName = strModelName; }
 	std::string&		getModelName(void) { return m_strModelName; }
@@ -148,7 +148,7 @@ private:
 private:
 	CCOLFormat*				m_pCOLFile;
 
-	eCOLVersion				m_uiCOLVersion;
+	ECOLVersion				m_uiCOLVersion;
 	uint32					m_uiFileSize;
 	std::string				m_strModelName;
 	uint16					m_usModelId;

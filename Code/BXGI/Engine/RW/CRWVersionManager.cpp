@@ -35,7 +35,7 @@ void											CRWVersionManager::initRWVersions(void)
 }
 
 // add/remove version
-CRWVersion*										CRWVersionManager::addVersion(uint32 uiRawVersion, eRWVersion uiVersionId, EFileType uiFileType, vector<ePlatformedGame> vecPlatformedGames)
+CRWVersion*										CRWVersionManager::addVersion(uint32 uiRawVersion, ERWVersion uiVersionId, EFileType uiFileType, vector<EPlatformedGame> vecPlatformedGames)
 {
 	CRWVersion *pRWVersion = new CRWVersion;
 	pRWVersion->setRawVersion(uiRawVersion);
@@ -85,11 +85,11 @@ CRWVersion*										CRWVersionManager::getEntryByVersionCC(uint32 uiVersionCC)
 	return nullptr;
 }
 
-CRWVersion*										CRWVersionManager::getEntryByVersionId(eRWVersion eRWVersion)
+CRWVersion*										CRWVersionManager::getEntryByVersionId(ERWVersion ERWVersion)
 {
 	for (auto pRWVersion : getEntries())
 	{
-		if (pRWVersion->getVersionId() == eRWVersion)
+		if (pRWVersion->getVersionId() == ERWVersion)
 		{
 			return pRWVersion;
 		}
@@ -97,9 +97,9 @@ CRWVersion*										CRWVersionManager::getEntryByVersionId(eRWVersion eRWVersio
 	return nullptr;
 }
 
-CRWVersion*										CRWVersionManager::getRWVersionFromGame(ePlatformedGame ePlatformedGame)
+CRWVersion*										CRWVersionManager::getRWVersionFromGame(EPlatformedGame EPlatformedGame)
 {
-	switch (ePlatformedGame)
+	switch (EPlatformedGame)
 	{
 	case PC_GTA_III:	return getEntryByVersionId(RW_3_2_0_0);
 	case PC_GTA_VC:		return getEntryByVersionId(RW_3_4_0_3);

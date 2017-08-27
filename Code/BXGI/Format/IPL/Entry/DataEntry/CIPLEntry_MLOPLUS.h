@@ -7,10 +7,7 @@
 class bxgi::CIPLEntry_MLOPLUS : public bxgi::CIPLEntry_Data
 {
 public:
-	CIPLEntry_MLOPLUS(bxgi::CIPLFormat *pIPLFormat) :
-		CIPLEntry_Data(pIPLFormat, IPL_SECTION_MLOPLUS)
-	{
-	};
+	CIPLEntry_MLOPLUS(bxgi::CIPLFormat *pIPLFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

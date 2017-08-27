@@ -8,11 +8,7 @@
 class bxgi::CIDEEntry_HIER : public bxgi::CIDEEntry_Data
 {
 public:
-	CIDEEntry_HIER(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_Data(pIDEFormat, IDE_SECTION_HIER),
-		m_uiObjectId(0)
-	{
-	};
+	CIDEEntry_HIER(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

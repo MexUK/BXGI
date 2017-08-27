@@ -9,16 +9,7 @@
 class bxgi::CIPLEntry_AUZO : public bxgi::CIPLEntry_Data
 {
 public:
-	CIPLEntry_AUZO(bxgi::CIPLFormat *pIPLFormat) :
-		CIPLEntry_Data(pIPLFormat, IPL_SECTION_AUZO),
-		m_uiSoundId(0),
-		m_uiSwitch(0),
-		m_vecLowerLeftPosition{ 0.0f, 0.0f, 0.0f },
-		m_vecUpperRightPosition{ 0.0f, 0.0f, 0.0f },
-		m_vecCenterPosition{ 0.0f, 0.0f, 0.0f },
-		m_fRadius(0.0f)
-	{
-	};
+	CIPLEntry_AUZO(bxgi::CIPLFormat *pIPLFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

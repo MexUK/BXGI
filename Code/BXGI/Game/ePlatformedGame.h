@@ -3,7 +3,7 @@
 #include "nsbxgi.h"
 #include "Type/Types.h"
 
-enum bxgi::ePlatformedGame : uint16
+enum bxgi::EPlatformedGame : uint16
 {
 	UNKNOWN_PLATFORMED_GAME		= 0, // not for storing in an int as a bit flag
 	PC_GTA_III					= 1,

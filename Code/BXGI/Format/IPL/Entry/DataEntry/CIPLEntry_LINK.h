@@ -7,10 +7,7 @@
 class bxgi::CIPLEntry_LINK : public bxgi::CIPLEntry_Data
 {
 public:
-	CIPLEntry_LINK(bxgi::CIPLFormat *pIPLFormat) :
-		CIPLEntry_Data(pIPLFormat, IPL_SECTION_LINK)
-	{
-	};
+	CIPLEntry_LINK(bxgi::CIPLFormat *pIPLFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

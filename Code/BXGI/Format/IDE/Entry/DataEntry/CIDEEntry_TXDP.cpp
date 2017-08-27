@@ -1,10 +1,15 @@
 #include "CIDEEntry_TXDP.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_TXDP::CIDEEntry_TXDP(CIDEFormat *pIDEFormat) :
+	CIDEEntry_Data(pIDEFormat, IDE_SECTION_TXDP)
+{
+}
 
 void			CIDEEntry_TXDP::unserialize(void)
 {

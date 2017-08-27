@@ -1,10 +1,15 @@
 #include "CIPLEntry_RTFX.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIPLEntry_RTFX::CIPLEntry_RTFX(CIPLFormat *pIPLFormat) :
+	CIPLEntry_Data(pIPLFormat, IPL_SECTION_RTFX)
+{
+}
 
 void			CIPLEntry_RTFX::unserialize(void)
 {

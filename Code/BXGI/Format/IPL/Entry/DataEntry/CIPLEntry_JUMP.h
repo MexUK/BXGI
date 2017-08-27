@@ -8,16 +8,7 @@
 class bxgi::CIPLEntry_JUMP : public bxgi::CIPLEntry_Data
 {
 public:
-	CIPLEntry_JUMP(bxgi::CIPLFormat *pIPLFormat) :
-		CIPLEntry_Data(pIPLFormat, IPL_SECTION_JUMP),
-		m_vecStartLowerPosition{ 0.0f, 0.0f, 0.0f },
-		m_vecStartUpperPosition{ 0.0f, 0.0f, 0.0f },
-		m_vecTargetLowerPosition{ 0.0f, 0.0f, 0.0f },
-		m_vecTargetUpperPosition{ 0.0f, 0.0f, 0.0f },
-		m_vecCameraPosition{ 0.0f, 0.0f, 0.0f },
-		m_uiReward(0)
-	{
-	};
+	CIPLEntry_JUMP(bxgi::CIPLFormat *pIPLFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

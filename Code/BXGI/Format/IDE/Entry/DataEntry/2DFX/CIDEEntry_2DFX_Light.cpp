@@ -1,11 +1,25 @@
 #include "CIDEEntry_2DFX_Light.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 #include "Static/CString2.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_2DFX_Light::CIDEEntry_2DFX_Light(CIDEFormat *pIDEFormat) :
+	CIDEEntry_2DFX(pIDEFormat, _2DFX_LIGHT),
+	m_fViewDistance(0.0f),
+	m_fOuterRange(0.0f),
+	m_fCoronaSize(0.0f),
+	m_fInnerRange(0.0f),
+	m_uiIDEFlag(0),
+	m_uiFlash(0),
+	m_uiWet(0),
+	m_uiFlare(0),
+	m_uiDust(0)
+{
+}
 
 void			CIDEEntry_2DFX_Light::unserialize(void)
 {

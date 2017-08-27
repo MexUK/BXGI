@@ -52,7 +52,7 @@ void						CWDRFormat::serialize(void)
 {
 	CDataWriter *pDataWriter = CDataWriter::get();
 
-	eDataStreamType ePreviousDataStreamType = pDataWriter->getStreamType();
+	EDataStreamType ePreviousDataStreamType = pDataWriter->getStreamType();
 	pDataWriter->setStreamType(DATA_STREAM_MEMORY);
 
 	uint32 uiSeek = 0;

@@ -1,6 +1,6 @@
 #include "CIPLFormat.h"
 #include "Format/IPL/CIPLEntry.h"
-#include "Helper/SectionLines/eSectionLinesEntryType.h"
+#include "Helper/SectionLines/ESectionLinesEntryType.h"
 #include "Entry/CIPLEntry_Other.h"
 #include "Entry/CIPLEntry_Section.h"
 #include "Entry/CIPLEntry_Data.h"
@@ -32,7 +32,7 @@
 #include "Static/CString2.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include <vector>
 
 using namespace std;
@@ -186,16 +186,16 @@ void		CIPLFormat::serializeBinary(void)
 	}
 }
 
-CIPLEntry_Data*		CIPLFormat::unserializeDataEntry(eIPLSection eIPLSectionValue)
+CIPLEntry_Data*		CIPLFormat::unserializeDataEntry(EIPLSection EIPLSectionValue)
 {
 	CIPLEntry_Data *pIPLEntry = nullptr;
-	switch (eIPLSectionValue)
+	switch (EIPLSectionValue)
 	{
 	case IPL_SECTION_PATH:
-		pIPLEntry = createDataEntry(eIPLSectionValue, detectPATHType());
+		pIPLEntry = createDataEntry(EIPLSectionValue, detectPATHType());
 		break;
 	default:
-		pIPLEntry = createDataEntry(eIPLSectionValue);
+		pIPLEntry = createDataEntry(EIPLSectionValue);
 		break;
 	}
 	if (!pIPLEntry)
@@ -206,7 +206,7 @@ CIPLEntry_Data*		CIPLFormat::unserializeDataEntry(eIPLSection eIPLSectionValue)
 	return pIPLEntry;
 }
 
-eIPLPathType		CIPLFormat::detectPATHType(void)
+EIPLPathType		CIPLFormat::detectPATHType(void)
 {
 	CDataReader *pDataReader = CDataReader::get();
 
@@ -218,7 +218,7 @@ eIPLPathType		CIPLFormat::detectPATHType(void)
 	}
 }
 
-eIPLSection					CIPLFormat::getSectionFromText(string strIPLSectionText)
+EIPLSection					CIPLFormat::getSectionFromText(string strIPLSectionText)
 {
 	strIPLSectionText = CString2::zeroPad(strIPLSectionText, 4);
 
@@ -251,9 +251,9 @@ eIPLSection					CIPLFormat::getSectionFromText(string strIPLSectionText)
 	return IPL_SECTION_UNKNOWN;
 }
 
-string						CIPLFormat::getSectionText(eIPLSection eIPLSectionValue)
+string						CIPLFormat::getSectionText(EIPLSection EIPLSectionValue)
 {
-	switch (eIPLSectionValue)
+	switch (EIPLSectionValue)
 	{
 	case IPL_SECTION_INST:		return "INST";
 	case IPL_SECTION_ZONE:		return "ZONE";
@@ -281,9 +281,9 @@ string						CIPLFormat::getSectionText(eIPLSection eIPLSectionValue)
 	return "Unknown IPL Section";
 }
 
-CIPLEntry_Data*				CIPLFormat::createDataEntry(eIPLSection eIPLSectionValue, uint32 uiSectionSpecificType)
+CIPLEntry_Data*				CIPLFormat::createDataEntry(EIPLSection EIPLSectionValue, uint32 uiSectionSpecificType)
 {
-	switch (eIPLSectionValue)
+	switch (EIPLSectionValue)
 	{
 	case IPL_SECTION_INST:		return new CIPLEntry_INST(this);
 	case IPL_SECTION_ZONE:		return new CIPLEntry_ZONE(this);
@@ -291,8 +291,8 @@ CIPLEntry_Data*				CIPLFormat::createDataEntry(eIPLSection eIPLSectionValue, uin
 	case IPL_SECTION_PICK:		return new CIPLEntry_PICK(this);
 	case IPL_SECTION_PATH:
 	{
-		eIPLPathType eIPLPathTypeValue = (eIPLPathType)uiSectionSpecificType;
-		switch (eIPLPathTypeValue)
+		EIPLPathType EIPLPathTypeValue = (EIPLPathType)uiSectionSpecificType;
+		switch (EIPLPathTypeValue)
 		{
 		case IPL_PATH_GROUP:	return new CIPLEntry_PATH_Group(this);
 		case IPL_PATH_NODE:		return new CIPLEntry_PATH_Node(this);
@@ -321,9 +321,9 @@ CIPLEntry_Data*				CIPLFormat::createDataEntry(eIPLSection eIPLSectionValue, uin
 	return nullptr;
 }
 
-uint32						CIPLFormat::detectSectionSpecificType(eIPLSection eIPLSectionValue)
+uint32						CIPLFormat::detectSectionSpecificType(EIPLSection EIPLSectionValue)
 {
-	switch (eIPLSectionValue)
+	switch (EIPLSectionValue)
 	{
 	case IPL_SECTION_PATH:	return detectPATHType();
 	}

@@ -9,14 +9,7 @@
 class bxgi::CIPLEntry_ZONE : public bxgi::CIPLEntry_Data
 {
 public:
-	CIPLEntry_ZONE(bxgi::CIPLFormat *pIPLFormat) :
-		CIPLEntry_Data(pIPLFormat, IPL_SECTION_ZONE),
-		m_uiZoneType(0),
-		m_vecBottomLeftPosition{ 0.0f, 0.0f, 0.0f },
-		m_vecTopRightPosition{ 0.0f, 0.0f, 0.0f },
-		m_uiLevel(0)
-	{
-	};
+	CIPLEntry_ZONE(bxgi::CIPLFormat *pIPLFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

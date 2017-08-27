@@ -3,7 +3,7 @@
 #include "nsbxgi.h"
 #include "Format/CFormat.h"
 #include "Pool/CVectorPool.h"
-#include "eCOLVersion.h"
+#include "ECOLVersion.h"
 #include "CCOLEntry.h"
 #include <string>
 #include <vector>
@@ -13,11 +13,11 @@ class bxgi::CCOLVersion;
 class bxgi::CCOLFormat : public bxcf::CFormat, public bxcf::CVectorPool<bxgi::CCOLEntry*>
 {
 public:
-	CCOLFormat(void) : CFormat(true) {};
+	CCOLFormat(void) : CFormat(true) {}
 
 	void							unload(void);
 
-	void							setCOLVersion(eCOLVersion uiCOLVersion);
+	void							setCOLVersion(ECOLVersion uiCOLVersion);
 
 	std::vector<std::string>		getModelNames(void);
 	bxgi::CCOLEntry*						getEntryByName(std::string strName);

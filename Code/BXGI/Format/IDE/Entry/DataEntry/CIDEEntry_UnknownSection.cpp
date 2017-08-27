@@ -1,10 +1,15 @@
 #include "CIDEEntry_UnknownSection.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_UnknownSection::CIDEEntry_UnknownSection(CIDEFormat *pIDEFormat) :
+	CIDEEntry_Data(pIDEFormat, IDE_SECTION_UNKNOWN)
+{
+}
 
 void			CIDEEntry_UnknownSection::unserialize(void)
 {

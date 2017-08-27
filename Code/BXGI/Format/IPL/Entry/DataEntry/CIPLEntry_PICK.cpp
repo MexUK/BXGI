@@ -1,10 +1,15 @@
 #include "CIPLEntry_PICK.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIPLEntry_PICK::CIPLEntry_PICK(CIPLFormat *pIPLFormat) :
+	CIPLEntry_Data(pIPLFormat, IPL_SECTION_PICK)
+{
+}
 
 void			CIPLEntry_PICK::unserialize(void)
 {

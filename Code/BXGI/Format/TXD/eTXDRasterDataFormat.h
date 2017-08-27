@@ -2,7 +2,7 @@
 
 #include "nsbxgi.h"
 
-enum bxgi::eTXDRasterDataFormat
+enum bxgi::ETXDRasterDataFormat
 {
 	TXDRASTERDATAFORMAT_DEFAULT					= 0,
 	TXDRASTERDATAFORMAT_1555					= 0x100,

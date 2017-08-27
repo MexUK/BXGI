@@ -1,11 +1,26 @@
 #include "CIPLEntry_CARS.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 #include "Format/IPL/CIPLFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIPLEntry_CARS::CIPLEntry_CARS(CIPLFormat *pIPLFormat) :
+	CIPLEntry_Data(pIPLFormat, IPL_SECTION_CARS),
+	m_vecPosition{ 0.0f, 0.0f, 0.0f },
+	zRotation(0.0f),
+	m_iVehicleModelId(0),
+	m_uiForceSpawn(0),
+	m_uiAlarmTriggerProbability(0),
+	m_uiDoorLockProbability(0),
+	m_uiUnknown1(0),
+	m_uiUnknown2(0)
+{
+	m_iVehicleColour.x = 0;
+	m_iVehicleColour.y = 0;
+}
 
 void			CIPLEntry_CARS::unserialize(void)
 {

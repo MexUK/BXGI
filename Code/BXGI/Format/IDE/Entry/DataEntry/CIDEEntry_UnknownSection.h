@@ -8,10 +8,7 @@
 class bxgi::CIDEEntry_UnknownSection : public bxgi::CIDEEntry_Data
 {
 public:
-	CIDEEntry_UnknownSection(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_Data(pIDEFormat, IDE_SECTION_UNKNOWN)
-	{
-	};
+	CIDEEntry_UnknownSection(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

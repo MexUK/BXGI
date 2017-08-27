@@ -1,10 +1,19 @@
 #include "CIDEEntry_PEDS.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_PEDS::CIDEEntry_PEDS(CIDEFormat *pIDEFormat) :
+	CIDEEntry_Data(pIDEFormat, IDE_SECTION_PEDS),
+	m_uiObjectId(0),
+	m_uiCarsCanDrive(0)
+{
+	m_vecPreferredRadioStations.x = 0;
+	m_vecPreferredRadioStations.y = 0;
+}
 
 void			CIDEEntry_PEDS::unserialize(void)
 {

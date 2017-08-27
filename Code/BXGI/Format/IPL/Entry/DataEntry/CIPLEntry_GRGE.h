@@ -10,15 +10,7 @@
 class bxgi::CIPLEntry_GRGE : public bxgi::CIPLEntry_Data
 {
 public:
-	CIPLEntry_GRGE(bxgi::CIPLFormat *pIPLFormat) :
-		CIPLEntry_Data(pIPLFormat, IPL_SECTION_GRGE),
-		m_vecPosition{ 0.0f, 0.0f, 0.0f },
-		m_vecLine{ 0.0f, 0.0f },
-		m_vecCubePosition{ 0.0f, 0.0f, 0.0f },
-		m_uiGarageFlags(0),
-		m_uiGarageType(0)
-	{
-	};
+	CIPLEntry_GRGE(bxgi::CIPLFormat *pIPLFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

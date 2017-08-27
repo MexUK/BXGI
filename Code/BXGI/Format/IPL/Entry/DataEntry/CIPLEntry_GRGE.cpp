@@ -1,10 +1,20 @@
 #include "CIPLEntry_GRGE.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIPLEntry_GRGE::CIPLEntry_GRGE(CIPLFormat *pIPLFormat) :
+	CIPLEntry_Data(pIPLFormat, IPL_SECTION_GRGE),
+	m_vecPosition{ 0.0f, 0.0f, 0.0f },
+	m_vecLine{ 0.0f, 0.0f },
+	m_vecCubePosition{ 0.0f, 0.0f, 0.0f },
+	m_uiGarageFlags(0),
+	m_uiGarageType(0)
+{
+}
 
 void			CIPLEntry_GRGE::unserialize(void)
 {

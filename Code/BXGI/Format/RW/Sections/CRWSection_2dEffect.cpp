@@ -2,7 +2,7 @@
 #include "Format/RW/Entries/C2dEffect.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Type/Vector/Vec3f.h"
 
 using namespace std;
@@ -36,7 +36,7 @@ void							CRWSection_2dEffect::unserialize(void)
 		uint32 uiNextSeek = ((uint32)pDataReader->getSeek()) + uiDataSize; // todo - change getSeek() To uint32
 
 		// create 2d effect
-		p2dEffect = C2dEffect::createRW2dEffect((e2DFXType)uiEntryType);
+		p2dEffect = C2dEffect::createRW2dEffect((E2DFXType)uiEntryType);
 		if (p2dEffect == nullptr)
 		{
 			throw EXCEPTION_UNKNOWN_ENTRY_TYPE;
@@ -45,7 +45,7 @@ void							CRWSection_2dEffect::unserialize(void)
 
 		// store 2d effect header data
 		p2dEffect->setPosition(vecPosition);
-		p2dEffect->set2DFXType((e2DFXType)uiEntryType);
+		p2dEffect->set2DFXType((E2DFXType)uiEntryType);
 		p2dEffect->setDataSize(uiDataSize);
 
 		// read 2d effect body data

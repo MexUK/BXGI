@@ -14,7 +14,7 @@
 using namespace std;
 using namespace bxgi;
 
-bxgi::CIntermediateModelFormat*	CDFFFormat::convertToIntermediateModelFormat(void)
+CIntermediateModelFormat*	CDFFFormat::convertToIntermediateModelFormat(void)
 {
 	CIntermediateModelFormat *pGeneralModelFile = new CIntermediateModelFormat;
 

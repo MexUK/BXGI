@@ -34,7 +34,7 @@ void				CCOLFormat::serialize(void)
 	}
 }
 
-void				CCOLFormat::setCOLVersion(eCOLVersion uiCOLVersion)
+void				CCOLFormat::setCOLVersion(ECOLVersion uiCOLVersion)
 {
 	for (auto pCOLEntry : getEntries())
 	{

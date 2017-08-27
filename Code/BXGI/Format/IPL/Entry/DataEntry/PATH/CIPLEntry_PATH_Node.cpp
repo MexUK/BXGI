@@ -1,11 +1,26 @@
 #include "CIPLEntry_PATH_Node.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 #include "CIPLEntry_PATH_Group.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIPLEntry_PATH_Node::CIPLEntry_PATH_Node(CIPLFormat *pIPLFormat) :
+	CIPLEntry_PATH(pIPLFormat, IPL_PATH_NODE),
+	m_uiNodeType(0),
+	m_uiNextNode(0),
+	m_uiIsCrossRoad(0),
+	m_vecPosition{ 0.0f, 0.0f, 0.0f },
+	m_fMedian(0.0f),
+	m_uiLeftLaneCount(0),
+	m_uiRightLaneCount(0),
+	m_uiSpeedLimit(0),
+	m_uiFlags(0),
+	m_fSpawnRate(0.0f)
+{
+}
 
 void			CIPLEntry_PATH_Node::unserialize(void)
 {

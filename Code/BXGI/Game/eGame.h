@@ -3,7 +3,7 @@
 #include "nsbxgi.h"
 #include "Type/Types.h"
 
-enum bxgi::eGame : uint8
+enum bxgi::EGame : uint8
 {
 	UNKNOWN_GAME,
 	GTA_III,

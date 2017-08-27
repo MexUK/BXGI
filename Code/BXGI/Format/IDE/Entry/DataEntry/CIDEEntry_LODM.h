@@ -7,10 +7,7 @@
 class bxgi::CIDEEntry_LODM : public bxgi::CIDEEntry_Data
 {
 public:
-	CIDEEntry_LODM(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_Data(pIDEFormat, IDE_SECTION_LODM)
-	{
-	};
+	CIDEEntry_LODM(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

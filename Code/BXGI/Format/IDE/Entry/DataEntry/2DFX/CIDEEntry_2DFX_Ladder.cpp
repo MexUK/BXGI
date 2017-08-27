@@ -1,10 +1,19 @@
 #include "CIDEEntry_2DFX_Ladder.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_2DFX_Ladder::CIDEEntry_2DFX_Ladder(CIDEFormat *pIDEFormat) :
+	CIDEEntry_2DFX(pIDEFormat, _2DFX_LADDER),
+	m_vecLadderStartPosition{ 0.0f, 0.0f, 0.0f },
+	m_vecLadderEndPosition{ 0.0f, 0.0f, 0.0f },
+	m_vecClimbDirectionPosition{ 0.0f, 0.0f, 0.0f },
+	m_uiFlags(0)
+{
+}
 
 void			CIDEEntry_2DFX_Ladder::unserialize(void)
 {

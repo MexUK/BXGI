@@ -1,10 +1,15 @@
 #include "CIDEEntry_2DFX_WalkDontWalkAttr.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_2DFX_WalkDontWalkAttr::CIDEEntry_2DFX_WalkDontWalkAttr(CIDEFormat *pIDEFormat) :
+	CIDEEntry_2DFX(pIDEFormat, _2DFX_WALK_DONT_WALK_ATTR)
+{
+}
 
 void			CIDEEntry_2DFX_WalkDontWalkAttr::unserialize(void)
 {

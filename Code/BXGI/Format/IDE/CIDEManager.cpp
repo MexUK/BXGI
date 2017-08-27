@@ -1,6 +1,6 @@
 #include "CIDEManager.h"
 #include "CIDEFormat.h"
-#include "eIDESection.h"
+#include "EIDESection.h"
 #include "Static/CString2.h"
 #include "Static/CStdVector.h"
 #include "Static/CDebug.h"

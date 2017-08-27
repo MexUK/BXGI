@@ -5,6 +5,11 @@
 using namespace bxcf;
 using namespace bxgi;
 
+CIDEEntry_Other::CIDEEntry_Other(CIDEFormat *pIDEFormat) :
+	CIDEEntry(pIDEFormat)
+{
+}
+
 void		CIDEEntry_Other::unserialize(void)
 {
 	CDataReader *pDataReader = CDataReader::get();

@@ -1,5 +1,5 @@
 #include "CIDEEntry_2DFX_SpawnPoint.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 

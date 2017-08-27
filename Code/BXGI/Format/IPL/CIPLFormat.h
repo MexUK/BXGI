@@ -2,8 +2,8 @@
 
 #include "nsbxgi.h"
 #include "Helper/SectionLines/CSectionLinesFormat.h"
-#include "eIPLSection.h"
-#include "eIPLPathType.h"
+#include "EIPLSection.h"
+#include "EIPLPathType.h"
 #include "Entry/CIPLEntry_Other.h"
 #include "Entry/CIPLEntry_Section.h"
 #include "Entry/CIPLEntry_Data.h"
@@ -12,7 +12,7 @@
 class bxgi::CIPLFormat;
 class bxgi::CIPLEntry;
 
-class bxgi::CIPLFormat : public bxgi::CSectionLinesFormat<bxgi::CIPLFormat, bxgi::CIPLEntry, eIPLSection, bxgi::CIPLEntry_Other, bxgi::CIPLEntry_Section, bxgi::CIPLEntry_Data>
+class bxgi::CIPLFormat : public bxgi::CSectionLinesFormat<bxgi::CIPLFormat, bxgi::CIPLEntry, EIPLSection, bxgi::CIPLEntry_Other, bxgi::CIPLEntry_Section, bxgi::CIPLEntry_Data>
 {
 public:
 	CIPLFormat(void);
@@ -20,12 +20,12 @@ public:
 	void												setIsBinary(bool bState) { m_bIsBinary = bState; }
 	bool												isBinary(void) { return m_bIsBinary; }
 
-	bxgi::CIPLEntry_Data*								createDataEntry(eIPLSection eIDESectionValue, uint32 uiSectionSpecificType = 0);
+	bxgi::CIPLEntry_Data*								createDataEntry(EIPLSection EIDESectionValue, uint32 uiSectionSpecificType = 0);
 
-	eIPLSection											getSectionFromText(std::string strIPLSectionText);
-	std::string											getSectionText(eIPLSection eIPLSectionValue);
+	EIPLSection											getSectionFromText(std::string strIPLSectionText);
+	std::string											getSectionText(EIPLSection EIPLSectionValue);
 
-	uint32												detectSectionSpecificType(eIPLSection eIPLSectionValue);
+	uint32												detectSectionSpecificType(EIPLSection EIPLSectionValue);
 
 private:
 	void												unserialize(void);
@@ -34,9 +34,9 @@ private:
 	void												unserializeBinary(void);
 	void												serializeBinary(void);
 
-	bxgi::CIPLEntry_Data*								unserializeDataEntry(eIPLSection eIPLSectionValue);
+	bxgi::CIPLEntry_Data*								unserializeDataEntry(EIPLSection EIPLSectionValue);
 
-	eIPLPathType										detectPATHType(void);
+	EIPLPathType										detectPATHType(void);
 
 private:
 	uint8												m_bIsBinary : 1;

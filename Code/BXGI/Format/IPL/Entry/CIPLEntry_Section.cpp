@@ -6,11 +6,16 @@
 using namespace bxcf;
 using namespace bxgi;
 
+CIPLEntry_Section::CIPLEntry_Section(CIPLFormat *pIPLFormat) :
+	CIPLEntry(pIPLFormat)
+{
+}
+
 void		CIPLEntry_Section::unserialize(void)
 {
 	CDataReader *pDataReader = CDataReader::get();
 
-	// setSectionType() has already been called, as the eIPLSectionType has already been detected.
+	// setSectionType() has already been called, as the EIPLSectionType has already been detected.
 }
 
 void		CIPLEntry_Section::serialize(void)

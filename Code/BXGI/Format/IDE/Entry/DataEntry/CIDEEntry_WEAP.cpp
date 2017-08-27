@@ -1,10 +1,19 @@
 #include "CIDEEntry_WEAP.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_WEAP::CIDEEntry_WEAP(CIDEFormat *pIDEFormat) :
+	CIDEEntry_Data(pIDEFormat, IDE_SECTION_WEAP),
+	m_uiObjectId(0),
+	m_uiClumpCount(0),
+	m_fDrawDistance(0.0f),
+	m_uiFlags(0)
+{
+}
 
 void			CIDEEntry_WEAP::unserialize(void)
 {

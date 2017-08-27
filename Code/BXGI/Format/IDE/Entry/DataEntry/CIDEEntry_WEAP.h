@@ -8,14 +8,7 @@
 class bxgi::CIDEEntry_WEAP : public bxgi::CIDEEntry_Data
 {
 public:
-	CIDEEntry_WEAP(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_Data(pIDEFormat, IDE_SECTION_WEAP),
-		m_uiObjectId(0),
-		m_uiClumpCount(0),
-		m_fDrawDistance(0.0f),
-		m_uiFlags(0)
-	{
-	};
+	CIDEEntry_WEAP(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

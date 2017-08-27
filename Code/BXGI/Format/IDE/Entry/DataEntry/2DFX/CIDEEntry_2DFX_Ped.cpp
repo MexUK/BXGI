@@ -1,10 +1,18 @@
 #include "CIDEEntry_2DFX_Ped.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_2DFX_Ped::CIDEEntry_2DFX_Ped(CIDEFormat *pIDEFormat) :
+	CIDEEntry_2DFX(pIDEFormat, _2DFX_PED),
+	m_uiBehaviour(0),
+	m_vecUnknown2{ 0.0f, 0.0f, 0.0f },
+	m_vecPedRotation{ 0.0f, 0.0f, 0.0f }
+{
+}
 
 void			CIDEEntry_2DFX_Ped::unserialize(void)
 {

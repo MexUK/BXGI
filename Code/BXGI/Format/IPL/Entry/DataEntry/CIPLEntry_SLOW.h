@@ -7,10 +7,7 @@
 class bxgi::CIPLEntry_SLOW : public bxgi::CIPLEntry_Data
 {
 public:
-	CIPLEntry_SLOW(bxgi::CIPLFormat *pIPLFormat) :
-		CIPLEntry_Data(pIPLFormat, IPL_SECTION_SLOW)
-	{
-	};
+	CIPLEntry_SLOW(bxgi::CIPLFormat *pIPLFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

@@ -8,10 +8,7 @@
 class bxgi::CIPLEntry_MZON : public bxgi::CIPLEntry_Data
 {
 public:
-	CIPLEntry_MZON(bxgi::CIPLFormat *pIPLFormat) :
-		CIPLEntry_Data(pIPLFormat, IPL_SECTION_MZON)
-	{
-	};
+	CIPLEntry_MZON(bxgi::CIPLFormat *pIPLFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

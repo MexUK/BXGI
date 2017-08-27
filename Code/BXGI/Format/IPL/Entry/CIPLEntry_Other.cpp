@@ -5,6 +5,11 @@
 using namespace bxcf;
 using namespace bxgi;
 
+CIPLEntry_Other::CIPLEntry_Other(CIPLFormat *pIPLFormat) :
+	CIPLEntry(pIPLFormat)
+{
+}
+
 void		CIPLEntry_Other::unserialize(void)
 {
 	CDataReader *pDataReader = CDataReader::get();

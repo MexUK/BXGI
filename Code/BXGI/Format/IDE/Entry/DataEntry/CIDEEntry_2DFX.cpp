@@ -1,9 +1,27 @@
 #include "CIDEEntry_2DFX.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxgi;
+
+CIDEEntry_2DFX::CIDEEntry_2DFX(CIDEFormat *pIDEFormat, E2DFXType E2DFXTypeValue) :
+	CIDEEntry_Data(pIDEFormat, IDE_SECTION_2DFX),
+	m_E2DFXType(E2DFXTypeValue),
+	m_uiObjectId(0),
+	m_vecPosition{ 0.0f, 0.0f, 0.0f },
+	m_uiUnknown1(0),
+	m_ui2dfxType(0),
+	m_vecRotation{ 0.0f, 0.0f, 0.0f, 0.0f }
+{
+	m_vecColour.x = 0;
+	m_vecColour.y = 0;
+	m_vecColour.z = 0;
+}
+
+CIDEEntry_2DFX::~CIDEEntry_2DFX(void)
+{
+}
 
 void			CIDEEntry_2DFX::unserialize(void)
 {

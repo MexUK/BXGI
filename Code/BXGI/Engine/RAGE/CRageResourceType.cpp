@@ -15,7 +15,7 @@ string				CRageResourceType::getResourceName(void)
 	}
 }
 
-eRageResourceType	CRageResourceType::getResourceId(void)
+ERageResourceType	CRageResourceType::getResourceId(void)
 {
 	if (this == nullptr)
 	{

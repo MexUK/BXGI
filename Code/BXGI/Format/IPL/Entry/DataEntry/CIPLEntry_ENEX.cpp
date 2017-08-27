@@ -1,10 +1,27 @@
 #include "CIPLEntry_ENEX.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIPLEntry_ENEX::CIPLEntry_ENEX(CIPLFormat *pIPLFormat) :
+	CIPLEntry_Data(pIPLFormat, IPL_SECTION_ENEX),
+	m_vecEntrancePosition{ 0.0f, 0.0f, 0.0f },
+	m_fRotation(0.0f),
+	m_vecSize{ 0.0f, 0.0f },
+	m_uiConstant8(0),
+	m_vecExitPosition{ 0.0f, 0.0f, 0.0f },
+	m_fExitRotation(0.0f),
+	m_uiTargetInterior(0),
+	m_uiMarkerType(0),
+	m_uiSkyColourChanger(0),
+	m_uiUnknown1(0),
+	m_uiTimeOn(0),
+	m_uiTimeOff(0)
+{
+}
 
 void			CIPLEntry_ENEX::unserialize(void)
 {

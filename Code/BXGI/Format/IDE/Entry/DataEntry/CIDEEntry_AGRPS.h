@@ -7,10 +7,7 @@
 class bxgi::CIDEEntry_AGRPS: public bxgi::CIDEEntry_Data
 {
 public:
-	CIDEEntry_AGRPS(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_Data(pIDEFormat, IDE_SECTION_AGRPS)
-	{
-	};
+	CIDEEntry_AGRPS(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

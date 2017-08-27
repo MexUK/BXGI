@@ -15,8 +15,8 @@ public:
 	
 	void												unload(void);
 
-	void												setPathsFormat(bxgi::eDATPathFormat eFormat) { m_header.m_ePathsFormat = eFormat; }
-	bxgi::eDATPathFormat										getPathsFormat(void) { return m_header.m_ePathsFormat; }
+	void												setPathsFormat(bxgi::EDATPathFormat eFormat) { m_header.m_ePathsFormat = eFormat; }
+	bxgi::EDATPathFormat										getPathsFormat(void) { return m_header.m_ePathsFormat; }
 
 	void												applyOffsetToPositions(bxcf::Vec3f& vecPositionOffset);
 
@@ -31,7 +31,7 @@ public:
 
 	/*
 	todo - [after DAT Paths rewrite] these 3 lines still needed?
-	CDATPathFormat*			unserializeViaData_Paths(std::string strEntryData, uint32 uiAreaId, eDATPathFormat eDATPathFormatValue = DAT_PATH_UNKNOWN);
+	CDATPathFormat*			unserializeViaData_Paths(std::string strEntryData, uint32 uiAreaId, EDATPathFormat EDATPathFormatValue = DAT_PATH_UNKNOWN);
 	CDATPathFormat*			parseViaData_Paths_Default(std::string strEntryData, uint32 uiAreaId);
 	CDATPathFormat*			parseViaData_Paths_Fastman92(std::string strEntryData, uint32 uiAreaId);
 	*/
@@ -46,7 +46,7 @@ private:
 	void												serializeDefault(void);
 	void												serializeFastman92(void); 
 	
-	bxgi::eDATPathFormat										detectPathsFormat(void);
+	bxgi::EDATPathFormat										detectPathsFormat(void);
 
 public: // todo - make this access specifier private
 	uint32												m_uiFileIndex;

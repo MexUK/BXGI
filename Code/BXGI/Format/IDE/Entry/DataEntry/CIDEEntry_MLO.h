@@ -7,10 +7,7 @@
 class bxgi::CIDEEntry_MLO : public bxgi::CIDEEntry_Data
 {
 public:
-	CIDEEntry_MLO(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_Data(pIDEFormat, IDE_SECTION_MLO)
-	{
-	};
+	CIDEEntry_MLO(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

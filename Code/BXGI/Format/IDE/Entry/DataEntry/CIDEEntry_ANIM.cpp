@@ -1,10 +1,23 @@
 #include "CIDEEntry_ANIM.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_ANIM::CIDEEntry_ANIM(CIDEFormat *pIDEFormat) :
+	CIDEEntry_Data(pIDEFormat, IDE_SECTION_ANIM),
+	m_uiObjectId(0),
+	m_fDrawDistance(0.0f),
+	m_uiFlags(0),
+	m_uiUnknown1(0),
+	m_vecBoundingBoxLowerLeftCorner{ 0.0f, 0.0f, 0.0f },
+	m_vecBoundingBoxUpperRightCorner{ 0.0f, 0.0f, 0.0f },
+	m_vecBoundingSphereCenterPosition{ 0.0f, 0.0f, 0.0f },
+	m_fBoundingSphereRadius(0.0f)
+{
+}
 
 void			CIDEEntry_ANIM::unserialize(void)
 {

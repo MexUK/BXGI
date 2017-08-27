@@ -7,10 +7,7 @@
 class bxgi::CIDEEntry_LINK : public bxgi::CIDEEntry_Data
 {
 public:
-	CIDEEntry_LINK(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_Data(pIDEFormat, IDE_SECTION_LINK)
-	{
-	};
+	CIDEEntry_LINK(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

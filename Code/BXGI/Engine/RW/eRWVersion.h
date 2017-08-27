@@ -3,7 +3,7 @@
 #include "nsbxgi.h"
 #include "Type/Types.h"
 
-enum bxgi::eRWVersion : uint8
+enum bxgi::ERWVersion : uint8
 {
 	UNKNOWN_RW_VERSION,
 	RW_3_0_0_0_2,

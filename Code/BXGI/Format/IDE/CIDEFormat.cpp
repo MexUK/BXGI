@@ -33,10 +33,10 @@
 #include "Format/IDE/Entry/DataEntry/2DFX/CIDEEntry_2DFX_SpawnPoint.h"
 #include "Format/IDE/Entry/DataEntry/PATH/CIDEEntry_PATH_Group.h"
 #include "Format/IDE/Entry/DataEntry/PATH/CIDEEntry_PATH_Node.h"
-#include "Helper/SectionLines/eSectionLinesEntryType.h"
+#include "Helper/SectionLines/ESectionLinesEntryType.h"
 // todo #include "CDataType.h"
 #include "Static/CString2.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include <unordered_map>
 
 using namespace std;
@@ -59,23 +59,23 @@ void				CIDEFormat::serialize(void)
 }
 
 // unserialization
-CIDEEntry_Data*		CIDEFormat::unserializeDataEntry(eIDESection eIDESectionValue)
+CIDEEntry_Data*		CIDEFormat::unserializeDataEntry(EIDESection EIDESectionValue)
 {
 	CIDEEntry_Data *pIDEEntry = nullptr;
-	switch (eIDESectionValue)
+	switch (EIDESectionValue)
 	{
 	case IDE_SECTION_2DFX:
 	{
-		pair<e2DFXType, uint32> pairData = detect2DFXTypeAndGame();
-		pIDEEntry = createDataEntry(eIDESectionValue, pairData.first);
+		pair<E2DFXType, uint32> pairData = detect2DFXTypeAndGame();
+		pIDEEntry = createDataEntry(EIDESectionValue, pairData.first);
 		pIDEEntry->setFormatGames(pairData.second);
 		break;
 	}
 	case IDE_SECTION_PATH:
-		pIDEEntry = createDataEntry(eIDESectionValue, detectPATHType());
+		pIDEEntry = createDataEntry(EIDESectionValue, detectPATHType());
 		break;
 	default:
-		pIDEEntry = createDataEntry(eIDESectionValue);
+		pIDEEntry = createDataEntry(EIDESectionValue);
 		break;
 	}
 	if (!pIDEEntry)
@@ -86,7 +86,7 @@ CIDEEntry_Data*		CIDEFormat::unserializeDataEntry(eIDESection eIDESectionValue)
 	return pIDEEntry;
 }
 
-pair<e2DFXType, uint32>			CIDEFormat::detect2DFXTypeAndGame(void)
+pair<E2DFXType, uint32>			CIDEFormat::detect2DFXTypeAndGame(void)
 {
 	CDataReader *pDataReader = CDataReader::get();
 
@@ -187,7 +187,7 @@ pair<e2DFXType, uint32>			CIDEFormat::detect2DFXTypeAndGame(void)
 	throw EXCEPTION_UNKNOWN_FORMAT_TYPE;
 }
 
-eIDEPathType			CIDEFormat::detectPATHType(void)
+EIDEPathType			CIDEFormat::detectPATHType(void)
 {
 	CDataReader *pDataReader = CDataReader::get();
 
@@ -200,7 +200,7 @@ eIDEPathType			CIDEFormat::detectPATHType(void)
 }
 
 // general
-eIDESection					CIDEFormat::getSectionFromText(string strIDESectionText)
+EIDESection					CIDEFormat::getSectionFromText(string strIDESectionText)
 {
 	strIDESectionText = CString2::zeroPad(strIDESectionText, 4);
 
@@ -235,9 +235,9 @@ eIDESection					CIDEFormat::getSectionFromText(string strIDESectionText)
 	return IDE_SECTION_UNKNOWN;
 }
 
-string						CIDEFormat::getSectionText(eIDESection eIDESectionValue)
+string						CIDEFormat::getSectionText(EIDESection EIDESectionValue)
 {
-	switch (eIDESectionValue)
+	switch (EIDESectionValue)
 	{
 	case IDE_SECTION_OBJS:	return "OBJS";
 	case IDE_SECTION_TOBJ:	return "TOBJ";
@@ -262,9 +262,9 @@ string						CIDEFormat::getSectionText(eIDESection eIDESectionValue)
 	}
 }
 
-CIDEEntry_Data*				CIDEFormat::createDataEntry(eIDESection eIDESectionValue, uint32 uiSectionSpecificType)
+CIDEEntry_Data*				CIDEFormat::createDataEntry(EIDESection EIDESectionValue, uint32 uiSectionSpecificType)
 {
-	switch (eIDESectionValue)
+	switch (EIDESectionValue)
 	{
 	case IDE_SECTION_OBJS:	return new CIDEEntry_OBJS(this);
 	case IDE_SECTION_TOBJ:	return new CIDEEntry_TOBJ(this);
@@ -273,8 +273,8 @@ CIDEEntry_Data*				CIDEFormat::createDataEntry(eIDESection eIDESectionValue, uin
 	case IDE_SECTION_PEDS:	return new CIDEEntry_PEDS(this);
 	case IDE_SECTION_PATH:
 	{
-		eIDEPathType eIDEPathTypeValue = (eIDEPathType)uiSectionSpecificType;
-		switch (eIDEPathTypeValue)
+		EIDEPathType EIDEPathTypeValue = (EIDEPathType)uiSectionSpecificType;
+		switch (EIDEPathTypeValue)
 		{
 		case IDE_PATH_GROUP:	return new CIDEEntry_PATH_Group(this);
 		case IDE_PATH_NODE:		return new CIDEEntry_PATH_Node(this);
@@ -284,8 +284,8 @@ CIDEEntry_Data*				CIDEFormat::createDataEntry(eIDESection eIDESectionValue, uin
 	}
 	case IDE_SECTION_2DFX:
 	{
-		e2DFXType e2DFXTypeValue = (e2DFXType)uiSectionSpecificType;
-		switch (e2DFXTypeValue)
+		E2DFXType E2DFXTypeValue = (E2DFXType)uiSectionSpecificType;
+		switch (E2DFXTypeValue)
 		{
 		case _2DFX_LIGHT:			return new CIDEEntry_2DFX_Light(this);
 		case _2DFX_PARTICLE:			return new CIDEEntry_2DFX_Particle(this);
@@ -313,9 +313,9 @@ CIDEEntry_Data*				CIDEFormat::createDataEntry(eIDESection eIDESectionValue, uin
 	return nullptr;
 }
 
-uint32						CIDEFormat::detectSectionSpecificType(eIDESection eIDESectionValue)
+uint32						CIDEFormat::detectSectionSpecificType(EIDESection EIDESectionValue)
 {
-	switch (eIDESectionValue)
+	switch (EIDESectionValue)
 	{
 	case IDE_SECTION_2DFX:	return detect2DFXTypeAndGame().first;
 	case IDE_SECTION_PATH:	return detectPATHType();

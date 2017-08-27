@@ -8,10 +8,7 @@
 class bxgi::CIPLEntry_PICK : public bxgi::CIPLEntry_Data
 {
 public:
-	CIPLEntry_PICK(bxgi::CIPLFormat *pIPLFormat) :
-		CIPLEntry_Data(pIPLFormat, IPL_SECTION_PICK)
-	{
-	};
+	CIPLEntry_PICK(bxgi::CIPLFormat *pIPLFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

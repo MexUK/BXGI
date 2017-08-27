@@ -688,27 +688,27 @@ void							CDATPathFormat::serializeFastman92(void)
 	delete[] pPathIntersectionFlags;
 }
 
-eDATPathFormat			CDATPathFormat::detectPathsFormat(void)
+EDATPathFormat			CDATPathFormat::detectPathsFormat(void)
 {
 	CDataReader *pDataReader = CDataReader::get();
-	eDATPathFormat eDATPathFormatValue;
+	EDATPathFormat EDATPathFormatValue;
 
 	uint64 uiPreviousSeek = pDataReader->getSeek();
 	pDataReader->setPeek(true);
 
 	if (CString2::unpackUint32(pDataReader->readString(4), false) == 0xFFFFFFFF && pDataReader->readString(4) == "FM92")
 	{
-		eDATPathFormatValue = DAT_PATH_FASTMAN92;
+		EDATPathFormatValue = DAT_PATH_FASTMAN92;
 	}
 	else
 	{
-		eDATPathFormatValue = DAT_PATH_DEFAULT;
+		EDATPathFormatValue = DAT_PATH_DEFAULT;
 	}
 
 	pDataReader->setSeek(uiPreviousSeek);
 	pDataReader->setPeek(false);
 
-	return eDATPathFormatValue;
+	return EDATPathFormatValue;
 }
 
 void					CDATPathFormat::applyOffsetToPositions(Vec3f& vecPositionOffset)

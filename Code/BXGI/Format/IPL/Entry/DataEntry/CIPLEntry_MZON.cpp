@@ -1,10 +1,15 @@
 #include "CIPLEntry_MZON.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIPLEntry_MZON::CIPLEntry_MZON(CIPLFormat *pIPLFormat) :
+	CIPLEntry_Data(pIPLFormat, IPL_SECTION_MZON)
+{
+}
 
 void			CIPLEntry_MZON::unserialize(void)
 {

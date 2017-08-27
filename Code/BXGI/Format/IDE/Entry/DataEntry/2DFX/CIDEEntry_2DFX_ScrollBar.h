@@ -5,10 +5,7 @@
 class bxgi::CIDEEntry_2DFX_ScrollBar : public bxgi::CIDEEntry_2DFX
 {
 public:
-	CIDEEntry_2DFX_ScrollBar(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_2DFX(pIDEFormat, bxgi::_2DFX_SCROLL_BAR)
-	{
-	};
+	CIDEEntry_2DFX_ScrollBar(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

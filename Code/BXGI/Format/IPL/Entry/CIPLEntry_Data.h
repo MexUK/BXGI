@@ -7,9 +7,9 @@
 class bxgi::CIPLEntry_Data : public bxgi::CSectionLinesEntry_Data, public bxgi::CIPLEntry
 {
 public:
-	CIPLEntry_Data(bxgi::CIPLFormat *pIPLFormat, bxgi::eIPLSection eIPLSectionValue) :
+	CIPLEntry_Data(bxgi::CIPLFormat *pIPLFormat, bxgi::EIPLSection EIPLSectionValue) :
 		CIPLEntry(pIPLFormat)
 	{
-		setSectionType(eIPLSectionValue);
+		setSectionType(EIPLSectionValue);
 	};
 };

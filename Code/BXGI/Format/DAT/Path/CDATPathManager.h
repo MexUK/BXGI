@@ -4,7 +4,7 @@
 #include "Format/CFormatManager.h"
 #include "Object/CSingleton.h"
 #include "Type/Vector/Vec2f.h"
-#include "Game/ePlatformedGame.h"
+#include "Game/EPlatformedGame.h"
 #include <vector>
 
 class bxgi::CDATPathFormat;

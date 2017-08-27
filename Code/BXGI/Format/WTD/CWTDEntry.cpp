@@ -9,7 +9,7 @@ using namespace bxgi;
 
 CWTDEntry::CWTDEntry(void) :
 	m_eD3DFormat(D3DFMT_UNKNOWN),
-	m_eRasterDataFormat(bxcf::RASTERDATAFORMAT_UNKNOWN),
+	m_ERasterDataFormat(bxcf::RASTERDATAFORMAT_UNKNOWN),
 	m_uiRawDataOffset(0),
 	m_uiTextureHash(0),
 	m_ucLevels(0)
@@ -18,12 +18,12 @@ CWTDEntry::CWTDEntry(void) :
 	m_usImageSize[1] = 0;
 }
 
-void					CWTDEntry::setRasterDataFormat(eRasterDataFormat eRasterDataFormatValue, bool bUpdateD3DFormat)
+void					CWTDEntry::setRasterDataFormat(ERasterDataFormat ERasterDataFormatValue, bool bUpdateD3DFormat)
 {
-	m_eRasterDataFormat = eRasterDataFormatValue;
+	m_ERasterDataFormat = ERasterDataFormatValue;
 	if (bUpdateD3DFormat)
 	{
-		m_eD3DFormat = CImageManager::getD3DFormatFromRasterDataFormat(eRasterDataFormatValue);
+		m_eD3DFormat = CImageManager::getD3DFormatFromRasterDataFormat(ERasterDataFormatValue);
 	}
 }
 

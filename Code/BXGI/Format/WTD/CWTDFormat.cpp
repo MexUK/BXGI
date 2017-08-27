@@ -89,7 +89,7 @@ void					CWTDFormat::unserialize(void)
 		pWTDEntry_RG->m_uiNameOffset = convertULongToOffset(pWTDEntry_RG->m_uiNameOffset);
 
 		//D3DFORMAT eD3DFormat = getD3DFormatFromFourCC(CFileParser::get()->readString(4));
-		//eRasterDataFormat eRasterDataFormatValue = CImageManager::getRasterDataFormatFromD3DFormat(eD3DFormat);
+		//ERasterDataFormat ERasterDataFormatValue = CImageManager::getRasterDataFormatFromD3DFormat(eD3DFormat);
 
 		pWTDEntry_RG->m_uiPrevTextureInfoOffset = convertULongToOffset(pWTDEntry_RG->m_uiPrevTextureInfoOffset);
 		pWTDEntry_RG->m_uiNextTextureInfoOffset = convertULongToOffset(pWTDEntry_RG->m_uiNextTextureInfoOffset);
@@ -180,7 +180,7 @@ void					CWTDFormat::serialize(void)
 		*pDataWriter = CDataWriter::get(),
 		*pDataWriter2 = CDataWriter::get(1);
 
-	//eDataStreamType ePreviousDataStreamType = pDataWriter->getStreamType();
+	//EDataStreamType ePreviousDataStreamType = pDataWriter->getStreamType();
 	pDataWriter2->setStreamType(DATA_STREAM_MEMORY);
 
 	// store system stream
@@ -330,9 +330,9 @@ void					CWTDFormat::serialize(void)
 	pDataWriter2->reset();
 }
 
-bxgi::CIntermediateTextureFormat*		CWTDFormat::convertToIntermediateFormat(void)
+CIntermediateTextureFormat*		CWTDFormat::convertToIntermediateFormat(void)
 {
-	bxgi::CIntermediateTextureFormat *pGeneralTextureFile = new bxgi::CIntermediateTextureFormat;
+	CIntermediateTextureFormat *pGeneralTextureFile = new CIntermediateTextureFormat;
 
 	for (CWTDEntry *pWTDEntry : getEntries())
 	{

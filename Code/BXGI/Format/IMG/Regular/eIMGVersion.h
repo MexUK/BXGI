@@ -3,7 +3,7 @@
 #include "nsbxgi.h"
 #include "Type/Types.h"
 
-enum bxgi::eIMGVersion : uint8
+enum bxgi::EIMGVersion : uint8
 {
 	IMG_UNKNOWN,
 	IMG_1,

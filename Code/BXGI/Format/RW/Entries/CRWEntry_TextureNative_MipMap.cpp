@@ -26,9 +26,9 @@ string				CRWEntry_TextureNative_MipMap::getRasterDataRGBA32(void)
 	return CImageManager::convertBGRA32ToRGBA32(getRasterDataBGRA32());
 }
 
-void				CRWEntry_TextureNative_MipMap::convertToRasterDataFormat(eRasterDataFormat eRasterDataFormatValue)
+void				CRWEntry_TextureNative_MipMap::convertToRasterDataFormat(ERasterDataFormat ERasterDataFormatValue)
 {
-	if (getRasterDataFormat() == eRasterDataFormatValue)
+	if (getRasterDataFormat() == ERasterDataFormatValue)
 	{
 		// raster data is already in the requested format
 		return;
@@ -36,7 +36,7 @@ void				CRWEntry_TextureNative_MipMap::convertToRasterDataFormat(eRasterDataForm
 
 	// convert raster data to requested format
 	string strPaletteData = "";
-	setRasterData(CImageManager::convertBGRA32ToRasterDataFormat(getRasterDataBGRA32(), eRasterDataFormatValue, &strPaletteData, getImageSize().x, getImageSize().y));
+	setRasterData(CImageManager::convertBGRA32ToRasterDataFormat(getRasterDataBGRA32(), ERasterDataFormatValue, &strPaletteData, getImageSize().x, getImageSize().y));
 }
 
 bool				CRWEntry_TextureNative_MipMap::canRasterDataBeConverted(void)
@@ -49,7 +49,7 @@ bool				CRWEntry_TextureNative_MipMap::canRasterDataBeConverted(void)
 	return true;
 }
 
-eRasterDataFormat	CRWEntry_TextureNative_MipMap::getRasterDataFormat(void)
+ERasterDataFormat	CRWEntry_TextureNative_MipMap::getRasterDataFormat(void)
 {
 	return getTexture()->getRasterDataFormat();
 }

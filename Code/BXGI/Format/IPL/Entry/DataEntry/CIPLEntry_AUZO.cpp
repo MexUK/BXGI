@@ -1,10 +1,21 @@
 #include "CIPLEntry_AUZO.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIPLEntry_AUZO::CIPLEntry_AUZO(CIPLFormat *pIPLFormat) :
+	CIPLEntry_Data(pIPLFormat, IPL_SECTION_AUZO),
+	m_uiSoundId(0),
+	m_uiSwitch(0),
+	m_vecLowerLeftPosition{ 0.0f, 0.0f, 0.0f },
+	m_vecUpperRightPosition{ 0.0f, 0.0f, 0.0f },
+	m_vecCenterPosition{ 0.0f, 0.0f, 0.0f },
+	m_fRadius(0.0f)
+{
+}
 
 void			CIPLEntry_AUZO::unserialize(void)
 {

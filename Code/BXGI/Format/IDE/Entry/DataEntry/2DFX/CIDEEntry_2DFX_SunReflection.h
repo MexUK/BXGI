@@ -6,10 +6,7 @@
 class bxgi::CIDEEntry_2DFX_SunReflection : public bxgi::CIDEEntry_2DFX
 {
 public:
-	CIDEEntry_2DFX_SunReflection(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_2DFX(pIDEFormat, bxgi::_2DFX_SUN_REFLECTION)
-	{
-	};
+	CIDEEntry_2DFX_SunReflection(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

@@ -10,11 +10,7 @@ class bxgi::CIDEEntry;
 class bxgi::CIDEEntry_PATH_Group : public bxgi::CIDEEntry_PATH, public bxcf::CVectorPool<bxgi::CIDEEntry*>
 {
 public:
-	CIDEEntry_PATH_Group(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_PATH(pIDEFormat, IDE_PATH_GROUP),
-		m_uiObjectId(0)
-	{
-	};
+	CIDEEntry_PATH_Group(bxgi::CIDEFormat *pIDEFormat);
 
 	void							unload(void);
 

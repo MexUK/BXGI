@@ -6,10 +6,7 @@
 class bxgi::CIDEEntry_2DFX_WalkDontWalkAttr : public bxgi::CIDEEntry_2DFX
 {
 public:
-	CIDEEntry_2DFX_WalkDontWalkAttr(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_2DFX(pIDEFormat, bxgi::_2DFX_WALK_DONT_WALK_ATTR)
-	{
-	};
+	CIDEEntry_2DFX_WalkDontWalkAttr(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

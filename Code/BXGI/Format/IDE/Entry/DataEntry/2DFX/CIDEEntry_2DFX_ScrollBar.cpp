@@ -1,10 +1,15 @@
 #include "CIDEEntry_2DFX_ScrollBar.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_2DFX_ScrollBar::CIDEEntry_2DFX_ScrollBar(CIDEFormat *pIDEFormat) :
+	CIDEEntry_2DFX(pIDEFormat, _2DFX_SCROLL_BAR)
+{
+}
 
 void			CIDEEntry_2DFX_ScrollBar::unserialize(void)
 {

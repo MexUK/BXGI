@@ -8,18 +8,7 @@
 class bxgi::CIPLEntry_OCCL : public bxgi::CIPLEntry_Data
 {
 public:
-	CIPLEntry_OCCL(bxgi::CIPLFormat *pIPLFormat) :
-		CIPLEntry_Data(pIPLFormat, IPL_SECTION_OCCL),
-		m_vecMidPosition{ 0.0f, 0.0f },
-		m_fBottomHeightZ(0.0f),
-		m_vecWidth{ 0.0f, 0.0f },
-		m_fHeight(0.0f),
-		m_fRotation(0.0f),
-		m_fUnknown1(0.0f),
-		m_fUnknown2(0.0f),
-		m_uiUnknown3(0)
-	{
-	};
+	CIPLEntry_OCCL(bxgi::CIPLFormat *pIPLFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

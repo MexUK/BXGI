@@ -7,10 +7,7 @@
 class bxgi::CIPLEntry_RTFX : public bxgi::CIPLEntry_Data
 {
 public:
-	CIPLEntry_RTFX(bxgi::CIPLFormat *pIPLFormat) :
-		CIPLEntry_Data(pIPLFormat, IPL_SECTION_RTFX)
-	{
-	};
+	CIPLEntry_RTFX(bxgi::CIPLFormat *pIPLFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

@@ -1,10 +1,15 @@
 #include "CIDEEntry_2DFX_LightShaft.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_2DFX_LightShaft::CIDEEntry_2DFX_LightShaft(CIDEFormat *pIDEFormat) :
+	CIDEEntry_2DFX(pIDEFormat, _2DFX_LIGHT_SHAFT)
+{
+}
 
 void			CIDEEntry_2DFX_LightShaft::unserialize(void)
 {

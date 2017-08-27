@@ -25,7 +25,7 @@ using namespace std;
 using namespace bxcf;
 using namespace bxgi;
 
-unordered_map<eRWSection, bool>		CRWSection::m_umapRWSectionsContainingStruct;
+unordered_map<ERWSection, bool>		CRWSection::m_umapRWSectionsContainingStruct;
 
 CRWSection::CRWSection(void) :
 	m_eSectionId(RW_SECTION_UNKNOWN),
@@ -44,10 +44,10 @@ void				CRWSection::initStatic(void)
 
 void				CRWSection::initRWSections(void)
 {
-	vector<eRWSection> vecRWSectionIds = getRWSections();
-	for (eRWSection eRWSectionValue : vecRWSectionIds)
+	vector<ERWSection> vecRWSectionIds = getRWSections();
+	for (ERWSection ERWSectionValue : vecRWSectionIds)
 	{
-		m_umapRWSectionsContainingStruct[eRWSectionValue] = doesRWSectionContainStruct_BeforeInit(eRWSectionValue);
+		m_umapRWSectionsContainingStruct[ERWSectionValue] = doesRWSectionContainStruct_BeforeInit(ERWSectionValue);
 	}
 }
 
@@ -79,9 +79,9 @@ void				CRWSection::serialize(void)
 	}
 }
 
-CRWSection*			CRWSection::addSection(eRWSection eRWSectionValue, eRWVersion eRWVersionValue)
+CRWSection*			CRWSection::addSection(ERWSection ERWSectionValue, ERWVersion ERWVersionValue)
 {
-	CRWSection *pRWSection = CRWSectionContainer::addSection(eRWSectionValue, eRWVersionValue);
+	CRWSection *pRWSection = CRWSectionContainer::addSection(ERWSectionValue, ERWVersionValue);
 	pRWSection->setParentNode(this);
 	return pRWSection;
 }
@@ -129,9 +129,9 @@ void				CRWSection::fillPlaceholdersForSerialization(uint32 uiSectionByteCount, 
 	}
 }
 
-CRWSection*			CRWSection::createRWSection(eRWSection eRWSectionValue)
+CRWSection*			CRWSection::creatERWSection(ERWSection ERWSectionValue)
 {
-	switch (eRWSectionValue)
+	switch (ERWSectionValue)
 	{
 	case RW_SECTION_2D_EFFECT:			return new CRWSection_2dEffect;
 	case RW_SECTION_ATOMIC:				return new CRWSection_Atomic;
@@ -154,29 +154,29 @@ CRWSection*			CRWSection::createRWSection(eRWSection eRWSectionValue)
 	}
 
 	CRWSection *pRWSection = new CRWSection_UnknownSection;
-	pRWSection->setSectionId(eRWSectionValue);
+	pRWSection->setSectionId(ERWSectionValue);
 	return pRWSection;
 }
 
-bool				CRWSection::doesRWSectionContainStruct_BeforeInit(eRWSection eRWSectionValue)
+bool				CRWSection::doesRWSectionContainStruct_BeforeInit(ERWSection ERWSectionValue)
 {
-	return eRWSectionValue == RW_SECTION_ATOMIC
-		|| eRWSectionValue == RW_SECTION_CLUMP
-		|| eRWSectionValue == RW_SECTION_GEOMETRY
-		|| eRWSectionValue == RW_SECTION_GEOMETRY_LIST
-		|| eRWSectionValue == RW_SECTION_FRAME_LIST
-		|| eRWSectionValue == RW_SECTION_MATERIAL
-		|| eRWSectionValue == RW_SECTION_MATERIAL_LIST
-		|| eRWSectionValue == RW_SECTION_TEXTURE
-		|| eRWSectionValue == RW_SECTION_TEXTURE_DICTIONARY
-		|| eRWSectionValue == RW_SECTION_TEXTURE_NATIVE;
+	return ERWSectionValue == RW_SECTION_ATOMIC
+		|| ERWSectionValue == RW_SECTION_CLUMP
+		|| ERWSectionValue == RW_SECTION_GEOMETRY
+		|| ERWSectionValue == RW_SECTION_GEOMETRY_LIST
+		|| ERWSectionValue == RW_SECTION_FRAME_LIST
+		|| ERWSectionValue == RW_SECTION_MATERIAL
+		|| ERWSectionValue == RW_SECTION_MATERIAL_LIST
+		|| ERWSectionValue == RW_SECTION_TEXTURE
+		|| ERWSectionValue == RW_SECTION_TEXTURE_DICTIONARY
+		|| ERWSectionValue == RW_SECTION_TEXTURE_NATIVE;
 }
-bool				CRWSection::doesRWSectionContainStruct(eRWSection eRWSectionValue)
+bool				CRWSection::doesRWSectionContainStruct(ERWSection ERWSectionValue)
 {
-	return m_umapRWSectionsContainingStruct.count(eRWSectionValue) == 1 && m_umapRWSectionsContainingStruct[eRWSectionValue] == true;
+	return m_umapRWSectionsContainingStruct.count(ERWSectionValue) == 1 && m_umapRWSectionsContainingStruct[ERWSectionValue] == true;
 }
 
-vector<eRWSection>	CRWSection::getRWSections(void)
+vector<ERWSection>	CRWSection::getRWSections(void)
 {
 	return {
 		RW_SECTION_STRUCT,
@@ -200,7 +200,7 @@ vector<eRWSection>	CRWSection::getRWSections(void)
 	};
 }
 
-CRWSection*						CRWSection::getNextParentNodeWithSectionType(eRWSection eSection)
+CRWSection*						CRWSection::getNextParentNodeWithSectionType(ERWSection eSection)
 {
 	CRWSection *pRWSection = this;
 	do

@@ -2,7 +2,7 @@
 
 #include "nsbxgi.h"
 
-enum bxgi::eRageResourceType : uint8
+enum bxgi::ERageResourceType : uint8
 {
 	RAGE_UNKNOWN,
 	RAGE_GENERIC,

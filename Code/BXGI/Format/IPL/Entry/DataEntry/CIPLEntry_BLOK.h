@@ -7,10 +7,7 @@
 class bxgi::CIPLEntry_BLOK : public bxgi::CIPLEntry_Data
 {
 public:
-	CIPLEntry_BLOK(bxgi::CIPLFormat *pIPLFormat) :
-		CIPLEntry_Data(pIPLFormat, IPL_SECTION_BLOK)
-	{
-	};
+	CIPLEntry_BLOK(bxgi::CIPLFormat *pIPLFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

@@ -30,7 +30,7 @@ CIMGEntry::CIMGEntry(void) :
 	m_bReplacedEntry(false),
 	m_bProtectedEntry(false),
 	m_uiFileCreationDate(0),
-	m_eCompressionAlgorithm(COMPRESSION_NONE),
+	m_ECompressionAlgorithm(COMPRESSION_NONE),
 	m_uiCompressionLevel(0),
 	m_bIsEncrypted(false),
 	m_pRageResourceType(nullptr),
@@ -48,7 +48,7 @@ CIMGEntry::CIMGEntry(CIMGFormat *pIMGFile) :
 	m_bReplacedEntry(false),
 	m_bProtectedEntry(false),
 	m_uiFileCreationDate(0),
-	m_eCompressionAlgorithm(COMPRESSION_NONE),
+	m_ECompressionAlgorithm(COMPRESSION_NONE),
 	m_uiCompressionLevel(0),
 	m_bIsEncrypted(false),
 	m_pRageResourceType(nullptr),
@@ -302,10 +302,10 @@ string					CIMGEntry::getEntryCompressedData(void)
 }
 */
 
-void					CIMGEntry::applyCompression(eCompressionAlgorithm eCompressionAlgorithmValue, uint32 uiCompressionLevel)
+void					CIMGEntry::applyCompression(ECompressionAlgorithm ECompressionAlgorithmValue, uint32 uiCompressionLevel)
 {
 	string strEntryData = getEntryData();
-	setCompressionAlgorithmId(eCompressionAlgorithmValue);
+	setCompressionAlgorithmId(ECompressionAlgorithmValue);
 	setCompressionLevel(uiCompressionLevel);
 	setEntryData(strEntryData);
 }

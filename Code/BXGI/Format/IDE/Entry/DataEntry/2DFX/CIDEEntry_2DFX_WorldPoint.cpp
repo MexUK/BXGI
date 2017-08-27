@@ -1,10 +1,15 @@
 #include "CIDEEntry_2DFX_WorldPoint.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_2DFX_WorldPoint::CIDEEntry_2DFX_WorldPoint(CIDEFormat *pIDEFormat) :
+	CIDEEntry_2DFX(pIDEFormat, _2DFX_WORLD_POINT)
+{
+}
 
 void			CIDEEntry_2DFX_WorldPoint::unserialize(void)
 {

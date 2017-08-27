@@ -1,11 +1,17 @@
 #include "CIPLEntry_PATH_Group.h"
 #include "Format/IPL/Entry/DataEntry/CIPLEntry_PATH.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIPLEntry_PATH_Group::CIPLEntry_PATH_Group(CIPLFormat *pIPLFormat) :
+	CIPLEntry_PATH(pIPLFormat, IPL_PATH_GROUP),
+	m_iMinusOne(0)
+{
+}
 
 void			CIPLEntry_PATH_Group::unload(void)
 {

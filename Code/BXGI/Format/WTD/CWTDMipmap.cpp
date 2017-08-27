@@ -29,7 +29,7 @@ string					CWTDMipmap::getRasterDataBGRA32(void)
 	}
 }
 
-eRasterDataFormat		CWTDMipmap::getRasterDataFormat(void)
+ERasterDataFormat		CWTDMipmap::getRasterDataFormat(void)
 {
 	return getWTDEntry()->getRasterDataFormat();
 }

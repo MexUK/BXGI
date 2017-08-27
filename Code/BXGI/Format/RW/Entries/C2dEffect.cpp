@@ -12,9 +12,16 @@
 using namespace bxcf;
 using namespace bxgi;
 
-C2dEffect*			C2dEffect::createRW2dEffect(e2DFXType e2DFXTypeValue)
+C2dEffect::C2dEffect(E2DFXType E2DFXTypeValue) :
+	m_E2DFXType(E2DFXTypeValue),
+	m_uiDataSize(0),
+	m_vecPosition{ 0.0f, 0.0f, 0.0f }
 {
-	switch (e2DFXTypeValue)
+}
+
+C2dEffect*			C2dEffect::createRW2dEffect(E2DFXType E2DFXTypeValue)
+{
+	switch (E2DFXTypeValue)
 	{
 	case _2DFX_LIGHT:				return new CRWEntry_2dEffect_Light;
 	case _2DFX_PARTICLE:			return new CRWEntry_2dEffect_ParticleEffect;

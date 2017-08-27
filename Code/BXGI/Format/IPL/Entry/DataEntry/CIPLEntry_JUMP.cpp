@@ -1,10 +1,21 @@
 #include "CIPLEntry_JUMP.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIPLEntry_JUMP::CIPLEntry_JUMP(CIPLFormat *pIPLFormat) :
+	CIPLEntry_Data(pIPLFormat, IPL_SECTION_JUMP),
+	m_vecStartLowerPosition{ 0.0f, 0.0f, 0.0f },
+	m_vecStartUpperPosition{ 0.0f, 0.0f, 0.0f },
+	m_vecTargetLowerPosition{ 0.0f, 0.0f, 0.0f },
+	m_vecTargetUpperPosition{ 0.0f, 0.0f, 0.0f },
+	m_vecCameraPosition{ 0.0f, 0.0f, 0.0f },
+	m_uiReward(0)
+{
+}
 
 void			CIPLEntry_JUMP::unserialize(void)
 {

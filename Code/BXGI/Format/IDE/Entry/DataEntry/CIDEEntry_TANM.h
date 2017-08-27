@@ -7,10 +7,7 @@
 class bxgi::CIDEEntry_TANM : public bxgi::CIDEEntry_Data
 {
 public:
-	CIDEEntry_TANM(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_Data(pIDEFormat, IDE_SECTION_TANM)
-	{
-	};
+	CIDEEntry_TANM(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

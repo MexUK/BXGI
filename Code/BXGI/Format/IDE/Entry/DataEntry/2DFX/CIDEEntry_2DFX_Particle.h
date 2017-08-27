@@ -9,19 +9,7 @@
 class bxgi::CIDEEntry_2DFX_Particle : public bxgi::CIDEEntry_2DFX
 {
 public:
-	CIDEEntry_2DFX_Particle(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_2DFX(pIDEFormat, bxgi::_2DFX_PARTICLE),
-		m_uiParticleType(0),
-		m_fSize(0.0f),
-		m_uiDestructionStageCount(0),
-		m_uiDrawDistance(0),
-		m_uiUnknown2(0),
-		m_uiUnknown3(0)
-	{
-		m_vecColour2.x = 0;
-		m_vecColour2.y = 0;
-		m_vecColour2.z = 0;
-	};
+	CIDEEntry_2DFX_Particle(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

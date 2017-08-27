@@ -1,10 +1,24 @@
 #include "CIDEEntry_2DFX_Particle.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_2DFX_Particle::CIDEEntry_2DFX_Particle(CIDEFormat *pIDEFormat) :
+	CIDEEntry_2DFX(pIDEFormat, _2DFX_PARTICLE),
+	m_uiParticleType(0),
+	m_fSize(0.0f),
+	m_uiDestructionStageCount(0),
+	m_uiDrawDistance(0),
+	m_uiUnknown2(0),
+	m_uiUnknown3(0)
+{
+	m_vecColour2.x = 0;
+	m_vecColour2.y = 0;
+	m_vecColour2.z = 0;
+}
 
 void			CIDEEntry_2DFX_Particle::unserialize(void)
 {

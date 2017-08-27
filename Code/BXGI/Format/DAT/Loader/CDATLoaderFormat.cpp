@@ -110,7 +110,7 @@ vector<CIPLFormat*>		CDATLoaderFormat::parseIPLFiles(string strGameDirectoryPath
 }
 
 template<class ManagerClass, class FormatClass>
-vector<FormatClass*>	CDATLoaderFormat::parseFiles(string strGameDirectoryPath, eDATLoaderEntryType eType1, eDATLoaderEntryType eType2)
+vector<FormatClass*>	CDATLoaderFormat::parseFiles(string strGameDirectoryPath, EDATLoaderEntryType eType1, EDATLoaderEntryType eType2)
 {
 	strGameDirectoryPath = CPath::addSlashToEnd(strGameDirectoryPath);
 

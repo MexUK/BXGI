@@ -33,7 +33,7 @@ void											CCOLVersionManager::uninitCOLVersions(void)
 }
 
 // add/remove version
-CCOLVersion*									CCOLVersionManager::addVersion(eCOLVersion uiCOLVersion, string strVersionText, vector<eGame> vecGames)
+CCOLVersion*									CCOLVersionManager::addVersion(ECOLVersion uiCOLVersion, string strVersionText, vector<EGame> vecGames)
 {
 	CCOLVersion *pCOLVersion = new CCOLVersion;
 	pCOLVersion->setVersionId(uiCOLVersion);
@@ -59,11 +59,11 @@ string											CCOLVersionManager::getVersionText(uint32 uiRawVersion)
 }
 
 // entry fetching
-CCOLVersion*									CCOLVersionManager::getEntryByVersionId(eCOLVersion eCOLVersionValue)
+CCOLVersion*									CCOLVersionManager::getEntryByVersionId(ECOLVersion ECOLVersionValue)
 {
 	for (CCOLVersion *pCOLVersion : getEntries())
 	{
-		if (pCOLVersion->getVersionId() == eCOLVersionValue)
+		if (pCOLVersion->getVersionId() == ECOLVersionValue)
 		{
 			return pCOLVersion;
 		}

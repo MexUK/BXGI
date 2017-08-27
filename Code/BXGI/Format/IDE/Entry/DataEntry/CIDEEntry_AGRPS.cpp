@@ -1,10 +1,15 @@
 #include "CIDEEntry_AGRPS.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_AGRPS::CIDEEntry_AGRPS(CIDEFormat *pIDEFormat) :
+	CIDEEntry_Data(pIDEFormat, IDE_SECTION_AGRPS)
+{
+}
 
 void			CIDEEntry_AGRPS::unserialize(void)
 {

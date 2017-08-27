@@ -1,10 +1,23 @@
 #include "CIDEEntry_OBJS.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_OBJS::CIDEEntry_OBJS(CIDEFormat *pIDEFormat) :
+	CIDEEntry_Data(pIDEFormat, IDE_SECTION_OBJS),
+	m_uiObjectId(0),
+	m_uiClumpCount(0),
+	m_uiFlags(0),
+	m_uiUnknown2(0),
+	m_vecBoundingBoxLowerLeftCorner{ 0.0f, 0.0f, 0.0f },
+	m_vecBoundingBoxUpperRightCorner{ 0.0f, 0.0f, 0.0f },
+	m_vecBoundingSphereCenterPosition{ 0.0f, 0.0f, 0.0f },
+	m_fBoundingSphereRadius(0.0f)
+{
+}
 
 void			CIDEEntry_OBJS::unserialize(void)
 {

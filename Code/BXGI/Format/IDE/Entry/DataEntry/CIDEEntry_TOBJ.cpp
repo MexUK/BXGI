@@ -1,10 +1,27 @@
 #include "CIDEEntry_TOBJ.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_TOBJ::CIDEEntry_TOBJ(CIDEFormat *pIDEFormat) :
+	CIDEEntry_Data(pIDEFormat, IDE_SECTION_TOBJ),
+	m_uiTokenCount(0),
+	m_uiObjectId(0),
+	m_uiClumpCount(0),
+	m_uiFlags(0),
+	m_uiTimeOn(0),
+	m_uiTimeOff(0),
+	m_uiUnknown2(0),
+	m_vecBoundingBoxLowerLeftCorner{ 0.0f, 0.0f, 0.0f },
+	m_vecBoundingBoxUpperRightCorner{ 0.0f, 0.0f, 0.0f },
+	m_vecBoundingSphereCenterPosition{ 0.0f, 0.0f, 0.0f },
+	m_fBoundingSphereRadius(0.0f),
+	m_uiNightFlags(0)
+{
+}
 
 void			CIDEEntry_TOBJ::unserialize(void)
 {

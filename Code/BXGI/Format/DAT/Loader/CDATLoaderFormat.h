@@ -3,7 +3,7 @@
 #include "nsbxgi.h"
 #include "Format/CFormat.h"
 #include "Pool/CVectorPool.h"
-#include "eDATLoaderEntryType.h"
+#include "EDATLoaderEntryType.h"
 #include <string>
 #include <vector>
 
@@ -15,7 +15,7 @@ class bxgi::CIPLFormat;
 class bxgi::CDATLoaderFormat : public bxcf::CFormat, public bxcf::CVectorPool<bxgi::CDATLoaderEntry*>
 {
 public:
-	CDATLoaderFormat(void) : CFormat(false) {};
+	CDATLoaderFormat(void) : CFormat(false) {}
 	
 	void									unload(void);
 
@@ -27,11 +27,11 @@ public:
 	std::vector<bxgi::CIPLFormat*>				parseIPLFiles(std::string strGameDirectoryPath);
 
 	template<class ManagerClass, class FormatClass>
-	std::vector<FormatClass*>				parseFiles(std::string strGameDirectoryPath, bxgi::eDATLoaderEntryType eType1, bxgi::eDATLoaderEntryType eType2 = DAT_LOADER_UNKNOWN);
+	std::vector<FormatClass*>				parseFiles(std::string strGameDirectoryPath, bxgi::EDATLoaderEntryType eType1, bxgi::EDATLoaderEntryType eType2 = DAT_LOADER_UNKNOWN);
 
 private:
 	void									unserialize(void);
-	void									serialize(void) {}; // todo
+	void									serialize(void) {} // todo
 
 	void									unserializeLine(void);
 };

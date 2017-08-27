@@ -1,11 +1,22 @@
 #include "CIPLEntry_INST.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 #include "Format/IPL/CIPLFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIPLEntry_INST::CIPLEntry_INST(CIPLFormat *pIPLFormat) :
+	CIPLEntry_Data(pIPLFormat, IPL_SECTION_INST),
+	m_uiObjectId(0),
+	m_uiInterior(0),
+	m_vecPosition{ 0.0f, 0.0f, 0.0f },
+	m_vecScale{ 0.0f, 0.0f, 0.0f },
+	m_vecRotation{ 0.0f, 0.0f, 0.0f, 0.0f },
+	m_iLOD(0)
+{
+}
 
 void			CIPLEntry_INST::unserialize(void)
 {

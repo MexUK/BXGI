@@ -6,10 +6,7 @@
 class bxgi::CIDEEntry_2DFX_Escalator : public bxgi::CIDEEntry_2DFX
 {
 public:
-	CIDEEntry_2DFX_Escalator(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_2DFX(pIDEFormat, bxgi::_2DFX_ESCALATOR)
-	{
-	};
+	CIDEEntry_2DFX_Escalator(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

@@ -1,10 +1,23 @@
 #include "CIPLEntry_OCCL.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIPLEntry_OCCL::CIPLEntry_OCCL(CIPLFormat *pIPLFormat) :
+	CIPLEntry_Data(pIPLFormat, IPL_SECTION_OCCL),
+	m_vecMidPosition{ 0.0f, 0.0f },
+	m_fBottomHeightZ(0.0f),
+	m_vecWidth{ 0.0f, 0.0f },
+	m_fHeight(0.0f),
+	m_fRotation(0.0f),
+	m_fUnknown1(0.0f),
+	m_fUnknown2(0.0f),
+	m_uiUnknown3(0)
+{
+}
 
 void			CIPLEntry_OCCL::unserialize(void)
 {

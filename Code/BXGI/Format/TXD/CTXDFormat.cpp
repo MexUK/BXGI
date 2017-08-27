@@ -3,7 +3,7 @@
 #include "CTXDManager.h"
 #include "Static/CDebug.h"
 #include "Engine/RW/CRWManager.h"
-#include "Format/RW/eRWSection.h"
+#include "Format/RW/ERWSection.h"
 #include "Engine/RW/CRWVersionManager.h"
 #include "Static/CPath.h"
 #include "Static/CFile.h"
@@ -57,20 +57,20 @@ vector<string>		CTXDFormat::getTextureNames(void)
 	return vecTextureNames;
 }
 
-void				CTXDFormat::convertToGame(ePlatformedGame ePlatformedGame, vector<string>& vecMipmapsRemoved2)
+void				CTXDFormat::convertToGame(EPlatformedGame EPlatformedGame, vector<string>& vecMipmapsRemoved2)
 {
 	m_vecGames.clear();
-	m_vecGames.push_back(ePlatformedGame);
+	m_vecGames.push_back(EPlatformedGame);
 
-	setRWVersion(CRWManager::get()->getVersionManager()->getRWVersionFromGame(ePlatformedGame));
+	setRWVersion(CRWManager::get()->getVersionManager()->getRWVersionFromGame(EPlatformedGame));
 	
 	uint32 uiTextureIndex = 0;
 	for (auto pTexture : getTextures())
 	{
 		vector<string> vecMipmapsRemoved;
-		pTexture->convertToGame(ePlatformedGame, vecMipmapsRemoved);
+		pTexture->convertToGame(EPlatformedGame, vecMipmapsRemoved);
 		
-		if (ePlatformedGame == PC_GTA_SA)
+		if (EPlatformedGame == PC_GTA_SA)
 		{
 			m_usDeviceId = 2;
 		}
@@ -95,11 +95,11 @@ void				CTXDFormat::convertToGame(ePlatformedGame ePlatformedGame, vector<string
 	}
 }
 
-void				CTXDFormat::convertToRasterDataFormat(eRasterDataFormat eRasterDataFormatValue, vector<string>& vecMipmapsRemoved)
+void				CTXDFormat::convertToRasterDataFormat(ERasterDataFormat ERasterDataFormatValue, vector<string>& vecMipmapsRemoved)
 {
 	for (auto pTexture : getTextures())
 	{
-		pTexture->convertToRasterDataFormat(eRasterDataFormatValue, vecMipmapsRemoved);
+		pTexture->convertToRasterDataFormat(ERasterDataFormatValue, vecMipmapsRemoved);
 	}
 }
 
@@ -137,7 +137,7 @@ bool				CTXDFormat::isTextureNameValid(string& strTextureName, bool bIsAlphaText
 	}
 }
 
-bool				CTXDFormat::isTextureResolutionValid(uint16 usWidth, uint16 usHeight, vector<ePlatformedGame>& vecGames)
+bool				CTXDFormat::isTextureResolutionValid(uint16 usWidth, uint16 usHeight, vector<EPlatformedGame>& vecGames)
 {
 	// ensure width and height are both even
 	if ((usWidth % 2) == 1 || (usHeight % 2) == 1)
@@ -146,9 +146,9 @@ bool				CTXDFormat::isTextureResolutionValid(uint16 usWidth, uint16 usHeight, ve
 		return false;
 	}
 
-	for (auto ePlatformedGame : vecGames)
+	for (auto EPlatformedGame : vecGames)
 	{
-		if (ePlatformedGame == PC_GTA_III || ePlatformedGame == PC_GTA_VC)
+		if (EPlatformedGame == PC_GTA_III || EPlatformedGame == PC_GTA_VC)
 		{
 			// III/VC - 8x8 to 4096x4096
 			if (usWidth < 8 || usWidth > 4096 || usHeight < 8 || usHeight > 4096)
@@ -161,7 +161,7 @@ bool				CTXDFormat::isTextureResolutionValid(uint16 usWidth, uint16 usHeight, ve
 				return true;
 			}
 		}
-		else if (ePlatformedGame == PC_GTA_SA)
+		else if (EPlatformedGame == PC_GTA_SA)
 		{
 			// SA - 16x16 to 2048x2048
 			if (usWidth < 16 || usWidth > 2048 || usHeight < 16 || usHeight > 2048)
@@ -185,11 +185,11 @@ bool				CTXDFormat::isTXDSizeValid(uint32 uiFileSize)
 	return uiFileSize <= (200 * 1024 * 1024); // 200 MB
 }
 
-bool				CTXDFormat::isTextureCountValid(uint32 uiTextureCount, vector<ePlatformedGame>& vecGames)
+bool				CTXDFormat::isTextureCountValid(uint32 uiTextureCount, vector<EPlatformedGame>& vecGames)
 {
-	for (auto ePlatformedGame : vecGames)
+	for (auto EPlatformedGame : vecGames)
 	{
-		bool bValid = uiTextureCount <= getMaxTextureCountForGame(ePlatformedGame);
+		bool bValid = uiTextureCount <= getMaxTextureCountForGame(EPlatformedGame);
 		if (bValid)
 		{
 			return true;
@@ -199,13 +199,13 @@ bool				CTXDFormat::isTextureCountValid(uint32 uiTextureCount, vector<ePlatforme
 	return false;
 }
 
-uint32		CTXDFormat::getMaxTextureCountForGame(ePlatformedGame ePlatformedGame)
+uint32		CTXDFormat::getMaxTextureCountForGame(EPlatformedGame EPlatformedGame)
 {
-	if (ePlatformedGame == PC_GTA_III || ePlatformedGame == PC_GTA_VC)
+	if (EPlatformedGame == PC_GTA_III || EPlatformedGame == PC_GTA_VC)
 	{
 		return 128;
 	}
-	else if (ePlatformedGame == PC_GTA_SA)
+	else if (EPlatformedGame == PC_GTA_SA)
 	{
 		return 64;
 	}
@@ -263,9 +263,9 @@ CRWSection_TextureNative*	CTXDFormat::addTextureViaFile(string& strFilePath, str
 	return pTexture;
 }
 
-bxgi::CIntermediateTextureFormat*	CTXDFormat::convertToIntermediateFormat(void)
+CIntermediateTextureFormat*	CTXDFormat::convertToIntermediateFormat(void)
 {
-	bxgi::CIntermediateTextureFormat *pGeneralTextureFile = new bxgi::CIntermediateTextureFormat;
+	CIntermediateTextureFormat *pGeneralTextureFile = new CIntermediateTextureFormat;
 
 	for (CRWSection_TextureNative *pTXDEntry : getTextures())
 	{

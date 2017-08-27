@@ -12,7 +12,7 @@
 #include "Engine/RAGE/CRageResourceTypeManager.h"
 #include "Static/CDebug.h"
 #include "Format/COL/CCOLManager.h"
-#include "Compression/eCompressionAlgorithm.h"
+#include "Compression/ECompressionAlgorithm.h"
 #include "Compression/CCompressionManager.h"
 
 using namespace std;
@@ -31,7 +31,7 @@ void			CIMGManager::uninit(void)
 }
 
 // utility
-string			CIMGManager::getVersionName(eIMGVersion eVersion, bool bIsEncrypted)
+string			CIMGManager::getVersionName(EIMGVersion eVersion, bool bIsEncrypted)
 {
 	switch (eVersion)
 	{
@@ -50,7 +50,7 @@ string			CIMGManager::getVersionName(eIMGVersion eVersion, bool bIsEncrypted)
 	default:				return "Unknown";
 	}
 }
-string			CIMGManager::getVersionGames(eIMGVersion eVersion)
+string			CIMGManager::getVersionGames(EIMGVersion eVersion)
 {
 	switch (eVersion)
 	{
@@ -61,13 +61,13 @@ string			CIMGManager::getVersionGames(eIMGVersion eVersion)
 	default:				return "Unknown";
 	}
 }
-string			CIMGManager::getVersionNameWithGames(eIMGVersion eVersion, bool bIsEncrypted)
+string			CIMGManager::getVersionNameWithGames(EIMGVersion eVersion, bool bIsEncrypted)
 {
 	string strVersionGames = getVersionGames(eVersion);
 	return getVersionName(eVersion, bIsEncrypted) + (strVersionGames == "" ? "" : " (" + strVersionGames + ")");
 }
 
-eIMGVersion		CIMGManager::detectIMGVersion(string& strIMGFilePath, string& strHeader16B, bool& bIsEncryptedOut)
+EIMGVersion		CIMGManager::detectIMGVersion(string& strIMGFilePath, string& strHeader16B, bool& bIsEncryptedOut)
 {
 	bIsEncryptedOut = false;
 
@@ -170,7 +170,7 @@ bool			CIMGManager::detectIMGEncryptionState(string& strIMGFilePath)
 	return false;
 }
 
-uint32	CIMGManager::getIMGEntryCount(string& strIMGFilePath, eIMGVersion eVersion)
+uint32	CIMGManager::getIMGEntryCount(string& strIMGFilePath, EIMGVersion eVersion)
 {
 	if (eVersion == IMG_UNKNOWN)
 	{
@@ -325,10 +325,10 @@ string			CIMGManager::decryptVersion3IMGString(string strData)
 	*/
 }
 
-vector<string>		CIMGManager::getDefaultGameIMGSubPaths(ePlatformedGame ePlatformedGameValue)
+vector<string>		CIMGManager::getDefaultGameIMGSubPaths(EPlatformedGame EPlatformedGameValue)
 {
 	vector<string> vecGameIMGPaths;
-	switch (ePlatformedGameValue)
+	switch (EPlatformedGameValue)
 	{
 	case PC_GTA_III:
 		vecGameIMGPaths.push_back("models/gta3.img");
@@ -355,9 +355,9 @@ vector<string>		CIMGManager::getDefaultGameIMGSubPaths(ePlatformedGame ePlatform
 	return vecGameIMGPaths;
 }
 
-string				CIMGManager::getCompressionTypeText(eCompressionAlgorithm eCompressionAlgorithmValue)
+string				CIMGManager::getCompressionTypeText(ECompressionAlgorithm ECompressionAlgorithmValue)
 {
-	switch (eCompressionAlgorithmValue)
+	switch (ECompressionAlgorithmValue)
 	{
 	case COMPRESSION_NONE:		return "Not Compressed";
 	case COMPRESSION_ZLIB:		return "ZLib";

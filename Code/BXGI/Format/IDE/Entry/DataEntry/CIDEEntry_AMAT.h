@@ -7,10 +7,7 @@
 class bxgi::CIDEEntry_AMAT : public bxgi::CIDEEntry_Data
 {
 public:
-	CIDEEntry_AMAT(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_Data(pIDEFormat, IDE_SECTION_AMAT)
-	{
-	};
+	CIDEEntry_AMAT(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

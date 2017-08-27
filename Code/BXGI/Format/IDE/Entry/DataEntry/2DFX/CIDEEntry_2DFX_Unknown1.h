@@ -7,13 +7,7 @@
 class bxgi::CIDEEntry_2DFX_Unknown1 : public bxgi::CIDEEntry_2DFX
 {
 public:
-	CIDEEntry_2DFX_Unknown1(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_2DFX(pIDEFormat, bxgi::_2DFX_UNKNOWN_1),
-		m_uiUnknown2(0),
-		m_vecUnknown3{ 0.0f, 0.0f, 0.0f },
-		m_uiUnknown4(0)
-	{
-	};
+	CIDEEntry_2DFX_Unknown1(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

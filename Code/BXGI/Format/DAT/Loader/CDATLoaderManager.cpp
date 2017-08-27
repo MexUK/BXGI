@@ -18,7 +18,7 @@ void				CDATLoaderManager::uninit(void)
 {
 }
 
-eDATLoaderEntryType CDATLoaderManager::getDATEntryTypeFromString(string strType)
+EDATLoaderEntryType CDATLoaderManager::getDATEntryTypeFromString(string strType)
 {
 	strType = CString2::toUpperCase(strType);
 	if (strType == "IMG")
@@ -50,9 +50,9 @@ eDATLoaderEntryType CDATLoaderManager::getDATEntryTypeFromString(string strType)
 	return DAT_LOADER_UNKNOWN;
 }
 
-string			CDATLoaderManager::getDefaultGameDATSubPath(ePlatformedGame ePlatformedGameValue)
+string			CDATLoaderManager::getDefaultGameDATSubPath(EPlatformedGame EPlatformedGameValue)
 {
-	switch (ePlatformedGameValue)
+	switch (EPlatformedGameValue)
 	{
 	case PC_GTA_III:	return "data/gta3.dat";
 	case PC_GTA_VC:		return "data/gta_vc.dat";

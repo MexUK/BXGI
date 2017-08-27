@@ -2,9 +2,9 @@
 
 #include "nsbxgi.h"
 #include "Object/CManager.h"
-#include "eCOLVersion.h"
+#include "ECOLVersion.h"
 #include "Pool/CVectorPool.h"
-#include "Game/eGame.h"
+#include "Game/EGame.h"
 #include <string>
 #include <unordered_map>
 
@@ -16,11 +16,11 @@ public:
 	void											init(void);
 	void											uninit(void);
 
-	CCOLVersion*									addVersion(eCOLVersion uiCOLVersion, std::string strVersionText, std::vector<eGame> vecGames = std::vector<eGame>());
+	CCOLVersion*									addVersion(ECOLVersion uiCOLVersion, std::string strVersionText, std::vector<EGame> vecGames = std::vector<EGame>());
 
 	std::string										getVersionText(uint32 uiRawVersion);
 
-	bxgi::CCOLVersion*								getEntryByVersionId(bxgi::eCOLVersion eCOLVersionValue);
+	bxgi::CCOLVersion*								getEntryByVersionId(bxgi::ECOLVersion ECOLVersionValue);
 
 private:
 	void											initCOLVersions(void);

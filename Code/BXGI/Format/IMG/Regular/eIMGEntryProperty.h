@@ -3,7 +3,7 @@
 #include "nsbxgi.h"
 #include "Type/Types.h"
 
-enum bxgi::eIMGEntryProperty : uint8
+enum bxgi::EIMGEntryProperty : uint8
 {
 	IMG_ENTRY_ID,
 	IMG_ENTRY_NAME,

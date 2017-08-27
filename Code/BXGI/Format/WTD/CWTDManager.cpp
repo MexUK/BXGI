@@ -10,7 +10,7 @@
 #include "Intermediate/Texture/Data/CIntermediateTextureMipmap.h"
 #include "Image/CImageManager.h"
 #include "Compression/CCompressionManager.h"
-#include "Image/eRasterDataFormat.h"
+#include "Image/ERasterDataFormat.h"
 
 using namespace std;
 using namespace bxcf;
@@ -71,7 +71,7 @@ uint32			CWTDManager::getImageDataSize(CWTDEntry *pWTDEntry, bool bIncludeLevels
 	return uiImageDataSize;
 }
 
-CWTDFormat*				CWTDManager::convertIntermediateTextureFileToWTDFile(bxgi::CIntermediateTextureFormat *pIntermediateTextureFormat)
+CWTDFormat*				CWTDManager::convertIntermediateTextureFileToWTDFile(CIntermediateTextureFormat *pIntermediateTextureFormat)
 {
 	CWTDFormat *pWTDFile = new CWTDFormat;
 

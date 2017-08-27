@@ -6,10 +6,7 @@
 class bxgi::CIDEEntry_2DFX_ProcObject : public bxgi::CIDEEntry_2DFX
 {
 public:
-	CIDEEntry_2DFX_ProcObject(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_2DFX(pIDEFormat, bxgi::_2DFX_PROC_OBJECT)
-	{
-	};
+	CIDEEntry_2DFX_ProcObject(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

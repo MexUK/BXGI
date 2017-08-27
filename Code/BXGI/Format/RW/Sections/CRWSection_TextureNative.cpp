@@ -1,18 +1,18 @@
 #include "CRWSection_TextureNative.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
-#include "Format/TXD/eTXDRasterDataFormat.h"
+#include "Format/TXD/ETXDRasterDataFormat.h"
 #include "Format/TXD/CTXDManager.h"
 #include "Static/CString2.h"
 #include "Image/CImageManager.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 
 using namespace std;
 using namespace bxcf;
 using namespace bxgi;
 
 CRWSection_TextureNative::CRWSection_TextureNative(void) :
-	m_ePlatform(_PLATFORM_UNKNOWN),
+	m_EPlatform(_PLATFORM_UNKNOWN),
 	m_bHasDiffuse(false),
 	m_bHasAlpha(false),
 	m_bPaletteIsUsed(false),
@@ -20,11 +20,11 @@ CRWSection_TextureNative::CRWSection_TextureNative(void) :
 	m_ucFilterFlags(0),
 	m_ucTextureWrapUV(0),
 	m_uiTXDRasterDataFormat(0),
-	m_eRasterDataFormat(RASTERDATAFORMAT_UNKNOWN),
+	m_ERasterDataFormat(RASTERDATAFORMAT_UNKNOWN),
 	m_uiAlpha(0),
 	m_ucBPP(0),
 	m_ucRasterType(0),
-	m_eDXTCompressionType(DXT_NOT_COMPRESSED),
+	m_EDXTCompressionType(DXT_NOT_COMPRESSED),
 	m_bCubeTexture(false),
 	m_bAutoMipMaps(false),
 	m_bIsNotRWCompatible(false),
@@ -45,7 +45,7 @@ void							CRWSection_TextureNative::unserialize(void)
 	pDataReader->setPeek(false);
 	pDataReader->setSeek(uiPreviousSeek);
 
-	m_ePlatform = CTXDManager::getPlatformFromTXDPlatformId(uiPlatformId);
+	m_EPlatform = CTXDManager::getPlatformFromTXDPlatformId(uiPlatformId);
 
 	unserializeHeader();
 	unserializeBody();
@@ -59,7 +59,7 @@ void							CRWSection_TextureNative::serialize(void)
 
 void							CRWSection_TextureNative::unserializeHeader(void)
 {
-	switch (m_ePlatform)
+	switch (m_EPlatform)
 	{
 	case PLATFORM_PC:
 	case PLATFORM_XBOX:
@@ -79,7 +79,7 @@ void							CRWSection_TextureNative::unserializeHeader(void)
 
 void							CRWSection_TextureNative::unserializeBody(void)
 {
-	switch (m_ePlatform)
+	switch (m_EPlatform)
 	{
 	case PLATFORM_PC:
 	case PLATFORM_XBOX:
@@ -95,7 +95,7 @@ void							CRWSection_TextureNative::unserializeBody(void)
 
 void							CRWSection_TextureNative::serializeHeader(void)
 {
-	switch (m_ePlatform)
+	switch (m_EPlatform)
 	{
 	case PLATFORM_PC:
 	case PLATFORM_XBOX:
@@ -111,7 +111,7 @@ void							CRWSection_TextureNative::serializeHeader(void)
 
 void							CRWSection_TextureNative::serializeBody(void)
 {
-	switch (m_ePlatform)
+	switch (m_EPlatform)
 	{
 	case PLATFORM_PC:
 	case PLATFORM_XBOX:
@@ -177,7 +177,7 @@ void							CRWSection_TextureNative::unserializeHeader_Direct3D(void)
 	else
 	{
 		// GTA III & VC
-		setDXTCompressionType((eDXTCompressionType)pDataReader->readUint8());
+		setDXTCompressionType((EDXTCompressionType)pDataReader->readUint8());
 		setCubeTexture(false);
 		setAutoMipMaps(false);
 		setIsNotRWCompatible(false);
@@ -458,7 +458,7 @@ void							CRWSection_TextureNative::serializeHeader_Direct3D(void)
 	if (m_uiPlatformId == 9)
 	{
 		// GTA SA
-		pDataWriter->writeString(CImageManager::getD3DFormatToPack(CImageManager::getD3DFormatFromRasterDataFormat(m_eRasterDataFormat)));
+		pDataWriter->writeString(CImageManager::getD3DFormatToPack(CImageManager::getD3DFormatFromRasterDataFormat(m_ERasterDataFormat)));
 	}
 	else
 	{
@@ -567,13 +567,13 @@ string							CRWSection_TextureNative::unserializeString(void)
 	return strData;
 }
 
-void							CRWSection_TextureNative::setRasterDataFormat(eRasterDataFormat eRasterDataFormatValue, bool bUpdateTXDRasterDataFormat)
+void							CRWSection_TextureNative::setRasterDataFormat(ERasterDataFormat ERasterDataFormatValue, bool bUpdatETXDRasterDataFormat)
 {
-	m_eRasterDataFormat = eRasterDataFormatValue;
-	if (bUpdateTXDRasterDataFormat)
+	m_ERasterDataFormat = ERasterDataFormatValue;
+	if (bUpdatETXDRasterDataFormat)
 	{
-		m_uiTXDRasterDataFormat = CTXDManager::getTXDRasterDataFormatFromRasterDataFormat(eRasterDataFormatValue);
-		m_eDXTCompressionType = CImageManager::getDXTCompressionTypeFromRasterDataFormat(eRasterDataFormatValue);
+		m_uiTXDRasterDataFormat = CTXDManager::getTXDRasterDataFormatFromRasterDataFormat(ERasterDataFormatValue);
+		m_EDXTCompressionType = CImageManager::getDXTCompressionTypeFromRasterDataFormat(ERasterDataFormatValue);
 	}
 }
 
@@ -596,7 +596,7 @@ bool							CRWSection_TextureNative::doesTXDRasterDataFormatExist(uint32 uiTXDRa
 	return false;
 }
 
-eRasterDataFormat				CRWSection_TextureNative::detectRasterDataFormat(void)
+ERasterDataFormat				CRWSection_TextureNative::detectRasterDataFormat(void)
 {
 	if (m_uiTXDRasterDataFormat & TXDRASTERDATAFORMAT_EXT_PAL4)
 	{
@@ -621,7 +621,7 @@ eRasterDataFormat				CRWSection_TextureNative::detectRasterDataFormat(void)
 	case TXDRASTERDATAFORMAT_565:
 	case TXDRASTERDATAFORMAT_1555:
 	case TXDRASTERDATAFORMAT_4444:
-		switch (m_eDXTCompressionType)
+		switch (m_EDXTCompressionType)
 		{
 		case DXT_1:		return RASTERDATAFORMAT_DXT1;
 		case DXT_2:		return RASTERDATAFORMAT_DXT2;
@@ -813,9 +813,9 @@ void							CRWSection_TextureNative::unclut(uint32 uiWidth, uint32 uiHeight)
 	pMipmap->setRasterData(strRasterData);
 }
 
-void							CRWSection_TextureNative::convertToGame(ePlatformedGame ePlatformedGame, vector<string>& vecMipmapsRemoved)
+void							CRWSection_TextureNative::convertToGame(EPlatformedGame EPlatformedGame, vector<string>& vecMipmapsRemoved)
 {
-	switch (ePlatformedGame)
+	switch (EPlatformedGame)
 	{
 	case PC_GTA_III:
 		setPlatformId(8);
@@ -870,7 +870,7 @@ void							CRWSection_TextureNative::convertToGame(ePlatformedGame ePlatformedGa
 	}
 }
 
-void							CRWSection_TextureNative::convertToRasterDataFormat(eRasterDataFormat eRasterDataFormatValue, vector<string>& vecMipmapsRemoved)
+void							CRWSection_TextureNative::convertToRasterDataFormat(ERasterDataFormat ERasterDataFormatValue, vector<string>& vecMipmapsRemoved)
 {
 	vector<CRWEntry_TextureNative_MipMap*> vecMipmapsToRemove;
 	uint32 uiMipmapIndex = 0;
@@ -883,7 +883,7 @@ void							CRWSection_TextureNative::convertToRasterDataFormat(eRasterDataFormat
 			continue;
 		}
 
-		pMipmap->convertToRasterDataFormat(eRasterDataFormatValue);
+		pMipmap->convertToRasterDataFormat(ERasterDataFormatValue);
 		uiMipmapIndex++;
 	}
 	for (auto pMipmap : vecMipmapsToRemove)
@@ -891,12 +891,12 @@ void							CRWSection_TextureNative::convertToRasterDataFormat(eRasterDataFormat
 		getMipMaps().removeEntry(pMipmap);
 	}
 
-	setRasterDataFormat(eRasterDataFormatValue, true);
-	//setTXDRasterDataFormat(CTXDManager::getTXDRasterDataFormatFromRasterDataFormat(eRasterDataFormatValue));
-	setBPP(CImageManager::getBPPFromRasterDataFormat(eRasterDataFormatValue));
-	setDXTCompressionType(CImageManager::getDXTCompressionTypeFromRasterDataFormat(eRasterDataFormatValue));
+	setRasterDataFormat(ERasterDataFormatValue, true);
+	//setTXDRasterDataFormat(CTXDManager::getTXDRasterDataFormatFromRasterDataFormat(ERasterDataFormatValue));
+	setBPP(CImageManager::getBPPFromRasterDataFormat(ERasterDataFormatValue));
+	setDXTCompressionType(CImageManager::getDXTCompressionTypeFromRasterDataFormat(ERasterDataFormatValue));
 
-	if (eRasterDataFormatValue != RASTERDATAFORMAT_PAL4 && eRasterDataFormatValue != RASTERDATAFORMAT_PAL8)
+	if (ERasterDataFormatValue != RASTERDATAFORMAT_PAL4 && ERasterDataFormatValue != RASTERDATAFORMAT_PAL8)
 	{
 		string strPaletteData = "";
 

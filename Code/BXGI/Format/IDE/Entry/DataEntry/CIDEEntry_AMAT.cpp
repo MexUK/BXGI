@@ -1,10 +1,15 @@
 #include "CIDEEntry_AMAT.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_AMAT::CIDEEntry_AMAT(CIDEFormat *pIDEFormat) :
+	CIDEEntry_Data(pIDEFormat, IDE_SECTION_AMAT)
+{
+}
 
 void			CIDEEntry_AMAT::unserialize(void)
 {

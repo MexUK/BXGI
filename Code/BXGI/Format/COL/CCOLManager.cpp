@@ -66,41 +66,41 @@ void			CCOLManager::initGameMaterials(void)
 	*/
 }
 
-eCOLVersion			CCOLManager::getCOLVersionFromFourCC(string strFourCC)
+ECOLVersion			CCOLManager::getCOLVersionFromFourCC(string strFourCC)
 {
-	eCOLVersion eCOLVersionValue;
+	ECOLVersion ECOLVersionValue;
 	if (strFourCC == "COLL")
 	{
-		eCOLVersionValue = COL_1;
+		ECOLVersionValue = COL_1;
 	}
 	else if (strFourCC == "COL2")
 	{
-		eCOLVersionValue = COL_2;
+		ECOLVersionValue = COL_2;
 	}
 	else if (strFourCC == "COL3")
 	{
-		eCOLVersionValue = COL_3;
+		ECOLVersionValue = COL_3;
 	}
 	else if (strFourCC == "COL4")
 	{
-		eCOLVersionValue = COL_4;
+		ECOLVersionValue = COL_4;
 	}
 	else
 	{
-		eCOLVersionValue = COL_UNKNOWN;
+		ECOLVersionValue = COL_UNKNOWN;
 	}
-	return eCOLVersionValue;
+	return ECOLVersionValue;
 }
 
-string			CCOLManager::getCOLVersionText(eCOLVersion eCOLVersionValue)
+string			CCOLManager::getCOLVersionText(ECOLVersion ECOLVersionValue)
 {
-	CCOLVersion *pCOLVersion = get()->getVersionManager()->getEntryByVersionId(eCOLVersionValue);
+	CCOLVersion *pCOLVersion = get()->getVersionManager()->getEntryByVersionId(ECOLVersionValue);
 	return pCOLVersion == nullptr ? "Unknown COL Version" : pCOLVersion->getText();
 }
 
-string			CCOLManager::getFourCCFromCOLVersion(eCOLVersion eCOLVersionValue)
+string			CCOLManager::getFourCCFromCOLVersion(ECOLVersion ECOLVersionValue)
 {
-	switch (eCOLVersionValue)
+	switch (ECOLVersionValue)
 	{
 	case COL_1: return "COLL";
 	case COL_2: return "COL2";
@@ -113,12 +113,12 @@ string			CCOLManager::getFourCCFromCOLVersion(eCOLVersion eCOLVersionValue)
 	}
 }
 
-uint32		CCOLManager::getEntryHeaderSizeForPacking(eCOLVersion eCOLVersionValue)
+uint32		CCOLManager::getEntryHeaderSizeForPacking(ECOLVersion ECOLVersionValue)
 {
 	uint32 uiHeaderPart1Size = 4 + 4 + 22 + 2 + 40;
 	uint32 uiHeaderPart2Size_COLVersion2 = (3 * 2) + (2 * 1) + (7 * 4);
 	uint32 uiFinalValue = 0;
-	switch (eCOLVersionValue)
+	switch (ECOLVersionValue)
 	{
 	case COL_1:
 		uiFinalValue = uiHeaderPart1Size;

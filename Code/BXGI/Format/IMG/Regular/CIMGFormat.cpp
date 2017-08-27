@@ -11,7 +11,7 @@
 #include "Format/IMG/Regular/Raw/CIMGFormat_Version3_Header1.h"
 #include "Format/IMG/Regular/Raw/CIMGEntry_Version1Or2.h"
 #include "Format/IMG/Regular/Raw/CIMGEntry_Version3.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Static/CPath.h"
 #include "Format/COL/CCOLManager.h"
 #include "Localization/CLocalizationManager.h"
@@ -40,8 +40,8 @@ using namespace bxcf::fileType;
 
 CIMGFormat::CIMGFormat(void) :
 	CFormat(true, LITTLE_ENDIAN),
-	m_eIMGVersion(IMG_UNKNOWN),
-	m_ePlatform(PLATFORM_PC),
+	m_EIMGVersion(IMG_UNKNOWN),
+	m_EPlatform(PLATFORM_PC),
 	m_bEncrypted(false),
 	m_ucGameType(0)
 {
@@ -49,8 +49,8 @@ CIMGFormat::CIMGFormat(void) :
 
 CIMGFormat::CIMGFormat(string& strFilePath) :
 	CFormat(strFilePath, true, LITTLE_ENDIAN),
-	m_eIMGVersion(IMG_UNKNOWN),
-	m_ePlatform(PLATFORM_PC),
+	m_EIMGVersion(IMG_UNKNOWN),
+	m_EPlatform(PLATFORM_PC),
 	m_bEncrypted(false),
 	m_ucGameType(0)
 {
@@ -58,8 +58,8 @@ CIMGFormat::CIMGFormat(string& strFilePath) :
 
 CIMGFormat::CIMGFormat(CDataReader& reader) :
 	CFormat(reader, true, LITTLE_ENDIAN),
-	m_eIMGVersion(IMG_UNKNOWN),
-	m_ePlatform(PLATFORM_PC),
+	m_EIMGVersion(IMG_UNKNOWN),
+	m_EPlatform(PLATFORM_PC),
 	m_bEncrypted(false),
 	m_ucGameType(0)
 {
@@ -71,7 +71,7 @@ void				CIMGFormat::readMetaData(void)
 	if (CString2::toUpperCase(CPath::getFileExtension(m_strFilePath)) == "DIR")
 	{
 		// version 1
-		m_eIMGVersion = IMG_1;
+		m_EIMGVersion = IMG_1;
 		m_uiEntryCount = (uint32)(m_reader.getSize() / 32);
 		return;
 	}
@@ -85,7 +85,7 @@ void				CIMGFormat::readMetaData(void)
 	if (strFirst4Bytes == "VER2")
 	{
 		// version 2
-		m_eIMGVersion = IMG_2;
+		m_EIMGVersion = IMG_2;
 		m_uiEntryCount = uiSecond4BytesUi;
 		return;
 	}
@@ -93,7 +93,7 @@ void				CIMGFormat::readMetaData(void)
 	if (strFirst4Bytes == "VERF")
 	{
 		// version fastman92
-		m_eIMGVersion = IMG_FASTMAN92;
+		m_EIMGVersion = IMG_FASTMAN92;
 		m_uiEntryCount = uiSecond4BytesUi;
 		m_ucGameType = CString2::unpackUint8(strFirst16Bytes.substr(8, 1));
 		return;
@@ -113,7 +113,7 @@ void				CIMGFormat::readMetaData(void)
 		if (uiSecond4BytesUi == 3)
 		{
 			// version 3
-			m_eIMGVersion = IMG_3;
+			m_EIMGVersion = IMG_3;
 			m_uiEntryCount = CString2::unpackUint32(strFirst16Bytes.substr(8, 4), false);
 			m_bEncrypted = bEncrypted;
 			return;
@@ -133,17 +133,17 @@ void				CIMGFormat::readMetaData(void)
 		}
 
 		// version 1
-		m_eIMGVersion = IMG_1;
+		m_EIMGVersion = IMG_1;
 		m_uiEntryCount = (uint32)(m_reader.getSize() / 32);
 		return;
 	}
 }
 
 // meta data
-eIMGVersion			CIMGFormat::getVersion(void)
+EIMGVersion			CIMGFormat::getVersion(void)
 {
 	checkMetaDataIsLoaded();
-	return m_eIMGVersion;
+	return m_EIMGVersion;
 }
 
 // unserialize
@@ -151,7 +151,7 @@ bool		CIMGFormat::unserialize2(void)
 {
 	CFormat::unserialize2();
 
-	switch (m_eIMGVersion)
+	switch (m_EIMGVersion)
 	{
 	case IMG_1:
 		unserializeVersion1();
@@ -174,9 +174,9 @@ bool		CIMGFormat::unserialize2(void)
 		break;
 	}
 
-	if (m_eIMGVersion != IMG_3)
+	if (m_EIMGVersion != IMG_3)
 	{
-		unserializeRWVersions();
+		unserializERWVersions();
 	}
 
 	return true;
@@ -244,8 +244,8 @@ void		CIMGFormat::unserializeBodyComponents(void)
 	case IMG_1:
 	case IMG_2:
 	case IMG_FASTMAN92:
-		//CTiming::get()->start("unserializeRWVersions");
-		unserializeRWVersions();
+		//CTiming::get()->start("unserializERWVersions");
+		unserializERWVersions();
 		//CTiming::get()->stop();
 		break;
 	case IMG_3:
@@ -327,7 +327,7 @@ void		CIMGFormat::unserializeVersion3_Encrypted(void)
 	// decrypt IMG header
 	string strIMGHeaderEncrypted = pDataReader->readString(32); // padded with 12 bytes at the end
 	string strIMGHeaderUnencrypted = CIMGManager::decryptVersion3IMGString(strIMGHeaderEncrypted); // padded with 12 bytes at the end too
-	//eDataStreamType ePreviousStreamType = pDataReader->getStreamType();
+	//EDataStreamType ePreviousStreamType = pDataReader->getStreamType();
 
 	pDataReader2->setStreamType(DATA_STREAM_MEMORY);
 	pDataReader2->setData(strIMGHeaderUnencrypted);
@@ -491,7 +491,7 @@ void		CIMGFormat::unserializeVersionFastman92(void)
 }
 
 // body unserialization
-void		CIMGFormat::unserializeRWVersions(void)
+void		CIMGFormat::unserializERWVersions(void)
 {
 	bool bUseNewReader = getVersion() == IMG_1 && m_reader.getStreamType() == DATA_STREAM_FILE;
 	CDataReader *pDataReader = bUseNewReader ? new CDataReader : &m_reader;
@@ -921,7 +921,7 @@ void					CIMGFormat::serializeVersion3_Encrypted(void)
 	}
 
 	// write IMG data - IMG header
-	eDataStreamType ePreviousStreamType = pDataWriter->getStreamType();
+	EDataStreamType ePreviousStreamType = pDataWriter->getStreamType();
 	pDataWriter->setStreamType(DATA_STREAM_MEMORY);
 
 	uint32 uiTableByteCount = (uint32)(ceil(((float)((16 * getEntryCount()) + uiNamesLength)) / 2048.0) * 2048.0);
@@ -1205,7 +1205,7 @@ map<string, pair<uint32, EFileType>, SortByStringKey>		CIMGFormat::getFileTypedV
 
 
 
-eCompressionAlgorithm								CIMGFormat::getCompressionAlgorithmIdFromFastman92CompressionAlgorithmId(eIMGVersionFastman92CompressionAlgorithm eFastman92CompressionAlgorithmId)
+ECompressionAlgorithm								CIMGFormat::getCompressionAlgorithmIdFromFastman92CompressionAlgorithmId(EIMGVersionFastman92CompressionAlgorithm eFastman92CompressionAlgorithmId)
 {
 	switch (eFastman92CompressionAlgorithmId)
 	{
@@ -1436,7 +1436,7 @@ unordered_map<CIMGEntry*, string>	CIMGFormat::getEntriesData(vector<CIMGEntry*>&
 		}
 		pDataReader->close();
 	}
-	catch (eExceptionCode)
+	catch (EExceptionCode)
 	{
 		pDataReader->reset();
 	}
@@ -1601,7 +1601,7 @@ uint32			CIMGFormat::merge(string& strSecondIMGPath, vector<string>& vecImported
 		pIMGFileIn->unload();
 		delete pIMGFileIn;
 	}
-	catch (eExceptionCode)
+	catch (EExceptionCode)
 	{
 		pDataReader->reset();
 	}
@@ -1609,13 +1609,13 @@ uint32			CIMGFormat::merge(string& strSecondIMGPath, vector<string>& vecImported
 	return uiImportedEntryCount;
 }
 
-void					CIMGFormat::split(vector<CIMGEntry*>& vecIMGEntries, string& strOutPath, eIMGVersion eIMGVersion)
+void					CIMGFormat::split(vector<CIMGEntry*>& vecIMGEntries, string& strOutPath, EIMGVersion EIMGVersion)
 {
 	CIMGFormat *pIMGFile = new CIMGFormat;
-	pIMGFile->setVersion(eIMGVersion);
+	pIMGFile->setVersion(EIMGVersion);
 	pIMGFile->setFilePath(getFilePath());
 
-	bool bVersion3IMG = eIMGVersion == IMG_3;
+	bool bVersion3IMG = EIMGVersion == IMG_3;
 	for (auto pIMGEntry : vecIMGEntries)
 	{
 		CIMGEntry *pIMGEntry2 = new CIMGEntry(pIMGFile);
@@ -1681,7 +1681,7 @@ void					CIMGFormat::exportMultiple(vector<CIMGEntry*>& vecIMGEntries, string st
 
 		pDataReader->close();
 	}
-	catch (eExceptionCode)
+	catch (EExceptionCode)
 	{
 		pDataReader->reset();
 	}
@@ -1708,7 +1708,7 @@ void					CIMGFormat::exportAll(string& strFolderPath)
 		}
 		pDataReader->close();
 	}
-	catch (eExceptionCode)
+	catch (EExceptionCode)
 	{
 		pDataReader->reset();
 	}
@@ -1733,12 +1733,12 @@ vector<CIMGEntry*>		CIMGFormat::getUnknownVersionEntries(void)
 	return vecIMGEntries;
 }
 
-uint32			CIMGFormat::getEntryCountForCompressionType(eCompressionAlgorithm eCompressionAlgorithmValue)
+uint32			CIMGFormat::getEntryCountForCompressionType(ECompressionAlgorithm ECompressionAlgorithmValue)
 {
 	uint32 uiCount = 0;
 	for (CIMGEntry *pIMGEntry : getEntries())
 	{
-		if (pIMGEntry->getCompressionAlgorithmId() == eCompressionAlgorithmValue)
+		if (pIMGEntry->getCompressionAlgorithmId() == ECompressionAlgorithmValue)
 		{
 			uiCount++;
 		}

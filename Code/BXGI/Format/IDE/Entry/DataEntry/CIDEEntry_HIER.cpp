@@ -1,10 +1,16 @@
 #include "CIDEEntry_HIER.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_HIER::CIDEEntry_HIER(CIDEFormat *pIDEFormat) :
+	CIDEEntry_Data(pIDEFormat, IDE_SECTION_HIER),
+	m_uiObjectId(0)
+{
+}
 
 void			CIDEEntry_HIER::unserialize(void)
 {

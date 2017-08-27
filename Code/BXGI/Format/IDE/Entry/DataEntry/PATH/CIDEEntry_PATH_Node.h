@@ -7,17 +7,7 @@
 class bxgi::CIDEEntry_PATH_Node : public bxgi::CIDEEntry_PATH
 {
 public:
-	CIDEEntry_PATH_Node(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_PATH(pIDEFormat, IDE_PATH_NODE),
-		m_uiNodeType(0),
-		m_uiNextNode(0),
-		m_uiIsCrossRoad(0),
-		m_vecPosition{ 0.0f, 0.0f, 0.0f },
-		m_fUnknown1(0.0f),
-		m_uiLeftLaneCount(0),
-		m_uiRightLaneCount(0)
-	{
-	};
+	CIDEEntry_PATH_Node(bxgi::CIDEFormat *pIDEFormat);
 
 	void							unserialize(void);
 	void							serialize(void);

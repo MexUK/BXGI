@@ -1,8 +1,8 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "eRWVersion.h"
-#include "Game/ePlatformedGame.h"
+#include "ERWVersion.h"
+#include "Game/EPlatformedGame.h"
 #include "Format/EFileType.h"
 #include <string>
 #include <vector>
@@ -17,16 +17,16 @@ public:
 	void									setRawVersion(uint32 uiRawVersion) { m_uiRawVersion = uiRawVersion; }
 	uint32									getRawVersion(void) { return m_uiRawVersion; }
 
-	void									setVersionId(bxgi::eRWVersion uiVersionId) { m_uiVersionId = uiVersionId; }
-	bxgi::eRWVersion						getVersionId(void) { return m_uiVersionId; }
+	void									setVersionId(bxgi::ERWVersion uiVersionId) { m_uiVersionId = uiVersionId; }
+	bxgi::ERWVersion						getVersionId(void) { return m_uiVersionId; }
 
 	void									setFileType(bxcf::fileType::EFileType uiFileType) { m_uiFileType = uiFileType; }
 	bxcf::fileType::EFileType				getFileType(void) { return m_uiFileType; }
 
-	void									setPlatformedGames(std::vector<bxgi::ePlatformedGame>& vecPlatformedGames) { m_vecPlatformedGames = vecPlatformedGames; }
-	std::vector<bxgi::ePlatformedGame>&		getPlatformedGames(void) { return m_vecPlatformedGames; }
+	void									setPlatformedGames(std::vector<bxgi::EPlatformedGame>& vecPlatformedGames) { m_vecPlatformedGames = vecPlatformedGames; }
+	std::vector<bxgi::EPlatformedGame>&		getPlatformedGames(void) { return m_vecPlatformedGames; }
 
-	bool									doesUsePlatformedGame(bxgi::ePlatformedGame ePlatformedGameId);
+	bool									doesUsEPlatformedGame(bxgi::EPlatformedGame EPlatformedGameId);
 
 	std::string								getVersionText(void);
 	std::string								getVersionTextWithGames(void);
@@ -40,7 +40,7 @@ public:
 
 private:
 	uint32									m_uiRawVersion;				// e.g. 0x00000302
-	bxgi::eRWVersion						m_uiVersionId;				// e.g. 0
+	bxgi::ERWVersion						m_uiVersionId;				// e.g. 0
 	bxcf::fileType::EFileType				m_uiFileType;				// e.g. MODEL
-	std::vector<ePlatformedGame>			m_vecPlatformedGames;		// e.g. PC_GTA_III, PC_GTA_VC
+	std::vector<EPlatformedGame>			m_vecPlatformedGames;		// e.g. PC_GTA_III, PC_GTA_VC
 };

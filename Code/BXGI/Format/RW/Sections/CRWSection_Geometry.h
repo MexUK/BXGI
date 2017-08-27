@@ -2,7 +2,7 @@
 
 #include "nsbxgi.h"
 #include "Format/RW/CRWSection.h"
-#include "Format/RW/eRWSection.h"
+#include "Format/RW/ERWSection.h"
 #include "Partial/CRWGeometryBoundingInfo.h"
 #include "Type/Vector/Vec2f.h"
 #include "Type/Vector/Vec3f.h"

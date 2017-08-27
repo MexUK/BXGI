@@ -17,9 +17,9 @@ CRWVersion::CRWVersion(void) :
 }
 
 // platformed game
-bool						CRWVersion::doesUsePlatformedGame(ePlatformedGame ePlatformedGameId)
+bool						CRWVersion::doesUsEPlatformedGame(EPlatformedGame EPlatformedGameId)
 {
-	return std::find(m_vecPlatformedGames.begin(), m_vecPlatformedGames.end(), ePlatformedGameId) != m_vecPlatformedGames.end();
+	return std::find(m_vecPlatformedGames.begin(), m_vecPlatformedGames.end(), EPlatformedGameId) != m_vecPlatformedGames.end();
 }
 
 // version text
@@ -38,7 +38,7 @@ string						CRWVersion::getGamesAsString(void)
 {
 	CGameManager *pGameManager = CGameManager::get();
 	vector<string> vecGames;
-	for (ePlatformedGame uiPlatformedGame : m_vecPlatformedGames)
+	for (EPlatformedGame uiPlatformedGame : m_vecPlatformedGames)
 	{
 		vecGames.push_back(pGameManager->getPlatformedGameText(uiPlatformedGame));
 	}

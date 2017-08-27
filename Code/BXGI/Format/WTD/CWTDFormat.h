@@ -7,12 +7,12 @@
 #include "d3d9.h"
 #include <string>
 
-class CIntermediateTextureFormat;
+class bxgi::CIntermediateTextureFormat;
 
 class bxgi::CWTDFormat : public bxcf::CFormat, public bxcf::CVectorPool<bxgi::CWTDEntry*>
 {
 public:
-	CWTDFormat(void) : CFormat(true, bxcf::LITTLE_ENDIAN) {};
+	CWTDFormat(void) : CFormat(true, bxcf::LITTLE_ENDIAN) {}
 
 	void						unload(void);
 

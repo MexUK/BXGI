@@ -762,6 +762,24 @@
     <ClCompile Include="..\..\..\Code\BXGI\Game\CPlatformedGame.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\CRWSectionDepthData.cpp">
+      <Filter>Source Files\Format\RW</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\CTextureEntry.cpp">
+      <Filter>Source Files\Format\RW</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Entries\CRWEntry_BinMeshPLG_Mesh.cpp">
+      <Filter>Source Files\Format\RW\Entries</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Sections\Partial\CRWGeometryBoundingInfo.cpp">
+      <Filter>Source Files\Format\RW\Sections\Partial</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Intermediate\Model\Data\CIntermediateBoundingObject.cpp">
+      <Filter>Source Files\Intermediate\Model\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Intermediate\Model\Data\CIntermediateGeometry.cpp">
+      <Filter>Source Files\Intermediate\Model\Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\BXGI\Format\COL\CCOLEntry.h">
@@ -971,12 +989,6 @@
     <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\CIDEManager.h">
       <Filter>Header Files\Format\IDE</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\eIDESection.h">
-      <Filter>Header Files\Format\IDE</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\eIDEPathType.h">
-      <Filter>Header Files\Format\IDE</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Fastman92\CIMGEntry_Fastman92.h">
       <Filter>Header Files\Format\IMG\Fastman92</Filter>
     </ClInclude>
@@ -986,9 +998,6 @@
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Fastman92\CIMGFormat_VersionFastman92_Header2.h">
       <Filter>Header Files\Format\IMG\Fastman92</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Fastman92\eIMGVersionFastman92CompressionAlgorithm.h">
-      <Filter>Header Files\Format\IMG\Fastman92</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\CIMGEntry.h">
       <Filter>Header Files\Format\IMG\Regular</Filter>
     </ClInclude>
@@ -996,12 +1005,6 @@
       <Filter>Header Files\Format\IMG\Regular</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\CIMGManager.h">
-      <Filter>Header Files\Format\IMG\Regular</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\eIMGVersion.h">
-      <Filter>Header Files\Format\IMG\Regular</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\eIMGEntryProperty.h">
       <Filter>Header Files\Format\IMG\Regular</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\Raw\CIMGEntry_Version1Or2.h">
@@ -1041,9 +1044,6 @@
       <Filter>Header Files\Intermediate\Texture\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Model\Data\CIntermediateVertexData.h">
-      <Filter>Header Files\Intermediate\Model\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Model\Data\eIntermediateBoundingObjectType.h">
       <Filter>Header Files\Intermediate\Model\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\CIPLEntry.h">
@@ -1139,12 +1139,6 @@
     <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\CIPLFormat.h">
       <Filter>Header Files\Format\IPL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\eIPLSection.h">
-      <Filter>Header Files\Format\IPL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\eIPLPathType.h">
-      <Filter>Header Files\Format\IPL</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Engine\RAGE\CRageManager.h">
       <Filter>Header Files\Engine\RAGE</Filter>
     </ClInclude>
@@ -1190,9 +1184,6 @@
     <ClInclude Include="..\..\..\Code\BXGI\Helper\SectionLines\CSectionLinesFormat.h">
       <Filter>Header Files\Helper\SectionLines</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Helper\SectionLines\eSectionLinesEntryType.h">
-      <Filter>Header Files\Helper\SectionLines</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Helper\SectionLines\Entry\CSectionLinesEntry_Other.h">
       <Filter>Header Files\Helper\SectionLines\Entry</Filter>
     </ClInclude>
@@ -1203,9 +1194,6 @@
       <Filter>Header Files\Format\TXD</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\TXD\CTXDFormat.h">
-      <Filter>Header Files\Format\TXD</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Format\TXD\eTXDRasterDataFormat.h">
       <Filter>Header Files\Format\TXD</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\WDR\CWDRBlock_Geometry.h">
@@ -1250,20 +1238,8 @@
     <ClInclude Include="..\..\..\Code\BXGI\Format\WTD\Raw\CWTDFormat_Header2.h">
       <Filter>Header Files\Format\WTD\Raw</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\eCOLVersion.h">
-      <Filter>Header Files\Format\COL</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\COL\TShapes.h">
       <Filter>Header Files\Format\COL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Loader\eDATLoaderEntryType.h">
-      <Filter>Header Files\Format\DAT\Loader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\eDATPathFormat.h">
-      <Filter>Header Files\Format\DAT\Path</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RAGE\eRageResourceType.h">
-      <Filter>Header Files\Engine\RAGE</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\CGameFormat.h">
       <Filter>Header Files\Format</Filter>
@@ -1349,9 +1325,6 @@
     <ClInclude Include="..\..\..\Code\BXGI\Format\RW\CTextureEntry.h">
       <Filter>Header Files\Format\RW</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\eRWSection.h">
-      <Filter>Header Files\Format\RW</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWManager.h">
       <Filter>Header Files\Engine\RW</Filter>
     </ClInclude>
@@ -1360,12 +1333,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\CRWVersionManager.h">
       <Filter>Header Files\Engine\RW</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\eRWVersion.h">
-      <Filter>Header Files\Engine\RW</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Format\e2DFXType.h">
-      <Filter>Header Files\Format</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Game\CGame.h">
       <Filter>Header Files\Game</Filter>
@@ -1379,17 +1346,68 @@
     <ClInclude Include="..\..\..\Code\BXGI\Game\CPlatformedGame.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Game\eGameFlag.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Game\ePlatformedGame.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Game\eGame.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\nsbxgi.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RAGE\ERageResourceType.h">
+      <Filter>Header Files\Engine\RAGE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Engine\RW\ERWVersion.h">
+      <Filter>Header Files\Engine\RW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\ECOLVersion.h">
+      <Filter>Header Files\Format\COL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Loader\EDATLoaderEntryType.h">
+      <Filter>Header Files\Format\DAT\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\EDATPathFormat.h">
+      <Filter>Header Files\Format\DAT\Path</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\EIDEPathType.h">
+      <Filter>Header Files\Format\IDE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IDE\EIDESection.h">
+      <Filter>Header Files\Format\IDE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Fastman92\EIMGVersionFastman92CompressionAlgorithm.h">
+      <Filter>Header Files\Format\IMG\Fastman92</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\EIMGVersion.h">
+      <Filter>Header Files\Format\IMG\Regular</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\EIMGEntryProperty.h">
+      <Filter>Header Files\Format\IMG\Regular</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\EIPLSection.h">
+      <Filter>Header Files\Format\IPL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IPL\EIPLPathType.h">
+      <Filter>Header Files\Format\IPL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\RW\ERWSection.h">
+      <Filter>Header Files\Format\RW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\TXD\ETXDRasterDataFormat.h">
+      <Filter>Header Files\Format\TXD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\E2DFXType.h">
+      <Filter>Header Files\Format</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Game\EGame.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Game\EGameFlag.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Game\EPlatformedGame.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Helper\SectionLines\ESectionLinesEntryType.h">
+      <Filter>Header Files\Helper\SectionLines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Intermediate\Model\Data\EIntermediateBoundingObjectType.h">
+      <Filter>Header Files\Intermediate\Model\Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

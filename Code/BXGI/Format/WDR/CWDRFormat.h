@@ -13,7 +13,7 @@ class bxgi::CWDRBlock_Model;
 class bxgi::CWDRFormat : public bxcf::CFormat
 {
 public:
-	CWDRFormat(void) : CFormat(true, bxcf::LITTLE_ENDIAN) {};
+	CWDRFormat(void) : CFormat(true, bxcf::LITTLE_ENDIAN) {}
 
 	void								unload(void);
 

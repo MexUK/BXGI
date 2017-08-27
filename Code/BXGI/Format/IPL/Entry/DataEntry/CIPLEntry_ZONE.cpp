@@ -1,10 +1,19 @@
 #include "CIPLEntry_ZONE.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIPLEntry_ZONE::CIPLEntry_ZONE(CIPLFormat *pIPLFormat) :
+	CIPLEntry_Data(pIPLFormat, IPL_SECTION_ZONE),
+	m_uiZoneType(0),
+	m_vecBottomLeftPosition{ 0.0f, 0.0f, 0.0f },
+	m_vecTopRightPosition{ 0.0f, 0.0f, 0.0f },
+	m_uiLevel(0)
+{
+}
 
 void			CIPLEntry_ZONE::unserialize(void)
 {

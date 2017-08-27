@@ -2,7 +2,7 @@
 
 #include "nsbxgi.h"
 #include "Type/Types.h"
-#include "eDATPathFormat.h"
+#include "EDATPathFormat.h"
 #include <string>
 
 // default format file structures
@@ -173,7 +173,7 @@ struct bxgi::CDATEntry_Paths_Fastman92_PathIntersectionFlags
 // general format file structures
 struct bxgi::CDATEntry_Paths_General_Header
 {
-	eDATPathFormat		m_ePathsFormat;
+	EDATPathFormat		m_ePathsFormat;
 	uint32				m_uiPathNodeCount;
 	uint32				m_uiVehicleNodeCount;
 	uint32				m_uiPedNodeCount;

@@ -6,10 +6,7 @@
 class bxgi::CIDEEntry_2DFX_LightShaft : public bxgi::CIDEEntry_2DFX
 {
 public:
-	CIDEEntry_2DFX_LightShaft(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_2DFX(pIDEFormat, bxgi::_2DFX_LIGHT_SHAFT)
-	{
-	};
+	CIDEEntry_2DFX_LightShaft(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

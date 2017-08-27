@@ -1,10 +1,15 @@
 #include "CIDEEntry_2DFX_Audio.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_2DFX_Audio::CIDEEntry_2DFX_Audio(CIDEFormat *pIDEFormat) :
+	CIDEEntry_2DFX(pIDEFormat, _2DFX_AUDIO)
+{
+}
 
 void			CIDEEntry_2DFX_Audio::unserialize(void)
 {

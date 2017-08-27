@@ -47,7 +47,7 @@ void				CRWSectionContainer::unserialize(void)
 			uiRWSectionId = pDataReader->readUint32(),
 			uiRWSectionSize = pDataReader->readUint32(),
 			uiRWSectionRWVersion = pDataReader->readUint32();
-		eRWSection eRWSectionValue = (eRWSection)uiRWSectionId;
+		ERWSection ERWSectionValue = (ERWSection)uiRWSectionId;
 		if (vecByteCountsRead.size() > 0)
 		{
 			// todo vecByteCountsRead[vecByteCountsRead.size() - 1] += 12;
@@ -77,7 +77,7 @@ void				CRWSectionContainer::unserialize(void)
 
 		// read struct header
 		uint32 uiStructSectionSize = 0;
-		if (CRWSection::doesRWSectionContainStruct(eRWSectionValue))
+		if (CRWSection::doesRWSectionContainStruct(ERWSectionValue))
 		{
 			uint32
 				uiRWSectionId2 = pDataReader->readUint32(),
@@ -93,15 +93,15 @@ void				CRWSectionContainer::unserialize(void)
 		}
 
 		// create RW section
-		CRWSection *pRWSection = CRWSection::createRWSection(eRWSectionValue);
+		CRWSection *pRWSection = CRWSection::creatERWSection(ERWSectionValue);
 		/*
 		todo
 		if (!pRWSection->isUnknownSection())
 		{
-			pRWSection->setSectionEnumId(eRWSectionValue);
+			pRWSection->setSectionEnumId(ERWSectionValue);
 		}
 		*/
-		pRWSection->setSectionId(eRWSectionValue);
+		pRWSection->setSectionId(ERWSectionValue);
 		pRWSection->setSectionSize(uiRWSectionSize);
 		pRWSection->setStructSectionSize(uiStructSectionSize);
 		pRWSection->setSectionRWVersion(uiRWSectionRWVersion);
@@ -162,10 +162,10 @@ void				CRWSectionContainer::unserialize(void)
 void				CRWSectionContainer::serialize(void)
 {
 	CDataWriter *pDataWriter = CDataWriter::get();
-	eDataStreamType ePreviousStreamType = pDataWriter->getStreamType();
+	EDataStreamType ePreviousStreamType = pDataWriter->getStreamType();
 
 	pDataWriter->setStreamType(DATA_STREAM_MEMORY);
-	serializeRWSectionContainer(this);
+	serializERWSectionContainer(this);
 	string strData = pDataWriter->getData();
 
 	pDataWriter->setStreamType(ePreviousStreamType);
@@ -173,7 +173,7 @@ void				CRWSectionContainer::serialize(void)
 	pDataWriter->write(strData);
 }
 
-void				CRWSectionContainer::serializeRWSectionContainer(CRWSectionContainer *pRWSectionContainer)
+void				CRWSectionContainer::serializERWSectionContainer(CRWSectionContainer *pRWSectionContainer)
 {
 	CDataWriter *pDataWriter = CDataWriter::get();
 	for (CRWSection *pRWSection : pRWSectionContainer->getEntries())
@@ -186,7 +186,7 @@ void				CRWSectionContainer::serializeRWSectionContainer(CRWSectionContainer *pR
 
 		if (!pRWSection->isUnknownSection())
 		{
-			serializeRWSectionContainer(pRWSection);
+			serializERWSectionContainer(pRWSection);
 		}
 		uint64 uiSeek4 = pDataWriter->getSeek();
 		
@@ -202,17 +202,17 @@ void				CRWSectionContainer::serializeRWSectionContainer(CRWSectionContainer *pR
 	}
 }
 
-CRWSection*			CRWSectionContainer::addSection(eRWSection eRWSectionValue, eRWVersion eRWVersionValue)
+CRWSection*			CRWSectionContainer::addSection(ERWSection ERWSectionValue, ERWVersion ERWVersionValue)
 {
-	CRWSection *pRWSection = CRWSection::createRWSection(eRWSectionValue);
+	CRWSection *pRWSection = CRWSection::creatERWSection(ERWSectionValue);
 	if (pRWSection == nullptr)
 	{
 		return nullptr;
 	}
 	pRWSection->setParentNode(nullptr);
-	pRWSection->setSectionId(eRWSectionValue);
+	pRWSection->setSectionId(ERWSectionValue);
 	pRWSection->setSectionSize(0);
-	pRWSection->setSectionRWVersion(eRWVersionValue);
+	pRWSection->setSectionRWVersion(ERWVersionValue);
 	addEntry(pRWSection);
 	return pRWSection;
 }
@@ -229,7 +229,7 @@ void				CRWSectionContainer::removeSectionByIndex(uint32 uiSectionIndex)
 	delete pRWSection;
 }
 
-vector<CRWSection*>	CRWSectionContainer::getSectionsByType(eRWSection eRWSectionValue, bool bCheckRecursiveSections)
+vector<CRWSection*>	CRWSectionContainer::getSectionsByType(ERWSection ERWSectionValue, bool bCheckRecursiveSections)
 {
 	vector<CRWSection*>
 		vecRWSectionsToSearch = getEntries(),
@@ -245,7 +245,7 @@ vector<CRWSection*>	CRWSectionContainer::getSectionsByType(eRWSection eRWSection
 			}
 		}
 
-		if (pRWSection->getSectionId() == eRWSectionValue)
+		if (pRWSection->getSectionId() == ERWSectionValue)
 		{
 			vecRWSectionsToReturn.push_back(pRWSection);
 		}
@@ -253,7 +253,7 @@ vector<CRWSection*>	CRWSectionContainer::getSectionsByType(eRWSection eRWSection
 	return vecRWSectionsToReturn;
 }
 
-uint32				CRWSectionContainer::getSectionCountByType(eRWSection eRWSectionValue, bool bCheckRecursiveSections)
+uint32				CRWSectionContainer::getSectionCountByType(ERWSection ERWSectionValue, bool bCheckRecursiveSections)
 {
 	vector<CRWSection*> vecRWSectionsToSearch = getEntries();
 	uint32 uiSectionCount = 0;
@@ -268,7 +268,7 @@ uint32				CRWSectionContainer::getSectionCountByType(eRWSection eRWSectionValue,
 			}
 		}
 
-		if (pRWSection->getSectionId() == eRWSectionValue)
+		if (pRWSection->getSectionId() == ERWSectionValue)
 		{
 			uiSectionCount++;
 		}

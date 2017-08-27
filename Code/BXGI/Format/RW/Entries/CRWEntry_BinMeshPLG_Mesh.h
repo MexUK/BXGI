@@ -7,10 +7,7 @@
 class bxgi::CRWEntry_BinMeshPLG_Mesh
 {
 public:
-	CRWEntry_BinMeshPLG_Mesh(void) :
-		m_uiIndexCount(0),
-		m_uiMaterialIndex(0)
-	{};
+	CRWEntry_BinMeshPLG_Mesh(void);
 
 	void							setIndexCount(uint32 uiIndexCount) { m_uiIndexCount = uiIndexCount; }
 	uint32							getIndexCount(void) { return m_uiIndexCount; }

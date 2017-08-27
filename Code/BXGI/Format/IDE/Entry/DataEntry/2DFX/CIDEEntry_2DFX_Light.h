@@ -7,19 +7,7 @@
 class bxgi::CIDEEntry_2DFX_Light : public bxgi::CIDEEntry_2DFX
 {
 public:
-	CIDEEntry_2DFX_Light(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_2DFX(pIDEFormat, bxgi::_2DFX_LIGHT),
-		m_fViewDistance(0.0f),
-		m_fOuterRange(0.0f),
-		m_fCoronaSize(0.0f),
-		m_fInnerRange(0.0f),
-		m_uiIDEFlag(0),
-		m_uiFlash(0),
-		m_uiWet(0),
-		m_uiFlare(0),
-		m_uiDust(0)
-	{
-	};
+	CIDEEntry_2DFX_Light(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

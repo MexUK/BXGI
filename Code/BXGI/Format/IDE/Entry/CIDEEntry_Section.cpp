@@ -6,11 +6,16 @@
 using namespace bxcf;
 using namespace bxgi;
 
+CIDEEntry_Section::CIDEEntry_Section(CIDEFormat *pIDEFormat) :
+	CIDEEntry(pIDEFormat)
+{
+}
+
 void		CIDEEntry_Section::unserialize(void)
 {
 	CDataReader *pDataReader = CDataReader::get();
 
-	// setSectionType() has already been called, as the eIDESectionType has already been detected.
+	// setSectionType() has already been called, as the EIDESectionType has already been detected.
 }
 
 void		CIDEEntry_Section::serialize(void)

@@ -2,7 +2,7 @@
 
 #include "nsbxgi.h"
 #include "Format/CFormat.h"
-#include "Format/e2DFXType.h"
+#include "Format/E2DFXType.h"
 #include <string>
 #include <vector>
 #include <map>
@@ -130,7 +130,7 @@ void				bxgi::CSectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEnt
 				pFormatEntry = createDataEntry(eFormatSectionValue, detectSectionSpecificType(eFormatSectionValue));
 				pFormatEntry->unserialize();
 			}
-			catch (eExceptionCode)
+			catch (EExceptionCode)
 			{
 				// e.g. undocumeted formats: despite being detected as a data line, treat it as a other line to preserve data when serializing.
 				if (pFormatEntry != nullptr)

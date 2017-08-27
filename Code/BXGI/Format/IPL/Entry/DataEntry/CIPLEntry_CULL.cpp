@@ -1,10 +1,27 @@
 #include "CIPLEntry_CULL.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIPLEntry_CULL::CIPLEntry_CULL(CIPLFormat *pIPLFormat) :
+	CIPLEntry_Data(pIPLFormat, IPL_SECTION_CULL),
+	m_vecCenterPosition{ 0.0f, 0.0f, 0.0f },
+	m_vecLowerLeftPosition{ 0.0f, 0.0f, 0.0f },
+	m_vecUpperRightPosition{ 0.0f, 0.0f, 0.0f },
+	m_uiFlags(0),
+	m_uiUnknown1(0),
+	m_uiUnknown2(0),
+	m_uiUnknown3(0),
+	m_uiLength(0),
+	m_uiWidth(0),
+	m_uiTop(0),
+	m_uiBottom(0),
+	m_vecMirrorParameters{ 0.0f, 0.0f, 0.0f, 0.0f }
+{
+}
 
 void			CIPLEntry_CULL::unserialize(void)
 {

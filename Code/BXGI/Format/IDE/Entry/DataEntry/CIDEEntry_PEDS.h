@@ -9,14 +9,7 @@
 class bxgi::CIDEEntry_PEDS : public bxgi::CIDEEntry_Data
 {
 public:
-	CIDEEntry_PEDS(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_Data(pIDEFormat, IDE_SECTION_PEDS),
-		m_uiObjectId(0),
-		m_uiCarsCanDrive(0)
-	{
-		m_vecPreferredRadioStations.x = 0;
-		m_vecPreferredRadioStations.y = 0;
-	};
+	CIDEEntry_PEDS(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

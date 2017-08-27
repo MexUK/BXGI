@@ -8,10 +8,7 @@
 class bxgi::CIPLEntry_UnknownSection : public bxgi::CIPLEntry_Data
 {
 public:
-	CIPLEntry_UnknownSection(bxgi::CIPLFormat *pIPLFormat) :
-		CIPLEntry_Data(pIPLFormat, IPL_SECTION_UNKNOWN)
-	{
-	};
+	CIPLEntry_UnknownSection(bxgi::CIPLFormat *pIPLFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

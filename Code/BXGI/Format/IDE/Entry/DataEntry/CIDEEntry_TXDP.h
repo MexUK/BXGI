@@ -7,10 +7,7 @@
 class bxgi::CIDEEntry_TXDP : public bxgi::CIDEEntry_Data
 {
 public:
-	CIDEEntry_TXDP(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_Data(pIDEFormat, IDE_SECTION_TXDP)
-	{
-	};
+	CIDEEntry_TXDP(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

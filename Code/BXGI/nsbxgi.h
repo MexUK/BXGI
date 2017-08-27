@@ -7,14 +7,14 @@ namespace bxgi
 	class CGameManager;
 	class CGame;
 	class CPlatformedGame;
-	enum eGame;
-	enum eGameFlag;
-	enum ePlatformedGame;
+	enum EGame;
+	enum EGameFlag;
+	enum EPlatformedGame;
 
 	class CRageManager;
 	class CRageResourceType;
 	class CRageResourceTypeManager;
-	enum eRageResourceType;
+	enum ERageResourceType;
 
 	class CRWFormat;
 	class CRWManager;
@@ -25,8 +25,8 @@ namespace bxgi
 	class CRWVersion;
 	class CRWVersionManager;
 	class CTextureEntry;
-	enum eRWSection;
-	enum eRWVersion;
+	enum ERWSection;
+	enum ERWVersion;
 	class CRWEntry_BinMeshPLG_Mesh;
 	class CRWEntry_TextureNative_MipMap;
 	class CRWEntry_2dEffect_CoverPoint;
@@ -59,13 +59,13 @@ namespace bxgi
 	class CRWSection_TextureNative;
 	class CRWSection_UnknownSection;
 
-	enum e2DFXType;
+	enum E2DFXType;
 	class CCOLEntry;
 	class CCOLFormat;
 	class CCOLManager;
 	class CCOLVersion;
 	class CCOLVersionManager;
-	enum eCOLVersion;
+	enum ECOLVersion;
 	struct TBounds;
 	struct TSurface;
 	struct TSphere;
@@ -109,11 +109,11 @@ namespace bxgi
 	struct CDATEntry_Paths_General_Link;
 	class CDATPathFormat;
 	class CDATPathManager;
-	enum eDATPathFormat;
+	enum EDATPathFormat;
 
 	class CDATLoaderEntry;
 	class CDATLoaderFormat;
-	enum eDATLoaderEntryType;
+	enum EDATLoaderEntryType;
 	class CDATLoaderManager;
 
 	class CDATScriptPathEntry;
@@ -128,8 +128,8 @@ namespace bxgi
 	class CIDEEntry;
 	class CIDEFormat;
 	class CIDEManager;
-	enum eIDEPathType;
-	enum eIDESection;
+	enum EIDEPathType;
+	enum EIDESection;
 	class CIDEEntry_Data;
 	class CIDEEntry_Other;
 	class CIDEEntry_Section;
@@ -176,12 +176,12 @@ namespace bxgi
 	class CIMGEntry;
 	class CIMGFormat;
 	class CIMGManager;
-	enum eIMGEntryProperty;
-	enum eIMGVersion;
+	enum EIMGEntryProperty;
+	enum EIMGVersion;
 	struct CIMGEntry_Fastman92;
 	struct CIMGFormat_VersionFastman92_Header1;
 	struct CIMGFormat_VersionFastman92_Header2;
-	enum eIMGVersionFastman92CompressionAlgorithm;
+	enum EIMGVersionFastman92CompressionAlgorithm;
 	struct RG_CIMGEntry_Version1Or2;
 	struct RG_CIMGEntry_Version3;
 	struct RG_CIMGFormat_Version2_Header1;
@@ -191,7 +191,7 @@ namespace bxgi
 	class CIntermediateGeometry;
 	class CIntermediateIndexData;
 	class CIntermediateVertexData;
-	enum eIntermediateBoundingObjectType;
+	enum EIntermediateBoundingObjectType;
 	class CIntermediateModel;
 	class CIntermediateModelFormat;
 
@@ -230,18 +230,18 @@ namespace bxgi
 	class CIPLEntry;
 	class CIPLFormat;
 	class CIPLManager;
-	enum eIPLPathType;
-	enum eIPLSection;
+	enum EIPLPathType;
+	enum EIPLSection;
 
 	template<class FormatClass, typename SectionEnum> class CSectionLinesEntry;
 	template<class FormatClass, class EntryClass, typename SectionEnum, class OtherEntryClass, class SectionEntryClass, class DataEntryClass> class CSectionLinesFormat;
-	enum eSectionLinesEntryType;
+	enum ESectionLinesEntryType;
 	class CSectionLinesEntry_Data;
 	class CSectionLinesEntry_Other;
 
 	class CTXDFormat;
 	class CTXDManager;
-	enum eTXDRasterDataFormat;
+	enum ETXDRasterDataFormat;
 
 	class CWDRBlock_Geometry;
 	class CWDRBlock_IndexData;

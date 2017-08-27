@@ -1,11 +1,17 @@
 #include "CIDEEntry_PATH_Group.h"
 #include "Format/IDE/Entry/DataEntry/CIDEEntry_PATH.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_PATH_Group::CIDEEntry_PATH_Group(CIDEFormat *pIDEFormat) :
+	CIDEEntry_PATH(pIDEFormat, IDE_PATH_GROUP),
+	m_uiObjectId(0)
+{
+}
 
 void			CIDEEntry_PATH_Group::unload(void)
 {

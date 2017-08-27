@@ -7,10 +7,7 @@
 class bxgi::CIDEEntry_TREE : public bxgi::CIDEEntry_Data
 {
 public:
-	CIDEEntry_TREE(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_Data(pIDEFormat, IDE_SECTION_TREE)
-	{
-	};
+	CIDEEntry_TREE(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

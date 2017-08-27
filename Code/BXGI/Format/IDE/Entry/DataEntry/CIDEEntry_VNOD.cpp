@@ -1,10 +1,15 @@
 #include "CIDEEntry_VNOD.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_VNOD::CIDEEntry_VNOD(CIDEFormat *pIDEFormat) :
+	CIDEEntry_Data(pIDEFormat, IDE_SECTION_VNOD)
+{
+}
 
 void			CIDEEntry_VNOD::unserialize(void)
 {

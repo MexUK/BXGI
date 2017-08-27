@@ -7,10 +7,7 @@
 class bxgi::CIPLEntry_LODM : public bxgi::CIPLEntry_Data
 {
 public:
-	CIPLEntry_LODM(bxgi::CIPLFormat *pIPLFormat) :
-		CIPLEntry_Data(pIPLFormat, IPL_SECTION_LODM)
-	{
-	};
+	CIPLEntry_LODM(bxgi::CIPLFormat *pIPLFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

@@ -7,13 +7,7 @@
 class bxgi::CIDEEntry_2DFX_Ped : public bxgi::CIDEEntry_2DFX
 {
 public:
-	CIDEEntry_2DFX_Ped(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_2DFX(pIDEFormat, bxgi::_2DFX_PED),
-		m_uiBehaviour(0),
-		m_vecUnknown2{ 0.0f, 0.0f, 0.0f },
-		m_vecPedRotation{ 0.0f, 0.0f, 0.0f }
-	{
-	};
+	CIDEEntry_2DFX_Ped(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

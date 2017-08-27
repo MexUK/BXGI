@@ -1,11 +1,23 @@
 #include "CIDEEntry_PATH_Node.h"
-#include "Exception/eExceptionCode.h"
+#include "Exception/EExceptionCode.h"
 #include "Stream/CDataReader.h"
 #include "Stream/CDataWriter.h"
 #include "CIDEEntry_PATH_Group.h"
 
 using namespace bxcf;
 using namespace bxgi;
+
+CIDEEntry_PATH_Node::CIDEEntry_PATH_Node(CIDEFormat *pIDEFormat) :
+	CIDEEntry_PATH(pIDEFormat, IDE_PATH_NODE),
+	m_uiNodeType(0),
+	m_uiNextNode(0),
+	m_uiIsCrossRoad(0),
+	m_vecPosition{ 0.0f, 0.0f, 0.0f },
+	m_fUnknown1(0.0f),
+	m_uiLeftLaneCount(0),
+	m_uiRightLaneCount(0)
+{
+}
 
 void			CIDEEntry_PATH_Node::unserialize(void)
 {

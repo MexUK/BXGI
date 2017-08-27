@@ -9,25 +9,7 @@
 class bxgi::CIDEEntry_CARS : public bxgi::CIDEEntry_Data
 {
 public:
-	CIDEEntry_CARS(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_Data(pIDEFormat, IDE_SECTION_CARS),
-		m_uiObjectId(0),
-		m_uiSpawnFrequency(0),
-		m_uiUnknown1(0),
-		m_uiUnknown2(0),
-		m_uiWheelModelId(0),
-		m_fWheelScaleFront(0.0f),
-		m_fWheelScaleRear(0.0f),
-		m_fWheelScale(0.0f),
-		m_uiUnknown3(0),
-		m_uiMaxVehicleCountAtOneTime(0),
-		m_vecWheelRadius{ 0.0f, 0.0f },
-		m_fDirtLevel(0.0f),
-		m_uiLODMultiplier(0),
-		m_fSwankness(0.0f),
-		m_uiFlags(0)
-	{
-	};
+	CIDEEntry_CARS(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

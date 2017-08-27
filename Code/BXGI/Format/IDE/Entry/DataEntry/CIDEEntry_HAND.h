@@ -8,11 +8,7 @@
 class bxgi::CIDEEntry_HAND : public bxgi::CIDEEntry_Data
 {
 public:
-	CIDEEntry_HAND(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_Data(pIDEFormat, IDE_SECTION_HAND),
-		m_uiObjectId(0)
-	{
-	};
+	CIDEEntry_HAND(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);

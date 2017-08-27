@@ -9,9 +9,7 @@ class bxgi::CIDEFormat;
 class bxgi::CIDEEntry_Other : public bxgi::CSectionLinesEntry_Other, public bxgi::CIDEEntry
 {
 public:
-	CIDEEntry_Other(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry(pIDEFormat)
-	{};
+	CIDEEntry_Other(bxgi::CIDEFormat *pIDEFormat);
 
 	void							unserialize(void);
 	void							serialize(void);

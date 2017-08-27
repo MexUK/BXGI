@@ -55,7 +55,7 @@ void										CGameManager::uninitPlatformedGames(void)
 }
 
 // add/remove game
-CGame*										CGameManager::addGame(eGame uiGameId, string strGameName)
+CGame*										CGameManager::addGame(EGame uiGameId, string strGameName)
 {
 	CGame *pGame = new CGame;
 	pGame->setGameId(uiGameId);
@@ -65,7 +65,7 @@ CGame*										CGameManager::addGame(eGame uiGameId, string strGameName)
 }
 
 // add/remove platformed game
-CPlatformedGame*							CGameManager::addPlatformedGame(ePlatformedGame uiPlatformedGameId, string strPlatformedGameText)
+CPlatformedGame*							CGameManager::addPlatformedGame(EPlatformedGame uiPlatformedGameId, string strPlatformedGameText)
 {
 	CPlatformedGame *pPlatformedGame = new CPlatformedGame;
 	pPlatformedGame->setPlatformedGameId(uiPlatformedGameId);
@@ -75,11 +75,11 @@ CPlatformedGame*							CGameManager::addPlatformedGame(ePlatformedGame uiPlatfor
 }
 
 // game name
-string										CGameManager::getGameName(eGame eGameId)
+string										CGameManager::getGameName(EGame EGameId)
 {
 	for (CGame *pGame : getEntries())
 	{
-		if (pGame->getGameId() == eGameId)
+		if (pGame->getGameId() == EGameId)
 		{
 			return pGame->getName();
 		}
@@ -88,7 +88,7 @@ string										CGameManager::getGameName(eGame eGameId)
 }
 
 // platformed game text
-string										CGameManager::getPlatformedGameText(ePlatformedGame uiPlatformedGameId)
+string										CGameManager::getPlatformedGameText(EPlatformedGame uiPlatformedGameId)
 {
 	for (CPlatformedGame *pPlatformedGame : getPlatformedGames().getEntries())
 	{

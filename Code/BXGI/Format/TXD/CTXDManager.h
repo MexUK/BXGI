@@ -3,11 +3,11 @@
 #include "nsbxgi.h"
 #include "Format/CFormatManager.h"
 #include "Object/CSingleton.h"
-#include "eTXDRasterDataFormat.h"
-#include "Image/eRasterDataFormat.h"
-#include "Game/ePlatformedGame.h"
-#include "Image/eDXTCompressionType.h"
-#include "Platform/Hardware/ePlatform.h"
+#include "ETXDRasterDataFormat.h"
+#include "Image/ERasterDataFormat.h"
+#include "Game/EPlatformedGame.h"
+#include "Image/EDXTCompressionType.h"
+#include "Platform/Hardware/EPlatform.h"
 #include <string>
 
 class bxgi::CTXDFormat;
@@ -25,7 +25,7 @@ public:
 
 	bxgi::CTXDFormat*			convertIntermediateTextureFileToTXDFile(bxgi::CIntermediateTextureFormat *pGeneralTextureFile);
 
-	static uint32				getTXDRasterDataFormatFromRasterDataFormat(bxcf::eRasterDataFormat eRasterDataFormatValue);
-	static std::string			getTXDRasterFormatText(uint32 uiTXDRasterDataFormatValue, bxcf::eDXTCompressionType eDXTCompressionTypeValue);
-	static bxcf::ePlatform		getPlatformFromTXDPlatformId(uint32 uiTXDPlatformId);
+	static uint32				getTXDRasterDataFormatFromRasterDataFormat(bxcf::ERasterDataFormat ERasterDataFormatValue);
+	static std::string			getTXDRasterFormatText(uint32 uiTXDRasterDataFormatValue, bxcf::EDXTCompressionType EDXTCompressionTypeValue);
+	static bxcf::EPlatform		getPlatformFromTXDPlatformId(uint32 uiTXDPlatformId);
 };

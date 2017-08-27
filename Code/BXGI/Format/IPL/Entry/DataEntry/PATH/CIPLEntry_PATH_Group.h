@@ -10,11 +10,7 @@ class bxgi::CIPLEntry;
 class bxgi::CIPLEntry_PATH_Group : public bxgi::CIPLEntry_PATH, public bxcf::CVectorPool<bxgi::CIPLEntry*>
 {
 public:
-	CIPLEntry_PATH_Group(bxgi::CIPLFormat *pIPLFormat) :
-		CIPLEntry_PATH(pIPLFormat, IPL_PATH_GROUP),
-		m_iMinusOne(0)
-	{
-	};
+	CIPLEntry_PATH_Group(bxgi::CIPLFormat *pIPLFormat);
 
 	void							unload(void);
 

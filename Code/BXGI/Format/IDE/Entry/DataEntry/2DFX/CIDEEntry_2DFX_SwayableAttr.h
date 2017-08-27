@@ -6,10 +6,7 @@
 class bxgi::CIDEEntry_2DFX_SwayableAttr : public bxgi::CIDEEntry_2DFX
 {
 public:
-	CIDEEntry_2DFX_SwayableAttr(bxgi::CIDEFormat *pIDEFormat) :
-		CIDEEntry_2DFX(pIDEFormat, bxgi::_2DFX_SWAYABLE_ATTR)
-	{
-	};
+	CIDEEntry_2DFX_SwayableAttr(bxgi::CIDEFormat *pIDEFormat);
 
 	void						unserialize(void);
 	void						serialize(void);
