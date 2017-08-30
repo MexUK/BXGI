@@ -281,7 +281,7 @@ void		CIMGFormat::unserializeVersion1(void)
 		pIMGEntry->setIMGFile(this);
 		pIMGEntry->unserializeVersion1Or2(pRGIMGActiveEntry++);
 		pIMGEntry->setEntryExtension(CString2::toUpperCase(CPath::getFileExtension(pIMGEntry->getEntryName())));
-		Events::triggerVoidNoRef(UNSERIALIZE_IMG_ENTRY, this);
+		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
 
 	// clean up
@@ -311,7 +311,7 @@ void		CIMGFormat::unserializeVersion2(void)
 		pIMGEntry->setIMGFile(this);
 		pIMGEntry->unserializeVersion1Or2(pRGIMGActiveEntry++);
 		pIMGEntry->setEntryExtension(CString2::toUpperCase(CPath::getFileExtension(pIMGEntry->getEntryName())));
-		Events::triggerVoidNoRef(UNSERIALIZE_IMG_ENTRY, this);
+		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
 
 	// clean up
@@ -367,7 +367,7 @@ void		CIMGFormat::unserializeVersion3_Encrypted(void)
 		rvecIMGEntries[i] = pIMGEntry;
 		pIMGEntry->setIMGFile(this);
 		pIMGEntry->unserializeVersion3(pRGIMGActiveEntry++);
-		Events::triggerVoidNoRef(UNSERIALIZE_IMG_ENTRY, this);
+		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
 	
 	// read IMG entry names
@@ -378,7 +378,7 @@ void		CIMGFormat::unserializeVersion3_Encrypted(void)
 	{
 		rvecIMGEntries[i]->setEntryName(pDataReader2->readStringUntilZero());
 		rvecIMGEntries[i]->setEntryExtension(CString2::toUpperCase(CPath::getFileExtension(rvecIMGEntries[i]->getEntryName())));
-		Events::triggerVoidNoRef(UNSERIALIZE_IMG_ENTRY, this);
+		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
 	
 	// restore
@@ -410,7 +410,7 @@ void		CIMGFormat::unserializeVersion3_Unencrypted(void)
 		rvecIMGEntries[i] = pIMGEntry;
 		pIMGEntry->setIMGFile(this);
 		pIMGEntry->unserializeVersion3(pRGIMGActiveEntry++);
-		Events::triggerVoidNoRef(UNSERIALIZE_IMG_ENTRY, this);
+		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
 
 	// read IMG entry names
@@ -418,7 +418,7 @@ void		CIMGFormat::unserializeVersion3_Unencrypted(void)
 	{
 		rvecIMGEntries[i]->setEntryName(pDataReader->readStringUntilZero());
 		rvecIMGEntries[i]->setEntryExtension(CString2::toUpperCase(CPath::getFileExtension(rvecIMGEntries[i]->getEntryName())));
-		Events::triggerVoidNoRef(UNSERIALIZE_IMG_ENTRY, this);
+		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
 
 	// clean up
@@ -481,7 +481,7 @@ void		CIMGFormat::unserializeVersionFastman92(void)
 		pIMGEntry->setIMGFile(this);
 		pIMGEntry->unserializeVersionFastman92(pRawIMGActiveEntry++);
 		pIMGEntry->setEntryExtension(CString2::toUpperCase(CPath::getFileExtension(pIMGEntry->getEntryName())));
-		Events::triggerVoidNoRef(UNSERIALIZE_IMG_ENTRY, this);
+		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
 
 	// clean up
@@ -591,7 +591,7 @@ void		CIMGFormat::unserializERWVersions(void)
 			break;
 		}
 
-		Events::triggerVoidNoRef(UNSERIALIZE_IMG_ENTRY, this);
+		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
 
 	if (bUseNewReader) // todo - IMG_1 and data stream memory
@@ -661,7 +661,7 @@ void					CIMGFormat::serializeVersion1(void)
 		pIMGEntry->setEntryOffsetInSectors(uiSeek);
 		uiSeek += uiEntryByteCountPadded;
 
-		Events::trigger(SERIALIZE_IMG_ENTRY, this);
+		Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
 	}
 
 	if (pDataReader->getStreamType() == DATA_STREAM_FILE)
@@ -695,7 +695,7 @@ void					CIMGFormat::serializeVersion1(void)
 		pDataWriter->writeUint32(pIMGEntry->getEntrySizeInSectors());
 		pDataWriter->writeStringRef(pIMGEntry->getEntryName(), 24);
 
-		Events::trigger(SERIALIZE_IMG_ENTRY, this);
+		Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
 	}
 
 	// finalize DIR data reading/writing
@@ -748,7 +748,7 @@ void					CIMGFormat::serializeVersion2(void)
 		pDataWriter->writeUint16(0);
 		pDataWriter->writeStringRef(pIMGEntry->getEntryName(), 24);
 
-		Events::trigger(SERIALIZE_IMG_ENTRY, this);
+		Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
 	}
 
 	if ((uiBodyStart % 2048) != 0 && uiEntryCount > 0)
@@ -766,7 +766,7 @@ void					CIMGFormat::serializeVersion2(void)
 
 		pIMGEntry->setEntryOffsetInSectors(vecNewEntryPositions[i++]);
 
-		Events::trigger(SERIALIZE_IMG_ENTRY, this);
+		Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
 	}
 
 	// finalize IMG data reading/writing
@@ -859,7 +859,7 @@ void					CIMGFormat::serializeVersionFastman92(void)
 			pDataWriter->writeStringRef(pIMGEntry->getEntryName(), 40);
 			pDataWriter->writeString(8);
 
-			Events::trigger(SERIALIZE_IMG_ENTRY, this);
+			Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
 		}
 
 		if ((uiBodyStart % 2048) != 0 && uiEntryCount > 0)
@@ -877,7 +877,7 @@ void					CIMGFormat::serializeVersionFastman92(void)
 
 			pIMGEntry->setEntryOffsetInSectors(vecNewEntryPositions[i++]);
 
-			Events::trigger(SERIALIZE_IMG_ENTRY, this);
+			Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
 		}
 	}
 
@@ -944,7 +944,7 @@ void					CIMGFormat::serializeVersion3_Encrypted(void)
 		uint32 uiRemainder = pIMGEntry->getEntrySize() % 2048;
 		pDataWriter->writeUint16((uint16)(pIMGEntry->getFlags() | ((uint16)(uiRemainder == 0 ? 0 : (2048 - uiRemainder)))));
 
-		Events::trigger(SERIALIZE_IMG_ENTRY, this);
+		Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
 	}
 
 	string strEntryName;
@@ -982,7 +982,7 @@ void					CIMGFormat::serializeVersion3_Encrypted(void)
 
 		pIMGEntry->setEntryOffsetInSectors(vecNewEntryPositions[i++]);
 
-		Events::trigger(SERIALIZE_IMG_ENTRY, this);
+		Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
 	}
 
 	// finalize IMG data reading/writing
@@ -1043,7 +1043,7 @@ void					CIMGFormat::serializeVersion3_Unencrypted(void)
 		uint32 uiRemainder = pIMGEntry->getEntrySize() % 2048;
 		pDataWriter->writeUint16((uint16)((pIMGEntry->getFlags() | ((uint16)(uiRemainder == 0 ? 0 : (2048 - uiRemainder))))));
 
-		Events::trigger(SERIALIZE_IMG_ENTRY, this);
+		Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
 	}
 
 	string strEntryName;
@@ -1069,7 +1069,7 @@ void					CIMGFormat::serializeVersion3_Unencrypted(void)
 
 		pIMGEntry->setEntryOffsetInSectors(vecNewEntryPositions[i++]);
 
-		Events::trigger(SERIALIZE_IMG_ENTRY, this);
+		Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
 	}
 
 	// finalize IMG data reading/writing
@@ -1357,7 +1357,7 @@ uint32						CIMGFormat::replaceEntries(vector<string>& vecPaths, vector<string>&
 		CIMGEntry *pIMGEntry = getEntryByName(strNewEntryName);
 		if (!pIMGEntry)
 		{
-			Events::trigger(REPLACE_IMG_ENTRY_SKIPPED_ENTRY, this);
+			Events::triggerConst(REPLACE_IMG_ENTRY_SKIPPED_ENTRY, this);
 			continue;
 		}
 
@@ -1382,7 +1382,7 @@ uint32						CIMGFormat::replaceEntries(vector<string>& vecPaths, vector<string>&
 		vecReplacedEntryNames.push_back(strNewEntryName);
 		vecReplacedEntries.push_back(pIMGEntry);
 
-		Events::trigger(REPLACE_IMG_ENTRY, this);
+		Events::triggerConst(REPLACE_IMG_ENTRY, this);
 	}
 
 	return uiReplaceCount;
@@ -1591,7 +1591,7 @@ uint32			CIMGFormat::merge(string& strSecondIMGPath, vector<string>& vecImported
 
 			vecImportedEntryNames.push_back(pOutEntry->getEntryName());
 
-			Events::trigger(MERGE_IMG_ENTRY, this);
+			Events::triggerConst(MERGE_IMG_ENTRY, this);
 		}
 
 		// finalize
@@ -1634,7 +1634,7 @@ void					CIMGFormat::split(vector<CIMGEntry*>& vecIMGEntries, string& strOutPath
 			pIMGEntry2->setRWVersion(pIMGEntry->getRWVersion());
 		}
 
-		Events::trigger(SPLIT_IMG_ENTRY, this);
+		Events::triggerConst(SPLIT_IMG_ENTRY, this);
 	}
 
 	pIMGFile->serializeViaFile(strOutPath);
@@ -1676,7 +1676,7 @@ void					CIMGFormat::exportMultiple(vector<CIMGEntry*>& vecIMGEntries, string st
 			string strFileContent = pDataReader->readString(pIMGEntry->getEntrySize());
 			CFile::storeFile(strFolderPath + pIMGEntry->getEntryName(), strFileContent, false, true);
 
-			Events::trigger(EXPORT_IMG_ENTRY, this);
+			Events::triggerConst(EXPORT_IMG_ENTRY, this);
 		}
 
 		pDataReader->close();
