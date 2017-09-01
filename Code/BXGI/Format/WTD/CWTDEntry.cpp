@@ -8,7 +8,7 @@ using namespace bxcf;
 using namespace bxgi;
 
 CWTDEntry::CWTDEntry(void) :
-	m_eD3DFormat(D3DFMT_UNKNOWN),
+	m_uiD3DFormat(D3DFMT_UNKNOWN),
 	m_ERasterDataFormat(bxcf::RASTERDATAFORMAT_UNKNOWN),
 	m_uiRawDataOffset(0),
 	m_uiTextureHash(0),
@@ -23,7 +23,7 @@ void					CWTDEntry::setRasterDataFormat(ERasterDataFormat ERasterDataFormatValue
 	m_ERasterDataFormat = ERasterDataFormatValue;
 	if (bUpdateD3DFormat)
 	{
-		m_eD3DFormat = CImageManager::getD3DFormatFromRasterDataFormat(ERasterDataFormatValue);
+		m_uiD3DFormat = CImageManager::getD3DFormatFromRasterDataFormat(ERasterDataFormatValue);
 	}
 }
 

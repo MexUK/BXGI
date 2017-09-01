@@ -11,8 +11,8 @@ class bxgi::CIntermediateBoundingObject
 public:
 	CIntermediateBoundingObject(void);
 
-	void								setBoundingObjectType(bxgi::EIntermediateBoundingObjectType EIntermediateBoundingObjectTypeValue) { m_eBoundingObjectType = EIntermediateBoundingObjectTypeValue; }
-	bxgi::EIntermediateBoundingObjectType		getBoundingObjectType(void) { return m_eBoundingObjectType; }
+	void										setBoundingObjectType(bxgi::EIntermediateBoundingObjectType EIntermediateBoundingObjectTypeValue) { m_uiBoundingObjectType = EIntermediateBoundingObjectTypeValue; }
+	bxgi::EIntermediateBoundingObjectType		getBoundingObjectType(void) { return m_uiBoundingObjectType; }
 
 	void								setMin(bxcf::Vec4f vecMin) { m_vecMin = vecMin; }
 	bxcf::Vec4f							getMin(void) { return m_vecMin; }
@@ -33,7 +33,7 @@ public:
 	bool								doesHaveNormals(void) { return m_bHasNormals; }
 
 private:
-	bxgi::EIntermediateBoundingObjectType		m_eBoundingObjectType;
+	bxgi::EIntermediateBoundingObjectType		m_uiBoundingObjectType;
 	union
 	{
 		struct

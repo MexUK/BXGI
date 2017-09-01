@@ -31,8 +31,8 @@ public:
 	static std::vector<bxgi::ERWSection>				getRWSections(void);
 	static std::unordered_map<bxgi::ERWSection, bool>&	getRWSectionsContainingStruct(void) { return m_umapRWSectionsContainingStruct; }
 
-	void							setSectionId(bxgi::ERWSection eSectionId) { m_eSectionId = eSectionId; }
-	bxgi::ERWSection				getSectionId(void) { return m_eSectionId; }
+	void							setSectionId(bxgi::ERWSection eSectionId) { m_uiSectionId = eSectionId; }
+	bxgi::ERWSection				getSectionId(void) { return m_uiSectionId; }
 
 	void							setSectionSize(uint32 uiSectionSize) { m_uiSectionSize = uiSectionSize; }
 	uint32							getSectionSize(void) { return m_uiSectionSize; }
@@ -55,7 +55,7 @@ private:
 	static void						initRWSections(void);
 
 protected:
-	bxgi::ERWSection				m_eSectionId;
+	bxgi::ERWSection				m_uiSectionId;
 	uint32							m_uiSectionSize;
 	uint32							m_uiSectionRWVersion;
 	uint32							m_uiStructSectionSize;

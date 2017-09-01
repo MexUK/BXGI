@@ -11,7 +11,7 @@ using namespace bxgi;
 CDATPathFormat::CDATPathFormat(void) :
 	CFormat(true)
 {
-	m_header.m_ePathsFormat = DAT_PATH_UNKNOWN;
+	m_header.m_uiPathsFormat = DAT_PATH_UNKNOWN;
 	m_header.m_uiPathNodeCount = 0;
 	m_header.m_uiNaviNodeCount = 0;
 	m_header.m_uiPedNodeCount = 0;
@@ -51,7 +51,7 @@ void				CDATPathFormat::unserializeDefault(void)
 	uint32 uiSize;
 
 	CDATEntry_Paths_Default_Header *pHeader1 = pDataReader->readStruct<CDATEntry_Paths_Default_Header>();
-	m_header.m_ePathsFormat = DAT_PATH_DEFAULT;
+	m_header.m_uiPathsFormat = DAT_PATH_DEFAULT;
 	m_header.m_uiPathNodeCount = pHeader1->m_uiPathNodeCount;
 	m_header.m_uiVehicleNodeCount = pHeader1->m_uiVehicleNodeCount;
 	m_header.m_uiPedNodeCount = pHeader1->m_uiPedNodeCount;
@@ -148,7 +148,7 @@ void				CDATPathFormat::unserializeFastman92(void)
 	//uint32 uiSeek = 0;
 	//uint32 uiSize;
 
-	m_header.m_ePathsFormat = DAT_PATH_FASTMAN92;
+	m_header.m_uiPathsFormat = DAT_PATH_FASTMAN92;
 	uint32 uiFourCC = pDataReader->readUint32(); // 0xFFFFFFFF
 	string strFormat = pDataReader->readString(4); // FM92
 	uint8 ucNicknameLength = pDataReader->readUint8();

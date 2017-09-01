@@ -11,8 +11,8 @@ class bxgi::CSectionLinesEntry
 public:
 	CSectionLinesEntry(FormatClass *pFormat) :
 		m_pFormat(pFormat),
-		m_eEntryType(SECTION_LINES_ENTRY_UNKNOWN),
-		m_eSectionType((SectionEnum)0),
+		m_uiEntryType(SECTION_LINES_ENTRY_UNKNOWN),
+		m_uiSectionType((SectionEnum)0),
 		m_ucFormatType(0)
 	{
 	}
@@ -25,11 +25,11 @@ public:
 	void						setFormat(FormatClass* pFormat) { m_pFormat = pFormat; }
 	FormatClass*				getFormat(void) { return m_pFormat; }
 
-	void						setEntryType(bxgi::ESectionLinesEntryType eEntryType) { m_eEntryType = eEntryType; }
-	bxgi::ESectionLinesEntryType		getEntryType(void) { return m_eEntryType; }
+	void							setEntryType(bxgi::ESectionLinesEntryType eEntryType) { m_uiEntryType = eEntryType; }
+	bxgi::ESectionLinesEntryType	getEntryType(void) { return m_uiEntryType; }
 
-	void						setSectionType(SectionEnum eSectionValue) { m_eSectionType = eSectionValue; }
-	SectionEnum					getSectionType(void) { return m_eSectionType; }
+	void						setSectionType(SectionEnum eSectionValue) { m_uiSectionType = eSectionValue; }
+	SectionEnum					getSectionType(void) { return m_uiSectionType; }
 
 	void						setComment(std::string& strComment) { m_strComment = strComment; }
 	std::string&				getComment(void) { return m_strComment; }
@@ -38,9 +38,9 @@ public:
 	uint8						getFormatType(void) { return m_ucFormatType; }
 
 private:
-	FormatClass*				m_pFormat;
-	bxgi::ESectionLinesEntryType		m_eEntryType;
-	SectionEnum					m_eSectionType;
-	std::string					m_strComment;
-	uint8						m_ucFormatType;
+	FormatClass*					m_pFormat;
+	bxgi::ESectionLinesEntryType	m_uiEntryType;
+	SectionEnum						m_uiSectionType;
+	std::string						m_strComment;
+	uint8							m_ucFormatType;
 };

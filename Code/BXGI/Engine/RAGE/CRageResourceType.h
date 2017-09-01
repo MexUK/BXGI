@@ -13,8 +13,8 @@ public:
 	std::string					getResourceName(void);
 	bxgi::ERageResourceType		getResourceId(void);
 
-	void						setResourceTypeId(bxgi::ERageResourceType eResourceTypeId) { m_eResourceTypeId = eResourceTypeId; }
-	bxgi::ERageResourceType		getResourceTypeId(void) { return m_eResourceTypeId; }
+	void						setResourceTypeId(bxgi::ERageResourceType eResourceTypeId) { m_uiResourceTypeId = eResourceTypeId; }
+	bxgi::ERageResourceType		getResourceTypeId(void) { return m_uiResourceTypeId; }
 
 	void						setIdentifier(uint32 uiIdentifier) { m_uiIdentifier = uiIdentifier; }
 	uint32						getIdentifier(void) { return m_uiIdentifier; }
@@ -26,7 +26,7 @@ public:
 	std::string					getFileExtension(void) { return m_strFileExtension; }
 
 private:
-	bxgi::ERageResourceType		m_eResourceTypeId;
+	bxgi::ERageResourceType		m_uiResourceTypeId;
 	uint32						m_uiIdentifier;
 	std::string					m_strName;
 	std::string					m_strFileExtension;

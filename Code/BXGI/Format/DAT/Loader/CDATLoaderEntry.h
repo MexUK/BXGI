@@ -10,13 +10,13 @@ class bxgi::CDATLoaderEntry
 public:
 	void						unload(void) {}
 
-	void						setEntryType(EDATLoaderEntryType eEntryType) { m_eEntryType = eEntryType; }
-	EDATLoaderEntryType			getEntryType(void) { return m_eEntryType; }
+	void						setEntryType(EDATLoaderEntryType eEntryType) { m_uiEntryType = eEntryType; }
+	EDATLoaderEntryType			getEntryType(void) { return m_uiEntryType; }
 
 	void						setEntryValues(std::deque<std::string>& deqValues) { m_deqValues = deqValues; }
 	std::deque<std::string>&	getEntryValues(void) { return m_deqValues; }
 
 private:
-	EDATLoaderEntryType			m_eEntryType;
+	EDATLoaderEntryType			m_uiEntryType;
 	std::deque<std::string>		m_deqValues;
 };

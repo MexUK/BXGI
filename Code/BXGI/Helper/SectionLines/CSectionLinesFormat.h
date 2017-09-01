@@ -48,12 +48,12 @@ protected:
 	void												serializeText(void);
 
 private:
-	void												setActiveReadSection(SectionEnum eActiveReadSection) { m_eActiveReadSection = eActiveReadSection; }
-	SectionEnum											getActiveReadSection(void) { return m_eActiveReadSection; }
+	void												setActiveReadSection(SectionEnum eActiveReadSection) { m_uiActiveReadSection = eActiveReadSection; }
+	SectionEnum											getActiveReadSection(void) { return m_uiActiveReadSection; }
 
 private:
 	std::map<SectionEnum, std::vector<EntryClass*>>		m_umapSectionEntries;
-	SectionEnum											m_eActiveReadSection;
+	SectionEnum											m_uiActiveReadSection;
 };
 
 
@@ -62,7 +62,7 @@ private:
 template<class FormatClass, class EntryClass, typename SectionEnum, class OtherEntryClass, class SectionEntryClass, class DataEntryClass>
 bxgi::CSectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntryClass, SectionEntryClass, DataEntryClass>::CSectionLinesFormat(void) :
 	CFormat(false),
-	m_eActiveReadSection((SectionEnum)0)
+	m_uiActiveReadSection((SectionEnum)0)
 {
 }
 

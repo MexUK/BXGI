@@ -23,6 +23,6 @@ ERageResourceType	CRageResourceType::getResourceId(void)
 	}
 	else
 	{
-		return m_eResourceTypeId;
+		return m_uiResourceTypeId;
 	}
 }

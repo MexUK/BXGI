@@ -17,7 +17,7 @@ void							CRWSection_UnknownSection::unserialize(void)
 {
 	CDataReader *pDataReader = CDataReader::get();
 
-	m_uiActualSectionId = m_eSectionId;
+	m_uiActualSectionId = m_uiSectionId;
 	m_strData = pDataReader->readString(m_uiSectionSize);
 }
 

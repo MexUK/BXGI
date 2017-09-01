@@ -28,7 +28,7 @@ using namespace bxgi;
 unordered_map<ERWSection, bool>		CRWSection::m_umapRWSectionsContainingStruct;
 
 CRWSection::CRWSection(void) :
-	m_eSectionId(RW_SECTION_UNKNOWN),
+	m_uiSectionId(RW_SECTION_UNKNOWN),
 	m_uiSectionSize(0),
 	m_uiSectionRWVersion(0),
 	m_bSectionHeaderSkipped(false),
@@ -55,7 +55,7 @@ void				CRWSection::serialize(void)
 {
 	/*
 	todo
-	if (m_eSectionId == RW_SECTION_UNKNOWN)
+	if (m_uiSectionId == RW_SECTION_UNKNOWN)
 	{
 		return;
 	}
@@ -66,12 +66,12 @@ void				CRWSection::serialize(void)
 	
 	if (!isSectionHeaderSkipped())
 	{
-		pDataWriter->writeUint32(m_eSectionId);
+		pDataWriter->writeUint32(m_uiSectionId);
 		pDataWriter->writeUint32(0); // placeholder
 		pDataWriter->writeUint32(uiVersionCC);
 	}
 	
-	if (doesRWSectionContainStruct(m_eSectionId))
+	if (doesRWSectionContainStruct(m_uiSectionId))
 	{
 		pDataWriter->writeUint32(RW_SECTION_STRUCT);
 		pDataWriter->writeUint32(0); // placeholder
@@ -122,7 +122,7 @@ void				CRWSection::fillPlaceholdersForSerialization(uint32 uiSectionByteCount, 
 		strData = strData.substr(0, (strData.length() - uiSectionStartPosition) + 4) + CString2::packUint32(uiSectionByteCount, false) + strData.substr((strData.length() - uiSectionStartPosition) + 8);
 	}
 
-	if (doesRWSectionContainStruct(m_eSectionId))
+	if (doesRWSectionContainStruct(m_uiSectionId))
 	{
 		uint32 uiStructStartPosition = uiSectionByteCount;
 		strData = strData.substr(0, (strData.length() - uiStructStartPosition) + 4) + CString2::packUint32(uiSectionStructByteCount, false) + strData.substr((strData.length() - uiStructStartPosition) + 8);

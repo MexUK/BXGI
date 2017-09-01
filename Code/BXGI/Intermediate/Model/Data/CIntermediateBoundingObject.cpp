@@ -3,7 +3,7 @@
 using namespace bxgi;
 
 CIntermediateBoundingObject::CIntermediateBoundingObject(void) :
-	m_eBoundingObjectType(BOUNDING_OBJECT_TYPE_SPHERE),
+	m_uiBoundingObjectType(BOUNDING_OBJECT_TYPE_SPHERE),
 	m_fRadius(0.0f),
 	m_bHasPositions(false),
 	m_bHasNormals(false)

@@ -15,8 +15,8 @@ public:
 	
 	void												unload(void);
 
-	void												setPathsFormat(bxgi::EDATPathFormat eFormat) { m_header.m_ePathsFormat = eFormat; }
-	bxgi::EDATPathFormat										getPathsFormat(void) { return m_header.m_ePathsFormat; }
+	void												setPathsFormat(bxgi::EDATPathFormat eFormat) { m_header.m_uiPathsFormat = eFormat; }
+	bxgi::EDATPathFormat								getPathsFormat(void) { return m_header.m_uiPathsFormat; }
 
 	void												applyOffsetToPositions(bxcf::Vec3f& vecPositionOffset);
 
@@ -24,7 +24,7 @@ public:
 	void												addNaviNode(CDATEntry_Paths_General_NaviNode naviNode);
 	void												addLink(CDATEntry_Paths_General_Link link);
 
-	bxgi::CDATEntry_Paths_General_Header&						getHeader(void) { return m_header; }
+	bxgi::CDATEntry_Paths_General_Header&				getHeader(void) { return m_header; }
 	std::vector<CDATEntry_Paths_General_PathNode>&		getPathNodes(void) { return m_vecPathNodes; }
 	std::vector<CDATEntry_Paths_General_NaviNode>&		getNaviNodes(void) { return m_vecNaviNodes; }
 	std::vector<CDATEntry_Paths_General_Link>&			getLinks(void) { return m_vecLinks; }
@@ -46,11 +46,11 @@ private:
 	void												serializeDefault(void);
 	void												serializeFastman92(void); 
 	
-	bxgi::EDATPathFormat										detectPathsFormat(void);
+	bxgi::EDATPathFormat								detectPathsFormat(void);
 
 public: // todo - make this access specifier private
-	uint32												m_uiFileIndex;
-	bxgi::CDATEntry_Paths_General_Header						m_header;
+	uint32													m_uiFileIndex;
+	bxgi::CDATEntry_Paths_General_Header					m_header;
 	std::vector<bxgi::CDATEntry_Paths_General_PathNode>		m_vecPathNodes;
 	std::vector<bxgi::CDATEntry_Paths_General_NaviNode>		m_vecNaviNodes;
 	std::vector<bxgi::CDATEntry_Paths_General_Link>			m_vecLinks;
