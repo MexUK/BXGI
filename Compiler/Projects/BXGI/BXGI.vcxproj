@@ -140,6 +140,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TBounds.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TBox.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TFace.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TFaceGroup.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TSphere.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TSurface.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TVertex.h" />
     <ClInclude Include="..\..\..\Code\BXGI\nsbxgi.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Event\EEvent.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\GameFormat.h" />
@@ -211,7 +218,6 @@
     <ClInclude Include="..\..\..\Code\BXGI\Format\COL\COLVersion.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\COL\COLVersionManager.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\COL\ECOLVersion.h" />
-    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\TShapes.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Animgrp\DATAnimgrpEntry.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Animgrp\DATAnimgrpFormat.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Animgrp\DATAnimgrpSection.h" />

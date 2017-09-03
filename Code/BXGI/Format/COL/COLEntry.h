@@ -2,7 +2,12 @@
 
 #include "nsbxgi.h"
 #include "Type/Vector/Vec3f.h"
-#include "TShapes.h"
+#include "Format/COL/Parts/TBounds.h"
+#include "Format/COL/Parts/TSphere.h"
+#include "Format/COL/Parts/TBox.h"
+#include "Format/COL/Parts/TVertex.h"
+#include "Format/COL/Parts/TFace.h"
+#include "Format/COL/Parts/TFaceGroup.h"
 #include "COLVersion.h"
 #include <string>
 #include <vector>

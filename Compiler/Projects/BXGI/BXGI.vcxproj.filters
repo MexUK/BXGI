@@ -301,6 +301,12 @@
     <Filter Include="Source Files\Event">
       <UniqueIdentifier>{23fc71b2-8909-4cc6-9bf0-9791fed9eef8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Format\COL\Parts">
+      <UniqueIdentifier>{f7a1ba39-0583-4e2d-876c-3f4d5436861e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\COL\Parts">
+      <UniqueIdentifier>{bddb19cd-b649-4610-b42f-d70311e2bdea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\BXGI\Game\PlatformedGame.cpp">
@@ -782,9 +788,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\TShapes.h">
-      <Filter>Header Files\Format\COL</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Event\EEvent.h">
       <Filter>Header Files\Event</Filter>
     </ClInclude>
@@ -1408,6 +1411,27 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\RW\Entries\_2dEffect.h">
       <Filter>Header Files\Format\RW\Entries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TSphere.h">
+      <Filter>Header Files\Format\COL\Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TSurface.h">
+      <Filter>Header Files\Format\COL\Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TVertex.h">
+      <Filter>Header Files\Format\COL\Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TBounds.h">
+      <Filter>Header Files\Format\COL\Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TBox.h">
+      <Filter>Header Files\Format\COL\Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TFace.h">
+      <Filter>Header Files\Format\COL\Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TFaceGroup.h">
+      <Filter>Header Files\Format\COL\Parts</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

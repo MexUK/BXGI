@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Type/Types.h"
+
 namespace bxgi
 {
 	enum EEvent;
