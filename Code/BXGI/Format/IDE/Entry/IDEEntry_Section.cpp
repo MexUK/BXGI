@@ -1,0 +1,26 @@
+#include "IDEEntry_Section.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
+#include "Format/IDE/IDEFormat.h"
+
+using namespace bxcf;
+using namespace bxgi;
+
+IDEEntry_Section::IDEEntry_Section(IDEFormat *pIDEFormat) :
+	IDEEntry(pIDEFormat)
+{
+}
+
+void		IDEEntry_Section::unserialize(void)
+{
+	DataReader *pDataReader = DataReader::get();
+
+	// setSectionType() has already been called, as the EIDESectionType has already been detected.
+}
+
+void		IDEEntry_Section::serialize(void)
+{
+	DataWriter *pDataWriter = DataWriter::get();
+
+	pDataWriter->writeString(getFormat()->getSectionText(getSectionType()));
+}
