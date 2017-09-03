@@ -1,10 +1,10 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Pool/CVectorPool.h"
+#include "Pool/VectorPool.h"
 #include "CIntermediateModel.h"
 
-class bxgi::CIntermediateModelFormat : public bxcf::CVectorPool<bxgi::CIntermediateModel*>
+class bxgi::CIntermediateModelFormat : public bxcf::VectorPool<bxgi::CIntermediateModel*>
 {
 public:
 	void								unload(void);

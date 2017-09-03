@@ -3,11 +3,11 @@
 #include "nsbxgi.h"
 #include "Type/Types.h"
 #include "Format/IPL/Entry/DataEntry/CIPLEntry_PATH.h"
-#include "Pool/CVectorPool.h"
+#include "Pool/VectorPool.h"
 
 class bxgi::CIPLEntry;
 
-class bxgi::CIPLEntry_PATH_Group : public bxgi::CIPLEntry_PATH, public bxcf::CVectorPool<bxgi::CIPLEntry*>
+class bxgi::CIPLEntry_PATH_Group : public bxgi::CIPLEntry_PATH, public bxcf::VectorPool<bxgi::CIPLEntry*>
 {
 public:
 	CIPLEntry_PATH_Group(bxgi::CIPLFormat *pIPLFormat);

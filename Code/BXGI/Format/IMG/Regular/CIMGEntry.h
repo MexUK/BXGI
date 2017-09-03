@@ -7,8 +7,8 @@
 #include "Format/IMG/Regular/Raw/CIMGEntry_Version3.h"
 #include "Format/IMG/Fastman92/CIMGEntry_Fastman92.h"
 #include "Compression/ECompressionAlgorithm.h"
-#include "Static/CMath.h"
-#include "Static/CString2.h"
+#include "Static/Math.h"
+#include "Static/String2.h"
 #include "Format/IMG/Regular/CIMGFormat.h"
 #include <string>
 
@@ -33,14 +33,14 @@ public:
 
 	void					setEntryOffset(uint32 uiEntryOffsetInBytes) { m_uiEntryOffset = uiEntryOffsetInBytes; } // in bytes
 	inline uint32			getEntryOffset(void) { return m_uiEntryOffset; } // in bytes
-	void					setEntryOffsetInSectors(uint32 uiEntryOffsetInSectors) { m_uiEntryOffset = bxcf::CMath::convertSectorsToBytes(uiEntryOffsetInSectors); } // in sectors (1 sector = 2048 bytes)
-	inline uint32			getEntryOffsetInSectors(void) { return bxcf::CMath::convertBytesToSectors(m_uiEntryOffset); } // in sectors (1 sector = 2048 bytes)
+	void					setEntryOffsetInSectors(uint32 uiEntryOffsetInSectors) { m_uiEntryOffset = bxcf::Math::convertSectorsToBytes(uiEntryOffsetInSectors); } // in sectors (1 sector = 2048 bytes)
+	inline uint32			getEntryOffsetInSectors(void) { return bxcf::Math::convertBytesToSectors(m_uiEntryOffset); } // in sectors (1 sector = 2048 bytes)
 
 	void					setEntrySize(uint32 uiEntrySize); // in bytes
 	inline uint32			getEntrySize(void) { return m_uiEntrySize; } // in bytes
 	uint32					getPaddedEntrySize(void); // in bytes
-	void					setEntrySizeInSectors(uint32 uiEntrySizeInSectors) { m_uiEntrySize = bxcf::CMath::convertSectorsToBytes(uiEntrySizeInSectors); } // in sectors (1 sector = 2048 bytes)
-	inline uint32			getEntrySizeInSectors(void) { return bxcf::CMath::convertBytesToSectors(getPaddedEntrySize()); } // in sectors (1 sector = 2048 bytes)
+	void					setEntrySizeInSectors(uint32 uiEntrySizeInSectors) { m_uiEntrySize = bxcf::Math::convertSectorsToBytes(uiEntrySizeInSectors); } // in sectors (1 sector = 2048 bytes)
+	inline uint32			getEntrySizeInSectors(void) { return bxcf::Math::convertBytesToSectors(getPaddedEntrySize()); } // in sectors (1 sector = 2048 bytes)
 
 	void					setEntryName(std::string& strEntryName) { m_strEntryName = strEntryName; } // dynamic length
 	inline std::string&		getEntryName(void) { return m_strEntryName; }  // dynamic length
@@ -57,8 +57,8 @@ public:
 
 	void					setUncompressedSize(uint32 uiUncompressedSize) { m_uiUncompressedSize = uiUncompressedSize; } // in bytes
 	uint32					getUncompressedSize(void) { return m_uiUncompressedSize; } // in bytes
-	void					setUncompressedSizeInSectors(uint32 uiUncompressedSizeInSectors) { m_uiUncompressedSize = bxcf::CMath::convertSectorsToBytes(uiUncompressedSizeInSectors); } // in sectors (1 sector = 2048 bytes)
-	uint32					getUncompressedSizeInSectors(void) { return bxcf::CMath::convertBytesToSectors(m_uiUncompressedSize); } // in sectors (1 sector = 2048 bytes)
+	void					setUncompressedSizeInSectors(uint32 uiUncompressedSizeInSectors) { m_uiUncompressedSize = bxcf::Math::convertSectorsToBytes(uiUncompressedSizeInSectors); } // in sectors (1 sector = 2048 bytes)
+	uint32					getUncompressedSizeInSectors(void) { return bxcf::Math::convertBytesToSectors(m_uiUncompressedSize); } // in sectors (1 sector = 2048 bytes)
 
 	void					setCompression(uint8 ucCompressionMethod) { m_uiFlags = (m_uiFlags & 4294967280) | ucCompressionMethod; } // old - todo - remove?
 	uint8					getCompression(void) { return m_uiFlags & 0xF; } // old
@@ -154,24 +154,24 @@ private:
 
 inline void					bxgi::CIMGEntry::unserializeVersion1Or2(bxgi::RG_CIMGEntry_Version1Or2 *pRGIMGEntry)
 {
-	m_uiEntryOffset = bxcf::CMath::convertSectorsToBytes(pRGIMGEntry->m_uiOffsetInSectors);
-	m_uiEntrySize = bxcf::CMath::convertSectorsToBytes(pRGIMGEntry->m_uiSizeInSectors);
-	m_strEntryName = bxcf::CString2::rtrimFromLeft(std::string((char*)pRGIMGEntry->m_szName));
+	m_uiEntryOffset = bxcf::Math::convertSectorsToBytes(pRGIMGEntry->m_uiOffsetInSectors);
+	m_uiEntrySize = bxcf::Math::convertSectorsToBytes(pRGIMGEntry->m_uiSizeInSectors);
+	m_strEntryName = bxcf::String2::rtrimFromLeft(std::string((char*)pRGIMGEntry->m_szName));
 }
 
 inline void					bxgi::CIMGEntry::unserializeVersion3(bxgi::RG_CIMGEntry_Version3 *pRGIMGEntry)
 {
 	setRageResourceTypeByIdentifier(pRGIMGEntry->m_uiRageResourceTypeIdentifier);
-	m_uiEntryOffset = bxcf::CMath::convertSectorsToBytes(pRGIMGEntry->m_uiOffsetInSectors);
-	m_uiEntrySize = bxcf::CMath::convertSectorsToBytes(pRGIMGEntry->m_usSizeInSectors) - (pRGIMGEntry->m_usFlags & 2047);
+	m_uiEntryOffset = bxcf::Math::convertSectorsToBytes(pRGIMGEntry->m_uiOffsetInSectors);
+	m_uiEntrySize = bxcf::Math::convertSectorsToBytes(pRGIMGEntry->m_usSizeInSectors) - (pRGIMGEntry->m_usFlags & 2047);
 	m_uiFlags = pRGIMGEntry->m_usFlags;
 }
 
 inline void					bxgi::CIMGEntry::unserializeVersionFastman92(bxgi::CIMGEntry_Fastman92 *pRawIMGEntry)
 {
-	m_uiEntryOffset = bxcf::CMath::convertSectorsToBytes(pRawIMGEntry->m_uiOffsetInSectors);
-	m_uiEntrySize = bxcf::CMath::convertSectorsToBytes(pRawIMGEntry->m_uiSizeInSectors);
-	m_uiUncompressedSize = bxcf::CMath::convertSectorsToBytes(pRawIMGEntry->m_uiUncompressedSizeInSectors);
+	m_uiEntryOffset = bxcf::Math::convertSectorsToBytes(pRawIMGEntry->m_uiOffsetInSectors);
+	m_uiEntrySize = bxcf::Math::convertSectorsToBytes(pRawIMGEntry->m_uiSizeInSectors);
+	m_uiUncompressedSize = bxcf::Math::convertSectorsToBytes(pRawIMGEntry->m_uiUncompressedSizeInSectors);
 	m_ECompressionAlgorithm = bxgi::CIMGFormat::getCompressionAlgorithmIdFromFastman92CompressionAlgorithmId((bxgi::EIMGVersionFastman92CompressionAlgorithm)pRawIMGEntry->m_uiCompressionAlgorithmId);
-	m_strEntryName = bxcf::CString2::rtrimFromLeft(std::string((char*)pRawIMGEntry->m_strName));
+	m_strEntryName = bxcf::String2::rtrimFromLeft(std::string((char*)pRawIMGEntry->m_strName));
 }

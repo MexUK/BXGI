@@ -1,15 +1,15 @@
 #include "CWTDManager.h"
 #include "CWTDEntry.h"
-#include "Static/CFile.h"
-#include "Static/CString2.h"
+#include "Static/File.h"
+#include "Static/String2.h"
 //#include "CIMGManager.h" // WTD Manager project only relies upon IMG Manager project for it's decompressZLib function.
-#include "Static/CDebug.h"
+#include "Static/Debug.h"
 #include "CWTDMipmap.h"
 #include "Intermediate/Texture/CIntermediateTextureFormat.h"
 #include "Intermediate/Texture/CIntermediateTexture.h"
 #include "Intermediate/Texture/Data/CIntermediateTextureMipmap.h"
-#include "Image/CImageManager.h"
-#include "Compression/CCompressionManager.h"
+#include "Image/ImageManager.h"
+#include "Compression/CompressionManager.h"
 #include "Image/ERasterDataFormat.h"
 
 using namespace std;
@@ -80,7 +80,7 @@ CWTDFormat*				CWTDManager::convertIntermediateTextureFileToWTDFile(CIntermediat
 		CWTDEntry *pWTDEntry = new CWTDEntry;
 
 		pWTDEntry->setEntryName(pGeneralTexture->getName());
-		pWTDEntry->setD3DFormat(CImageManager::getD3DFormatFromRasterDataFormat(pGeneralTexture->getRasterDataFormat()));
+		pWTDEntry->setD3DFormat(ImageManager::getD3DFormatFromRasterDataFormat(pGeneralTexture->getRasterDataFormat()));
 		pWTDEntry->setImageSize(true, pGeneralTexture->getSize().x);
 		pWTDEntry->setImageSize(false, pGeneralTexture->getSize().y);
 		

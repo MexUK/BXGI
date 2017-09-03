@@ -1,15 +1,15 @@
 #include "CWTDFormat.h"
-#include "Static/CFile.h"
-#include "Stream/CDataWriter.h"
+#include "Static/File.h"
+#include "Stream/DataWriter.h"
 #include "CWTDManager.h"
-#include "Static/CString2.h"
+#include "Static/String2.h"
 #include "Intermediate/Texture/CIntermediateTextureFormat.h"
 #include "Intermediate/Texture/CIntermediateTexture.h"
 #include "Intermediate/Texture/Data/CIntermediateTextureMipmap.h"
-#include "Compression/CCompressionManager.h"
-#include "Image/CImageManager.h"
-#include "Stream/CDataReader.h"
-#include "Static/CMemory.h"
+#include "Compression/CompressionManager.h"
+#include "Image/ImageManager.h"
+#include "Stream/DataReader.h"
+#include "Static/Memory.h"
 #include "Format/WTD/Raw/CWTDFormat_Header1.h"
 #include "Format/WTD/Raw/CWTDFormat_Header2.h"
 #include "Format/WTD/Raw/CWTDEntry_RG.h"
@@ -35,18 +35,18 @@ void					CWTDFormat::unload(void)
 
 void					CWTDFormat::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	// header 1 and decompress whole file except first 12 bytes
 	uint32 uiSystemSegmentSize, uiGPUSegmentSize;
 	string strData = decompressWTDFormatData(uiSystemSegmentSize, uiGPUSegmentSize);
-	pDataReader->setStreamType(DATA_STREAM_MEMORY); // todo - make this call CDataReader::close() or something so that is closes the file handle
+	pDataReader->setStreamType(DATA_STREAM_MEMORY); // todo - make this call DataReader::close() or something so that is closes the file handle
 	pDataReader->setData(strData);
 	pDataReader->setSeek(0);
 
 	// header 2
 	RG_CWTDFormat_Header2 *pHeader2 = pDataReader->readStruct<RG_CWTDFormat_Header2>();
-	//pHeader2->m_uiHashTableOffset = CString2::swapEndian(pHeader2->m_uiHashTableOffset); // todo - is this code needed?
+	//pHeader2->m_uiHashTableOffset = String2::swapEndian(pHeader2->m_uiHashTableOffset); // todo - is this code needed?
 	pHeader2->m_uiHashTableOffset = convertULongToOffset(pHeader2->m_uiHashTableOffset);
 	pHeader2->m_usTextureCount = (uint16) convertULongToOffset(pHeader2->m_usTextureCount);
 	pHeader2->m_uiTextureListOffset = convertULongToOffset(pHeader2->m_uiTextureListOffset);
@@ -77,7 +77,7 @@ void					CWTDFormat::unserialize(void)
 		RG_CWTDEntry *pWTDEntry_RG = &(pWTDEntries_RG[i]);
 
 		pDataReader->setSeek(vecInfoOffsets[i]);
-		CMemory::copyAndDeleteUint8Array(pWTDEntry_RG, pDataReader->readCString(sizeof(RG_CWTDEntry)), sizeof(RG_CWTDEntry));
+		Memory::copyAndDeleteUint8Array(pWTDEntry_RG, pDataReader->readCString(sizeof(RG_CWTDEntry)), sizeof(RG_CWTDEntry));
 	}
 
 	// convert ints to offsets
@@ -88,8 +88,8 @@ void					CWTDFormat::unserialize(void)
 		pWTDEntry_RG->m_uiBlockMapOffset2 = convertULongToOffset(pWTDEntry_RG->m_uiBlockMapOffset2);
 		pWTDEntry_RG->m_uiNameOffset = convertULongToOffset(pWTDEntry_RG->m_uiNameOffset);
 
-		//D3DFORMAT eD3DFormat = getD3DFormatFromFourCC(CFileParser::get()->readString(4));
-		//ERasterDataFormat ERasterDataFormatValue = CImageManager::getRasterDataFormatFromD3DFormat(eD3DFormat);
+		//D3DFORMAT eD3DFormat = getD3DFormatFromFourCC(FileParser::get()->readString(4));
+		//ERasterDataFormat ERasterDataFormatValue = ImageManager::getRasterDataFormatFromD3DFormat(eD3DFormat);
 
 		pWTDEntry_RG->m_uiPrevTextureInfoOffset = convertULongToOffset(pWTDEntry_RG->m_uiPrevTextureInfoOffset);
 		pWTDEntry_RG->m_uiNextTextureInfoOffset = convertULongToOffset(pWTDEntry_RG->m_uiNextTextureInfoOffset);
@@ -118,7 +118,7 @@ void					CWTDFormat::unserialize(void)
 		pWTDEntry->setImageSize(true, pWTDEntry_RG->m_usWidth);
 		pWTDEntry->setImageSize(false, pWTDEntry_RG->m_usHeight);
 		pWTDEntry->setD3DFormat(getD3DFormatFromFourCC((char*)&pWTDEntry_RG->m_ucD3DFormat));
-		pWTDEntry->setRasterDataFormat(CImageManager::getRasterDataFormatFromD3DFormat(pWTDEntry->getD3DFormat()), false);
+		pWTDEntry->setRasterDataFormat(ImageManager::getRasterDataFormatFromD3DFormat(pWTDEntry->getD3DFormat()), false);
 		pWTDEntry->setLevels(pWTDEntry_RG->m_ucLevels);
 		pWTDEntry->setRawDataOffset(pWTDEntry_RG->m_uiRawDataOffset);
 		pWTDEntry->setTextureHash(vecTextureHashes[i]);
@@ -176,9 +176,9 @@ void					CWTDFormat::serialize(void)
 {
 	// todo
 
-	CDataWriter
-		*pDataWriter = CDataWriter::get(),
-		*pDataWriter2 = CDataWriter::get(1);
+	DataWriter
+		*pDataWriter = DataWriter::get(),
+		*pDataWriter2 = DataWriter::get(1);
 
 	//EDataStreamType ePreviousDataStreamType = pDataWriter->getStreamType();
 	pDataWriter2->setStreamType(DATA_STREAM_MEMORY);
@@ -322,10 +322,10 @@ void					CWTDFormat::serialize(void)
 		bBigEndian = false
 	;
 	string strHeader12B = 
-		CString2::packUint32(uiMagicNumber, bBigEndian) +
-		CString2::packUint32(uiType, bBigEndian) +
-		CString2::packUint32(uiFlags, bBigEndian);
-	pDataWriter->writeString(strHeader12B + CCompressionManager::compressZLib(pDataWriter2->getData()));
+		String2::packUint32(uiMagicNumber, bBigEndian) +
+		String2::packUint32(uiType, bBigEndian) +
+		String2::packUint32(uiFlags, bBigEndian);
+	pDataWriter->writeString(strHeader12B + CompressionManager::compressZLib(pDataWriter2->getData()));
 
 	pDataWriter2->reset();
 }
@@ -343,7 +343,7 @@ CIntermediateTextureFormat*		CWTDFormat::convertToIntermediateFormat(void)
 		vecImageSize.y = pWTDEntry->getImageSize(false);
 
 		pGeneralTexture->setName(pWTDEntry->getEntryName());
-		pGeneralTexture->setRasterDataFormat(CImageManager::getRasterDataFormatFromD3DFormat(pWTDEntry->getD3DFormat()));
+		pGeneralTexture->setRasterDataFormat(ImageManager::getRasterDataFormatFromD3DFormat(pWTDEntry->getD3DFormat()));
 		pGeneralTexture->setSize(vecImageSize);
 
 		for (CWTDMipmap *pWTDMipmap : pWTDEntry->getEntries())
@@ -386,15 +386,15 @@ uint32				CWTDFormat::getCompactSize(uint32 uiSize)
 
 string						CWTDFormat::decompressWTDFormatData(uint32& uiSystemSegmentSize, uint32& uiGPUSegmentSize)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	RG_CWTDFormat_Header1 *pHeader1 = pDataReader->readStruct<RG_CWTDFormat_Header1>();
 
 	/*
 	todo - is this code needed?
-	header1.m_uiFlags = CString2::swapEndian(header1.m_uiFlags);
-	header1.m_uiMagicNumber = CString2::swapEndian(header1.m_uiMagicNumber);
-	header1.m_uiType = CString2::swapEndian(header1.m_uiType);
+	header1.m_uiFlags = String2::swapEndian(header1.m_uiFlags);
+	header1.m_uiMagicNumber = String2::swapEndian(header1.m_uiMagicNumber);
+	header1.m_uiType = String2::swapEndian(header1.m_uiType);
 	*/
 
 	uiSystemSegmentSize = (pHeader1->m_uiFlags & 0x7FF) << (((pHeader1->m_uiFlags >> 11) & 0xF) + 8);
@@ -402,7 +402,7 @@ string						CWTDFormat::decompressWTDFormatData(uint32& uiSystemSegmentSize, uin
 
 	delete pHeader1;
 
-	return CCompressionManager::decompressZLib(pDataReader->readRemaining(), uiSystemSegmentSize + uiGPUSegmentSize);
+	return CompressionManager::decompressZLib(pDataReader->readRemaining(), uiSystemSegmentSize + uiGPUSegmentSize);
 }
 
 uint32			CWTDFormat::convertULongToOffset(uint32 uiValue)

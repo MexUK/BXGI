@@ -1,7 +1,7 @@
 #include "CDATPathFormat.h"
-#include "Stream/CDataWriter.h"
-#include "Static/CString2.h"
-#include "Stream/CDataReader.h"
+#include "Stream/DataWriter.h"
+#include "Static/String2.h"
+#include "Stream/DataReader.h"
 #include "Type/Vector/Vec3f.h"
 
 using namespace std;
@@ -9,7 +9,7 @@ using namespace bxcf;
 using namespace bxgi;
 
 CDATPathFormat::CDATPathFormat(void) :
-	CFormat(true)
+	Format(true)
 {
 	m_header.m_uiPathsFormat = DAT_PATH_UNKNOWN;
 	m_header.m_uiPathNodeCount = 0;
@@ -44,7 +44,7 @@ void							CDATPathFormat::serialize(void)
 
 void				CDATPathFormat::unserializeDefault(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	m_uiFileIndex = 0;// uiAreaId;
 	uint32 uiSeek = 0;
@@ -142,7 +142,7 @@ void				CDATPathFormat::unserializeDefault(void)
 
 void				CDATPathFormat::unserializeFastman92(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	m_uiFileIndex = 0; // uiAreaId;
 	//uint32 uiSeek = 0;
@@ -279,7 +279,7 @@ void				CDATPathFormat::unserializeFastman92(void)
 	//
 	//if (strEOF.substr(0, 3) != "EOF")
 	//{
-	//CDebug::log("PARSER FAILED on index " + CString2::toString(pDATFile_Paths->m_uiFileIndex) + ", bytes read: " + CString2::toString(pDataReader->getByteCountRead()));
+	//Debug::log("PARSER FAILED on index " + String2::toString(pDATFile_Paths->m_uiFileIndex) + ", bytes read: " + String2::toString(pDataReader->getByteCountRead()));
 	//}
 	//
 
@@ -339,28 +339,28 @@ void				CDATPathFormat::unserializeFastman92(void)
 	// debug
 	for (auto& pathNode : m_vecPathNodes)
 	{
-		CDebug::log(
+		Debug::log(
 			"[path node]"
-			+ string(" position: ") + CString2::toString((float32)((float32)pathNode.m_vecPosition.x / 8.0)) + " "
-			+ CString2::toString((float32)((float32)pathNode.m_vecPosition.y / 8.0)) + " "
-			+ CString2::toString((float32)((float32)pathNode.m_vecPosition.z / 8.0)) + " "
-			+ " search list: " + CString2::toString(pathNode.m_wSearchList)
-			+ " first link id: " + CString2::toString(pathNode.m_wConnectedNodesStartId)
-			+ " area id: " + CString2::toString(pathNode.m_wAreaId) + " node id: " + CString2::toString(pathNode.m_wNodeId)
-			+ " path width: " + CString2::toString(pathNode.m_ucPathWidth)
-			+ " node type: " + CString2::toString(pathNode.m_ucNodeType)
-			+ " flags: " + CString2::toString(pathNode.m_uiFlags)
+			+ string(" position: ") + String2::toString((float32)((float32)pathNode.m_vecPosition.x / 8.0)) + " "
+			+ String2::toString((float32)((float32)pathNode.m_vecPosition.y / 8.0)) + " "
+			+ String2::toString((float32)((float32)pathNode.m_vecPosition.z / 8.0)) + " "
+			+ " search list: " + String2::toString(pathNode.m_wSearchList)
+			+ " first link id: " + String2::toString(pathNode.m_wConnectedNodesStartId)
+			+ " area id: " + String2::toString(pathNode.m_wAreaId) + " node id: " + String2::toString(pathNode.m_wNodeId)
+			+ " path width: " + String2::toString(pathNode.m_ucPathWidth)
+			+ " node type: " + String2::toString(pathNode.m_ucNodeType)
+			+ " flags: " + String2::toString(pathNode.m_uiFlags)
 			);
 	}
 	for (auto& naviNode : m_vecNaviNodes)
 	{
-		CDebug::log(
+		Debug::log(
 			"[navi node]"
-			+ string(" position: ") + CString2::toString((float32)((float32)naviNode.m_iPosition[0] / 8.0)) + " "
-			+ CString2::toString((float32)((float32)naviNode.m_iPosition[1] / 8.0)) + " "
-			+ " area id: " + CString2::toString(naviNode.m_usTargetNode_AreaId) + " node id: " + CString2::toString(naviNode.m_usTargetNode_NodeId)
-			+ " direction x: " + CString2::toString(naviNode.m_ucDirection[0]) + " direction y " + CString2::toString(naviNode.m_ucDirection[1])
-			+ " flags: " + CString2::toString(naviNode.m_uiFlags)
+			+ string(" position: ") + String2::toString((float32)((float32)naviNode.m_iPosition[0] / 8.0)) + " "
+			+ String2::toString((float32)((float32)naviNode.m_iPosition[1] / 8.0)) + " "
+			+ " area id: " + String2::toString(naviNode.m_usTargetNode_AreaId) + " node id: " + String2::toString(naviNode.m_usTargetNode_NodeId)
+			+ " direction x: " + String2::toString(naviNode.m_ucDirection[0]) + " direction y " + String2::toString(naviNode.m_ucDirection[1])
+			+ " flags: " + String2::toString(naviNode.m_uiFlags)
 			);
 	}
 	*/
@@ -376,7 +376,7 @@ void				CDATPathFormat::unserializeFastman92(void)
 
 void							CDATPathFormat::serializeDefault(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	//uint32 uiSeek = 0;
 	uint32 uiSize;
@@ -481,7 +481,7 @@ void							CDATPathFormat::serializeDefault(void)
 
 void							CDATPathFormat::serializeFastman92(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	pDataWriter->writeUint32(0xFFFFFFFF);
 	pDataWriter->writeString("FM92");
@@ -690,13 +690,13 @@ void							CDATPathFormat::serializeFastman92(void)
 
 EDATPathFormat			CDATPathFormat::detectPathsFormat(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	EDATPathFormat EDATPathFormatValue;
 
 	uint64 uiPreviousSeek = pDataReader->getSeek();
 	pDataReader->setPeek(true);
 
-	if (CString2::unpackUint32(pDataReader->readString(4), false) == 0xFFFFFFFF && pDataReader->readString(4) == "FM92")
+	if (String2::unpackUint32(pDataReader->readString(4), false) == 0xFFFFFFFF && pDataReader->readString(4) == "FM92")
 	{
 		EDATPathFormatValue = DAT_PATH_FASTMAN92;
 	}

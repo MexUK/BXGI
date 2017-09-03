@@ -1,7 +1,7 @@
 #include "CIPLEntry_TCYC.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -13,7 +13,7 @@ CIPLEntry_TCYC::CIPLEntry_TCYC(CIPLFormat *pIPLFormat) :
 
 void			CIPLEntry_TCYC::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	switch (pDataReader->getLineTokens().size())
 	{
@@ -36,7 +36,7 @@ void			CIPLEntry_TCYC::unserialize(void)
 
 void			CIPLEntry_TCYC::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	switch (getFormatType())
 	{

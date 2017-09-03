@@ -1,7 +1,7 @@
 #include "CIDEEntry_PEDS.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -17,7 +17,7 @@ CIDEEntry_PEDS::CIDEEntry_PEDS(CIDEFormat *pIDEFormat) :
 
 void			CIDEEntry_PEDS::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	uint32 uiLineTokenCount = pDataReader->getLineTokens().size();
 	bool bMatchFound = false;
@@ -88,7 +88,7 @@ void			CIDEEntry_PEDS::unserialize(void)
 
 void			CIDEEntry_PEDS::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	switch (getFormatType())
 	{

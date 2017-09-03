@@ -1,8 +1,8 @@
 #include "CIPLEntry_PATH.h"
 #include "Format/IPL/Entry/DataEntry/PATH/CIPLEntry_PATH_Group.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -17,10 +17,10 @@ CIPLEntry_PATH::CIPLEntry_PATH(CIPLFormat *pIPLFormat, EIPLPathType EIPLPathType
 
 void			CIPLEntry_PATH::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 }
 
 void			CIPLEntry_PATH::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 }

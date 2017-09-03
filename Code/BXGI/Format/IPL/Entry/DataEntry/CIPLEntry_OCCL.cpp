@@ -1,7 +1,7 @@
 #include "CIPLEntry_OCCL.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -21,7 +21,7 @@ CIPLEntry_OCCL::CIPLEntry_OCCL(CIPLFormat *pIPLFormat) :
 
 void			CIPLEntry_OCCL::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	switch (pDataReader->getLineTokens().size())
 	{
@@ -55,7 +55,7 @@ void			CIPLEntry_OCCL::unserialize(void)
 
 void			CIPLEntry_OCCL::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	switch (getFormatType())
 	{

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Pool/CVectorPool.h"
+#include "Pool/VectorPool.h"
 // #include "CRWSection.h" // todo
 #include "Format/RW/ERWSection.h"
 #include "Engine/RW/ERWVersion.h"
@@ -12,7 +12,7 @@ class bxgi::CRWSection;
 class bxgi::C2dEffect;
 class bxgi::CRWFormat;
 
-class bxgi::CRWSectionContainer : public bxcf::CVectorPool<bxgi::CRWSection*>
+class bxgi::CRWSectionContainer : public bxcf::VectorPool<bxgi::CRWSection*>
 {
 public:
 	CRWSectionContainer(void);
@@ -38,11 +38,11 @@ public:
 	void									setParentNode(bxgi::CRWSection* pParentNode) { m_pParentNode = pParentNode; }
 	bxgi::CRWSection*								getParentNode(void) { return m_pParentNode; }
 
-	void									setDVCColours(std::vector<bxcf::Vec4u8>& vecDVCColours);
-	std::vector<bxcf::Vec4u8>				getDVCColours(void);
+	void									setDVColours(std::vector<bxcf::Vec4u8>& vecDVColours);
+	std::vector<bxcf::Vec4u8>				getDVColours(void);
 
-	void									setNVCColours(std::vector<bxcf::Vec4u8>& vecNVCColours);
-	std::vector<bxcf::Vec4u8>				getNVCColours(void);
+	void									setNVColours(std::vector<bxcf::Vec4u8>& vecNVColours);
+	std::vector<bxcf::Vec4u8>				getNVColours(void);
 
 	void									set2dEffects(std::vector<bxgi::C2dEffect*>& vec2dEffects);				// the array of 2d effects are all applied to all 2d effects sections
 	void									set2dEffects(std::vector<std::vector<bxgi::C2dEffect*>>& vec2dEffects);	// index into outer vector represents 2d effects section index

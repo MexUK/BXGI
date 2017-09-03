@@ -6,10 +6,10 @@
 #include "Sections/CRWSection_ExtraVertColour.h"
 #include "Sections/CRWSection_Extension.h"
 #include "Sections/CRWSection_2dEffect.h"
-#include "Static/CString2.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
-#include "Static/CDebug.h"
+#include "Static/String2.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
+#include "Static/Debug.h"
 
 using namespace std;
 using namespace bxcf;
@@ -31,7 +31,7 @@ void				CRWSectionContainer::unload(void)
 
 void				CRWSectionContainer::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	CRWSectionContainer *pParentRWSection = this;
 	CRWSectionContainer *pPreviousRWSection = this;
@@ -111,7 +111,7 @@ void				CRWSectionContainer::unserialize(void)
 		}
 
 		// unserialize RW section
-		CDebug::log("Section ID: " + CString2::toString(uiRWSectionId));
+		Debug::log("Section ID: " + String2::toString(uiRWSectionId));
 		uint64 uiByteCountBefore = pDataReader->getSeek();
 		pRWSection->unserialize();
 		uint64 uiByteCountAfter = pDataReader->getSeek();
@@ -161,7 +161,7 @@ void				CRWSectionContainer::unserialize(void)
 
 void				CRWSectionContainer::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 	EDataStreamType ePreviousStreamType = pDataWriter->getStreamType();
 
 	pDataWriter->setStreamType(DATA_STREAM_MEMORY);
@@ -175,7 +175,7 @@ void				CRWSectionContainer::serialize(void)
 
 void				CRWSectionContainer::serializERWSectionContainer(CRWSectionContainer *pRWSectionContainer)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 	for (CRWSection *pRWSection : pRWSectionContainer->getEntries())
 	{
 		uint64 uiSeek1 = pDataWriter->getSeek();
@@ -291,7 +291,7 @@ void				CRWSectionContainer::removePrelightning(void)
 
 void				CRWSectionContainer::setPrelightningColour(int16 ssRed, int16 ssGreen, int16 ssBlue, int16 ssAlpha)
 {
-	Vec4u8 vecColour; // todo - add CColour4uc : Vec4u8
+	Vec4u8 vecColour; // todo - add Colour4uc : Vec4u8
 	vecColour.x = (uint8) ssRed;
 	vecColour.y = (uint8) ssGreen;
 	vecColour.z = (uint8) ssBlue;
@@ -334,38 +334,38 @@ void				CRWSectionContainer::applyPrelightningColourOffset(int16 ssRed, int16 ss
 	}
 }
 
-vector<Vec4u8>		CRWSectionContainer::getDVCColours(void)
+vector<Vec4u8>		CRWSectionContainer::getDVColours(void)
 {
-	vector<Vec4u8> vecDVCColours;
+	vector<Vec4u8> vecDVColours;
 	for (CRWSection *pRWSection : getSectionsByType(RW_SECTION_GEOMETRY))
 	{
 		CRWSection_Geometry *pRWSection_Geometry = (CRWSection_Geometry*)pRWSection;
-		vecDVCColours = pRWSection_Geometry->getVertexColours();
+		vecDVColours = pRWSection_Geometry->getVertexColours();
 		break;
 	}
-	return vecDVCColours;
+	return vecDVColours;
 }
-vector<Vec4u8>		CRWSectionContainer::getNVCColours(void)
+vector<Vec4u8>		CRWSectionContainer::getNVColours(void)
 {
-	vector<Vec4u8> vecNVCColours;
+	vector<Vec4u8> vecNVColours;
 	for (CRWSection *pRWSection : getSectionsByType(RW_SECTION_EXTRA_VERT_COLOUR))
 	{
 		CRWSection_ExtraVertColour *pRWSection_ExtraVertColour = (CRWSection_ExtraVertColour*)pRWSection;
-		vecNVCColours = pRWSection_ExtraVertColour->getVertexColours();
+		vecNVColours = pRWSection_ExtraVertColour->getVertexColours();
 		break;
 	}
-	return vecNVCColours;
+	return vecNVColours;
 }
 
-void					CRWSectionContainer::setDVCColours(vector<Vec4u8>& vecDVCColours)
+void					CRWSectionContainer::setDVColours(vector<Vec4u8>& vecDVColours)
 {
 	for (CRWSection *pRWSection : getSectionsByType(RW_SECTION_GEOMETRY))
 	{
 		CRWSection_Geometry *pRWSection_Geometry = (CRWSection_Geometry*)pRWSection;
-		pRWSection_Geometry->setVertexColours(vecDVCColours);
+		pRWSection_Geometry->setVertexColours(vecDVColours);
 	}
 }
-void					CRWSectionContainer::setNVCColours(vector<Vec4u8>& vecNVCColours)
+void					CRWSectionContainer::setNVColours(vector<Vec4u8>& vecNVColours)
 {
 	for (CRWSection *pRWSection1 : getSectionsByType(RW_SECTION_GEOMETRY))
 	{
@@ -383,14 +383,14 @@ void					CRWSectionContainer::setNVCColours(vector<Vec4u8>& vecNVCColours)
 				pRWSection_Extension = (CRWSection_Extension*)vecRWSections_Extension[0];
 			}
 			CRWSection_ExtraVertColour *pRWSection_ExtraVertColour = (CRWSection_ExtraVertColour*)pRWSection_Extension->addSection(RW_SECTION_EXTRA_VERT_COLOUR, RW_3_4_0_3); // todo - don't use hardcoded RW version
-			pRWSection_ExtraVertColour->setVertexColours(vecNVCColours);
+			pRWSection_ExtraVertColour->setVertexColours(vecNVColours);
 		}
 		else
 		{
 			for (CRWSection *pRWSection2 : vecNVCSections)
 			{
 				CRWSection_ExtraVertColour *pRWSection_ExtraVertColour = (CRWSection_ExtraVertColour*)pRWSection2;
-				pRWSection_ExtraVertColour->setVertexColours(vecNVCColours);
+				pRWSection_ExtraVertColour->setVertexColours(vecNVColours);
 			}
 		}
 	}

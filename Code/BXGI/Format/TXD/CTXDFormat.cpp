@@ -1,19 +1,19 @@
 #include "CTXDFormat.h"
-#include "Static/CString2.h"
+#include "Static/String2.h"
 #include "CTXDManager.h"
-#include "Static/CDebug.h"
+#include "Static/Debug.h"
 #include "Engine/RW/CRWManager.h"
 #include "Format/RW/ERWSection.h"
 #include "Engine/RW/CRWVersionManager.h"
-#include "Static/CPath.h"
-#include "Static/CFile.h"
-#include "Format/Image/BMP/CBMPManager.h"
-#include "Format/Image/BMP/CBMPFormat.h"
+#include "Static/Path.h"
+#include "Static/File.h"
+#include "Format/Image/BMP/BMPManager.h"
+#include "Format/Image/BMP/BMPFormat.h"
 #include "Intermediate/Texture/CIntermediateTextureFormat.h"
 #include "Intermediate/Texture/CIntermediateTexture.h"
 #include "Intermediate/Texture/Data/CIntermediateTextureMipmap.h"
-#include "Image/CImageManager.h"
-#include "Image/CImageFile.h"
+#include "Image/ImageManager.h"
+#include "Image/ImageFile.h"
 #include "Format/RW/Sections/CRWSection_TextureNative.h"
 #include "Type/Vector/Vec2u16.h"
 
@@ -81,7 +81,7 @@ void				CTXDFormat::convertToGame(EPlatformedGame EPlatformedGame, vector<string
 		
 		for (auto strMipmapRemoved : vecMipmapsRemoved)
 		{
-			strMipmapRemoved = "Texture #" + CString2::toString(uiTextureIndex + 1) + " (" + pTexture->getDiffuseName() + ") - " + strMipmapRemoved;
+			strMipmapRemoved = "Texture #" + String2::toString(uiTextureIndex + 1) + " (" + pTexture->getDiffuseName() + ") - " + strMipmapRemoved;
 			vecMipmapsRemoved2.push_back(strMipmapRemoved);
 		}
 
@@ -91,7 +91,7 @@ void				CTXDFormat::convertToGame(EPlatformedGame EPlatformedGame, vector<string
 	for (uint32 i = 0, j = vecMipmapsRemoved2.size(); i < j; i++)
 	{
 		string strMipmapRemoved = vecMipmapsRemoved2[i];
-		vecMipmapsRemoved2[i] = "TXD File: " + CPath::getFileName(getFilePath()) + strMipmapRemoved;
+		vecMipmapsRemoved2[i] = "TXD File: " + Path::getFileName(getFilePath()) + strMipmapRemoved;
 	}
 }
 
@@ -122,7 +122,7 @@ bool				CTXDFormat::isTextureNameValid(string& strTextureName, bool bIsAlphaText
 		bool bNotBlank = strTextureName.length() > 0 && (strTextureName.c_str()[0] & 0xFF) != 0;
 		if (bNotBlank)
 		{
-			return CString2::isAlphaNumericUnderscore(strTextureName);
+			return String2::isAlphaNumericUnderscore(strTextureName);
 		}
 		return true;
 	}
@@ -131,7 +131,7 @@ bool				CTXDFormat::isTextureNameValid(string& strTextureName, bool bIsAlphaText
 		bool bNotBlank = strTextureName.length() > 0 && (strTextureName.c_str()[0] & 0xFF) != 0;
 		if (bNotBlank)
 		{
-			return CString2::isAlphaNumericUnderscore(strTextureName);
+			return String2::isAlphaNumericUnderscore(strTextureName);
 		}
 		return false;
 	}
@@ -214,7 +214,7 @@ uint32		CTXDFormat::getMaxTextureCountForGame(EPlatformedGame EPlatformedGame)
 
 CRWSection_TextureNative*	CTXDFormat::addTextureViaFile(string& strFilePath, string& strTextureDiffuseName, string strTextureAlphaName)
 {
-	CImageFile *pImageFile = CImageManager::loadImageFromFile(strFilePath);
+	ImageFile *pImageFile = ImageManager::loadImageFromFile(strFilePath);
 
 	CRWSection_TextureNative *pTexture = new CRWSection_TextureNative;
 	pTexture->setBPP(32);

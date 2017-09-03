@@ -1,18 +1,18 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Format/CFormat.h"
-#include "Pool/CVectorPool.h"
+#include "Format/Format.h"
+#include "Pool/VectorPool.h"
 #include "CWTDEntry.h"
 #include "d3d9.h"
 #include <string>
 
 class bxgi::CIntermediateTextureFormat;
 
-class bxgi::CWTDFormat : public bxcf::CFormat, public bxcf::CVectorPool<bxgi::CWTDEntry*>
+class bxgi::CWTDFormat : public bxcf::Format, public bxcf::VectorPool<bxgi::CWTDEntry*>
 {
 public:
-	CWTDFormat(void) : CFormat(true, bxcf::LITTLE_ENDIAN) {}
+	CWTDFormat(void) : Format(true, bxcf::LITTLE_ENDIAN) {}
 
 	void						unload(void);
 

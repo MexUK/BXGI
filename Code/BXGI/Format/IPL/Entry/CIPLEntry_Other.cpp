@@ -1,6 +1,6 @@
 #include "CIPLEntry_Other.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -12,14 +12,14 @@ CIPLEntry_Other::CIPLEntry_Other(CIPLFormat *pIPLFormat) :
 
 void		CIPLEntry_Other::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	setLine(*pDataReader->getActiveLine());
 }
 
 void		CIPLEntry_Other::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	pDataWriter->writeStringRef(getLine());
 }

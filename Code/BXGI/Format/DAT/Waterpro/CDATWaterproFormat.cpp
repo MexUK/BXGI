@@ -1,19 +1,19 @@
 #include "CDATWaterproFormat.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace std;
 using namespace bxcf;
 using namespace bxgi;
 
 CDATWaterproFormat::CDATWaterproFormat(void) :
-	CFormat(true, LITTLE_ENDIAN)
+	Format(true, LITTLE_ENDIAN)
 {
 }
 
 void					CDATWaterproFormat::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	
 	/*
 	todo
@@ -49,7 +49,7 @@ void					CDATWaterproFormat::unserialize(void)
 
 void					CDATWaterproFormat::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 	//uint32 i;
 	
 	/*

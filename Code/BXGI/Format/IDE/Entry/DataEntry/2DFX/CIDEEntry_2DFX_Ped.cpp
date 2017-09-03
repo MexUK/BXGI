@@ -1,7 +1,7 @@
 #include "CIDEEntry_2DFX_Ped.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -16,7 +16,7 @@ CIDEEntry_2DFX_Ped::CIDEEntry_2DFX_Ped(CIDEFormat *pIDEFormat) :
 
 void			CIDEEntry_2DFX_Ped::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	
 	CIDEEntry_2DFX::unserialize();
 	
@@ -27,7 +27,7 @@ void			CIDEEntry_2DFX_Ped::unserialize(void)
 
 void			CIDEEntry_2DFX_Ped::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	CIDEEntry_2DFX::serialize();
 

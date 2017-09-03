@@ -2,14 +2,14 @@
 
 #include "nsbxgi.h"
 #include "CWTDMipmap.h"
-#include "Pool/CVectorPool.h"
+#include "Pool/VectorPool.h"
 #include "Image/ERasterDataFormat.h"
 #include "d3d9.h"
 #include <string>
 
 class bxgi::CWTDMipmap;
 
-class bxgi::CWTDEntry : public bxcf::CVectorPool<bxgi::CWTDMipmap*>
+class bxgi::CWTDEntry : public bxcf::VectorPool<bxgi::CWTDMipmap*>
 {
 public:
 	CWTDEntry(void);

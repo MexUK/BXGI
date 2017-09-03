@@ -4,12 +4,12 @@
 
 #include "nsbxgi.h"
 #include "Type/Types.h"
-#include "Format/CFormat.h"
+#include "Format/Format.h"
 #include "CDATWaterproEntry.h"
-#include "Pool/CVectorPool.h"
+#include "Pool/VectorPool.h"
 #include <vector>
 
-class bxgi::CDATWaterproFormat : public bxcf::CFormat, public bxcf::CVectorPool<bxgi::CDATWaterproEntry*>
+class bxgi::CDATWaterproFormat : public bxcf::Format, public bxcf::VectorPool<bxgi::CDATWaterproEntry*>
 {
 public:
 	CDATWaterproFormat(void);

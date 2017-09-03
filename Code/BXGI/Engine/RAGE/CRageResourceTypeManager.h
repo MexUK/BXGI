@@ -2,12 +2,12 @@
 
 #include "nsbxgi.h"
 #include "Type/Types.h"
-#include "Object/CManager.h"
+#include "Object/Manager.h"
 #include "CRageResourceType.h"
-#include "Pool/CVectorPool.h"
+#include "Pool/VectorPool.h"
 #include <string>
 
-class bxgi::CRageResourceTypeManager : public bxcf::CManager, public bxcf::CVectorPool<bxgi::CRageResourceType*>
+class bxgi::CRageResourceTypeManager : public bxcf::Manager, public bxcf::VectorPool<bxgi::CRageResourceType*>
 {
 public:
 	void											init(void);

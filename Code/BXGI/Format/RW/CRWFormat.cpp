@@ -5,7 +5,7 @@
 #include "Sections/CRWSection_String.h"
 #include "Sections/CRWSection_TextureNative.h"
 #include "CTextureEntry.h"
-#include "Static/CString2.h"
+#include "Static/String2.h"
 #include "Exception/EExceptionCode.h"
 
 using namespace std;
@@ -13,7 +13,7 @@ using namespace bxcf;
 using namespace bxgi;
 
 CRWFormat::CRWFormat(void) :
-	CFormat(true, bxcf::LITTLE_ENDIAN),
+	Format(true, bxcf::LITTLE_ENDIAN),
 	m_pRWVersion(nullptr)
 {
 }
@@ -128,7 +128,7 @@ void				CRWFormat::fixAlphaTextureStates(void)
 	vector<CTextureEntry*> vecTexturesToRemove;
 	for (auto pTextureEntry : m_vecTextureEntries)
 	{
-		if (pTextureEntry->doesHaveDiffuse() && CString2::toUpperCase(pTextureEntry->getDiffuseName()).c_str()[pTextureEntry->getDiffuseName().length() - 1] == 'A')
+		if (pTextureEntry->doesHaveDiffuse() && String2::toUpperCase(pTextureEntry->getDiffuseName()).c_str()[pTextureEntry->getDiffuseName().length() - 1] == 'A')
 		{
 			CTextureEntry *pTextureEntry2 = getTextureByDiffuseName(pTextureEntry->getDiffuseName().substr(0, pTextureEntry->getDiffuseName().length() - 1));
 			if (pTextureEntry2 != nullptr)
@@ -149,8 +149,8 @@ void				CRWFormat::fixAlphaTextureStates(void)
 
 void				CRWFormat::removeTextureEntry(CTextureEntry *pTextureEntry)
 {
-	string strDiffuseName = CString2::toUpperCase(pTextureEntry->getDiffuseName());
-	string strAlphaName = CString2::toUpperCase(pTextureEntry->getAlphaName());
+	string strDiffuseName = String2::toUpperCase(pTextureEntry->getDiffuseName());
+	string strAlphaName = String2::toUpperCase(pTextureEntry->getAlphaName());
 	auto it = std::find(m_vecTextureEntries.begin(), m_vecTextureEntries.end(), pTextureEntry);
 	if (it != m_vecTextureEntries.end())
 	{
@@ -169,10 +169,10 @@ void				CRWFormat::removeTextureEntry(CTextureEntry *pTextureEntry)
 
 CTextureEntry*		CRWFormat::getTextureByDiffuseName(string strTextureDiffuseName)
 {
-	strTextureDiffuseName = CString2::toUpperCase(strTextureDiffuseName);
+	strTextureDiffuseName = String2::toUpperCase(strTextureDiffuseName);
 	for (auto pTextureEntry : m_vecTextureEntries)
 	{
-		if (pTextureEntry->doesHaveDiffuse() && CString2::toUpperCase(pTextureEntry->getDiffuseName()) == strTextureDiffuseName)
+		if (pTextureEntry->doesHaveDiffuse() && String2::toUpperCase(pTextureEntry->getDiffuseName()) == strTextureDiffuseName)
 		{
 			return pTextureEntry;
 		}
@@ -182,7 +182,7 @@ CTextureEntry*		CRWFormat::getTextureByDiffuseName(string strTextureDiffuseName)
 
 CTextureEntry*		CRWFormat::getTextureByDiffuseOrAlphaName(string strTextureName)
 {
-	strTextureName = CString2::toUpperCase(strTextureName);
+	strTextureName = String2::toUpperCase(strTextureName);
 	if (m_umapTexturesByNameUpper.count(strTextureName) == 1)
 	{
 		return m_umapTexturesByNameUpper[strTextureName];

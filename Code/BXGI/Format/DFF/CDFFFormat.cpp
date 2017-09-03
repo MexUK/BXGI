@@ -1,14 +1,14 @@
 #include "CDFFFormat.h"
 #include "Format/RW/CTextureEntry.h"
-#include "Static/CString2.h"
+#include "Static/String2.h"
 #include "Engine/RW/CRWVersion.h"
 #include "Format/RW/Sections/CRWSection_Geometry.h"
-#include "Static/CFile.h"
+#include "Static/File.h"
 #include "Intermediate/Model/CIntermediateModel.h"
 #include "Format/RW/Sections/CRWSection_ExtraVertColour.h"
 #include "Format/RW/Sections/CRWSection_2dEffect.h"
 #include "Format/RW/Sections/CRWSection_Extension.h"
-#include "Static/CDebug.h"
+#include "Static/Debug.h"
 #include "Format/RW/CRWSection.h"
 
 using namespace std;

@@ -1,7 +1,7 @@
 #include "CIPLEntry_INST.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 #include "Format/IPL/CIPLFormat.h"
 
 using namespace bxcf;
@@ -32,7 +32,7 @@ void			CIPLEntry_INST::unserialize(void)
 
 void			CIPLEntry_INST::unserialize_Text(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	switch (pDataReader->getLineTokenCount())
 	{
@@ -78,7 +78,7 @@ void			CIPLEntry_INST::unserialize_Text(void)
 
 void			CIPLEntry_INST::unserialize_Binary(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	setFormatType(0);
 	setFormatGames(GAME_FLAG_GTA_SA);
@@ -104,7 +104,7 @@ void			CIPLEntry_INST::serialize(void)
 
 void			CIPLEntry_INST::serialize_Text(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	switch (getFormatType())
 	{
@@ -138,7 +138,7 @@ void			CIPLEntry_INST::serialize_Text(void)
 
 void			CIPLEntry_INST::serialize_Binary(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	switch (getFormatType())
 	{

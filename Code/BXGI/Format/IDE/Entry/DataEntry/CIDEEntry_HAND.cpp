@@ -1,7 +1,7 @@
 #include "CIDEEntry_HAND.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -14,7 +14,7 @@ CIDEEntry_HAND::CIDEEntry_HAND(CIDEFormat *pIDEFormat) :
 
 void			CIDEEntry_HAND::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	switch (pDataReader->getLineTokens().size())
 	{
@@ -34,7 +34,7 @@ void			CIDEEntry_HAND::unserialize(void)
 
 void			CIDEEntry_HAND::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	switch (getFormatType())
 	{

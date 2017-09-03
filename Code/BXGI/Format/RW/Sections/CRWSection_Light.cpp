@@ -1,6 +1,6 @@
 #include "CRWSection_Light.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -12,14 +12,14 @@ CRWSection_Light::CRWSection_Light(void)
 
 void							CRWSection_Light::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	m_strData = pDataReader->readString(24);
 }
 
 void							CRWSection_Light::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	pDataWriter->writeStringRef(m_strData, 24);
 }

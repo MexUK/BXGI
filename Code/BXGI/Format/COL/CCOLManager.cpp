@@ -1,11 +1,11 @@
 #include "CCOLManager.h"
 #include "CCOLFormat.h"
-#include "Stream/CDataReader.h"
-#include "Static/CString2.h"
+#include "Stream/DataReader.h"
+#include "Static/String2.h"
 #include "CCOLVersionManager.h"
-#include "Static/CFile.h"
-#include "Localization/CLocalizationManager.h"
-#include "Static/CDebug.h"
+#include "Static/File.h"
+#include "Localization/LocalizationManager.h"
+#include "Static/Debug.h"
 
 using namespace std;
 using namespace bxcf;
@@ -140,6 +140,6 @@ uint32		CCOLManager::getEntryHeaderSizeForPacking(ECOLVersion ECOLVersionValue)
 // file extension
 bool											CCOLManager::isCollisionExtension(string& strFileExtension)
 {
-	string strExtensionUpper = CString2::toUpperCase(strFileExtension);
+	string strExtensionUpper = String2::toUpperCase(strFileExtension);
 	return strExtensionUpper == "COL";
 }

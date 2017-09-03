@@ -5,9 +5,9 @@
 #include "CWDRBlock_IndexData.h"
 #include "Intermediate/Model/CIntermediateModelFormat.h"
 #include "Intermediate/Model/Data/CIntermediateGeometry.h"
-#include "Static/CFile.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Static/File.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 #include "CWDRManager.h"
 
 using namespace std;
@@ -43,14 +43,14 @@ void						CWDRFormat::unload(void)
 
 void						CWDRFormat::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	// todo
 }
 
 void						CWDRFormat::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	EDataStreamType ePreviousDataStreamType = pDataWriter->getStreamType();
 	pDataWriter->setStreamType(DATA_STREAM_MEMORY);

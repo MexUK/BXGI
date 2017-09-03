@@ -1,6 +1,6 @@
 #include "CRWSection_Texture.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -14,7 +14,7 @@ CRWSection_Texture::CRWSection_Texture(void) :
 
 void							CRWSection_Texture::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	m_usFilterFlags = pDataReader->readUint16();
 	m_usUnknown1 = pDataReader->readUint16();
@@ -22,7 +22,7 @@ void							CRWSection_Texture::unserialize(void)
 
 void							CRWSection_Texture::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	pDataWriter->writeUint16(m_usFilterFlags);
 	pDataWriter->writeUint16(m_usUnknown1);

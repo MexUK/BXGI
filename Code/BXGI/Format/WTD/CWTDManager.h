@@ -1,15 +1,15 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Format/CFormatManager.h"
-#include "Object/CSingleton.h"
+#include "Format/FormatManager.h"
+#include "Object/Singleton.h"
 #include "CWTDFormat.h"
 #include "d3d9.h"
 
 class bxgi::CWTDEntry;
 class bxgi::CIntermediateTextureFormat;
 
-class bxgi::CWTDManager : public bxcf::CFormatManager<bxgi::CWTDFormat>, public bxcf::CSingleton<bxgi::CWTDManager>
+class bxgi::CWTDManager : public bxcf::FormatManager<bxgi::CWTDFormat>, public bxcf::Singleton<bxgi::CWTDManager>
 {
 public:
 	CWTDManager(void);

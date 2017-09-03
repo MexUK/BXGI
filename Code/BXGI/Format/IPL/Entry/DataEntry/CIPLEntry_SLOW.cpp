@@ -1,7 +1,7 @@
 #include "CIPLEntry_SLOW.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -13,14 +13,14 @@ CIPLEntry_SLOW::CIPLEntry_SLOW(CIPLFormat *pIPLFormat) :
 
 void			CIPLEntry_SLOW::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	throw EXCEPTION_UNKNOWN_FORMAT_TYPE;
 }
 
 void			CIPLEntry_SLOW::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	throw EXCEPTION_UNKNOWN_FORMAT_TYPE;
 }

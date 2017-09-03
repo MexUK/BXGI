@@ -1,8 +1,8 @@
 #include "CIDEEntry_CARS.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
-#include "Static/CString2.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
+#include "Static/String2.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -29,7 +29,7 @@ CIDEEntry_CARS::CIDEEntry_CARS(CIDEFormat *pIDEFormat) :
 
 void			CIDEEntry_CARS::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	switch (pDataReader->getLineTokens().size())
 	{
@@ -69,7 +69,7 @@ void			CIDEEntry_CARS::unserialize(void)
 	case 15: // GTA SA or GTA IV
 	{
 		pDataReader->setPeek(true);
-		bool bIsSA = CString2::isPositiveInteger(pDataReader->readTokenString());
+		bool bIsSA = String2::isPositiveInteger(pDataReader->readTokenString());
 		pDataReader->setPeek(false);
 		if (bIsSA)
 		{
@@ -121,7 +121,7 @@ void			CIDEEntry_CARS::unserialize(void)
 
 void			CIDEEntry_CARS::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	switch (getFormatType())
 	{

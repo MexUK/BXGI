@@ -1,7 +1,7 @@
 #include "CIPLEntry_GRGE.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -18,7 +18,7 @@ CIPLEntry_GRGE::CIPLEntry_GRGE(CIPLFormat *pIPLFormat) :
 
 void			CIPLEntry_GRGE::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	uint32 uiLineTokenCount = pDataReader->getLineTokens().size();
 	switch (uiLineTokenCount)
@@ -45,7 +45,7 @@ void			CIPLEntry_GRGE::unserialize(void)
 
 void			CIPLEntry_GRGE::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	switch (getFormatType())
 	{

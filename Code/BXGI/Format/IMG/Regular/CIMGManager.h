@@ -2,15 +2,15 @@
 
 #include "nsbxgi.h"
 #include "Type/Types.h"
-#include "Format/CFormatManager.h"
-#include "Object/CSingleton.h"
+#include "Format/FormatManager.h"
+#include "Object/Singleton.h"
 #include "CIMGFormat.h"
 #include "Engine/RAGE/CRageResourceType.h"
 #include "Game/EPlatformedGame.h"
 #include <string>
 #include <vector>
 
-class bxgi::CIMGManager : public bxcf::CFormatManager<bxgi::CIMGFormat>, public bxcf::CSingleton<bxgi::CIMGManager>
+class bxgi::CIMGManager : public bxcf::FormatManager<bxgi::CIMGFormat>, public bxcf::Singleton<bxgi::CIMGManager>
 {
 public:
 	CIMGManager(void);

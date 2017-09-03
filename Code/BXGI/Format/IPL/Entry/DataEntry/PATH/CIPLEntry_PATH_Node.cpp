@@ -1,7 +1,7 @@
 #include "CIPLEntry_PATH_Node.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 #include "CIPLEntry_PATH_Group.h"
 
 using namespace bxcf;
@@ -24,7 +24,7 @@ CIPLEntry_PATH_Node::CIPLEntry_PATH_Node(CIPLFormat *pIPLFormat) :
 
 void			CIPLEntry_PATH_Node::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	if (getLatestPathGroup() == nullptr)
 	{
@@ -58,7 +58,7 @@ void			CIPLEntry_PATH_Node::unserialize(void)
 
 void			CIPLEntry_PATH_Node::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	switch (getFormatType())
 	{

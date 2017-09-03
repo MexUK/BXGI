@@ -1,8 +1,8 @@
 #include "CRWSection_ExtraVertColour.h"
 #include "CRWSection_Geometry.h"
 #include "Format/RW/CRWFormat.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace std;
 using namespace bxcf;
@@ -16,7 +16,7 @@ CRWSection_ExtraVertColour::CRWSection_ExtraVertColour(void) :
 
 void							CRWSection_ExtraVertColour::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	m_uiMagicNumber = pDataReader->readUint32();
 
@@ -33,7 +33,7 @@ void							CRWSection_ExtraVertColour::unserialize(void)
 
 void							CRWSection_ExtraVertColour::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	pDataWriter->writeUint32(m_uiMagicNumber);
 

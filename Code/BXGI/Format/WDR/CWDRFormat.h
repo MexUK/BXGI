@@ -1,7 +1,7 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Format/CFormat.h"
+#include "Format/Format.h"
 #include "CWDRBoundingObject.h"
 #include <string>
 #include <vector>
@@ -10,10 +10,10 @@ class bxgi::CWDRBlock_Geometry;
 class bxgi::CIntermediateGeometry;
 class bxgi::CWDRBlock_Model;
 
-class bxgi::CWDRFormat : public bxcf::CFormat
+class bxgi::CWDRFormat : public bxcf::Format
 {
 public:
-	CWDRFormat(void) : CFormat(true, bxcf::LITTLE_ENDIAN) {}
+	CWDRFormat(void) : Format(true, bxcf::LITTLE_ENDIAN) {}
 
 	void								unload(void);
 

@@ -1,7 +1,7 @@
 #include "CWTDEntry.h"
-#include "Static/CString2.h"
-#include "Image/CImageManager.h"
-#include "Static/CDebug.h"
+#include "Static/String2.h"
+#include "Image/ImageManager.h"
+#include "Static/Debug.h"
 
 using namespace std;
 using namespace bxcf;
@@ -23,7 +23,7 @@ void					CWTDEntry::setRasterDataFormat(ERasterDataFormat ERasterDataFormatValue
 	m_ERasterDataFormat = ERasterDataFormatValue;
 	if (bUpdateD3DFormat)
 	{
-		m_uiD3DFormat = CImageManager::getD3DFormatFromRasterDataFormat(ERasterDataFormatValue);
+		m_uiD3DFormat = ImageManager::getD3DFormatFromRasterDataFormat(ERasterDataFormatValue);
 	}
 }
 

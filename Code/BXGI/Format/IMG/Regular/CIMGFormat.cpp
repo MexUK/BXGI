@@ -3,31 +3,31 @@
 #include "Type/Types.h"
 #include "Event/Events.h"
 #include "Event/EEvent.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 #include "CIMGManager.h"
-#include "Static/CString2.h"
+#include "Static/String2.h"
 #include "Format/IMG/Regular/Raw/CIMGFormat_Version2_Header1.h"
 #include "Format/IMG/Regular/Raw/CIMGFormat_Version3_Header1.h"
 #include "Format/IMG/Regular/Raw/CIMGEntry_Version1Or2.h"
 #include "Format/IMG/Regular/Raw/CIMGEntry_Version3.h"
 #include "Exception/EExceptionCode.h"
-#include "Static/CPath.h"
+#include "Static/Path.h"
 #include "Format/COL/CCOLManager.h"
-#include "Localization/CLocalizationManager.h"
+#include "Localization/LocalizationManager.h"
 #include "Engine/RW/CRWManager.h"
 #include "Engine/RW/CRWVersion.h"
-#include "Static/CMemory.h"
+#include "Static/Memory.h"
 #include "Format/IMG/Fastman92/CIMGFormat_VersionFastman92_Header1.h"
 #include "Format/IMG/Fastman92/CIMGFormat_VersionFastman92_Header2.h"
 #include "Format/IMG/Fastman92/CIMGEntry_Fastman92.h"
 #include "Engine/RAGE/CRageManager.h"
 #include "Engine/RAGE/CRageResourceTypeManager.h"
-#include "Static/CFile.h"
-#include "Static/CTiming.h"
-#include "Static/CDebug.h"
+#include "Static/File.h"
+#include "Static/Timing.h"
+#include "Static/Debug.h"
 #include "Format/EFileType.h"
-#include "Static/CStdVector.h"
+#include "Static/StdVector.h"
 #include "Format/CGameFormat.h"
 #include "CIMGEntry.h"
 #include <set>
@@ -39,7 +39,7 @@ using namespace bxgi;
 using namespace bxcf::fileType;
 
 CIMGFormat::CIMGFormat(void) :
-	CFormat(true, LITTLE_ENDIAN),
+	Format(true, LITTLE_ENDIAN),
 	m_EIMGVersion(IMG_UNKNOWN),
 	m_EPlatform(PLATFORM_PC),
 	m_bEncrypted(false),
@@ -48,7 +48,7 @@ CIMGFormat::CIMGFormat(void) :
 }
 
 CIMGFormat::CIMGFormat(string& strFilePath) :
-	CFormat(strFilePath, true, LITTLE_ENDIAN),
+	Format(strFilePath, true, LITTLE_ENDIAN),
 	m_EIMGVersion(IMG_UNKNOWN),
 	m_EPlatform(PLATFORM_PC),
 	m_bEncrypted(false),
@@ -56,8 +56,8 @@ CIMGFormat::CIMGFormat(string& strFilePath) :
 {
 }
 
-CIMGFormat::CIMGFormat(CDataReader& reader) :
-	CFormat(reader, true, LITTLE_ENDIAN),
+CIMGFormat::CIMGFormat(DataReader& reader) :
+	Format(reader, true, LITTLE_ENDIAN),
 	m_EIMGVersion(IMG_UNKNOWN),
 	m_EPlatform(PLATFORM_PC),
 	m_bEncrypted(false),
@@ -68,7 +68,7 @@ CIMGFormat::CIMGFormat(CDataReader& reader) :
 // read meta data
 void				CIMGFormat::readMetaData(void)
 {
-	if (CString2::toUpperCase(CPath::getFileExtension(m_strFilePath)) == "DIR")
+	if (String2::toUpperCase(Path::getFileExtension(m_strFilePath)) == "DIR")
 	{
 		// version 1
 		m_EIMGVersion = IMG_1;
@@ -80,7 +80,7 @@ void				CIMGFormat::readMetaData(void)
 		strFirst16Bytes = m_reader.read(16),
 		strFirst4Bytes = strFirst16Bytes.substr(0, 4);
 	uint32
-		uiSecond4BytesUi = CString2::unpackUint32(strFirst16Bytes.substr(4, 4), false);
+		uiSecond4BytesUi = String2::unpackUint32(strFirst16Bytes.substr(4, 4), false);
 
 	if (strFirst4Bytes == "VER2")
 	{
@@ -95,17 +95,17 @@ void				CIMGFormat::readMetaData(void)
 		// version fastman92
 		m_EIMGVersion = IMG_FASTMAN92;
 		m_uiEntryCount = uiSecond4BytesUi;
-		m_ucGameType = CString2::unpackUint8(strFirst16Bytes.substr(8, 1));
+		m_ucGameType = String2::unpackUint8(strFirst16Bytes.substr(8, 1));
 		return;
 	}
 
-	uint32 uiIdentifier = CString2::unpackUint32(strFirst4Bytes, false);
+	uint32 uiIdentifier = String2::unpackUint32(strFirst4Bytes, false);
 	bool bEncrypted = false;
 
 	if (uiIdentifier != 0xA94E2A52)
 	{
 		bEncrypted = true;
-		uiIdentifier = CString2::unpackUint32(CIMGManager::decryptVersion3IMGString(strFirst16Bytes).substr(0, 4), false);
+		uiIdentifier = String2::unpackUint32(CIMGManager::decryptVersion3IMGString(strFirst16Bytes).substr(0, 4), false);
 	}
 
 	if (uiIdentifier == 0xA94E2A52)
@@ -114,14 +114,14 @@ void				CIMGFormat::readMetaData(void)
 		{
 			// version 3
 			m_EIMGVersion = IMG_3;
-			m_uiEntryCount = CString2::unpackUint32(strFirst16Bytes.substr(8, 4), false);
+			m_uiEntryCount = String2::unpackUint32(strFirst16Bytes.substr(8, 4), false);
 			m_bEncrypted = bEncrypted;
 			return;
 		}
 	}
 
-	string strFilePathDIRExt = CPath::replaceFileExtensionWithCase(m_strFilePath, "DIR");
-	if (CFile::doesFileExist(strFilePathDIRExt))
+	string strFilePathDIRExt = Path::replaceFileExtensionWithCase(m_strFilePath, "DIR");
+	if (File::doesFileExist(strFilePathDIRExt))
 	{
 		m_reader.reset();
 		m_reader.setFilePath(strFilePathDIRExt);
@@ -149,7 +149,7 @@ EIMGVersion			CIMGFormat::getVersion(void)
 // unserialize
 bool		CIMGFormat::unserialize2(void)
 {
-	CFormat::unserialize2();
+	Format::unserialize2();
 
 	switch (m_EIMGVersion)
 	{
@@ -213,9 +213,9 @@ void		CIMGFormat::unserializeHeaderComponents(void)
 	switch (getVersion())
 	{
 	case IMG_1:
-		//CTiming::get()->start("unserializeVersion1");
+		//Timing::get()->start("unserializeVersion1");
 		unserializeVersion1();
-		//CTiming::get()->stop();
+		//Timing::get()->stop();
 		break;
 	case IMG_2:
 		unserializeVersion2();
@@ -244,9 +244,9 @@ void		CIMGFormat::unserializeBodyComponents(void)
 	case IMG_1:
 	case IMG_2:
 	case IMG_FASTMAN92:
-		//CTiming::get()->start("unserializERWVersions");
+		//Timing::get()->start("unserializERWVersions");
 		unserializERWVersions();
-		//CTiming::get()->stop();
+		//Timing::get()->stop();
 		break;
 	case IMG_3:
 		unserializeResourceTypes();
@@ -280,7 +280,7 @@ void		CIMGFormat::unserializeVersion1(void)
 		rvecIMGEntries[(unsigned int)i] = pIMGEntry;
 		pIMGEntry->setIMGFile(this);
 		pIMGEntry->unserializeVersion1Or2(pRGIMGActiveEntry++);
-		pIMGEntry->setEntryExtension(CString2::toUpperCase(CPath::getFileExtension(pIMGEntry->getEntryName())));
+		pIMGEntry->setEntryExtension(String2::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())));
 		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
 
@@ -310,7 +310,7 @@ void		CIMGFormat::unserializeVersion2(void)
 		rvecIMGEntries[(unsigned int)i] = pIMGEntry;
 		pIMGEntry->setIMGFile(this);
 		pIMGEntry->unserializeVersion1Or2(pRGIMGActiveEntry++);
-		pIMGEntry->setEntryExtension(CString2::toUpperCase(CPath::getFileExtension(pIMGEntry->getEntryName())));
+		pIMGEntry->setEntryExtension(String2::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())));
 		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
 
@@ -321,8 +321,8 @@ void		CIMGFormat::unserializeVersion2(void)
 
 void		CIMGFormat::unserializeVersion3_Encrypted(void)
 {
-	CDataReader *pDataReader = CDataReader::get(); // IMG file
-	CDataReader *pDataReader2 = CDataReader::get(1); // for unencrypted img header and unencrypted img table
+	DataReader *pDataReader = DataReader::get(); // IMG file
+	DataReader *pDataReader2 = DataReader::get(1); // for unencrypted img header and unencrypted img table
 
 	// decrypt IMG header
 	string strIMGHeaderEncrypted = pDataReader->readString(32); // padded with 12 bytes at the end
@@ -377,7 +377,7 @@ void		CIMGFormat::unserializeVersion3_Encrypted(void)
 	for (uint32 i = 0; i < uiEntryCount; i++)
 	{
 		rvecIMGEntries[i]->setEntryName(pDataReader2->readStringUntilZero());
-		rvecIMGEntries[i]->setEntryExtension(CString2::toUpperCase(CPath::getFileExtension(rvecIMGEntries[i]->getEntryName())));
+		rvecIMGEntries[i]->setEntryExtension(String2::toUpperCase(Path::getFileExtension(rvecIMGEntries[i]->getEntryName())));
 		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
 	
@@ -388,7 +388,7 @@ void		CIMGFormat::unserializeVersion3_Encrypted(void)
 
 void		CIMGFormat::unserializeVersion3_Unencrypted(void)
 {
-	CDataReader *pDataReader = CDataReader::get(); // IMG file
+	DataReader *pDataReader = DataReader::get(); // IMG file
 
 	// read header 1
 	RG_CIMGFormat_Version3_Header1 *pHeader1 = pDataReader->readStruct<RG_CIMGFormat_Version3_Header1>();
@@ -417,7 +417,7 @@ void		CIMGFormat::unserializeVersion3_Unencrypted(void)
 	for (uint32 i = 0; i < uiEntryCount; i++)
 	{
 		rvecIMGEntries[i]->setEntryName(pDataReader->readStringUntilZero());
-		rvecIMGEntries[i]->setEntryExtension(CString2::toUpperCase(CPath::getFileExtension(rvecIMGEntries[i]->getEntryName())));
+		rvecIMGEntries[i]->setEntryExtension(String2::toUpperCase(Path::getFileExtension(rvecIMGEntries[i]->getEntryName())));
 		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
 
@@ -428,7 +428,7 @@ void		CIMGFormat::unserializeVersion3_Unencrypted(void)
 
 void		CIMGFormat::unserializeVersionFastman92(void)
 {
-	CDataReader *pDataReader = CDataReader::get(); // IMG file
+	DataReader *pDataReader = DataReader::get(); // IMG file
 	
 	// read header 1
 	CIMGFormat_VersionFastman92_Header1 *pHeader1 = pDataReader->readStruct<CIMGFormat_VersionFastman92_Header1>();
@@ -480,7 +480,7 @@ void		CIMGFormat::unserializeVersionFastman92(void)
 		rvecIMGEntries[(unsigned int)i] = pIMGEntry;
 		pIMGEntry->setIMGFile(this);
 		pIMGEntry->unserializeVersionFastman92(pRawIMGActiveEntry++);
-		pIMGEntry->setEntryExtension(CString2::toUpperCase(CPath::getFileExtension(pIMGEntry->getEntryName())));
+		pIMGEntry->setEntryExtension(String2::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())));
 		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
 
@@ -494,17 +494,17 @@ void		CIMGFormat::unserializeVersionFastman92(void)
 void		CIMGFormat::unserializERWVersions(void)
 {
 	bool bUseNewReader = getVersion() == IMG_1 && m_reader.getStreamType() == DATA_STREAM_FILE;
-	CDataReader *pDataReader = bUseNewReader ? new CDataReader : &m_reader;
+	DataReader *pDataReader = bUseNewReader ? new DataReader : &m_reader;
 
 	if (bUseNewReader) // todo - IMG_1 and data stream memory
 	{
 		//pDataReader->close(); // close handle to DIR file
 
-		string strIMGFilePath = CPath::replaceFileExtensionWithCase(m_reader.getFilePath(), "IMG");
+		string strIMGFilePath = Path::replaceFileExtensionWithCase(m_reader.getFilePath(), "IMG");
 
 		pDataReader->setStreamType(DATA_STREAM_FILE);
 		pDataReader->setFilePath(strIMGFilePath);
-		pDataReader->open(true); // open handle to IMG file (handle is closed in CFormat::unserializeVia*() methods
+		pDataReader->open(true); // open handle to IMG file (handle is closed in Format::unserializeVia*() methods
 	}
 
 	string strUncompressedEntryData;
@@ -532,7 +532,7 @@ void		CIMGFormat::unserializERWVersions(void)
 				// RW file - compressed
 				if (strUncompressedEntryData.length() >= 12)
 				{
-					pIMGEntry->setRawVersion(CString2::unpackUint32(strUncompressedEntryData.substr(8, 4), false));
+					pIMGEntry->setRawVersion(String2::unpackUint32(strUncompressedEntryData.substr(8, 4), false));
 				}
 			}
 			else
@@ -572,7 +572,7 @@ void		CIMGFormat::unserializERWVersions(void)
 				}
 				else
 				{
-					pIMGEntry->setRawVersion(CString2::toUint32(strVersionCharacter));
+					pIMGEntry->setRawVersion(String2::toUint32(strVersionCharacter));
 				}
 			}
 			break;
@@ -586,7 +586,7 @@ void		CIMGFormat::unserializERWVersions(void)
 			}
 			else
 			{
-				pIMGEntry->setRawVersion(CString2::toUint32(strVersionCharacter) - 1);
+				pIMGEntry->setRawVersion(String2::toUint32(strVersionCharacter) - 1);
 			}
 			break;
 		}
@@ -633,16 +633,16 @@ void		CIMGFormat::serializeHeaderAndBodyComponents(void)
 }
 void					CIMGFormat::serializeVersion1(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataReader *pDataReader = DataReader::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	string
 		strDIRFilePathIn = getOriginalFilePath(),
-		strIMGFilePathIn = CPath::replaceFileExtensionWithCase(strDIRFilePathIn, "IMG"),
+		strIMGFilePathIn = Path::replaceFileExtensionWithCase(strDIRFilePathIn, "IMG"),
 		strIMGFilePathOut = pDataWriter->getFilePath(),
-		strDIRFilePathOut = CPath::replaceFileExtensionWithCase(strIMGFilePathOut, "DIR");
+		strDIRFilePathOut = Path::replaceFileExtensionWithCase(strIMGFilePathOut, "DIR");
 
-	// open IMG file to read from (IMG file to write to is already open in CDataWriter)
+	// open IMG file to read from (IMG file to write to is already open in DataWriter)
 	if (pDataReader->getStreamType() == DATA_STREAM_FILE)
 	{
 		pDataReader->setFilePath(strIMGFilePathIn);
@@ -705,20 +705,20 @@ void					CIMGFormat::serializeVersion1(void)
 	}
 	if(pDataWriter->getStreamType() == DATA_STREAM_FILE)
 	{
-		pDataWriter->close(); // optionally called here, CDataWriter::close() will be called by CFormat too.
+		pDataWriter->close(); // optionally called here, DataWriter::close() will be called by Format too.
 	}
 }
 
 void					CIMGFormat::serializeVersion2(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataReader *pDataReader = DataReader::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	// fetch new seek positions for all IMG entries
 	uint32
 		uiEntryCount = getEntryCount(),
 		uiBodyStart = (uiEntryCount * 32) + 8,
-		uiSeek = CMath::convertBytesToSectors(uiBodyStart),
+		uiSeek = Math::convertBytesToSectors(uiBodyStart),
 		i = 0;
 	vector<uint32> vecNewEntryPositions;
 	vecNewEntryPositions.resize(uiEntryCount);
@@ -729,7 +729,7 @@ void					CIMGFormat::serializeVersion2(void)
 		i++;
 	}
 
-	// open IMG file to read from (IMG file to write to is already open in CDataWriter)
+	// open IMG file to read from (IMG file to write to is already open in DataWriter)
 	if (pDataReader->getStreamType() == DATA_STREAM_FILE)
 	{
 		pDataReader->setFilePath(getOriginalFilePath());
@@ -776,20 +776,20 @@ void					CIMGFormat::serializeVersion2(void)
 	}
 	if(pDataWriter->getStreamType() == DATA_STREAM_FILE)
 	{
-		pDataWriter->close(); // optionally called here, CDataWriter::close() will be called by CFormat too.
+		pDataWriter->close(); // optionally called here, DataWriter::close() will be called by Format too.
 	}
 }
 
 void					CIMGFormat::serializeVersionFastman92(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataReader *pDataReader = DataReader::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	// fetch new seek positions for all IMG entries
 	uint32
 		uiEntryCount = getEntryCount(),
 		uiBodyStart = (uiEntryCount * 32) + 8,
-		uiSeek = CMath::convertBytesToSectors(uiBodyStart),
+		uiSeek = Math::convertBytesToSectors(uiBodyStart),
 		i = 0;
 	vector<uint32> vecNewEntryPositions;
 	vecNewEntryPositions.resize(uiEntryCount);
@@ -800,7 +800,7 @@ void					CIMGFormat::serializeVersionFastman92(void)
 		i++;
 	}
 
-	// open IMG file to read from (IMG file to write to is already open in CDataWriter)
+	// open IMG file to read from (IMG file to write to is already open in DataWriter)
 	if (pDataReader->getStreamType() == DATA_STREAM_FILE)
 	{
 		pDataReader->setFilePath(getOriginalFilePath());
@@ -820,7 +820,7 @@ void					CIMGFormat::serializeVersionFastman92(void)
 		// write IMG data - IMG header
 		uint32 uiCheck = 1;
 		uint32 uiEntryCount = getEntryCount();
-		string strReserved1 = CString2::zeroPad(8);
+		string strReserved1 = String2::zeroPad(8);
 
 		pDataWriter->writeUint32(uiCheck);
 		pDataWriter->writeUint32(uiEntryCount);
@@ -888,21 +888,21 @@ void					CIMGFormat::serializeVersionFastman92(void)
 	}
 	if(pDataWriter->getStreamType() == DATA_STREAM_FILE)
 	{
-		pDataWriter->close(); // optionally called here, CDataWriter::close() will be called by CFormat too.
+		pDataWriter->close(); // optionally called here, DataWriter::close() will be called by Format too.
 	}
 }
 
 void					CIMGFormat::serializeVersion3_Encrypted(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataReader *pDataReader = DataReader::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	// fetch new seek positions for all IMG entries
 	uint32
 		uiEntryCount = getEntryCount(),
 		uiNamesLength = getVersion3NamesLength(),
 		uiPaddingStart = 20 + (16 * getEntryCount()) + uiNamesLength,
-		uiSeek = CMath::convertBytesToSectors(uiPaddingStart),
+		uiSeek = Math::convertBytesToSectors(uiPaddingStart),
 		i = 0;
 	vector<uint32> vecNewEntryPositions;
 	vecNewEntryPositions.resize(uiEntryCount);
@@ -913,7 +913,7 @@ void					CIMGFormat::serializeVersion3_Encrypted(void)
 		i++;
 	}
 
-	// open IMG file to read from (IMG file to write to is already open in CDataWriter)
+	// open IMG file to read from (IMG file to write to is already open in DataWriter)
 	if (pDataReader->getStreamType() == DATA_STREAM_FILE)
 	{
 		pDataReader->setFilePath(getOriginalFilePath());
@@ -965,7 +965,7 @@ void					CIMGFormat::serializeVersion3_Encrypted(void)
 	string strData = pDataWriter->getData();
 
 	string strHeader = CIMGManager::encryptVersion3IMGString(strData.substr(0, 32));
-	string strTables = CIMGManager::encryptVersion3IMGString(CString2::zeroPad(strData.substr(20), (strData.length() - 20) + (2048 - ((strData.length() - 20) % 2048))));
+	string strTables = CIMGManager::encryptVersion3IMGString(String2::zeroPad(strData.substr(20), (strData.length() - 20) + (2048 - ((strData.length() - 20) % 2048))));
 
 	pDataWriter->setStreamType(ePreviousStreamType);
 	pDataWriter->setSeek(0);
@@ -992,21 +992,21 @@ void					CIMGFormat::serializeVersion3_Encrypted(void)
 	}
 	if(pDataWriter->getStreamType() == DATA_STREAM_FILE)
 	{
-		pDataWriter->close(); // optionally called here, CDataWriter::close() will be called by CFormat too.
+		pDataWriter->close(); // optionally called here, DataWriter::close() will be called by Format too.
 	}
 }
 
 void					CIMGFormat::serializeVersion3_Unencrypted(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataReader *pDataReader = DataReader::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	// fetch new seek positions for all IMG entries
 	uint32
 		uiEntryCount = getEntryCount(),
 		uiNamesLength = getVersion3NamesLength(),
 		uiBodyStart = 20 + (16 * getEntryCount()) + uiNamesLength,
-		uiSeek = CMath::convertBytesToSectors(uiBodyStart),
+		uiSeek = Math::convertBytesToSectors(uiBodyStart),
 		i = 0;
 	vector<uint32> vecNewEntryPositions;
 	vecNewEntryPositions.resize(uiEntryCount);
@@ -1017,7 +1017,7 @@ void					CIMGFormat::serializeVersion3_Unencrypted(void)
 		i++;
 	}
 
-	// open IMG file to read from (IMG file to write to is already open in CDataWriter)
+	// open IMG file to read from (IMG file to write to is already open in DataWriter)
 	if (pDataReader->getStreamType() == DATA_STREAM_FILE)
 	{
 		pDataReader->setFilePath(getOriginalFilePath());
@@ -1079,14 +1079,14 @@ void					CIMGFormat::serializeVersion3_Unencrypted(void)
 	}
 	if(pDataWriter->getStreamType() == DATA_STREAM_FILE)
 	{
-		pDataWriter->close(); // optionally called here, CDataWriter::close() will be called by CFormat too.
+		pDataWriter->close(); // optionally called here, DataWriter::close() will be called by Format too.
 	}
 }
 
 // extension counts
 void					CIMGFormat::addEntryExtensionCount(string strEntryExtension)
 {
-	strEntryExtension = CString2::toUpperCase(strEntryExtension);
+	strEntryExtension = String2::toUpperCase(strEntryExtension);
 	if (m_umapExtensionCounts.count(strEntryExtension) > 0)
 	{
 		m_umapExtensionCounts[strEntryExtension]++;
@@ -1098,7 +1098,7 @@ void					CIMGFormat::addEntryExtensionCount(string strEntryExtension)
 }
 void					CIMGFormat::removeEntryExtensionCount(string strEntryExtension)
 {
-	strEntryExtension = CString2::toUpperCase(strEntryExtension);
+	strEntryExtension = String2::toUpperCase(strEntryExtension);
 	if (m_umapExtensionCounts[strEntryExtension] > 1)
 	{
 		m_umapExtensionCounts[strEntryExtension]--;
@@ -1111,7 +1111,7 @@ void					CIMGFormat::removeEntryExtensionCount(string strEntryExtension)
 
 uint32					CIMGFormat::getEntryExtensionCount(string strEntryExtension)
 {
-	strEntryExtension = CString2::toUpperCase(strEntryExtension);
+	strEntryExtension = String2::toUpperCase(strEntryExtension);
 	if (m_umapExtensionCounts.count(strEntryExtension) > 0)
 	{
 		return m_umapExtensionCounts[strEntryExtension];
@@ -1150,7 +1150,7 @@ vector<EFileType>			CIMGFormat::getFileTypes(void)
 
 vector<string>				CIMGFormat::getFileTypesText(void)
 {
-	return CStdVector::mapSorted(getFileTypes(), CFormat::getFileTypeText);
+	return StdVector::mapSorted(getFileTypes(), Format::getFileTypeText);
 }
 
 map<string, EFileType, SortByStringKey>		CIMGFormat::getFileTypesAsMap(void)
@@ -1158,7 +1158,7 @@ map<string, EFileType, SortByStringKey>		CIMGFormat::getFileTypesAsMap(void)
 	map<string, EFileType, SortByStringKey> mapFileTypes;
 	for (EFileType uiFileType : getFileTypes())
 	{
-		mapFileTypes[CFormat::getFileTypeText(uiFileType)] = uiFileType;
+		mapFileTypes[Format::getFileTypeText(uiFileType)] = uiFileType;
 	}
 	return mapFileTypes;
 }
@@ -1177,7 +1177,7 @@ vector<string>				CIMGFormat::getFileVersions(void)
 			vecFileVersions.push_back(strVersionText);
 		}
 	}
-	CStdVector::sortAZCaseInsensitive(vecFileVersions);
+	StdVector::sortAZCaseInsensitive(vecFileVersions);
 	return vecFileVersions;
 }
 
@@ -1232,12 +1232,12 @@ CIMGEntry*							CIMGFormat::addEntryViaFile(string& strEntryFilePath, string st
 {
 	if (strEntryName == "")
 	{
-		strEntryName = CPath::getFileName(strEntryFilePath);
+		strEntryName = Path::getFileName(strEntryFilePath);
 	}
 
-	string strEntryData = CFile::getFileContent(strEntryFilePath);
+	string strEntryData = File::getFileContent(strEntryFilePath);
 	CIMGEntry *pIMGEntry = addEntryViaData(strEntryName, strEntryData);
-	pIMGEntry->setFileCreationDate(CFile::getFileCreationDate(strEntryFilePath));
+	pIMGEntry->setFileCreationDate(File::getFileCreationDate(strEntryFilePath));
 	return pIMGEntry;
 }
 
@@ -1251,17 +1251,17 @@ CIMGEntry*							CIMGFormat::addEntryViaData(string& strEntryName, string& strEn
 
 	if (getVersion() == IMG_3)
 	{
-		pIMGEntry->setRageResourceType(CRageManager::get()->getResourceTypeManager()->getResourceTypeByFileExtension(CPath::getFileExtension(pIMGEntry->getEntryName())));
+		pIMGEntry->setRageResourceType(CRageManager::get()->getResourceTypeManager()->getResourceTypeByFileExtension(Path::getFileExtension(pIMGEntry->getEntryName())));
 		pIMGEntry->setFlags((uint16)CIMGEntry::getVersion3IMGSizeDeduction(pIMGEntry->getEntrySize()));
 	}
 	else
 	{
-		string strExtensionUpper = CString2::toUpperCase(CPath::getFileExtension(strEntryName));
+		string strExtensionUpper = String2::toUpperCase(Path::getFileExtension(strEntryName));
 		if (strExtensionUpper == "TXD" || CGameFormat::isModelExtension(strExtensionUpper))
 		{
 			if (strEntryData.length() >= 12)
 			{
-				pIMGEntry->setRWVersionByVersionCC(CString2::unpackUint32(strEntryData.substr(8, 4), false));
+				pIMGEntry->setRWVersionByVersionCC(String2::unpackUint32(strEntryData.substr(8, 4), false));
 			}
 		}
 		else if (strExtensionUpper == "COL")
@@ -1280,11 +1280,11 @@ CIMGEntry*							CIMGFormat::addEntryViaData(string& strEntryName, string& strEn
 
 void					CIMGFormat::addEntry(CIMGEntry *pIMGEntry)
 {
-	CVectorPool::addEntry(pIMGEntry);
+	VectorPool::addEntry(pIMGEntry);
 
 	Events::trigger(ADD_IMG_ENTRY, pIMGEntry);
 
-	string strEntryExtension = CPath::getFileExtension(pIMGEntry->getEntryName());
+	string strEntryExtension = Path::getFileExtension(pIMGEntry->getEntryName());
 	addEntryExtensionCount(strEntryExtension);
 	if (getEntryExtensionCount(strEntryExtension) == 1)
 	{
@@ -1302,7 +1302,7 @@ void								CIMGFormat::addEntries(vector<string>& vecEntryFilePaths)
 
 void								CIMGFormat::addAllEntriesInFolder(string& strFolderPath)
 {
-	vector<string> vecFileNames = CFile::getFileNames(strFolderPath);
+	vector<string> vecFileNames = File::getFileNames(strFolderPath);
 	for (auto strFileName : vecFileNames)
 	{
 		addEntryViaFile(strFileName);
@@ -1311,7 +1311,7 @@ void								CIMGFormat::addAllEntriesInFolder(string& strFolderPath)
 
 void								CIMGFormat::removeEntry(CIMGEntry *pIMGEntry)
 {
-	string strEntryExtension = CPath::getFileExtension(pIMGEntry->getEntryName());
+	string strEntryExtension = Path::getFileExtension(pIMGEntry->getEntryName());
 	removeEntryExtensionCount(strEntryExtension);
 	if (getEntryExtensionCount(strEntryExtension) == 0)
 	{
@@ -1320,14 +1320,14 @@ void								CIMGFormat::removeEntry(CIMGEntry *pIMGEntry)
 
 	Events::trigger(REMOVE_IMG_ENTRY, pIMGEntry);
 
-	CVectorPool::removeEntry(pIMGEntry);
+	VectorPool::removeEntry(pIMGEntry);
 }
 
 CIMGEntry*							CIMGFormat::replaceEntryViaFile(string& strEntryName, string& strEntryFilePath, string strNewEntryName)
 {
-	string strEntryData = CFile::getFileContent(strEntryFilePath);
+	string strEntryData = File::getFileContent(strEntryFilePath);
 	CIMGEntry *pIMGEntry = replaceEntryViaData(strEntryName, strEntryData, strNewEntryName);
-	pIMGEntry->setFileCreationDate(CFile::getFileCreationDate(strEntryFilePath));
+	pIMGEntry->setFileCreationDate(File::getFileCreationDate(strEntryFilePath));
 	return pIMGEntry;
 }
 CIMGEntry*							CIMGFormat::replaceEntryViaData(string& strEntryName, string& strEntryData, string strNewEntryName)
@@ -1353,7 +1353,7 @@ uint32						CIMGFormat::replaceEntries(vector<string>& vecPaths, vector<string>&
 
 	for (auto strPath : vecPaths)
 	{
-		string strNewEntryName = CPath::getFileName(strPath);
+		string strNewEntryName = Path::getFileName(strPath);
 		CIMGEntry *pIMGEntry = getEntryByName(strNewEntryName);
 		if (!pIMGEntry)
 		{
@@ -1362,7 +1362,7 @@ uint32						CIMGFormat::replaceEntries(vector<string>& vecPaths, vector<string>&
 		}
 
 		// body
-		string strFileContent = CFile::getFileContent(strPath);
+		string strFileContent = File::getFileContent(strPath);
 		uint32 uiFileSize = strFileContent.length();
 		pIMGEntry->setEntryData(strFileContent);
 
@@ -1371,11 +1371,11 @@ uint32						CIMGFormat::replaceEntries(vector<string>& vecPaths, vector<string>&
 		pIMGEntry->setEntrySize(uiFileSize);
 		if (getVersion() == IMG_3)
 		{
-			pIMGEntry->setRageResourceType(CRageManager::get()->getResourceTypeManager()->getResourceTypeByFileExtension(CPath::getFileExtension(strNewEntryName)));
+			pIMGEntry->setRageResourceType(CRageManager::get()->getResourceTypeManager()->getResourceTypeByFileExtension(Path::getFileExtension(strNewEntryName)));
 		}
 		else
 		{
-			pIMGEntry->setRWVersionByVersionCC(strFileContent.length() >= 12 ? CString2::unpackUint32(strFileContent.substr(8, 4), false) : 0);
+			pIMGEntry->setRWVersionByVersionCC(strFileContent.length() >= 12 ? String2::unpackUint32(strFileContent.substr(8, 4), false) : 0);
 		}
 
 		uiReplaceCount++;
@@ -1422,7 +1422,7 @@ unordered_map<CIMGEntry*, string>	CIMGFormat::getAllEntriesData(void)
 
 unordered_map<CIMGEntry*, string>	CIMGFormat::getEntriesData(vector<CIMGEntry*>& vecEntries)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	unordered_map<CIMGEntry*, string> umapEntriesData;
 
 	try
@@ -1465,11 +1465,11 @@ uint32			CIMGFormat::getNextEntryOffset(void)
 
 vector<CIMGEntry*>		CIMGFormat::getEntriesByExtension(string strExtension)
 {
-	strExtension = CString2::toUpperCase(strExtension);
+	strExtension = String2::toUpperCase(strExtension);
 	vector<CIMGEntry*> vecIMGEntries;
 	for (auto pIMGEntry : getEntries())
 	{
-		if (CString2::toUpperCase(CPath::getFileExtension(pIMGEntry->getEntryName())) == strExtension)
+		if (String2::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())) == strExtension)
 		{
 			vecIMGEntries.push_back(pIMGEntry);
 		}
@@ -1479,10 +1479,10 @@ vector<CIMGEntry*>		CIMGFormat::getEntriesByExtension(string strExtension)
 
 CIMGEntry*				CIMGFormat::getEntryByName(string& strEntryName)
 {
-	strEntryName = CString2::toUpperCase(strEntryName);
+	strEntryName = String2::toUpperCase(strEntryName);
 	for (auto pIMGEntry : getEntries())
 	{
-		if (strEntryName == CString2::toUpperCase(pIMGEntry->getEntryName()))
+		if (strEntryName == String2::toUpperCase(pIMGEntry->getEntryName()))
 		{
 			return pIMGEntry;
 		}
@@ -1492,10 +1492,10 @@ CIMGEntry*				CIMGFormat::getEntryByName(string& strEntryName)
 
 CIMGEntry*				CIMGFormat::getEntryByNameWithoutExtension(string& strEntryNameWithoutExtension)
 {
-	strEntryNameWithoutExtension = CString2::toUpperCase(strEntryNameWithoutExtension);
+	strEntryNameWithoutExtension = String2::toUpperCase(strEntryNameWithoutExtension);
 	for (auto pIMGEntry : getEntries())
 	{
-		if (strEntryNameWithoutExtension == CString2::toUpperCase(CPath::removeFileExtension(pIMGEntry->getEntryName())))
+		if (strEntryNameWithoutExtension == String2::toUpperCase(Path::removeFileExtension(pIMGEntry->getEntryName())))
 		{
 			return pIMGEntry;
 		}
@@ -1520,11 +1520,11 @@ CIMGEntry*				CIMGFormat::getEntryByHighestOffset(void)
 
 uint32			CIMGFormat::getEntryCountForName(string& strEntryName)
 {
-	strEntryName = CString2::toUpperCase(strEntryName);
+	strEntryName = String2::toUpperCase(strEntryName);
 	uint32 uiNameCount = 0;
 	for (auto pIMGEntry : getEntries())
 	{
-		if (strEntryName == CString2::toUpperCase(pIMGEntry->getEntryName()))
+		if (strEntryName == String2::toUpperCase(pIMGEntry->getEntryName()))
 		{
 			uiNameCount++;
 		}
@@ -1548,7 +1548,7 @@ uint32			CIMGFormat::getEntryPaddedSize(uint32 uiDataLength)
 
 uint32			CIMGFormat::merge(string& strSecondIMGPath, vector<string>& vecImportedEntryNames)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	uint32 uiImportedEntryCount = 0;
 	try
 	{
@@ -1650,15 +1650,15 @@ void					CIMGFormat::exportSingle(CIMGEntry *pIMGEntry, string& strFolderPath)
 		return;
 	}
 
-	strFolderPath = CPath::addSlashToEnd(strFolderPath);
+	strFolderPath = Path::addSlashToEnd(strFolderPath);
 
-	CFile::storeFile(strFolderPath + pIMGEntry->getEntryName(), pIMGEntry->getEntryData(), false, true);
+	File::storeFile(strFolderPath + pIMGEntry->getEntryName(), pIMGEntry->getEntryData(), false, true);
 }
 
 void					CIMGFormat::exportMultiple(vector<CIMGEntry*>& vecIMGEntries, string strFolderPath)
 {
-	CDataReader *pDataReader = CDataReader::get();
-	strFolderPath = CPath::addSlashToEnd(strFolderPath);
+	DataReader *pDataReader = DataReader::get();
+	strFolderPath = Path::addSlashToEnd(strFolderPath);
 
 	try
 	{
@@ -1674,7 +1674,7 @@ void					CIMGFormat::exportMultiple(vector<CIMGEntry*>& vecIMGEntries, string st
 
 			pDataReader->setSeek(pIMGEntry->getEntryOffset());
 			string strFileContent = pDataReader->readString(pIMGEntry->getEntrySize());
-			CFile::storeFile(strFolderPath + pIMGEntry->getEntryName(), strFileContent, false, true);
+			File::storeFile(strFolderPath + pIMGEntry->getEntryName(), strFileContent, false, true);
 
 			Events::triggerConst(EXPORT_IMG_ENTRY, this);
 		}
@@ -1689,8 +1689,8 @@ void					CIMGFormat::exportMultiple(vector<CIMGEntry*>& vecIMGEntries, string st
 
 void					CIMGFormat::exportAll(string& strFolderPath)
 {
-	CDataReader *pDataReader = CDataReader::get();
-	strFolderPath = CPath::addSlashToEnd(strFolderPath);
+	DataReader *pDataReader = DataReader::get();
+	strFolderPath = Path::addSlashToEnd(strFolderPath);
 
 	try
 	{

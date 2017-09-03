@@ -1,7 +1,7 @@
 #include "CIPLEntry_RTFX.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -13,14 +13,14 @@ CIPLEntry_RTFX::CIPLEntry_RTFX(CIPLFormat *pIPLFormat) :
 
 void			CIPLEntry_RTFX::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	throw EXCEPTION_UNKNOWN_FORMAT_TYPE;
 }
 
 void			CIPLEntry_RTFX::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	throw EXCEPTION_UNKNOWN_FORMAT_TYPE;
 }

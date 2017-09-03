@@ -1,6 +1,6 @@
 #include "CWTDMipmap.h"
 #include "CWTDEntry.h"
-#include "Image/CImageManager.h"
+#include "Image/ImageManager.h"
 //#include "squish.h"
 
 using namespace std;
@@ -25,7 +25,7 @@ string					CWTDMipmap::getRasterDataBGRA32(void)
 	{
 		// the mipmap's raster data is currently stored in a format that is not BGRA32
 		string strPaletteData = "";
-		return CImageManager::convertRasterDataFormatToBGRA32(m_strRasterData, getRasterDataFormat(), strPaletteData, getImageSize(true), getImageSize(false));
+		return ImageManager::convertRasterDataFormatToBGRA32(m_strRasterData, getRasterDataFormat(), strPaletteData, getImageSize(true), getImageSize(false));
 	}
 }
 

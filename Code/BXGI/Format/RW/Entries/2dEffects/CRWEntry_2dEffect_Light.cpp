@@ -1,7 +1,7 @@
 #include "CRWEntry_2dEffect_Light.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
-#include "Static/CString2.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
+#include "Static/String2.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -30,7 +30,7 @@ CRWEntry_2dEffect_Light::CRWEntry_2dEffect_Light(void) :
 
 void							CRWEntry_2dEffect_Light::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	
 	m_uiColor = pDataReader->readUint32();
 	m_fCoronaFarClip = pDataReader->readFloat32();
@@ -42,8 +42,8 @@ void							CRWEntry_2dEffect_Light::unserialize(void)
 	m_ucCoronaFlareType = pDataReader->readUint8();
 	m_ucShadowColorMultiplier = pDataReader->readUint8();
 	m_ucFlags1 = pDataReader->readUint8();
-	m_strCoronaTexName = CString2::rtrimFromLeft(pDataReader->readString(24));
-	m_strShadowTexName = CString2::rtrimFromLeft(pDataReader->readString(24));
+	m_strCoronaTexName = String2::rtrimFromLeft(pDataReader->readString(24));
+	m_strShadowTexName = String2::rtrimFromLeft(pDataReader->readString(24));
 	m_ucShadowZDistance = pDataReader->readUint8();
 	m_ucFlags2 = pDataReader->readUint8();
 	if (m_uiDataSize == 76)
@@ -63,7 +63,7 @@ void							CRWEntry_2dEffect_Light::unserialize(void)
 
 void							CRWEntry_2dEffect_Light::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 	
 	pDataWriter->writeUint32(m_uiColor);
 	pDataWriter->writeFloat32(m_fCoronaFarClip);

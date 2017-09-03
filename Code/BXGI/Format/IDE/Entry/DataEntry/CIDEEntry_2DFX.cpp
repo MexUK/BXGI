@@ -1,7 +1,7 @@
 #include "CIDEEntry_2DFX.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxgi;
 
@@ -25,7 +25,7 @@ CIDEEntry_2DFX::~CIDEEntry_2DFX(void)
 
 void			CIDEEntry_2DFX::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	
 	if(doesSupportFormatGame(GAME_FLAG_GTA_IV))
 	{
@@ -50,7 +50,7 @@ void			CIDEEntry_2DFX::unserialize(void)
 
 void			CIDEEntry_2DFX::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	if (doesSupportFormatGame(GAME_FLAG_GTA_IV))
 	{

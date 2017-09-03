@@ -1,6 +1,6 @@
 #include "CRWSection.h"
 #include "Engine/RW/CRWManager.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataWriter.h"
 #include "Sections/CRWSection_2dEffect.h"
 #include "Sections/CRWSection_Atomic.h"
 #include "Sections/CRWSection_BinMeshPLG.h"
@@ -19,7 +19,7 @@
 #include "Sections/CRWSection_TextureDictionary.h"
 #include "Sections/CRWSection_TextureNative.h"
 #include "Sections/CRWSection_UnknownSection.h"
-#include "Static/CString2.h"
+#include "Static/String2.h"
 
 using namespace std;
 using namespace bxcf;
@@ -61,7 +61,7 @@ void				CRWSection::serialize(void)
 	}
 	*/
 	
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 	uint32 uiVersionCC = CRWManager::get()->getSerializationRWVersion();
 	
 	if (!isSectionHeaderSkipped())
@@ -112,20 +112,20 @@ uint32				CRWSection::getSectionIndex(void)
 
 void				CRWSection::fillPlaceholdersForSerialization(uint32 uiSectionByteCount, uint32 uiSectionStructByteCount)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	string &strData = pDataWriter->getData();
 
 	if (!isSectionHeaderSkipped())
 	{
 		uint32 uiSectionStartPosition = uiSectionByteCount + 12;
-		strData = strData.substr(0, (strData.length() - uiSectionStartPosition) + 4) + CString2::packUint32(uiSectionByteCount, false) + strData.substr((strData.length() - uiSectionStartPosition) + 8);
+		strData = strData.substr(0, (strData.length() - uiSectionStartPosition) + 4) + String2::packUint32(uiSectionByteCount, false) + strData.substr((strData.length() - uiSectionStartPosition) + 8);
 	}
 
 	if (doesRWSectionContainStruct(m_uiSectionId))
 	{
 		uint32 uiStructStartPosition = uiSectionByteCount;
-		strData = strData.substr(0, (strData.length() - uiStructStartPosition) + 4) + CString2::packUint32(uiSectionStructByteCount, false) + strData.substr((strData.length() - uiStructStartPosition) + 8);
+		strData = strData.substr(0, (strData.length() - uiStructStartPosition) + 4) + String2::packUint32(uiSectionStructByteCount, false) + strData.substr((strData.length() - uiStructStartPosition) + 8);
 	}
 }
 

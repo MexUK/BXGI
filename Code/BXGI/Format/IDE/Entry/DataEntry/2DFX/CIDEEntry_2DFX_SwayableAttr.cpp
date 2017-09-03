@@ -1,7 +1,7 @@
 #include "CIDEEntry_2DFX_SwayableAttr.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -13,14 +13,14 @@ CIDEEntry_2DFX_SwayableAttr::CIDEEntry_2DFX_SwayableAttr(CIDEFormat *pIDEFormat)
 
 void			CIDEEntry_2DFX_SwayableAttr::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	
 	throw EXCEPTION_UNKNOWN_FORMAT_TYPE;
 }
 
 void			CIDEEntry_2DFX_SwayableAttr::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	throw EXCEPTION_UNKNOWN_FORMAT_TYPE;
 }

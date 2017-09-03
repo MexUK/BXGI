@@ -1,7 +1,7 @@
 #include "CIDEEntry_UnknownSection.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -13,14 +13,14 @@ CIDEEntry_UnknownSection::CIDEEntry_UnknownSection(CIDEFormat *pIDEFormat) :
 
 void			CIDEEntry_UnknownSection::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	
 	setLine(*pDataReader->getActiveLine());
 }
 
 void			CIDEEntry_UnknownSection::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	pDataWriter->writeStringRef(m_strLine);
 }

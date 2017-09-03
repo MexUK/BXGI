@@ -1,7 +1,7 @@
 #include "CDATLoaderManager.h"
-#include "Static/CString2.h"
-#include "Static/CStdVector.h"
-#include "Static/CDebug.h"
+#include "Static/String2.h"
+#include "Static/StdVector.h"
+#include "Static/Debug.h"
 
 using namespace std;
 using namespace bxcf;
@@ -20,7 +20,7 @@ void				CDATLoaderManager::uninit(void)
 
 EDATLoaderEntryType CDATLoaderManager::getDATEntryTypeFromString(string strType)
 {
-	strType = CString2::toUpperCase(strType);
+	strType = String2::toUpperCase(strType);
 	if (strType == "IMG")
 		return DAT_LOADER_IMG;
 	if (strType == "CDIMAGE")

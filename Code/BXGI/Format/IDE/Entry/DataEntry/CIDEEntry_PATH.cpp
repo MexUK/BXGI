@@ -1,8 +1,8 @@
 #include "CIDEEntry_PATH.h"
 #include "Format/IDE/Entry/DataEntry/PATH/CIDEEntry_PATH_Group.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -17,10 +17,10 @@ CIDEEntry_PATH::CIDEEntry_PATH(CIDEFormat *pIDEFormat, EIDEPathType EIDEPathType
 
 void			CIDEEntry_PATH::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 }
 
 void			CIDEEntry_PATH::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 }

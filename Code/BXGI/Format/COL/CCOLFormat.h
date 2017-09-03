@@ -1,8 +1,8 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Format/CFormat.h"
-#include "Pool/CVectorPool.h"
+#include "Format/Format.h"
+#include "Pool/VectorPool.h"
 #include "ECOLVersion.h"
 #include "CCOLEntry.h"
 #include <string>
@@ -10,10 +10,10 @@
 
 class bxgi::CCOLVersion;
 
-class bxgi::CCOLFormat : public bxcf::CFormat, public bxcf::CVectorPool<bxgi::CCOLEntry*>
+class bxgi::CCOLFormat : public bxcf::Format, public bxcf::VectorPool<bxgi::CCOLEntry*>
 {
 public:
-	CCOLFormat(void) : CFormat(true) {}
+	CCOLFormat(void) : Format(true) {}
 
 	void							unload(void);
 

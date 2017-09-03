@@ -1,8 +1,8 @@
 #include "CIDEEntry_2DFX_Light.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
-#include "Static/CString2.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
+#include "Static/String2.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -23,7 +23,7 @@ CIDEEntry_2DFX_Light::CIDEEntry_2DFX_Light(CIDEFormat *pIDEFormat) :
 
 void			CIDEEntry_2DFX_Light::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	if(doesSupportFormatGame(GAME_FLAG_GTA_IV))
 	{
@@ -36,8 +36,8 @@ void			CIDEEntry_2DFX_Light::unserialize(void)
 
 		CIDEEntry_2DFX::unserialize();
 		
-		m_strCoronaTexture = CString2::trim(CString2::trim(pDataReader->readTokenString(), "\""));
-		m_strShadowTexture = CString2::trim(CString2::trim(pDataReader->readTokenString(), "\""));
+		m_strCoronaTexture = String2::trim(String2::trim(pDataReader->readTokenString(), "\""));
+		m_strShadowTexture = String2::trim(String2::trim(pDataReader->readTokenString(), "\""));
 		m_fViewDistance = pDataReader->readTokenFloat32();
 		m_fOuterRange = pDataReader->readTokenFloat32();
 		m_fCoronaSize = pDataReader->readTokenFloat32();
@@ -52,7 +52,7 @@ void			CIDEEntry_2DFX_Light::unserialize(void)
 
 void			CIDEEntry_2DFX_Light::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	switch (getFormatType())
 	{

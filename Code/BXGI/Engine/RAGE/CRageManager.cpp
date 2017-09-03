@@ -1,5 +1,5 @@
 #include "CRageManager.h"
-#include "Static/CString2.h"
+#include "Static/String2.h"
 #include "CRageResourceTypeManager.h"
 
 using namespace std;
@@ -45,18 +45,18 @@ bool											CRageManager::isRageFileExtension(string& strFileExtension)
 
 bool											CRageManager::isRageModelExtension(string& strFileExtension)
 {
-	string strExtensionUpper = CString2::toUpperCase(strFileExtension);
+	string strExtensionUpper = String2::toUpperCase(strFileExtension);
 	return strExtensionUpper == "WDR";
 }
 
 bool											CRageManager::isRageTextureExtension(string& strFileExtension)
 {
-	string strExtensionUpper = CString2::toUpperCase(strFileExtension);
+	string strExtensionUpper = String2::toUpperCase(strFileExtension);
 	return strExtensionUpper == "WTD";
 }
 
 bool											CRageManager::isRageCollisionExtension(string& strFileExtension)
 {
-	string strExtensionUpper = CString2::toUpperCase(strFileExtension);
+	string strExtensionUpper = String2::toUpperCase(strFileExtension);
 	return strExtensionUpper == "WBN";
 }

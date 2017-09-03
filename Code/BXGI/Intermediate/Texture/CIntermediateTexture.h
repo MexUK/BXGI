@@ -2,13 +2,13 @@
 
 #include "nsbxgi.h"
 #include "Type/Types.h"
-#include "Pool/CVectorPool.h"
+#include "Pool/VectorPool.h"
 #include "Image/ERasterDataFormat.h"
 #include "Data/CIntermediateTextureMipmap.h"
 #include "Type/Vector/Vec2u16.h"
 #include <string>
 
-class bxgi::CIntermediateTexture : public bxcf::CVectorPool<bxgi::CIntermediateTextureMipmap*>
+class bxgi::CIntermediateTexture : public bxcf::VectorPool<bxgi::CIntermediateTextureMipmap*>
 {
 public:
 	CIntermediateTexture(void) :

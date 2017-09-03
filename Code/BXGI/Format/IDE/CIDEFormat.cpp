@@ -1,6 +1,6 @@
 #include "CIDEFormat.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 #include "CIDEEntry.h"
 #include "Format/IDE/Entry/CIDEEntry_Section.h"
 #include "Format/IDE/Entry/CIDEEntry_Other.h"
@@ -35,7 +35,7 @@
 #include "Format/IDE/Entry/DataEntry/PATH/CIDEEntry_PATH_Node.h"
 #include "Helper/SectionLines/ESectionLinesEntryType.h"
 // todo #include "CDataType.h"
-#include "Static/CString2.h"
+#include "Static/String2.h"
 #include "Exception/EExceptionCode.h"
 #include <unordered_map>
 
@@ -88,7 +88,7 @@ CIDEEntry_Data*		CIDEFormat::unserializeDataEntry(EIDESection EIDESectionValue)
 
 pair<E2DFXType, uint32>			CIDEFormat::detect2DFXTypeAndGame(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	uint32 uiLineTokenCount = pDataReader->getLineTokens().size();
 
@@ -189,7 +189,7 @@ pair<E2DFXType, uint32>			CIDEFormat::detect2DFXTypeAndGame(void)
 
 EIDEPathType			CIDEFormat::detectPATHType(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	switch (pDataReader->getLineTokens().size())
 	{
@@ -202,9 +202,9 @@ EIDEPathType			CIDEFormat::detectPATHType(void)
 // general
 EIDESection					CIDEFormat::getSectionFromText(string strIDESectionText)
 {
-	strIDESectionText = CString2::zeroPad(strIDESectionText, 4);
+	strIDESectionText = String2::zeroPad(strIDESectionText, 4);
 
-	const uint8 *pszData = (const uint8*) CString2::toUpperCase(strIDESectionText.substr(0, 5)).c_str();
+	const uint8 *pszData = (const uint8*) String2::toUpperCase(strIDESectionText.substr(0, 5)).c_str();
 	switch ((uint32)*pszData)
 	{
 	case 'OBJS':	return IDE_SECTION_OBJS;

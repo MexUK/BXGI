@@ -1,13 +1,13 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Format/CFormatManager.h"
-#include "Object/CSingleton.h"
+#include "Format/FormatManager.h"
+#include "Object/Singleton.h"
 
 class bxgi::CWDRFormat;
 class bxgi::CIntermediateModelFormat;
 
-class bxgi::CWDRManager : public bxcf::CFormatManager<bxgi::CWDRFormat>, public bxcf::CSingleton<bxgi::CWDRManager>
+class bxgi::CWDRManager : public bxcf::FormatManager<bxgi::CWDRFormat>, public bxcf::Singleton<bxgi::CWDRManager>
 {
 public:
 	CWDRManager(void);

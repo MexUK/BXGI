@@ -1,15 +1,15 @@
 #include "CDATLoaderFormat.h"
 #include "CDATLoaderEntry.h"
-#include "Static/CPath.h"
+#include "Static/Path.h"
 #include "Format/IMG/Regular/CIMGManager.h"
 #include "Format/IMG/Regular/CIMGFormat.h"
 #include "Format/IDE/CIDEManager.h"
 #include "Format/IDE/CIDEFormat.h"
 #include "Format/IPL/CIPLManager.h"
 #include "Format/IPL/CIPLFormat.h"
-#include "Static/CString2.h"
-#include "Stream/CDataReader.h"
-#include "Static/CStdVector.h"
+#include "Static/String2.h"
+#include "Stream/DataReader.h"
+#include "Static/StdVector.h"
 #include "CDATLoaderManager.h"
 
 using namespace std;
@@ -23,7 +23,7 @@ void					CDATLoaderFormat::unload(void)
 
 void					CDATLoaderFormat::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	pDataReader->readAndStoreLines();
 	while (pDataReader->iterateLines())
 	{
@@ -33,7 +33,7 @@ void					CDATLoaderFormat::unserialize(void)
 
 void					CDATLoaderFormat::unserializeLine(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	string strLine = *pDataReader->getActiveLine();
 
 	// remove comment from end of line
@@ -50,7 +50,7 @@ void					CDATLoaderFormat::unserializeLine(void)
 		// blank line
 	}
 
-	else if (CString2::ltrim(strLine).c_str()[0] == '#')
+	else if (String2::ltrim(strLine).c_str()[0] == '#')
 	{
 		// line is a comment
 	}
@@ -58,7 +58,7 @@ void					CDATLoaderFormat::unserializeLine(void)
 	else
 	{
 		// parse line
-		deque<string> deqTokens = CStdVector::convertVectorToDeque(CString2::split(strLine, " "));
+		deque<string> deqTokens = StdVector::convertVectorToDeque(String2::split(strLine, " "));
 
 		CDATLoaderEntry *pDATLoaderEntry = new CDATLoaderEntry;
 		pDATLoaderEntry->setEntryType(CDATLoaderManager::getDATEntryTypeFromString(deqTokens[0]));
@@ -112,7 +112,7 @@ vector<CIPLFormat*>		CDATLoaderFormat::parseIPLFiles(string strGameDirectoryPath
 template<class ManagerClass, class FormatClass>
 vector<FormatClass*>	CDATLoaderFormat::parseFiles(string strGameDirectoryPath, EDATLoaderEntryType eType1, EDATLoaderEntryType eType2)
 {
-	strGameDirectoryPath = CPath::addSlashToEnd(strGameDirectoryPath);
+	strGameDirectoryPath = Path::addSlashToEnd(strGameDirectoryPath);
 
 	vector<FormatClass*> vecFormats;
 
@@ -120,7 +120,7 @@ vector<FormatClass*>	CDATLoaderFormat::parseFiles(string strGameDirectoryPath, E
 	{
 		if (pDATEntry->getEntryType() == eType1 || (eType2 != DAT_LOADER_UNKNOWN && pDATEntry->getEntryType() == eType2))
 		{
-			string strFormatPath = strGameDirectoryPath + CPath::removeSlashFromFront(pDATEntry->getEntryValues()[0]);
+			string strFormatPath = strGameDirectoryPath + Path::removeSlashFromFront(pDATEntry->getEntryValues()[0]);
 			FormatClass *pFormat = ManagerClass::get()->parseViaFile(strFormatPath);
 			if (pFormat->doesHaveError())
 			{

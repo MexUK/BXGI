@@ -1,11 +1,11 @@
 #include "CRWSection_Geometry.h"
 #include "CRWSection_String.h"
 #include "Engine/RW/CRWManager.h"
-#include "Static/CString2.h"
+#include "Static/String2.h"
 #include "Intermediate/Model/Data/CIntermediateGeometry.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
-#include "Static/CDebug.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
+#include "Static/Debug.h"
 
 using namespace std;
 using namespace bxcf;
@@ -27,7 +27,7 @@ CRWSection_Geometry::CRWSection_Geometry(void) :
 
 void							CRWSection_Geometry::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	//uint32 uiTemp1 = pDataReader->getSeek();
 
@@ -112,12 +112,12 @@ void							CRWSection_Geometry::unserialize(void)
 	//uint32 uiTemp2 = pDataReader->getSeek();
 
 	//uint32 uiByteCountRead = uiTemp2 - uiTemp1;
-	//CDebug::log("Geometry uiByteCountRead: " + CString2::toString(uiByteCountRead));
+	//Debug::log("Geometry uiByteCountRead: " + String2::toString(uiByteCountRead));
 }
 
 void							CRWSection_Geometry::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	pDataWriter->writeUint32(m_uiFlags);
 	pDataWriter->writeUint32(m_uiTriangleCount);
@@ -159,7 +159,7 @@ void							CRWSection_Geometry::serialize(void)
 				pDataWriter->writeStdVector2D(m_vecTextureCoordinates);
 			}
 		}
-		// todo CDebug::log("SEEK AFTER TEXTURE COORDINATES: " + CString2::toString((uint32)CDataWriter::get()->getSeek()));
+		// todo Debug::log("SEEK AFTER TEXTURE COORDINATES: " + String2::toString((uint32)DataWriter::get()->getSeek()));
 		pDataWriter->writeStdVector4ui16(m_vecVertexIndices);
 	}
 

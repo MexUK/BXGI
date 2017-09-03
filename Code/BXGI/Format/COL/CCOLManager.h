@@ -1,8 +1,8 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Format/CFormatManager.h"
-#include "Object/CSingleton.h"
+#include "Format/FormatManager.h"
+#include "Object/Singleton.h"
 #include "ECOLVersion.h"
 #include "CCOLVersion.h"
 #include "Game/EPlatformedGame.h"
@@ -12,7 +12,7 @@
 class bxgi::CCOLFormat;
 class bxgi::CCOLVersionManager;
 
-class bxgi::CCOLManager : public bxcf::CFormatManager<bxgi::CCOLFormat>, public bxcf::CSingleton<bxgi::CCOLManager>
+class bxgi::CCOLManager : public bxcf::FormatManager<bxgi::CCOLFormat>, public bxcf::Singleton<bxgi::CCOLManager>
 {
 public:
 	CCOLManager(void);

@@ -1,6 +1,6 @@
 #include "CRWEntry_2dEffect_SunGlare.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -12,14 +12,14 @@ CRWEntry_2dEffect_SunGlare::CRWEntry_2dEffect_SunGlare(void) :
 
 void							CRWEntry_2dEffect_SunGlare::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	
 	// this 2d effect does not have body data
 }
 
 void							CRWEntry_2dEffect_SunGlare::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 	
 	// this 2d effect does not have body data
 }

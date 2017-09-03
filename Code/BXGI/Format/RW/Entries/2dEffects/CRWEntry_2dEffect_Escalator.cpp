@@ -1,6 +1,6 @@
 #include "CRWEntry_2dEffect_Escalator.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -16,7 +16,7 @@ CRWEntry_2dEffect_Escalator::CRWEntry_2dEffect_Escalator(void) :
 
 void							CRWEntry_2dEffect_Escalator::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	m_vecEscalatorBottom = pDataReader->readVector3D();
 	m_vecEscalatorTop = pDataReader->readVector3D();
@@ -26,7 +26,7 @@ void							CRWEntry_2dEffect_Escalator::unserialize(void)
 
 void							CRWEntry_2dEffect_Escalator::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	pDataWriter->writeVector3D(m_vecEscalatorBottom);
 	pDataWriter->writeVector3D(m_vecEscalatorTop);

@@ -2,7 +2,7 @@
 
 #include "nsbxgi.h"
 #include "Type/Types.h"
-#include "Format/CFormat.h"
+#include "Format/Format.h"
 #include "CRWSectionContainer.h"
 #include "Engine/RW/CRWVersion.h"
 #include "Format/RW/ERWSection.h"
@@ -14,7 +14,7 @@ class bxgi::CRWSection;
 class bxgi::C2dEffect;
 class bxgi::CTextureEntry;
 
-class bxgi::CRWFormat : public bxcf::CFormat, public bxgi::CRWSectionContainer
+class bxgi::CRWFormat : public bxcf::Format, public bxgi::CRWSectionContainer
 {
 public:
 	CRWFormat(void);

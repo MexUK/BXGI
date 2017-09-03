@@ -1,6 +1,6 @@
 #include "CRWSection_BinMeshPLG.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 #include "CRWSection_Geometry.h"
 
 using namespace bxcf;
@@ -16,7 +16,7 @@ CRWSection_BinMeshPLG::CRWSection_BinMeshPLG(void) :
 
 void							CRWSection_BinMeshPLG::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	m_uiFlags = pDataReader->readUint32();
 	m_uiMeshCount = pDataReader->readUint32();
@@ -59,7 +59,7 @@ void							CRWSection_BinMeshPLG::unserialize(void)
 
 void							CRWSection_BinMeshPLG::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	pDataWriter->writeUint32(m_uiFlags);
 	pDataWriter->writeUint32(m_uiMeshCount);

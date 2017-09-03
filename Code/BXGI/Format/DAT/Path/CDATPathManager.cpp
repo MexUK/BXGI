@@ -1,8 +1,8 @@
 #include "CDATPathManager.h"
 #include "CDATPathFormat.h"
-#include "Static/CString2.h"
-#include "Static/CStdVector.h"
-#include "Static/CDebug.h"
+#include "Static/String2.h"
+#include "Static/StdVector.h"
+#include "Static/Debug.h"
 
 using namespace std;
 using namespace bxcf;

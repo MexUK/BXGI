@@ -1,7 +1,7 @@
 #include "CRWSection_2dEffect.h"
 #include "Format/RW/Entries/C2dEffect.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 #include "Exception/EExceptionCode.h"
 #include "Type/Vector/Vec3f.h"
 
@@ -21,7 +21,7 @@ CRWSection_2dEffect::~CRWSection_2dEffect(void)
 
 void							CRWSection_2dEffect::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	uint32 uiEntryCount = pDataReader->readUint32();
 
@@ -58,7 +58,7 @@ void							CRWSection_2dEffect::unserialize(void)
 
 void							CRWSection_2dEffect::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	// 2d effect RW section header
 	pDataWriter->writeUint32(get2dEffects()->getEntryCount());

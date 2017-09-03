@@ -1,14 +1,14 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Object/CSingleton.h"
-#include "Object/CManager.h"
+#include "Object/Singleton.h"
+#include "Object/Manager.h"
 #include "CRWVersion.h"
 #include <string>
 
 class bxgi::CRWVersionManager;
 
-class bxgi::CRWManager : public bxcf::CManager, public bxcf::CSingleton<bxgi::CRWManager>
+class bxgi::CRWManager : public bxcf::Manager, public bxcf::Singleton<bxgi::CRWManager>
 {
 public:
 	CRWManager(void);

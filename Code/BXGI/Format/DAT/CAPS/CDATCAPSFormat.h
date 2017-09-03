@@ -2,9 +2,9 @@
 
 #include "nsbxgi.h"
 #include "Type/Types.h"
-#include "Format/CFormat.h"
+#include "Format/Format.h"
 
-class bxgi::CDATCAPSFormat : public bxcf::CFormat
+class bxgi::CDATCAPSFormat : public bxcf::Format
 {
 public:
 	CDATCAPSFormat(void);

@@ -1,14 +1,14 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Format/CFormat.h"
+#include "Format/Format.h"
 #include "CDATPathEntry.h"
 #include <string>
 #include <vector>
 
 class bxcf::Vec3f;
 
-class bxgi::CDATPathFormat : public bxcf::CFormat
+class bxgi::CDATPathFormat : public bxcf::Format
 {
 public:
 	CDATPathFormat(void);

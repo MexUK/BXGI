@@ -1,8 +1,8 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Format/CFormat.h"
-#include "Pool/CVectorPool.h"
+#include "Format/Format.h"
+#include "Pool/VectorPool.h"
 #include "EDATLoaderEntryType.h"
 #include <string>
 #include <vector>
@@ -12,10 +12,10 @@ class bxgi::CIMGFormat;
 class bxgi::CIDEFormat;
 class bxgi::CIPLFormat;
 
-class bxgi::CDATLoaderFormat : public bxcf::CFormat, public bxcf::CVectorPool<bxgi::CDATLoaderEntry*>
+class bxgi::CDATLoaderFormat : public bxcf::Format, public bxcf::VectorPool<bxgi::CDATLoaderEntry*>
 {
 public:
-	CDATLoaderFormat(void) : CFormat(false) {}
+	CDATLoaderFormat(void) : Format(false) {}
 	
 	void									unload(void);
 

@@ -1,6 +1,6 @@
 #include "CRWSection_FrameList.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -13,7 +13,7 @@ CRWSection_FrameList::CRWSection_FrameList(void) :
 
 void							CRWSection_FrameList::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	m_uiFrameCount = pDataReader->readUint32();
 	m_strFrameData = pDataReader->readString(56 * m_uiFrameCount);
@@ -21,7 +21,7 @@ void							CRWSection_FrameList::unserialize(void)
 
 void							CRWSection_FrameList::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	pDataWriter->writeUint32(m_uiFrameCount);
 	pDataWriter->writeStringRef(m_strFrameData);

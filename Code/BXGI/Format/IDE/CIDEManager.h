@@ -1,14 +1,14 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Format/CFormatManager.h"
-#include "Object/CSingleton.h"
+#include "Format/FormatManager.h"
+#include "Object/Singleton.h"
 #include <string>
 #include <vector>
 
 class bxgi::CIDEFormat;
 
-class bxgi::CIDEManager : public bxcf::CFormatManager<bxgi::CIDEFormat>, public bxcf::CSingleton<bxgi::CIDEManager>
+class bxgi::CIDEManager : public bxcf::FormatManager<bxgi::CIDEFormat>, public bxcf::Singleton<bxgi::CIDEManager>
 {
 public:
 	CIDEManager(void);

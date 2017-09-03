@@ -2,7 +2,7 @@
 
 #include "nsbxgi.h"
 #include "Format/RW/CRWSection.h"
-#include "Pool/CVectorPool.h"
+#include "Pool/VectorPool.h"
 #include "Image/EDXTCompressionType.h"
 #include "Game/EPlatformedGame.h"
 #include "Image/ERasterDataFormat.h"
@@ -29,7 +29,7 @@ public:
 	uint32						getBodyLength(void);
 	void						unswizzlePS2Format(void);
 	
-	bxcf::CVectorPool<bxgi::CRWEntry_TextureNative_MipMap*>&	getMipMaps(void) { return m_vecMipMaps; }
+	bxcf::VectorPool<bxgi::CRWEntry_TextureNative_MipMap*>&	getMipMaps(void) { return m_vecMipMaps; }
 
 	static bool					doesTXDRasterDataFormatExist(uint32 uiTXDRasterDataFormat);
 	
@@ -148,5 +148,5 @@ private:
 	uint8						m_ucOriginalBPP;
 	uint32						m_uiMipMapCount;
 
-	bxcf::CVectorPool<bxgi::CRWEntry_TextureNative_MipMap*>	m_vecMipMaps;
+	bxcf::VectorPool<bxgi::CRWEntry_TextureNative_MipMap*>	m_vecMipMaps;
 };

@@ -1,6 +1,6 @@
 #include "CRWEntry_2dEffect_SlotmachineWheel.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -13,14 +13,14 @@ CRWEntry_2dEffect_SlotmachineWheel::CRWEntry_2dEffect_SlotmachineWheel(void) :
 
 void							CRWEntry_2dEffect_SlotmachineWheel::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	
 	m_iWheelIndex = pDataReader->readInt32();
 }
 
 void							CRWEntry_2dEffect_SlotmachineWheel::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 	
 	pDataWriter->writeInt32(m_iWheelIndex);
 }

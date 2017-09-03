@@ -2,8 +2,8 @@
 
 #include "nsbxgi.h"
 #include "Type/Types.h"
-#include "Format/CFormat.h"
-#include "Pool/CVectorPool.h"
+#include "Format/Format.h"
+#include "Pool/VectorPool.h"
 #include "EIMGVersion.h"
 #include "Engine/RW/ERWVersion.h"
 #include "Compression/ECompressionAlgorithm.h"
@@ -11,7 +11,7 @@
 #include "Format/COL/ECOLVersion.h"
 //#include "CIMGEntry.h"
 #include "Platform/Hardware/EPlatform.h"
-#include "Stream/CDataReader.h"
+#include "Stream/DataReader.h"
 #include <string>
 #include <vector>
 #include <map>
@@ -27,12 +27,12 @@ struct SortByStringKey // todo - namespace
 
 class bxgi::CIMGEntry;
 
-class bxgi::CIMGFormat : public bxcf::CFormat, public bxcf::CVectorPool<bxgi::CIMGEntry*>
+class bxgi::CIMGFormat : public bxcf::Format, public bxcf::VectorPool<bxgi::CIMGEntry*>
 {
 public:
 	CIMGFormat(void);
 	CIMGFormat(std::string& strFilePath);
-	CIMGFormat(bxcf::CDataReader& reader);
+	CIMGFormat(bxcf::DataReader& reader);
 
 	void											unload(void) {}
 

@@ -1,7 +1,7 @@
 #include "CIDEEntry_TANM.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -13,14 +13,14 @@ CIDEEntry_TANM::CIDEEntry_TANM(CIDEFormat *pIDEFormat) :
 
 void			CIDEEntry_TANM::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	throw EXCEPTION_UNKNOWN_FORMAT_TYPE;
 }
 
 void			CIDEEntry_TANM::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	throw EXCEPTION_UNKNOWN_FORMAT_TYPE;
 }

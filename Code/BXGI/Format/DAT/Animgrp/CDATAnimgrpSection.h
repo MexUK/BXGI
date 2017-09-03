@@ -2,13 +2,13 @@
 
 #include "nsbxgi.h"
 #include "Type/Types.h"
-#include "Pool/CVectorPool.h"
+#include "Pool/VectorPool.h"
 #include "CDATAnimgrpEntry.h"
 #include <string>
 
 class bxgi::CDATAnimgrpFormat;
 
-class bxgi::CDATAnimgrpSection : public bxcf::CVectorPool<bxgi::CDATAnimgrpEntry*>
+class bxgi::CDATAnimgrpSection : public bxcf::VectorPool<bxgi::CDATAnimgrpEntry*>
 {
 public:
 	CDATAnimgrpSection(void);

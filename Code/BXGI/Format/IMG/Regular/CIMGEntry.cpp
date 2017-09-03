@@ -1,12 +1,12 @@
 #include "CIMGEntry.h"
 #include "CIMGFormat.h"
 #include "CIMGManager.h"
-#include "Static/CPath.h"
-#include "Static/CString2.h"
-#include "Static/CFile.h"
-#include "Static/CDebug.h"
-#include "Compression/CCompressionManager.h"
-#include "Localization/CLocalizationManager.h"
+#include "Static/Path.h"
+#include "Static/String2.h"
+#include "Static/File.h"
+#include "Static/Debug.h"
+#include "Compression/CompressionManager.h"
+#include "Localization/LocalizationManager.h"
 #include "Engine/RW/CRWManager.h"
 #include "Engine/RW/CRWVersionManager.h"
 #include "Engine/RAGE/CRageManager.h"
@@ -81,7 +81,7 @@ void					CIMGEntry::setEntryData(string strEntryData, bool bIsNew)
 		setReplacedEntry(true);
 	}
 
-	strEntryData = CString2::zeroPad(strEntryData, CIMGEntry::getEntryDataPadLength(strEntryData.length()));
+	strEntryData = String2::zeroPad(strEntryData, CIMGEntry::getEntryDataPadLength(strEntryData.length()));
 	if (getIMGFile()->getVersion() == IMG_FASTMAN92)
 	{
 		setUncompressedSize(uiFUncompressedSize);
@@ -92,10 +92,10 @@ void					CIMGEntry::setEntryData(string strEntryData, bool bIsNew)
 			switch (getCompressionAlgorithmId())
 			{
 			case COMPRESSION_ZLIB:
-				strEntryData = CCompressionManager::compressZLib(strEntryData, getCompressionLevel());
+				strEntryData = CompressionManager::compressZLib(strEntryData, getCompressionLevel());
 				break;
 			case COMPRESSION_LZ4:
-				strEntryData = CCompressionManager::compressLZ4(strEntryData, getCompressionLevel());
+				strEntryData = CompressionManager::compressLZ4(strEntryData, getCompressionLevel());
 				break;
 			}
 		}
@@ -118,20 +118,20 @@ void					CIMGEntry::setEntryData(string strEntryData, bool bIsNew)
 			string strCompressedData;
 			if (i == (uiBlockCount - 1))
 			{
-				strCompressedData = CCompressionManager::compressLZO1X999(strEntryData.substr(i * uiBlockSize));
+				strCompressedData = CompressionManager::compressLZO1X999(strEntryData.substr(i * uiBlockSize));
 			}
 			else
 			{
-				strCompressedData = CCompressionManager::compressLZO1X999(strEntryData.substr(i * uiBlockSize, uiBlockSize));
+				strCompressedData = CompressionManager::compressLZO1X999(strEntryData.substr(i * uiBlockSize, uiBlockSize));
 			}
 
 			uint32 uiUnknown1 = 4;
 			uint32 uiUncompressedBlockSize = strEntryData.length();
 			uint32 uiCompressedBlockSize = strCompressedData.length();
 
-			strOutputData += CString2::packUint32(uiUnknown1, bBigEndian);
-			strOutputData += CString2::packUint32(uiUncompressedBlockSize, bBigEndian);
-			strOutputData += CString2::packUint32(uiCompressedBlockSize, bBigEndian);
+			strOutputData += String2::packUint32(uiUnknown1, bBigEndian);
+			strOutputData += String2::packUint32(uiUncompressedBlockSize, bBigEndian);
+			strOutputData += String2::packUint32(uiCompressedBlockSize, bBigEndian);
 
 			strOutputData += strCompressedData;
 		}
@@ -141,20 +141,20 @@ void					CIMGEntry::setEntryData(string strEntryData, bool bIsNew)
 		uint32 uiCompressionDataSize = strOutputData.length();
 
 		string strOutputData2 = "";
-		strOutputData2 += CString2::packUint32(uiMagicNumber, bBigEndian);
-		strOutputData2 += CString2::packUint32(uiChecksum, bBigEndian);
-		strOutputData2 += CString2::packUint32(uiCompressionDataSize, bBigEndian);
+		strOutputData2 += String2::packUint32(uiMagicNumber, bBigEndian);
+		strOutputData2 += String2::packUint32(uiChecksum, bBigEndian);
+		strOutputData2 += String2::packUint32(uiCompressionDataSize, bBigEndian);
 		
 		strEntryData = strOutputData2 + strOutputData;
 	}
 	*/
 	setEntrySize((uint32)strEntryData.length());
-	CFile::storeFileSubContent(getIMGFile()->getFilePath(), strEntryData, getEntryOffset());
+	File::storeFileSubContent(getIMGFile()->getFilePath(), strEntryData, getEntryOffset());
 }
 
 string					CIMGEntry::getEntryData(void)
 {
-	string strEntryData = CFile::getFileSubContent(getIMGFile()->getFilePath(), getEntryOffset(), getEntrySize(), true);
+	string strEntryData = File::getFileSubContent(getIMGFile()->getFilePath(), getEntryOffset(), getEntrySize(), true);
 	bool bBigEndian = false;
 
 	if (getIMGFile()->getVersion() == IMG_FASTMAN92)
@@ -164,8 +164,8 @@ string					CIMGEntry::getEntryData(void)
 			// compressed
 			switch (getCompressionAlgorithmId())
 			{
-			case COMPRESSION_ZLIB:	return CCompressionManager::decompressZLib(strEntryData, getUncompressedSize());
-			case COMPRESSION_LZ4:	return CCompressionManager::decompressLZ4(strEntryData, getUncompressedSize());
+			case COMPRESSION_ZLIB:	return CompressionManager::decompressZLib(strEntryData, getUncompressedSize());
+			case COMPRESSION_LZ4:	return CompressionManager::decompressLZ4(strEntryData, getUncompressedSize());
 			default:					return "";
 			}
 		}
@@ -175,26 +175,26 @@ string					CIMGEntry::getEntryData(void)
 			return strEntryData;
 		}
 	}
-	else if (CString2::unpackUint32(strEntryData.substr(0, 4), bBigEndian) == 0x67A3A1CE)
+	else if (String2::unpackUint32(strEntryData.substr(0, 4), bBigEndian) == 0x67A3A1CE)
 	{
 		// the entry data is compressed with LZO 1X 999 compression
 		uint32 uiSeek = 0;
 
-		uint32 uiMagicNumber = CString2::unpackUint32(strEntryData.substr(uiSeek, 4), bBigEndian);
-		uint32 uiChecksum = CString2::unpackUint32(strEntryData.substr(uiSeek + 4, 4), bBigEndian);
-		uint32 uiCompressionDataSize = CString2::unpackUint32(strEntryData.substr(uiSeek + 8, 4), bBigEndian);
+		uint32 uiMagicNumber = String2::unpackUint32(strEntryData.substr(uiSeek, 4), bBigEndian);
+		uint32 uiChecksum = String2::unpackUint32(strEntryData.substr(uiSeek + 4, 4), bBigEndian);
+		uint32 uiCompressionDataSize = String2::unpackUint32(strEntryData.substr(uiSeek + 8, 4), bBigEndian);
 		uiSeek += 12;
 
 		string strUncompressedData = "";
 		uint32 uiByteCountRead = 0;
 		while (uiByteCountRead < uiCompressionDataSize)
 		{
-			uint32 uiUnknown1 = CString2::unpackUint32(strEntryData.substr(uiSeek, 4), bBigEndian);
-			uint32 uiUncompressedBlockSize = CString2::unpackUint32(strEntryData.substr(uiSeek + 4, 4), bBigEndian);
-			uint32 uiCompressedBlockSize = CString2::unpackUint32(strEntryData.substr(uiSeek + 8, 4), bBigEndian);
+			uint32 uiUnknown1 = String2::unpackUint32(strEntryData.substr(uiSeek, 4), bBigEndian);
+			uint32 uiUncompressedBlockSize = String2::unpackUint32(strEntryData.substr(uiSeek + 4, 4), bBigEndian);
+			uint32 uiCompressedBlockSize = String2::unpackUint32(strEntryData.substr(uiSeek + 8, 4), bBigEndian);
 
 			string strCompressedBlock = strEntryData.substr(uiSeek + 12, uiCompressedBlockSize);
-			strUncompressedData += CCompressionManager::decompressLZO1X(strCompressedBlock, uiUncompressedBlockSize);
+			strUncompressedData += CompressionManager::decompressLZO1X(strCompressedBlock, uiUncompressedBlockSize);
 
 			uiSeek += 12 + uiCompressedBlockSize;
 			uiByteCountRead += 12 + uiCompressedBlockSize;
@@ -218,36 +218,36 @@ string					CIMGEntry::getEntrySubData(uint32 uiStart, uint32 uiLength)
 		uint32 uiLength2 = (uint32) ceil((float32)uiLength / (float32) ucZLibBlockSize) * ucZLibBlockSize;
 		uint32 uiStartOffset = uiStart - uiStart2;
 		/*
-		CDebug::log("uiStart: " + CString2::toString(uiStart));
-		CDebug::log("uiLength: " + CString2::toString(uiLength));
-		CDebug::log("uiStart2: " + CString2::toString(uiStart2));
-		CDebug::log("uiLength2: " + CString2::toString(uiLength2));
-		CDebug::log("uiStartOffset: " + CString2::toString(uiStartOffset));
+		Debug::log("uiStart: " + String2::toString(uiStart));
+		Debug::log("uiLength: " + String2::toString(uiLength));
+		Debug::log("uiStart2: " + String2::toString(uiStart2));
+		Debug::log("uiLength2: " + String2::toString(uiLength2));
+		Debug::log("uiStartOffset: " + String2::toString(uiStartOffset));
 		*/
-		string strEntrySubData = CFile::getFileSubContent(getIMGFile()->getFilePath(), getEntryOffset() + uiStart2, uiLength2, true);
+		string strEntrySubData = File::getFileSubContent(getIMGFile()->getFilePath(), getEntryOffset() + uiStart2, uiLength2, true);
 		//strEntrySubData = CIMGManager::decompressZLib(strEntrySubData, uiLength2);
 		switch (getCompressionAlgorithmId())
 		{
-		case COMPRESSION_ZLIB:	return CCompressionManager::decompressZLib(strEntrySubData, getUncompressedSize());
-		case COMPRESSION_LZ4:	return CCompressionManager::decompressLZ4(strEntrySubData, getUncompressedSize());
+		case COMPRESSION_ZLIB:	return CompressionManager::decompressZLib(strEntrySubData, getUncompressedSize());
+		case COMPRESSION_LZ4:	return CompressionManager::decompressLZ4(strEntrySubData, getUncompressedSize());
 		}
 		return strEntrySubData.substr(uiStartOffset, uiLength);
 	}
 	else
 	{
 		// not compressed
-		return CFile::getFileSubContent(getIMGFile()->getFilePath(), getEntryOffset() + uiStart, uiLength, true);
+		return File::getFileSubContent(getIMGFile()->getFilePath(), getEntryOffset() + uiStart, uiLength, true);
 	}
 }
 
 void					CIMGEntry::saveEntry(string strFilePath)
 {
-	CFile::storeFile(strFilePath, getEntryData(), false, true);
+	File::storeFile(strFilePath, getEntryData(), false, true);
 }
 
 void					CIMGEntry::saveEntryByMemory(string strFilePath, string& strEntryData)
 {
-	CFile::storeFile(strFilePath, strEntryData, false, true);
+	File::storeFile(strFilePath, strEntryData, false, true);
 }
 
 uint32			CIMGEntry::getEntryDataPadLength(uint32 uiUnpaddedDataLength)
@@ -392,7 +392,7 @@ string				CIMGEntry::getVersionText(void)
 		// IMG version 3
 		if (getRageResourceType() == nullptr)
 		{
-			return CLocalizationManager::get()->getTranslatedText("Window_Main_Combo_RWVersion_Unknown");
+			return LocalizationManager::get()->getTranslatedText("Window_Main_Combo_RWVersion_Unknown");
 		}
 		return getRageResourceType()->getResourceName();
 	}
@@ -410,7 +410,7 @@ string				CIMGEntry::getVersionText(void)
 			return CCOLManager::get()->getVersionManager()->getVersionText(m_uiRawVersion);
 		case ANIMATION:
 			// IFP file
-			return "IFP " + CString2::toString(m_uiRawVersion);
+			return "IFP " + String2::toString(m_uiRawVersion);
 		}
 	}
 	return "Unknown";

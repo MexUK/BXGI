@@ -1,6 +1,6 @@
 #include "CRWSection_Material.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -19,7 +19,7 @@ CRWSection_Material::CRWSection_Material(void) :
 
 void							CRWSection_Material::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	m_uiUnknown1 = pDataReader->readUint32();
 	m_uiColour = pDataReader->readUint32();
@@ -32,7 +32,7 @@ void							CRWSection_Material::unserialize(void)
 
 void							CRWSection_Material::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	pDataWriter->writeUint32(m_uiUnknown1);
 	pDataWriter->writeUint32(m_uiColour);

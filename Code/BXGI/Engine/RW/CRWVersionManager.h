@@ -1,14 +1,14 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Object/CManager.h"
+#include "Object/Manager.h"
 #include "CRWVersion.h"
-#include "Pool/CVectorPool.h"
+#include "Pool/VectorPool.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
 
-class bxgi::CRWVersionManager : public bxcf::CManager, public bxcf::CVectorPool<bxgi::CRWVersion*>
+class bxgi::CRWVersionManager : public bxcf::Manager, public bxcf::VectorPool<bxgi::CRWVersion*>
 {
 public:
 	void											init(void);

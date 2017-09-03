@@ -1,7 +1,7 @@
 #include "CRWEntry_2dEffect_EnterExit.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
-#include "Static/CString2.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
+#include "Static/String2.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -20,7 +20,7 @@ CRWEntry_2dEffect_EnterExit::CRWEntry_2dEffect_EnterExit(void) :
 
 void							CRWEntry_2dEffect_EnterExit::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	
 	m_fEnterMarkerRotationAngle = pDataReader->readFloat32();
 	m_vecMarkerApporximationRadius = pDataReader->readVector2D();
@@ -28,13 +28,13 @@ void							CRWEntry_2dEffect_EnterExit::unserialize(void)
 	m_fExitMarkerAngleRotation = pDataReader->readFloat32();
 	m_iInteriorCount = pDataReader->readInt8();
 	m_iFlags = pDataReader->readInt8();
-	m_strInteriorName = CString2::rtrimFromLeft(pDataReader->readString(8));
+	m_strInteriorName = String2::rtrimFromLeft(pDataReader->readString(8));
 	m_iSkyColour = pDataReader->readInt8();
 }
 
 void							CRWEntry_2dEffect_EnterExit::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 	
 	pDataWriter->writeFloat32(m_fEnterMarkerRotationAngle);
 	pDataWriter->writeVector2D(m_vecMarkerApporximationRadius);

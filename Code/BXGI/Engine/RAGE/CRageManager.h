@@ -2,13 +2,13 @@
 
 #include "nsbxgi.h"
 #include "Type/Types.h"
-#include "Object/CSingleton.h"
-#include "Object/CManager.h"
+#include "Object/Singleton.h"
+#include "Object/Manager.h"
 #include <string>
 
 class bxgi::CRageResourceTypeManager;
 
-class bxgi::CRageManager : public bxcf::CManager, public bxcf::CSingleton<CRageManager>
+class bxgi::CRageManager : public bxcf::Manager, public bxcf::Singleton<CRageManager>
 {
 public:
 	CRageManager(void);

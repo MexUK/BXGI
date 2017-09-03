@@ -1,7 +1,7 @@
 #include "CIDEEntry_HIER.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -14,7 +14,7 @@ CIDEEntry_HIER::CIDEEntry_HIER(CIDEFormat *pIDEFormat) :
 
 void			CIDEEntry_HIER::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	switch (pDataReader->getLineTokens().size())
 	{
@@ -33,7 +33,7 @@ void			CIDEEntry_HIER::unserialize(void)
 
 void			CIDEEntry_HIER::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	switch (getFormatType())
 	{

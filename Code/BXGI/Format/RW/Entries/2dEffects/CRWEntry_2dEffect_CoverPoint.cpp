@@ -1,6 +1,6 @@
 #include "CRWEntry_2dEffect_CoverPoint.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -14,7 +14,7 @@ CRWEntry_2dEffect_CoverPoint::CRWEntry_2dEffect_CoverPoint(void) :
 
 void							CRWEntry_2dEffect_CoverPoint::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	
 	m_vecDirection = pDataReader->readVector2D();
 	m_uiCoverType = pDataReader->readUint32();
@@ -22,7 +22,7 @@ void							CRWEntry_2dEffect_CoverPoint::unserialize(void)
 
 void							CRWEntry_2dEffect_CoverPoint::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 	
 	pDataWriter->writeVector2D(m_vecDirection);
 	pDataWriter->writeUint32(m_uiCoverType);

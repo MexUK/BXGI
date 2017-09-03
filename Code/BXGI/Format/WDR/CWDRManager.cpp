@@ -6,7 +6,7 @@
 #include "Intermediate/Model/Data/CIntermediateBoundingObject.h"
 #include "CWDRBlock_Model.h"
 #include "CWDRBlock_Geometry.h"
-#include "Static/CMath.h"
+#include "Static/Math.h"
 
 using namespace std;
 using namespace bxcf;
@@ -44,8 +44,8 @@ CWDRFormat*					CWDRManager::convertIntermediateModelFileToWDRFile(CIntermediate
 		CIntermediateBoundingObject *pBoundingObject = pGeneralModelFile->getEntryByIndex(0)->getEntryByIndex(0)->getBoundingObject();
 		if (pBoundingObject->getBoundingObjectType() == BOUNDING_OBJECT_TYPE_SPHERE)
 		{
-			Vec3f vecMin = CMath::getBoundingCuboidMinFromSphere(pBoundingObject->getCenter(), pBoundingObject->getRadius());
-			Vec3f vecMax = CMath::getBoundingCuboidMinFromSphere(pBoundingObject->getCenter(), pBoundingObject->getRadius());
+			Vec3f vecMin = Math::getBoundingCuboidMinFromSphere(pBoundingObject->getCenter(), pBoundingObject->getRadius());
+			Vec3f vecMax = Math::getBoundingCuboidMinFromSphere(pBoundingObject->getCenter(), pBoundingObject->getRadius());
 			pWDRFile->m_boundingObject.m_fMin[0] = vecMin.x;
 			pWDRFile->m_boundingObject.m_fMin[1] = vecMin.y;
 			pWDRFile->m_boundingObject.m_fMin[2] = vecMin.z;

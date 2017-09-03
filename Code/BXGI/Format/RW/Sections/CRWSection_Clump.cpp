@@ -1,7 +1,7 @@
 #include "CRWSection_Clump.h"
 #include "Engine/RW/CRWManager.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -16,7 +16,7 @@ CRWSection_Clump::CRWSection_Clump(void) :
 
 void							CRWSection_Clump::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	/*
 	todo
@@ -49,7 +49,7 @@ void							CRWSection_Clump::unserialize(void)
 
 void							CRWSection_Clump::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	pDataWriter->writeUint32(m_uiAtomicallyLinkedObjectCount);
 

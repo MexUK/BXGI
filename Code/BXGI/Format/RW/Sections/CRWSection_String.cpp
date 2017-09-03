@@ -1,7 +1,7 @@
 #include "CRWSection_String.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
-#include "Static/CString2.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
+#include "Static/String2.h"
 
 using namespace std;
 using namespace bxcf;
@@ -14,7 +14,7 @@ CRWSection_String::CRWSection_String(void)
 
 void							CRWSection_String::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	// todo
 	//uint64 uiPreviousSeek = pDataReader->getSeek();
@@ -31,10 +31,10 @@ void							CRWSection_String::unserialize(void)
 
 void							CRWSection_String::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	uint32 uiStringLength = (uint32)(ceil(((float32)(m_strData.length() + 1)) / 4.0) * 4);
-	string strData = CString2::zeroPad(m_strData, uiStringLength);
+	string strData = String2::zeroPad(m_strData, uiStringLength);
 
 	pDataWriter->writeStringRef(strData);
 }

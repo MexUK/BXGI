@@ -1,7 +1,7 @@
 #include "CRWEntry_2dEffect_PedAttractor.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
-#include "Static/CString2.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
+#include "Static/String2.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -22,13 +22,13 @@ CRWEntry_2dEffect_PedAttractor::CRWEntry_2dEffect_PedAttractor(void) :
 
 void							CRWEntry_2dEffect_PedAttractor::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	
 	m_iType = pDataReader->readInt32();
 	m_vecRotation[0] = pDataReader->readVector3D();
 	m_vecRotation[1] = pDataReader->readVector3D();
 	m_vecRotation[2] = pDataReader->readVector3D();
-	m_strExternalScriptName = CString2::rtrimFromLeft(pDataReader->readString(8));
+	m_strExternalScriptName = String2::rtrimFromLeft(pDataReader->readString(8));
 	m_iPedExistingProbability = pDataReader->readInt32();
 	m_ucUnknown1 = pDataReader->readUint8();
 	m_ucNotUsed1 = pDataReader->readUint8();
@@ -38,7 +38,7 @@ void							CRWEntry_2dEffect_PedAttractor::unserialize(void)
 
 void							CRWEntry_2dEffect_PedAttractor::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 	
 	pDataWriter->writeInt32(m_iType);
 	pDataWriter->writeVector3D(m_vecRotation[0]);

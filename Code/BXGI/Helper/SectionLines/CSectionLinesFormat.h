@@ -1,7 +1,7 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Format/CFormat.h"
+#include "Format/Format.h"
 #include "Format/E2DFXType.h"
 #include <string>
 #include <vector>
@@ -9,7 +9,7 @@
 #include <algorithm>
 
 template<class FormatClass, class EntryClass, typename SectionEnum, class OtherEntryClass, class SectionEntryClass, class DataEntryClass>
-class bxgi::CSectionLinesFormat : public bxcf::CFormat
+class bxgi::CSectionLinesFormat : public bxcf::Format
 {
 public:
 	CSectionLinesFormat(void);
@@ -61,7 +61,7 @@ private:
 
 template<class FormatClass, class EntryClass, typename SectionEnum, class OtherEntryClass, class SectionEntryClass, class DataEntryClass>
 bxgi::CSectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntryClass, SectionEntryClass, DataEntryClass>::CSectionLinesFormat(void) :
-	CFormat(false),
+	Format(false),
 	m_uiActiveReadSection((SectionEnum)0)
 {
 }
@@ -85,7 +85,7 @@ void				bxgi::CSectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEnt
 {
 	// initialize
 	EntryClass *pFormatEntry = nullptr;
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	string strActiveLine = *pDataReader->getActiveLine();
 
 	// remove comment from end of line
@@ -98,10 +98,10 @@ void				bxgi::CSectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEnt
 	}
 
 	// trim line
-	strActiveLine = CString2::trim(strActiveLine);
+	strActiveLine = String2::trim(strActiveLine);
 
 	// check if line is blank or section end
-	if (strActiveLine == "" || CString2::toUpperCase(strActiveLine) == "END")
+	if (strActiveLine == "" || String2::toUpperCase(strActiveLine) == "END")
 	{
 		pFormatEntry = createOtherEntry();
 		pFormatEntry->unserialize();
@@ -123,7 +123,7 @@ void				bxgi::CSectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEnt
 		{
 			// line is a data line
 			pDataReader->setTokenModeEnabled(true);
-			pDataReader->setLineTokens(CString2::split(CString2::replace(strActiveLine, ",", ""), " "));
+			pDataReader->setLineTokens(String2::split(String2::replace(strActiveLine, ",", ""), " "));
 			try
 			{
 				eFormatSectionValue = getActiveReadSection();
@@ -158,7 +158,7 @@ void				bxgi::CSectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEnt
 template<class FormatClass, class EntryClass, typename SectionEnum, class OtherEntryClass, class SectionEntryClass, class DataEntryClass>
 void				bxgi::CSectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntryClass, SectionEntryClass, DataEntryClass>::unserializeText(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	pDataReader->readAndStoreLines();
 	while (pDataReader->iterateLines())
 	{
@@ -169,7 +169,7 @@ void				bxgi::CSectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEnt
 template<class FormatClass, class EntryClass, typename SectionEnum, class OtherEntryClass, class SectionEntryClass, class DataEntryClass>
 void				bxgi::CSectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntryClass, SectionEntryClass, DataEntryClass>::serializeText(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 	for (auto it : getSectionEntries())
 	{
 		for (EntryClass *pFormatEntry : it.second)
@@ -219,7 +219,7 @@ std::vector<std::string>	bxgi::CSectionLinesFormat<FormatClass, EntryClass, Sect
 		{
 			if (pFormatEntry->getEntryType() == SECTION_LINES_ENTRY_DATA)
 			{
-				std::string strModelName = CString2::toUpperCase(((DataEntryClass*)pFormatEntry)->getModelName());
+				std::string strModelName = String2::toUpperCase(((DataEntryClass*)pFormatEntry)->getModelName());
 				if (strModelName != "")
 				{
 					vecModelNames.push_back(strModelName);
@@ -240,7 +240,7 @@ std::vector<std::string>	bxgi::CSectionLinesFormat<FormatClass, EntryClass, Sect
 		{
 			if (pFormatEntry->getEntryType() == SECTION_LINES_ENTRY_DATA)
 			{
-				std::string strTXDName = CString2::toUpperCase(((DataEntryClass*)pFormatEntry)->getTXDName());
+				std::string strTXDName = String2::toUpperCase(((DataEntryClass*)pFormatEntry)->getTXDName());
 				if (strTXDName != "")
 				{
 					vecTXDNames.push_back(strTXDName);
@@ -265,12 +265,12 @@ std::vector<std::string>	bxgi::CSectionLinesFormat<FormatClass, EntryClass, Sect
 template<class FormatClass, class EntryClass, typename SectionEnum, class OtherEntryClass, class SectionEntryClass, class DataEntryClass>
 std::string			bxgi::CSectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntryClass, SectionEntryClass, DataEntryClass>::getTXDNameFromModelName(std::string strModelName)
 {
-	strModelName = CString2::toUpperCase(strModelName);
+	strModelName = String2::toUpperCase(strModelName);
 	for (auto it : getSectionEntries())
 	{
 		for (EntryClass *pFormatEntry : it.second)
 		{
-			if (pFormatEntry->getEntryType() == SECTION_LINES_ENTRY_DATA && strModelName == CString2::toUpperCase(((DataEntryClass*)pFormatEntry)->getModelName()))
+			if (pFormatEntry->getEntryType() == SECTION_LINES_ENTRY_DATA && strModelName == String2::toUpperCase(((DataEntryClass*)pFormatEntry)->getModelName()))
 			{
 				return ((DataEntryClass*)pFormatEntry)->getTXDName();
 			}
@@ -282,13 +282,13 @@ std::string			bxgi::CSectionLinesFormat<FormatClass, EntryClass, SectionEnum, Ot
 template<class FormatClass, class EntryClass, typename SectionEnum, class OtherEntryClass, class SectionEntryClass, class DataEntryClass>
 std::vector<EntryClass*>	bxgi::CSectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntryClass, SectionEntryClass, DataEntryClass>::getEntriesByModelName(std::string strModelName)
 {
-	strModelName = CString2::toUpperCase(strModelName);
+	strModelName = String2::toUpperCase(strModelName);
 	std::vector<EntryClass*> vecFormatEntries;
 	for (auto it : getSectionEntries())
 	{
 		for (EntryClass *pFormatEntry : it.second)
 		{
-			if (pFormatEntry->getEntryType() == SECTION_LINES_ENTRY_DATA && strModelName == CString2::toUpperCase(((DataEntryClass*)pFormatEntry)->getModelName()))
+			if (pFormatEntry->getEntryType() == SECTION_LINES_ENTRY_DATA && strModelName == String2::toUpperCase(((DataEntryClass*)pFormatEntry)->getModelName()))
 			{
 				vecFormatEntries.push_back(pFormatEntry);
 			}
@@ -300,13 +300,13 @@ std::vector<EntryClass*>	bxgi::CSectionLinesFormat<FormatClass, EntryClass, Sect
 template<class FormatClass, class EntryClass, typename SectionEnum, class OtherEntryClass, class SectionEntryClass, class DataEntryClass>
 std::vector<EntryClass*>	bxgi::CSectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntryClass, SectionEntryClass, DataEntryClass>::getEntriesByTXDName(std::string strTXDName)
 {
-	strTXDName = CString2::toUpperCase(strTXDName);
+	strTXDName = String2::toUpperCase(strTXDName);
 	std::vector<EntryClass*> vecFormatEntries;
 	for (auto it : getSectionEntries())
 	{
 		for (EntryClass *pFormatEntry : it.second)
 		{
-			if (pFormatEntry->getEntryType() == SECTION_LINES_ENTRY_DATA && strTXDName == CString2::toUpperCase(((DataEntryClass*)pFormatEntry)->getTXDName()))
+			if (pFormatEntry->getEntryType() == SECTION_LINES_ENTRY_DATA && strTXDName == String2::toUpperCase(((DataEntryClass*)pFormatEntry)->getTXDName()))
 			{
 				vecFormatEntries.push_back(pFormatEntry);
 			}

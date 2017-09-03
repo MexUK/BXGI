@@ -2,11 +2,11 @@
 
 #include "nsbxgi.h"
 #include "Type/Types.h"
-#include "Format/CFormat.h"
-#include "Pool/CVectorPool.h"
+#include "Format/Format.h"
+#include "Pool/VectorPool.h"
 #include "CDATScriptPathEntry.h"
 
-class bxgi::CDATScriptPathFormat : public bxcf::CFormat, public bxcf::CVectorPool<bxgi::CDATScriptPathEntry*>
+class bxgi::CDATScriptPathFormat : public bxcf::Format, public bxcf::VectorPool<bxgi::CDATScriptPathEntry*>
 {
 public:
 	CDATScriptPathFormat(void);

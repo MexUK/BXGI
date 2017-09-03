@@ -1,6 +1,6 @@
 #include "CDATAnimgrpEntry.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -12,14 +12,14 @@ CDATAnimgrpEntry::CDATAnimgrpEntry(void) :
 
 void					CDATAnimgrpEntry::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	
 	m_strAnimationName = pDataReader->readTokenString();
 }
 
 void					CDATAnimgrpEntry::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 	
 	pDataWriter->writeToken(m_strAnimationName);
 }

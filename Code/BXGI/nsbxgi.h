@@ -6,7 +6,7 @@ namespace bxgi
 
 	class CGameManager;
 	class CGame;
-	class CPlatformedGame;
+	class PlatformedGame;
 	enum EGame;
 	enum EGameFlag;
 	enum EPlatformedGame;

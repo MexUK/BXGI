@@ -4,10 +4,10 @@
 #include "Game/EPlatformedGame.h"
 #include <string>
 
-class bxgi::CPlatformedGame
+class bxgi::PlatformedGame
 {
 public:
-	CPlatformedGame(void);
+	PlatformedGame(void);
 
 	void					unload(void) {}
 

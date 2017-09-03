@@ -1,8 +1,8 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Format/CFormatManager.h"
-#include "Object/CSingleton.h"
+#include "Format/FormatManager.h"
+#include "Object/Singleton.h"
 #include "ETXDRasterDataFormat.h"
 #include "Image/ERasterDataFormat.h"
 #include "Game/EPlatformedGame.h"
@@ -13,7 +13,7 @@
 class bxgi::CTXDFormat;
 class bxgi::CIntermediateTextureFormat;
 
-class bxgi::CTXDManager : public bxcf::CFormatManager<bxgi::CTXDFormat>, public bxcf::CSingleton<CTXDManager>
+class bxgi::CTXDManager : public bxcf::FormatManager<bxgi::CTXDFormat>, public bxcf::Singleton<CTXDManager>
 {
 public:
 	CTXDManager(void);

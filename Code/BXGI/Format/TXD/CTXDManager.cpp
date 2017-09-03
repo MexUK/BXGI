@@ -5,17 +5,17 @@
 #include "CTXDManager.h"
 #include "CTXDFormat.h"
 #include "Format/RW/Sections/CRWSection_TextureNative.h"
-#include "Stream/CDataReader.h"
-#include "Static/CString2.h"
+#include "Stream/DataReader.h"
+#include "Static/String2.h"
 #include "Engine/RW/CRWManager.h"
-#include "Static/CDebug.h"
-#include "Image/CRasterDataFormatManager.h"
+#include "Static/Debug.h"
+#include "Image/RasterDataFormatManager.h"
 #include "Engine/RW/CRWVersionManager.h"
 #include "Intermediate/Texture/CIntermediateTextureFormat.h"
 #include "Intermediate/Texture/CIntermediateTexture.h"
 #include "Intermediate/Texture/Data/CIntermediateTextureMipmap.h"
-#include "Image/CImageManager.h"
-#include "Localization/CLocalizationManager.h"
+#include "Image/ImageManager.h"
+#include "Localization/LocalizationManager.h"
 #include "Type/Vector/Vec2u16.h"
 
 using namespace std;
@@ -70,7 +70,7 @@ CTXDFormat*				CTXDManager::convertIntermediateTextureFileToTXDFile(CIntermediat
 		ERasterDataFormat ERasterDataFormatValue = RASTERDATAFORMAT_BGRA32;
 		pTexture->setRasterDataFormat(ERasterDataFormatValue);
 		pTexture->setTXDRasterDataFormat(CTXDManager::getTXDRasterDataFormatFromRasterDataFormat(ERasterDataFormatValue));
-		EDXTCompressionType eDXTValue = CImageManager::getDXTCompressionTypeFromRasterDataFormat(ERasterDataFormatValue);
+		EDXTCompressionType eDXTValue = ImageManager::getDXTCompressionTypeFromRasterDataFormat(ERasterDataFormatValue);
 		if (pTexture->getPlatformId() == 9)
 		{
 			// GTA SA
@@ -86,7 +86,7 @@ CTXDFormat*				CTXDManager::convertIntermediateTextureFileToTXDFile(CIntermediat
 		vecImageSize.x = pGeneralTexture->getSize().x;
 		vecImageSize.y = pGeneralTexture->getSize().y;
 		pTexture->setImageSize(vecImageSize);
-		pTexture->setBPP(CImageManager::getBPPFromRasterDataFormat(ERasterDataFormatValue));
+		pTexture->setBPP(ImageManager::getBPPFromRasterDataFormat(ERasterDataFormatValue));
 		pTexture->setRasterType(0);
 		if (pTexture->getPlatformId() == 9)
 		{
@@ -111,9 +111,9 @@ CTXDFormat*				CTXDManager::convertIntermediateTextureFileToTXDFile(CIntermediat
 			CRWEntry_TextureNative_MipMap *pMipmap = new CRWEntry_TextureNative_MipMap(pTexture);
 
 			string strMipmapRasterData = pGeneralMipmap->getRasterData();
-			strMipmapRasterData = CImageManager::convertRasterDataFormatToBGRA32(strMipmapRasterData, pGeneralTexture->getRasterDataFormat(), pGeneralTexture->getPaletteData(), pGeneralMipmap->getSize().x, pGeneralMipmap->getSize().y);
+			strMipmapRasterData = ImageManager::convertRasterDataFormatToBGRA32(strMipmapRasterData, pGeneralTexture->getRasterDataFormat(), pGeneralTexture->getPaletteData(), pGeneralMipmap->getSize().x, pGeneralMipmap->getSize().y);
 			string strPaletteDataOut = "";
-			strMipmapRasterData = CImageManager::convertBGRA32ToRasterDataFormat(strMipmapRasterData, ERasterDataFormatValue, &strPaletteDataOut, pGeneralMipmap->getSize().x, pGeneralMipmap->getSize().y);
+			strMipmapRasterData = ImageManager::convertBGRA32ToRasterDataFormat(strMipmapRasterData, ERasterDataFormatValue, &strPaletteDataOut, pGeneralMipmap->getSize().x, pGeneralMipmap->getSize().y);
 			
 			Vec2u vecMipMapSize;
 			vecMipMapSize.x = pGeneralMipmap->getSize().x;
@@ -176,7 +176,7 @@ string					CTXDManager::getTXDRasterFormatText(uint32 uiTXDRasterDataFormatValue
 		case DXT_5:	return "DXT5";
 		}
 	}
-	return CLocalizationManager::get()->getTranslatedText("UnknownTXDRasterDataFormat");
+	return LocalizationManager::get()->getTranslatedText("UnknownTXDRasterDataFormat");
 }
 
 bxcf::EPlatform				CTXDManager::getPlatformFromTXDPlatformId(uint32 uiTXDPlatformId)

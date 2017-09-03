@@ -1,6 +1,6 @@
 #include "CRWSection_TextureDictionary.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -13,7 +13,7 @@ CRWSection_TextureDictionary::CRWSection_TextureDictionary(void) :
 
 void							CRWSection_TextureDictionary::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	if (m_uiSectionRWVersion <= 0x1803FFFF) // todo - change from 3.6.0.3 to 3.6.0.0
 	{
@@ -28,7 +28,7 @@ void							CRWSection_TextureDictionary::unserialize(void)
 
 void							CRWSection_TextureDictionary::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	uint32 uiTextureCount = getSectionCountByType(RW_SECTION_TEXTURE_NATIVE, false);
 

@@ -1,6 +1,6 @@
 #include "CGameManager.h"
 #include "CGame.h"
-#include "CPlatformedGame.h"
+#include "PlatformedGame.h"
 
 using namespace std;
 using namespace bxcf;
@@ -65,9 +65,9 @@ CGame*										CGameManager::addGame(EGame uiGameId, string strGameName)
 }
 
 // add/remove platformed game
-CPlatformedGame*							CGameManager::addPlatformedGame(EPlatformedGame uiPlatformedGameId, string strPlatformedGameText)
+PlatformedGame*							CGameManager::addPlatformedGame(EPlatformedGame uiPlatformedGameId, string strPlatformedGameText)
 {
-	CPlatformedGame *pPlatformedGame = new CPlatformedGame;
+	PlatformedGame *pPlatformedGame = new PlatformedGame;
 	pPlatformedGame->setPlatformedGameId(uiPlatformedGameId);
 	pPlatformedGame->setText(strPlatformedGameText);
 	getPlatformedGames().addEntry(pPlatformedGame);
@@ -90,7 +90,7 @@ string										CGameManager::getGameName(EGame EGameId)
 // platformed game text
 string										CGameManager::getPlatformedGameText(EPlatformedGame uiPlatformedGameId)
 {
-	for (CPlatformedGame *pPlatformedGame : getPlatformedGames().getEntries())
+	for (PlatformedGame *pPlatformedGame : getPlatformedGames().getEntries())
 	{
 		if (pPlatformedGame->getPlatformedGameId() == uiPlatformedGameId)
 		{

@@ -1,7 +1,7 @@
 #include "CRWSection_UnknownSection.h"
 #include "Engine/RW/CRWManager.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -15,7 +15,7 @@ CRWSection_UnknownSection::CRWSection_UnknownSection(void) :
 
 void							CRWSection_UnknownSection::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	m_uiActualSectionId = m_uiSectionId;
 	m_strData = pDataReader->readString(m_uiSectionSize);
@@ -23,7 +23,7 @@ void							CRWSection_UnknownSection::unserialize(void)
 
 void							CRWSection_UnknownSection::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	uint32 uiRWVersionCC = CRWManager::get()->getSerializationRWVersion();
 

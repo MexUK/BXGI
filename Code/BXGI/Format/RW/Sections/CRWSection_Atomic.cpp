@@ -1,6 +1,6 @@
 #include "CRWSection_Atomic.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -16,7 +16,7 @@ CRWSection_Atomic::CRWSection_Atomic(void) :
 
 void							CRWSection_Atomic::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	m_uiFrameIndex = pDataReader->readUint32();
 	m_uiGeometryIndex = pDataReader->readUint32();
@@ -26,7 +26,7 @@ void							CRWSection_Atomic::unserialize(void)
 
 void							CRWSection_Atomic::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	pDataWriter->writeUint32(m_uiFrameIndex);
 	pDataWriter->writeUint32(m_uiGeometryIndex);

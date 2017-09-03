@@ -1,7 +1,7 @@
 #include "CIPLEntry_PICK.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -13,7 +13,7 @@ CIPLEntry_PICK::CIPLEntry_PICK(CIPLFormat *pIPLFormat) :
 
 void			CIPLEntry_PICK::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	switch (pDataReader->getLineTokens().size())
 	{
@@ -31,7 +31,7 @@ void			CIPLEntry_PICK::unserialize(void)
 
 void			CIPLEntry_PICK::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	switch (getFormatType())
 	{

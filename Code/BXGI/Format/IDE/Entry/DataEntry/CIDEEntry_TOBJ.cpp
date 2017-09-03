@@ -1,7 +1,7 @@
 #include "CIDEEntry_TOBJ.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -25,7 +25,7 @@ CIDEEntry_TOBJ::CIDEEntry_TOBJ(CIDEFormat *pIDEFormat) :
 
 void			CIDEEntry_TOBJ::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	switch (pDataReader->getLineTokens().size())
 	{
@@ -165,7 +165,7 @@ void			CIDEEntry_TOBJ::unserialize(void)
 
 void			CIDEEntry_TOBJ::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	switch (getFormatType())
 	{

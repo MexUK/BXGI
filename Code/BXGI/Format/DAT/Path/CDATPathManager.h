@@ -1,8 +1,8 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Format/CFormatManager.h"
-#include "Object/CSingleton.h"
+#include "Format/FormatManager.h"
+#include "Object/Singleton.h"
 #include "Type/Vector/Vec2f.h"
 #include "Game/EPlatformedGame.h"
 #include <vector>
@@ -11,7 +11,7 @@ class bxgi::CDATPathFormat;
 struct bxgi::CDATEntry_Paths_General_PathNode;
 struct bxgi::CDATEntry_Paths_General_NaviNode;
 
-class bxgi::CDATPathManager : public bxcf::CFormatManager<bxgi::CDATPathFormat>, public bxcf::CSingleton<CDATPathManager>
+class bxgi::CDATPathManager : public bxcf::FormatManager<bxgi::CDATPathFormat>, public bxcf::Singleton<CDATPathManager>
 {
 public:
 	CDATPathManager(void);

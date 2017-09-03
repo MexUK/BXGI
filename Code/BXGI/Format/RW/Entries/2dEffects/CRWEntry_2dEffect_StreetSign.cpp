@@ -1,7 +1,7 @@
 #include "CRWEntry_2dEffect_StreetSign.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
-#include "Static/CString2.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
+#include "Static/String2.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -16,20 +16,20 @@ CRWEntry_2dEffect_StreetSign::CRWEntry_2dEffect_StreetSign(void) :
 
 void							CRWEntry_2dEffect_StreetSign::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	
 	m_vecSize = pDataReader->readVector2D();
 	m_vecRotation = pDataReader->readVector3D();
 	m_uiFlags = (uint16) pDataReader->readUint32();
 	for (uint32 i = 0; i < 4; i++)
 	{
-		m_strText[i] = CString2::rtrimFromLeft(pDataReader->readString(16));
+		m_strText[i] = String2::rtrimFromLeft(pDataReader->readString(16));
 	}
 }
 
 void							CRWEntry_2dEffect_StreetSign::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	pDataWriter->writeVector2D(m_vecSize);
 	pDataWriter->writeVector3D(m_vecRotation);

@@ -1,5 +1,5 @@
 #include "CRageResourceTypeManager.h"
-#include "Static/CString2.h"
+#include "Static/String2.h"
 
 using namespace std;
 using namespace bxcf;
@@ -115,10 +115,10 @@ CRageResourceType*								CRageResourceTypeManager::getResourceTypeByIdentifier(
 
 CRageResourceType*								CRageResourceTypeManager::getResourceTypeByFileExtension(string strFileExtension)
 {
-	strFileExtension = CString2::toUpperCase(strFileExtension);
+	strFileExtension = String2::toUpperCase(strFileExtension);
 	for (auto pRageResource : getEntries())
 	{
-		if (CString2::toUpperCase(pRageResource->getFileExtension()) == strFileExtension)
+		if (String2::toUpperCase(pRageResource->getFileExtension()) == strFileExtension)
 		{
 			return pRageResource;
 		}

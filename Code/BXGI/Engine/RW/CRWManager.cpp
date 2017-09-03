@@ -1,8 +1,8 @@
 #include "CRWManager.h"
 #include "CRWVersionManager.h"
 #include "Format/RW/CRWSection.h"
-#include "Localization/CLocalizationManager.h"
-#include "Static/CString2.h"
+#include "Localization/LocalizationManager.h"
+#include "Static/String2.h"
 
 using namespace std;
 using namespace bxcf;
@@ -37,13 +37,13 @@ bool											CRWManager::isRWFileExtension(string& strFileExtension)
 
 bool											CRWManager::isRWModelExtension(string& strFileExtension)
 {
-	string strExtensionUpper = CString2::toUpperCase(strFileExtension);
+	string strExtensionUpper = String2::toUpperCase(strFileExtension);
 	return strExtensionUpper == "DFF"
 		|| strExtensionUpper == "BSP";
 }
 
 bool											CRWManager::isRWTextureExtension(string& strFileExtension)
 {
-	string strExtensionUpper = CString2::toUpperCase(strFileExtension);
+	string strExtensionUpper = String2::toUpperCase(strFileExtension);
 	return strExtensionUpper == "TXD";
 }

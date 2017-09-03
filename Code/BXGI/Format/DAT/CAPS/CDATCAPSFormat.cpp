@@ -1,13 +1,13 @@
 #include "CDATCAPSFormat.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace std;
 using namespace bxcf;
 using namespace bxgi;
 
 CDATCAPSFormat::CDATCAPSFormat(void) :
-	CFormat(true, LITTLE_ENDIAN),
+	Format(true, LITTLE_ENDIAN),
 	m_uiOptimalRasterFormatForTextures_RGBA(0),
 	m_uiOptimalRasterFormatForTextures_RGB(0),
 	m_uiOptimalRasterFormatForTextures_Greyscale(0),
@@ -17,7 +17,7 @@ CDATCAPSFormat::CDATCAPSFormat(void) :
 
 void					CDATCAPSFormat::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	
 	m_uiOptimalRasterFormatForTextures_RGBA			= pDataReader->readUint32();
 	m_uiOptimalRasterFormatForTextures_RGB			= pDataReader->readUint32();
@@ -27,7 +27,7 @@ void					CDATCAPSFormat::unserialize(void)
 
 void					CDATCAPSFormat::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 	
 	pDataWriter->write(m_uiOptimalRasterFormatForTextures_RGBA);
 	pDataWriter->write(m_uiOptimalRasterFormatForTextures_RGB);

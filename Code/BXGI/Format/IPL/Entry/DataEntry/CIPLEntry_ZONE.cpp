@@ -1,7 +1,7 @@
 #include "CIPLEntry_ZONE.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -17,7 +17,7 @@ CIPLEntry_ZONE::CIPLEntry_ZONE(CIPLFormat *pIPLFormat) :
 
 void			CIPLEntry_ZONE::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	uint32 uiLineTokenCount = pDataReader->getLineTokens().size();
 	switch (uiLineTokenCount)
@@ -45,7 +45,7 @@ void			CIPLEntry_ZONE::unserialize(void)
 
 void			CIPLEntry_ZONE::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	switch (getFormatType())
 	{

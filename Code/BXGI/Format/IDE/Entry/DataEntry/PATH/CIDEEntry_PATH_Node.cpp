@@ -1,7 +1,7 @@
 #include "CIDEEntry_PATH_Node.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 #include "CIDEEntry_PATH_Group.h"
 
 using namespace bxcf;
@@ -21,7 +21,7 @@ CIDEEntry_PATH_Node::CIDEEntry_PATH_Node(CIDEFormat *pIDEFormat) :
 
 void			CIDEEntry_PATH_Node::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	if (getLatestPathGroup() == nullptr)
 	{
@@ -52,7 +52,7 @@ void			CIDEEntry_PATH_Node::unserialize(void)
 
 void			CIDEEntry_PATH_Node::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	switch (getFormatType())
 	{

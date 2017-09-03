@@ -1,9 +1,9 @@
-#include "CPlatformedGame.h"
+#include "PlatformedGame.h"
 #include "nsbxgi.h"
 
 using namespace bxgi;
 
-CPlatformedGame::CPlatformedGame(void) :
+PlatformedGame::PlatformedGame(void) :
 	m_uiPlatformedGameId(UNKNOWN_PLATFORMED_GAME)
 {
 }

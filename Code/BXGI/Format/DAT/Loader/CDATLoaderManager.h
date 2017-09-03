@@ -1,15 +1,15 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Format/CFormatManager.h"
-#include "Object/CSingleton.h"
+#include "Format/FormatManager.h"
+#include "Object/Singleton.h"
 #include "EDATLoaderEntryType.h"
 #include "Game/EPlatformedGame.h"
 #include <string>
 
 class bxgi::CDATLoaderFormat;
 
-class bxgi::CDATLoaderManager : public bxcf::CFormatManager<bxgi::CDATLoaderFormat>, public bxcf::CSingleton<bxgi::CDATLoaderManager>
+class bxgi::CDATLoaderManager : public bxcf::FormatManager<bxgi::CDATLoaderFormat>, public bxcf::Singleton<bxgi::CDATLoaderManager>
 {
 public:
 	CDATLoaderManager(void);

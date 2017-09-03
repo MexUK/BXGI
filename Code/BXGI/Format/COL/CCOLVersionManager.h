@@ -1,16 +1,16 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Object/CManager.h"
+#include "Object/Manager.h"
 #include "ECOLVersion.h"
-#include "Pool/CVectorPool.h"
+#include "Pool/VectorPool.h"
 #include "Game/EGame.h"
 #include <string>
 #include <unordered_map>
 
 class bxgi::CCOLVersion;
 
-class bxgi::CCOLVersionManager : public bxcf::CManager, public bxcf::CVectorPool<bxgi::CCOLVersion*>
+class bxgi::CCOLVersionManager : public bxcf::Manager, public bxcf::VectorPool<bxgi::CCOLVersion*>
 {
 public:
 	void											init(void);

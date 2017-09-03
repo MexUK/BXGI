@@ -29,9 +29,9 @@
 #include "Entry/DataEntry/CIPLEntry_UnknownSection.h"
 #include "Entry/DataEntry/PATH/CIPLEntry_PATH_Group.h"
 #include "Entry/DataEntry/PATH/CIPLEntry_PATH_Node.h"
-#include "Static/CString2.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Static/String2.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 #include "Exception/EExceptionCode.h"
 #include <vector>
 
@@ -77,7 +77,7 @@ void		CIPLFormat::serialize(void)
 // unserialize
 void		CIPLFormat::unserializeBinary(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	// header
 	string strFourCC = pDataReader->readString(4);
@@ -124,7 +124,7 @@ void		CIPLFormat::unserializeBinary(void)
 // serialize
 void		CIPLFormat::serializeBinary(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	// header
 	string strFourCC = "BNRY";
@@ -208,7 +208,7 @@ CIPLEntry_Data*		CIPLFormat::unserializeDataEntry(EIPLSection EIPLSectionValue)
 
 EIPLPathType		CIPLFormat::detectPATHType(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	switch (pDataReader->getLineTokens().size())
 	{
@@ -220,9 +220,9 @@ EIPLPathType		CIPLFormat::detectPATHType(void)
 
 EIPLSection					CIPLFormat::getSectionFromText(string strIPLSectionText)
 {
-	strIPLSectionText = CString2::zeroPad(strIPLSectionText, 4);
+	strIPLSectionText = String2::zeroPad(strIPLSectionText, 4);
 
-	const uint8 *pszData = (const uint8*) CString2::toUpperCase(strIPLSectionText.substr(0, 4)).c_str();
+	const uint8 *pszData = (const uint8*) String2::toUpperCase(strIPLSectionText.substr(0, 4)).c_str();
 	switch ((uint32)*pszData)
 	{
 	case 'INST':	return IPL_SECTION_INST;

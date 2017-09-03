@@ -1,19 +1,19 @@
 #include "CDATChaseFormat.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace std;
 using namespace bxcf;
 using namespace bxgi;
 
 CDATChaseFormat::CDATChaseFormat(void) :
-	CFormat(true, LITTLE_ENDIAN)
+	Format(true, LITTLE_ENDIAN)
 {
 }
 
 void					CDATChaseFormat::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	
 	/*
 	todo
@@ -43,7 +43,7 @@ void					CDATChaseFormat::unserialize(void)
 
 void					CDATChaseFormat::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 	
 	for(CDATChaseEntry *pDATChaseEntry : getEntries())
 	{

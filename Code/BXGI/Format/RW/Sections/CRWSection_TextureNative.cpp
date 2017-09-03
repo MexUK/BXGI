@@ -1,10 +1,10 @@
 #include "CRWSection_TextureNative.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 #include "Format/TXD/ETXDRasterDataFormat.h"
 #include "Format/TXD/CTXDManager.h"
-#include "Static/CString2.h"
-#include "Image/CImageManager.h"
+#include "Static/String2.h"
+#include "Image/ImageManager.h"
 #include "Exception/EExceptionCode.h"
 
 using namespace std;
@@ -38,7 +38,7 @@ CRWSection_TextureNative::CRWSection_TextureNative(void) :
 
 void							CRWSection_TextureNative::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get(); // todo - make better code for peek and seek-restore
+	DataReader *pDataReader = DataReader::get(); // todo - make better code for peek and seek-restore
 	uint64 uiPreviousSeek = pDataReader->getSeek();
 	pDataReader->setPeek(true);
 	uint32 uiPlatformId = pDataReader->readUint32();
@@ -127,19 +127,19 @@ void							CRWSection_TextureNative::serializeBody(void)
 
 void							CRWSection_TextureNative::unserializeHeader_Direct3D(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	// struct TextureFormat
 	m_uiPlatformId = pDataReader->readUint32();
 	m_ucFilterFlags = pDataReader->readUint8();
 	m_ucTextureWrapUV = pDataReader->readUint8();
 	string strPadding = pDataReader->readString(2);
-	setDiffuseName(CString2::rtrimFromLeft(pDataReader->readString(32)));
+	setDiffuseName(String2::rtrimFromLeft(pDataReader->readString(32)));
 	if (getDiffuseName() != "")
 	{
 		setHasDiffuse(true);
 	}
-	setAlphaName(CString2::rtrimFromLeft(pDataReader->readString(32)));
+	setAlphaName(String2::rtrimFromLeft(pDataReader->readString(32)));
 	if (getAlphaName() != "")
 	{
 		setHasAlpha(true);
@@ -150,7 +150,7 @@ void							CRWSection_TextureNative::unserializeHeader_Direct3D(void)
 	if (m_uiPlatformId == 9)
 	{
 		// GTA SA
-		setDXTCompressionType(CImageManager::getDXTCompressionTypeFromFourCC(pDataReader->readString(4)));
+		setDXTCompressionType(ImageManager::getDXTCompressionTypeFromFourCC(pDataReader->readString(4)));
 		setAlpha(0);
 	}
 	else
@@ -186,7 +186,7 @@ void							CRWSection_TextureNative::unserializeHeader_Direct3D(void)
 
 void							CRWSection_TextureNative::unserializeHeader_PS2(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	// struct TextureFormat
 	setPlatformId(pDataReader->readUint32());
@@ -236,7 +236,7 @@ void							CRWSection_TextureNative::unserializeHeader_PS2(void)
 
 void							CRWSection_TextureNative::unserializeHeader_Android(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	// struct TextureFormat
 	setPlatformId(pDataReader->readUint32());
@@ -246,12 +246,12 @@ void							CRWSection_TextureNative::unserializeHeader_Android(void)
 	pDataReader->readUint32();
 	pDataReader->readUint32();
 	pDataReader->readString(16);
-	setDiffuseName(CString2::rtrimFromLeft(pDataReader->readString(32)));
+	setDiffuseName(String2::rtrimFromLeft(pDataReader->readString(32)));
 	if (getDiffuseName() != "")
 	{
 		setHasDiffuse(true);
 	}
-	setAlphaName(CString2::rtrimFromLeft(pDataReader->readString(32)));
+	setAlphaName(String2::rtrimFromLeft(pDataReader->readString(32)));
 	if (getAlphaName() != "")
 	{
 		setHasAlpha(true);
@@ -270,7 +270,7 @@ void							CRWSection_TextureNative::unserializeHeader_Android(void)
 
 void							CRWSection_TextureNative::unserializeBody_Direct3D(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	// texture native struct body - palette
 	bool bPaletteUsed = false;
@@ -317,7 +317,7 @@ void							CRWSection_TextureNative::unserializeBody_Direct3D(void)
 
 void							CRWSection_TextureNative::unserializeBody_PS2(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	pDataReader->readUint32(); // RW section header
 	pDataReader->readUint32();
@@ -426,7 +426,7 @@ void							CRWSection_TextureNative::serializeHeader_Direct3D(void)
 {
 	// texture native struct header - 86 bytes
 
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	// struct TextureFormat
 	pDataWriter->writeUint32(m_uiPlatformId);
@@ -458,7 +458,7 @@ void							CRWSection_TextureNative::serializeHeader_Direct3D(void)
 	if (m_uiPlatformId == 9)
 	{
 		// GTA SA
-		pDataWriter->writeString(CImageManager::getD3DFormatToPack(CImageManager::getD3DFormatFromRasterDataFormat(m_ERasterDataFormat)));
+		pDataWriter->writeString(ImageManager::getD3DFormatToPack(ImageManager::getD3DFormatFromRasterDataFormat(m_ERasterDataFormat)));
 	}
 	else
 	{
@@ -502,21 +502,21 @@ void							CRWSection_TextureNative::serializeHeader_Direct3D(void)
 
 void							CRWSection_TextureNative::serializeHeader_PS2(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	// todo
 }
 
 void							CRWSection_TextureNative::serializeHeader_Android(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	// todo
 }
 
 void							CRWSection_TextureNative::serializeBody_Direct3D(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	for (auto pMipmap : getMipMaps().getEntries())
 	{
@@ -527,21 +527,21 @@ void							CRWSection_TextureNative::serializeBody_Direct3D(void)
 
 void							CRWSection_TextureNative::serializeBody_PS2(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	// todo
 }
 
 void							CRWSection_TextureNative::serializeBody_Android(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	// todo
 }
 
 string							CRWSection_TextureNative::unserializeString(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	pDataReader->readUint32(); // RW section header
 	uint32 uiSectionSize = pDataReader->readUint32();
@@ -573,7 +573,7 @@ void							CRWSection_TextureNative::setRasterDataFormat(ERasterDataFormat ERast
 	if (bUpdatETXDRasterDataFormat)
 	{
 		m_uiTXDRasterDataFormat = CTXDManager::getTXDRasterDataFormatFromRasterDataFormat(ERasterDataFormatValue);
-		m_EDXTCompressionType = CImageManager::getDXTCompressionTypeFromRasterDataFormat(ERasterDataFormatValue);
+		m_EDXTCompressionType = ImageManager::getDXTCompressionTypeFromRasterDataFormat(ERasterDataFormatValue);
 	}
 }
 
@@ -879,7 +879,7 @@ void							CRWSection_TextureNative::convertToRasterDataFormat(ERasterDataFormat
 		if (!pMipmap->canRasterDataBeConverted())
 		{
 			vecMipmapsToRemove.push_back(pMipmap);
-			vecMipmapsRemoved.push_back("Texture (" + getDiffuseName() + ") - Mipmap #" + CString2::toString(uiMipmapIndex + 1));
+			vecMipmapsRemoved.push_back("Texture (" + getDiffuseName() + ") - Mipmap #" + String2::toString(uiMipmapIndex + 1));
 			continue;
 		}
 
@@ -893,8 +893,8 @@ void							CRWSection_TextureNative::convertToRasterDataFormat(ERasterDataFormat
 
 	setRasterDataFormat(ERasterDataFormatValue, true);
 	//setTXDRasterDataFormat(CTXDManager::getTXDRasterDataFormatFromRasterDataFormat(ERasterDataFormatValue));
-	setBPP(CImageManager::getBPPFromRasterDataFormat(ERasterDataFormatValue));
-	setDXTCompressionType(CImageManager::getDXTCompressionTypeFromRasterDataFormat(ERasterDataFormatValue));
+	setBPP(ImageManager::getBPPFromRasterDataFormat(ERasterDataFormatValue));
+	setDXTCompressionType(ImageManager::getDXTCompressionTypeFromRasterDataFormat(ERasterDataFormatValue));
 
 	if (ERasterDataFormatValue != RASTERDATAFORMAT_PAL4 && ERasterDataFormatValue != RASTERDATAFORMAT_PAL8)
 	{

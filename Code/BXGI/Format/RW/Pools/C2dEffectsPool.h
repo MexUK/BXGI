@@ -1,9 +1,9 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Pool/CVectorPool.h"
+#include "Pool/VectorPool.h"
 #include "Format/RW/Entries/C2dEffect.h"
 
-class bxgi::C2dEffectsPool : public bxcf::CVectorPool<bxgi::C2dEffect*>
+class bxgi::C2dEffectsPool : public bxcf::VectorPool<bxgi::C2dEffect*>
 {
 };

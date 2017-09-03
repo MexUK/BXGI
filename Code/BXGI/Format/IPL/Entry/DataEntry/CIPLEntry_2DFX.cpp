@@ -1,7 +1,7 @@
 #include "CIPLEntry_2DFX.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -13,14 +13,14 @@ CIPLEntry_2DFX::CIPLEntry_2DFX(CIPLFormat *pIPLFormat) :
 
 void			CIPLEntry_2DFX::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	throw EXCEPTION_UNKNOWN_FORMAT_TYPE;
 }
 
 void			CIPLEntry_2DFX::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 	
 	throw EXCEPTION_UNKNOWN_FORMAT_TYPE;
 }

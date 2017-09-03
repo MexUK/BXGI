@@ -1,7 +1,7 @@
 #include "CIDEEntry_ANIM.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -21,7 +21,7 @@ CIDEEntry_ANIM::CIDEEntry_ANIM(CIDEFormat *pIDEFormat) :
 
 void			CIDEEntry_ANIM::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	switch (pDataReader->getLineTokens().size())
 	{
@@ -59,7 +59,7 @@ void			CIDEEntry_ANIM::unserialize(void)
 
 void			CIDEEntry_ANIM::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	switch (getFormatType())
 	{

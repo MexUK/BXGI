@@ -1,12 +1,12 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Format/CFormatManager.h"
-#include "Object/CSingleton.h"
+#include "Format/FormatManager.h"
+#include "Object/Singleton.h"
 
 class bxgi::CIPLFormat;
 
-class bxgi::CIPLManager : public bxcf::CFormatManager<bxgi::CIPLFormat>, public bxcf::CSingleton<bxgi::CIPLManager>
+class bxgi::CIPLManager : public bxcf::FormatManager<bxgi::CIPLFormat>, public bxcf::Singleton<bxgi::CIPLManager>
 {
 public:
 	CIPLManager(void);

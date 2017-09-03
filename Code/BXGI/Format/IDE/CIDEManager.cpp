@@ -1,9 +1,9 @@
 #include "CIDEManager.h"
 #include "CIDEFormat.h"
 #include "EIDESection.h"
-#include "Static/CString2.h"
-#include "Static/CStdVector.h"
-#include "Static/CDebug.h"
+#include "Static/String2.h"
+#include "Static/StdVector.h"
+#include "Static/Debug.h"
 
 using namespace std;
 using namespace bxcf;
@@ -44,9 +44,9 @@ vector<string>		CIDEManager::getIDEEntryNamesWithoutExtension(vector<string> vec
 		{
 			vecTextureNames = pIDEFile->getTXDNames();
 		}
-		vecEntryNamesWithoutExtension = CStdVector::combineVectors(vecEntryNamesWithoutExtension, CStdVector::combineVectors(vecModelNames, vecTextureNames));
+		vecEntryNamesWithoutExtension = StdVector::combineVectors(vecEntryNamesWithoutExtension, StdVector::combineVectors(vecModelNames, vecTextureNames));
 		pIDEFile->unload();
 		delete pIDEFile;
 	}
-	return CStdVector::removeDuplicates(vecEntryNamesWithoutExtension);
+	return StdVector::removeDuplicates(vecEntryNamesWithoutExtension);
 }

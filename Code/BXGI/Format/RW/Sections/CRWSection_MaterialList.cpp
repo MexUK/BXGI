@@ -1,6 +1,6 @@
 #include "CRWSection_MaterialList.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -13,7 +13,7 @@ CRWSection_MaterialList::CRWSection_MaterialList(void) :
 
 void							CRWSection_MaterialList::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	m_uiMaterialCount = pDataReader->readUint32();
 	m_strReservedValues = pDataReader->readString(4 * m_uiMaterialCount);
@@ -21,7 +21,7 @@ void							CRWSection_MaterialList::unserialize(void)
 
 void							CRWSection_MaterialList::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	pDataWriter->writeUint32(m_uiMaterialCount);
 	pDataWriter->writeStringRef(m_strReservedValues);

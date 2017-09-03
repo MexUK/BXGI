@@ -1,6 +1,6 @@
 #include "CDATAnimgrpSection.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -12,7 +12,7 @@ CDATAnimgrpSection::CDATAnimgrpSection(void) :
 
 void					CDATAnimgrpSection::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 	
 	m_strWalkStyleName = pDataReader->readTokenString();
 	m_strIFPFileName = pDataReader->readTokenString();
@@ -22,7 +22,7 @@ void					CDATAnimgrpSection::unserialize(void)
 
 void					CDATAnimgrpSection::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 	
 	pDataWriter->writeToken(m_strWalkStyleName);
 	pDataWriter->writeToken(m_strIFPFileName);

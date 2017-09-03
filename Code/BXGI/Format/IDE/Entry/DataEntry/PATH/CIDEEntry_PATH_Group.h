@@ -2,12 +2,12 @@
 
 #include "nsbxgi.h"
 #include "Format/IDE/Entry/DataEntry/CIDEEntry_PATH.h"
-#include "Pool/CVectorPool.h"
+#include "Pool/VectorPool.h"
 #include <string>
 
 class bxgi::CIDEEntry;
 
-class bxgi::CIDEEntry_PATH_Group : public bxgi::CIDEEntry_PATH, public bxcf::CVectorPool<bxgi::CIDEEntry*>
+class bxgi::CIDEEntry_PATH_Group : public bxgi::CIDEEntry_PATH, public bxcf::VectorPool<bxgi::CIDEEntry*>
 {
 public:
 	CIDEEntry_PATH_Group(bxgi::CIDEFormat *pIDEFormat);

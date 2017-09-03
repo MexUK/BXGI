@@ -1,10 +1,10 @@
 #include "CCOLFormat.h"
-#include "Static/CString2.h"
-#include "Static/CFile.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Static/String2.h"
+#include "Static/File.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 #include "CCOLManager.h"
-#include "Static/CDebug.h"
+#include "Static/Debug.h"
 #include <algorithm>
 
 using namespace std;
@@ -18,7 +18,7 @@ void				CCOLFormat::unload(void)
 
 void				CCOLFormat::unserialize(void)
 {
-	while (!CDataReader::get()->isEOF())
+	while (!DataReader::get()->isEOF())
 	{
 		CCOLEntry *pCOLEntry = new CCOLEntry(this);
 		m_vecEntries.push_back(pCOLEntry);
@@ -54,10 +54,10 @@ vector<string>		CCOLFormat::getModelNames(void)
 
 CCOLEntry*			CCOLFormat::getEntryByName(string strName)
 {
-	strName = CString2::toUpperCase(strName);
+	strName = String2::toUpperCase(strName);
 	for (auto pCOLEntry : getEntries())
 	{
-		if (strName == CString2::toUpperCase(pCOLEntry->getModelName()))
+		if (strName == String2::toUpperCase(pCOLEntry->getModelName()))
 		{
 			return pCOLEntry;
 		}
@@ -68,10 +68,10 @@ CCOLEntry*			CCOLFormat::getEntryByName(string strName)
 vector<CCOLEntry*>	CCOLFormat::getEntriesByModelName(string strModelName)
 {
 	vector<CCOLEntry*> vecCOLEntries;
-	strModelName = CString2::toUpperCase(strModelName);
+	strModelName = String2::toUpperCase(strModelName);
 	for (auto pCOLEntry : getEntries())
 	{
-		if (CString2::toUpperCase(pCOLEntry->getModelName()) == strModelName)
+		if (String2::toUpperCase(pCOLEntry->getModelName()) == strModelName)
 		{
 			vecCOLEntries.push_back(pCOLEntry);
 		}

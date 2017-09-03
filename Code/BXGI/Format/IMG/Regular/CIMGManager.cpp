@@ -1,19 +1,19 @@
 #include "CIMGManager.h"
 #include "CIMGFormat.h"
 #include "CIMGEntry.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
-#include "Static/CString2.h"
-#include "Static/CPath.h"
-#include "Static/CFile.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
+#include "Static/String2.h"
+#include "Static/Path.h"
+#include "Static/File.h"
 #include "Encryption/AES/Rijndael/Rijndael.h"
 #include "Engine/RAGE/CRageManager.h"
 #include "Engine/RAGE/CRageResourceType.h"
 #include "Engine/RAGE/CRageResourceTypeManager.h"
-#include "Static/CDebug.h"
+#include "Static/Debug.h"
 #include "Format/COL/CCOLManager.h"
 #include "Compression/ECompressionAlgorithm.h"
-#include "Compression/CCompressionManager.h"
+#include "Compression/CompressionManager.h"
 
 using namespace std;
 using namespace bxcf;
@@ -72,16 +72,16 @@ EIMGVersion		CIMGManager::detectIMGVersion(string& strIMGFilePath, string& strHe
 	bIsEncryptedOut = false;
 
 	// strIMGFilePath can be a path to an IMG file or a DIR file
-	if (!CFile::doesFileExist(strIMGFilePath))
+	if (!File::doesFileExist(strIMGFilePath))
 	{
 		return IMG_UNKNOWN;
 	}
 	
-	string strFileExtensionUpper = CString2::toUpperCase(CPath::getFileExtension(strIMGFilePath));
+	string strFileExtensionUpper = String2::toUpperCase(Path::getFileExtension(strIMGFilePath));
 	if (strFileExtensionUpper == "DIR")
 	{
 		// input file is: DIR file
-		if (CFile::doesFileExist(CPath::replaceFileExtension(strIMGFilePath, "img")))
+		if (File::doesFileExist(Path::replaceFileExtension(strIMGFilePath, "img")))
 		{
 			// both IMG and DIR files exist in same folder
 			return IMG_1;
@@ -99,20 +99,20 @@ EIMGVersion		CIMGManager::detectIMGVersion(string& strIMGFilePath, string& strHe
 		uint32 uiFileSize = 0;
 		if (strHeader16B == "")
 		{
-			uiFileSize = CFile::getFileSize(strIMGFilePath);
+			uiFileSize = File::getFileSize(strIMGFilePath);
 		}
 		if (strHeader16B == "")
 		{
 			if (uiFileSize >= 16)
 			{
-				strHeader16B = CFile::getFileSubContent(strIMGFilePath, 0, 16, true);
+				strHeader16B = File::getFileSubContent(strIMGFilePath, 0, 16, true);
 			}
 		}
 		if (strHeader16B == "")
 		{
 			if (uiFileSize >= 4)
 			{
-				strHeader4B = CFile::getFileSubContent(strIMGFilePath, 0, 4, true);
+				strHeader4B = File::getFileSubContent(strIMGFilePath, 0, 4, true);
 			}
 		}
 		else
@@ -128,19 +128,19 @@ EIMGVersion		CIMGManager::detectIMGVersion(string& strIMGFilePath, string& strHe
 		{
 			return IMG_FASTMAN92;
 		}
-		else if (strHeader4B.length() == 4 && CString2::unpackUint32(strHeader4B, false) == 0xA94E2A52)
+		else if (strHeader4B.length() == 4 && String2::unpackUint32(strHeader4B, false) == 0xA94E2A52)
 		{
 			return IMG_3; // unencrypted
 		}
-		else if (strHeader16B.length() == 16 && CString2::unpackUint32(CIMGManager::decryptVersion3IMGString(strHeader16B).substr(0, 4), false) == 0xA94E2A52)
+		else if (strHeader16B.length() == 16 && String2::unpackUint32(CIMGManager::decryptVersion3IMGString(strHeader16B).substr(0, 4), false) == 0xA94E2A52)
 		{
 			bIsEncryptedOut = true;
 			return IMG_3; // encrypted
 		}
 		else
 		{
-			string strDIRFilePath = CPath::replaceFileExtension(strIMGFilePath, "dir");
-			if (CFile::doesFileExist(strDIRFilePath))
+			string strDIRFilePath = Path::replaceFileExtension(strIMGFilePath, "dir");
+			if (File::doesFileExist(strDIRFilePath))
 			{
 				return IMG_1;
 			}
@@ -152,17 +152,17 @@ EIMGVersion		CIMGManager::detectIMGVersion(string& strIMGFilePath, string& strHe
 
 bool			CIMGManager::detectIMGEncryptionState(string& strIMGFilePath)
 {
-	string strHeader16B = CFile::getFileSubContent(strIMGFilePath, 0, 16, true);
+	string strHeader16B = File::getFileSubContent(strIMGFilePath, 0, 16, true);
 	string strHeader4B = strHeader16B.substr(0, 4);
 
 	// version 3
-	if (CString2::unpackUint32(CIMGManager::decryptVersion3IMGString(strHeader16B).substr(0, 4), false) == 0xA94E2A52)
+	if (String2::unpackUint32(CIMGManager::decryptVersion3IMGString(strHeader16B).substr(0, 4), false) == 0xA94E2A52)
 	{
 		return true;
 	}
 
 	// version fastman92
-	if (((CString2::toNumber(strHeader16B.substr(4, 1)) >> 24) & 15) != 0)
+	if (((String2::toNumber(strHeader16B.substr(4, 1)) >> 24) & 15) != 0)
 	{
 		return true;
 	}
@@ -179,28 +179,28 @@ uint32	CIMGManager::getIMGEntryCount(string& strIMGFilePath, EIMGVersion eVersio
 
 	if (eVersion == IMG_1)
 	{
-		return CFile::getFileSize(CPath::replaceFileExtension(strIMGFilePath, "dir")) / 32;
+		return File::getFileSize(Path::replaceFileExtension(strIMGFilePath, "dir")) / 32;
 	}
 	else if (eVersion == IMG_2)
 	{
-		return CString2::unpackUint32(CFile::getFileSubContent(strIMGFilePath, 0, 8, true).substr(4, 4), false);
+		return String2::unpackUint32(File::getFileSubContent(strIMGFilePath, 0, 8, true).substr(4, 4), false);
 	}
 	else if (eVersion == IMG_3)
 	{
 		if (detectIMGEncryptionState(strIMGFilePath))
 		{
-			string strHeader16B = CFile::getFileSubContent(strIMGFilePath, 0, 16, true);
-			return CString2::unpackUint32(CIMGManager::decryptVersion3IMGString(strHeader16B).substr(8, 4), false);
+			string strHeader16B = File::getFileSubContent(strIMGFilePath, 0, 16, true);
+			return String2::unpackUint32(CIMGManager::decryptVersion3IMGString(strHeader16B).substr(8, 4), false);
 		}
 		else
 		{
-			return CString2::unpackUint32(CFile::getFileSubContent(strIMGFilePath, 0, 12, true).substr(8, 4), false);
+			return String2::unpackUint32(File::getFileSubContent(strIMGFilePath, 0, 12, true).substr(8, 4), false);
 		}
 	}
 	else if (eVersion == IMG_FASTMAN92)
 	{
-		string strHeader28B = CFile::getFileSubContent(strIMGFilePath, 0, 28, true);
-		return CString2::unpackUint32(strHeader28B.substr(24, 4), false);
+		string strHeader28B = File::getFileSubContent(strIMGFilePath, 0, 28, true);
+		return String2::unpackUint32(strHeader28B.substr(24, 4), false);
 	}
 	else
 	{
@@ -235,7 +235,7 @@ string			CIMGManager::decryptVersion3IMGString(string strData)
 	///*
 	char sz[1024];
 	sprintf_s(sz, "strData length: %u", strData.length());
-	//CDebug::log(sz);
+	//Debug::log(sz);
 
 	/*
 	for (uint32 i = 0; i < 16; i++)
@@ -289,7 +289,7 @@ string			CIMGManager::decryptVersion3IMGString(string strData)
 
 	for (uint32 i = 0; i < 16; i++)
 	{
-		CDebug::log("DECRYPTION LOOP");
+		Debug::log("DECRYPTION LOOP");
 		AutoSeededRandomPool prng;
 
 		//byte* key_s = (byte*)"\x1a\xb5\x6f\xed\x7e\xc3\xff\x1\x22\x7b\x69\x15\x33\x97\x5d\xce\x47\xd7\x69\x65\x3f\xf7\x75\x42\x6a\x96\xcd\x6d\x53\x7\x56\x5d";
@@ -314,7 +314,7 @@ string			CIMGManager::decryptVersion3IMGString(string strData)
 		}
 		catch (const CryptoPP::Exception& e)
 		{
-			CDebug::log(e.what());
+			Debug::log(e.what());
 			exit(1);
 		}
 
@@ -381,5 +381,5 @@ string				CIMGManager::getEncryptionText(bool bIsEncrypted)
 
 CIMGFormat*			CIMGManager::parseViaFile(string& strFilePath)
 {
-	return CFormatManager::parseViaFile(strFilePath);
+	return FormatManager::parseViaFile(strFilePath);
 }

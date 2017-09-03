@@ -1,12 +1,12 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Format/CFormatManager.h"
-#include "Object/CSingleton.h"
+#include "Format/FormatManager.h"
+#include "Object/Singleton.h"
 
 class bxgi::CDFFFormat;
 
-class bxgi::CDFFManager : public bxcf::CFormatManager<bxgi::CDFFFormat>, public bxcf::CSingleton<bxgi::CDFFManager>
+class bxgi::CDFFManager : public bxcf::FormatManager<bxgi::CDFFFormat>, public bxcf::Singleton<bxgi::CDFFManager>
 {
 public:
 	CDFFManager(void);

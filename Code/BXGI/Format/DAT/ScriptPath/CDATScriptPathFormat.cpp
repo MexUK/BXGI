@@ -1,21 +1,21 @@
 #include "CDATScriptPathFormat.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace std;
 using namespace bxgi;
 
 CDATScriptPathFormat::CDATScriptPathFormat(void) :
-	CFormat(false, bxcf::LITTLE_ENDIAN)
+	Format(false, bxcf::LITTLE_ENDIAN)
 {
 }
 
 void					CDATScriptPathFormat::unserialize(void)
 {
-	// todo CDataReader::get()->unserializeLineEntries<CDATScriptPathEntry>(this);
+	// todo DataReader::get()->unserializeLineEntries<CDATScriptPathEntry>(this);
 }
 
 void					CDATScriptPathFormat::serialize(void)
 {
-	// todo CDataWriter::get()->serializeLineEntries<CDATScriptPathEntry>(this);
+	// todo DataWriter::get()->serializeLineEntries<CDATScriptPathEntry>(this);
 }

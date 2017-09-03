@@ -1,7 +1,7 @@
 #include "CIDEEntry_OBJS.h"
 #include "Exception/EExceptionCode.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -21,7 +21,7 @@ CIDEEntry_OBJS::CIDEEntry_OBJS(CIDEFormat *pIDEFormat) :
 
 void			CIDEEntry_OBJS::unserialize(void)
 {
-	CDataReader *pDataReader = CDataReader::get();
+	DataReader *pDataReader = DataReader::get();
 
 	switch (pDataReader->getLineTokens().size())
 	{
@@ -103,7 +103,7 @@ void			CIDEEntry_OBJS::unserialize(void)
 
 void			CIDEEntry_OBJS::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 
 	switch (getFormatType())
 	{

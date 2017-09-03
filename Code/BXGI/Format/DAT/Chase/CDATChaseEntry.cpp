@@ -1,6 +1,6 @@
 #include "CDATChaseEntry.h"
-#include "Stream/CDataReader.h"
-#include "Stream/CDataWriter.h"
+#include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -28,7 +28,7 @@ CDATChaseEntry::CDATChaseEntry(void) :
 
 void					CDATChaseEntry::serialize(void)
 {
-	CDataWriter *pDataWriter = CDataWriter::get();
+	DataWriter *pDataWriter = DataWriter::get();
 	
 	/*
 	todo

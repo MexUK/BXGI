@@ -145,7 +145,7 @@
     <ClInclude Include="..\..\..\Code\BXGI\Format\CGameFormat.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Game\CGame.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Game\CGameManager.h" />
-    <ClInclude Include="..\..\..\Code\BXGI\Game\CPlatformedGame.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Game\PlatformedGame.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Game\EGame.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Game\EGameFlag.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Game\EPlatformedGame.h" />
@@ -358,7 +358,7 @@
     <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Sections\Partial\CRWGeometryBoundingInfo.cpp" />
     <ClCompile Include="..\..\..\Code\BXGI\Game\CGame.cpp" />
     <ClCompile Include="..\..\..\Code\BXGI\Game\CGameManager.cpp" />
-    <ClCompile Include="..\..\..\Code\BXGI\Game\CPlatformedGame.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Game\PlatformedGame.cpp" />
     <ClCompile Include="..\..\..\Code\BXGI\Intermediate\Model\CIntermediateModelFormat.cpp" />
     <ClCompile Include="..\..\..\Code\BXGI\Intermediate\Model\Data\CIntermediateBoundingObject.cpp" />
     <ClCompile Include="..\..\..\Code\BXGI\Intermediate\Model\Data\CIntermediateGeometry.cpp" />

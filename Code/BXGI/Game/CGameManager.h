@@ -2,25 +2,25 @@
 
 #include "nsbxgi.h"
 #include "nsbxcf.h"
-#include "Object/CManager.h"
-#include "Object/CSingleton.h"
-#include "Pool/CVectorPool.h"
+#include "Object/Manager.h"
+#include "Object/Singleton.h"
+#include "Pool/VectorPool.h"
 #include "Game/CGame.h"
 #include "Game/EGame.h"
-#include "Game/CPlatformedGame.h"
+#include "Game/PlatformedGame.h"
 #include "Game/EPlatformedGame.h"
 #include <string>
 
-class bxgi::CGameManager : public bxcf::CManager, public bxcf::CSingleton<bxgi::CGameManager>, public bxcf::CVectorPool<bxgi::CGame*>
+class bxgi::CGameManager : public bxcf::Manager, public bxcf::Singleton<bxgi::CGameManager>, public bxcf::VectorPool<bxgi::CGame*>
 {
 public:
 	void											init(void);
 	void											uninit(void);
 
-	bxcf::CVectorPool<bxgi::CPlatformedGame*>&		getPlatformedGames(void) { return m_vecPlatformedGames; }
+	bxcf::VectorPool<bxgi::PlatformedGame*>&		getPlatformedGames(void) { return m_vecPlatformedGames; }
 
 	bxgi::CGame*									addGame(bxgi::EGame uiGameId, std::string strGameName);
-	bxgi::CPlatformedGame*							addPlatformedGame(bxgi::EPlatformedGame uiPlatformedGameId, std::string strGameName);
+	bxgi::PlatformedGame*							addPlatformedGame(bxgi::EPlatformedGame uiPlatformedGameId, std::string strGameName);
 
 	std::string										getGameName(bxgi::EGame uiGameId);
 	std::string										getPlatformedGameText(bxgi::EPlatformedGame uiPlatformedGameId);
@@ -33,5 +33,5 @@ private:
 	void											uninitPlatformedGames(void);
 
 private:
-	bxcf::CVectorPool<bxgi::CPlatformedGame*>		m_vecPlatformedGames;
+	bxcf::VectorPool<bxgi::PlatformedGame*>		m_vecPlatformedGames;
 };
