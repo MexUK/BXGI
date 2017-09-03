@@ -1,7 +1,7 @@
 #include "RWEntry_2dEffect_EnterExit.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -28,7 +28,7 @@ void							RWEntry_2dEffect_EnterExit::unserialize(void)
 	m_fExitMarkerAngleRotation = pDataReader->readFloat32();
 	m_iInteriorCount = pDataReader->readInt8();
 	m_iFlags = pDataReader->readInt8();
-	m_strInteriorName = String2::rtrimFromLeft(pDataReader->readString(8));
+	m_strInteriorName = String::rtrimFromLeft(pDataReader->readString(8));
 	m_iSkyColour = pDataReader->readInt8();
 }
 

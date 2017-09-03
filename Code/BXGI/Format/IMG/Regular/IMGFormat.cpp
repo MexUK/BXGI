@@ -6,7 +6,7 @@
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
 #include "IMGManager.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "Format/IMG/Regular/Raw/IMGFormat_Version2_Header1.h"
 #include "Format/IMG/Regular/Raw/IMGFormat_Version3_Header1.h"
 #include "Format/IMG/Regular/Raw/IMGEntry_Version1Or2.h"
@@ -68,7 +68,7 @@ IMGFormat::IMGFormat(DataReader& reader) :
 // read meta data
 void				IMGFormat::readMetaData(void)
 {
-	if (String2::toUpperCase(Path::getFileExtension(m_strFilePath)) == "DIR")
+	if (String::toUpperCase(Path::getFileExtension(m_strFilePath)) == "DIR")
 	{
 		// version 1
 		m_EIMGVersion = IMG_1;
@@ -80,7 +80,7 @@ void				IMGFormat::readMetaData(void)
 		strFirst16Bytes = m_reader.read(16),
 		strFirst4Bytes = strFirst16Bytes.substr(0, 4);
 	uint32
-		uiSecond4BytesUi = String2::unpackUint32(strFirst16Bytes.substr(4, 4), false);
+		uiSecond4BytesUi = String::unpackUint32(strFirst16Bytes.substr(4, 4), false);
 
 	if (strFirst4Bytes == "VER2")
 	{
@@ -95,17 +95,17 @@ void				IMGFormat::readMetaData(void)
 		// version fastman92
 		m_EIMGVersion = IMG_FASTMAN92;
 		m_uiEntryCount = uiSecond4BytesUi;
-		m_ucGameType = String2::unpackUint8(strFirst16Bytes.substr(8, 1));
+		m_ucGameType = String::unpackUint8(strFirst16Bytes.substr(8, 1));
 		return;
 	}
 
-	uint32 uiIdentifier = String2::unpackUint32(strFirst4Bytes, false);
+	uint32 uiIdentifier = String::unpackUint32(strFirst4Bytes, false);
 	bool bEncrypted = false;
 
 	if (uiIdentifier != 0xA94E2A52)
 	{
 		bEncrypted = true;
-		uiIdentifier = String2::unpackUint32(IMGManager::decryptVersion3IMGString(strFirst16Bytes).substr(0, 4), false);
+		uiIdentifier = String::unpackUint32(IMGManager::decryptVersion3IMGString(strFirst16Bytes).substr(0, 4), false);
 	}
 
 	if (uiIdentifier == 0xA94E2A52)
@@ -114,7 +114,7 @@ void				IMGFormat::readMetaData(void)
 		{
 			// version 3
 			m_EIMGVersion = IMG_3;
-			m_uiEntryCount = String2::unpackUint32(strFirst16Bytes.substr(8, 4), false);
+			m_uiEntryCount = String::unpackUint32(strFirst16Bytes.substr(8, 4), false);
 			m_bEncrypted = bEncrypted;
 			return;
 		}
@@ -280,7 +280,7 @@ void		IMGFormat::unserializeVersion1(void)
 		rvecIMGEntries[(unsigned int)i] = pIMGEntry;
 		pIMGEntry->setIMGFile(this);
 		pIMGEntry->unserializeVersion1Or2(pRGIMGActiveEntry++);
-		pIMGEntry->setEntryExtension(String2::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())));
+		pIMGEntry->setEntryExtension(String::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())));
 		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
 
@@ -310,7 +310,7 @@ void		IMGFormat::unserializeVersion2(void)
 		rvecIMGEntries[(unsigned int)i] = pIMGEntry;
 		pIMGEntry->setIMGFile(this);
 		pIMGEntry->unserializeVersion1Or2(pRGIMGActiveEntry++);
-		pIMGEntry->setEntryExtension(String2::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())));
+		pIMGEntry->setEntryExtension(String::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())));
 		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
 
@@ -377,7 +377,7 @@ void		IMGFormat::unserializeVersion3_Encrypted(void)
 	for (uint32 i = 0; i < uiEntryCount; i++)
 	{
 		rvecIMGEntries[i]->setEntryName(pDataReader2->readStringUntilZero());
-		rvecIMGEntries[i]->setEntryExtension(String2::toUpperCase(Path::getFileExtension(rvecIMGEntries[i]->getEntryName())));
+		rvecIMGEntries[i]->setEntryExtension(String::toUpperCase(Path::getFileExtension(rvecIMGEntries[i]->getEntryName())));
 		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
 	
@@ -417,7 +417,7 @@ void		IMGFormat::unserializeVersion3_Unencrypted(void)
 	for (uint32 i = 0; i < uiEntryCount; i++)
 	{
 		rvecIMGEntries[i]->setEntryName(pDataReader->readStringUntilZero());
-		rvecIMGEntries[i]->setEntryExtension(String2::toUpperCase(Path::getFileExtension(rvecIMGEntries[i]->getEntryName())));
+		rvecIMGEntries[i]->setEntryExtension(String::toUpperCase(Path::getFileExtension(rvecIMGEntries[i]->getEntryName())));
 		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
 
@@ -480,7 +480,7 @@ void		IMGFormat::unserializeVersionFastman92(void)
 		rvecIMGEntries[(unsigned int)i] = pIMGEntry;
 		pIMGEntry->setIMGFile(this);
 		pIMGEntry->unserializeVersionFastman92(pRawIMGActiveEntry++);
-		pIMGEntry->setEntryExtension(String2::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())));
+		pIMGEntry->setEntryExtension(String::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())));
 		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
 
@@ -532,7 +532,7 @@ void		IMGFormat::unserializERWVersions(void)
 				// RW file - compressed
 				if (strUncompressedEntryData.length() >= 12)
 				{
-					pIMGEntry->setRawVersion(String2::unpackUint32(strUncompressedEntryData.substr(8, 4), false));
+					pIMGEntry->setRawVersion(String::unpackUint32(strUncompressedEntryData.substr(8, 4), false));
 				}
 			}
 			else
@@ -572,7 +572,7 @@ void		IMGFormat::unserializERWVersions(void)
 				}
 				else
 				{
-					pIMGEntry->setRawVersion(String2::toUint32(strVersionCharacter));
+					pIMGEntry->setRawVersion(String::toUint32(strVersionCharacter));
 				}
 			}
 			break;
@@ -586,7 +586,7 @@ void		IMGFormat::unserializERWVersions(void)
 			}
 			else
 			{
-				pIMGEntry->setRawVersion(String2::toUint32(strVersionCharacter) - 1);
+				pIMGEntry->setRawVersion(String::toUint32(strVersionCharacter) - 1);
 			}
 			break;
 		}
@@ -820,7 +820,7 @@ void					IMGFormat::serializeVersionFastman92(void)
 		// write IMG data - IMG header
 		uint32 uiCheck = 1;
 		uint32 uiEntryCount = getEntryCount();
-		string strReserved1 = String2::zeroPad(8);
+		string strReserved1 = String::zeroPad(8);
 
 		pDataWriter->writeUint32(uiCheck);
 		pDataWriter->writeUint32(uiEntryCount);
@@ -965,7 +965,7 @@ void					IMGFormat::serializeVersion3_Encrypted(void)
 	string strData = pDataWriter->getData();
 
 	string strHeader = IMGManager::encryptVersion3IMGString(strData.substr(0, 32));
-	string strTables = IMGManager::encryptVersion3IMGString(String2::zeroPad(strData.substr(20), (strData.length() - 20) + (2048 - ((strData.length() - 20) % 2048))));
+	string strTables = IMGManager::encryptVersion3IMGString(String::zeroPad(strData.substr(20), (strData.length() - 20) + (2048 - ((strData.length() - 20) % 2048))));
 
 	pDataWriter->setStreamType(ePreviousStreamType);
 	pDataWriter->setSeek(0);
@@ -1086,7 +1086,7 @@ void					IMGFormat::serializeVersion3_Unencrypted(void)
 // extension counts
 void					IMGFormat::addEntryExtensionCount(string strEntryExtension)
 {
-	strEntryExtension = String2::toUpperCase(strEntryExtension);
+	strEntryExtension = String::toUpperCase(strEntryExtension);
 	if (m_umapExtensionCounts.count(strEntryExtension) > 0)
 	{
 		m_umapExtensionCounts[strEntryExtension]++;
@@ -1098,7 +1098,7 @@ void					IMGFormat::addEntryExtensionCount(string strEntryExtension)
 }
 void					IMGFormat::removeEntryExtensionCount(string strEntryExtension)
 {
-	strEntryExtension = String2::toUpperCase(strEntryExtension);
+	strEntryExtension = String::toUpperCase(strEntryExtension);
 	if (m_umapExtensionCounts[strEntryExtension] > 1)
 	{
 		m_umapExtensionCounts[strEntryExtension]--;
@@ -1111,7 +1111,7 @@ void					IMGFormat::removeEntryExtensionCount(string strEntryExtension)
 
 uint32					IMGFormat::getEntryExtensionCount(string strEntryExtension)
 {
-	strEntryExtension = String2::toUpperCase(strEntryExtension);
+	strEntryExtension = String::toUpperCase(strEntryExtension);
 	if (m_umapExtensionCounts.count(strEntryExtension) > 0)
 	{
 		return m_umapExtensionCounts[strEntryExtension];
@@ -1256,12 +1256,12 @@ IMGEntry*							IMGFormat::addEntryViaData(string& strEntryName, string& strEntr
 	}
 	else
 	{
-		string strExtensionUpper = String2::toUpperCase(Path::getFileExtension(strEntryName));
+		string strExtensionUpper = String::toUpperCase(Path::getFileExtension(strEntryName));
 		if (strExtensionUpper == "TXD" || GameFormat::isModelExtension(strExtensionUpper))
 		{
 			if (strEntryData.length() >= 12)
 			{
-				pIMGEntry->setRWVersionByVersionCC(String2::unpackUint32(strEntryData.substr(8, 4), false));
+				pIMGEntry->setRWVersionByVersionCC(String::unpackUint32(strEntryData.substr(8, 4), false));
 			}
 		}
 		else if (strExtensionUpper == "COL")
@@ -1375,7 +1375,7 @@ uint32						IMGFormat::replaceEntries(vector<string>& vecPaths, vector<string>& 
 		}
 		else
 		{
-			pIMGEntry->setRWVersionByVersionCC(strFileContent.length() >= 12 ? String2::unpackUint32(strFileContent.substr(8, 4), false) : 0);
+			pIMGEntry->setRWVersionByVersionCC(strFileContent.length() >= 12 ? String::unpackUint32(strFileContent.substr(8, 4), false) : 0);
 		}
 
 		uiReplaceCount++;
@@ -1465,11 +1465,11 @@ uint32			IMGFormat::getNextEntryOffset(void)
 
 vector<IMGEntry*>		IMGFormat::getEntriesByExtension(string strExtension)
 {
-	strExtension = String2::toUpperCase(strExtension);
+	strExtension = String::toUpperCase(strExtension);
 	vector<IMGEntry*> vecIMGEntries;
 	for (auto pIMGEntry : getEntries())
 	{
-		if (String2::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())) == strExtension)
+		if (String::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())) == strExtension)
 		{
 			vecIMGEntries.push_back(pIMGEntry);
 		}
@@ -1479,10 +1479,10 @@ vector<IMGEntry*>		IMGFormat::getEntriesByExtension(string strExtension)
 
 IMGEntry*				IMGFormat::getEntryByName(string& strEntryName)
 {
-	strEntryName = String2::toUpperCase(strEntryName);
+	strEntryName = String::toUpperCase(strEntryName);
 	for (auto pIMGEntry : getEntries())
 	{
-		if (strEntryName == String2::toUpperCase(pIMGEntry->getEntryName()))
+		if (strEntryName == String::toUpperCase(pIMGEntry->getEntryName()))
 		{
 			return pIMGEntry;
 		}
@@ -1492,10 +1492,10 @@ IMGEntry*				IMGFormat::getEntryByName(string& strEntryName)
 
 IMGEntry*				IMGFormat::getEntryByNameWithoutExtension(string& strEntryNameWithoutExtension)
 {
-	strEntryNameWithoutExtension = String2::toUpperCase(strEntryNameWithoutExtension);
+	strEntryNameWithoutExtension = String::toUpperCase(strEntryNameWithoutExtension);
 	for (auto pIMGEntry : getEntries())
 	{
-		if (strEntryNameWithoutExtension == String2::toUpperCase(Path::removeFileExtension(pIMGEntry->getEntryName())))
+		if (strEntryNameWithoutExtension == String::toUpperCase(Path::removeFileExtension(pIMGEntry->getEntryName())))
 		{
 			return pIMGEntry;
 		}
@@ -1520,11 +1520,11 @@ IMGEntry*				IMGFormat::getEntryByHighestOffset(void)
 
 uint32			IMGFormat::getEntryCountForName(string& strEntryName)
 {
-	strEntryName = String2::toUpperCase(strEntryName);
+	strEntryName = String::toUpperCase(strEntryName);
 	uint32 uiNameCount = 0;
 	for (auto pIMGEntry : getEntries())
 	{
-		if (strEntryName == String2::toUpperCase(pIMGEntry->getEntryName()))
+		if (strEntryName == String::toUpperCase(pIMGEntry->getEntryName()))
 		{
 			uiNameCount++;
 		}

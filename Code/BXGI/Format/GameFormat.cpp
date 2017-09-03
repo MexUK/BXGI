@@ -2,7 +2,7 @@
 #include "Engine/RW/RWManager.h"
 #include "Engine/RAGE/RageManager.h"
 #include "Format/COL/COLManager.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 
 using namespace std;
 using namespace bxcf;
@@ -37,7 +37,7 @@ bool			GameFormat::isCollisionExtension(string& strFileExtension)
 
 bool			GameFormat::isAnimationExtension(string& strFileExtension)
 {
-	string strFileExtensionUpper = String2::toUpperCase(strFileExtension);
+	string strFileExtensionUpper = String::toUpperCase(strFileExtension);
 	return strFileExtensionUpper == "IFP";
 }
 

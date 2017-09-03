@@ -1,7 +1,7 @@
 #include "COLEntry.h"
 #include "COLManager.h"
 #include "COLFormat.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
 #include "Static/Debug.h"
@@ -57,7 +57,7 @@ void			COLEntry::unserialize(void)
 		throw EXCEPTION_UNKNOWN_FORMAT;
 	}
 	uint32 uiEntrySize = pDataReader->readUint32(); // entry size from after this value
-	setModelName(String2::rtrimFromLeft(pDataReader->readString(22)));
+	setModelName(String::rtrimFromLeft(pDataReader->readString(22)));
 	setModelId(pDataReader->readUint16());
 	parseBoundingObjects();
 
@@ -816,7 +816,7 @@ uint32	COLEntry::calculateCollisionMeshVertexCount(void)
 		{
 			for (uint8 i2 = 0; i2 < 3; i2++)
 			{
-				uint32 uiVertexIndex = String2::unpackUint32(strCollisionMeshFacesData.substr(uiSeek, 4), false);
+				uint32 uiVertexIndex = String::unpackUint32(strCollisionMeshFacesData.substr(uiSeek, 4), false);
 				if (uiVertexIndex > uiHighestVertexIndex)
 				{
 					uiHighestVertexIndex = uiVertexIndex;
@@ -833,7 +833,7 @@ uint32	COLEntry::calculateCollisionMeshVertexCount(void)
 		{
 			for (uint8 i2 = 0; i2 < 3; i2++)
 			{
-				uint32 uiVertexIndex = String2::unpackUint16(strCollisionMeshFacesData.substr(uiSeek, 2), false);
+				uint32 uiVertexIndex = String::unpackUint16(strCollisionMeshFacesData.substr(uiSeek, 2), false);
 				if (uiVertexIndex > uiHighestVertexIndex)
 				{
 					uiHighestVertexIndex = uiVertexIndex;
@@ -851,13 +851,13 @@ uint32	COLEntry::calculateShadowMeshVertexCount(void)
 	DataReader *pDataReader = DataReader::get();
 	ECOLVersion ECOLVersionValue = getCOLVersion();
 
-	//Debug::log("getHeaderStartOffset(): " + String2::toString(getHeaderStartOffset()));
-	//Debug::log("getShadowMeshFacesOffset(): " + String2::toString(getShadowMeshFacesOffset()));
-	//Debug::log("getShadowMeshFaceCount(): " + String2::toString(getShadowMeshFaceCount()));
-	//Debug::log("getCOLVersion(): " + String2::toString(getCOLVersion()));
+	//Debug::log("getHeaderStartOffset(): " + String::toString(getHeaderStartOffset()));
+	//Debug::log("getShadowMeshFacesOffset(): " + String::toString(getShadowMeshFacesOffset()));
+	//Debug::log("getShadowMeshFaceCount(): " + String::toString(getShadowMeshFaceCount()));
+	//Debug::log("getCOLVersion(): " + String::toString(getCOLVersion()));
 	pDataReader->setSeek(getHeaderStartOffset() + 4 + getShadowMeshFacesOffset());
 	string strShadowMeshFacesData = pDataReader->readString(getShadowMeshFaceCount() * (ECOLVersionValue == 1 ? 16 : 8)); // 12 or 6 = sizeof(TVertex)
-	//Debug::log("part 2 -- strShadowMeshFacesData.length(): " + String2::toString(strShadowMeshFacesData.length()));
+	//Debug::log("part 2 -- strShadowMeshFacesData.length(): " + String::toString(strShadowMeshFacesData.length()));
 	uint32 uiSeek = 0;
 	uint32 uiHighestVertexIndex = 0;
 	if (getShadowMeshFaceCount() == 0)
@@ -871,7 +871,7 @@ uint32	COLEntry::calculateShadowMeshVertexCount(void)
 		{
 			for (uint8 i2 = 0; i2 < 3; i2++)
 			{
-				uint32 uiVertexIndex = String2::unpackUint32(strShadowMeshFacesData.substr(uiSeek, 4), false);
+				uint32 uiVertexIndex = String::unpackUint32(strShadowMeshFacesData.substr(uiSeek, 4), false);
 				if (uiVertexIndex > uiHighestVertexIndex)
 				{
 					uiHighestVertexIndex = uiVertexIndex;
@@ -888,7 +888,7 @@ uint32	COLEntry::calculateShadowMeshVertexCount(void)
 		{
 			for (uint8 i2 = 0; i2 < 3; i2++)
 			{
-				uint32 uiVertexIndex = String2::unpackUint16(strShadowMeshFacesData.substr(uiSeek, 2), false);
+				uint32 uiVertexIndex = String::unpackUint16(strShadowMeshFacesData.substr(uiSeek, 2), false);
 				if (uiVertexIndex > uiHighestVertexIndex)
 				{
 					uiHighestVertexIndex = uiVertexIndex;

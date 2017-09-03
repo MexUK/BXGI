@@ -2,7 +2,7 @@
 #include "Static/File.h"
 #include "Stream/DataWriter.h"
 #include "WTDManager.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "Intermediate/Texture/IntermediateTextureFormat.h"
 #include "Intermediate/Texture/IntermediateTexture.h"
 #include "Intermediate/Texture/Data/IntermediateTextureMipmap.h"
@@ -46,7 +46,7 @@ void					WTDFormat::unserialize(void)
 
 	// header 2
 	RG_WTDFormat_Header2 *pHeader2 = pDataReader->readStruct<RG_WTDFormat_Header2>();
-	//pHeader2->m_uiHashTableOffset = String2::swapEndian(pHeader2->m_uiHashTableOffset); // todo - is this code needed?
+	//pHeader2->m_uiHashTableOffset = String::swapEndian(pHeader2->m_uiHashTableOffset); // todo - is this code needed?
 	pHeader2->m_uiHashTableOffset = convertULongToOffset(pHeader2->m_uiHashTableOffset);
 	pHeader2->m_usTextureCount = (uint16) convertULongToOffset(pHeader2->m_usTextureCount);
 	pHeader2->m_uiTextureListOffset = convertULongToOffset(pHeader2->m_uiTextureListOffset);
@@ -322,9 +322,9 @@ void					WTDFormat::serialize(void)
 		bBigEndian = false
 	;
 	string strHeader12B = 
-		String2::packUint32(uiMagicNumber, bBigEndian) +
-		String2::packUint32(uiType, bBigEndian) +
-		String2::packUint32(uiFlags, bBigEndian);
+		String::packUint32(uiMagicNumber, bBigEndian) +
+		String::packUint32(uiType, bBigEndian) +
+		String::packUint32(uiFlags, bBigEndian);
 	pDataWriter->writeString(strHeader12B + CompressionManager::compressZLib(pDataWriter2->getData()));
 
 	pDataWriter2->reset();
@@ -392,9 +392,9 @@ string						WTDFormat::decompressWTDFormatData(uint32& uiSystemSegmentSize, uint
 
 	/*
 	todo - is this code needed?
-	header1.m_uiFlags = String2::swapEndian(header1.m_uiFlags);
-	header1.m_uiMagicNumber = String2::swapEndian(header1.m_uiMagicNumber);
-	header1.m_uiType = String2::swapEndian(header1.m_uiType);
+	header1.m_uiFlags = String::swapEndian(header1.m_uiFlags);
+	header1.m_uiMagicNumber = String::swapEndian(header1.m_uiMagicNumber);
+	header1.m_uiType = String::swapEndian(header1.m_uiType);
 	*/
 
 	uiSystemSegmentSize = (pHeader1->m_uiFlags & 0x7FF) << (((pHeader1->m_uiFlags >> 11) & 0xF) + 8);

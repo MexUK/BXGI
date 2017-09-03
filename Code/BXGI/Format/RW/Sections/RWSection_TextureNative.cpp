@@ -3,7 +3,7 @@
 #include "Stream/DataWriter.h"
 #include "Format/TXD/ETXDRasterDataFormat.h"
 #include "Format/TXD/TXDManager.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "Image/ImageManager.h"
 #include "Exception/EExceptionCode.h"
 
@@ -134,12 +134,12 @@ void							RWSection_TextureNative::unserializeHeader_Direct3D(void)
 	m_ucFilterFlags = pDataReader->readUint8();
 	m_ucTextureWrapUV = pDataReader->readUint8();
 	string strPadding = pDataReader->readString(2);
-	setDiffuseName(String2::rtrimFromLeft(pDataReader->readString(32)));
+	setDiffuseName(String::rtrimFromLeft(pDataReader->readString(32)));
 	if (getDiffuseName() != "")
 	{
 		setHasDiffuse(true);
 	}
-	setAlphaName(String2::rtrimFromLeft(pDataReader->readString(32)));
+	setAlphaName(String::rtrimFromLeft(pDataReader->readString(32)));
 	if (getAlphaName() != "")
 	{
 		setHasAlpha(true);
@@ -246,12 +246,12 @@ void							RWSection_TextureNative::unserializeHeader_Android(void)
 	pDataReader->readUint32();
 	pDataReader->readUint32();
 	pDataReader->readString(16);
-	setDiffuseName(String2::rtrimFromLeft(pDataReader->readString(32)));
+	setDiffuseName(String::rtrimFromLeft(pDataReader->readString(32)));
 	if (getDiffuseName() != "")
 	{
 		setHasDiffuse(true);
 	}
-	setAlphaName(String2::rtrimFromLeft(pDataReader->readString(32)));
+	setAlphaName(String::rtrimFromLeft(pDataReader->readString(32)));
 	if (getAlphaName() != "")
 	{
 		setHasAlpha(true);
@@ -879,7 +879,7 @@ void							RWSection_TextureNative::convertToRasterDataFormat(ERasterDataFormat 
 		if (!pMipmap->canRasterDataBeConverted())
 		{
 			vecMipmapsToRemove.push_back(pMipmap);
-			vecMipmapsRemoved.push_back("Texture (" + getDiffuseName() + ") - Mipmap #" + String2::toString(uiMipmapIndex + 1));
+			vecMipmapsRemoved.push_back("Texture (" + getDiffuseName() + ") - Mipmap #" + String::toString(uiMipmapIndex + 1));
 			continue;
 		}
 

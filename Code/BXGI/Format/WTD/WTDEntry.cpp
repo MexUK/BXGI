@@ -1,5 +1,5 @@
 #include "WTDEntry.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "Image/ImageManager.h"
 #include "Static/Debug.h"
 

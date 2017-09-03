@@ -2,7 +2,7 @@
 #include "Exception/EExceptionCode.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -69,7 +69,7 @@ void			IDEEntry_CARS::unserialize(void)
 	case 15: // GTA SA or GTA IV
 	{
 		pDataReader->setPeek(true);
-		bool bIsSA = String2::isPositiveInteger(pDataReader->readTokenString());
+		bool bIsSA = String::isPositiveInteger(pDataReader->readTokenString());
 		pDataReader->setPeek(false);
 		if (bIsSA)
 		{

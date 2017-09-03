@@ -1,7 +1,7 @@
 #include "RWEntry_2dEffect_StreetSign.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -23,7 +23,7 @@ void							RWEntry_2dEffect_StreetSign::unserialize(void)
 	m_uiFlags = (uint16) pDataReader->readUint32();
 	for (uint32 i = 0; i < 4; i++)
 	{
-		m_strText[i] = String2::rtrimFromLeft(pDataReader->readString(16));
+		m_strText[i] = String::rtrimFromLeft(pDataReader->readString(16));
 	}
 }
 

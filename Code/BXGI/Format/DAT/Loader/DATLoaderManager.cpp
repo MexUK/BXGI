@@ -1,5 +1,5 @@
 #include "DATLoaderManager.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "Static/StdVector.h"
 #include "Static/Debug.h"
 
@@ -20,7 +20,7 @@ void				DATLoaderManager::uninit(void)
 
 EDATLoaderEntryType DATLoaderManager::getDATEntryTypeFromString(string strType)
 {
-	strType = String2::toUpperCase(strType);
+	strType = String::toUpperCase(strType);
 	if (strType == "IMG")
 		return DAT_LOADER_IMG;
 	if (strType == "CDIMAGE")

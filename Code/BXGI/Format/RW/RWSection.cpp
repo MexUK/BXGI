@@ -19,7 +19,7 @@
 #include "Sections/RWSection_TextureDictionary.h"
 #include "Sections/RWSection_TextureNative.h"
 #include "Sections/RWSection_UnknownSection.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 
 using namespace std;
 using namespace bxcf;
@@ -119,13 +119,13 @@ void				RWSection::fillPlaceholdersForSerialization(uint32 uiSectionByteCount, u
 	if (!isSectionHeaderSkipped())
 	{
 		uint32 uiSectionStartPosition = uiSectionByteCount + 12;
-		strData = strData.substr(0, (strData.length() - uiSectionStartPosition) + 4) + String2::packUint32(uiSectionByteCount, false) + strData.substr((strData.length() - uiSectionStartPosition) + 8);
+		strData = strData.substr(0, (strData.length() - uiSectionStartPosition) + 4) + String::packUint32(uiSectionByteCount, false) + strData.substr((strData.length() - uiSectionStartPosition) + 8);
 	}
 
 	if (doesRWSectionContainStruct(m_uiSectionId))
 	{
 		uint32 uiStructStartPosition = uiSectionByteCount;
-		strData = strData.substr(0, (strData.length() - uiStructStartPosition) + 4) + String2::packUint32(uiSectionStructByteCount, false) + strData.substr((strData.length() - uiStructStartPosition) + 8);
+		strData = strData.substr(0, (strData.length() - uiStructStartPosition) + 4) + String::packUint32(uiSectionStructByteCount, false) + strData.substr((strData.length() - uiStructStartPosition) + 8);
 	}
 }
 

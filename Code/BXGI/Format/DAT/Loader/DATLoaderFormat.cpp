@@ -7,7 +7,7 @@
 #include "Format/IDE/IDEFormat.h"
 #include "Format/IPL/IPLManager.h"
 #include "Format/IPL/IPLFormat.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "Stream/DataReader.h"
 #include "Static/StdVector.h"
 #include "DATLoaderManager.h"
@@ -50,7 +50,7 @@ void					DATLoaderFormat::unserializeLine(void)
 		// blank line
 	}
 
-	else if (String2::ltrim(strLine).c_str()[0] == '#')
+	else if (String::ltrim(strLine).c_str()[0] == '#')
 	{
 		// line is a comment
 	}
@@ -58,7 +58,7 @@ void					DATLoaderFormat::unserializeLine(void)
 	else
 	{
 		// parse line
-		deque<string> deqTokens = StdVector::convertVectorToDeque(String2::split(strLine, " "));
+		deque<string> deqTokens = StdVector::convertVectorToDeque(String::split(strLine, " "));
 
 		DATLoaderEntry *pDATLoaderEntry = new DATLoaderEntry;
 		pDATLoaderEntry->setEntryType(DATLoaderManager::getDATEntryTypeFromString(deqTokens[0]));

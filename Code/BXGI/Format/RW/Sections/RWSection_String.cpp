@@ -1,7 +1,7 @@
 #include "RWSection_String.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 
 using namespace std;
 using namespace bxcf;
@@ -34,7 +34,7 @@ void							RWSection_String::serialize(void)
 	DataWriter *pDataWriter = DataWriter::get();
 
 	uint32 uiStringLength = (uint32)(ceil(((float32)(m_strData.length() + 1)) / 4.0) * 4);
-	string strData = String2::zeroPad(m_strData, uiStringLength);
+	string strData = String::zeroPad(m_strData, uiStringLength);
 
 	pDataWriter->writeStringRef(strData);
 }

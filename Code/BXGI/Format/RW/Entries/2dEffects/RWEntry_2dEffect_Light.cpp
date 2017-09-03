@@ -1,7 +1,7 @@
 #include "RWEntry_2dEffect_Light.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -42,8 +42,8 @@ void							RWEntry_2dEffect_Light::unserialize(void)
 	m_ucCoronaFlareType = pDataReader->readUint8();
 	m_ucShadowColorMultiplier = pDataReader->readUint8();
 	m_ucFlags1 = pDataReader->readUint8();
-	m_strCoronaTexName = String2::rtrimFromLeft(pDataReader->readString(24));
-	m_strShadowTexName = String2::rtrimFromLeft(pDataReader->readString(24));
+	m_strCoronaTexName = String::rtrimFromLeft(pDataReader->readString(24));
+	m_strShadowTexName = String::rtrimFromLeft(pDataReader->readString(24));
 	m_ucShadowZDistance = pDataReader->readUint8();
 	m_ucFlags2 = pDataReader->readUint8();
 	if (m_uiDataSize == 76)

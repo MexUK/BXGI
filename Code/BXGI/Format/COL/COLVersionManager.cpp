@@ -1,6 +1,6 @@
 #include "COLVersionManager.h"
 #include "COLVersion.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 
 using namespace std;
 using namespace bxcf;
@@ -52,7 +52,7 @@ string											COLVersionManager::getVersionText(uint32 uiRawVersion)
 	}
 	else
 	{
-		string strVersionText = "COL " + String2::toString(uiRawVersion);
+		string strVersionText = "COL " + String::toString(uiRawVersion);
 		m_umapRawVersionTexts[uiRawVersion] = strVersionText;
 		return strVersionText;
 	}

@@ -5,7 +5,7 @@
 #include "Sections/RWSection_String.h"
 #include "Sections/RWSection_TextureNative.h"
 #include "TextureEntry.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "Exception/EExceptionCode.h"
 
 using namespace std;
@@ -128,7 +128,7 @@ void				RWFormat::fixAlphaTextureStates(void)
 	vector<TextureEntry*> vecTexturesToRemove;
 	for (auto pTextureEntry : m_vecTextureEntries)
 	{
-		if (pTextureEntry->doesHaveDiffuse() && String2::toUpperCase(pTextureEntry->getDiffuseName()).c_str()[pTextureEntry->getDiffuseName().length() - 1] == 'A')
+		if (pTextureEntry->doesHaveDiffuse() && String::toUpperCase(pTextureEntry->getDiffuseName()).c_str()[pTextureEntry->getDiffuseName().length() - 1] == 'A')
 		{
 			TextureEntry *pTextureEntry2 = getTextureByDiffuseName(pTextureEntry->getDiffuseName().substr(0, pTextureEntry->getDiffuseName().length() - 1));
 			if (pTextureEntry2 != nullptr)
@@ -149,8 +149,8 @@ void				RWFormat::fixAlphaTextureStates(void)
 
 void				RWFormat::removeTextureEntry(TextureEntry *pTextureEntry)
 {
-	string strDiffuseName = String2::toUpperCase(pTextureEntry->getDiffuseName());
-	string strAlphaName = String2::toUpperCase(pTextureEntry->getAlphaName());
+	string strDiffuseName = String::toUpperCase(pTextureEntry->getDiffuseName());
+	string strAlphaName = String::toUpperCase(pTextureEntry->getAlphaName());
 	auto it = std::find(m_vecTextureEntries.begin(), m_vecTextureEntries.end(), pTextureEntry);
 	if (it != m_vecTextureEntries.end())
 	{
@@ -169,10 +169,10 @@ void				RWFormat::removeTextureEntry(TextureEntry *pTextureEntry)
 
 TextureEntry*		RWFormat::getTextureByDiffuseName(string strTextureDiffuseName)
 {
-	strTextureDiffuseName = String2::toUpperCase(strTextureDiffuseName);
+	strTextureDiffuseName = String::toUpperCase(strTextureDiffuseName);
 	for (auto pTextureEntry : m_vecTextureEntries)
 	{
-		if (pTextureEntry->doesHaveDiffuse() && String2::toUpperCase(pTextureEntry->getDiffuseName()) == strTextureDiffuseName)
+		if (pTextureEntry->doesHaveDiffuse() && String::toUpperCase(pTextureEntry->getDiffuseName()) == strTextureDiffuseName)
 		{
 			return pTextureEntry;
 		}
@@ -182,7 +182,7 @@ TextureEntry*		RWFormat::getTextureByDiffuseName(string strTextureDiffuseName)
 
 TextureEntry*		RWFormat::getTextureByDiffuseOrAlphaName(string strTextureName)
 {
-	strTextureName = String2::toUpperCase(strTextureName);
+	strTextureName = String::toUpperCase(strTextureName);
 	if (m_umapTexturesByNameUpper.count(strTextureName) == 1)
 	{
 		return m_umapTexturesByNameUpper[strTextureName];

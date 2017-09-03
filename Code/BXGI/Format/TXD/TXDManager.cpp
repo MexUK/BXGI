@@ -6,7 +6,7 @@
 #include "TXDFormat.h"
 #include "Format/RW/Sections/RWSection_TextureNative.h"
 #include "Stream/DataReader.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "Engine/RW/RWManager.h"
 #include "Static/Debug.h"
 #include "Image/RasterDataFormatManager.h"

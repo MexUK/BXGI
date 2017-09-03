@@ -1,7 +1,7 @@
 #include "RWEntry_2dEffect_PedAttractor.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -28,7 +28,7 @@ void							RWEntry_2dEffect_PedAttractor::unserialize(void)
 	m_vecRotation[0] = pDataReader->readVector3D();
 	m_vecRotation[1] = pDataReader->readVector3D();
 	m_vecRotation[2] = pDataReader->readVector3D();
-	m_strExternalScriptName = String2::rtrimFromLeft(pDataReader->readString(8));
+	m_strExternalScriptName = String::rtrimFromLeft(pDataReader->readString(8));
 	m_iPedExistingProbability = pDataReader->readInt32();
 	m_ucUnknown1 = pDataReader->readUint8();
 	m_ucNotUsed1 = pDataReader->readUint8();

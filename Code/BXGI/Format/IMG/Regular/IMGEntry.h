@@ -8,7 +8,7 @@
 #include "Format/IMG/Fastman92/IMGEntry_Fastman92.h"
 #include "Compression/ECompressionAlgorithm.h"
 #include "Static/Math.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "Format/IMG/Regular/IMGFormat.h"
 #include <string>
 
@@ -156,7 +156,7 @@ inline void					bxgi::IMGEntry::unserializeVersion1Or2(bxgi::RG_IMGEntry_Version
 {
 	m_uiEntryOffset = bxcf::Math::convertSectorsToBytes(pRGIMGEntry->m_uiOffsetInSectors);
 	m_uiEntrySize = bxcf::Math::convertSectorsToBytes(pRGIMGEntry->m_uiSizeInSectors);
-	m_strEntryName = bxcf::String2::rtrimFromLeft(std::string((char*)pRGIMGEntry->m_szName));
+	m_strEntryName = bxcf::String::rtrimFromLeft(std::string((char*)pRGIMGEntry->m_szName));
 }
 
 inline void					bxgi::IMGEntry::unserializeVersion3(bxgi::RG_IMGEntry_Version3 *pRGIMGEntry)
@@ -173,5 +173,5 @@ inline void					bxgi::IMGEntry::unserializeVersionFastman92(bxgi::IMGEntry_Fastm
 	m_uiEntrySize = bxcf::Math::convertSectorsToBytes(pRawIMGEntry->m_uiSizeInSectors);
 	m_uiUncompressedSize = bxcf::Math::convertSectorsToBytes(pRawIMGEntry->m_uiUncompressedSizeInSectors);
 	m_ECompressionAlgorithm = bxgi::IMGFormat::getCompressionAlgorithmIdFromFastman92CompressionAlgorithmId((bxgi::EIMGVersionFastman92CompressionAlgorithm)pRawIMGEntry->m_uiCompressionAlgorithmId);
-	m_strEntryName = bxcf::String2::rtrimFromLeft(std::string((char*)pRawIMGEntry->m_strName));
+	m_strEntryName = bxcf::String::rtrimFromLeft(std::string((char*)pRawIMGEntry->m_strName));
 }

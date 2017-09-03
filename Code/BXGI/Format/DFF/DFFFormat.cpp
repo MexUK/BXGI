@@ -1,6 +1,6 @@
 #include "DFFFormat.h"
 #include "Format/RW/TextureEntry.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "Engine/RW/RWVersion.h"
 #include "Format/RW/Sections/RWSection_Geometry.h"
 #include "Static/File.h"

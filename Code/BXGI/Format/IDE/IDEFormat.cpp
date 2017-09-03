@@ -35,7 +35,7 @@
 #include "Format/IDE/Entry/DataEntry/PATH/IDEEntry_PATH_Node.h"
 #include "Helper/SectionLines/ESectionLinesEntryType.h"
 // todo #include "CDataType.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "Exception/EExceptionCode.h"
 #include <unordered_map>
 
@@ -202,9 +202,9 @@ EIDEPathType			IDEFormat::detectPATHType(void)
 // general
 EIDESection					IDEFormat::getSectionFromText(string strIDESectionText)
 {
-	strIDESectionText = String2::zeroPad(strIDESectionText, 4);
+	strIDESectionText = String::zeroPad(strIDESectionText, 4);
 
-	const uint8 *pszData = (const uint8*) String2::toUpperCase(strIDESectionText.substr(0, 5)).c_str();
+	const uint8 *pszData = (const uint8*) String::toUpperCase(strIDESectionText.substr(0, 5)).c_str();
 	switch ((uint32)*pszData)
 	{
 	case 'OBJS':	return IDE_SECTION_OBJS;

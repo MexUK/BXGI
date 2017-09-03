@@ -1,7 +1,7 @@
 #include "IDEManager.h"
 #include "IDEFormat.h"
 #include "EIDESection.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "Static/StdVector.h"
 #include "Static/Debug.h"
 

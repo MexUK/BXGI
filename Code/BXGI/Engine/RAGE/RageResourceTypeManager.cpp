@@ -1,5 +1,5 @@
 #include "RageResourceTypeManager.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 
 using namespace std;
 using namespace bxcf;
@@ -115,10 +115,10 @@ RageResourceType*								RageResourceTypeManager::getResourceTypeByIdentifier(ui
 
 RageResourceType*								RageResourceTypeManager::getResourceTypeByFileExtension(string strFileExtension)
 {
-	strFileExtension = String2::toUpperCase(strFileExtension);
+	strFileExtension = String::toUpperCase(strFileExtension);
 	for (auto pRageResource : getEntries())
 	{
-		if (String2::toUpperCase(pRageResource->getFileExtension()) == strFileExtension)
+		if (String::toUpperCase(pRageResource->getFileExtension()) == strFileExtension)
 		{
 			return pRageResource;
 		}

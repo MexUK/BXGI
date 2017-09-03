@@ -2,7 +2,7 @@
 #include "Exception/EExceptionCode.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -36,8 +36,8 @@ void			IDEEntry_2DFX_Light::unserialize(void)
 
 		IDEEntry_2DFX::unserialize();
 		
-		m_strCoronaTexture = String2::trim(String2::trim(pDataReader->readTokenString(), "\""));
-		m_strShadowTexture = String2::trim(String2::trim(pDataReader->readTokenString(), "\""));
+		m_strCoronaTexture = String::trim(String::trim(pDataReader->readTokenString(), "\""));
+		m_strShadowTexture = String::trim(String::trim(pDataReader->readTokenString(), "\""));
 		m_fViewDistance = pDataReader->readTokenFloat32();
 		m_fOuterRange = pDataReader->readTokenFloat32();
 		m_fCoronaSize = pDataReader->readTokenFloat32();

@@ -1,7 +1,7 @@
 #include "COLManager.h"
 #include "COLFormat.h"
 #include "Stream/DataReader.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "COLVersionManager.h"
 #include "Static/File.h"
 #include "Localization/LocalizationManager.h"
@@ -140,6 +140,6 @@ uint32		COLManager::getEntryHeaderSizeForPacking(ECOLVersion ECOLVersionValue)
 // file extension
 bool											COLManager::isCollisionExtension(string& strFileExtension)
 {
-	string strExtensionUpper = String2::toUpperCase(strFileExtension);
+	string strExtensionUpper = String::toUpperCase(strFileExtension);
 	return strExtensionUpper == "COL";
 }

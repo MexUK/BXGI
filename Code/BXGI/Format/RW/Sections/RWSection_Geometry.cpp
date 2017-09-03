@@ -1,7 +1,7 @@
 #include "RWSection_Geometry.h"
 #include "RWSection_String.h"
 #include "Engine/RW/RWManager.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "Intermediate/Model/Data/IntermediateGeometry.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
@@ -112,7 +112,7 @@ void							RWSection_Geometry::unserialize(void)
 	//uint32 uiTemp2 = pDataReader->getSeek();
 
 	//uint32 uiByteCountRead = uiTemp2 - uiTemp1;
-	//Debug::log("Geometry uiByteCountRead: " + String2::toString(uiByteCountRead));
+	//Debug::log("Geometry uiByteCountRead: " + String::toString(uiByteCountRead));
 }
 
 void							RWSection_Geometry::serialize(void)
@@ -159,7 +159,7 @@ void							RWSection_Geometry::serialize(void)
 				pDataWriter->writeStdVector2D(m_vecTextureCoordinates);
 			}
 		}
-		// todo Debug::log("SEEK AFTER TEXTURE COORDINATES: " + String2::toString((uint32)DataWriter::get()->getSeek()));
+		// todo Debug::log("SEEK AFTER TEXTURE COORDINATES: " + String::toString((uint32)DataWriter::get()->getSeek()));
 		pDataWriter->writeStdVector4ui16(m_vecVertexIndices);
 	}
 

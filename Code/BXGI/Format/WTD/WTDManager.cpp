@@ -1,7 +1,7 @@
 #include "WTDManager.h"
 #include "WTDEntry.h"
 #include "Static/File.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 //#include "IMGManager.h" // WTD Manager project only relies upon IMG Manager project for it's decompressZLib function.
 #include "Static/Debug.h"
 #include "WTDMipmap.h"

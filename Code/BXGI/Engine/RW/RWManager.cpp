@@ -2,7 +2,7 @@
 #include "RWVersionManager.h"
 #include "Format/RW/RWSection.h"
 #include "Localization/LocalizationManager.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 
 using namespace std;
 using namespace bxcf;
@@ -37,13 +37,13 @@ bool											RWManager::isRWFileExtension(string& strFileExtension)
 
 bool											RWManager::isRWModelExtension(string& strFileExtension)
 {
-	string strExtensionUpper = String2::toUpperCase(strFileExtension);
+	string strExtensionUpper = String::toUpperCase(strFileExtension);
 	return strExtensionUpper == "DFF"
 		|| strExtensionUpper == "BSP";
 }
 
 bool											RWManager::isRWTextureExtension(string& strFileExtension)
 {
-	string strExtensionUpper = String2::toUpperCase(strFileExtension);
+	string strExtensionUpper = String::toUpperCase(strFileExtension);
 	return strExtensionUpper == "TXD";
 }

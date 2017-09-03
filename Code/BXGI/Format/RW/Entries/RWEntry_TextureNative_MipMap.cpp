@@ -1,6 +1,6 @@
 #include "RWEntry_TextureNative_MipMap.h"
 #include "Format/RW/Sections/RWSection_TextureNative.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "Image/ImageManager.h"
 
 using namespace std;

@@ -1,5 +1,5 @@
 #include "COLFormat.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "Static/File.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
@@ -54,10 +54,10 @@ vector<string>		COLFormat::getModelNames(void)
 
 COLEntry*			COLFormat::getEntryByName(string strName)
 {
-	strName = String2::toUpperCase(strName);
+	strName = String::toUpperCase(strName);
 	for (auto pCOLEntry : getEntries())
 	{
-		if (strName == String2::toUpperCase(pCOLEntry->getModelName()))
+		if (strName == String::toUpperCase(pCOLEntry->getModelName()))
 		{
 			return pCOLEntry;
 		}
@@ -68,10 +68,10 @@ COLEntry*			COLFormat::getEntryByName(string strName)
 vector<COLEntry*>	COLFormat::getEntriesByModelName(string strModelName)
 {
 	vector<COLEntry*> vecCOLEntries;
-	strModelName = String2::toUpperCase(strModelName);
+	strModelName = String::toUpperCase(strModelName);
 	for (auto pCOLEntry : getEntries())
 	{
-		if (String2::toUpperCase(pCOLEntry->getModelName()) == strModelName)
+		if (String::toUpperCase(pCOLEntry->getModelName()) == strModelName)
 		{
 			vecCOLEntries.push_back(pCOLEntry);
 		}

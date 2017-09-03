@@ -1,5 +1,5 @@
 #include "RageManager.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "RageResourceTypeManager.h"
 
 using namespace std;
@@ -45,18 +45,18 @@ bool											RageManager::isRageFileExtension(string& strFileExtension)
 
 bool											RageManager::isRageModelExtension(string& strFileExtension)
 {
-	string strExtensionUpper = String2::toUpperCase(strFileExtension);
+	string strExtensionUpper = String::toUpperCase(strFileExtension);
 	return strExtensionUpper == "WDR";
 }
 
 bool											RageManager::isRageTextureExtension(string& strFileExtension)
 {
-	string strExtensionUpper = String2::toUpperCase(strFileExtension);
+	string strExtensionUpper = String::toUpperCase(strFileExtension);
 	return strExtensionUpper == "WTD";
 }
 
 bool											RageManager::isRageCollisionExtension(string& strFileExtension)
 {
-	string strExtensionUpper = String2::toUpperCase(strFileExtension);
+	string strExtensionUpper = String::toUpperCase(strFileExtension);
 	return strExtensionUpper == "WBN";
 }

@@ -1,6 +1,6 @@
 #include "DATPathFormat.h"
 #include "Stream/DataWriter.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "Stream/DataReader.h"
 #include "Type/Vector/Vec3f.h"
 
@@ -279,7 +279,7 @@ void				DATPathFormat::unserializeFastman92(void)
 	//
 	//if (strEOF.substr(0, 3) != "EOF")
 	//{
-	//Debug::log("PARSER FAILED on index " + String2::toString(pDATFile_Paths->m_uiFileIndex) + ", bytes read: " + String2::toString(pDataReader->getByteCountRead()));
+	//Debug::log("PARSER FAILED on index " + String::toString(pDATFile_Paths->m_uiFileIndex) + ", bytes read: " + String::toString(pDataReader->getByteCountRead()));
 	//}
 	//
 
@@ -341,26 +341,26 @@ void				DATPathFormat::unserializeFastman92(void)
 	{
 		Debug::log(
 			"[path node]"
-			+ string(" position: ") + String2::toString((float32)((float32)pathNode.m_vecPosition.x / 8.0)) + " "
-			+ String2::toString((float32)((float32)pathNode.m_vecPosition.y / 8.0)) + " "
-			+ String2::toString((float32)((float32)pathNode.m_vecPosition.z / 8.0)) + " "
-			+ " search list: " + String2::toString(pathNode.m_wSearchList)
-			+ " first link id: " + String2::toString(pathNode.m_wConnectedNodesStartId)
-			+ " area id: " + String2::toString(pathNode.m_wAreaId) + " node id: " + String2::toString(pathNode.m_wNodeId)
-			+ " path width: " + String2::toString(pathNode.m_ucPathWidth)
-			+ " node type: " + String2::toString(pathNode.m_ucNodeType)
-			+ " flags: " + String2::toString(pathNode.m_uiFlags)
+			+ string(" position: ") + String::toString((float32)((float32)pathNode.m_vecPosition.x / 8.0)) + " "
+			+ String::toString((float32)((float32)pathNode.m_vecPosition.y / 8.0)) + " "
+			+ String::toString((float32)((float32)pathNode.m_vecPosition.z / 8.0)) + " "
+			+ " search list: " + String::toString(pathNode.m_wSearchList)
+			+ " first link id: " + String::toString(pathNode.m_wConnectedNodesStartId)
+			+ " area id: " + String::toString(pathNode.m_wAreaId) + " node id: " + String::toString(pathNode.m_wNodeId)
+			+ " path width: " + String::toString(pathNode.m_ucPathWidth)
+			+ " node type: " + String::toString(pathNode.m_ucNodeType)
+			+ " flags: " + String::toString(pathNode.m_uiFlags)
 			);
 	}
 	for (auto& naviNode : m_vecNaviNodes)
 	{
 		Debug::log(
 			"[navi node]"
-			+ string(" position: ") + String2::toString((float32)((float32)naviNode.m_iPosition[0] / 8.0)) + " "
-			+ String2::toString((float32)((float32)naviNode.m_iPosition[1] / 8.0)) + " "
-			+ " area id: " + String2::toString(naviNode.m_usTargetNode_AreaId) + " node id: " + String2::toString(naviNode.m_usTargetNode_NodeId)
-			+ " direction x: " + String2::toString(naviNode.m_ucDirection[0]) + " direction y " + String2::toString(naviNode.m_ucDirection[1])
-			+ " flags: " + String2::toString(naviNode.m_uiFlags)
+			+ string(" position: ") + String::toString((float32)((float32)naviNode.m_iPosition[0] / 8.0)) + " "
+			+ String::toString((float32)((float32)naviNode.m_iPosition[1] / 8.0)) + " "
+			+ " area id: " + String::toString(naviNode.m_usTargetNode_AreaId) + " node id: " + String::toString(naviNode.m_usTargetNode_NodeId)
+			+ " direction x: " + String::toString(naviNode.m_ucDirection[0]) + " direction y " + String::toString(naviNode.m_ucDirection[1])
+			+ " flags: " + String::toString(naviNode.m_uiFlags)
 			);
 	}
 	*/
@@ -696,7 +696,7 @@ EDATPathFormat			DATPathFormat::detectPathsFormat(void)
 	uint64 uiPreviousSeek = pDataReader->getSeek();
 	pDataReader->setPeek(true);
 
-	if (String2::unpackUint32(pDataReader->readString(4), false) == 0xFFFFFFFF && pDataReader->readString(4) == "FM92")
+	if (String::unpackUint32(pDataReader->readString(4), false) == 0xFFFFFFFF && pDataReader->readString(4) == "FM92")
 	{
 		EDATPathFormatValue = DAT_PATH_FASTMAN92;
 	}

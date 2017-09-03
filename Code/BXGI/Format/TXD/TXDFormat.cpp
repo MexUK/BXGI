@@ -1,5 +1,5 @@
 #include "TXDFormat.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "TXDManager.h"
 #include "Static/Debug.h"
 #include "Engine/RW/RWManager.h"
@@ -81,7 +81,7 @@ void				TXDFormat::convertToGame(EPlatformedGame EPlatformedGame, vector<string>
 		
 		for (auto strMipmapRemoved : vecMipmapsRemoved)
 		{
-			strMipmapRemoved = "Texture #" + String2::toString(uiTextureIndex + 1) + " (" + pTexture->getDiffuseName() + ") - " + strMipmapRemoved;
+			strMipmapRemoved = "Texture #" + String::toString(uiTextureIndex + 1) + " (" + pTexture->getDiffuseName() + ") - " + strMipmapRemoved;
 			vecMipmapsRemoved2.push_back(strMipmapRemoved);
 		}
 
@@ -122,7 +122,7 @@ bool				TXDFormat::isTextureNameValid(string& strTextureName, bool bIsAlphaTextu
 		bool bNotBlank = strTextureName.length() > 0 && (strTextureName.c_str()[0] & 0xFF) != 0;
 		if (bNotBlank)
 		{
-			return String2::isAlphaNumericUnderscore(strTextureName);
+			return String::isAlphaNumericUnderscore(strTextureName);
 		}
 		return true;
 	}
@@ -131,7 +131,7 @@ bool				TXDFormat::isTextureNameValid(string& strTextureName, bool bIsAlphaTextu
 		bool bNotBlank = strTextureName.length() > 0 && (strTextureName.c_str()[0] & 0xFF) != 0;
 		if (bNotBlank)
 		{
-			return String2::isAlphaNumericUnderscore(strTextureName);
+			return String::isAlphaNumericUnderscore(strTextureName);
 		}
 		return false;
 	}

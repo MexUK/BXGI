@@ -98,10 +98,10 @@ void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntr
 	}
 
 	// trim line
-	strActiveLine = String2::trim(strActiveLine);
+	strActiveLine = String::trim(strActiveLine);
 
 	// check if line is blank or section end
-	if (strActiveLine == "" || String2::toUpperCase(strActiveLine) == "END")
+	if (strActiveLine == "" || String::toUpperCase(strActiveLine) == "END")
 	{
 		pFormatEntry = createOtherEntry();
 		pFormatEntry->unserialize();
@@ -123,7 +123,7 @@ void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntr
 		{
 			// line is a data line
 			pDataReader->setTokenModeEnabled(true);
-			pDataReader->setLineTokens(String2::split(String2::replace(strActiveLine, ",", ""), " "));
+			pDataReader->setLineTokens(String::split(String::replace(strActiveLine, ",", ""), " "));
 			try
 			{
 				eFormatSectionValue = getActiveReadSection();
@@ -219,7 +219,7 @@ std::vector<std::string>	bxgi::SectionLinesFormat<FormatClass, EntryClass, Secti
 		{
 			if (pFormatEntry->getEntryType() == SECTION_LINES_ENTRY_DATA)
 			{
-				std::string strModelName = String2::toUpperCase(((DataEntryClass*)pFormatEntry)->getModelName());
+				std::string strModelName = String::toUpperCase(((DataEntryClass*)pFormatEntry)->getModelName());
 				if (strModelName != "")
 				{
 					vecModelNames.push_back(strModelName);
@@ -240,7 +240,7 @@ std::vector<std::string>	bxgi::SectionLinesFormat<FormatClass, EntryClass, Secti
 		{
 			if (pFormatEntry->getEntryType() == SECTION_LINES_ENTRY_DATA)
 			{
-				std::string strTXDName = String2::toUpperCase(((DataEntryClass*)pFormatEntry)->getTXDName());
+				std::string strTXDName = String::toUpperCase(((DataEntryClass*)pFormatEntry)->getTXDName());
 				if (strTXDName != "")
 				{
 					vecTXDNames.push_back(strTXDName);
@@ -265,12 +265,12 @@ std::vector<std::string>	bxgi::SectionLinesFormat<FormatClass, EntryClass, Secti
 template<class FormatClass, class EntryClass, typename SectionEnum, class OtherEntryClass, class SectionEntryClass, class DataEntryClass>
 std::string			bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntryClass, SectionEntryClass, DataEntryClass>::getTXDNameFromModelName(std::string strModelName)
 {
-	strModelName = String2::toUpperCase(strModelName);
+	strModelName = String::toUpperCase(strModelName);
 	for (auto it : getSectionEntries())
 	{
 		for (EntryClass *pFormatEntry : it.second)
 		{
-			if (pFormatEntry->getEntryType() == SECTION_LINES_ENTRY_DATA && strModelName == String2::toUpperCase(((DataEntryClass*)pFormatEntry)->getModelName()))
+			if (pFormatEntry->getEntryType() == SECTION_LINES_ENTRY_DATA && strModelName == String::toUpperCase(((DataEntryClass*)pFormatEntry)->getModelName()))
 			{
 				return ((DataEntryClass*)pFormatEntry)->getTXDName();
 			}
@@ -282,13 +282,13 @@ std::string			bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, Oth
 template<class FormatClass, class EntryClass, typename SectionEnum, class OtherEntryClass, class SectionEntryClass, class DataEntryClass>
 std::vector<EntryClass*>	bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntryClass, SectionEntryClass, DataEntryClass>::getEntriesByModelName(std::string strModelName)
 {
-	strModelName = String2::toUpperCase(strModelName);
+	strModelName = String::toUpperCase(strModelName);
 	std::vector<EntryClass*> vecFormatEntries;
 	for (auto it : getSectionEntries())
 	{
 		for (EntryClass *pFormatEntry : it.second)
 		{
-			if (pFormatEntry->getEntryType() == SECTION_LINES_ENTRY_DATA && strModelName == String2::toUpperCase(((DataEntryClass*)pFormatEntry)->getModelName()))
+			if (pFormatEntry->getEntryType() == SECTION_LINES_ENTRY_DATA && strModelName == String::toUpperCase(((DataEntryClass*)pFormatEntry)->getModelName()))
 			{
 				vecFormatEntries.push_back(pFormatEntry);
 			}
@@ -300,13 +300,13 @@ std::vector<EntryClass*>	bxgi::SectionLinesFormat<FormatClass, EntryClass, Secti
 template<class FormatClass, class EntryClass, typename SectionEnum, class OtherEntryClass, class SectionEntryClass, class DataEntryClass>
 std::vector<EntryClass*>	bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntryClass, SectionEntryClass, DataEntryClass>::getEntriesByTXDName(std::string strTXDName)
 {
-	strTXDName = String2::toUpperCase(strTXDName);
+	strTXDName = String::toUpperCase(strTXDName);
 	std::vector<EntryClass*> vecFormatEntries;
 	for (auto it : getSectionEntries())
 	{
 		for (EntryClass *pFormatEntry : it.second)
 		{
-			if (pFormatEntry->getEntryType() == SECTION_LINES_ENTRY_DATA && strTXDName == String2::toUpperCase(((DataEntryClass*)pFormatEntry)->getTXDName()))
+			if (pFormatEntry->getEntryType() == SECTION_LINES_ENTRY_DATA && strTXDName == String::toUpperCase(((DataEntryClass*)pFormatEntry)->getTXDName()))
 			{
 				vecFormatEntries.push_back(pFormatEntry);
 			}

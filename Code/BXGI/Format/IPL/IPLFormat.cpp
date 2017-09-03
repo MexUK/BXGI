@@ -29,7 +29,7 @@
 #include "Entry/DataEntry/IPLEntry_UnknownSection.h"
 #include "Entry/DataEntry/PATH/IPLEntry_PATH_Group.h"
 #include "Entry/DataEntry/PATH/IPLEntry_PATH_Node.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
 #include "Exception/EExceptionCode.h"
@@ -220,9 +220,9 @@ EIPLPathType		IPLFormat::detectPATHType(void)
 
 EIPLSection					IPLFormat::getSectionFromText(string strIPLSectionText)
 {
-	strIPLSectionText = String2::zeroPad(strIPLSectionText, 4);
+	strIPLSectionText = String::zeroPad(strIPLSectionText, 4);
 
-	const uint8 *pszData = (const uint8*) String2::toUpperCase(strIPLSectionText.substr(0, 4)).c_str();
+	const uint8 *pszData = (const uint8*) String::toUpperCase(strIPLSectionText.substr(0, 4)).c_str();
 	switch ((uint32)*pszData)
 	{
 	case 'INST':	return IPL_SECTION_INST;

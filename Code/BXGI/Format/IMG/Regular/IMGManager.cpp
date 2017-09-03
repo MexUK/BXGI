@@ -3,7 +3,7 @@
 #include "IMGEntry.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "Static/Path.h"
 #include "Static/File.h"
 #include "Encryption/AES/Rijndael/Rijndael.h"
@@ -77,7 +77,7 @@ EIMGVersion		IMGManager::detectIMGVersion(string& strIMGFilePath, string& strHea
 		return IMG_UNKNOWN;
 	}
 	
-	string strFileExtensionUpper = String2::toUpperCase(Path::getFileExtension(strIMGFilePath));
+	string strFileExtensionUpper = String::toUpperCase(Path::getFileExtension(strIMGFilePath));
 	if (strFileExtensionUpper == "DIR")
 	{
 		// input file is: DIR file
@@ -128,11 +128,11 @@ EIMGVersion		IMGManager::detectIMGVersion(string& strIMGFilePath, string& strHea
 		{
 			return IMG_FASTMAN92;
 		}
-		else if (strHeader4B.length() == 4 && String2::unpackUint32(strHeader4B, false) == 0xA94E2A52)
+		else if (strHeader4B.length() == 4 && String::unpackUint32(strHeader4B, false) == 0xA94E2A52)
 		{
 			return IMG_3; // unencrypted
 		}
-		else if (strHeader16B.length() == 16 && String2::unpackUint32(IMGManager::decryptVersion3IMGString(strHeader16B).substr(0, 4), false) == 0xA94E2A52)
+		else if (strHeader16B.length() == 16 && String::unpackUint32(IMGManager::decryptVersion3IMGString(strHeader16B).substr(0, 4), false) == 0xA94E2A52)
 		{
 			bIsEncryptedOut = true;
 			return IMG_3; // encrypted
@@ -156,13 +156,13 @@ bool			IMGManager::detectIMGEncryptionState(string& strIMGFilePath)
 	string strHeader4B = strHeader16B.substr(0, 4);
 
 	// version 3
-	if (String2::unpackUint32(IMGManager::decryptVersion3IMGString(strHeader16B).substr(0, 4), false) == 0xA94E2A52)
+	if (String::unpackUint32(IMGManager::decryptVersion3IMGString(strHeader16B).substr(0, 4), false) == 0xA94E2A52)
 	{
 		return true;
 	}
 
 	// version fastman92
-	if (((String2::toNumber(strHeader16B.substr(4, 1)) >> 24) & 15) != 0)
+	if (((String::toNumber(strHeader16B.substr(4, 1)) >> 24) & 15) != 0)
 	{
 		return true;
 	}
@@ -183,24 +183,24 @@ uint32	IMGManager::getIMGEntryCount(string& strIMGFilePath, EIMGVersion eVersion
 	}
 	else if (eVersion == IMG_2)
 	{
-		return String2::unpackUint32(File::getFileSubContent(strIMGFilePath, 0, 8, true).substr(4, 4), false);
+		return String::unpackUint32(File::getFileSubContent(strIMGFilePath, 0, 8, true).substr(4, 4), false);
 	}
 	else if (eVersion == IMG_3)
 	{
 		if (detectIMGEncryptionState(strIMGFilePath))
 		{
 			string strHeader16B = File::getFileSubContent(strIMGFilePath, 0, 16, true);
-			return String2::unpackUint32(IMGManager::decryptVersion3IMGString(strHeader16B).substr(8, 4), false);
+			return String::unpackUint32(IMGManager::decryptVersion3IMGString(strHeader16B).substr(8, 4), false);
 		}
 		else
 		{
-			return String2::unpackUint32(File::getFileSubContent(strIMGFilePath, 0, 12, true).substr(8, 4), false);
+			return String::unpackUint32(File::getFileSubContent(strIMGFilePath, 0, 12, true).substr(8, 4), false);
 		}
 	}
 	else if (eVersion == IMG_FASTMAN92)
 	{
 		string strHeader28B = File::getFileSubContent(strIMGFilePath, 0, 28, true);
-		return String2::unpackUint32(strHeader28B.substr(24, 4), false);
+		return String::unpackUint32(strHeader28B.substr(24, 4), false);
 	}
 	else
 	{

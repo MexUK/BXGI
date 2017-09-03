@@ -6,7 +6,7 @@
 #include "Sections/RWSection_ExtraVertColour.h"
 #include "Sections/RWSection_Extension.h"
 #include "Sections/RWSection_2dEffect.h"
-#include "Static/String2.h"
+#include "Static/String.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
 #include "Static/Debug.h"
@@ -111,7 +111,7 @@ void				RWSectionContainer::unserialize(void)
 		}
 
 		// unserialize RW section
-		Debug::log("Section ID: " + String2::toString(uiRWSectionId));
+		Debug::log("Section ID: " + String::toString(uiRWSectionId));
 		uint64 uiByteCountBefore = pDataReader->getSeek();
 		pRWSection->unserialize();
 		uint64 uiByteCountAfter = pDataReader->getSeek();
