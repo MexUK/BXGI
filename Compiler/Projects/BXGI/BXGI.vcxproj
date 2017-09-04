@@ -70,17 +70,17 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>..\..\..\Code\BXGI\;../../../../BXCF/Code/BXCF/;../../../../BXCF/Code/BXCF.ThirdParty/;$(IncludePath)</IncludePath>
-    <OutDir>..\..\..\..\_Output\Lib\BXGI\BXGI\$(Configuration)\</OutDir>
-    <IntDir>..\..\..\..\_Output\Intermediate\BXGI\BXGI\$(Configuration)\</IntDir>
+    <IncludePath>../../../Code/BXGI/;../../../../BXCF/Code/BXCF/;../../../../BXCF/Code/BXCF.ThirdParty/;$(IncludePath)</IncludePath>
+    <OutDir>../../../../_Output/Lib/BXGI/BXGI/$(Configuration)/</OutDir>
+    <IntDir>../../../../_Output/Intermediate/BXGI/BXGI/$(Configuration)/</IntDir>
     <TargetName>BXGI</TargetName>
-    <LibraryPath>C:\Users\james\Desktop\GitHub Repos\_Output\Lib\BXCF\BXCF\Debug;$(LibraryPath)</LibraryPath>
+    <LibraryPath>../../../../_Output/Lib/BXCF/BXCF/Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>..\..\..\..\_Output\Lib\BXGI\BXGI\$(Configuration)\</OutDir>
-    <IntDir>..\..\..\..\_Output\Intermediate\BXGI\BXGI\$(Configuration)\</IntDir>
+    <OutDir>../../../../_Output/Lib/BXGI/BXGI/$(Configuration)/</OutDir>
+    <IntDir>../../../../_Output/Intermediate/BXGI/BXGI/$(Configuration)/</IntDir>
     <TargetName>BXGI</TargetName>
-    <IncludePath>..\..\..\Code\BXGI\;../../../../BXCF/Code/BXCF/;../../../../BXCF/Code/BXCF.ThirdParty/;$(IncludePath)</IncludePath>
+    <IncludePath>../../../Code/BXGI/;../../../../BXCF/Code/BXCF/;../../../../BXCF/Code/BXCF.ThirdParty/;$(IncludePath)</IncludePath>
     <LibraryPath>../../../Dependencies/BXGI/Lib/$(Configuration)/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -98,6 +98,9 @@
       <AdditionalDependencies>BXCF.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/IGNORE:4221 /IGNORE:4006 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
+    <PostBuildEvent>
+      <Command>"../../Events/BXVLP/$(Configuration)/BXVLP.exe"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -123,7 +126,7 @@
       <AdditionalOptions>/IGNORE:4221 /IGNORE:4006 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
     <PostBuildEvent>
-      <Command>"..\..\Events\BXVLP\$(Configuration)\BXVLP.exe"</Command>
+      <Command>"../../Events/BXVLP/$(Configuration)/BXVLP.exe"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
