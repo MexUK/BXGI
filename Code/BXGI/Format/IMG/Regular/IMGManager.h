@@ -4,8 +4,7 @@
 #include "Type/Types.h"
 #include "Format/FormatManager.h"
 #include "Object/Singleton.h"
-#include "IMGFormat.h"
-#include "Engine/RAGE/RageResourceType.h"
+#include "Format/IMG/Regular/IMGFormat.h"
 #include "Game/EPlatformedGame.h"
 #include <string>
 #include <vector>

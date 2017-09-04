@@ -2,7 +2,8 @@
 
 #include "nsbxgi.h"
 #include "Format/Format.h"
-#include "DATPathEntry.h"
+#include "Format/DAT/Path/EDATPathFormat.h"
+#include "Format/DAT/Path/DATPathEntry.h"
 #include <string>
 #include <vector>
 
@@ -50,7 +51,7 @@ private:
 
 public: // todo - make this access specifier private
 	uint32													m_uiFileIndex;
-	bxgi::DATEntry_Paths_General_Header					m_header;
+	bxgi::DATEntry_Paths_General_Header						m_header;
 	std::vector<bxgi::DATEntry_Paths_General_PathNode>		m_vecPathNodes;
 	std::vector<bxgi::DATEntry_Paths_General_NaviNode>		m_vecNaviNodes;
 	std::vector<bxgi::DATEntry_Paths_General_Link>			m_vecLinks;

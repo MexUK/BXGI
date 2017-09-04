@@ -1,5 +1,4 @@
 #include "IPLEntry_PATH_Group.h"
-#include "Format/IPL/Entry/DataEntry/IPLEntry_PATH.h"
 #include "Exception/EExceptionCode.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"

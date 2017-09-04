@@ -1,5 +1,4 @@
 #include "IntermediateModelFormat.h"
-#include "IntermediateModel.h"
 #include "Data/IntermediateGeometry.h"
 
 using namespace bxgi;

@@ -2,7 +2,6 @@
 
 #include "nsbxgi.h"
 #include "Pool/VectorPool.h"
-// #include "RWSection.h" // todo
 #include "Format/RW/ERWSection.h"
 #include "Engine/RW/ERWVersion.h"
 #include "Type/Vector/Vec4u8.h"
@@ -24,19 +23,19 @@ public:
 
 	void									serializERWSectionContainer(RWSectionContainer *pRWSectionContainer);
 
-	bxgi::RWSection*								addSection(bxgi::ERWSection ERWSectionValue, bxgi::ERWVersion ERWVersionValue);
+	bxgi::RWSection*						addSection(bxgi::ERWSection ERWSectionValue, bxgi::ERWVersion ERWVersionValue);
 	void									removeSectionByIndex(uint32 uiSectionIndex);
-	std::vector<bxgi::RWSection*>				getSectionsByType(bxgi::ERWSection ERWSectionValue, bool bCheckRecursiveSections = true);
+	std::vector<bxgi::RWSection*>			getSectionsByType(bxgi::ERWSection ERWSectionValue, bool bCheckRecursiveSections = true);
 	uint32									getSectionCountByType(bxgi::ERWSection ERWSectionValue, bool bCheckRecursiveSections = true);
 
 	void									removePrelightning(void);
 	void									setPrelightningColour(int16 ssRed, int16 ssGreen, int16 ssBlue, int16 ssAlpha);
 	void									applyPrelightningColourOffset(int16 ssRed, int16 ssGreen, int16 ssBlue, int16 ssAlpha);
 
-	bxgi::RWFormat*								getRWFormat(void) { return nullptr; } // todo
+	bxgi::RWFormat*							getRWFormat(void) { return nullptr; } // todo
 
 	void									setParentNode(bxgi::RWSection* pParentNode) { m_pParentNode = pParentNode; }
-	bxgi::RWSection*								getParentNode(void) { return m_pParentNode; }
+	bxgi::RWSection*						getParentNode(void) { return m_pParentNode; }
 
 	void									setDVColours(std::vector<bxcf::Vec4u8>& vecDVColours);
 	std::vector<bxcf::Vec4u8>				getDVColours(void);
@@ -49,5 +48,5 @@ public:
 	std::vector<std::vector<bxgi::_2dEffect*>>	get2dEffects(void);													// index into outer vector represents 2d effects section index
 
 private:
-	bxgi::RWSection*								m_pParentNode;
+	bxgi::RWSection*						m_pParentNode;
 };

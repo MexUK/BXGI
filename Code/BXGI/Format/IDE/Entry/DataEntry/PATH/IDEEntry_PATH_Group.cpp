@@ -1,5 +1,4 @@
 #include "IDEEntry_PATH_Group.h"
-#include "Format/IDE/Entry/DataEntry/IDEEntry_PATH.h"
 #include "Exception/EExceptionCode.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"

@@ -1,7 +1,6 @@
 #include "RWSectionContainer.h"
-#include "RWSection.h"
+#include "Format/RW/RWSection.h"
 #include "Engine/RW/RWManager.h"
-#include "Sections/RWSection_Geometry.h"
 #include "Sections/RWSection_Geometry.h"
 #include "Sections/RWSection_ExtraVertColour.h"
 #include "Sections/RWSection_Extension.h"

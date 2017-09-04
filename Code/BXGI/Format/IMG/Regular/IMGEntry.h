@@ -6,7 +6,6 @@
 #include "Format/IMG/Regular/Raw/IMGEntry_Version1Or2.h"
 #include "Format/IMG/Regular/Raw/IMGEntry_Version3.h"
 #include "Format/IMG/Fastman92/IMGEntry_Fastman92.h"
-#include "Compression/ECompressionAlgorithm.h"
 #include "Static/Math.h"
 #include "Static/String.h"
 #include "Format/IMG/Regular/IMGFormat.h"

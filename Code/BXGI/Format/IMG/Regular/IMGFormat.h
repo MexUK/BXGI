@@ -9,7 +9,6 @@
 #include "Compression/ECompressionAlgorithm.h"
 #include "Format/IMG/Fastman92/EIMGVersionFastman92CompressionAlgorithm.h"
 #include "Format/COL/ECOLVersion.h"
-//#include "IMGEntry.h"
 #include "Platform/Hardware/EPlatform.h"
 #include "Stream/DataReader.h"
 #include <string>

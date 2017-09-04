@@ -3,7 +3,6 @@
 #include "Type/Types.h"
 #include "Event/Events.h"
 #include "Event/EEvent.h"
-#include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
 #include "IMGManager.h"
 #include "Static/String.h"
