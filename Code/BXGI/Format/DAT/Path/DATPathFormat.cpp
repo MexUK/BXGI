@@ -3,7 +3,6 @@
 #include "Type/Vector/Vec3f.h"
 #include "Stream/DataWriter.h"
 #include "Stream/DataReader.h"
-#include "Format/DAT/Path/DATPathEntry.h"
 
 using namespace std;
 using namespace bxcf;

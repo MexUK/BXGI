@@ -95,7 +95,7 @@ namespace bxgi
 	struct DATEntry_Paths_Default_Link_Wrapper;
 	class CompressedVector;
 	class CompressedVector_extended;
-	struct CNodeAddress;
+	struct NodeAddress;
 	struct DATEntry_Paths_Fastman92_Header;
 	struct DATEntry_Paths_Fastman92_PathNode;
 	struct DATEntry_Paths_Fastman92_PathNode_extended;

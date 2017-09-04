@@ -307,6 +307,36 @@
     <Filter Include="Source Files\Format\COL\Parts">
       <UniqueIdentifier>{bddb19cd-b649-4610-b42f-d70311e2bdea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Format\DAT\Path\Entries">
+      <UniqueIdentifier>{8fcbea4f-1468-457e-a705-eee1a61c04db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\DAT\Path\Entries\Default">
+      <UniqueIdentifier>{750884b6-4e7f-497f-9e23-4beec61f0b69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\DAT\Path\Entries\Fastman92">
+      <UniqueIdentifier>{249bf58b-2d9c-49e2-b01c-a0f30a80d1ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\DAT\Path\Entries\Intermediate">
+      <UniqueIdentifier>{1b3111d4-f5fe-4812-a884-3ef95a83e51a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Format\DAT\Path\Entries\Default\Wrapper">
+      <UniqueIdentifier>{673fd467-6368-4788-a53d-23b4ecfcb552}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\DAT\Path\Entries">
+      <UniqueIdentifier>{cd7da671-44fd-4cd2-bf0e-ee5421eda747}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\DAT\Path\Entries\Default">
+      <UniqueIdentifier>{0d570840-f4c3-4f48-bee0-e45718356cfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\DAT\Path\Entries\Default\Wrapper">
+      <UniqueIdentifier>{780cb177-0b85-4820-bb16-67948a4738c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\DAT\Path\Entries\Fastman92">
+      <UniqueIdentifier>{7597a168-6fb8-444b-b5da-c8ea01b1e40c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Format\DAT\Path\Entries\Intermediate">
+      <UniqueIdentifier>{fa23dfb5-2158-4ad8-8b73-99883fa6f854}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\BXGI\Game\PlatformedGame.cpp">
@@ -920,9 +950,6 @@
     <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Loader\DATLoaderManager.h">
       <Filter>Header Files\Format\DAT\Loader</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\DATPathEntry.h">
-      <Filter>Header Files\Format\DAT\Path</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\DATPathFormat.h">
       <Filter>Header Files\Format\DAT\Path</Filter>
     </ClInclude>
@@ -1432,6 +1459,75 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TFaceGroup.h">
       <Filter>Header Files\Format\COL\Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\CompressedVector_extended.h">
+      <Filter>Header Files\Format\DAT\Path\Entries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\CompressedVector.h">
+      <Filter>Header Files\Format\DAT\Path\Entries</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Default\Wrapper\DATEntry_Paths_Default_Link_Wrapper.h">
+      <Filter>Header Files\Format\DAT\Path\Entries\Default\Wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Default\DATEntry_Paths_Default_LinkLength.h">
+      <Filter>Header Files\Format\DAT\Path\Entries\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Default\DATEntry_Paths_Default_NaviLink.h">
+      <Filter>Header Files\Format\DAT\Path\Entries\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Default\DATEntry_Paths_Default_NaviNode.h">
+      <Filter>Header Files\Format\DAT\Path\Entries\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Default\DATEntry_Paths_Default_PathNode.h">
+      <Filter>Header Files\Format\DAT\Path\Entries\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Default\DATEntry_Paths_Default_Header.h">
+      <Filter>Header Files\Format\DAT\Path\Entries\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Default\DATEntry_Paths_Default_Link.h">
+      <Filter>Header Files\Format\DAT\Path\Entries\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Fastman92\DATEntry_Paths_Fastman92_NaviNode.h">
+      <Filter>Header Files\Format\DAT\Path\Entries\Fastman92</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Fastman92\DATEntry_Paths_Fastman92_NaviNode_extended.h">
+      <Filter>Header Files\Format\DAT\Path\Entries\Fastman92</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Fastman92\DATEntry_Paths_Fastman92_PathIntersectionFlags.h">
+      <Filter>Header Files\Format\DAT\Path\Entries\Fastman92</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Fastman92\DATEntry_Paths_Fastman92_PathNode.h">
+      <Filter>Header Files\Format\DAT\Path\Entries\Fastman92</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Fastman92\DATEntry_Paths_Fastman92_PathNode_extended.h">
+      <Filter>Header Files\Format\DAT\Path\Entries\Fastman92</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Fastman92\NodeAddress.h">
+      <Filter>Header Files\Format\DAT\Path\Entries\Fastman92</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Fastman92\DATEntry_Paths_Fastman92_Header.h">
+      <Filter>Header Files\Format\DAT\Path\Entries\Fastman92</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Fastman92\DATEntry_Paths_Fastman92_Link.h">
+      <Filter>Header Files\Format\DAT\Path\Entries\Fastman92</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Fastman92\DATEntry_Paths_Fastman92_LinkLength.h">
+      <Filter>Header Files\Format\DAT\Path\Entries\Fastman92</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Fastman92\DATEntry_Paths_Fastman92_NaviLink.h">
+      <Filter>Header Files\Format\DAT\Path\Entries\Fastman92</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Intermediate\DATEntry_Paths_General_NaviNode.h">
+      <Filter>Header Files\Format\DAT\Path\Entries\Intermediate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Intermediate\DATEntry_Paths_General_PathNode.h">
+      <Filter>Header Files\Format\DAT\Path\Entries\Intermediate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Intermediate\DATEntry_Paths_General_Header.h">
+      <Filter>Header Files\Format\DAT\Path\Entries\Intermediate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Intermediate\DATEntry_Paths_General_Link.h">
+      <Filter>Header Files\Format\DAT\Path\Entries\Intermediate</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
