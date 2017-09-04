@@ -81,7 +81,7 @@
     <IntDir>..\..\..\..\_Output\Intermediate\BXGI\BXGI\$(Configuration)\</IntDir>
     <TargetName>BXGI</TargetName>
     <IncludePath>..\..\..\Code\BXGI\;../../../../BXCF/Code/BXCF/;../../../../BXCF/Code/BXCF.ThirdParty/;$(IncludePath)</IncludePath>
-    <LibraryPath>../../../Dependencies/Lib/$(Configuration)/;$(LibraryPath)</LibraryPath>
+    <LibraryPath>../../../Dependencies/BXGI/Lib/$(Configuration)/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
