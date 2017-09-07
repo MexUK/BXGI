@@ -27,6 +27,8 @@ public:
 	inline void				unserializeVersion3(bxgi::RG_IMGEntry_Version3 *pRGIMGEntry);
 	inline void				unserializeVersionFastman92(bxgi::IMGEntry_Fastman92 *pRawIMGEntry);
 
+	void					unserializeRWVersion(bxcf::DataReader *pDataReader = nullptr, std::string strFilePath = "", std::string strUncompressedEntryData = "");
+
 	void					setIMGFile(bxgi::IMGFormat *pIMGFile) { m_pIMGFile = pIMGFile; }
 	bxgi::IMGFormat*		getIMGFile(void) { return m_pIMGFile; }
 

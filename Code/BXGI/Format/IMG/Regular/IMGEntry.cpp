@@ -11,6 +11,7 @@
 #include "Engine/RAGE/RageResourceTypeManager.h"
 #include "Format/COL/COLManager.h"
 #include "Format/COL/COLVersionManager.h"
+#include "Format/GameFormat.h"
 
 using namespace std;
 using namespace bxcf;
@@ -62,9 +63,122 @@ void					IMGEntry::setEntrySize(uint32 uiEntrySize)
 	}
 }
 
-uint32			IMGEntry::getPaddedEntrySize(void)
+uint32					IMGEntry::getPaddedEntrySize(void)
 {
 	return (uint32) (ceil(((float32) getEntrySize()) / 2048.0f) * 2048.0f);
+}
+
+void					IMGEntry::unserializeRWVersion(DataReader *pDataReader, string strFilePath, string strUncompressedEntryData)
+{
+	bool bUseNewDataReader = false;
+
+	if (strUncompressedEntryData == "")
+	{
+		bUseNewDataReader = pDataReader == nullptr;
+
+		if (strFilePath == "")
+		{
+			strFilePath = m_pIMGFile->getFilePath();
+		}
+
+		if (bUseNewDataReader)
+		{
+			strFilePath = Path::replaceFileExtensionWithCase(strFilePath, "IMG");
+
+			pDataReader = new DataReader;
+			pDataReader->setStreamType(DATA_STREAM_FILE);
+			pDataReader->setFilePath(strFilePath);
+			pDataReader->open(true);
+		}
+	}
+
+	bool bEntryIsCompressed;
+	EFileType uiFileType;
+	string strVersionCharacter;
+
+	uiFileType = GameFormat::getRWFileType(getEntryExtension());
+	setFileType(uiFileType);
+
+	bEntryIsCompressed = isCompressed();
+	if (bEntryIsCompressed)
+	{
+		strUncompressedEntryData = getEntryData();
+	}
+
+	switch (uiFileType)
+	{
+	case MODEL:
+	case TEXTURE:
+		// RW file
+		if (bEntryIsCompressed)
+		{
+			// RW file - compressed
+			if (strUncompressedEntryData.length() >= 12)
+			{
+				setRawVersion(String::unpackUint32(strUncompressedEntryData.substr(8, 4), false));
+			}
+		}
+		else
+		{
+			// RW file - not compressed
+			pDataReader->setSeek(getEntryOffset() + 8);
+			setRawVersion(pDataReader->readUint32());
+		}
+		break;
+	case COLLISION:
+		// COL file
+		if (bEntryIsCompressed)
+		{
+			// COL file - compressed
+			if (strUncompressedEntryData.length() >= 4)
+			{
+				strVersionCharacter = strUncompressedEntryData.substr(3, 1);
+			}
+			else
+			{
+				strVersionCharacter = "";
+				setRawVersion(0);
+			}
+		}
+		else
+		{
+			// COL file - not compressed
+			pDataReader->setSeek(getEntryOffset() + 3);
+			strVersionCharacter = pDataReader->readString(1);
+		}
+
+		if (strVersionCharacter.length())
+		{
+			if (strVersionCharacter == "L")
+			{
+				setRawVersion(1);
+			}
+			else
+			{
+				setRawVersion(String::toUint32(strVersionCharacter));
+			}
+		}
+		break;
+	case ANIMATION:
+		// IFP file (animation)
+		pDataReader->setSeek(getEntryOffset() + 3);
+		strVersionCharacter = pDataReader->readString(1);
+		if (strVersionCharacter == "K")
+		{
+			setRawVersion(1);
+		}
+		else
+		{
+			setRawVersion(String::toUint32(strVersionCharacter) - 1);
+		}
+		break;
+	}
+
+	if (bUseNewDataReader)
+	{
+		pDataReader->close();
+		delete pDataReader;
+	}
 }
 
 void					IMGEntry::setEntryData(string strEntryData, bool bIsNew)
@@ -144,7 +258,11 @@ void					IMGEntry::setEntryData(string strEntryData, bool bIsNew)
 	}
 	*/
 	setEntrySize((uint32)strEntryData.length());
-	File::storeFileSubContent(getIMGFile()->getFilePath(), strEntryData, getEntryOffset());
+
+	string strFilePath = m_pIMGFile->getFilePath();
+	strFilePath = Path::replaceFileExtensionWithCase(strFilePath, "IMG");
+
+	File::storeFileSubContent(strFilePath, strEntryData, getEntryOffset());
 }
 
 string					IMGEntry::getEntryData(void)
@@ -245,7 +363,7 @@ void					IMGEntry::saveEntryByMemory(string strFilePath, string& strEntryData)
 	File::storeFile(strFilePath, strEntryData, false, true);
 }
 
-uint32			IMGEntry::getEntryDataPadLength(uint32 uiUnpaddedDataLength)
+uint32					IMGEntry::getEntryDataPadLength(uint32 uiUnpaddedDataLength)
 {
 	return (uint32)(ceil((float32)uiUnpaddedDataLength / (float32)2048.0f) * (float32)2048.0f);
 }
@@ -261,7 +379,7 @@ void					IMGEntry::setRageResourceTypeByIdentifier(uint32 uiResourceType)
 	setRageResourceType(RageManager::get()->getResourceTypeManager()->getResourceTypeByIdentifier(uiResourceType));
 }
 
-uint32			IMGEntry::getVersion3IMGSizeDeduction(uint32 uiDataLength)
+uint32					IMGEntry::getVersion3IMGSizeDeduction(uint32 uiDataLength)
 {
 	return 2048 - (uiDataLength % 2048);
 }
@@ -360,7 +478,7 @@ IMGEntry*				IMGEntry::clone(IMGFormat *pIMGFile)
 	return pClonedIMGEntry;
 }
 
-bool				IMGEntry::canBeRead(void)
+bool					IMGEntry::canBeRead(void)
 {
 	if (getIMGFile()->isEncrypted())
 	{
@@ -380,7 +498,7 @@ bool				IMGEntry::canBeRead(void)
 	return true;
 }
 
-string				IMGEntry::getVersionText(void)
+string					IMGEntry::getVersionText(void)
 {
 	if (getIMGFile()->getVersion() == IMG_3)
 	{

@@ -27,7 +27,6 @@
 #include "Static/Debug.h"
 #include "Format/EFileType.h"
 #include "Static/StdVector.h"
-#include "Format/GameFormat.h"
 #include "IMGEntry.h"
 #include <set>
 #include <algorithm>
@@ -104,7 +103,9 @@ void				IMGFormat::readMetaData(void)
 	if (uiIdentifier != 0xA94E2A52)
 	{
 		bEncrypted = true;
-		uiIdentifier = String::unpackUint32(IMGManager::decryptVersion3IMGString(strFirst16Bytes).substr(0, 4), false);
+		strFirst16Bytes = IMGManager::decryptVersion3IMGString(strFirst16Bytes);
+		uiIdentifier = String::unpackUint32(strFirst16Bytes.substr(0, 4), false);
+		uiSecond4BytesUi = String::unpackUint32(strFirst16Bytes.substr(4, 4), false);
 	}
 
 	if (uiIdentifier == 0xA94E2A52)
@@ -175,7 +176,7 @@ bool		IMGFormat::unserialize2(void)
 
 	if (m_EIMGVersion != IMG_3)
 	{
-		unserializERWVersions();
+		unserializERWVersions(); // todo - fix function name - capital e in name
 	}
 
 	return true;
@@ -320,11 +321,10 @@ void		IMGFormat::unserializeVersion2(void)
 
 void		IMGFormat::unserializeVersion3_Encrypted(void)
 {
-	DataReader *pDataReader = DataReader::get(); // IMG file
 	DataReader *pDataReader2 = DataReader::get(1); // for unencrypted img header and unencrypted img table
 
 	// decrypt IMG header
-	string strIMGHeaderEncrypted = pDataReader->readString(32); // padded with 12 bytes at the end
+	string strIMGHeaderEncrypted = m_reader.readString(32); // padded with 12 bytes at the end
 	string strIMGHeaderUnencrypted = IMGManager::decryptVersion3IMGString(strIMGHeaderEncrypted); // padded with 12 bytes at the end too
 	//EDataStreamType ePreviousStreamType = pDataReader->getStreamType();
 
@@ -341,10 +341,10 @@ void		IMGFormat::unserializeVersion3_Encrypted(void)
 	uint32 uiTablesLength = pHeader1->m_uiTableSize - uiRemainder;
 	
 	//pDataReader->setStreamType(ePreviousStreamType);
-	pDataReader->setSeek(20);
+	m_reader.setSeek(20);
 	
-	string strIMGTableEncrypted = pDataReader->readString(uiTablesLength);
-	string strIMGBodyPartial = pDataReader->readString(uiRemainder);
+	string strIMGTableEncrypted = m_reader.readString(uiTablesLength);
+	string strIMGBodyPartial = m_reader.readString(uiRemainder);
 	string strIMGTableUnencrypted = IMGManager::decryptVersion3IMGString(strIMGTableEncrypted) + strIMGBodyPartial;
 	
 	//pDataReader2->setStreamType(DATA_STREAM_MEMORY);
@@ -387,15 +387,13 @@ void		IMGFormat::unserializeVersion3_Encrypted(void)
 
 void		IMGFormat::unserializeVersion3_Unencrypted(void)
 {
-	DataReader *pDataReader = DataReader::get(); // IMG file
-
 	// read header 1
-	RG_IMGFormat_Version3_Header1 *pHeader1 = pDataReader->readStruct<RG_IMGFormat_Version3_Header1>();
+	RG_IMGFormat_Version3_Header1 *pHeader1 = m_reader.readStruct<RG_IMGFormat_Version3_Header1>();
 	uint32 uiEntryCount = pHeader1->m_uiEntryCount;
 
 	// load data from file into RG structs
 	RG_IMGEntry_Version3
-		*pRGIMGEntries = pDataReader->readStructMultiple<RG_IMGEntry_Version3>(uiEntryCount),
+		*pRGIMGEntries = m_reader.readStructMultiple<RG_IMGEntry_Version3>(uiEntryCount),
 		*pRGIMGActiveEntry = pRGIMGEntries;
 
 	// copy IMG tables RG structs into wrapper structs
@@ -415,7 +413,7 @@ void		IMGFormat::unserializeVersion3_Unencrypted(void)
 	// read IMG entry names
 	for (uint32 i = 0; i < uiEntryCount; i++)
 	{
-		rvecIMGEntries[i]->setEntryName(pDataReader->readStringUntilZero());
+		rvecIMGEntries[i]->setEntryName(m_reader.readStringUntilZero());
 		rvecIMGEntries[i]->setEntryExtension(String::toUpperCase(Path::getFileExtension(rvecIMGEntries[i]->getEntryName())));
 		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
@@ -427,10 +425,8 @@ void		IMGFormat::unserializeVersion3_Unencrypted(void)
 
 void		IMGFormat::unserializeVersionFastman92(void)
 {
-	DataReader *pDataReader = DataReader::get(); // IMG file
-	
 	// read header 1
-	IMGFormat_VersionFastman92_Header1 *pHeader1 = pDataReader->readStruct<IMGFormat_VersionFastman92_Header1>();
+	IMGFormat_VersionFastman92_Header1 *pHeader1 = m_reader.readStruct<IMGFormat_VersionFastman92_Header1>();
 	setGameType(pHeader1->m_uiGameId);
 
 	// verify header 1 data
@@ -452,7 +448,7 @@ void		IMGFormat::unserializeVersionFastman92(void)
 	}
 
 	// read header 2
-	IMGFormat_VersionFastman92_Header2 *pHeader2 = pDataReader->readStruct<IMGFormat_VersionFastman92_Header2>();
+	IMGFormat_VersionFastman92_Header2 *pHeader2 = m_reader.readStruct<IMGFormat_VersionFastman92_Header2>();
 	uint32 uiEntryCount = pHeader2->m_uiEntryCount;
 
 	// verify header 2 data
@@ -465,7 +461,7 @@ void		IMGFormat::unserializeVersionFastman92(void)
 
 	// load data from file into raw structs
 	IMGEntry_Fastman92
-		*pRawIMGEntries = pDataReader->readStructMultiple<IMGEntry_Fastman92>(uiEntryCount),
+		*pRawIMGEntries = m_reader.readStructMultiple<IMGEntry_Fastman92>(uiEntryCount),
 		*pRawIMGActiveEntry = pRawIMGEntries;
 
 	// copy raw structs into wrapper structs
@@ -506,89 +502,9 @@ void		IMGFormat::unserializERWVersions(void)
 		pDataReader->open(true); // open handle to IMG file (handle is closed in Format::unserializeVia*() methods
 	}
 
-	string strUncompressedEntryData;
-	bool bEntryIsCompressed;
-	EFileType uiFileType;
-	string strVersionCharacter;
 	for (IMGEntry *pIMGEntry : getEntries())
 	{
-		uiFileType = GameFormat::getRWFileType(pIMGEntry->getEntryExtension());
-		pIMGEntry->setFileType(uiFileType);
-
-		bEntryIsCompressed = pIMGEntry->isCompressed();
-		if (bEntryIsCompressed)
-		{
-			strUncompressedEntryData = pIMGEntry->getEntryData();
-		}
-
-		switch (uiFileType)
-		{
-		case MODEL:
-		case TEXTURE:
-			// RW file
-			if (bEntryIsCompressed)
-			{
-				// RW file - compressed
-				if (strUncompressedEntryData.length() >= 12)
-				{
-					pIMGEntry->setRawVersion(String::unpackUint32(strUncompressedEntryData.substr(8, 4), false));
-				}
-			}
-			else
-			{
-				// RW file - not compressed
-				pDataReader->setSeek(pIMGEntry->getEntryOffset() + 8);
-				pIMGEntry->setRawVersion(pDataReader->readUint32());
-			}
-			break;
-		case COLLISION:
-			// COL file
-			if (bEntryIsCompressed)
-			{
-				// COL file - compressed
-				if (strUncompressedEntryData.length() >= 4)
-				{
-					strVersionCharacter = strUncompressedEntryData.substr(3, 1);
-				}
-				else
-				{
-					strVersionCharacter = "";
-					pIMGEntry->setRawVersion(0);
-				}
-			}
-			else
-			{
-				// COL file - not compressed
-				pDataReader->setSeek(pIMGEntry->getEntryOffset() + 3);
-				strVersionCharacter = pDataReader->readString(1);
-			}
-
-			if (strVersionCharacter.length())
-			{
-				if (strVersionCharacter == "L")
-				{
-					pIMGEntry->setRawVersion(1);
-				}
-				else
-				{
-					pIMGEntry->setRawVersion(String::toUint32(strVersionCharacter));
-				}
-			}
-			break;
-		case ANIMATION:
-			// IFP file (animation)
-			pDataReader->setSeek(pIMGEntry->getEntryOffset() + 3);
-			strVersionCharacter = pDataReader->readString(1);
-			if (strVersionCharacter == "K")
-			{
-				pIMGEntry->setRawVersion(1);
-			}
-			else
-			{
-				pIMGEntry->setRawVersion(String::toUint32(strVersionCharacter) - 1);
-			}
-			break;
-		}
+		pIMGEntry->unserializeRWVersion(pDataReader);
 
 		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
@@ -1235,18 +1151,17 @@ IMGEntry*							IMGFormat::addEntryViaFile(string& strEntryFilePath, string strE
 	}
 
 	string strEntryData = File::getFileContent(strEntryFilePath);
-	IMGEntry *pIMGEntry = addEntryViaData(strEntryName, strEntryData);
-	pIMGEntry->setFileCreationDate(File::getFileCreationDate(strEntryFilePath));
-	return pIMGEntry;
-}
 
-IMGEntry*							IMGFormat::addEntryViaData(string& strEntryName, string& strEntryData)
-{
 	IMGEntry *pIMGEntry = new IMGEntry(this);
+
+	m_uiEntryCount++;
 
 	pIMGEntry->setNewEntry(true);
 	pIMGEntry->setEntryName(strEntryName);
+	pIMGEntry->setEntryOffset(getNextEntryOffset());
 	pIMGEntry->setEntrySize(strEntryData.length()); // this is also set inside IMGEntry::setEntryData()
+	pIMGEntry->setEntryExtension(String::toUpperCase(Path::getFileExtension(strEntryName)));
+	pIMGEntry->setFileCreationDate(File::getFileCreationDate(strEntryFilePath));
 
 	if (getVersion() == IMG_3)
 	{
@@ -1255,24 +1170,40 @@ IMGEntry*							IMGFormat::addEntryViaData(string& strEntryName, string& strEntr
 	}
 	else
 	{
-		string strExtensionUpper = String::toUpperCase(Path::getFileExtension(strEntryName));
-		if (strExtensionUpper == "TXD" || GameFormat::isModelExtension(strExtensionUpper))
-		{
-			if (strEntryData.length() >= 12)
-			{
-				pIMGEntry->setRWVersionByVersionCC(String::unpackUint32(strEntryData.substr(8, 4), false));
-			}
-		}
-		else if (strExtensionUpper == "COL")
-		{
-			if (strEntryData.length() >= 4)
-			{
-				pIMGEntry->setCOLVersion(COLManager::getCOLVersionFromFourCC(strEntryData.substr(0, 4)));
-			}
-		}
+		pIMGEntry->unserializeRWVersion();
 	}
 
 	pIMGEntry->setEntryData(strEntryData, true);
+
+	addEntry(pIMGEntry);
+	return pIMGEntry;
+}
+
+IMGEntry*							IMGFormat::addEntryViaData(string& strEntryName, string& strEntryData)
+{
+	IMGEntry *pIMGEntry = new IMGEntry(this);
+
+	m_uiEntryCount++;
+
+	pIMGEntry->setNewEntry(true);
+	pIMGEntry->setEntryName(strEntryName);
+	pIMGEntry->setEntryOffset(getNextEntryOffset());
+	pIMGEntry->setEntrySize(strEntryData.length()); // this is also set inside IMGEntry::setEntryData()
+	pIMGEntry->setEntryExtension(String::toUpperCase(Path::getFileExtension(strEntryName)));
+	// todo pIMGEntry->setFileCreationDate(Math::getTimeNow());
+
+	if (getVersion() == IMG_3)
+	{
+		pIMGEntry->setRageResourceType(RageManager::get()->getResourceTypeManager()->getResourceTypeByFileExtension(Path::getFileExtension(pIMGEntry->getEntryName())));
+		pIMGEntry->setFlags((uint16)IMGEntry::getVersion3IMGSizeDeduction(pIMGEntry->getEntrySize()));
+	}
+	else
+	{
+		pIMGEntry->unserializeRWVersion(nullptr, "", strEntryData.substr(0, 12));
+	}
+
+	pIMGEntry->setEntryData(strEntryData, true);
+
 	addEntry(pIMGEntry);
 	return pIMGEntry;
 }
