@@ -28,13 +28,14 @@
 #include "Format/EFileType.h"
 #include "Static/StdVector.h"
 #include "IMGEntry.h"
+#include "../BXCF/Event/EEvent.h"
 #include <set>
 #include <algorithm>
 
 using namespace std;
 using namespace bxcf;
-using namespace bxgi;
 using namespace bxcf::fileType;
+using namespace bxgi;
 
 IMGFormat::IMGFormat(void) :
 	Format(true, LITTLE_ENDIAN),
@@ -1170,7 +1171,7 @@ IMGEntry*							IMGFormat::addEntryViaFile(string& strEntryFilePath, string strE
 	}
 	else
 	{
-		pIMGEntry->unserializeRWVersion();
+		pIMGEntry->unserializeRWVersion(nullptr, "", strEntryData.substr(0, 12));
 	}
 
 	pIMGEntry->setEntryData(strEntryData, true);
@@ -1592,7 +1593,11 @@ void					IMGFormat::exportMultiple(vector<IMGEntry*>& vecIMGEntries, string strF
 
 	try
 	{
-		pDataReader->setFilePath(getFilePath());
+		string strIMGFilePath = getFilePath();
+		strIMGFilePath = Path::replaceFileExtensionWithCase(strIMGFilePath, "IMG");
+
+		pDataReader->setFilePath(strIMGFilePath);
+		pDataReader->setStreamType(DATA_STREAM_FILE);
 		pDataReader->open(true);
 
 		for (auto pIMGEntry : vecIMGEntries)
@@ -1606,7 +1611,7 @@ void					IMGFormat::exportMultiple(vector<IMGEntry*>& vecIMGEntries, string strF
 			string strFileContent = pDataReader->readString(pIMGEntry->getEntrySize());
 			File::storeFile(strFolderPath + pIMGEntry->getEntryName(), strFileContent, false, true);
 
-			Events::triggerConst(EXPORT_IMG_ENTRY, this);
+			Events::trigger(TASK_PROGRESS);
 		}
 
 		pDataReader->close();
@@ -1624,7 +1629,11 @@ void					IMGFormat::exportAll(string& strFolderPath)
 
 	try
 	{
-		pDataReader->setFilePath(getFilePath());
+		string strIMGFilePath = getFilePath();
+		strIMGFilePath = Path::replaceFileExtensionWithCase(strIMGFilePath, "IMG");
+
+		pDataReader->setFilePath(strIMGFilePath);
+		pDataReader->setStreamType(DATA_STREAM_FILE);
 		pDataReader->open(true);
 		for (auto pIMGEntry : getEntries())
 		{
@@ -1635,6 +1644,8 @@ void					IMGFormat::exportAll(string& strFolderPath)
 
 			pDataReader->setSeek(pIMGEntry->getEntryOffset());
 			pIMGEntry->saveEntryByMemory(strFolderPath + pIMGEntry->getEntryName(), pDataReader->readString(pIMGEntry->getEntrySize()));
+
+			Events::trigger(TASK_PROGRESS);
 		}
 		pDataReader->close();
 	}

@@ -70,9 +70,11 @@ uint32					IMGEntry::getPaddedEntrySize(void)
 
 void					IMGEntry::unserializeRWVersion(DataReader *pDataReader, string strFilePath, string strUncompressedEntryData)
 {
-	bool bUseNewDataReader = false;
+	bool
+		bUseNewDataReader = false,
+		bUseStringAsData = strUncompressedEntryData != "";
 
-	if (strUncompressedEntryData == "")
+	if (!bUseStringAsData)
 	{
 		bUseNewDataReader = pDataReader == nullptr;
 
@@ -117,12 +119,23 @@ void					IMGEntry::unserializeRWVersion(DataReader *pDataReader, string strFileP
 			{
 				setRawVersion(String::unpackUint32(strUncompressedEntryData.substr(8, 4), false));
 			}
+			else
+			{
+				setRawVersion(0);
+			}
 		}
 		else
 		{
 			// RW file - not compressed
-			pDataReader->setSeek(getEntryOffset() + 8);
-			setRawVersion(pDataReader->readUint32());
+			if (bUseStringAsData)
+			{
+				setRawVersion(String::unpackUint32(strUncompressedEntryData.substr(8, 4)));
+			}
+			else
+			{
+				pDataReader->setSeek(getEntryOffset() + 8);
+				setRawVersion(pDataReader->readUint32());
+			}
 		}
 		break;
 	case COLLISION:
@@ -134,17 +147,19 @@ void					IMGEntry::unserializeRWVersion(DataReader *pDataReader, string strFileP
 			{
 				strVersionCharacter = strUncompressedEntryData.substr(3, 1);
 			}
-			else
-			{
-				strVersionCharacter = "";
-				setRawVersion(0);
-			}
 		}
 		else
 		{
 			// COL file - not compressed
-			pDataReader->setSeek(getEntryOffset() + 3);
-			strVersionCharacter = pDataReader->readString(1);
+			if (bUseStringAsData)
+			{
+				strVersionCharacter = strUncompressedEntryData.substr(3, 1);
+			}
+			else
+			{
+				pDataReader->setSeek(getEntryOffset() + 3);
+				strVersionCharacter = pDataReader->readString(1);
+			}
 		}
 
 		if (strVersionCharacter.length())
@@ -158,11 +173,24 @@ void					IMGEntry::unserializeRWVersion(DataReader *pDataReader, string strFileP
 				setRawVersion(String::toUint32(strVersionCharacter));
 			}
 		}
+		else
+		{
+			setRawVersion(0);
+		}
+
 		break;
 	case ANIMATION:
 		// IFP file (animation)
-		pDataReader->setSeek(getEntryOffset() + 3);
-		strVersionCharacter = pDataReader->readString(1);
+		if (bUseStringAsData)
+		{
+			strVersionCharacter = strUncompressedEntryData.substr(3, 1);
+		}
+		else
+		{
+			pDataReader->setSeek(getEntryOffset() + 3);
+			strVersionCharacter = pDataReader->readString(1);
+		}
+
 		if (strVersionCharacter == "K")
 		{
 			setRawVersion(1);
@@ -171,12 +199,12 @@ void					IMGEntry::unserializeRWVersion(DataReader *pDataReader, string strFileP
 		{
 			setRawVersion(String::toUint32(strVersionCharacter) - 1);
 		}
+
 		break;
 	}
 
 	if (bUseNewDataReader)
 	{
-		pDataReader->close();
 		delete pDataReader;
 	}
 }
