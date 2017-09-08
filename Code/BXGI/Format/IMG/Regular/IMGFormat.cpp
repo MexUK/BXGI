@@ -1252,6 +1252,13 @@ void								IMGFormat::removeEntry(IMGEntry *pIMGEntry)
 	Events::trigger(REMOVE_IMG_ENTRY, pIMGEntry);
 
 	VectorPool::removeEntry(pIMGEntry);
+	m_uiEntryCount--;
+}
+
+void								IMGFormat::removeAllEntries(void)
+{
+	VectorPool::removeAllEntries();
+	m_uiEntryCount = 0;
 }
 
 IMGEntry*							IMGFormat::replaceEntryViaFile(string& strEntryName, string& strEntryFilePath, string strNewEntryName)

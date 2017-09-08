@@ -65,25 +65,26 @@ public:
 
 	static bxcf::ECompressionAlgorithm				getCompressionAlgorithmIdFromFastman92CompressionAlgorithmId(EIMGVersionFastman92CompressionAlgorithm eFastman92CompressionAlgorithmId);
 
-	bxgi::IMGEntry*								addEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "");
-	bxgi::IMGEntry*								addEntryViaData(std::string& strEntryName, std::string& strEntryData);
+	bxgi::IMGEntry*									addEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "");
+	bxgi::IMGEntry*									addEntryViaData(std::string& strEntryName, std::string& strEntryData);
 	void											addEntry(bxgi::IMGEntry *pIMGEntry);
 	void											addEntries(std::vector<std::string>& vecEntryFilePaths);
 	void											addAllEntriesInFolder(std::string& strFolderPath);
 	void											removeEntry(bxgi::IMGEntry *pIMGEntry);
-	bxgi::IMGEntry*								replaceEntryViaFile(std::string& strEntryName, std::string& strEntryFilePath, std::string strNewEntryName = "");
-	bxgi::IMGEntry*								replaceEntryViaData(std::string& strEntryName, std::string& strEntryData, std::string strNewEntryName = "");
+	void											removeAllEntries(void);
+	bxgi::IMGEntry*									replaceEntryViaFile(std::string& strEntryName, std::string& strEntryFilePath, std::string strNewEntryName = "");
+	bxgi::IMGEntry*									replaceEntryViaData(std::string& strEntryName, std::string& strEntryData, std::string strNewEntryName = "");
 	uint32											replaceEntries(std::vector<std::string>& vecPaths, std::vector<std::string>& vecReplacedEntryNames, std::vector<IMGEntry*>& vecReplacedEntries);
-	bxgi::IMGEntry*								addOrReplaceEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "");
-	bxgi::IMGEntry*								addOrReplaceEntryViaData(std::string& strEntryName, std::string& strEntryData);
-	std::unordered_map<bxgi::IMGEntry*, std::string>		getAllEntriesData(void); // not recommended to be used, may use too much memory, better to iterate pIMGFile->getEntries()
-	std::unordered_map<bxgi::IMGEntry*, std::string>		getEntriesData(std::vector<bxgi::IMGEntry*>& vecEntries); // not recommended to be used, may use too much memory, better to iterate pIMGFile->getEntries()
+	bxgi::IMGEntry*									addOrReplaceEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "");
+	bxgi::IMGEntry*									addOrReplaceEntryViaData(std::string& strEntryName, std::string& strEntryData);
+	std::unordered_map<bxgi::IMGEntry*, std::string>	getAllEntriesData(void); // not recommended to be used, may use too much memory, better to iterate pIMGFile->getEntries()
+	std::unordered_map<bxgi::IMGEntry*, std::string>	getEntriesData(std::vector<bxgi::IMGEntry*>& vecEntries); // not recommended to be used, may use too much memory, better to iterate pIMGFile->getEntries()
 	uint32											getNextEntryOffset(void); // in bytes
 	std::vector<bxgi::IMGEntry*>					getEntriesByExtension(std::string strExtension);
-	bxgi::IMGEntry*								getEntryByName(std::string& strEntryName); // case-insensitive
-	bxgi::IMGEntry*								getEntryByNameWithoutExtension(std::string& strEntryNameWithoutExtension); // case-insensitive
+	bxgi::IMGEntry*									getEntryByName(std::string& strEntryName); // case-insensitive
+	bxgi::IMGEntry*									getEntryByNameWithoutExtension(std::string& strEntryNameWithoutExtension); // case-insensitive
 	std::vector<std::string>						getEntryNames(void);
-	bxgi::IMGEntry*								getEntryByHighestOffset(void);
+	bxgi::IMGEntry*									getEntryByHighestOffset(void);
 	uint32											getEntryCountForName(std::string& strEntryName); // case-insensitive
 	uint32											getEntryCountForCompressionType(bxcf::ECompressionAlgorithm ECompressionAlgorithmValue);
 
