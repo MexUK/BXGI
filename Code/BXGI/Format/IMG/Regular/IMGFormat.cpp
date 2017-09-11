@@ -1401,16 +1401,42 @@ uint32			IMGFormat::getNextEntryOffset(void)
 	return pIMGEntry->getEntryOffset() + pIMGEntry->getPaddedEntrySize();
 }
 
-vector<IMGEntry*>		IMGFormat::getEntriesByExtension(string strExtension)
+vector<IMGEntry*>		IMGFormat::getEntriesByName(string strText)
+{
+	strText = String::toUpperCase(strText);
+	vector<IMGEntry*> vecIMGEntries;
+	for (auto pIMGEntry : getEntries())
+	{
+		if (String::isIn(String::toUpperCase(pIMGEntry->getEntryName()), strText))
+		{
+			vecIMGEntries.push_back(pIMGEntry);
+		}
+		Events::trigger(TASK_PROGRESS);
+	}
+	return vecIMGEntries;
+}
+
+vector<IMGEntry*>		IMGFormat::getEntriesByExtension(string strExtension, bool bWildcard)
 {
 	strExtension = String::toUpperCase(strExtension);
 	vector<IMGEntry*> vecIMGEntries;
 	for (auto pIMGEntry : getEntries())
 	{
-		if (String::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())) == strExtension)
+		if (bWildcard)
 		{
-			vecIMGEntries.push_back(pIMGEntry);
+			if (String::isIn(String::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())), strExtension))
+			{
+				vecIMGEntries.push_back(pIMGEntry);
+			}
 		}
+		else
+		{
+			if (String::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())) == strExtension)
+			{
+				vecIMGEntries.push_back(pIMGEntry);
+			}
+		}
+		Events::trigger(TASK_PROGRESS);
 	}
 	return vecIMGEntries;
 }

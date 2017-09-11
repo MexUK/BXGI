@@ -80,7 +80,10 @@ public:
 	std::unordered_map<bxgi::IMGEntry*, std::string>	getAllEntriesData(void); // not recommended to be used, may use too much memory, better to iterate pIMGFile->getEntries()
 	std::unordered_map<bxgi::IMGEntry*, std::string>	getEntriesData(std::vector<bxgi::IMGEntry*>& vecEntries); // not recommended to be used, may use too much memory, better to iterate pIMGFile->getEntries()
 	uint32											getNextEntryOffset(void); // in bytes
-	std::vector<bxgi::IMGEntry*>					getEntriesByExtension(std::string strExtension);
+
+	std::vector<bxgi::IMGEntry*>					getEntriesByName(std::string strText); // case-insensitive, wildcard match
+	std::vector<bxgi::IMGEntry*>					getEntriesByExtension(std::string strExtension, bool bWildcard = false); // case-insensitive
+
 	bxgi::IMGEntry*									getEntryByName(std::string& strEntryName); // case-insensitive
 	bxgi::IMGEntry*									getEntryByNameWithoutExtension(std::string& strEntryNameWithoutExtension); // case-insensitive
 	std::vector<std::string>						getEntryNames(void);
