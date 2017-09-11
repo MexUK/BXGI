@@ -1441,6 +1441,20 @@ vector<IMGEntry*>		IMGFormat::getEntriesByExtension(string strExtension, bool bW
 	return vecIMGEntries;
 }
 
+vector<IMGEntry*>		IMGFormat::getEntriesByVersion(uint32 uiFileTypeId, uint32 uiFileVersionId)
+{
+	vector<IMGEntry*> vecIMGEntries;
+	for (auto pIMGEntry : getEntries())
+	{
+		if (pIMGEntry->getFileType() == uiFileTypeId && pIMGEntry->getRawVersion() == uiFileVersionId)
+		{
+			vecIMGEntries.push_back(pIMGEntry);
+		}
+		Events::trigger(TASK_PROGRESS);
+	}
+	return vecIMGEntries;
+}
+
 IMGEntry*				IMGFormat::getEntryByName(string& strEntryName)
 {
 	strEntryName = String::toUpperCase(strEntryName);

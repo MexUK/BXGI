@@ -83,6 +83,7 @@ public:
 
 	std::vector<bxgi::IMGEntry*>					getEntriesByName(std::string strText); // case-insensitive, wildcard match
 	std::vector<bxgi::IMGEntry*>					getEntriesByExtension(std::string strExtension, bool bWildcard = false); // case-insensitive
+	std::vector<bxgi::IMGEntry*>					getEntriesByVersion(uint32 uiFileTypeId, uint32 uiFileVersionId);
 
 	bxgi::IMGEntry*									getEntryByName(std::string& strEntryName); // case-insensitive
 	bxgi::IMGEntry*									getEntryByNameWithoutExtension(std::string& strEntryNameWithoutExtension); // case-insensitive
