@@ -125,7 +125,9 @@ public:
 
 	bool					doesHaveUnknownVersion(void); // checks for RW version (DFF/TXD) or COL version. Unknown file extension counts as unknown RW version. IPL files are skipped.
 
-	bxgi::IMGEntry*		clone(bxgi::IMGFormat *pIMGFile);
+	bxgi::IMGEntry*			clone(bxgi::IMGFormat *pIMGFile);
+
+	void					replace(std::string& strFilePath);
 
 private:
 	bxgi::IMGFormat*		m_pIMGFile;
