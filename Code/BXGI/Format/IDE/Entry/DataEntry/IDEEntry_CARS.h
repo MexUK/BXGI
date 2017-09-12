@@ -69,7 +69,7 @@ public:
 	uint32						getMaxVehicleCountAtOneTime(void) { return m_uiMaxVehicleCountAtOneTime; }
 
 	void						setWheelRadius(bxcf::Vec2f& vecWheelRadius) { m_vecWheelRadius = vecWheelRadius; }
-	bxcf::Vec2f&					getWheelRadius(void) { return m_vecWheelRadius; }
+	bxcf::Vec2f&				getWheelRadius(void) { return m_vecWheelRadius; }
 
 	void						setDirtLevel(float32 fDirtLevel) { m_fDirtLevel = fDirtLevel; }
 	float32						getDirtLevel(void) { return m_fDirtLevel; }

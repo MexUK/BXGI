@@ -199,13 +199,53 @@ EIDEPathType			IDEFormat::detectPATHType(void)
 	}
 }
 
+// item sets in sections
+vector<string>				IDEFormat::getModelSetNamesInSections(vector<EIDESection>& vecIDESections)
+{
+	vector<string> vecModelSetNames;
+	for (EIDESection uiIDESection : vecIDESections)
+	{
+		vector<vector<IDEEntry*>> vecIDEEntries2 = getSectionsBySection(uiIDESection);
+		for (vector<IDEEntry*> vecIDEEntries : vecIDEEntries2)
+		{
+			for (IDEEntry *pIDEEntry : vecIDEEntries)
+			{
+				vecModelSetNames.push_back(pIDEEntry->_getModelName());
+			}
+		}
+	}
+	return vecModelSetNames;
+}
+
+vector<string>				IDEFormat::getTextureSetNamesInSections(vector<EIDESection>& vecIDESections)
+{
+	vector<string> vecTextureSetNames;
+	for (EIDESection uiIDESection : vecIDESections)
+	{
+		vector<vector<IDEEntry*>> vecIDEEntries2 = getSectionsBySection(uiIDESection);
+		for (vector<IDEEntry*> vecIDEEntries : vecIDEEntries2)
+		{
+			for (IDEEntry *pIDEEntry : vecIDEEntries)
+			{
+				vecTextureSetNames.push_back(pIDEEntry->_getTextureName());
+			}
+		}
+	}
+	return vecTextureSetNames;
+}
+
 // general
 EIDESection					IDEFormat::getSectionFromText(string strIDESectionText)
 {
+	strIDESectionText = strIDESectionText.substr(0, 5);
+	strIDESectionText = String::toUpperCase(strIDESectionText);
 	strIDESectionText = String::zeroPad(strIDESectionText, 4);
+	strIDESectionText = String::reverse(strIDESectionText);
 
-	const uint8 *pszData = (const uint8*) String::toUpperCase(strIDESectionText.substr(0, 5)).c_str();
-	switch ((uint32)*pszData)
+	const char *pIDESectionTextValue = strIDESectionText.c_str();
+
+	uint32 uiValue = *(const uint32*)pIDESectionTextValue;
+	switch (uiValue)
 	{
 	case 'OBJS':	return IDE_SECTION_OBJS;
 	case 'TOBJ':	return IDE_SECTION_TOBJ;
@@ -226,7 +266,7 @@ EIDESection					IDEFormat::getSectionFromText(string strIDESectionText)
 	case 'AMAT':	return IDE_SECTION_AMAT;
 	case 'LODM':	return IDE_SECTION_LODM;
 	case 'AGRP':
-		if (strIDESectionText.length() >= 5 && *(pszData + 4) == 'S')
+		if (strIDESectionText.length() >= 5 && *(pIDESectionTextValue + 4) == 'S')
 		{
 			return IDE_SECTION_AGRPS;
 		}

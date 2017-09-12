@@ -2,6 +2,7 @@
 #include "Exception/EExceptionCode.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/IDE/IDEFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -17,7 +18,7 @@ IDEEntry_PEDS::IDEEntry_PEDS(IDEFormat *pIDEFormat) :
 
 void			IDEEntry_PEDS::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pFormat->m_reader;
 
 	uint32 uiLineTokenCount = pDataReader->getLineTokens().size();
 	bool bMatchFound = false;

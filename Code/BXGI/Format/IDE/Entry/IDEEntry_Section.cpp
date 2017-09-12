@@ -13,7 +13,7 @@ IDEEntry_Section::IDEEntry_Section(IDEFormat *pIDEFormat) :
 
 void		IDEEntry_Section::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pFormat->m_reader;
 
 	// setSectionType() has already been called, as the EIDESectionType has already been detected.
 }

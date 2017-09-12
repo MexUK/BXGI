@@ -2,6 +2,7 @@
 #include "Exception/EExceptionCode.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/IDE/IDEFormat.h"
 
 using namespace bxgi;
 
@@ -25,7 +26,7 @@ IDEEntry_2DFX::~IDEEntry_2DFX(void)
 
 void			IDEEntry_2DFX::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pFormat->m_reader;
 	
 	if(doesSupportFormatGame(GAME_FLAG_GTA_IV))
 	{

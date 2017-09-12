@@ -13,14 +13,10 @@ IDEEntry_AMAT::IDEEntry_AMAT(IDEFormat *pIDEFormat) :
 
 void			IDEEntry_AMAT::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
-
 	throw EXCEPTION_UNKNOWN_FORMAT_TYPE;
 }
 
 void			IDEEntry_AMAT::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
-
 	throw EXCEPTION_UNKNOWN_FORMAT_TYPE;
 }

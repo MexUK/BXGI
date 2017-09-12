@@ -217,10 +217,15 @@ EIPLPathType		IPLFormat::detectPATHType(void)
 
 EIPLSection					IPLFormat::getSectionFromText(string strIPLSectionText)
 {
+	strIPLSectionText = strIPLSectionText.substr(0, 5);
+	strIPLSectionText = String::toUpperCase(strIPLSectionText);
 	strIPLSectionText = String::zeroPad(strIPLSectionText, 4);
+	strIPLSectionText = String::reverse(strIPLSectionText);
 
-	const uint8 *pszData = (const uint8*) String::toUpperCase(strIPLSectionText.substr(0, 4)).c_str();
-	switch ((uint32)*pszData)
+	const char *pIPLSectionTextValue = strIPLSectionText.c_str();
+
+	uint32 uiValue = *(const uint32*)pIPLSectionTextValue;
+	switch (uiValue)
 	{
 	case 'INST':	return IPL_SECTION_INST;
 	case 'ZONE':	return IPL_SECTION_ZONE;

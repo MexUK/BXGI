@@ -2,6 +2,7 @@
 #include "Exception/EExceptionCode.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/IDE/IDEFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -13,9 +14,7 @@ IDEEntry_UnknownSection::IDEEntry_UnknownSection(IDEFormat *pIDEFormat) :
 
 void			IDEEntry_UnknownSection::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
-	
-	setLine(*pDataReader->getActiveLine());
+	setLine(*m_pFormat->m_reader.getActiveLine());
 }
 
 void			IDEEntry_UnknownSection::serialize(void)

@@ -21,10 +21,16 @@ class bxgi::IDEFormat : public bxgi::SectionLinesFormat<bxgi::IDEFormat, bxgi::I
 public:
 	IDEFormat(void);
 
-	bxgi::IDEEntry_Data*								createDataEntry(EIDESection EIDESectionValue, uint32 uiSectionSpecificType = 0);
+	void										unserialize(void);
+	void										serialize(void);
+
+	bxgi::IDEEntry_Data*						createDataEntry(EIDESection EIDESectionValue, uint32 uiSectionSpecificType = 0);
 	
 	template<class EntryClass2>
 	std::vector<EntryClass2*>					getEntriesBySection(EIDESection EIDESectionValue, bxgi::E2DFXType E2DFXTypeValue = bxgi::_2DFX_UNKNOWN);
+
+	std::vector<std::string>					getModelSetNamesInSections(std::vector<EIDESection>& vecIDESections);
+	std::vector<std::string>					getTextureSetNamesInSections(std::vector<EIDESection>& vecIDESections);
 
 	EIDESection									getSectionFromText(std::string strIDESectionText);
 	std::string									getSectionText(EIDESection EIDESectionValue);
@@ -32,12 +38,9 @@ public:
 	uint32										detectSectionSpecificType(EIDESection EIDESectionValue);
 
 private:
-	void										unserialize(void);
-	void										serialize(void);
+	bxgi::IDEEntry_Data*						unserializeDataEntry(EIDESection EIDESectionValue);
 
-	bxgi::IDEEntry_Data*								unserializeDataEntry(EIDESection EIDESectionValue);
-
-	std::pair<bxgi::E2DFXType, uint32>				detect2DFXTypeAndGame(void);
+	std::pair<bxgi::E2DFXType, uint32>			detect2DFXTypeAndGame(void);
 	EIDEPathType								detectPATHType(void);
 };
 

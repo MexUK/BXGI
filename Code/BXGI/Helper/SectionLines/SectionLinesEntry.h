@@ -37,8 +37,10 @@ public:
 	void						setFormatType(uint8 ucFormatType) { m_ucFormatType = ucFormatType; }
 	uint8						getFormatType(void) { return m_ucFormatType; }
 
-private:
+protected:
 	FormatClass*					m_pFormat;
+
+private:
 	bxgi::ESectionLinesEntryType	m_uiEntryType;
 	SectionEnum						m_uiSectionType;
 	std::string						m_strComment;

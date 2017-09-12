@@ -85,8 +85,7 @@ void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntr
 {
 	// initialize
 	EntryClass *pFormatEntry = nullptr;
-	DataReader *pDataReader = DataReader::get();
-	string strActiveLine = *pDataReader->getActiveLine();
+	string strActiveLine = *m_reader.getActiveLine();
 
 	// remove comment from end of line
 	string strComment = "";
@@ -109,7 +108,7 @@ void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntr
 	else
 	{
 		// set active line for data reader - keep blank lines intact (detected blank after comment removal and trimming)
-		pDataReader->setActiveLine(&strActiveLine);
+		m_reader.setActiveLine(&strActiveLine);
 
 		// check if line is a section name
 		SectionEnum eFormatSectionValue = getSectionFromText(strActiveLine);
@@ -122,8 +121,8 @@ void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntr
 		else
 		{
 			// line is a data line
-			pDataReader->setTokenModeEnabled(true);
-			pDataReader->setLineTokens(String::split(String::replace(strActiveLine, ",", ""), " "));
+			m_reader.setTokenModeEnabled(true);
+			m_reader.setLineTokens(String::split(String::replace(strActiveLine, ",", ""), " "));
 			try
 			{
 				eFormatSectionValue = getActiveReadSection();
@@ -141,7 +140,7 @@ void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntr
 				pFormatEntry->setSectionType(getActiveReadSection());
 				pFormatEntry->unserialize();
 			}
-			pDataReader->setTokenModeEnabled(false);
+			m_reader.setTokenModeEnabled(false);
 		}
 	}
 
@@ -158,9 +157,8 @@ void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntr
 template<class FormatClass, class EntryClass, typename SectionEnum, class OtherEntryClass, class SectionEntryClass, class DataEntryClass>
 void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntryClass, SectionEntryClass, DataEntryClass>::unserializeText(void)
 {
-	DataReader *pDataReader = DataReader::get();
-	pDataReader->readAndStoreLines();
-	while (pDataReader->iterateLines())
+	m_reader.readAndStoreLines();
+	while (m_reader.iterateLines())
 	{
 		unserializeLine();
 	}
@@ -198,6 +196,7 @@ template<class FormatClass, class EntryClass, typename SectionEnum, class OtherE
 OtherEntryClass*	bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntryClass, SectionEntryClass, DataEntryClass>::createOtherEntry(void)
 {
 	OtherEntryClass *pFormatEntry = new OtherEntryClass((FormatClass*)this);
+	pFormatEntry->setEntryType(SECTION_LINES_ENTRY_OTHER);
 	return pFormatEntry;
 }
 
@@ -205,6 +204,7 @@ template<class FormatClass, class EntryClass, typename SectionEnum, class OtherE
 SectionEntryClass*	bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntryClass, SectionEntryClass, DataEntryClass>::createSectionEntry(SectionEnum eFormatSectionValue)
 {
 	SectionEntryClass *pFormatEntry = new SectionEntryClass((FormatClass*)this);
+	pFormatEntry->setEntryType(SECTION_LINES_ENTRY_SECTION);
 	pFormatEntry->setSectionType(eFormatSectionValue);
 	return pFormatEntry;
 }

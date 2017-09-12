@@ -3,6 +3,7 @@
 #include "Exception/EExceptionCode.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/IDE/IDEFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -17,7 +18,7 @@ IDEEntry_PATH::IDEEntry_PATH(IDEFormat *pIDEFormat, EIDEPathType EIDEPathTypeVal
 
 void			IDEEntry_PATH::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pFormat->m_reader;
 }
 
 void			IDEEntry_PATH::serialize(void)

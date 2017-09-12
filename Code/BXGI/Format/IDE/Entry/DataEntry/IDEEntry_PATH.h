@@ -12,13 +12,13 @@ class bxgi::IDEEntry_PATH : public bxgi::IDEEntry_Data
 public:
 	IDEEntry_PATH(bxgi::IDEFormat *pIDEFormat, bxgi::EIDEPathType EIDEPathTypeValue);
 
-	virtual void					unserialize(void);
-	virtual void					serialize(void);
+	virtual void						unserialize(void);
+	virtual void						serialize(void);
 
-	void							setIDEPathType(bxgi::EIDEPathType EIDEPathTypeValue) { m_EIDEPathType = EIDEPathTypeValue; }
+	void								setIDEPathType(bxgi::EIDEPathType EIDEPathTypeValue) { m_EIDEPathType = EIDEPathTypeValue; }
 	bxgi::EIDEPathType					getIDEPathType(void) { return m_EIDEPathType; }
 
-	static void						setLatestPathGroup(bxgi::IDEEntry_PATH_Group* pLatestPathGroup) { m_pLatestPathGroup = pLatestPathGroup; }
+	static void							setLatestPathGroup(bxgi::IDEEntry_PATH_Group* pLatestPathGroup) { m_pLatestPathGroup = pLatestPathGroup; }
 	static bxgi::IDEEntry_PATH_Group*	getLatestPathGroup(void) { return m_pLatestPathGroup; }
 
 private:

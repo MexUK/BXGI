@@ -36,13 +36,13 @@ public:
 	uint32						getUnknown1(void) { return m_uiUnknown1; }
 
 	void						setBoundingBoxLowerLeftCorner(bxcf::Vec3f& vecBoundingBoxLowerLeftCorner) { m_vecBoundingBoxLowerLeftCorner = vecBoundingBoxLowerLeftCorner; }
-	bxcf::Vec3f&					getBoundingBoxLowerLeftCorner(void) { return m_vecBoundingBoxLowerLeftCorner; }
+	bxcf::Vec3f&				getBoundingBoxLowerLeftCorner(void) { return m_vecBoundingBoxLowerLeftCorner; }
 
 	void						setBoundingBoxUpperRightCorner(bxcf::Vec3f& vecBoundingBoxUpperRightCorner) { m_vecBoundingBoxUpperRightCorner = vecBoundingBoxUpperRightCorner; }
-	bxcf::Vec3f&					getBoundingBoxUpperRightCorner(void) { return m_vecBoundingBoxUpperRightCorner; }
+	bxcf::Vec3f&				getBoundingBoxUpperRightCorner(void) { return m_vecBoundingBoxUpperRightCorner; }
 
 	void						setBoundingSphereCenterPosition(bxcf::Vec3f& vecBoundingSphereCenterPosition) { m_vecBoundingSphereCenterPosition = vecBoundingSphereCenterPosition; }
-	bxcf::Vec3f&					getBoundingSphereCenterPosition(void) { return m_vecBoundingSphereCenterPosition; }
+	bxcf::Vec3f&				getBoundingSphereCenterPosition(void) { return m_vecBoundingSphereCenterPosition; }
 
 	void						setBoundingSphereRadius(float32 fBoundingSphereRadius) { m_fBoundingSphereRadius = fBoundingSphereRadius; }
 	float32						getBoundingSphereRadius(void) { return m_fBoundingSphereRadius; }
