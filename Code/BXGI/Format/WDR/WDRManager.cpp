@@ -16,6 +16,7 @@ WDRManager::WDRManager(void)
 {
 }
 
+// initialization
 void						WDRManager::init(void)
 {
 }
@@ -23,6 +24,7 @@ void						WDRManager::uninit(void)
 {
 }
 
+// convert format
 WDRFormat*					WDRManager::convertIntermediateModelFileToWDRFile(IntermediateModelFormat *pGeneralModelFile)
 {
 	WDRFormat *pWDRFile = new WDRFormat;
@@ -72,6 +74,7 @@ WDRFormat*					WDRManager::convertIntermediateModelFileToWDRFile(IntermediateMod
 	return pWDRFile;
 }
 
+// offsets
 uint32						WDRManager::getPackedOffset(uint32 uiOffset)
 {
 	return uiOffset | (5 << 28);

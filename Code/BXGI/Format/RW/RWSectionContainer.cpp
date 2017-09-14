@@ -9,13 +9,15 @@
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
 #include "Static/Debug.h"
+#include "Format/RW/RWFormat.h"
 
 using namespace std;
 using namespace bxcf;
 using namespace bxgi;
 
 RWSectionContainer::RWSectionContainer(void) :
-	m_pParentNode(nullptr)
+	m_pParentNode(nullptr),
+	m_pRWFormat(nullptr)
 {
 }
 
@@ -28,9 +30,10 @@ void				RWSectionContainer::unload(void)
 	}
 }
 
-void				RWSectionContainer::unserialize(void)
+// serialization
+void				RWSectionContainer::_unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	RWSectionContainer *pParentRWSection = this;
 	RWSectionContainer *pPreviousRWSection = this;
@@ -60,7 +63,7 @@ void				RWSectionContainer::unserialize(void)
 		// enter new section
 		if (uiRWSectionId == 0)
 		{
-			// assuming end of data
+			// assume end of data
 			break;
 		}
 		else if (uiRWSectionId != 1)
@@ -92,7 +95,7 @@ void				RWSectionContainer::unserialize(void)
 		}
 
 		// create RW section
-		RWSection *pRWSection = RWSection::creatERWSection(ERWSectionValue);
+		RWSection *pRWSection = RWSection::creatERWSection(ERWSectionValue); // todo - rename to lowercase E
 		/*
 		todo
 		if (!pRWSection->isUnknownSection())
@@ -100,6 +103,7 @@ void				RWSectionContainer::unserialize(void)
 			pRWSection->setSectionEnumId(ERWSectionValue);
 		}
 		*/
+		pRWSection->setRWFormat(m_pRWFormat);
 		pRWSection->setSectionId(ERWSectionValue);
 		pRWSection->setSectionSize(uiRWSectionSize);
 		pRWSection->setStructSectionSize(uiStructSectionSize);
@@ -110,9 +114,9 @@ void				RWSectionContainer::unserialize(void)
 		}
 
 		// unserialize RW section
-		Debug::log("Section ID: " + String::toString(uiRWSectionId));
+		//Debug::log("Section ID: " + String::toString(uiRWSectionId));
 		uint64 uiByteCountBefore = pDataReader->getSeek();
-		pRWSection->unserialize();
+		pRWSection->_unserialize();
 		uint64 uiByteCountAfter = pDataReader->getSeek();
 		
 		uint32 uiByteCountDifference = (uint32)(uiByteCountAfter - uiByteCountBefore);
@@ -122,7 +126,14 @@ void				RWSectionContainer::unserialize(void)
 		}
 
 		// store RW section
-		pParentRWSection->addEntry(pRWSection);
+		if (pParentRWSection)
+		{
+			pParentRWSection->addEntry(pRWSection);
+		}
+		else
+		{
+			addEntry(pRWSection);
+		}
 
 		// reset section depth
 		/*
@@ -158,7 +169,7 @@ void				RWSectionContainer::unserialize(void)
 	}
 }
 
-void				RWSectionContainer::serialize(void)
+void				RWSectionContainer::_serialize(void)
 {
 	DataWriter *pDataWriter = DataWriter::get();
 	EDataStreamType ePreviousStreamType = pDataWriter->getStreamType();
@@ -178,9 +189,9 @@ void				RWSectionContainer::serializERWSectionContainer(RWSectionContainer *pRWS
 	for (RWSection *pRWSection : pRWSectionContainer->getEntries())
 	{
 		uint64 uiSeek1 = pDataWriter->getSeek();
-		pRWSection->RWSection::serialize();	// base method,              RW section header
+		pRWSection->RWSection::_serialize();	// base method,              RW section header
 		uint64 uiSeek2 = pDataWriter->getSeek();
-		pRWSection->serialize();				// derived method (virtual), RW section body
+		pRWSection->_serialize();				// derived method (virtual), RW section body
 		uint64 uiSeek3 = pDataWriter->getSeek();
 
 		if (!pRWSection->isUnknownSection())
@@ -201,6 +212,7 @@ void				RWSectionContainer::serializERWSectionContainer(RWSectionContainer *pRWS
 	}
 }
 
+// add/remove section
 RWSection*			RWSectionContainer::addSection(ERWSection ERWSectionValue, ERWVersion ERWVersionValue)
 {
 	RWSection *pRWSection = RWSection::creatERWSection(ERWSectionValue);
@@ -228,6 +240,7 @@ void				RWSectionContainer::removeSectionByIndex(uint32 uiSectionIndex)
 	delete pRWSection;
 }
 
+// fetch section
 vector<RWSection*>	RWSectionContainer::getSectionsByType(ERWSection ERWSectionValue, bool bCheckRecursiveSections)
 {
 	vector<RWSection*>
@@ -252,6 +265,7 @@ vector<RWSection*>	RWSectionContainer::getSectionsByType(ERWSection ERWSectionVa
 	return vecRWSectionsToReturn;
 }
 
+// section count
 uint32				RWSectionContainer::getSectionCountByType(ERWSection ERWSectionValue, bool bCheckRecursiveSections)
 {
 	vector<RWSection*> vecRWSectionsToSearch = getEntries();
@@ -275,6 +289,7 @@ uint32				RWSectionContainer::getSectionCountByType(ERWSection ERWSectionValue, 
 	return uiSectionCount;
 }
 
+// prelightning
 void				RWSectionContainer::removePrelightning(void)
 {
 	if (((RWSection*)this)->getSectionId() == RW_SECTION_GEOMETRY)
@@ -333,6 +348,7 @@ void				RWSectionContainer::applyPrelightningColourOffset(int16 ssRed, int16 ssG
 	}
 }
 
+// DV/NV colours
 vector<Vec4u8>		RWSectionContainer::getDVColours(void)
 {
 	vector<Vec4u8> vecDVColours;
@@ -395,6 +411,7 @@ void					RWSectionContainer::setNVColours(vector<Vec4u8>& vecNVColours)
 	}
 }
 
+// 2d effects
 void					RWSectionContainer::set2dEffects(vector<_2dEffect*>& vec2dEffects)
 {
 	vector<vector<_2dEffect*>> vec2dEffects2;

@@ -8,8 +8,8 @@ class bxgi::RWSection_Clump : public bxgi::RWSection
 public:
 	RWSection_Clump(void);
 
-	void							unserialize(void);
-	void							serialize(void);
+	void							_unserialize(void);
+	void							_serialize(void);
 
 	void							setAtomicallyLinkedObjectCount(uint32 uiAtomicallyLinkedObjectCount) { m_uiAtomicallyLinkedObjectCount = uiAtomicallyLinkedObjectCount; }
 	uint32							getAtomicallyLinkedObjectCount(void) { return m_uiAtomicallyLinkedObjectCount; }

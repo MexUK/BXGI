@@ -14,9 +14,10 @@ RWSection_ExtraVertColour::RWSection_ExtraVertColour(void) :
 	setSectionId(RW_SECTION_EXTRA_VERT_COLOUR);
 }
 
-void							RWSection_ExtraVertColour::unserialize(void)
+// serialization
+void							RWSection_ExtraVertColour::_unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	m_uiMagicNumber = pDataReader->readUint32();
 
@@ -31,7 +32,7 @@ void							RWSection_ExtraVertColour::unserialize(void)
 	}
 }
 
-void							RWSection_ExtraVertColour::serialize(void)
+void							RWSection_ExtraVertColour::_serialize(void)
 {
 	DataWriter *pDataWriter = DataWriter::get();
 
@@ -43,6 +44,7 @@ void							RWSection_ExtraVertColour::serialize(void)
 	}
 }
 
+// vertex colours
 void							RWSection_ExtraVertColour::setVertexColours(vector<Vec4u8>& vecNightVertexColours)
 {
 	RWSection_Geometry *pRWSection_Geometry = (RWSection_Geometry*)getParentNode()->getParentNode();

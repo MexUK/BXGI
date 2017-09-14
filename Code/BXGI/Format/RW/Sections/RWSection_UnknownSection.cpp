@@ -2,6 +2,7 @@
 #include "Engine/RW/RWManager.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/RW/RWFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -13,15 +14,16 @@ RWSection_UnknownSection::RWSection_UnknownSection(void) :
 	setUnknownSection(true);
 }
 
-void							RWSection_UnknownSection::unserialize(void)
+// serialization
+void							RWSection_UnknownSection::_unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	m_uiActualSectionId = m_uiSectionId;
 	m_strData = pDataReader->readString(m_uiSectionSize);
 }
 
-void							RWSection_UnknownSection::serialize(void)
+void							RWSection_UnknownSection::_serialize(void)
 {
 	DataWriter *pDataWriter = DataWriter::get();
 

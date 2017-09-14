@@ -9,8 +9,8 @@ class bxgi::RWSection_ExtraVertColour : public bxgi::RWSection
 public:
 	RWSection_ExtraVertColour(void);
 
-	void							unserialize(void);
-	void							serialize(void);
+	void							_unserialize(void);
+	void							_serialize(void);
 
 	void							setMagicNumber(uint32 uiMagicNumber) { m_uiMagicNumber = uiMagicNumber; }
 	uint32							getMagicNumber(void) { return m_uiMagicNumber; }

@@ -9,8 +9,8 @@ class bxgi::RWSection_MaterialList : public bxgi::RWSection
 public:
 	RWSection_MaterialList(void);
 
-	void							unserialize(void);
-	void							serialize(void);
+	void							_unserialize(void);
+	void							_serialize(void);
 
 	void							setMaterialCount(uint32 uiMaterialCount) { m_uiMaterialCount = uiMaterialCount; }
 	uint32							getMaterialCount(void) { return m_uiMaterialCount; }

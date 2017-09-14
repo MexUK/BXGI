@@ -33,7 +33,8 @@ void					WTDFormat::unload(void)
 	getEntries().clear();
 }
 
-void					WTDFormat::unserialize(void)
+// serialization
+void					WTDFormat::_unserialize(void)
 {
 	DataReader *pDataReader = DataReader::get();
 
@@ -172,7 +173,7 @@ void					WTDFormat::unserialize(void)
 	}
 }
 
-void					WTDFormat::serialize(void)
+void					WTDFormat::_serialize(void)
 {
 	// todo
 
@@ -330,6 +331,7 @@ void					WTDFormat::serialize(void)
 	pDataWriter2->reset();
 }
 
+// convert format
 IntermediateTextureFormat*		WTDFormat::convertToIntermediateFormat(void)
 {
 	IntermediateTextureFormat *pGeneralTextureFile = new IntermediateTextureFormat;
@@ -366,6 +368,7 @@ IntermediateTextureFormat*		WTDFormat::convertToIntermediateFormat(void)
 	return pGeneralTextureFile;
 }
 
+// stream sizes
 uint32				WTDFormat::getFileHeaderFlagsFromSystemAndGraphicsStreamSizes(uint32 uiSystemStreamSize, uint32 uiGraphicsStreamSize)
 {
 	return (getCompactSize(uiSystemStreamSize) & 0x7FFF) | (getCompactSize(uiGraphicsStreamSize) & 0x7FFF) << 15 | 3 << 30;
@@ -384,6 +387,7 @@ uint32				WTDFormat::getCompactSize(uint32 uiSize)
 	return ((i & 0x0F) << 11) | (uiSize & 0x7FF);
 }
 
+// compression
 string						WTDFormat::decompressWTDFormatData(uint32& uiSystemSegmentSize, uint32& uiGPUSegmentSize)
 {
 	DataReader *pDataReader = DataReader::get();
@@ -405,6 +409,7 @@ string						WTDFormat::decompressWTDFormatData(uint32& uiSystemSegmentSize, uint
 	return CompressionManager::decompressZLib(pDataReader->readRemaining(), uiSystemSegmentSize + uiGPUSegmentSize);
 }
 
+// offsets
 uint32			WTDFormat::convertULongToOffset(uint32 uiValue)
 {
 	if (uiValue == 0)
@@ -425,6 +430,7 @@ uint32			WTDFormat::convertULongToDataOffset(uint32 uiValue)
 	return uiValue & 0x0FFFFFFF;
 }
 
+// D3D Formats
 D3DFORMAT				WTDFormat::getD3DFormatFromFourCC(string strFourCC)
 {
 	if (strFourCC == "DXT1")

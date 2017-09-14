@@ -1,6 +1,7 @@
 #include "RWSection_GeometryList.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/RW/RWFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -11,14 +12,15 @@ RWSection_GeometryList::RWSection_GeometryList(void) :
 	setSectionId(RW_SECTION_GEOMETRY_LIST);
 }
 
-void							RWSection_GeometryList::unserialize(void)
+// serialization
+void							RWSection_GeometryList::_unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	m_uiGeometryCount = pDataReader->readUint32();
 }
 
-void							RWSection_GeometryList::serialize(void)
+void							RWSection_GeometryList::_serialize(void)
 {
 	DataWriter *pDataWriter = DataWriter::get();
 

@@ -10,8 +10,8 @@ public:
 	RWSection_2dEffect(void);
 	~RWSection_2dEffect(void);
 
-	void							unserialize(void);
-	void							serialize(void);
+	void							_unserialize(void);
+	void							_serialize(void);
 
 	bxgi::_2dEffectsPool*			get2dEffects(void) { return m_p2dEffectsPool; }
 

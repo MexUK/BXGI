@@ -24,8 +24,8 @@ public:
 	static D3DFORMAT			getD3DFormatFromFourCC(std::string strFourCC);
 
 private:
-	void						unserialize(void);
-	void						serialize(void);
+	void						_unserialize(void);
+	void						_serialize(void);
 
 	static uint32				getCompactSize(uint32 uiSize);
 	uint32						convertULongToOffset(uint32 uiValue);

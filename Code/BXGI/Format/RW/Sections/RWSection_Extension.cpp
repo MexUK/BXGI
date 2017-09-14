@@ -1,18 +1,20 @@
 #include "RWSection_Extension.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/RW/RWFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
 
-void							RWSection_Extension::unserialize(void)
+// serialization
+void							RWSection_Extension::_unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	// no body data to read, contained RW sections are unserialized elsewhere
 }
 
-void							RWSection_Extension::serialize(void)
+void							RWSection_Extension::_serialize(void)
 {
 	DataWriter *pDataWriter = DataWriter::get();
 

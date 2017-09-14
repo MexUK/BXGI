@@ -150,7 +150,8 @@ void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntr
 	// store entry in Format object
 	if (pFormatEntry->getEntryType() != SECTION_LINES_ENTRY_SECTION)
 	{
-		getSectionEntries().rbegin()->second.push_back(pFormatEntry);
+		//getSectionEntries().rbegin()->second.push_back(pFormatEntry);
+		m_umapSectionEntries[pFormatEntry->getSectionType()].push_back(pFormatEntry);
 	}
 }
 

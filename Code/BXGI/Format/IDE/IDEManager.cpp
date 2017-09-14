@@ -4,6 +4,8 @@
 #include "Static/String.h"
 #include "Static/StdVector.h"
 #include "Static/Debug.h"
+#include "Event/Events.h"
+#include "../BXCF/Event/EEvent.h"
 
 using namespace std;
 using namespace bxcf;
@@ -20,6 +22,41 @@ void			IDEManager::uninit(void)
 {
 }
 
+// entry fetching
+void				IDEManager::getModelAndTextureSetNamesFromFiles(
+	vector<string>& vecIDEFilePaths,
+	set<string>& stModelNames,
+	set<string>& stTextureSetNames,
+	vector<EIDESection>& vecModelSections,
+	vector<EIDESection>& vecTextureSections
+)
+{
+	for (string& strIDEFilePath : vecIDEFilePaths)
+	{
+		IDEFormat ideFormat;
+		ideFormat.setFilePath(strIDEFilePath);
+		ideFormat.open();
+		ideFormat.unserialize();
+		ideFormat.close();
+		if (ideFormat.doesHaveError())
+		{
+			continue;
+		}
+
+		for (string& strModelName : ideFormat.getModelNamesInSections(vecModelSections))
+		{
+			stModelNames.insert(String::toUpperCase(strModelName));
+		}
+		for (string& strTextureSetName : ideFormat.getTextureSetNamesInSections(vecTextureSections))
+		{
+			stTextureSetNames.insert(String::toUpperCase(strTextureSetName));
+		}
+
+		Events::trigger(TASK_PROGRESS);
+	}
+}
+
+// entry fetching old
 vector<string>		IDEManager::getIDEEntryNamesWithoutExtension(vector<string> vecIDEPaths, bool bModelNames, bool bTXDNames)
 {
 	vector<string> vecEntryNamesWithoutExtension;

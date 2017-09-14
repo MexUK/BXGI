@@ -15,13 +15,13 @@ class bxgi::WDRFormat : public bxcf::Format
 public:
 	WDRFormat(void) : Format(true, bxcf::LITTLE_ENDIAN) {}
 
-	void								unload(void);
+	void									unload(void);
 
 	static bxgi::WDRBlock_Geometry*			convertIntermediateGeometryToWDRGeometry(bxgi::IntermediateGeometry *pGeneralGeometry);
 
 public:
-	void								unserialize(void);
-	void								serialize(void);
+	void									_unserialize(void);
+	void									_serialize(void);
 
 public: // todo - make the properties private
 	bxgi::WDRBoundingObject					m_boundingObject;

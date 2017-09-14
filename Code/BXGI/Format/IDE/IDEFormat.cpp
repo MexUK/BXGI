@@ -200,7 +200,7 @@ EIDEPathType			IDEFormat::detectPATHType(void)
 }
 
 // item sets in sections
-vector<string>				IDEFormat::getModelSetNamesInSections(vector<EIDESection>& vecIDESections)
+vector<string>				IDEFormat::getModelNamesInSections(vector<EIDESection>& vecIDESections)
 {
 	vector<string> vecModelSetNames;
 	for (EIDESection uiIDESection : vecIDESections)
@@ -210,7 +210,10 @@ vector<string>				IDEFormat::getModelSetNamesInSections(vector<EIDESection>& vec
 		{
 			for (IDEEntry *pIDEEntry : vecIDEEntries)
 			{
-				vecModelSetNames.push_back(pIDEEntry->_getModelName());
+				if (pIDEEntry->getEntryType() == SECTION_LINES_ENTRY_DATA)
+				{
+					vecModelSetNames.push_back(((IDEEntry_Data*)pIDEEntry)->getModelName());
+				}
 			}
 		}
 	}
@@ -227,7 +230,10 @@ vector<string>				IDEFormat::getTextureSetNamesInSections(vector<EIDESection>& v
 		{
 			for (IDEEntry *pIDEEntry : vecIDEEntries)
 			{
-				vecTextureSetNames.push_back(pIDEEntry->_getTextureName());
+				if (pIDEEntry->getEntryType() == SECTION_LINES_ENTRY_DATA)
+				{
+					vecTextureSetNames.push_back(((IDEEntry_Data*)pIDEEntry)->getTXDName());
+				}
 			}
 		}
 	}

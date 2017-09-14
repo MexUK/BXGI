@@ -1,6 +1,7 @@
 #include "RWSection_Material.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/RW/RWFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -17,9 +18,10 @@ RWSection_Material::RWSection_Material(void) :
 	setSectionId(RW_SECTION_MATERIAL);
 }
 
-void							RWSection_Material::unserialize(void)
+// serialization
+void							RWSection_Material::_unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	m_uiUnknown1 = pDataReader->readUint32();
 	m_uiColour = pDataReader->readUint32();
@@ -30,7 +32,7 @@ void							RWSection_Material::unserialize(void)
 	m_fDiffuse = pDataReader->readFloat32();
 }
 
-void							RWSection_Material::serialize(void)
+void							RWSection_Material::_serialize(void)
 {
 	DataWriter *pDataWriter = DataWriter::get();
 

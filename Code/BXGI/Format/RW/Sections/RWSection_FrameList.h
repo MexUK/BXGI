@@ -9,8 +9,8 @@ class bxgi::RWSection_FrameList : public bxgi::RWSection
 public:
 	bxgi::RWSection_FrameList(void);
 
-	void							unserialize(void);
-	void							serialize(void);
+	void							_unserialize(void);
+	void							_serialize(void);
 
 	void							setFrameCount(uint32 uiFrameCount) { m_uiFrameCount = uiFrameCount; }
 	uint32							getFrameCount(void) { return m_uiFrameCount; }

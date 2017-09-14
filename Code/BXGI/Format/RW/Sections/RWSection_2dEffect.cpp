@@ -4,6 +4,7 @@
 #include "Stream/DataWriter.h"
 #include "Exception/EExceptionCode.h"
 #include "Type/Vector/Vec3f.h"
+#include "Format/RW/RWFormat.h"
 
 using namespace std;
 using namespace bxcf;
@@ -14,14 +15,16 @@ RWSection_2dEffect::RWSection_2dEffect(void)
 	setSectionId(RW_SECTION_2D_EFFECT);
 	m_p2dEffectsPool = new _2dEffectsPool;
 }
+
 RWSection_2dEffect::~RWSection_2dEffect(void)
 {
 	delete m_p2dEffectsPool;
 }
 
-void							RWSection_2dEffect::unserialize(void)
+// serialization
+void							RWSection_2dEffect::_unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	uint32 uiEntryCount = pDataReader->readUint32();
 
@@ -56,7 +59,7 @@ void							RWSection_2dEffect::unserialize(void)
 	}
 }
 
-void							RWSection_2dEffect::serialize(void)
+void							RWSection_2dEffect::_serialize(void)
 {
 	DataWriter *pDataWriter = DataWriter::get();
 

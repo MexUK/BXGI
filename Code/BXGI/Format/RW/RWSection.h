@@ -16,7 +16,7 @@ public:
 
 	static void						initStatic(void);
 
-	void							serialize(void);
+	void							_serialize(void);
 
 	bxgi::RWSection*				addSection(bxgi::ERWSection ERWSectionValue, bxgi::ERWVersion ERWVersionValue);
 	void							removeSection(void);
@@ -24,7 +24,7 @@ public:
 
 	void							fillPlaceholdersForSerialization(uint32 uiSectionByteCount, uint32 uiSectionStructByteCount);
 
-	static bxgi::RWSection*		creatERWSection(bxgi::ERWSection ERWSectionValue);
+	static bxgi::RWSection*			creatERWSection(bxgi::ERWSection ERWSectionValue);
 	static bool						doesRWSectionContainStruct(bxgi::ERWSection ERWSectionValue);
 	static bool						doesRWSectionContainStruct_BeforeInit(bxgi::ERWSection ERWSectionValue);
 
@@ -49,6 +49,9 @@ public:
 	void							setUnknownSection(bool bUnknownSection) { m_bUnknownSection = bUnknownSection; }
 	bool							isUnknownSection(void) { return m_bUnknownSection; }
 
+	void							setRWFormat(RWFormat* pRWFormat) { m_pRWFormat = pRWFormat; }
+	RWFormat*						getRWFormat(void) { return m_pRWFormat; }
+
 	RWSection*						getNextParentNodeWithSectionType(ERWSection eSection);
 	
 private:
@@ -60,6 +63,7 @@ protected:
 	uint32							m_uiSectionRWVersion;
 	uint32							m_uiStructSectionSize;
 	bool							m_bUnknownSection;
+	RWFormat*						m_pRWFormat;
 
 private:
 	uint8													m_bSectionHeaderSkipped		: 1;

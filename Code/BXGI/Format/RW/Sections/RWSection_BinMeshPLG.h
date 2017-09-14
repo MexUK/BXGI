@@ -11,8 +11,8 @@ class bxgi::RWSection_BinMeshPLG : public bxgi::RWSection
 public:
 	RWSection_BinMeshPLG(void);
 
-	void										unserialize(void);
-	void										serialize(void);
+	void										_unserialize(void);
+	void										_serialize(void);
 
 	void										setFlags(uint32 uiFlags) { m_uiFlags = uiFlags; }
 	uint32										getFlags(void) { return m_uiFlags; }

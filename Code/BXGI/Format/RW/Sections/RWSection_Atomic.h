@@ -8,8 +8,8 @@ class bxgi::RWSection_Atomic : public bxgi::RWSection
 public:
 	RWSection_Atomic(void);
 
-	void							unserialize(void);
-	void							serialize(void);
+	void							_unserialize(void);
+	void							_serialize(void);
 
 	void							setFrameIndex(uint32 uiFrameIndex) { m_uiFrameIndex = uiFrameIndex; }
 	uint32							getFrameIndex(void) { return m_uiFrameIndex; }

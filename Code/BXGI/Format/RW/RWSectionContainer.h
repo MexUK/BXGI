@@ -18,9 +18,6 @@ public:
 
 	void									unload(void);
 
-	virtual void							unserialize(void) = 0;
-	virtual void							serialize(void) = 0;
-
 	void									serializERWSectionContainer(RWSectionContainer *pRWSectionContainer);
 
 	bxgi::RWSection*						addSection(bxgi::ERWSection ERWSectionValue, bxgi::ERWVersion ERWVersionValue);
@@ -31,8 +28,6 @@ public:
 	void									removePrelightning(void);
 	void									setPrelightningColour(int16 ssRed, int16 ssGreen, int16 ssBlue, int16 ssAlpha);
 	void									applyPrelightningColourOffset(int16 ssRed, int16 ssGreen, int16 ssBlue, int16 ssAlpha);
-
-	bxgi::RWFormat*							getRWFormat(void) { return nullptr; } // todo
 
 	void									setParentNode(bxgi::RWSection* pParentNode) { m_pParentNode = pParentNode; }
 	bxgi::RWSection*						getParentNode(void) { return m_pParentNode; }
@@ -47,6 +42,14 @@ public:
 	void									set2dEffects(std::vector<std::vector<bxgi::_2dEffect*>>& vec2dEffects);	// index into outer vector represents 2d effects section index
 	std::vector<std::vector<bxgi::_2dEffect*>>	get2dEffects(void);													// index into outer vector represents 2d effects section index
 
+	void									setRWFormat(RWFormat* pRWFormat) { m_pRWFormat = pRWFormat; }
+	RWFormat*								getRWFormat(void) { return m_pRWFormat; }
+
+protected:
+	virtual void							_unserialize(void);
+	virtual void							_serialize(void);
+
 private:
 	bxgi::RWSection*						m_pParentNode;
+	RWFormat*								m_pRWFormat;
 };

@@ -8,6 +8,6 @@ class bxgi::RWSection_Extension : public bxgi::RWSection
 public:
 	RWSection_Extension(void) { setSectionId(RW_SECTION_EXTENSION); }
 
-	void							unserialize(void);
-	void							serialize(void);
+	void							_unserialize(void);
+	void							_serialize(void);
 };

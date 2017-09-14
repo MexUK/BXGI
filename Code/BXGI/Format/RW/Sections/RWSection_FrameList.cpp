@@ -1,6 +1,7 @@
 #include "RWSection_FrameList.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/RW/RWFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -11,15 +12,16 @@ RWSection_FrameList::RWSection_FrameList(void) :
 	setSectionId(RW_SECTION_FRAME_LIST);
 }
 
-void							RWSection_FrameList::unserialize(void)
+// serialization
+void							RWSection_FrameList::_unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	m_uiFrameCount = pDataReader->readUint32();
 	m_strFrameData = pDataReader->readString(56 * m_uiFrameCount);
 }
 
-void							RWSection_FrameList::serialize(void)
+void							RWSection_FrameList::_serialize(void)
 {
 	DataWriter *pDataWriter = DataWriter::get();
 

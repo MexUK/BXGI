@@ -2,6 +2,7 @@
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
 #include "Static/String.h"
+#include "Format/RW/RWFormat.h"
 
 using namespace std;
 using namespace bxcf;
@@ -12,9 +13,10 @@ RWSection_String::RWSection_String(void)
 	setSectionId(RW_SECTION_STRING);
 }
 
-void							RWSection_String::unserialize(void)
+// serialization
+void							RWSection_String::_unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	// todo
 	//uint64 uiPreviousSeek = pDataReader->getSeek();
@@ -29,7 +31,7 @@ void							RWSection_String::unserialize(void)
 	//pDataReader->setSeek(uiPreviousSeek);
 }
 
-void							RWSection_String::serialize(void)
+void							RWSection_String::_serialize(void)
 {
 	DataWriter *pDataWriter = DataWriter::get();
 

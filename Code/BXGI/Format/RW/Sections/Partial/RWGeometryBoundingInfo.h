@@ -10,7 +10,7 @@ public:
 	RWGeometryBoundingInfo(void);
 
 	void							setCenter(bxcf::Vec3f& vecCenter) { m_vecCenter = vecCenter; }
-	bxcf::Vec3f&						getCenter(void) { return m_vecCenter; }
+	bxcf::Vec3f&					getCenter(void) { return m_vecCenter; }
 
 	void							setCenterRadius(float32 fCenterRadius) { m_fCenterRadius = fCenterRadius; }
 	float32							getCenterRadius(void) { return m_fCenterRadius; }

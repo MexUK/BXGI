@@ -6,6 +6,7 @@
 #include "Static/String.h"
 #include "Image/ImageManager.h"
 #include "Exception/EExceptionCode.h"
+#include "Format/RW/RWFormat.h"
 
 using namespace std;
 using namespace bxcf;
@@ -36,9 +37,10 @@ RWSection_TextureNative::RWSection_TextureNative(void) :
 	m_vecImageSize.y = 0;
 }
 
-void							RWSection_TextureNative::unserialize(void)
+// serialization
+void							RWSection_TextureNative::_unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get(); // todo - make better code for peek and seek-restore
+	DataReader *pDataReader = &m_pRWFormat->m_reader; // todo - make better code for peek and seek-restore
 	uint64 uiPreviousSeek = pDataReader->getSeek();
 	pDataReader->setPeek(true);
 	uint32 uiPlatformId = pDataReader->readUint32();
@@ -51,7 +53,7 @@ void							RWSection_TextureNative::unserialize(void)
 	unserializeBody();
 }
 
-void							RWSection_TextureNative::serialize(void)
+void							RWSection_TextureNative::_serialize(void)
 {
 	serializeHeader();
 	serializeBody();
@@ -539,6 +541,7 @@ void							RWSection_TextureNative::serializeBody_Android(void)
 	// todo
 }
 
+// serialization helpers
 string							RWSection_TextureNative::unserializeString(void)
 {
 	DataReader *pDataReader = DataReader::get();
@@ -565,74 +568,6 @@ string							RWSection_TextureNative::unserializeString(void)
 
 	pDataReader->readString(uiStringLength);
 	return strData;
-}
-
-void							RWSection_TextureNative::setRasterDataFormat(ERasterDataFormat ERasterDataFormatValue, bool bUpdatETXDRasterDataFormat)
-{
-	m_ERasterDataFormat = ERasterDataFormatValue;
-	if (bUpdatETXDRasterDataFormat)
-	{
-		m_uiTXDRasterDataFormat = TXDManager::getTXDRasterDataFormatFromRasterDataFormat(ERasterDataFormatValue);
-		m_EDXTCompressionType = ImageManager::getDXTCompressionTypeFromRasterDataFormat(ERasterDataFormatValue);
-	}
-}
-
-bool							RWSection_TextureNative::doesHaveValidTXDRasterDataFormat(void)
-{
-	return RWSection_TextureNative::doesTXDRasterDataFormatExist(getTXDRasterDataFormat());
-}
-
-bool							RWSection_TextureNative::doesTXDRasterDataFormatExist(uint32 uiTXDRasterDataFormat)
-{
-	switch (uiTXDRasterDataFormat & 0xFFB) // (0xFFF - 4) As TXD format versions for PS2 can have a value 4 OR'd into the TXD raster data format value.
-	{
-	case TXDRASTERDATAFORMAT_4444:
-	case TXDRASTERDATAFORMAT_1555:
-	case TXDRASTERDATAFORMAT_565:
-	case TXDRASTERDATAFORMAT_8888:
-	case TXDRASTERDATAFORMAT_888:
-		return true;
-	}
-	return false;
-}
-
-ERasterDataFormat				RWSection_TextureNative::detectRasterDataFormat(void)
-{
-	if (m_uiTXDRasterDataFormat & TXDRASTERDATAFORMAT_EXT_PAL4)
-	{
-		return RASTERDATAFORMAT_PAL4;
-	}
-	else if (m_uiTXDRasterDataFormat & TXDRASTERDATAFORMAT_EXT_PAL8)
-	{
-		return RASTERDATAFORMAT_PAL8;
-	}
-
-	switch (m_uiTXDRasterDataFormat & 0xFFB)
-	{
-	case TXDRASTERDATAFORMAT_8888:
-		return RASTERDATAFORMAT_BGRA32;
-	case TXDRASTERDATAFORMAT_888:
-		switch (m_ucBPP)
-		{
-		case 32:		return RASTERDATAFORMAT_BGR32;
-		case 24:		return RASTERDATAFORMAT_BGR24;
-		}
-		break;
-	case TXDRASTERDATAFORMAT_565:
-	case TXDRASTERDATAFORMAT_1555:
-	case TXDRASTERDATAFORMAT_4444:
-		switch (m_EDXTCompressionType)
-		{
-		case DXT_1:		return RASTERDATAFORMAT_DXT1;
-		case DXT_2:		return RASTERDATAFORMAT_DXT2;
-		case DXT_3:		return RASTERDATAFORMAT_DXT3;
-		case DXT_4:		return RASTERDATAFORMAT_DXT4;
-		case DXT_5:		return RASTERDATAFORMAT_DXT5;
-		}
-		break;
-	}
-
-	return RASTERDATAFORMAT_UNKNOWN;
 }
 
 void							RWSection_TextureNative::unswizzlePS2Format(void)
@@ -702,7 +637,7 @@ void							RWSection_TextureNative::unswizzlePS2Format(void)
 				// fix alpha
 				uint32 newval = pRasterData[i * 4 + 3] * 0xff;
 				newval /= 0x80;
-				newtexels[i * 4 + 3] = (uint8) newval;
+				newtexels[i * 4 + 3] = (uint8)newval;
 				//				if (texels[j][i*4+3] != 0xFF)
 				//					hasAlpha = true;
 			}
@@ -740,7 +675,7 @@ void							RWSection_TextureNative::unswizzlePS2Format(void)
 			}
 			uint32 uiNewAlpha = (m_strPaletteData.c_str()[i * 4 + 3] & 0xFF) * 0xff;
 			uiNewAlpha /= 0x80;
-			m_strPaletteData[i * 4 + 3] = (int8) uiNewAlpha;
+			m_strPaletteData[i * 4 + 3] = (int8)uiNewAlpha;
 		}
 	}
 
@@ -813,6 +748,78 @@ void							RWSection_TextureNative::unclut(uint32 uiWidth, uint32 uiHeight)
 	pMipmap->setRasterData(strRasterData);
 }
 
+// raster data format
+void							RWSection_TextureNative::setRasterDataFormat(ERasterDataFormat ERasterDataFormatValue, bool bUpdatETXDRasterDataFormat)
+{
+	m_ERasterDataFormat = ERasterDataFormatValue;
+	if (bUpdatETXDRasterDataFormat)
+	{
+		m_uiTXDRasterDataFormat = TXDManager::getTXDRasterDataFormatFromRasterDataFormat(ERasterDataFormatValue);
+		m_EDXTCompressionType = ImageManager::getDXTCompressionTypeFromRasterDataFormat(ERasterDataFormatValue);
+	}
+}
+
+// raster data format validation
+bool							RWSection_TextureNative::doesHaveValidTXDRasterDataFormat(void)
+{
+	return RWSection_TextureNative::doesTXDRasterDataFormatExist(getTXDRasterDataFormat());
+}
+
+bool							RWSection_TextureNative::doesTXDRasterDataFormatExist(uint32 uiTXDRasterDataFormat)
+{
+	switch (uiTXDRasterDataFormat & 0xFFB) // (0xFFF - 4) As TXD format versions for PS2 can have a value 4 OR'd into the TXD raster data format value.
+	{
+	case TXDRASTERDATAFORMAT_4444:
+	case TXDRASTERDATAFORMAT_1555:
+	case TXDRASTERDATAFORMAT_565:
+	case TXDRASTERDATAFORMAT_8888:
+	case TXDRASTERDATAFORMAT_888:
+		return true;
+	}
+	return false;
+}
+
+// fetch raster data format
+ERasterDataFormat				RWSection_TextureNative::detectRasterDataFormat(void)
+{
+	if (m_uiTXDRasterDataFormat & TXDRASTERDATAFORMAT_EXT_PAL4)
+	{
+		return RASTERDATAFORMAT_PAL4;
+	}
+	else if (m_uiTXDRasterDataFormat & TXDRASTERDATAFORMAT_EXT_PAL8)
+	{
+		return RASTERDATAFORMAT_PAL8;
+	}
+
+	switch (m_uiTXDRasterDataFormat & 0xFFB)
+	{
+	case TXDRASTERDATAFORMAT_8888:
+		return RASTERDATAFORMAT_BGRA32;
+	case TXDRASTERDATAFORMAT_888:
+		switch (m_ucBPP)
+		{
+		case 32:		return RASTERDATAFORMAT_BGR32;
+		case 24:		return RASTERDATAFORMAT_BGR24;
+		}
+		break;
+	case TXDRASTERDATAFORMAT_565:
+	case TXDRASTERDATAFORMAT_1555:
+	case TXDRASTERDATAFORMAT_4444:
+		switch (m_EDXTCompressionType)
+		{
+		case DXT_1:		return RASTERDATAFORMAT_DXT1;
+		case DXT_2:		return RASTERDATAFORMAT_DXT2;
+		case DXT_3:		return RASTERDATAFORMAT_DXT3;
+		case DXT_4:		return RASTERDATAFORMAT_DXT4;
+		case DXT_5:		return RASTERDATAFORMAT_DXT5;
+		}
+		break;
+	}
+
+	return RASTERDATAFORMAT_UNKNOWN;
+}
+
+// convert game
 void							RWSection_TextureNative::convertToGame(EPlatformedGame EPlatformedGame, vector<string>& vecMipmapsRemoved)
 {
 	switch (EPlatformedGame)
@@ -870,6 +877,7 @@ void							RWSection_TextureNative::convertToGame(EPlatformedGame EPlatformedGam
 	}
 }
 
+// convert raster data format
 void							RWSection_TextureNative::convertToRasterDataFormat(ERasterDataFormat ERasterDataFormatValue, vector<string>& vecMipmapsRemoved)
 {
 	vector<RWEntry_TextureNative_MipMap*> vecMipmapsToRemove;

@@ -6,6 +6,7 @@
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
 #include "Static/Debug.h"
+#include "Format/RW/RWFormat.h"
 
 using namespace std;
 using namespace bxcf;
@@ -18,16 +19,17 @@ RWSection_Geometry::RWSection_Geometry(void) :
 	m_uiTriangleCount(0),
 	m_uiVertexCount(0),
 	m_uiFrameCount(0),
-	m_uiAmbientColour(0),
-	m_uiDiffuseColour(0),
-	m_uiSpecularColour(0)
+	m_fAmbientColour(0.0f),
+	m_fDiffuseColour(0.0f),
+	m_fSpecularColour(0.0f)
 {
 	setSectionId(RW_SECTION_GEOMETRY);
 }
 
-void							RWSection_Geometry::unserialize(void)
+// serialization
+void							RWSection_Geometry::_unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	//uint32 uiTemp1 = pDataReader->getSeek();
 
@@ -47,17 +49,17 @@ void							RWSection_Geometry::unserialize(void)
 	m_uiVertexCount = pDataReader->readUint32();
 	m_uiFrameCount = pDataReader->readUint32();
 
-	if (RWVersion::unpackVersionStamp(m_uiSectionRWVersion) < 0x34000)
+	if (RWVersion::unpackVersionStamp(m_uiSectionRWVersion) < 0x33000 )
 	{
-		m_uiAmbientColour = pDataReader->readUint32();
-		m_uiDiffuseColour = pDataReader->readUint32();
-		m_uiSpecularColour = pDataReader->readUint32();
+		m_fAmbientColour = pDataReader->readFloat32();
+		m_fDiffuseColour = pDataReader->readFloat32();
+		m_fSpecularColour = pDataReader->readFloat32();
 	}
 	else
 	{
-		m_uiAmbientColour = 1;
-		m_uiDiffuseColour = 1;
-		m_uiSpecularColour = 1;
+		m_fAmbientColour = 1.0;
+		m_fDiffuseColour = 1.0;
+		m_fSpecularColour = 1.0;
 	}
 
 	if ((m_uiFlags & 0x01000000) == 0)
@@ -115,7 +117,7 @@ void							RWSection_Geometry::unserialize(void)
 	//Debug::log("Geometry uiByteCountRead: " + String::toString(uiByteCountRead));
 }
 
-void							RWSection_Geometry::serialize(void)
+void							RWSection_Geometry::_serialize(void)
 {
 	DataWriter *pDataWriter = DataWriter::get();
 
@@ -127,9 +129,9 @@ void							RWSection_Geometry::serialize(void)
 	uint32 uiRWVersionCC = RWManager::get()->getSerializationRWVersion();
 	if (RWVersion::unpackVersionStamp(uiRWVersionCC) < 0x34000)
 	{
-		pDataWriter->writeUint32(m_uiAmbientColour);
-		pDataWriter->writeUint32(m_uiDiffuseColour);
-		pDataWriter->writeUint32(m_uiSpecularColour);
+		pDataWriter->writeFloat32(m_fAmbientColour);
+		pDataWriter->writeFloat32(m_fDiffuseColour);
+		pDataWriter->writeFloat32(m_fSpecularColour);
 	}
 
 	if ((m_uiFlags & 0x01000000) == 0)
@@ -181,11 +183,13 @@ void							RWSection_Geometry::serialize(void)
 	}
 }
 
+// texture diffuse name
 string							RWSection_Geometry::getTextureDiffuseName(void)
 {
 	return ((RWSection_String*)getSectionsByType(RW_SECTION_TEXTURE)[0]->getSectionsByType(RW_SECTION_STRING)[0])->getData();
 }
 
+// vertex colours
 void							RWSection_Geometry::setVertexColours(vector<Vec4u8>& vecDayVertexColours)
 {
 	if (vecDayVertexColours.size() > 0)
@@ -216,12 +220,14 @@ void							RWSection_Geometry::setVertexColours(vector<Vec4u8>& vecDayVertexColo
 	}
 }
 
+// prelightning
 void							RWSection_Geometry::removePrelightning(void)
 {
 	m_uiFlags &= ~(1 << 3); // turn bit 4 off (flag 8)
 	m_vecVertexColours.clear();
 }
 
+// convert section
 IntermediateGeometry*			RWSection_Geometry::convertToIntermediateGeometry(void)
 {
 	IntermediateGeometry *pGeneralGeometry = new IntermediateGeometry;

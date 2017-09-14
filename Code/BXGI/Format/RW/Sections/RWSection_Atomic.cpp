@@ -1,6 +1,7 @@
 #include "RWSection_Atomic.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/RW/RWFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -14,9 +15,10 @@ RWSection_Atomic::RWSection_Atomic(void) :
 	setSectionId(RW_SECTION_ATOMIC);
 }
 
-void							RWSection_Atomic::unserialize(void)
+// serialization
+void							RWSection_Atomic::_unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	m_uiFrameIndex = pDataReader->readUint32();
 	m_uiGeometryIndex = pDataReader->readUint32();
@@ -24,7 +26,7 @@ void							RWSection_Atomic::unserialize(void)
 	m_uiUnknown2 = pDataReader->readUint32();
 }
 
-void							RWSection_Atomic::serialize(void)
+void							RWSection_Atomic::_serialize(void)
 {
 	DataWriter *pDataWriter = DataWriter::get();
 

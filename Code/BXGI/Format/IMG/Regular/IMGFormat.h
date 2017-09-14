@@ -30,14 +30,17 @@ class bxgi::IMGFormat : public bxcf::Format, public bxcf::VectorPool<bxgi::IMGEn
 {
 public:
 	IMGFormat(void);
-	IMGFormat(std::string& strFilePath);
+	IMGFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true);
 	IMGFormat(bxcf::DataReader& reader);
 
 	void											unload(void) {}
 
 	void											readMetaData(void);
 
-	bool											unserialize2(void);
+	void											_unserialize(void);
+	void											_serialize(void) {}
+
+	void											serialize(void); // temp
 
 	void											setVersion(bxgi::EIMGVersion EIMGVersion) { m_EIMGVersion = EIMGVersion; }
 	inline bxgi::EIMGVersion						getVersion(void);
@@ -60,6 +63,16 @@ public:
 
 	std::vector<std::string>						getFileVersions(void);
 	std::map<std::string, std::pair<uint32, bxcf::fileType::EFileType>, SortByStringKey>	getFileTypedVersionsAsMap(void);
+
+	void											getModelAndTextureSetNamesFromEntries(
+		std::unordered_map<IMGEntry*, std::vector<std::string>>& umapIMGModelNames,
+		std::unordered_map<IMGEntry*, std::vector<std::string>>& umapIMGTextureSetNames
+	);
+
+
+
+
+
 
 	uint32											getEntryExtensionCount(std::string strEntryExtension);
 
@@ -107,9 +120,6 @@ public:
 	std::vector<bxgi::IMGEntry*>					getUnknownVersionEntries(void); // for IMG versions 1 and 2
 
 private:
-	void											unserialize(void);
-	void											serialize(void);
-
 	void											unserializeHeaderComponents(void);
 	void											unserializeBodyComponents(void);
 

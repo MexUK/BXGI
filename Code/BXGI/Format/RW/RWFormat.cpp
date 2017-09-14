@@ -16,11 +16,13 @@ RWFormat::RWFormat(void) :
 	Format(true, bxcf::LITTLE_ENDIAN),
 	m_pRWVersion(nullptr)
 {
+	RWSectionContainer::setRWFormat(this);
 }
 
-void					RWFormat::unserialize(void)
+// serialization
+void					RWFormat::_unserialize(void)
 {
-	RWSectionContainer::unserialize();
+	RWSectionContainer::_unserialize();
 
 	if (getEntryCount() > 0)
 	{
@@ -42,7 +44,7 @@ void					RWFormat::unserialize(void)
 	}
 }
 
-void					RWFormat::serialize(void)
+void					RWFormat::_serialize(void)
 {
 	uint32 uiRWVersionCC;
 	if (getEntryCount() == 0)
@@ -56,9 +58,61 @@ void					RWFormat::serialize(void)
 
 	RWManager::get()->setSerializationRWVersion(uiRWVersionCC);
 
-	RWSectionContainer::serialize();
+	RWSectionContainer::_serialize();
 }
 
+// RW version
+void									RWFormat::setRWVersion(RWVersion *pRWVersion, ERWSection ERWSectionValue)
+{
+	if (ERWSectionValue == -1)
+	{
+		m_pRWVersion = pRWVersion;
+	}
+	else
+	{
+		// todo
+	}
+}
+
+RWVersion*								RWFormat::getRWVersion(ERWSection ERWSectionValue)
+{
+	if (ERWSectionValue == -1)
+	{
+		return m_pRWVersion;
+	}
+	else
+	{
+		// todo
+		return nullptr;
+	}
+}
+
+// alpha textures
+void				RWFormat::fixAlphaTextureStates(void)
+{
+	vector<TextureEntry*> vecTexturesToRemove;
+	for (auto pTextureEntry : m_vecTextureEntries)
+	{
+		if (pTextureEntry->doesHaveDiffuse() && String::toUpperCase(pTextureEntry->getDiffuseName()).c_str()[pTextureEntry->getDiffuseName().length() - 1] == 'A')
+		{
+			TextureEntry *pTextureEntry2 = getTextureByDiffuseName(pTextureEntry->getDiffuseName().substr(0, pTextureEntry->getDiffuseName().length() - 1));
+			if (pTextureEntry2 != nullptr)
+			{
+				vecTexturesToRemove.push_back(pTextureEntry);
+				pTextureEntry2->setHasAlpha(true);
+				pTextureEntry2->setAlphaName(pTextureEntry->getDiffuseName());
+			}
+		}
+	}
+	for (auto pTextureEntry : vecTexturesToRemove)
+	{
+		auto it = std::find(m_vecTextureEntries.begin(), m_vecTextureEntries.end(), pTextureEntry);
+		m_vecTextureEntries.erase(it);
+		delete pTextureEntry;
+	}
+}
+
+// creating/destroying textures
 void					RWFormat::loadTextureEntries(void)
 {
 	static TextureEntry *pTextureEntry = nullptr;
@@ -98,55 +152,6 @@ void					RWFormat::loadTextureEntries(void)
 	}
 }
 
-void									RWFormat::setRWVersion(RWVersion *pRWVersion, ERWSection ERWSectionValue)
-{
-	if (ERWSectionValue == -1)
-	{
-		m_pRWVersion = pRWVersion;
-	}
-	else
-	{
-		// todo
-	}
-}
-
-RWVersion*								RWFormat::getRWVersion(ERWSection ERWSectionValue)
-{
-	if (ERWSectionValue == -1)
-	{
-		return m_pRWVersion;
-	}
-	else
-	{
-		// todo
-		return nullptr;
-	}
-}
-
-void				RWFormat::fixAlphaTextureStates(void)
-{
-	vector<TextureEntry*> vecTexturesToRemove;
-	for (auto pTextureEntry : m_vecTextureEntries)
-	{
-		if (pTextureEntry->doesHaveDiffuse() && String::toUpperCase(pTextureEntry->getDiffuseName()).c_str()[pTextureEntry->getDiffuseName().length() - 1] == 'A')
-		{
-			TextureEntry *pTextureEntry2 = getTextureByDiffuseName(pTextureEntry->getDiffuseName().substr(0, pTextureEntry->getDiffuseName().length() - 1));
-			if (pTextureEntry2 != nullptr)
-			{
-				vecTexturesToRemove.push_back(pTextureEntry);
-				pTextureEntry2->setHasAlpha(true);
-				pTextureEntry2->setAlphaName(pTextureEntry->getDiffuseName());
-			}
-		}
-	}
-	for (auto pTextureEntry : vecTexturesToRemove)
-	{
-		auto it = std::find(m_vecTextureEntries.begin(), m_vecTextureEntries.end(), pTextureEntry);
-		m_vecTextureEntries.erase(it);
-		delete pTextureEntry;
-	}
-}
-
 void				RWFormat::removeTextureEntry(TextureEntry *pTextureEntry)
 {
 	string strDiffuseName = String::toUpperCase(pTextureEntry->getDiffuseName());
@@ -167,6 +172,7 @@ void				RWFormat::removeTextureEntry(TextureEntry *pTextureEntry)
 	}
 }
 
+// texture fetching
 TextureEntry*		RWFormat::getTextureByDiffuseName(string strTextureDiffuseName)
 {
 	strTextureDiffuseName = String::toUpperCase(strTextureDiffuseName);
@@ -193,6 +199,7 @@ TextureEntry*		RWFormat::getTextureByDiffuseOrAlphaName(string strTextureName)
 	}
 }
 
+// texture name fetching
 vector<string>		RWFormat::getTextureNames(void)
 {
 	vector<string> vecTextureNames;
@@ -210,6 +217,7 @@ vector<string>		RWFormat::getTextureNames(void)
 	return vecTextureNames;
 }
 
+// texture validation
 bool				RWFormat::doesHaveTextureWithInvalidTXDRasterDataFormat(void)
 {
 	for (auto pTexture : getSectionsByType(RW_SECTION_TEXTURE_NATIVE))

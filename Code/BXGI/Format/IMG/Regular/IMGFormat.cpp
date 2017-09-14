@@ -29,6 +29,7 @@
 #include "Static/StdVector.h"
 #include "IMGEntry.h"
 #include "../BXCF/Event/EEvent.h"
+#include "Format/DFF/DFFFormat.h"
 #include <set>
 #include <algorithm>
 
@@ -46,8 +47,8 @@ IMGFormat::IMGFormat(void) :
 {
 }
 
-IMGFormat::IMGFormat(string& strFilePath) :
-	Format(strFilePath, true, LITTLE_ENDIAN),
+IMGFormat::IMGFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) :
+	Format(strFilePathOrData, bStringIsFilePath, true, LITTLE_ENDIAN),
 	m_EIMGVersion(IMG_UNKNOWN),
 	m_EPlatform(PLATFORM_PC),
 	m_bEncrypted(false),
@@ -148,9 +149,9 @@ EIMGVersion			IMGFormat::getVersion(void)
 }
 
 // unserialize
-bool		IMGFormat::unserialize2(void)
+void				IMGFormat::_unserialize(void)
 {
-	Format::unserialize2();
+	checkMetaDataIsLoaded();
 
 	switch (m_EIMGVersion)
 	{
@@ -179,8 +180,6 @@ bool		IMGFormat::unserialize2(void)
 	{
 		unserializERWVersions(); // todo - fix function name - capital e in name
 	}
-
-	return true;
 }
 
 
@@ -195,11 +194,6 @@ bool		IMGFormat::unserialize2(void)
 
 
 // unserialization & serialization
-void		IMGFormat::unserialize(void)
-{
-	//unserializeHeaderComponents();
-	//unserializeBodyComponents();
-}
 void		IMGFormat::serialize(void)
 {
 	serializeHeaderAndBodyComponents();
@@ -999,6 +993,40 @@ void					IMGFormat::serializeVersion3_Unencrypted(void)
 	}
 }
 
+// entry fetching
+void					IMGFormat::getModelAndTextureSetNamesFromEntries(
+	unordered_map<IMGEntry*, vector<string>>& umapIMGModelNames,
+	unordered_map<IMGEntry*, vector<string>>& umapIMGTextureSetNames
+)
+{
+	for (IMGEntry *pIMGEntry : getEntries())
+	{
+		if (pIMGEntry->isModelFile())
+		{
+			/*
+			todo
+			try
+			{
+				DFFFormat dffFile;
+				dffFile.setData(pIMGEntry->getEntryData());
+				dffFile.unserialize();
+				umapIMGModelNames[pIMGEntry] = StdVector::toUpperCase(dffFile.getModelNames());
+			}
+			catch(EExceptionCode& uiErrorCode)
+			{
+			}
+			*/
+			umapIMGTextureSetNames[pIMGEntry].push_back(String::toUpperCase(Path::removeFileExtension(pIMGEntry->getEntryName())));
+		}
+		else if (pIMGEntry->isTextureFile())
+		{
+			umapIMGTextureSetNames[pIMGEntry].push_back(String::toUpperCase(Path::removeFileExtension(pIMGEntry->getEntryName())));
+		}
+
+		Events::trigger(TASK_PROGRESS);
+	}
+}
+
 // extension counts
 void					IMGFormat::addEntryExtensionCount(string strEntryExtension)
 {
@@ -1528,61 +1556,55 @@ uint32			IMGFormat::merge(string& strSecondIMGPath, vector<string>& vecImportedE
 {
 	DataReader *pDataReader = DataReader::get();
 	uint32 uiImportedEntryCount = 0;
-	try
+
+	// parse second IMG file for entry information
+	IMGFormat imgFileIn(strSecondIMGPath);
+	imgFileIn.setFilePath(strSecondIMGPath);
+	if (!imgFileIn.unserialize())
 	{
-		// parse second IMG file for entry information
-		IMGFormat *pIMGFileIn = IMGManager::get()->parseViaFile(strSecondIMGPath);
-		if (pIMGFileIn->doesHaveError())
-		{
-			pIMGFileIn->unload();
-			delete pIMGFileIn;
-			return 0;
-		}
-
-		// open second IMG file to read entry body data from
-		pDataReader->setFilePath(getFilePath());
-		pDataReader->open(true);
-
-		// import entries from second IMG into first IMG
-		bool bVersion3IMG = getVersion() == IMG_3;
-		for (auto pInEntry : pIMGFileIn->getEntries())
-		{
-			// entry header data
-			IMGEntry *pOutEntry = new IMGEntry(this);
-			pOutEntry->setEntryName(pInEntry->getEntryName());
-			pOutEntry->setEntrySize(pInEntry->getEntrySize());
-			if (bVersion3IMG)
-			{
-				pOutEntry->setRageResourceType(pInEntry->getRageResourceType());
-				pOutEntry->setFlags(pInEntry->getFlags());
-			}
-			else
-			{
-				pOutEntry->setRWVersion(pInEntry->getRWVersion());
-			}
-			addEntry(pOutEntry);
-
-			// entry body data
-			pDataReader->setSeek(pInEntry->getEntryOffset());
-			string strEntryData = pDataReader->readString(pInEntry->getEntrySize());
-			pOutEntry->setEntryData(strEntryData, true);
-
-			vecImportedEntryNames.push_back(pOutEntry->getEntryName());
-
-			Events::triggerConst(MERGE_IMG_ENTRY, this);
-		}
-
-		// finalize
-		pDataReader->close();
-
-		uint32 uiImportedEntryCount = pIMGFileIn->getEntryCount();
-		pIMGFileIn->unload();
-		delete pIMGFileIn;
+		imgFileIn.unload();
+		return 0;
 	}
-	catch (EExceptionCode)
+
+	// open second IMG file to read entry body data from
+	pDataReader->setFilePath(getFilePath());
+	pDataReader->open(true);
+
+	// import entries from second IMG into first IMG
+	bool bVersion3IMG = getVersion() == IMG_3;
+	for (auto pInEntry : imgFileIn.getEntries())
 	{
-		pDataReader->reset();
+		// entry header data
+		IMGEntry *pOutEntry = new IMGEntry(this);
+		pOutEntry->setEntryName(pInEntry->getEntryName());
+		pOutEntry->setEntrySize(pInEntry->getEntrySize());
+		if (bVersion3IMG)
+		{
+			pOutEntry->setRageResourceType(pInEntry->getRageResourceType());
+			pOutEntry->setFlags(pInEntry->getFlags());
+		}
+		else
+		{
+			pOutEntry->setRWVersion(pInEntry->getRWVersion());
+		}
+		addEntry(pOutEntry);
+		m_uiEntryCount++;
+
+		// entry body data
+		pDataReader->setSeek(pInEntry->getEntryOffset());
+		string strEntryData = pDataReader->readString(pInEntry->getEntrySize());
+		pOutEntry->setEntryData(strEntryData, true);
+
+		vecImportedEntryNames.push_back(pOutEntry->getEntryName());
+
+		Events::trigger(TASK_PROGRESS);
 	}
+
+	// finalize
+	pDataReader->close();
+
+	uint32 uiImportedEntryCount = imgFileIn.getEntryCount();
+	imgFileIn.unload();
 
 	return uiImportedEntryCount;
 }

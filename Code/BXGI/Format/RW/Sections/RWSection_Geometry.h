@@ -17,14 +17,14 @@ class bxgi::RWSection_Geometry : public bxgi::RWSection
 public:
 	RWSection_Geometry(void);
 
-	void							unserialize(void);
-	void							serialize(void);
+	void							_unserialize(void);
+	void							_serialize(void);
 
 	std::string						getTextureDiffuseName(void);
 
 	void							removePrelightning(void);
 
-	bxgi::IntermediateGeometry*	convertToIntermediateGeometry(void);
+	bxgi::IntermediateGeometry*		convertToIntermediateGeometry(void);
 
 	void							setFlags(uint32 uiFlags) { m_uiFlags = uiFlags; }
 	uint32							getFlags(void) { return m_uiFlags; }
@@ -44,14 +44,14 @@ public:
 	void							setFrameCount(uint32 uiFrameCount) { m_uiFrameCount = uiFrameCount; }
 	uint32							getFrameCount(void) { return m_uiFrameCount; }
 
-	void							setAmbientColour(uint32 uiAmbientColour) { m_uiAmbientColour = uiAmbientColour; }
-	uint32							getAmbientColour(void) { return m_uiAmbientColour; }
+	void							setAmbientColour(float32 fAmbientColour) { m_fAmbientColour = fAmbientColour; }
+	float32							getAmbientColour(void) { return m_fAmbientColour; }
 
-	void							setDiffuseColour(uint32 uiDiffuseColour) { m_uiDiffuseColour = uiDiffuseColour; }
-	uint32							getDiffuseColour(void) { return m_uiDiffuseColour; }
+	void							setDiffuseColour(float32 fDiffuseColour) { m_fDiffuseColour = fDiffuseColour; }
+	float32							getDiffuseColour(void) { return m_fDiffuseColour; }
 
-	void							setSpecularColour(uint32 uiSpecularColour) { m_uiSpecularColour = uiSpecularColour; }
-	uint32							getSpecularColour(void) { return m_uiSpecularColour; }
+	void							setSpecularColour(float32 fSpecularColour) { m_fSpecularColour = fSpecularColour; }
+	float32							getSpecularColour(void) { return m_fSpecularColour; }
 
 	void							setVertexColours(std::vector<bxcf::Vec4u8>& vecVertexColours); // Remainder is filled with 0xFFFFFFFF until vertex count is reached,
 	std::vector<bxcf::Vec4u8>&		getVertexColours(void) { return m_vecVertexColours; }
@@ -79,9 +79,9 @@ private:
 	uint32							m_uiVertexCount;
 	uint32							m_uiFrameCount;
 	
-	uint32							m_uiAmbientColour;
-	uint32							m_uiDiffuseColour;
-	uint32							m_uiSpecularColour;
+	float32							m_fAmbientColour;
+	float32							m_fDiffuseColour;
+	float32							m_fSpecularColour;
 	
 	std::vector<bxcf::Vec4u8>		m_vecVertexColours;
 	std::vector<bxcf::Vec2f>		m_vecTextureCoordinates;

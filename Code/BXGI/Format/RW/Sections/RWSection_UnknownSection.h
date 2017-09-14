@@ -9,8 +9,8 @@ class bxgi::RWSection_UnknownSection : public bxgi::RWSection
 public:
 	RWSection_UnknownSection(void);
 
-	void							unserialize(void);
-	void							serialize(void);
+	void							_unserialize(void);
+	void							_serialize(void);
 
 	void							setActualSectionId(uint32 uiActualSectionId) { m_uiActualSectionId = uiActualSectionId; }
 	uint32							getActualSectionId(void) { return m_uiActualSectionId; }

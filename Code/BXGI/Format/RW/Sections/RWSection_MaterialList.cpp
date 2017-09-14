@@ -1,6 +1,7 @@
 #include "RWSection_MaterialList.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/RW/RWFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -11,15 +12,16 @@ RWSection_MaterialList::RWSection_MaterialList(void) :
 	setSectionId(RW_SECTION_MATERIAL_LIST);
 }
 
-void							RWSection_MaterialList::unserialize(void)
+// serialization
+void							RWSection_MaterialList::_unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	m_uiMaterialCount = pDataReader->readUint32();
 	m_strReservedValues = pDataReader->readString(4 * m_uiMaterialCount);
 }
 
-void							RWSection_MaterialList::serialize(void)
+void							RWSection_MaterialList::_serialize(void)
 {
 	DataWriter *pDataWriter = DataWriter::get();
 

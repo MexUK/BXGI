@@ -8,8 +8,8 @@ class bxgi::RWSection_Material : public bxgi::RWSection
 public:
 	RWSection_Material(void);
 
-	void							unserialize(void);
-	void							serialize(void);
+	void							_unserialize(void);
+	void							_serialize(void);
 
 	void							setUnknown1(uint32 uiUnknown1) { m_uiUnknown1 = uiUnknown1; }
 	uint32							getUnknown1(void) { return m_uiUnknown1; }

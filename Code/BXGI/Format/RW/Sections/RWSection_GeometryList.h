@@ -8,8 +8,8 @@ class bxgi::RWSection_GeometryList : public bxgi::RWSection
 public:
 	RWSection_GeometryList(void);
 
-	void							unserialize(void);
-	void							serialize(void);
+	void							_unserialize(void);
+	void							_serialize(void);
 
 	void							setGeometryCount(uint32 uiGeometryCount) { m_uiGeometryCount = uiGeometryCount; }
 	uint32							getGeometryCount(void) { return m_uiGeometryCount; }

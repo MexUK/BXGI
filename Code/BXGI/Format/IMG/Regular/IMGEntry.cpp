@@ -295,7 +295,9 @@ void					IMGEntry::setEntryData(string strEntryData, bool bIsNew)
 
 string					IMGEntry::getEntryData(void)
 {
-	string strEntryData = File::getFileSubContent(getIMGFile()->getFilePath(), getEntryOffset(), getEntrySize(), true);
+	string strIMGFilePath = Path::replaceFileExtensionWithCase(getIMGFile()->getFilePath(), "IMG");
+
+	string strEntryData = File::getFileSubContent(strIMGFilePath, getEntryOffset(), getEntrySize(), true);
 	bool bBigEndian = false;
 
 	if (getIMGFile()->getVersion() == IMG_FASTMAN92)
@@ -351,6 +353,8 @@ string					IMGEntry::getEntryData(void)
 
 string					IMGEntry::getEntrySubData(uint32 uiStart, uint32 uiLength)
 {
+	string strIMGFilePath = Path::replaceFileExtensionWithCase(getIMGFile()->getFilePath(), "IMG");
+
 	if (getIMGFile()->getVersion() == IMG_FASTMAN92 && isCompressed())
 	{
 		// compressed
@@ -365,7 +369,7 @@ string					IMGEntry::getEntrySubData(uint32 uiStart, uint32 uiLength)
 		Debug::log("uiLength2: " + String::toString(uiLength2));
 		Debug::log("uiStartOffset: " + String::toString(uiStartOffset));
 		*/
-		string strEntrySubData = File::getFileSubContent(getIMGFile()->getFilePath(), getEntryOffset() + uiStart2, uiLength2, true);
+		string strEntrySubData = File::getFileSubContent(strIMGFilePath, getEntryOffset() + uiStart2, uiLength2, true);
 		//strEntrySubData = IMGManager::decompressZLib(strEntrySubData, uiLength2);
 		switch (getCompressionAlgorithmId())
 		{
@@ -377,7 +381,7 @@ string					IMGEntry::getEntrySubData(uint32 uiStart, uint32 uiLength)
 	else
 	{
 		// not compressed
-		return File::getFileSubContent(getIMGFile()->getFilePath(), getEntryOffset() + uiStart, uiLength, true);
+		return File::getFileSubContent(strIMGFilePath, getEntryOffset() + uiStart, uiLength, true);
 	}
 }
 

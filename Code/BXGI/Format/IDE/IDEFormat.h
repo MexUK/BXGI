@@ -29,7 +29,7 @@ public:
 	template<class EntryClass2>
 	std::vector<EntryClass2*>					getEntriesBySection(EIDESection EIDESectionValue, bxgi::E2DFXType E2DFXTypeValue = bxgi::_2DFX_UNKNOWN);
 
-	std::vector<std::string>					getModelSetNamesInSections(std::vector<EIDESection>& vecIDESections);
+	std::vector<std::string>					getModelNamesInSections(std::vector<EIDESection>& vecIDESections);
 	std::vector<std::string>					getTextureSetNamesInSections(std::vector<EIDESection>& vecIDESections);
 
 	EIDESection									getSectionFromText(std::string strIDESectionText);

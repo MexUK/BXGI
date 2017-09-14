@@ -17,8 +17,8 @@ class bxgi::RWSection_TextureNative : public bxgi::RWSection
 public:
 	RWSection_TextureNative(void);
 	
-	void						unserialize(void);
-	void						serialize(void);
+	void						_unserialize(void);
+	void						_serialize(void);
 	
 	void						convertToGame(bxgi::EPlatformedGame EPlatformedGame, std::vector<std::string>& vecMipmapsRemoved);
 	void						convertToRasterDataFormat(bxcf::ERasterDataFormat ERasterDataFormatValue, std::vector<std::string>& vecMipmapsRemoved);

@@ -33,10 +33,12 @@ RWSection::RWSection(void) :
 	m_uiSectionRWVersion(0),
 	m_bSectionHeaderSkipped(false),
 	m_uiStructSectionSize(0),
-	m_bUnknownSection(false)
+	m_bUnknownSection(false),
+	m_pRWFormat(nullptr)
 {
 }
 
+// static data
 void				RWSection::initStatic(void)
 {
 	initRWSections();
@@ -51,7 +53,8 @@ void				RWSection::initRWSections(void)
 	}
 }
 
-void				RWSection::serialize(void)
+// serialization
+void				RWSection::_serialize(void)
 {
 	/*
 	todo
@@ -79,37 +82,6 @@ void				RWSection::serialize(void)
 	}
 }
 
-RWSection*			RWSection::addSection(ERWSection ERWSectionValue, ERWVersion ERWVersionValue)
-{
-	RWSection *pRWSection = RWSectionContainer::addSection(ERWSectionValue, ERWVersionValue);
-	pRWSection->setParentNode(this);
-	return pRWSection;
-}
-
-void				RWSection::removeSection(void)
-{
-	uint32 uiSectionIndex = getSectionIndex();
-	if (uiSectionIndex == -1)
-	{
-		return;
-	}
-	getParentNode()->removeSectionByIndex(uiSectionIndex);
-}
-
-uint32				RWSection::getSectionIndex(void)
-{
-	uint32 i = 0;
-	for (RWSection *pRWSection : getParentNode()->getEntries())
-	{
-		if (pRWSection == this)
-		{
-			return i;
-		}
-		i++;
-	}
-	return -1;
-}
-
 void				RWSection::fillPlaceholdersForSerialization(uint32 uiSectionByteCount, uint32 uiSectionStructByteCount)
 {
 	DataWriter *pDataWriter = DataWriter::get();
@@ -129,6 +101,40 @@ void				RWSection::fillPlaceholdersForSerialization(uint32 uiSectionByteCount, u
 	}
 }
 
+// add/remove section
+RWSection*			RWSection::addSection(ERWSection ERWSectionValue, ERWVersion ERWVersionValue)
+{
+	RWSection *pRWSection = RWSectionContainer::addSection(ERWSectionValue, ERWVersionValue);
+	pRWSection->setParentNode(this);
+	return pRWSection;
+}
+
+void				RWSection::removeSection(void)
+{
+	uint32 uiSectionIndex = getSectionIndex();
+	if (uiSectionIndex == -1)
+	{
+		return;
+	}
+	getParentNode()->removeSectionByIndex(uiSectionIndex);
+}
+
+// section index
+uint32				RWSection::getSectionIndex(void)
+{
+	uint32 i = 0;
+	for (RWSection *pRWSection : getParentNode()->getEntries())
+	{
+		if (pRWSection == this)
+		{
+			return i;
+		}
+		i++;
+	}
+	return -1;
+}
+
+// create RW section
 RWSection*			RWSection::creatERWSection(ERWSection ERWSectionValue)
 {
 	switch (ERWSectionValue)
@@ -158,6 +164,7 @@ RWSection*			RWSection::creatERWSection(ERWSection ERWSectionValue)
 	return pRWSection;
 }
 
+// RW section struct
 bool				RWSection::doesRWSectionContainStruct_BeforeInit(ERWSection ERWSectionValue)
 {
 	return ERWSectionValue == RW_SECTION_ATOMIC
@@ -176,6 +183,7 @@ bool				RWSection::doesRWSectionContainStruct(ERWSection ERWSectionValue)
 	return m_umapRWSectionsContainingStruct.count(ERWSectionValue) == 1 && m_umapRWSectionsContainingStruct[ERWSectionValue] == true;
 }
 
+// fetch RW sections
 vector<ERWSection>	RWSection::getRWSections(void)
 {
 	return {
@@ -200,6 +208,7 @@ vector<ERWSection>	RWSection::getRWSections(void)
 	};
 }
 
+// RW section parent node
 RWSection*						RWSection::getNextParentNodeWithSectionType(ERWSection eSection)
 {
 	RWSection *pRWSection = this;

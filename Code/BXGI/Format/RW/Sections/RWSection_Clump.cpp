@@ -2,6 +2,7 @@
 #include "Engine/RW/RWManager.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/RW/RWFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -14,12 +15,13 @@ RWSection_Clump::RWSection_Clump(void) :
 	setSectionId(RW_SECTION_CLUMP);
 }
 
-void							RWSection_Clump::unserialize(void)
+// serialization
+void							RWSection_Clump::_unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	/*
-	todo
+	todo - tidy
 	if (m_pParentNode == pDFFFile) // found first clump struct in the DFF file
 	{
 		setSectionHeaderSkipped(false);
@@ -34,8 +36,10 @@ void							RWSection_Clump::unserialize(void)
 
 	m_uiAtomicallyLinkedObjectCount = pDataReader->readUint32();
 
+	// todo - tidy
 	//if ((uiRWVersionId >= 0x0C02FFFF || uiRWVersionId == 0x0400CFFF) ////////// && uiRWVersionId != 0x1003FFFF ////////)
-	if (m_uiStructSectionSize == 12)
+	//if (m_uiStructSectionSize == 12)
+	if (RWVersion::unpackVersionStamp(m_uiSectionRWVersion) > 0x33000)
 	{
 		m_uiLightCount = pDataReader->readUint32();
 		m_uiCameraCount = pDataReader->readUint32();
@@ -47,7 +51,7 @@ void							RWSection_Clump::unserialize(void)
 	}
 }
 
-void							RWSection_Clump::serialize(void)
+void							RWSection_Clump::_serialize(void)
 {
 	DataWriter *pDataWriter = DataWriter::get();
 

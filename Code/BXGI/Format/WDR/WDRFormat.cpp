@@ -41,14 +41,15 @@ void						WDRFormat::unload(void)
 	m_vecModels.clear();
 }
 
-void						WDRFormat::unserialize(void)
+// serialization
+void						WDRFormat::_unserialize(void)
 {
 	DataReader *pDataReader = DataReader::get();
 
 	// todo
 }
 
-void						WDRFormat::serialize(void)
+void						WDRFormat::_serialize(void)
 {
 	DataWriter *pDataWriter = DataWriter::get();
 
@@ -264,6 +265,7 @@ void						WDRFormat::serialize(void)
 	pDataWriter->writeStringRef(strWDRFileData);
 }
 
+// convert format
 WDRBlock_Geometry*			WDRFormat::convertIntermediateGeometryToWDRGeometry(IntermediateGeometry *pGeneralGeometry)
 {
 	WDRBlock_Geometry *pWDRBlock_Geometry = new WDRBlock_Geometry;

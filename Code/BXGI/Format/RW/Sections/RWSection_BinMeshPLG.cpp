@@ -2,6 +2,7 @@
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
 #include "RWSection_Geometry.h"
+#include "Format/RW/RWFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -14,9 +15,10 @@ RWSection_BinMeshPLG::RWSection_BinMeshPLG(void) :
 	setSectionId(RW_SECTION_BIN_MESH_PLG);
 }
 
-void							RWSection_BinMeshPLG::unserialize(void)
+// serialization
+void							RWSection_BinMeshPLG::_unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	m_uiFlags = pDataReader->readUint32();
 	m_uiMeshCount = pDataReader->readUint32();
@@ -57,7 +59,7 @@ void							RWSection_BinMeshPLG::unserialize(void)
 	}
 }
 
-void							RWSection_BinMeshPLG::serialize(void)
+void							RWSection_BinMeshPLG::_serialize(void)
 {
 	DataWriter *pDataWriter = DataWriter::get();
 

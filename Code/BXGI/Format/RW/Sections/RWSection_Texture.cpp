@@ -1,6 +1,7 @@
 #include "RWSection_Texture.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/RW/RWFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -12,15 +13,16 @@ RWSection_Texture::RWSection_Texture(void) :
 	setSectionId(RW_SECTION_TEXTURE);
 }
 
-void							RWSection_Texture::unserialize(void)
+// serialization
+void							RWSection_Texture::_unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	m_usFilterFlags = pDataReader->readUint16();
 	m_usUnknown1 = pDataReader->readUint16();
 }
 
-void							RWSection_Texture::serialize(void)
+void							RWSection_Texture::_serialize(void)
 {
 	DataWriter *pDataWriter = DataWriter::get();
 

@@ -1,6 +1,7 @@
 #include "RWSection_TextureDictionary.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/RW/RWFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -11,9 +12,10 @@ RWSection_TextureDictionary::RWSection_TextureDictionary(void) :
 	setSectionId(RW_SECTION_TEXTURE_DICTIONARY);
 }
 
-void							RWSection_TextureDictionary::unserialize(void)
+// serialization
+void							RWSection_TextureDictionary::_unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	if (m_uiSectionRWVersion <= 0x1803FFFF) // todo - change from 3.6.0.3 to 3.6.0.0
 	{
@@ -26,7 +28,7 @@ void							RWSection_TextureDictionary::unserialize(void)
 	}
 }
 
-void							RWSection_TextureDictionary::serialize(void)
+void							RWSection_TextureDictionary::_serialize(void)
 {
 	DataWriter *pDataWriter = DataWriter::get();
 

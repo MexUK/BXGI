@@ -8,8 +8,8 @@ class bxgi::RWSection_Texture : public bxgi::RWSection
 public:
 	RWSection_Texture(void);
 
-	void							unserialize(void);
-	void							serialize(void);
+	void							_unserialize(void);
+	void							_serialize(void);
 
 	void							setFilterFlags(uint16 usFilterFlags) { m_usFilterFlags = usFilterFlags; }
 	uint16							getFilterFlags(void) { return m_usFilterFlags; }

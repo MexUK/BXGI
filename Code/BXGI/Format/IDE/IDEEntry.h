@@ -13,7 +13,4 @@ class bxgi::IDEEntry : public bxgi::SectionLinesEntry<IDEFormat, EIDESection>
 {
 public:
 	IDEEntry(IDEFormat *pIDEFormat);
-
-	virtual std::string&					_getModelName(void) { return bxcf::g_strBlankString; }
-	virtual std::string&					_getTextureName(void) { return bxcf::g_strBlankString; }
 };
