@@ -13,6 +13,7 @@ class bxgi::SectionLinesFormat : public bxcf::Format
 {
 public:
 	SectionLinesFormat(void);
+	SectionLinesFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) : bxcf::Format(strFilePathOrData, bStringIsFilePath, false) {}
 
 	virtual void										unload(void);
 

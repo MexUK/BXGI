@@ -16,22 +16,23 @@ class bxgi::DATLoaderFormat : public bxcf::Format, public bxcf::VectorPool<bxgi:
 {
 public:
 	DATLoaderFormat(void) : Format(false) {}
-	
-	void									unload(void);
+	DATLoaderFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) : bxcf::Format(strFilePathOrData, bStringIsFilePath, false) {}
 
-	std::vector<std::string>				getRelativeIDEPaths(void);
-	std::vector<std::string>				getRelativeIPLPaths(void);
+	void										unload(void);
+
+	std::vector<std::string>					getRelativeIDEPaths(void);
+	std::vector<std::string>					getRelativeIPLPaths(void);
 
 	std::vector<bxgi::IMGFormat*>				parseIMGFiles(std::string strGameDirectoryPath);
 	std::vector<bxgi::IDEFormat*>				parseIDEFiles(std::string strGameDirectoryPath);
 	std::vector<bxgi::IPLFormat*>				parseIPLFiles(std::string strGameDirectoryPath);
 
 	template<class ManagerClass, class FormatClass>
-	std::vector<FormatClass*>				parseFiles(std::string strGameDirectoryPath, bxgi::EDATLoaderEntryType eType1, bxgi::EDATLoaderEntryType eType2 = DAT_LOADER_UNKNOWN);
+	std::vector<FormatClass*>					parseFiles(std::string strGameDirectoryPath, bxgi::EDATLoaderEntryType eType1, bxgi::EDATLoaderEntryType eType2 = DAT_LOADER_UNKNOWN);
 
 private:
-	void									unserialize(void);
-	void									serialize(void) {} // todo
+	void										_unserialize(void);
+	void										_serialize(void) {} // todo
 
-	void									unserializeLine(void);
+	void										unserializeLine(void);
 };

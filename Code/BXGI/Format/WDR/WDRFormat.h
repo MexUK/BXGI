@@ -14,6 +14,7 @@ class bxgi::WDRFormat : public bxcf::Format
 {
 public:
 	WDRFormat(void) : Format(true, bxcf::LITTLE_ENDIAN) {}
+	WDRFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) : bxcf::Format(strFilePathOrData, bStringIsFilePath, true, bxcf::LITTLE_ENDIAN) {}
 
 	void									unload(void);
 

@@ -47,18 +47,17 @@ IDEFormat::IDEFormat(void) :
 {
 }
 
-// unserialization & serialization
-void				IDEFormat::unserialize(void)
+// serialization
+void				IDEFormat::_unserialize(void)
 {
 	unserializeText();
 }
 
-void				IDEFormat::serialize(void)
+void				IDEFormat::_serialize(void)
 {
 	serializeText();
 }
 
-// unserialization
 IDEEntry_Data*		IDEFormat::unserializeDataEntry(EIDESection EIDESectionValue)
 {
 	IDEEntry_Data *pIDEEntry = nullptr;
@@ -86,6 +85,7 @@ IDEEntry_Data*		IDEFormat::unserializeDataEntry(EIDESection EIDESectionValue)
 	return pIDEEntry;
 }
 
+// detect 2dfx type and game
 pair<E2DFXType, uint32>			IDEFormat::detect2DFXTypeAndGame(void)
 {
 	DataReader *pDataReader = DataReader::get();
@@ -187,6 +187,7 @@ pair<E2DFXType, uint32>			IDEFormat::detect2DFXTypeAndGame(void)
 	throw EXCEPTION_UNKNOWN_FORMAT_TYPE;
 }
 
+// detect path type
 EIDEPathType			IDEFormat::detectPATHType(void)
 {
 	DataReader *pDataReader = DataReader::get();
@@ -199,7 +200,7 @@ EIDEPathType			IDEFormat::detectPATHType(void)
 	}
 }
 
-// item sets in sections
+// fetch model names
 vector<string>				IDEFormat::getModelNamesInSections(vector<EIDESection>& vecIDESections)
 {
 	vector<string> vecModelSetNames;
@@ -220,6 +221,7 @@ vector<string>				IDEFormat::getModelNamesInSections(vector<EIDESection>& vecIDE
 	return vecModelSetNames;
 }
 
+// fetch texture set names
 vector<string>				IDEFormat::getTextureSetNamesInSections(vector<EIDESection>& vecIDESections)
 {
 	vector<string> vecTextureSetNames;
@@ -240,7 +242,7 @@ vector<string>				IDEFormat::getTextureSetNamesInSections(vector<EIDESection>& v
 	return vecTextureSetNames;
 }
 
-// general
+// fetch section type
 EIDESection					IDEFormat::getSectionFromText(string strIDESectionText)
 {
 	strIDESectionText = strIDESectionText.substr(0, 5);
@@ -281,6 +283,7 @@ EIDESection					IDEFormat::getSectionFromText(string strIDESectionText)
 	return IDE_SECTION_UNKNOWN;
 }
 
+// section name
 string						IDEFormat::getSectionText(EIDESection EIDESectionValue)
 {
 	switch (EIDESectionValue)
@@ -308,6 +311,7 @@ string						IDEFormat::getSectionText(EIDESection EIDESectionValue)
 	}
 }
 
+// create entry
 IDEEntry_Data*				IDEFormat::createDataEntry(EIDESection EIDESectionValue, uint32 uiSectionSpecificType)
 {
 	switch (EIDESectionValue)
@@ -359,6 +363,7 @@ IDEEntry_Data*				IDEFormat::createDataEntry(EIDESection EIDESectionValue, uint3
 	return nullptr;
 }
 
+// detect section-specific type
 uint32						IDEFormat::detectSectionSpecificType(EIDESection EIDESectionValue)
 {
 	switch (EIDESectionValue)

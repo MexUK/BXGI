@@ -39,8 +39,14 @@ public:
 
 	void											_unserialize(void);
 	void											_serialize(void) {}
+	bool											validate(void);
+
+	std::string										readEntryContent(uint32 uiEntryIndex);
 
 	void											serialize(void); // temp
+
+	std::string										getIMGFilePath(void);
+	std::string										getDIRFilePath(void);
 
 	void											setVersion(bxgi::EIMGVersion EIMGVersion) { m_EIMGVersion = EIMGVersion; }
 	inline bxgi::EIMGVersion						getVersion(void);

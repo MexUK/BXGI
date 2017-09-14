@@ -20,9 +20,7 @@ class bxgi::IDEFormat : public bxgi::SectionLinesFormat<bxgi::IDEFormat, bxgi::I
 {
 public:
 	IDEFormat(void);
-
-	void										unserialize(void);
-	void										serialize(void);
+	IDEFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) : bxgi::SectionLinesFormat<bxgi::IDEFormat, bxgi::IDEEntry, bxgi::EIDESection, bxgi::IDEEntry_Other, bxgi::IDEEntry_Section, bxgi::IDEEntry_Data>(strFilePathOrData, bStringIsFilePath) {}
 
 	bxgi::IDEEntry_Data*						createDataEntry(EIDESection EIDESectionValue, uint32 uiSectionSpecificType = 0);
 	
@@ -38,6 +36,9 @@ public:
 	uint32										detectSectionSpecificType(EIDESection EIDESectionValue);
 
 private:
+	void										_unserialize(void);
+	void										_serialize(void);
+
 	bxgi::IDEEntry_Data*						unserializeDataEntry(EIDESection EIDESectionValue);
 
 	std::pair<bxgi::E2DFXType, uint32>			detect2DFXTypeAndGame(void);

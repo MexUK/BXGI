@@ -47,7 +47,7 @@ IMGFormat::IMGFormat(void) :
 {
 }
 
-IMGFormat::IMGFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) :
+IMGFormat::IMGFormat(std::string& strFilePathOrData, bool bStringIsFilePath) :
 	Format(strFilePathOrData, bStringIsFilePath, true, LITTLE_ENDIAN),
 	m_EIMGVersion(IMG_UNKNOWN),
 	m_EPlatform(PLATFORM_PC),
@@ -65,7 +65,7 @@ IMGFormat::IMGFormat(DataReader& reader) :
 {
 }
 
-// read meta data
+// meta data
 void				IMGFormat::readMetaData(void)
 {
 	if (String::toUpperCase(Path::getFileExtension(m_strFilePath)) == "DIR")
@@ -122,7 +122,7 @@ void				IMGFormat::readMetaData(void)
 		}
 	}
 
-	string strFilePathDIRExt = Path::replaceFileExtensionWithCase(m_strFilePath, "DIR");
+	string strFilePathDIRExt = getDIRFilePath();
 	if (File::doesFileExist(strFilePathDIRExt))
 	{
 		m_reader.reset();
@@ -141,7 +141,31 @@ void				IMGFormat::readMetaData(void)
 	}
 }
 
-// meta data
+// validation
+bool				IMGFormat::validate(void)
+{
+	if (getVersion() == IMG_FASTMAN92)
+	{
+		// check if IMG is fastman92 format and is encrypted
+		if (isEncrypted())
+		{
+			setErrorCode(EXCEPTION_UNKNOWN_ENCRYPTION_ALGORITHM_USED);
+			return false;
+		}
+
+		// check if IMG is fastman92 format and has an unsupported game type
+		if (getGameType() != 0)
+		{
+			setErrorCode(EXCEPTION_UNSUPPORTED_GAME_USED);
+			return false;
+		}
+	}
+
+	// no errors occurred
+	return true;
+}
+
+// version
 EIMGVersion			IMGFormat::getVersion(void)
 {
 	checkMetaDataIsLoaded();
@@ -180,6 +204,33 @@ void				IMGFormat::_unserialize(void)
 	{
 		unserializERWVersions(); // todo - fix function name - capital e in name
 	}
+}
+
+// read entry content, with try/catch
+string		IMGFormat::readEntryContent(uint32 uiEntryIndex)
+{
+	string strEntryData;
+	try
+	{
+		IMGEntry *pIMGEntry = getEntryByIndex(uiEntryIndex);
+		m_reader.setSeek(pIMGEntry->getEntryOffset());
+		strEntryData = m_reader.readString(pIMGEntry->getEntrySize());
+	}
+	catch (EExceptionCode uiErrorCode)
+	{
+	}
+	return strEntryData;
+}
+
+// IMG/DIR file path
+string		IMGFormat::getIMGFilePath(void)
+{
+	return Path::replaceFileExtensionWithCase(m_strFilePath, "IMG");
+}
+
+string		IMGFormat::getDIRFilePath(void)
+{
+	return Path::replaceFileExtensionWithCase(m_strFilePath, "DIR");
 }
 
 
@@ -490,10 +541,8 @@ void		IMGFormat::unserializERWVersions(void)
 	{
 		//pDataReader->close(); // close handle to DIR file
 
-		string strIMGFilePath = Path::replaceFileExtensionWithCase(m_reader.getFilePath(), "IMG");
-
 		pDataReader->setStreamType(DATA_STREAM_FILE);
-		pDataReader->setFilePath(strIMGFilePath);
+		pDataReader->setFilePath(getIMGFilePath());
 		pDataReader->open(true); // open handle to IMG file (handle is closed in Format::unserializeVia*() methods
 	}
 
@@ -1003,19 +1052,6 @@ void					IMGFormat::getModelAndTextureSetNamesFromEntries(
 	{
 		if (pIMGEntry->isModelFile())
 		{
-			/*
-			todo
-			try
-			{
-				DFFFormat dffFile;
-				dffFile.setData(pIMGEntry->getEntryData());
-				dffFile.unserialize();
-				umapIMGModelNames[pIMGEntry] = StdVector::toUpperCase(dffFile.getModelNames());
-			}
-			catch(EExceptionCode& uiErrorCode)
-			{
-			}
-			*/
 			umapIMGTextureSetNames[pIMGEntry].push_back(String::toUpperCase(Path::removeFileExtension(pIMGEntry->getEntryName())));
 		}
 		else if (pIMGEntry->isTextureFile())
@@ -1388,25 +1424,21 @@ unordered_map<IMGEntry*, string>	IMGFormat::getAllEntriesData(void)
 
 unordered_map<IMGEntry*, string>	IMGFormat::getEntriesData(vector<IMGEntry*>& vecEntries)
 {
-	DataReader *pDataReader = DataReader::get();
 	unordered_map<IMGEntry*, string> umapEntriesData;
-
-	try
+	
+	m_reader.setFilePath(getFilePath()); // todo - use IMG file not DIR file
+	if(!openFile())
 	{
-		pDataReader->setFilePath(getFilePath());
-		pDataReader->open(true);
-		for (auto pIMGEntry : vecEntries)
-		{
-			pDataReader->setSeek(pIMGEntry->getEntryOffset());
-			umapEntriesData.insert(make_pair(pIMGEntry, pDataReader->readString(pIMGEntry->getEntrySize())));
-		}
-		pDataReader->close();
+		return umapEntriesData;
 	}
-	catch (EExceptionCode)
+	
+	uint32 uiEntryIndex = 0;
+	for (IMGEntry *pIMGEntry : vecEntries)
 	{
-		pDataReader->reset();
+		umapEntriesData.insert(make_pair(pIMGEntry, readEntryContent(uiEntryIndex++)));
 	}
-
+	m_reader.close();
+	
 	return umapEntriesData;
 }
 
@@ -1555,7 +1587,6 @@ uint32			IMGFormat::getEntryPaddedSize(uint32 uiDataLength)
 uint32			IMGFormat::merge(string& strSecondIMGPath, vector<string>& vecImportedEntryNames)
 {
 	DataReader *pDataReader = DataReader::get();
-	uint32 uiImportedEntryCount = 0;
 
 	// parse second IMG file for entry information
 	IMGFormat imgFileIn(strSecondIMGPath);
@@ -1657,71 +1688,55 @@ void					IMGFormat::exportSingle(IMGEntry *pIMGEntry, string& strFolderPath)
 
 void					IMGFormat::exportMultiple(vector<IMGEntry*>& vecIMGEntries, string strFolderPath)
 {
-	DataReader *pDataReader = DataReader::get();
 	strFolderPath = Path::addSlashToEnd(strFolderPath);
 
-	try
+	m_reader.setFilePath(getIMGFilePath());
+	if(!openFile())
 	{
-		string strIMGFilePath = getFilePath();
-		strIMGFilePath = Path::replaceFileExtensionWithCase(strIMGFilePath, "IMG");
-
-		pDataReader->setFilePath(strIMGFilePath);
-		pDataReader->setStreamType(DATA_STREAM_FILE);
-		pDataReader->open(true);
-
-		for (auto pIMGEntry : vecIMGEntries)
+		return;
+	}
+	
+	uint32 uiEntryIndex = 0;
+	for (IMGEntry *pIMGEntry : vecIMGEntries)
+	{
+		if (!pIMGEntry->canBeRead())
 		{
-			if (!pIMGEntry->canBeRead())
-			{
-				continue;
-			}
-
-			pDataReader->setSeek(pIMGEntry->getEntryOffset());
-			string strFileContent = pDataReader->readString(pIMGEntry->getEntrySize());
-			File::storeFile(strFolderPath + pIMGEntry->getEntryName(), strFileContent, false, true);
-
-			Events::trigger(TASK_PROGRESS);
+			uiEntryIndex++;
+			continue;
 		}
+		
+		File::storeFile(strFolderPath + pIMGEntry->getEntryName(), readEntryContent(uiEntryIndex++), false, true);
+		
+		Events::trigger(TASK_PROGRESS);
+	}
 
-		pDataReader->close();
-	}
-	catch (EExceptionCode)
-	{
-		pDataReader->reset();
-	}
+	m_reader.close();
 }
 
 void					IMGFormat::exportAll(string& strFolderPath)
 {
-	DataReader *pDataReader = DataReader::get();
 	strFolderPath = Path::addSlashToEnd(strFolderPath);
 
-	try
+	m_reader.setFilePath(getIMGFilePath());
+	if(!openFile())
 	{
-		string strIMGFilePath = getFilePath();
-		strIMGFilePath = Path::replaceFileExtensionWithCase(strIMGFilePath, "IMG");
-
-		pDataReader->setFilePath(strIMGFilePath);
-		pDataReader->setStreamType(DATA_STREAM_FILE);
-		pDataReader->open(true);
-		for (auto pIMGEntry : getEntries())
+		return;
+	}
+	
+	uint32 uiEntryIndex = 0;
+	for (IMGEntry *pIMGEntry : getEntries())
+	{
+		if (!pIMGEntry->canBeRead())
 		{
-			if (!pIMGEntry->canBeRead())
-			{
-				continue;
-			}
-
-			pDataReader->setSeek(pIMGEntry->getEntryOffset());
-			pIMGEntry->saveEntryByMemory(strFolderPath + pIMGEntry->getEntryName(), pDataReader->readString(pIMGEntry->getEntrySize()));
-
-			Events::trigger(TASK_PROGRESS);
+			uiEntryIndex++;
+			continue;
 		}
-		pDataReader->close();
+		
+		File::storeFile(strFolderPath + pIMGEntry->getEntryName(), readEntryContent(uiEntryIndex++), false, true);
+		
+		Events::trigger(TASK_PROGRESS);
 	}
-	catch (EExceptionCode)
-	{
-		pDataReader->reset();
-	}
+	m_reader.close();
 }
 
 IMGFormat*				IMGFormat::clone(string& strClonedIMGPath)

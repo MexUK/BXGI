@@ -16,6 +16,7 @@ class bxgi::TXDFormat : public bxgi::RWFormat
 {
 public:
 	TXDFormat(void);
+	TXDFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) : bxgi::RWFormat(strFilePathOrData, bStringIsFilePath) {}
 
 	bxgi::RWSection_TextureNative*					addTextureViaFile(std::string& strFilePath, std::string& strTextureDiffuseName, std::string strTextureAlphaName = "");
 	std::vector<std::string>						getTextureNames(void);

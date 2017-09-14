@@ -16,7 +16,8 @@ void				COLFormat::unload(void)
 	removeAllEntries();
 }
 
-void				COLFormat::unserialize(void)
+// serialization
+void				COLFormat::_unserialize(void)
 {
 	while (!DataReader::get()->isEOF())
 	{
@@ -26,7 +27,7 @@ void				COLFormat::unserialize(void)
 	}
 }
 
-void				COLFormat::serialize(void)
+void				COLFormat::_serialize(void)
 {
 	for (COLEntry *pCOLEntry : getEntries())
 	{
@@ -34,6 +35,7 @@ void				COLFormat::serialize(void)
 	}
 }
 
+// COL version
 void				COLFormat::setCOLVersion(ECOLVersion uiCOLVersion)
 {
 	for (auto pCOLEntry : getEntries())
@@ -42,6 +44,7 @@ void				COLFormat::setCOLVersion(ECOLVersion uiCOLVersion)
 	}
 }
 
+// model names
 vector<string>		COLFormat::getModelNames(void)
 {
 	vector<string> vecModelNames;
@@ -52,6 +55,7 @@ vector<string>		COLFormat::getModelNames(void)
 	return vecModelNames;
 }
 
+// fetch entry
 COLEntry*			COLFormat::getEntryByName(string strName)
 {
 	strName = String::toUpperCase(strName);
@@ -65,6 +69,7 @@ COLEntry*			COLFormat::getEntryByName(string strName)
 	return nullptr;
 }
 
+// fetch entries
 vector<COLEntry*>	COLFormat::getEntriesByModelName(string strModelName)
 {
 	vector<COLEntry*> vecCOLEntries;
@@ -79,6 +84,7 @@ vector<COLEntry*>	COLFormat::getEntriesByModelName(string strModelName)
 	return vecCOLEntries;
 }
 
+// sort format
 void				COLFormat::sort(void)
 {
 	std::sort(getEntries().begin(), getEntries().end(), sortFunction);

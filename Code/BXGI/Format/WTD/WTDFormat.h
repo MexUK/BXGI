@@ -13,6 +13,7 @@ class bxgi::WTDFormat : public bxcf::Format, public bxcf::VectorPool<bxgi::WTDEn
 {
 public:
 	WTDFormat(void) : Format(true, bxcf::LITTLE_ENDIAN) {}
+	WTDFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) : bxcf::Format(strFilePathOrData, bStringIsFilePath, true, bxcf::LITTLE_ENDIAN) {}
 
 	void						unload(void);
 

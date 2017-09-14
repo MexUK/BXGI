@@ -21,7 +21,8 @@ void					DATLoaderFormat::unload(void)
 	removeAllEntries();
 }
 
-void					DATLoaderFormat::unserialize(void)
+// serialization
+void					DATLoaderFormat::_unserialize(void)
 {
 	DataReader *pDataReader = DataReader::get();
 	pDataReader->readAndStoreLines();
@@ -68,32 +69,7 @@ void					DATLoaderFormat::unserializeLine(void)
 	}
 }
 
-vector<string>			DATLoaderFormat::getRelativeIDEPaths(void)
-{
-	vector<string> vecRelativeIDEPaths;
-	for (auto pDATEntry : getEntries())
-	{
-		if (pDATEntry->getEntryType() == DAT_LOADER_IDE)
-		{
-			vecRelativeIDEPaths.push_back(pDATEntry->getEntryValues()[0]);
-		}
-	}
-	return vecRelativeIDEPaths;
-}
-
-vector<string>			DATLoaderFormat::getRelativeIPLPaths(void)
-{
-	vector<string> vecRelativeIDEPaths;
-	for (auto pDATEntry : getEntries())
-	{
-		if (pDATEntry->getEntryType() == DAT_LOADER_IPL)
-		{
-			vecRelativeIDEPaths.push_back(pDATEntry->getEntryValues()[0]);
-		}
-	}
-	return vecRelativeIDEPaths;
-}
-
+// item unserialization
 vector<IMGFormat*>		DATLoaderFormat::parseIMGFiles(string strGameDirectoryPath)
 {
 	return parseFiles<IMGManager, IMGFormat>(strGameDirectoryPath, DAT_LOADER_IMG, DAT_LOADER_CDIMAGE);
@@ -135,4 +111,32 @@ vector<FormatClass*>	DATLoaderFormat::parseFiles(string strGameDirectoryPath, ED
 	}
 
 	return vecFormats;
+}
+
+// fetch IDE paths
+vector<string>			DATLoaderFormat::getRelativeIDEPaths(void)
+{
+	vector<string> vecRelativeIDEPaths;
+	for (auto pDATEntry : getEntries())
+	{
+		if (pDATEntry->getEntryType() == DAT_LOADER_IDE)
+		{
+			vecRelativeIDEPaths.push_back(pDATEntry->getEntryValues()[0]);
+		}
+	}
+	return vecRelativeIDEPaths;
+}
+
+// fetch IPL paths
+vector<string>			DATLoaderFormat::getRelativeIPLPaths(void)
+{
+	vector<string> vecRelativeIDEPaths;
+	for (auto pDATEntry : getEntries())
+	{
+		if (pDATEntry->getEntryType() == DAT_LOADER_IPL)
+		{
+			vecRelativeIDEPaths.push_back(pDATEntry->getEntryValues()[0]);
+		}
+	}
+	return vecRelativeIDEPaths;
 }

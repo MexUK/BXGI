@@ -16,6 +16,7 @@ class bxgi::IPLFormat : public bxgi::SectionLinesFormat<bxgi::IPLFormat, bxgi::I
 {
 public:
 	IPLFormat(void);
+	IPLFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) : bxgi::SectionLinesFormat<bxgi::IPLFormat, bxgi::IPLEntry, EIPLSection, bxgi::IPLEntry_Other, bxgi::IPLEntry_Section, bxgi::IPLEntry_Data>(strFilePathOrData, bStringIsFilePath) {}
 
 	void												setIsBinary(bool bState) { m_bIsBinary = bState; }
 	bool												isBinary(void) { return m_bIsBinary; }
@@ -28,8 +29,8 @@ public:
 	uint32												detectSectionSpecificType(EIPLSection EIPLSectionValue);
 
 private:
-	void												unserialize(void);
-	void												serialize(void);
+	void												_unserialize(void);
+	void												_serialize(void);
 
 	void												unserializeBinary(void);
 	void												serializeBinary(void);

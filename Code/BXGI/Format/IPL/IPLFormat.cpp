@@ -42,8 +42,8 @@ IPLFormat::IPLFormat(void) :
 {
 }
 
-// unserialization & serialization
-void		IPLFormat::unserialize(void)
+// serialization
+void		IPLFormat::_unserialize(void)
 {
 	if (isBinary())
 	{
@@ -57,7 +57,7 @@ void		IPLFormat::unserialize(void)
 	}
 }
 
-void		IPLFormat::serialize(void)
+void		IPLFormat::_serialize(void)
 {
 	if (isBinary())
 	{
@@ -71,7 +71,6 @@ void		IPLFormat::serialize(void)
 	}
 }
 
-// unserialize
 void		IPLFormat::unserializeBinary(void)
 {
 	DataReader *pDataReader = DataReader::get();
@@ -118,7 +117,6 @@ void		IPLFormat::unserializeBinary(void)
 	}
 }
 
-// serialize
 void		IPLFormat::serializeBinary(void)
 {
 	DataWriter *pDataWriter = DataWriter::get();
@@ -203,6 +201,7 @@ IPLEntry_Data*		IPLFormat::unserializeDataEntry(EIPLSection EIPLSectionValue)
 	return pIPLEntry;
 }
 
+// detect path type
 EIPLPathType		IPLFormat::detectPATHType(void)
 {
 	DataReader *pDataReader = DataReader::get();
@@ -215,6 +214,7 @@ EIPLPathType		IPLFormat::detectPATHType(void)
 	}
 }
 
+// fetch section type
 EIPLSection					IPLFormat::getSectionFromText(string strIPLSectionText)
 {
 	strIPLSectionText = strIPLSectionText.substr(0, 5);
@@ -253,6 +253,7 @@ EIPLSection					IPLFormat::getSectionFromText(string strIPLSectionText)
 	return IPL_SECTION_UNKNOWN;
 }
 
+// section name
 string						IPLFormat::getSectionText(EIPLSection EIPLSectionValue)
 {
 	switch (EIPLSectionValue)
@@ -283,6 +284,7 @@ string						IPLFormat::getSectionText(EIPLSection EIPLSectionValue)
 	return "Unknown IPL Section";
 }
 
+// create entry
 IPLEntry_Data*				IPLFormat::createDataEntry(EIPLSection EIPLSectionValue, uint32 uiSectionSpecificType)
 {
 	switch (EIPLSectionValue)
@@ -323,6 +325,7 @@ IPLEntry_Data*				IPLFormat::createDataEntry(EIPLSection EIPLSectionValue, uint3
 	return nullptr;
 }
 
+// detect section-specific type
 uint32						IPLFormat::detectSectionSpecificType(EIPLSection EIPLSectionValue)
 {
 	switch (EIPLSectionValue)
