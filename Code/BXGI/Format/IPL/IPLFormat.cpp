@@ -73,7 +73,7 @@ void		IPLFormat::_serialize(void)
 
 void		IPLFormat::unserializeBinary(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_reader;
 
 	// header
 	string strFourCC = pDataReader->readString(4);
@@ -119,7 +119,7 @@ void		IPLFormat::unserializeBinary(void)
 
 void		IPLFormat::serializeBinary(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_writer;
 
 	// header
 	string strFourCC = "BNRY";
@@ -204,7 +204,7 @@ IPLEntry_Data*		IPLFormat::unserializeDataEntry(EIPLSection EIPLSectionValue)
 // detect path type
 EIPLPathType		IPLFormat::detectPATHType(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_reader;
 
 	switch (pDataReader->getLineTokens().size())
 	{

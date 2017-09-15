@@ -14,12 +14,14 @@ IDEEntry_UnknownSection::IDEEntry_UnknownSection(IDEFormat *pIDEFormat) :
 
 void			IDEEntry_UnknownSection::unserialize(void)
 {
-	setLine(*m_pFormat->m_reader.getActiveLine());
+	DataReader *pDataReader = &m_pFormat->m_reader;
+
+	setLine(*pDataReader->getActiveLine());
 }
 
 void			IDEEntry_UnknownSection::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	pDataWriter->writeStringRef(m_strLine);
 }

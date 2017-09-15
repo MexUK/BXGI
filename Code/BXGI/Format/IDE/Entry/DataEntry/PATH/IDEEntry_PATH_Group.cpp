@@ -2,6 +2,7 @@
 #include "Exception/EExceptionCode.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/IDE/IDEFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -23,7 +24,7 @@ void			IDEEntry_PATH_Group::unload(void)
 
 void			IDEEntry_PATH_Group::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pFormat->m_reader;
 
 	switch (pDataReader->getLineTokens().size())
 	{
@@ -44,7 +45,7 @@ void			IDEEntry_PATH_Group::unserialize(void)
 
 void			IDEEntry_PATH_Group::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	switch (getFormatType())
 	{

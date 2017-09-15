@@ -21,7 +21,7 @@ void			IDEEntry_LODM::unserialize(void)
 
 void			IDEEntry_LODM::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	throw EXCEPTION_UNKNOWN_FORMAT_TYPE;
 }

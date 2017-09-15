@@ -44,14 +44,14 @@ void						WDRFormat::unload(void)
 // serialization
 void						WDRFormat::_unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_reader;
 
 	// todo
 }
 
 void						WDRFormat::_serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_writer;
 
 	EDataStreamType ePreviousDataStreamType = pDataWriter->getStreamType();
 	pDataWriter->setStreamType(DATA_STREAM_MEMORY);

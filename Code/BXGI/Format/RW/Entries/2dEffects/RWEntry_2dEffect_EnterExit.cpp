@@ -2,6 +2,7 @@
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
 #include "Static/String.h"
+#include "Format/RW/RWFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -20,7 +21,7 @@ RWEntry_2dEffect_EnterExit::RWEntry_2dEffect_EnterExit(void) :
 
 void							RWEntry_2dEffect_EnterExit::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 	
 	m_fEnterMarkerRotationAngle = pDataReader->readFloat32();
 	m_vecMarkerApporximationRadius = pDataReader->readVector2D();
@@ -34,7 +35,7 @@ void							RWEntry_2dEffect_EnterExit::unserialize(void)
 
 void							RWEntry_2dEffect_EnterExit::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 	
 	pDataWriter->writeFloat32(m_fEnterMarkerRotationAngle);
 	pDataWriter->writeVector2D(m_vecMarkerApporximationRadius);

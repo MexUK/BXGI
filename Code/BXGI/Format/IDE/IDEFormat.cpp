@@ -88,7 +88,7 @@ IDEEntry_Data*		IDEFormat::unserializeDataEntry(EIDESection EIDESectionValue)
 // detect 2dfx type and game
 pair<E2DFXType, uint32>			IDEFormat::detect2DFXTypeAndGame(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_reader;
 
 	uint32 uiLineTokenCount = pDataReader->getLineTokens().size();
 
@@ -190,7 +190,7 @@ pair<E2DFXType, uint32>			IDEFormat::detect2DFXTypeAndGame(void)
 // detect path type
 EIDEPathType			IDEFormat::detectPATHType(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_reader;
 
 	switch (pDataReader->getLineTokens().size())
 	{

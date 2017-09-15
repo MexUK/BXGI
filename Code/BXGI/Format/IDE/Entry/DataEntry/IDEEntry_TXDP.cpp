@@ -32,7 +32,7 @@ void			IDEEntry_TXDP::unserialize(void)
 
 void			IDEEntry_TXDP::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	switch (getFormatType())
 	{

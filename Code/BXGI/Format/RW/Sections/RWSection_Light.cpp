@@ -21,7 +21,7 @@ void							RWSection_Light::_unserialize(void)
 
 void							RWSection_Light::_serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 
 	pDataWriter->writeStringRef(m_strData, 24);
 }

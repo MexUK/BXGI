@@ -2,6 +2,7 @@
 #include "Exception/EExceptionCode.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/IPL/IPLFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -13,7 +14,7 @@ IPLEntry_MZON::IPLEntry_MZON(IPLFormat *pIPLFormat) :
 
 void			IPLEntry_MZON::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pFormat->m_reader;
 
 	uint32 uiLineTokenCount = pDataReader->getLineTokens().size();
 	switch (uiLineTokenCount)
@@ -36,7 +37,7 @@ void			IPLEntry_MZON::unserialize(void)
 
 void			IPLEntry_MZON::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	switch (getFormatType())
 	{

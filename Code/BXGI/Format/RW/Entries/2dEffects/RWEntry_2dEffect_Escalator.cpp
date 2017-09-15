@@ -1,6 +1,7 @@
 #include "RWEntry_2dEffect_Escalator.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/RW/RWFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -16,7 +17,7 @@ RWEntry_2dEffect_Escalator::RWEntry_2dEffect_Escalator(void) :
 
 void							RWEntry_2dEffect_Escalator::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	m_vecEscalatorBottom = pDataReader->readVector3D();
 	m_vecEscalatorTop = pDataReader->readVector3D();
@@ -26,7 +27,7 @@ void							RWEntry_2dEffect_Escalator::unserialize(void)
 
 void							RWEntry_2dEffect_Escalator::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 
 	pDataWriter->writeVector3D(m_vecEscalatorBottom);
 	pDataWriter->writeVector3D(m_vecEscalatorTop);

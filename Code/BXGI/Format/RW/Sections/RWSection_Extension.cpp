@@ -16,7 +16,7 @@ void							RWSection_Extension::_unserialize(void)
 
 void							RWSection_Extension::_serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 
 	// no body data to write
 }

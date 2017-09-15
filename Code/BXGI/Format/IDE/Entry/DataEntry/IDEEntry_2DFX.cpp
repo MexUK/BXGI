@@ -51,7 +51,7 @@ void			IDEEntry_2DFX::unserialize(void)
 
 void			IDEEntry_2DFX::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	if (doesSupportFormatGame(GAME_FLAG_GTA_IV))
 	{

@@ -169,7 +169,7 @@ void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntr
 template<class FormatClass, class EntryClass, typename SectionEnum, class OtherEntryClass, class SectionEntryClass, class DataEntryClass>
 void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntryClass, SectionEntryClass, DataEntryClass>::serializeText(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_writer;
 	for (auto it : getSectionEntries())
 	{
 		for (EntryClass *pFormatEntry : it.second)

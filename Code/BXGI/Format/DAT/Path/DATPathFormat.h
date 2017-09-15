@@ -52,8 +52,8 @@ public:
 	/*
 	todo - [after DAT Paths rewrite] these 3 lines still needed?
 	DATPathFormat*			unserializeViaData_Paths(std::string strEntryData, uint32 uiAreaId, EDATPathFormat EDATPathFormatValue = DAT_PATH_UNKNOWN);
-	DATPathFormat*			parseViaData_Paths_Default(std::string strEntryData, uint32 uiAreaId);
-	DATPathFormat*			parseViaData_Paths_Fastman92(std::string strEntryData, uint32 uiAreaId);
+	DATPathFormat*			unserializeData_Paths_Default(std::string strEntryData, uint32 uiAreaId);
+	DATPathFormat*			unserializeData_Paths_Fastman92(std::string strEntryData, uint32 uiAreaId);
 	*/
 
 private:

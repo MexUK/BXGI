@@ -36,7 +36,7 @@ void					WTDFormat::unload(void)
 // serialization
 void					WTDFormat::_unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_reader;
 
 	// header 1 and decompress whole file except first 12 bytes
 	uint32 uiSystemSegmentSize, uiGPUSegmentSize;
@@ -178,7 +178,7 @@ void					WTDFormat::_serialize(void)
 	// todo
 
 	DataWriter
-		*pDataWriter = DataWriter::get(),
+		*pDataWriter = &m_writer,
 		*pDataWriter2 = DataWriter::get(1);
 
 	//EDataStreamType ePreviousDataStreamType = pDataWriter->getStreamType();
@@ -390,7 +390,7 @@ uint32				WTDFormat::getCompactSize(uint32 uiSize)
 // compression
 string						WTDFormat::decompressWTDFormatData(uint32& uiSystemSegmentSize, uint32& uiGPUSegmentSize)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_reader;
 
 	RG_WTDFormat_Header1 *pHeader1 = pDataReader->readStruct<RG_WTDFormat_Header1>();
 

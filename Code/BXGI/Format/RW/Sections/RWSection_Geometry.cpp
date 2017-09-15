@@ -119,7 +119,7 @@ void							RWSection_Geometry::_unserialize(void)
 
 void							RWSection_Geometry::_serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 
 	pDataWriter->writeUint32(m_uiFlags);
 	pDataWriter->writeUint32(m_uiTriangleCount);

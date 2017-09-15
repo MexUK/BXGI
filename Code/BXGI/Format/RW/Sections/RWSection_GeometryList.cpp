@@ -22,7 +22,7 @@ void							RWSection_GeometryList::_unserialize(void)
 
 void							RWSection_GeometryList::_serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 
 	pDataWriter->writeUint32(m_uiGeometryCount);
 }

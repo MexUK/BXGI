@@ -2,6 +2,7 @@
 #include "Exception/EExceptionCode.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/IDE/IDEFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -13,8 +14,6 @@ IDEEntry_2DFX_Escalator::IDEEntry_2DFX_Escalator(IDEFormat *pIDEFormat) :
 
 void			IDEEntry_2DFX_Escalator::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
-	
 	throw EXCEPTION_UNKNOWN_FORMAT_TYPE;
 }
 

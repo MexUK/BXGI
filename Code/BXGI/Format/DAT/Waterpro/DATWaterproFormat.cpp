@@ -13,7 +13,7 @@ DATWaterproFormat::DATWaterproFormat(void) :
 
 void					DATWaterproFormat::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_reader;
 	
 	/*
 	todo
@@ -49,7 +49,7 @@ void					DATWaterproFormat::unserialize(void)
 
 void					DATWaterproFormat::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_writer;
 	//uint32 i;
 	
 	/*

@@ -3,6 +3,7 @@
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
 #include "Static/String.h"
+#include "Format/IDE/IDEFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -23,7 +24,7 @@ IDEEntry_2DFX_Light::IDEEntry_2DFX_Light(IDEFormat *pIDEFormat) :
 
 void			IDEEntry_2DFX_Light::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pFormat->m_reader;
 
 	if(doesSupportFormatGame(GAME_FLAG_GTA_IV))
 	{
@@ -52,7 +53,7 @@ void			IDEEntry_2DFX_Light::unserialize(void)
 
 void			IDEEntry_2DFX_Light::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	switch (getFormatType())
 	{

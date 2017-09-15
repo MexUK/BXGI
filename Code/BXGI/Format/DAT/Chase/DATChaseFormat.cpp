@@ -13,7 +13,7 @@ DATChaseFormat::DATChaseFormat(void) :
 
 void					DATChaseFormat::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_reader;
 	
 	/*
 	todo
@@ -43,7 +43,7 @@ void					DATChaseFormat::unserialize(void)
 
 void					DATChaseFormat::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_writer;
 	
 	for(DATChaseEntry *pDATChaseEntry : getEntries())
 	{

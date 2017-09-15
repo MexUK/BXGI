@@ -129,7 +129,7 @@ void							RWSection_TextureNative::serializeBody(void)
 
 void							RWSection_TextureNative::unserializeHeader_Direct3D(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	// struct TextureFormat
 	m_uiPlatformId = pDataReader->readUint32();
@@ -188,7 +188,7 @@ void							RWSection_TextureNative::unserializeHeader_Direct3D(void)
 
 void							RWSection_TextureNative::unserializeHeader_PS2(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	// struct TextureFormat
 	setPlatformId(pDataReader->readUint32());
@@ -238,7 +238,7 @@ void							RWSection_TextureNative::unserializeHeader_PS2(void)
 
 void							RWSection_TextureNative::unserializeHeader_Android(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	// struct TextureFormat
 	setPlatformId(pDataReader->readUint32());
@@ -272,7 +272,7 @@ void							RWSection_TextureNative::unserializeHeader_Android(void)
 
 void							RWSection_TextureNative::unserializeBody_Direct3D(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	// texture native struct body - palette
 	bool bPaletteUsed = false;
@@ -319,7 +319,7 @@ void							RWSection_TextureNative::unserializeBody_Direct3D(void)
 
 void							RWSection_TextureNative::unserializeBody_PS2(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	pDataReader->readUint32(); // RW section header
 	pDataReader->readUint32();
@@ -428,7 +428,7 @@ void							RWSection_TextureNative::serializeHeader_Direct3D(void)
 {
 	// texture native struct header - 86 bytes
 
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 
 	// struct TextureFormat
 	pDataWriter->writeUint32(m_uiPlatformId);
@@ -504,21 +504,21 @@ void							RWSection_TextureNative::serializeHeader_Direct3D(void)
 
 void							RWSection_TextureNative::serializeHeader_PS2(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 
 	// todo
 }
 
 void							RWSection_TextureNative::serializeHeader_Android(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 
 	// todo
 }
 
 void							RWSection_TextureNative::serializeBody_Direct3D(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 
 	for (auto pMipmap : getMipMaps().getEntries())
 	{
@@ -529,14 +529,14 @@ void							RWSection_TextureNative::serializeBody_Direct3D(void)
 
 void							RWSection_TextureNative::serializeBody_PS2(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 
 	// todo
 }
 
 void							RWSection_TextureNative::serializeBody_Android(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 
 	// todo
 }
@@ -544,7 +544,7 @@ void							RWSection_TextureNative::serializeBody_Android(void)
 // serialization helpers
 string							RWSection_TextureNative::unserializeString(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 
 	pDataReader->readUint32(); // RW section header
 	uint32 uiSectionSize = pDataReader->readUint32();

@@ -1,6 +1,7 @@
 #include "RWEntry_2dEffect_CoverPoint.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/RW/RWFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -14,7 +15,7 @@ RWEntry_2dEffect_CoverPoint::RWEntry_2dEffect_CoverPoint(void) :
 
 void							RWEntry_2dEffect_CoverPoint::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 	
 	m_vecDirection = pDataReader->readVector2D();
 	m_uiCoverType = pDataReader->readUint32();
@@ -22,7 +23,7 @@ void							RWEntry_2dEffect_CoverPoint::unserialize(void)
 
 void							RWEntry_2dEffect_CoverPoint::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 	
 	pDataWriter->writeVector2D(m_vecDirection);
 	pDataWriter->writeUint32(m_uiCoverType);

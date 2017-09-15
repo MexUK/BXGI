@@ -21,7 +21,7 @@ void			IDEEntry_VNOD::unserialize(void)
 
 void			IDEEntry_VNOD::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	throw EXCEPTION_UNKNOWN_FORMAT_TYPE;
 }

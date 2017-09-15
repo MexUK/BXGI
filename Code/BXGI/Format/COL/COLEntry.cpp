@@ -43,9 +43,10 @@ COLEntry::COLEntry(COLFormat *pCOLFile) :
 {
 }
 
+// serialization
 void			COLEntry::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pCOLFile->m_reader;
 
 	uint64 uiHeaderStartPosition = pDataReader->getSeek();
 	setHeaderStartOffset((uint32)uiHeaderStartPosition);
@@ -200,7 +201,7 @@ void			COLEntry::unserialize(void)
 
 void			COLEntry::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pCOLFile->m_writer;
 	ECOLVersion ECOLVersionValue = getCOLVersion();
 
 	// COL 1 2 3 & 4 header
@@ -231,7 +232,7 @@ void			COLEntry::serialize(void)
 
 void			COLEntry::serializeHeader_Versions2_3_4(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pCOLFile->m_writer;
 	ECOLVersion ECOLVersionValue = getCOLVersion();
 
 	// calculate collision spheres array offset
@@ -333,7 +334,7 @@ void			COLEntry::serializeHeader_Versions2_3_4(void)
 
 void			COLEntry::serializeBody_Version1(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pCOLFile->m_writer;
 
 	pDataWriter->writeUint32(m_uiCollisionSphereCount);
 	storeCollisionSpheres();
@@ -352,7 +353,7 @@ void			COLEntry::serializeBody_Version1(void)
 
 void			COLEntry::serializeBody_Versions2_3_4(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pCOLFile->m_writer;
 	ECOLVersion ECOLVersionValue = getCOLVersion();
 
 	storeCollisionSpheres();
@@ -434,7 +435,7 @@ uint32			COLEntry::calculateEntrySizeForPacking()
 // unserialize components
 void					COLEntry::parseBoundingObjects(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pCOLFile->m_reader;
 	ECOLVersion ECOLVersionValue = getCOLVersion();
 	TBounds& boundingObjects = getBoundingObjects();
 
@@ -467,7 +468,7 @@ void					COLEntry::parseBoundingObjects(void)
 }
 void					COLEntry::parseCollisionSpheres(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pCOLFile->m_reader;
 	ECOLVersion ECOLVersionValue = getCOLVersion();
 	vector<TSphere>& vecSpheres = getCollisionSpheres();
 
@@ -501,7 +502,7 @@ void					COLEntry::parseCollisionSpheres(void)
 }
 void					COLEntry::parseCollisionBoxes(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pCOLFile->m_reader;
 	vector<TBox>& vecBoxes = getCollisionBoxes();
 
 	for (uint32 i = 0, j = getCollisionBoxCount(); i < j; i++)
@@ -522,7 +523,7 @@ void					COLEntry::parseCollisionBoxes(void)
 }
 void					COLEntry::parseCollisionMeshVertices(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pCOLFile->m_reader;
 	ECOLVersion ECOLVersionValue = getCOLVersion();
 	vector<TVertex>& vecVertices = getCollisionMeshVertices();
 
@@ -546,7 +547,7 @@ void					COLEntry::parseCollisionMeshVertices(void)
 }
 void					COLEntry::parseCollisionMeshFaces(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pCOLFile->m_reader;
 	ECOLVersion ECOLVersionValue = getCOLVersion();
 	vector<TFace>& vecFaces = getCollisionMeshFaces();
 
@@ -578,7 +579,7 @@ void					COLEntry::parseCollisionMeshFaces(void)
 }
 void					COLEntry::parseCollisionMeshFaceGroups(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pCOLFile->m_reader;
 	vector<TFaceGroup>& vecFaceGroups = getCollisionMeshFaceGroups();
 
 	for (uint32 i = 0, j = getCollisionMeshFaceGroupCount(); i < j; i++)
@@ -598,7 +599,7 @@ void					COLEntry::parseCollisionMeshFaceGroups(void)
 
 void					COLEntry::parseShadowMeshVertices(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pCOLFile->m_reader;
 	vector<TVertex>& vecVertices = getShadowMeshVertices();
 
 	for (uint32 i = 0, j = getShadowMeshVertexCount(); i < j; i++)
@@ -612,7 +613,7 @@ void					COLEntry::parseShadowMeshVertices(void)
 }
 void					COLEntry::parseShadowMeshFaces(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pCOLFile->m_reader;
 	vector<TFace>& vecFaces = getShadowMeshFaces();
 
 	for (uint32 i = 0, j = getShadowMeshFaceCount(); i < j; i++)
@@ -632,7 +633,7 @@ void					COLEntry::parseShadowMeshFaces(void)
 // serialize components
 void				COLEntry::storeBoundingObjects(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pCOLFile->m_writer;
 	ECOLVersion ECOLVersionValue = getCOLVersion();
 
 	TBounds boundingObjects = getBoundingObjects();
@@ -653,7 +654,7 @@ void				COLEntry::storeBoundingObjects(void)
 }
 void				COLEntry::storeCollisionSpheres(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pCOLFile->m_writer;
 	ECOLVersion ECOLVersionValue = getCOLVersion();
 
 	for (TSphere& sphere : getCollisionSpheres())
@@ -680,7 +681,7 @@ void				COLEntry::storeCollisionSpheres(void)
 }
 void				COLEntry::storeCollisionBoxes(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pCOLFile->m_writer;
 
 	for (TBox& box : getCollisionBoxes())
 	{
@@ -694,7 +695,7 @@ void				COLEntry::storeCollisionBoxes(void)
 }
 void				COLEntry::storeCollisionMeshVertices(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pCOLFile->m_writer;
 	ECOLVersion ECOLVersionValue = getCOLVersion();
 
 	for (TVertex& vertex : getCollisionMeshVertices())
@@ -715,7 +716,7 @@ void				COLEntry::storeCollisionMeshVertices(void)
 }
 void				COLEntry::storeCollisionMeshFaces(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pCOLFile->m_writer;
 	ECOLVersion ECOLVersionValue = getCOLVersion();
 
 	for (TFace& face : getCollisionMeshFaces())
@@ -742,7 +743,7 @@ void				COLEntry::storeCollisionMeshFaces(void)
 }
 void				COLEntry::storeCollisionMeshFaceGroups(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pCOLFile->m_writer;
 
 	for (TFaceGroup& faceGroup : getCollisionMeshFaceGroups())
 	{
@@ -754,7 +755,7 @@ void				COLEntry::storeCollisionMeshFaceGroups(void)
 }
 void				COLEntry::storeShadowMeshVertices(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pCOLFile->m_writer;
 
 	for (TVertex& vertex : getShadowMeshVertices())
 	{
@@ -765,7 +766,7 @@ void				COLEntry::storeShadowMeshVertices(void)
 }
 void				COLEntry::storeShadowMeshFaces(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pCOLFile->m_writer;
 
 	for (TFace& face : getShadowMeshFaces())
 	{
@@ -798,7 +799,7 @@ uint32	COLEntry::getFlagsForPacking(void)
 
 uint32	COLEntry::calculateCollisionMeshVertexCount(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pCOLFile->m_reader;
 	ECOLVersion ECOLVersionValue = getCOLVersion();
 
 	pDataReader->setSeek(getHeaderStartOffset() + 4 + getCollisionMeshFacesOffset());
@@ -848,7 +849,7 @@ uint32	COLEntry::calculateCollisionMeshVertexCount(void)
 
 uint32	COLEntry::calculateShadowMeshVertexCount(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pCOLFile->m_reader;
 	ECOLVersion ECOLVersionValue = getCOLVersion();
 
 	//Debug::log("getHeaderStartOffset(): " + String::toString(getHeaderStartOffset()));
@@ -901,6 +902,7 @@ uint32	COLEntry::calculateShadowMeshVertexCount(void)
 	return uiHighestVertexIndex + 1;
 }
 
+// mesh vertex offset
 void			COLEntry::applyCollisionMeshVerticesOffset(Vec3f vecAxisOffsets)
 {
 	for (Vec3f vecVertex : getCollisionMeshVertices())

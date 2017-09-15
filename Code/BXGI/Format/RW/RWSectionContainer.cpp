@@ -171,7 +171,7 @@ void				RWSectionContainer::_unserialize(void)
 
 void				RWSectionContainer::_serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 	EDataStreamType ePreviousStreamType = pDataWriter->getStreamType();
 
 	pDataWriter->setStreamType(DATA_STREAM_MEMORY);
@@ -185,7 +185,7 @@ void				RWSectionContainer::_serialize(void)
 
 void				RWSectionContainer::serializERWSectionContainer(RWSectionContainer *pRWSectionContainer)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 	for (RWSection *pRWSection : pRWSectionContainer->getEntries())
 	{
 		uint64 uiSeek1 = pDataWriter->getSeek();

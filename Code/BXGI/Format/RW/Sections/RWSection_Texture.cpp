@@ -24,7 +24,7 @@ void							RWSection_Texture::_unserialize(void)
 
 void							RWSection_Texture::_serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 
 	pDataWriter->writeUint16(m_usFilterFlags);
 	pDataWriter->writeUint16(m_usUnknown1);

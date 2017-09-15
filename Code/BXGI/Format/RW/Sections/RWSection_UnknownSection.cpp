@@ -25,7 +25,7 @@ void							RWSection_UnknownSection::_unserialize(void)
 
 void							RWSection_UnknownSection::_serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 
 	uint32 uiRWVersionCC = RWManager::get()->getSerializationRWVersion();
 

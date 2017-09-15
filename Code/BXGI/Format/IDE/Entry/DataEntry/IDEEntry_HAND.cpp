@@ -35,7 +35,7 @@ void			IDEEntry_HAND::unserialize(void)
 
 void			IDEEntry_HAND::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	switch (getFormatType())
 	{

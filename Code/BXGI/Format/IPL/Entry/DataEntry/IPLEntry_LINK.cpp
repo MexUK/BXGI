@@ -2,6 +2,7 @@
 #include "Exception/EExceptionCode.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/IPL/IPLFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -13,14 +14,14 @@ IPLEntry_LINK::IPLEntry_LINK(IPLFormat *pIPLFormat) :
 
 void			IPLEntry_LINK::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pFormat->m_reader;
 
 	throw EXCEPTION_UNKNOWN_FORMAT_TYPE;
 }
 
 void			IPLEntry_LINK::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	throw EXCEPTION_UNKNOWN_FORMAT_TYPE;
 }

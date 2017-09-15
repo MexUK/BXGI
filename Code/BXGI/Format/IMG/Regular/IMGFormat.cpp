@@ -168,7 +168,10 @@ bool				IMGFormat::validate(void)
 // version
 EIMGVersion			IMGFormat::getVersion(void)
 {
-	checkMetaDataIsLoaded();
+	if (m_EIMGVersion == IMG_UNKNOWN)
+	{
+		checkMetaDataIsLoaded();
+	}
 	return m_EIMGVersion;
 }
 
@@ -257,7 +260,7 @@ void		IMGFormat::unserializeHeaderComponents(void)
 	//IMGPeekData imgPeekData = peekIMGData();
 	//setVersion(imgPeekData.getVersion());
 	//setEncrypted(imgPeekData.isEncrypted());
-	switch (getVersion())
+	switch (m_EIMGVersion)
 	{
 	case IMG_1:
 		//Timing::get()->start("unserializeVersion1");
@@ -568,7 +571,7 @@ void		IMGFormat::unserializeResourceTypes(void)
 // header & body serialization
 void		IMGFormat::serializeHeaderAndBodyComponents(void)
 {
-	switch (getVersion())
+	switch (m_EIMGVersion)
 	{
 	case IMG_1:
 		serializeVersion1();
@@ -593,20 +596,17 @@ void		IMGFormat::serializeHeaderAndBodyComponents(void)
 }
 void					IMGFormat::serializeVersion1(void)
 {
-	DataReader *pDataReader = DataReader::get();
-	DataWriter *pDataWriter = DataWriter::get();
-
 	string
-		strDIRFilePathIn = getOriginalFilePath(),
-		strIMGFilePathIn = Path::replaceFileExtensionWithCase(strDIRFilePathIn, "IMG"),
-		strIMGFilePathOut = pDataWriter->getFilePath(),
+		strDIRFilePathIn = getDIRFilePath(),
+		strIMGFilePathIn = getIMGFilePath(),
+		strIMGFilePathOut = m_writer.getFilePath(),
 		strDIRFilePathOut = Path::replaceFileExtensionWithCase(strIMGFilePathOut, "DIR");
 
 	// open IMG file to read from (IMG file to write to is already open in DataWriter)
-	if (pDataReader->getStreamType() == DATA_STREAM_FILE)
+	if (m_reader.getStreamType() == DATA_STREAM_FILE)
 	{
-		pDataReader->setFilePath(strIMGFilePathIn);
-		pDataReader->open(true);
+		m_reader.setFilePath(strIMGFilePathIn);
+		m_reader.open(true);
 	}
 
 	// write IMG data
@@ -615,65 +615,62 @@ void					IMGFormat::serializeVersion1(void)
 	{
 		uint32 uiEntryByteCountPadded = IMGFormat::getEntryPaddedSize(pIMGEntry->getEntrySize());
 
-		pDataReader->setSeek(pIMGEntry->getEntryOffset());
-		pDataWriter->writeString(pDataReader->readString(pIMGEntry->getEntrySize()), uiEntryByteCountPadded);
+		m_reader.setSeek(pIMGEntry->getEntryOffset());
+		m_writer.writeString(m_reader.readString(pIMGEntry->getEntrySize()), uiEntryByteCountPadded);
 
-		pIMGEntry->setEntryOffsetInSectors(uiSeek);
+		//pIMGEntry->setEntryOffset(uiSeek);
 		uiSeek += uiEntryByteCountPadded;
 
 		Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
 	}
 
-	if (pDataReader->getStreamType() == DATA_STREAM_FILE)
+	if (m_reader.getStreamType() == DATA_STREAM_FILE)
 	{
 		// finalize IMG data reading
-		pDataReader->close();
+		m_reader.close();
 	}
-	if (pDataWriter->getStreamType() == DATA_STREAM_FILE)
+	if (m_writer.getStreamType() == DATA_STREAM_FILE)
 	{
 		// finalize IMG data writing
-		pDataWriter->close();
+		m_writer.close();
 	}
 
-	if (pDataReader->getStreamType() == DATA_STREAM_FILE)
+	if (m_reader.getStreamType() == DATA_STREAM_FILE)
 	{
 		// open DIR file to read from
-		pDataReader->setFilePath(strDIRFilePathIn);
-		pDataReader->open(true);
+		m_reader.setFilePath(strDIRFilePathIn);
+		m_reader.open(true);
 	}
-	if (pDataWriter->getStreamType() == DATA_STREAM_FILE)
+	if (m_writer.getStreamType() == DATA_STREAM_FILE)
 	{
 		// open DIR file to write to
-		pDataWriter->setFilePath(strDIRFilePathOut);
-		pDataWriter->open(true);
+		m_writer.setFilePath(strDIRFilePathOut);
+		m_writer.open(true);
 	}
 
 	// write DIR data
 	for (auto pIMGEntry : getEntries())
 	{
-		pDataWriter->writeUint32(pIMGEntry->getEntryOffsetInSectors());
-		pDataWriter->writeUint32(pIMGEntry->getEntrySizeInSectors());
-		pDataWriter->writeStringRef(pIMGEntry->getEntryName(), 24);
+		m_writer.writeUint32(pIMGEntry->getEntryOffsetInSectors());
+		m_writer.writeUint32(pIMGEntry->getEntrySizeInSectors());
+		m_writer.writeStringRef(pIMGEntry->getEntryName(), 24);
 
 		Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
 	}
 
 	// finalize DIR data reading/writing
-	if (pDataReader->getStreamType() == DATA_STREAM_FILE)
+	if (m_reader.getStreamType() == DATA_STREAM_FILE)
 	{
-		pDataReader->close();
+		m_reader.close();
 	}
-	if(pDataWriter->getStreamType() == DATA_STREAM_FILE)
+	if(m_writer.getStreamType() == DATA_STREAM_FILE)
 	{
-		pDataWriter->close(); // optionally called here, DataWriter::close() will be called by Format too.
+		m_writer.close(); // optionally called here, DataWriter::close() will be called by Format too.
 	}
 }
 
 void					IMGFormat::serializeVersion2(void)
 {
-	DataReader *pDataReader = DataReader::get();
-	DataWriter *pDataWriter = DataWriter::get();
-
 	// fetch new seek positions for all IMG entries
 	uint32
 		uiEntryCount = getEntryCount(),
@@ -690,23 +687,23 @@ void					IMGFormat::serializeVersion2(void)
 	}
 
 	// open IMG file to read from (IMG file to write to is already open in DataWriter)
-	if (pDataReader->getStreamType() == DATA_STREAM_FILE)
+	if (m_reader.getStreamType() == DATA_STREAM_FILE)
 	{
-		pDataReader->setFilePath(getOriginalFilePath());
-		pDataReader->open(true);
+		m_reader.setFilePath(getOriginalFilePath());
+		m_reader.open(true);
 	}
 
 	// write IMG data - IMG header
-	pDataWriter->writeString("VER2");
-	pDataWriter->writeUint32(getEntryCount());
+	m_writer.writeString("VER2");
+	m_writer.writeUint32(getEntryCount());
 
 	i = 0;
 	for (auto pIMGEntry : getEntries())
 	{
-		pDataWriter->writeUint32(vecNewEntryPositions[i++]);
-		pDataWriter->writeUint16((uint16)ceil((float)(pIMGEntry->getEntrySize() / (float)2048.0f)));
-		pDataWriter->writeUint16(0);
-		pDataWriter->writeStringRef(pIMGEntry->getEntryName(), 24);
+		m_writer.writeUint32(vecNewEntryPositions[i++]);
+		m_writer.writeUint16((uint16)ceil((float)(pIMGEntry->getEntrySize() / (float)2048.0f)));
+		m_writer.writeUint16(0);
+		m_writer.writeStringRef(pIMGEntry->getEntryName(), 24);
 
 		Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
 	}
@@ -714,15 +711,15 @@ void					IMGFormat::serializeVersion2(void)
 	if ((uiBodyStart % 2048) != 0 && uiEntryCount > 0)
 	{
 		uint32 uiPadByteCount = 2048 - (uiBodyStart % 2048);
-		pDataWriter->writeString(uiPadByteCount);
+		m_writer.writeString(uiPadByteCount);
 	}
 
 	// write IMG data - IMG body
 	i = 0;
 	for (auto pIMGEntry : getEntries())
 	{
-		pDataReader->setSeek(pIMGEntry->getEntryOffset());
-		pDataWriter->writeString(pDataReader->readString(pIMGEntry->getEntrySize()), IMGFormat::getEntryPaddedSize(pIMGEntry->getEntrySize()));
+		m_reader.setSeek(pIMGEntry->getEntryOffset());
+		m_writer.writeString(m_reader.readString(pIMGEntry->getEntrySize()), IMGFormat::getEntryPaddedSize(pIMGEntry->getEntrySize()));
 
 		pIMGEntry->setEntryOffsetInSectors(vecNewEntryPositions[i++]);
 
@@ -730,21 +727,18 @@ void					IMGFormat::serializeVersion2(void)
 	}
 
 	// finalize IMG data reading/writing
-	if (pDataReader->getStreamType() == DATA_STREAM_FILE)
+	if (m_reader.getStreamType() == DATA_STREAM_FILE)
 	{
-		pDataReader->close();
+		m_reader.close();
 	}
-	if(pDataWriter->getStreamType() == DATA_STREAM_FILE)
+	if(m_writer.getStreamType() == DATA_STREAM_FILE)
 	{
-		pDataWriter->close(); // optionally called here, DataWriter::close() will be called by Format too.
+		m_writer.close(); // optionally called here, DataWriter::close() will be called by Format too.
 	}
 }
 
 void					IMGFormat::serializeVersionFastman92(void)
 {
-	DataReader *pDataReader = DataReader::get();
-	DataWriter *pDataWriter = DataWriter::get();
-
 	// fetch new seek positions for all IMG entries
 	uint32
 		uiEntryCount = getEntryCount(),
@@ -761,10 +755,10 @@ void					IMGFormat::serializeVersionFastman92(void)
 	}
 
 	// open IMG file to read from (IMG file to write to is already open in DataWriter)
-	if (pDataReader->getStreamType() == DATA_STREAM_FILE)
+	if (m_reader.getStreamType() == DATA_STREAM_FILE)
 	{
-		pDataReader->setFilePath(getOriginalFilePath());
-		pDataReader->open(true);
+		m_reader.setFilePath(getOriginalFilePath());
+		m_reader.open(true);
 	}
 
 	// write IMG data - IMG header
@@ -772,9 +766,9 @@ void					IMGFormat::serializeVersionFastman92(void)
 	uint32 uiArchiveVersion = 1;
 	uint32 uiArchiveFlags = uiArchiveVersion;
 
-	pDataWriter->writeStringRef(strIMGVersion);
-	pDataWriter->writeUint32(uiArchiveFlags);
-	pDataWriter->writeString("fastman92", 12);
+	m_writer.writeStringRef(strIMGVersion);
+	m_writer.writeUint32(uiArchiveFlags);
+	m_writer.writeString("fastman92", 12);
 	if (uiArchiveVersion == 1)
 	{
 		// write IMG data - IMG header
@@ -782,9 +776,9 @@ void					IMGFormat::serializeVersionFastman92(void)
 		uint32 uiEntryCount = getEntryCount();
 		string strReserved1 = String::zeroPad(8);
 
-		pDataWriter->writeUint32(uiCheck);
-		pDataWriter->writeUint32(uiEntryCount);
-		pDataWriter->writeStringRef(strReserved1);
+		m_writer.writeUint32(uiCheck);
+		m_writer.writeUint32(uiEntryCount);
+		m_writer.writeStringRef(strReserved1);
 
 		// write IMG data - IMG directory
 		i = 0;
@@ -810,14 +804,14 @@ void					IMGFormat::serializeVersionFastman92(void)
 			uint16 usPaddedBytesCountInAlignedOriginalSize = (usUncompressedSizeInSectors * 2048) % 2048;
 			uint16 usPaddedBytesCountInAlignedPackedSize = (usPackedSizeInSectors * 2048) % 2048;
 
-			pDataWriter->writeUint32(vecNewEntryPositions[i++]);
-			pDataWriter->writeUint16(usUncompressedSizeInSectors);
-			pDataWriter->writeUint16(usPaddedBytesCountInAlignedOriginalSize);
-			pDataWriter->writeUint16(usPackedSizeInSectors);
-			pDataWriter->writeUint16(usPaddedBytesCountInAlignedPackedSize);
-			pDataWriter->writeUint32(uiEntryFlags);
-			pDataWriter->writeStringRef(pIMGEntry->getEntryName(), 40);
-			pDataWriter->writeString(8);
+			m_writer.writeUint32(vecNewEntryPositions[i++]);
+			m_writer.writeUint16(usUncompressedSizeInSectors);
+			m_writer.writeUint16(usPaddedBytesCountInAlignedOriginalSize);
+			m_writer.writeUint16(usPackedSizeInSectors);
+			m_writer.writeUint16(usPaddedBytesCountInAlignedPackedSize);
+			m_writer.writeUint32(uiEntryFlags);
+			m_writer.writeStringRef(pIMGEntry->getEntryName(), 40);
+			m_writer.writeString(8);
 
 			Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
 		}
@@ -825,15 +819,15 @@ void					IMGFormat::serializeVersionFastman92(void)
 		if ((uiBodyStart % 2048) != 0 && uiEntryCount > 0)
 		{
 			uint32 uiPadByteCount = 2048 - (uiBodyStart % 2048);
-			pDataWriter->writeString(uiPadByteCount);
+			m_writer.writeString(uiPadByteCount);
 		}
 
 		// write IMG data - IMG body
 		i = 0;
 		for (auto pIMGEntry : getEntries())
 		{
-			pDataReader->setSeek(pIMGEntry->getEntryOffset());
-			pDataWriter->writeString(pDataReader->readString(pIMGEntry->getEntrySize()), IMGFormat::getEntryPaddedSize(pIMGEntry->getEntrySize()));
+			m_reader.setSeek(pIMGEntry->getEntryOffset());
+			m_writer.writeString(m_reader.readString(pIMGEntry->getEntrySize()), IMGFormat::getEntryPaddedSize(pIMGEntry->getEntrySize()));
 
 			pIMGEntry->setEntryOffsetInSectors(vecNewEntryPositions[i++]);
 
@@ -842,21 +836,18 @@ void					IMGFormat::serializeVersionFastman92(void)
 	}
 
 	// finalize IMG data reading/writing
-	if (pDataReader->getStreamType() == DATA_STREAM_FILE)
+	if (m_reader.getStreamType() == DATA_STREAM_FILE)
 	{
-		pDataReader->close();
+		m_reader.close();
 	}
-	if(pDataWriter->getStreamType() == DATA_STREAM_FILE)
+	if(m_writer.getStreamType() == DATA_STREAM_FILE)
 	{
-		pDataWriter->close(); // optionally called here, DataWriter::close() will be called by Format too.
+		m_writer.close(); // optionally called here, DataWriter::close() will be called by Format too.
 	}
 }
 
 void					IMGFormat::serializeVersion3_Encrypted(void)
 {
-	DataReader *pDataReader = DataReader::get();
-	DataWriter *pDataWriter = DataWriter::get();
-
 	// fetch new seek positions for all IMG entries
 	uint32
 		uiEntryCount = getEntryCount(),
@@ -874,35 +865,35 @@ void					IMGFormat::serializeVersion3_Encrypted(void)
 	}
 
 	// open IMG file to read from (IMG file to write to is already open in DataWriter)
-	if (pDataReader->getStreamType() == DATA_STREAM_FILE)
+	if (m_reader.getStreamType() == DATA_STREAM_FILE)
 	{
-		pDataReader->setFilePath(getOriginalFilePath());
-		pDataReader->open(true);
+		m_reader.setFilePath(getOriginalFilePath());
+		m_reader.open(true);
 	}
 
 	// write IMG data - IMG header
-	EDataStreamType ePreviousStreamType = pDataWriter->getStreamType();
-	pDataWriter->setStreamType(DATA_STREAM_MEMORY);
+	EDataStreamType ePreviousStreamType = m_writer.getStreamType();
+	m_writer.setStreamType(DATA_STREAM_MEMORY);
 
 	uint32 uiTableByteCount = (uint32)(ceil(((float)((16 * getEntryCount()) + uiNamesLength)) / 2048.0) * 2048.0);
 
-	pDataWriter->writeUint32(0xA94E2A52);
-	pDataWriter->writeUint32(3);
-	pDataWriter->writeUint32(getEntryCount());
-	pDataWriter->writeUint32(uiTableByteCount);
-	pDataWriter->writeUint16(16);
-	pDataWriter->writeUint16(0);
+	m_writer.writeUint32(0xA94E2A52);
+	m_writer.writeUint32(3);
+	m_writer.writeUint32(getEntryCount());
+	m_writer.writeUint32(uiTableByteCount);
+	m_writer.writeUint16(16);
+	m_writer.writeUint16(0);
 
 	// IMG file - table
 	for (auto pIMGEntry : getEntries())
 	{
-		pDataWriter->writeUint32(0);
-		pDataWriter->writeUint32(pIMGEntry->getRageResourceType() == nullptr ? 0 : pIMGEntry->getRageResourceType()->getIdentifier());
-		pDataWriter->writeUint32(pIMGEntry->getEntryOffsetInSectors());
-		pDataWriter->writeUint16((uint16)ceil(((float)pIMGEntry->getEntrySize()) / (float)2048.0f));
+		m_writer.writeUint32(0);
+		m_writer.writeUint32(pIMGEntry->getRageResourceType() == nullptr ? 0 : pIMGEntry->getRageResourceType()->getIdentifier());
+		m_writer.writeUint32(pIMGEntry->getEntryOffsetInSectors());
+		m_writer.writeUint16((uint16)ceil(((float)pIMGEntry->getEntrySize()) / (float)2048.0f));
 
 		uint32 uiRemainder = pIMGEntry->getEntrySize() % 2048;
-		pDataWriter->writeUint16((uint16)(pIMGEntry->getFlags() | ((uint16)(uiRemainder == 0 ? 0 : (2048 - uiRemainder)))));
+		m_writer.writeUint16((uint16)(pIMGEntry->getFlags() | ((uint16)(uiRemainder == 0 ? 0 : (2048 - uiRemainder)))));
 
 		Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
 	}
@@ -912,33 +903,33 @@ void					IMGFormat::serializeVersion3_Encrypted(void)
 	{
 		strEntryName = pIMGEntry->getEntryName();
 		strEntryName.append("\0", 1);
-		pDataWriter->writeStringRef(strEntryName);
+		m_writer.writeStringRef(strEntryName);
 	}
 
 	if ((uiPaddingStart % 2048) != 0 && uiEntryCount > 0)
 	{
 		uint32 uiPadByteCount = 2048 - (uiPaddingStart % 2048);
-		pDataWriter->writeString(uiPadByteCount);
+		m_writer.writeString(uiPadByteCount);
 	}
 
 	// encrypt header and table
-	string strData = pDataWriter->getData();
+	string strData = m_writer.getData();
 
 	string strHeader = IMGManager::encryptVersion3IMGString(strData.substr(0, 32));
 	string strTables = IMGManager::encryptVersion3IMGString(String::zeroPad(strData.substr(20), (strData.length() - 20) + (2048 - ((strData.length() - 20) % 2048))));
 
-	pDataWriter->setStreamType(ePreviousStreamType);
-	pDataWriter->setSeek(0);
-	pDataWriter->writeStringRef(strHeader);
-	pDataWriter->setSeek(20);
-	pDataWriter->writeStringRef(strTables);
+	m_writer.setStreamType(ePreviousStreamType);
+	m_writer.setSeek(0);
+	m_writer.writeStringRef(strHeader);
+	m_writer.setSeek(20);
+	m_writer.writeStringRef(strTables);
 
 	// IMG file - body
 	i = 0;
 	for (auto pIMGEntry : getEntries())
 	{
-		pDataReader->setSeek(pIMGEntry->getEntryOffset());
-		pDataWriter->writeString(pDataReader->readString(pIMGEntry->getEntrySize()));
+		m_reader.setSeek(pIMGEntry->getEntryOffset());
+		m_writer.writeString(m_reader.readString(pIMGEntry->getEntrySize()));
 
 		pIMGEntry->setEntryOffsetInSectors(vecNewEntryPositions[i++]);
 
@@ -946,21 +937,18 @@ void					IMGFormat::serializeVersion3_Encrypted(void)
 	}
 
 	// finalize IMG data reading/writing
-	if (pDataReader->getStreamType() == DATA_STREAM_FILE)
+	if (m_reader.getStreamType() == DATA_STREAM_FILE)
 	{
-		pDataReader->close();
+		m_reader.close();
 	}
-	if(pDataWriter->getStreamType() == DATA_STREAM_FILE)
+	if(m_writer.getStreamType() == DATA_STREAM_FILE)
 	{
-		pDataWriter->close(); // optionally called here, DataWriter::close() will be called by Format too.
+		m_writer.close(); // optionally called here, DataWriter::close() will be called by Format too.
 	}
 }
 
 void					IMGFormat::serializeVersion3_Unencrypted(void)
 {
-	DataReader *pDataReader = DataReader::get();
-	DataWriter *pDataWriter = DataWriter::get();
-
 	// fetch new seek positions for all IMG entries
 	uint32
 		uiEntryCount = getEntryCount(),
@@ -978,30 +966,30 @@ void					IMGFormat::serializeVersion3_Unencrypted(void)
 	}
 
 	// open IMG file to read from (IMG file to write to is already open in DataWriter)
-	if (pDataReader->getStreamType() == DATA_STREAM_FILE)
+	if (m_reader.getStreamType() == DATA_STREAM_FILE)
 	{
-		pDataReader->setFilePath(getOriginalFilePath());
-		pDataReader->open(true);
+		m_reader.setFilePath(getOriginalFilePath());
+		m_reader.open(true);
 	}
 
 	// IMG file - header
-	pDataWriter->writeUint32(0xA94E2A52);
-	pDataWriter->writeUint32(3);
-	pDataWriter->writeUint32(getEntryCount());
-	pDataWriter->writeUint32((uint32)(ceil(((float)((16 * getEntryCount()) + uiNamesLength)) / 2048.0) * 2048));
-	pDataWriter->writeUint16(16);
-	pDataWriter->writeUint16(0);
+	m_writer.writeUint32(0xA94E2A52);
+	m_writer.writeUint32(3);
+	m_writer.writeUint32(getEntryCount());
+	m_writer.writeUint32((uint32)(ceil(((float)((16 * getEntryCount()) + uiNamesLength)) / 2048.0) * 2048));
+	m_writer.writeUint16(16);
+	m_writer.writeUint16(0);
 
 	// IMG file - table
 	for (auto pIMGEntry : getEntries())
 	{
-		pDataWriter->writeUint32(0);
-		pDataWriter->writeUint32((pIMGEntry->getRageResourceType() == nullptr ? 0 : pIMGEntry->getRageResourceType()->getIdentifier()));
-		pDataWriter->writeUint32(pIMGEntry->getEntryOffsetInSectors());
-		pDataWriter->writeUint16((uint16)ceil(((float)pIMGEntry->getEntrySize()) / (float)2048.0f));
+		m_writer.writeUint32(0);
+		m_writer.writeUint32((pIMGEntry->getRageResourceType() == nullptr ? 0 : pIMGEntry->getRageResourceType()->getIdentifier()));
+		m_writer.writeUint32(pIMGEntry->getEntryOffsetInSectors());
+		m_writer.writeUint16((uint16)ceil(((float)pIMGEntry->getEntrySize()) / (float)2048.0f));
 
 		uint32 uiRemainder = pIMGEntry->getEntrySize() % 2048;
-		pDataWriter->writeUint16((uint16)((pIMGEntry->getFlags() | ((uint16)(uiRemainder == 0 ? 0 : (2048 - uiRemainder))))));
+		m_writer.writeUint16((uint16)((pIMGEntry->getFlags() | ((uint16)(uiRemainder == 0 ? 0 : (2048 - uiRemainder))))));
 
 		Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
 	}
@@ -1011,21 +999,21 @@ void					IMGFormat::serializeVersion3_Unencrypted(void)
 	{
 		strEntryName = pIMGEntry->getEntryName();
 		strEntryName.append("\0", 1);
-		pDataWriter->writeStringRef(strEntryName);
+		m_writer.writeStringRef(strEntryName);
 	}
 
 	if ((uiBodyStart % 2048) != 0 && uiEntryCount > 0)
 	{
 		uint32 uiPadByteCount = 2048 - (uiBodyStart % 2048);
-		pDataWriter->writeString(uiPadByteCount);
+		m_writer.writeString(uiPadByteCount);
 	}
 
 	// IMG file - body
 	i = 0;
 	for (auto pIMGEntry : getEntries())
 	{
-		pDataReader->setSeek(pIMGEntry->getEntryOffset());
-		pDataWriter->writeString(pDataReader->readString(pIMGEntry->getEntrySize()));
+		m_reader.setSeek(pIMGEntry->getEntryOffset());
+		m_writer.writeString(m_reader.readString(pIMGEntry->getEntrySize()));
 
 		pIMGEntry->setEntryOffsetInSectors(vecNewEntryPositions[i++]);
 
@@ -1033,13 +1021,13 @@ void					IMGFormat::serializeVersion3_Unencrypted(void)
 	}
 
 	// finalize IMG data reading/writing
-	if (pDataReader->getStreamType() == DATA_STREAM_FILE)
+	if (m_reader.getStreamType() == DATA_STREAM_FILE)
 	{
-		pDataReader->close();
+		m_reader.close();
 	}
-	if(pDataWriter->getStreamType() == DATA_STREAM_FILE)
+	if(m_writer.getStreamType() == DATA_STREAM_FILE)
 	{
-		pDataWriter->close(); // optionally called here, DataWriter::close() will be called by Format too.
+		m_writer.close(); // optionally called here, DataWriter::close() will be called by Format too.
 	}
 }
 
@@ -1587,7 +1575,7 @@ uint32			IMGFormat::getEntryPaddedSize(uint32 uiDataLength)
 
 uint32			IMGFormat::merge(string& strSecondIMGPath, vector<string>& vecImportedEntryNames)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_reader;
 
 	// parse second IMG file for entry information
 	IMGFormat imgFileIn(strSecondIMGPath);
@@ -1645,7 +1633,11 @@ void					IMGFormat::split(vector<IMGEntry*>& vecIMGEntries, string& strOutPath, 
 {
 	IMGFormat *pIMGFile = new IMGFormat;
 	pIMGFile->setVersion(EIMGVersion);
-	pIMGFile->setFilePath(getFilePath());
+	
+	pIMGFile->setFilePath(getIMGFilePath()); // todo - rename to format::setInputPath()
+	pIMGFile->m_writer.setFilePath(strOutPath);
+
+	// todo - remove from here? pIMGFile->openFile(); // open input - todo - rename to openInputFile()
 
 	bool bVersion3IMG = EIMGVersion == IMG_3;
 	for (auto pIMGEntry : vecIMGEntries)
@@ -1670,6 +1662,8 @@ void					IMGFormat::split(vector<IMGEntry*>& vecIMGEntries, string& strOutPath, 
 	}
 
 	pIMGFile->serialize(strOutPath);
+
+	pIMGFile->closeOutput();
 
 	pIMGFile->unload();
 	delete pIMGFile;
@@ -1743,7 +1737,7 @@ void					IMGFormat::exportAll(string& strFolderPath)
 IMGFormat*				IMGFormat::clone(string& strClonedIMGPath)
 {
 	serialize(strClonedIMGPath);
-	return IMGManager::get()->parseViaFile(strClonedIMGPath);
+	return IMGManager::get()->unserializeFile(strClonedIMGPath);
 }
 
 vector<IMGEntry*>		IMGFormat::getUnknownVersionEntries(void)

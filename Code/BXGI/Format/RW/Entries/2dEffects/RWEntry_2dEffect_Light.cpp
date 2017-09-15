@@ -2,6 +2,7 @@
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
 #include "Static/String.h"
+#include "Format/RW/RWFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -30,7 +31,7 @@ RWEntry_2dEffect_Light::RWEntry_2dEffect_Light(void) :
 
 void							RWEntry_2dEffect_Light::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 	
 	m_uiColor = pDataReader->readUint32();
 	m_fCoronaFarClip = pDataReader->readFloat32();
@@ -63,7 +64,7 @@ void							RWEntry_2dEffect_Light::unserialize(void)
 
 void							RWEntry_2dEffect_Light::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 	
 	pDataWriter->writeUint32(m_uiColor);
 	pDataWriter->writeFloat32(m_fCoronaFarClip);

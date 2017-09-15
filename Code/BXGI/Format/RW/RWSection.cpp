@@ -20,6 +20,7 @@
 #include "Sections/RWSection_TextureNative.h"
 #include "Sections/RWSection_UnknownSection.h"
 #include "Static/String.h"
+#include "Format/RW/RWFormat.h"
 
 using namespace std;
 using namespace bxcf;
@@ -64,7 +65,7 @@ void				RWSection::_serialize(void)
 	}
 	*/
 	
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 	uint32 uiVersionCC = RWManager::get()->getSerializationRWVersion();
 	
 	if (!isSectionHeaderSkipped())
@@ -84,7 +85,7 @@ void				RWSection::_serialize(void)
 
 void				RWSection::fillPlaceholdersForSerialization(uint32 uiSectionByteCount, uint32 uiSectionStructByteCount)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 
 	string &strData = pDataWriter->getData();
 

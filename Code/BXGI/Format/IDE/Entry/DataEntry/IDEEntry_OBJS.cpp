@@ -104,7 +104,7 @@ void			IDEEntry_OBJS::unserialize(void)
 
 void			IDEEntry_OBJS::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	switch (getFormatType())
 	{

@@ -36,7 +36,7 @@ void			IPLEntry_CARS::unserialize(void)
 
 void			IPLEntry_CARS::unserialize_Text(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pFormat->m_reader;
 
 	switch (pDataReader->getLineTokenCount())
 	{
@@ -61,7 +61,7 @@ void			IPLEntry_CARS::unserialize_Text(void)
 
 void			IPLEntry_CARS::unserialize_Binary(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pFormat->m_reader;
 
 	setFormatType(0);
 	setFormatGames(GAME_FLAG_GTA_SA);
@@ -92,7 +92,7 @@ void			IPLEntry_CARS::serialize(void)
 
 void			IPLEntry_CARS::serialize_Text(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	switch (getFormatType())
 	{
@@ -115,7 +115,7 @@ void			IPLEntry_CARS::serialize_Text(void)
 
 void			IPLEntry_CARS::serialize_Binary(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	switch (getFormatType())
 	{

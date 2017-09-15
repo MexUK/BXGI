@@ -3,6 +3,7 @@
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
 #include "IDEEntry_PATH_Group.h"
+#include "Format/IDE/IDEFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -21,7 +22,7 @@ IDEEntry_PATH_Node::IDEEntry_PATH_Node(IDEFormat *pIDEFormat) :
 
 void			IDEEntry_PATH_Node::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pFormat->m_reader;
 
 	if (getLatestPathGroup() == nullptr)
 	{
@@ -52,7 +53,7 @@ void			IDEEntry_PATH_Node::unserialize(void)
 
 void			IDEEntry_PATH_Node::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	switch (getFormatType())
 	{

@@ -2,6 +2,7 @@
 #include "Exception/EExceptionCode.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/IPL/IPLFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -25,7 +26,7 @@ IPLEntry_ENEX::IPLEntry_ENEX(IPLFormat *pIPLFormat) :
 
 void			IPLEntry_ENEX::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pFormat->m_reader;
 
 	switch (pDataReader->getLineTokens().size())
 	{
@@ -54,7 +55,7 @@ void			IPLEntry_ENEX::unserialize(void)
 
 void			IPLEntry_ENEX::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	switch (getFormatType())
 	{

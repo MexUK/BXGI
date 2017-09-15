@@ -60,7 +60,7 @@ void			IDEEntry_ANIM::unserialize(void)
 
 void			IDEEntry_ANIM::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	switch (getFormatType())
 	{

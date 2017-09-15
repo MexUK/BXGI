@@ -27,43 +27,7 @@ void			IMGManager::uninit(void)
 }
 
 // utility
-string			IMGManager::getVersionName(EIMGVersion eVersion, bool bIsEncrypted)
-{
-	switch (eVersion)
-	{
-	case IMG_1:				return "1";
-	case IMG_2:				return "2";
-	case IMG_3:
-		if (bIsEncrypted)
-		{
-			return "3 [Encrypted]";
-		}
-		else
-		{
-			return "3 [Unencrypted]";
-		}
-	case IMG_FASTMAN92:		return "fastman92";
-	default:				return "Unknown";
-	}
-}
-string			IMGManager::getVersionGames(EIMGVersion eVersion)
-{
-	switch (eVersion)
-	{
-	case IMG_1:				return "GTA III / VC";
-	case IMG_2:				return "GTA SA";
-	case IMG_3:				return "GTA IV";
-	case IMG_FASTMAN92:		return "GTA SA Modded";
-	default:				return "Unknown";
-	}
-}
-string			IMGManager::getVersionNameWithGames(EIMGVersion eVersion, bool bIsEncrypted)
-{
-	string strVersionGames = getVersionGames(eVersion);
-	return getVersionName(eVersion, bIsEncrypted) + (strVersionGames == "" ? "" : " (" + strVersionGames + ")");
-}
-
-EIMGVersion		IMGManager::detectIMGVersion(string& strIMGFilePath, string& strHeader16B, bool& bIsEncryptedOut)
+EIMGVersion		IMGManager::detectIMGVersion(string& strIMGFilePath, string& strHeader16B, bool& bIsEncryptedOut) // todo - still used?
 {
 	bIsEncryptedOut = false;
 
@@ -375,7 +339,64 @@ string				IMGManager::getEncryptionText(bool bIsEncrypted)
 	}
 }
 
-IMGFormat*			IMGManager::parseViaFile(string& strFilePath)
+// IMG versions
+vector<string>		IMGManager::getVersionsText(void)
 {
-	return FormatManager::parseViaFile(strFilePath);
+	vector<string> vecIMGVersionsText = {
+		"IMG 1 (GTA III / VC)",
+		"IMG 2 (GTA SA)",
+		"IMG 3 (GTA IV)",
+		"IMG Fastman92"
+	};
+	return vecIMGVersionsText;
+}
+
+EIMGVersion			IMGManager::getVersionFromVersionIndex(int32 iVersionIndex)
+{
+	switch (iVersionIndex)
+	{
+	case 0:			return IMG_1;
+	case 1:			return IMG_2;
+	case 2:			return IMG_3;
+	case 3:			return IMG_FASTMAN92;
+	}
+	return IMG_UNKNOWN;
+}
+
+string				IMGManager::getVersionText(EIMGVersion eVersion, bool bIsEncrypted)
+{
+	switch (eVersion)
+	{
+	case IMG_1:				return "1";
+	case IMG_2:				return "2";
+	case IMG_3:
+		if (bIsEncrypted)
+		{
+							return "3 (Encrypted)";
+		}
+		else
+		{
+							return "3 (Unencrypted)";
+		}
+	case IMG_FASTMAN92:		return "fastman92";
+	default:				return "Unknown";
+	}
+}
+
+string				IMGManager::getVersionGames(EIMGVersion eVersion)
+{
+	switch (eVersion)
+	{
+	case IMG_1:				return "GTA III / VC";
+	case IMG_2:				return "GTA SA";
+	case IMG_3:				return "GTA IV";
+	case IMG_FASTMAN92:		return "GTA SA Modded";
+	default:				return "Unknown";
+	}
+}
+
+string				IMGManager::getVersionNameWithGames(EIMGVersion eVersion, bool bIsEncrypted)
+{
+	string strVersionGames = getVersionGames(eVersion);
+	return getVersionText(eVersion, bIsEncrypted) + (strVersionGames == "" ? "" : " (" + strVersionGames + ")");
 }

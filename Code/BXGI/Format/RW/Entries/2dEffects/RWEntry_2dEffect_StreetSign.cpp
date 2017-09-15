@@ -2,6 +2,7 @@
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
 #include "Static/String.h"
+#include "Format/RW/RWFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -16,7 +17,7 @@ RWEntry_2dEffect_StreetSign::RWEntry_2dEffect_StreetSign(void) :
 
 void							RWEntry_2dEffect_StreetSign::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pRWFormat->m_reader;
 	
 	m_vecSize = pDataReader->readVector2D();
 	m_vecRotation = pDataReader->readVector3D();
@@ -29,7 +30,7 @@ void							RWEntry_2dEffect_StreetSign::unserialize(void)
 
 void							RWEntry_2dEffect_StreetSign::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 
 	pDataWriter->writeVector2D(m_vecSize);
 	pDataWriter->writeVector3D(m_vecRotation);

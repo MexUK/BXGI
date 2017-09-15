@@ -3,6 +3,7 @@
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
 #include "IPLEntry_PATH_Group.h"
+#include "Format/IPL/IPLFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -24,7 +25,7 @@ IPLEntry_PATH_Node::IPLEntry_PATH_Node(IPLFormat *pIPLFormat) :
 
 void			IPLEntry_PATH_Node::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pFormat->m_reader;
 
 	if (getLatestPathGroup() == nullptr)
 	{
@@ -58,7 +59,7 @@ void			IPLEntry_PATH_Node::unserialize(void)
 
 void			IPLEntry_PATH_Node::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	switch (getFormatType())
 	{

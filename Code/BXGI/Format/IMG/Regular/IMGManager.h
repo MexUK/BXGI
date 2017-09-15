@@ -17,9 +17,6 @@ public:
 	void								init(void);
 	void								uninit(void);
 
-	static std::string					getVersionName(bxgi::EIMGVersion eVersion, bool bIsEncrypted = false);
-	static std::string					getVersionGames(bxgi::EIMGVersion eVersion);
-	static std::string					getVersionNameWithGames(bxgi::EIMGVersion eVersion, bool bIsEncrypted = false);
 	static uint32						getIMGEntryCount(std::string& strIMGFilePath, bxgi::EIMGVersion EIMGVersion = IMG_UNKNOWN);
 
 	static bxgi::EIMGVersion			detectIMGVersion(std::string& strIMGFilePath, std::string& strHeader16B = bxcf::g_strBlankString, bool& bIsEncryptedOut = bxcf::g_bDefaultBool);
@@ -33,5 +30,9 @@ public:
 	static std::string					getCompressionTypeText(bxcf::ECompressionAlgorithm ECompressionAlgorithmValue);
 	static std::string					getEncryptionText(bool bIsEncrypted);
 
-	IMGFormat*							parseViaFile(std::string& strFilePath);
+	static std::vector<std::string>		getVersionsText(void);
+	static EIMGVersion					getVersionFromVersionIndex(int32 iVersionIndex);
+	static std::string					getVersionText(bxgi::EIMGVersion eVersion, bool bIsEncrypted = false);
+	static std::string					getVersionGames(bxgi::EIMGVersion eVersion);
+	static std::string					getVersionNameWithGames(bxgi::EIMGVersion eVersion, bool bIsEncrypted = false);
 };

@@ -17,7 +17,7 @@ DATCAPSFormat::DATCAPSFormat(void) :
 
 void					DATCAPSFormat::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_reader;
 	
 	m_uiOptimalRasterFormatForTextures_RGBA			= pDataReader->readUint32();
 	m_uiOptimalRasterFormatForTextures_RGB			= pDataReader->readUint32();
@@ -27,7 +27,7 @@ void					DATCAPSFormat::unserialize(void)
 
 void					DATCAPSFormat::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_writer;
 	
 	pDataWriter->write(m_uiOptimalRasterFormatForTextures_RGBA);
 	pDataWriter->write(m_uiOptimalRasterFormatForTextures_RGB);

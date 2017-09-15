@@ -28,7 +28,7 @@ void							RWSection_Atomic::_unserialize(void)
 
 void							RWSection_Atomic::_serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 
 	pDataWriter->writeUint32(m_uiFrameIndex);
 	pDataWriter->writeUint32(m_uiGeometryIndex);

@@ -30,7 +30,7 @@ void							RWSection_TextureDictionary::_unserialize(void)
 
 void							RWSection_TextureDictionary::_serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 
 	uint32 uiTextureCount = getSectionCountByType(RW_SECTION_TEXTURE_NATIVE, false);
 

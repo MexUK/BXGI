@@ -89,7 +89,7 @@ void			IDEEntry_PEDS::unserialize(void)
 
 void			IDEEntry_PEDS::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	switch (getFormatType())
 	{

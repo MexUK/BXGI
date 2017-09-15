@@ -13,14 +13,14 @@ IPLEntry_Section::IPLEntry_Section(IPLFormat *pIPLFormat) :
 
 void		IPLEntry_Section::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pFormat->m_reader;
 
 	// setSectionType() has already been called, as the EIPLSectionType has already been detected.
 }
 
 void		IPLEntry_Section::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	pDataWriter->writeString(getFormat()->getSectionText(getSectionType()));
 }

@@ -53,7 +53,7 @@ void							RWSection_Clump::_unserialize(void)
 
 void							RWSection_Clump::_serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 
 	pDataWriter->writeUint32(m_uiAtomicallyLinkedObjectCount);
 

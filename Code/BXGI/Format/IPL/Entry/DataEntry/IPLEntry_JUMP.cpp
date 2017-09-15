@@ -2,6 +2,7 @@
 #include "Exception/EExceptionCode.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/IPL/IPLFormat.h"
 
 using namespace bxcf;
 using namespace bxgi;
@@ -19,7 +20,7 @@ IPLEntry_JUMP::IPLEntry_JUMP(IPLFormat *pIPLFormat) :
 
 void			IPLEntry_JUMP::unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pFormat->m_reader;
 
 	switch (pDataReader->getLineTokens().size())
 	{
@@ -41,7 +42,7 @@ void			IPLEntry_JUMP::unserialize(void)
 
 void			IPLEntry_JUMP::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	switch (getFormatType())
 	{

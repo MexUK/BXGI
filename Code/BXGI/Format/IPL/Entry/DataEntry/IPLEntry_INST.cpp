@@ -32,7 +32,7 @@ void			IPLEntry_INST::unserialize(void)
 
 void			IPLEntry_INST::unserialize_Text(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pFormat->m_reader;
 
 	switch (pDataReader->getLineTokenCount())
 	{
@@ -78,7 +78,7 @@ void			IPLEntry_INST::unserialize_Text(void)
 
 void			IPLEntry_INST::unserialize_Binary(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_pFormat->m_reader;
 
 	setFormatType(0);
 	setFormatGames(GAME_FLAG_GTA_SA);
@@ -104,7 +104,7 @@ void			IPLEntry_INST::serialize(void)
 
 void			IPLEntry_INST::serialize_Text(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	switch (getFormatType())
 	{
@@ -138,7 +138,7 @@ void			IPLEntry_INST::serialize_Text(void)
 
 void			IPLEntry_INST::serialize_Binary(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	switch (getFormatType())
 	{

@@ -20,7 +20,7 @@ void		IDEEntry_Other::unserialize(void)
 
 void		IDEEntry_Other::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	pDataWriter->writeStringRef(getLine());
 }

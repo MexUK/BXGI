@@ -17,19 +17,23 @@ public:
 	virtual void					unserialize(void)	= 0;
 	virtual void					serialize(void)		= 0;
 	
-	static bxgi::_2dEffect*				createRW2dEffect(E2DFXType E2DFXTypeValue);
+	static bxgi::_2dEffect*			createRW2dEffect(E2DFXType E2DFXTypeValue);
 	
 	void							setDataSize(uint32 uiDataSize) { m_uiDataSize = uiDataSize; }
 	uint32							getDataSize(void) { return m_uiDataSize; }
 
 	void							setPosition(bxcf::Vec3f& vecPosition) { m_vecPosition = vecPosition; }
-	bxcf::Vec3f&						getPosition(void) { return m_vecPosition; }
+	bxcf::Vec3f&					getPosition(void) { return m_vecPosition; }
 
 	void							set2DFXType(E2DFXType E2DFXTypeValue) { m_E2DFXType = E2DFXTypeValue; }
 	E2DFXType						get2DFXType(void) { return m_E2DFXType; }
 
+	void							setRWFormat(RWFormat* pRWFormat) { m_pRWFormat = pRWFormat; }
+	RWFormat*						getRWFormat(void) { return m_pRWFormat; }
+
 protected:
 	uint32							m_uiDataSize;
+	RWFormat*						m_pRWFormat;
 
 private:
 	bxcf::Vec3f						m_vecPosition;

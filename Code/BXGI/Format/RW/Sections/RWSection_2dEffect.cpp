@@ -44,6 +44,7 @@ void							RWSection_2dEffect::_unserialize(void)
 		{
 			throw EXCEPTION_UNKNOWN_ENTRY_TYPE;
 		}
+		p2dEffect->setRWFormat(m_pRWFormat);
 		get2dEffects()->addEntry(p2dEffect);
 
 		// store 2d effect header data
@@ -61,7 +62,7 @@ void							RWSection_2dEffect::_unserialize(void)
 
 void							RWSection_2dEffect::_serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 
 	// 2d effect RW section header
 	pDataWriter->writeUint32(get2dEffects()->getEntryCount());

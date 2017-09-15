@@ -23,5 +23,5 @@ void			IDEEntry_PATH::unserialize(void)
 
 void			IDEEntry_PATH::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 }

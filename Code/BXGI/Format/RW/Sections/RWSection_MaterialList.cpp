@@ -23,7 +23,7 @@ void							RWSection_MaterialList::_unserialize(void)
 
 void							RWSection_MaterialList::_serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 
 	pDataWriter->writeUint32(m_uiMaterialCount);
 	pDataWriter->writeStringRef(m_strReservedValues);

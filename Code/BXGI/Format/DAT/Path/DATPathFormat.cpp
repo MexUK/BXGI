@@ -44,7 +44,7 @@ void							DATPathFormat::serialize(void)
 
 void				DATPathFormat::unserializeDefault(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_reader;
 
 	m_uiFileIndex = 0;// uiAreaId;
 	uint32 uiSeek = 0;
@@ -142,7 +142,7 @@ void				DATPathFormat::unserializeDefault(void)
 
 void				DATPathFormat::unserializeFastman92(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_reader;
 
 	m_uiFileIndex = 0; // uiAreaId;
 	//uint32 uiSeek = 0;
@@ -376,7 +376,7 @@ void				DATPathFormat::unserializeFastman92(void)
 
 void							DATPathFormat::serializeDefault(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_writer;
 
 	//uint32 uiSeek = 0;
 	uint32 uiSize;
@@ -481,7 +481,7 @@ void							DATPathFormat::serializeDefault(void)
 
 void							DATPathFormat::serializeFastman92(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_writer;
 
 	pDataWriter->writeUint32(0xFFFFFFFF);
 	pDataWriter->writeString("FM92");
@@ -690,7 +690,7 @@ void							DATPathFormat::serializeFastman92(void)
 
 EDATPathFormat			DATPathFormat::detectPathsFormat(void)
 {
-	DataReader *pDataReader = DataReader::get();
+	DataReader *pDataReader = &m_reader;
 	EDATPathFormat EDATPathFormatValue;
 
 	uint64 uiPreviousSeek = pDataReader->getSeek();

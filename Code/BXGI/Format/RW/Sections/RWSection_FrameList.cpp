@@ -23,7 +23,7 @@ void							RWSection_FrameList::_unserialize(void)
 
 void							RWSection_FrameList::_serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pRWFormat->m_writer;
 
 	pDataWriter->writeUint32(m_uiFrameCount);
 	pDataWriter->writeStringRef(m_strFrameData);

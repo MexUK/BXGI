@@ -63,7 +63,7 @@ vector<string>		IDEManager::getIDEEntryNamesWithoutExtension(vector<string> vecI
 	IDEFormat *pIDEFile = nullptr;
 	for (auto strIDEPath : vecIDEPaths)
 	{
-		pIDEFile = IDEManager::get()->parseViaFile(strIDEPath);
+		pIDEFile = IDEManager::get()->unserializeFile(strIDEPath);
 		if (pIDEFile->doesHaveError())
 		{
 			pIDEFile->unload();

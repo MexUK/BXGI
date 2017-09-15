@@ -166,7 +166,7 @@ void			IDEEntry_TOBJ::unserialize(void)
 
 void			IDEEntry_TOBJ::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	switch (getFormatType())
 	{

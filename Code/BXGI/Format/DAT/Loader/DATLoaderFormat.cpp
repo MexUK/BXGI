@@ -24,9 +24,8 @@ void					DATLoaderFormat::unload(void)
 // serialization
 void					DATLoaderFormat::_unserialize(void)
 {
-	DataReader *pDataReader = DataReader::get();
-	pDataReader->readAndStoreLines();
-	while (pDataReader->iterateLines())
+	m_reader.readAndStoreLines();
+	while (m_reader.iterateLines())
 	{
 		unserializeLine();
 	}
@@ -34,8 +33,7 @@ void					DATLoaderFormat::_unserialize(void)
 
 void					DATLoaderFormat::unserializeLine(void)
 {
-	DataReader *pDataReader = DataReader::get();
-	string strLine = *pDataReader->getActiveLine();
+	string strLine = *m_reader.getActiveLine();
 
 	// remove comment from end of line
 	string strComment = "";
@@ -97,7 +95,7 @@ vector<FormatClass*>	DATLoaderFormat::parseFiles(string strGameDirectoryPath, ED
 		if (pDATEntry->getEntryType() == eType1 || (eType2 != DAT_LOADER_UNKNOWN && pDATEntry->getEntryType() == eType2))
 		{
 			string strFormatPath = strGameDirectoryPath + Path::removeSlashFromFront(pDATEntry->getEntryValues()[0]);
-			FormatClass *pFormat = ManagerClass::get()->parseViaFile(strFormatPath);
+			FormatClass *pFormat = ManagerClass::get()->unserializeFile(strFormatPath);
 			if (pFormat->doesHaveError())
 			{
 				pFormat->unload();

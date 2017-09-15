@@ -20,7 +20,7 @@ void		IDEEntry_Section::unserialize(void)
 
 void		IDEEntry_Section::serialize(void)
 {
-	DataWriter *pDataWriter = DataWriter::get();
+	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
 	pDataWriter->writeString(getFormat()->getSectionText(getSectionType()));
 }
