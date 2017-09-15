@@ -179,6 +179,7 @@ EIMGVersion			IMGFormat::getVersion(void)
 void				IMGFormat::_unserialize(void)
 {
 	checkMetaDataIsLoaded();
+	m_reader.resetFileSeek();
 
 	switch (m_EIMGVersion)
 	{
