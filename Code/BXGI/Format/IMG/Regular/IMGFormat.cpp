@@ -621,7 +621,7 @@ void					IMGFormat::serializeVersion1(void)
 		//pIMGEntry->setEntryOffset(uiSeek);
 		uiSeek += uiEntryByteCountPadded;
 
-		Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
+		Events::trigger(TASK_PROGRESS);
 	}
 
 	if (m_reader.getStreamType() == DATA_STREAM_FILE)
@@ -655,7 +655,7 @@ void					IMGFormat::serializeVersion1(void)
 		m_writer.writeUint32(pIMGEntry->getEntrySizeInSectors());
 		m_writer.writeStringRef(pIMGEntry->getEntryName(), 24);
 
-		Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
+		Events::trigger(TASK_PROGRESS);
 	}
 
 	// finalize DIR data reading/writing
@@ -689,7 +689,7 @@ void					IMGFormat::serializeVersion2(void)
 	// open IMG file to read from (IMG file to write to is already open in DataWriter)
 	if (m_reader.getStreamType() == DATA_STREAM_FILE)
 	{
-		m_reader.setFilePath(getOriginalFilePath());
+		m_reader.setFilePath(getIMGFilePath());
 		m_reader.open(true);
 	}
 
@@ -705,7 +705,7 @@ void					IMGFormat::serializeVersion2(void)
 		m_writer.writeUint16(0);
 		m_writer.writeStringRef(pIMGEntry->getEntryName(), 24);
 
-		Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
+		Events::trigger(TASK_PROGRESS);
 	}
 
 	if ((uiBodyStart % 2048) != 0 && uiEntryCount > 0)
@@ -723,7 +723,7 @@ void					IMGFormat::serializeVersion2(void)
 
 		pIMGEntry->setEntryOffsetInSectors(vecNewEntryPositions[i++]);
 
-		Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
+		Events::trigger(TASK_PROGRESS);
 	}
 
 	// finalize IMG data reading/writing
@@ -757,7 +757,7 @@ void					IMGFormat::serializeVersionFastman92(void)
 	// open IMG file to read from (IMG file to write to is already open in DataWriter)
 	if (m_reader.getStreamType() == DATA_STREAM_FILE)
 	{
-		m_reader.setFilePath(getOriginalFilePath());
+		m_reader.setFilePath(getIMGFilePath());
 		m_reader.open(true);
 	}
 
@@ -813,7 +813,7 @@ void					IMGFormat::serializeVersionFastman92(void)
 			m_writer.writeStringRef(pIMGEntry->getEntryName(), 40);
 			m_writer.writeString(8);
 
-			Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
+			Events::trigger(TASK_PROGRESS);
 		}
 
 		if ((uiBodyStart % 2048) != 0 && uiEntryCount > 0)
@@ -831,7 +831,7 @@ void					IMGFormat::serializeVersionFastman92(void)
 
 			pIMGEntry->setEntryOffsetInSectors(vecNewEntryPositions[i++]);
 
-			Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
+			Events::trigger(TASK_PROGRESS);
 		}
 	}
 
@@ -867,7 +867,7 @@ void					IMGFormat::serializeVersion3_Encrypted(void)
 	// open IMG file to read from (IMG file to write to is already open in DataWriter)
 	if (m_reader.getStreamType() == DATA_STREAM_FILE)
 	{
-		m_reader.setFilePath(getOriginalFilePath());
+		m_reader.setFilePath(getIMGFilePath());
 		m_reader.open(true);
 	}
 
@@ -895,7 +895,7 @@ void					IMGFormat::serializeVersion3_Encrypted(void)
 		uint32 uiRemainder = pIMGEntry->getEntrySize() % 2048;
 		m_writer.writeUint16((uint16)(pIMGEntry->getFlags() | ((uint16)(uiRemainder == 0 ? 0 : (2048 - uiRemainder)))));
 
-		Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
+		Events::trigger(TASK_PROGRESS);
 	}
 
 	string strEntryName;
@@ -933,7 +933,7 @@ void					IMGFormat::serializeVersion3_Encrypted(void)
 
 		pIMGEntry->setEntryOffsetInSectors(vecNewEntryPositions[i++]);
 
-		Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
+		Events::trigger(TASK_PROGRESS);
 	}
 
 	// finalize IMG data reading/writing
@@ -968,7 +968,7 @@ void					IMGFormat::serializeVersion3_Unencrypted(void)
 	// open IMG file to read from (IMG file to write to is already open in DataWriter)
 	if (m_reader.getStreamType() == DATA_STREAM_FILE)
 	{
-		m_reader.setFilePath(getOriginalFilePath());
+		m_reader.setFilePath(getIMGFilePath());
 		m_reader.open(true);
 	}
 
@@ -991,7 +991,7 @@ void					IMGFormat::serializeVersion3_Unencrypted(void)
 		uint32 uiRemainder = pIMGEntry->getEntrySize() % 2048;
 		m_writer.writeUint16((uint16)((pIMGEntry->getFlags() | ((uint16)(uiRemainder == 0 ? 0 : (2048 - uiRemainder))))));
 
-		Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
+		Events::trigger(TASK_PROGRESS);
 	}
 
 	string strEntryName;
@@ -1017,7 +1017,7 @@ void					IMGFormat::serializeVersion3_Unencrypted(void)
 
 		pIMGEntry->setEntryOffsetInSectors(vecNewEntryPositions[i++]);
 
-		Events::triggerConst(SERIALIZE_IMG_ENTRY, this);
+		Events::trigger(TASK_PROGRESS);
 	}
 
 	// finalize IMG data reading/writing
