@@ -218,6 +218,7 @@ string		IMGFormat::readEntryContent(uint32 uiEntryIndex)
 	}
 	catch (EExceptionCode uiErrorCode)
 	{
+		m_ucErrorCode = uiErrorCode;
 	}
 	return strEntryData;
 }
@@ -245,7 +246,7 @@ string		IMGFormat::getDIRFilePath(void)
 
 
 // unserialization & serialization
-void		IMGFormat::serialize(void)
+void		IMGFormat::_serialize(void)
 {
 	serializeHeaderAndBodyComponents();
 }
@@ -1668,7 +1669,7 @@ void					IMGFormat::split(vector<IMGEntry*>& vecIMGEntries, string& strOutPath, 
 		Events::triggerConst(SPLIT_IMG_ENTRY, this);
 	}
 
-	pIMGFile->serializeViaFile(strOutPath);
+	pIMGFile->serialize(strOutPath);
 
 	pIMGFile->unload();
 	delete pIMGFile;
@@ -1741,7 +1742,7 @@ void					IMGFormat::exportAll(string& strFolderPath)
 
 IMGFormat*				IMGFormat::clone(string& strClonedIMGPath)
 {
-	serializeViaFile(strClonedIMGPath);
+	serialize(strClonedIMGPath);
 	return IMGManager::get()->parseViaFile(strClonedIMGPath);
 }
 

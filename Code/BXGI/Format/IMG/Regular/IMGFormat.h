@@ -38,12 +38,10 @@ public:
 	void											readMetaData(void);
 
 	void											_unserialize(void);
-	void											_serialize(void) {}
+	void											_serialize(void);
 	bool											validate(void);
 
 	std::string										readEntryContent(uint32 uiEntryIndex);
-
-	void											serialize(void); // temp
 
 	std::string										getIMGFilePath(void);
 	std::string										getDIRFilePath(void);
