@@ -42,8 +42,10 @@ IMGFormat::IMGFormat(void) :
 	Format(true, LITTLE_ENDIAN),
 	m_EIMGVersion(IMG_UNKNOWN),
 	m_EPlatform(PLATFORM_PC),
-	m_bEncrypted(false),
-	m_ucGameType(0)
+	m_uiSubVersion(0),
+	m_uiEncryptionType(0),
+	m_ucGameType(0),
+	m_bEncrypted(false)
 {
 }
 
@@ -51,8 +53,10 @@ IMGFormat::IMGFormat(std::string& strFilePathOrData, bool bStringIsFilePath) :
 	Format(strFilePathOrData, bStringIsFilePath, true, LITTLE_ENDIAN),
 	m_EIMGVersion(IMG_UNKNOWN),
 	m_EPlatform(PLATFORM_PC),
-	m_bEncrypted(false),
-	m_ucGameType(0)
+	m_uiSubVersion(0),
+	m_uiEncryptionType(0),
+	m_ucGameType(0),
+	m_bEncrypted(false)
 {
 }
 
@@ -60,8 +64,10 @@ IMGFormat::IMGFormat(DataReader& reader) :
 	Format(reader, true, LITTLE_ENDIAN),
 	m_EIMGVersion(IMG_UNKNOWN),
 	m_EPlatform(PLATFORM_PC),
-	m_bEncrypted(false),
-	m_ucGameType(0)
+	m_uiSubVersion(0),
+	m_uiEncryptionType(0),
+	m_ucGameType(0),
+	m_bEncrypted(false)
 {
 }
 
@@ -77,10 +83,10 @@ void				IMGFormat::readMetaData(void)
 	}
 
 	string
-		strFirst16Bytes = m_reader.read(16),
-		strFirst4Bytes = strFirst16Bytes.substr(0, 4);
+		strFirst20Bytes = m_reader.read(21),
+		strFirst4Bytes = strFirst20Bytes.substr(0, 4);
 	uint32
-		uiSecond4BytesUi = String::unpackUint32(strFirst16Bytes.substr(4, 4), false);
+		uiSecond4BytesUi = String::unpackUint32(strFirst20Bytes.substr(4, 4), false);
 
 	if (strFirst4Bytes == "VER2")
 	{
@@ -94,13 +100,25 @@ void				IMGFormat::readMetaData(void)
 	{
 		// version fastman92
 		m_EIMGVersion = IMG_FASTMAN92;
-		m_uiEntryCount = uiSecond4BytesUi;
-		m_ucGameType = String::unpackUint8(strFirst16Bytes.substr(8, 1));
+		uint32 uiArchiveFlags = uiSecond4BytesUi;
+		string strAuthorName = String::rtrim(strFirst20Bytes.substr(8, 12));
+
+		uint32 uiDecryptionValidCheck = m_reader.readUint32();
+		m_uiEntryCount = m_reader.readUint32();
+		string strReserved = m_reader.readString(8);
+
+		m_uiSubVersion = uiArchiveFlags & 15;
+		m_uiEncryptionType = (uiArchiveFlags >> 4) & 15;
+		m_ucGameType = (uiArchiveFlags >> 8) & 7;
+
+		m_bEncrypted = m_uiEncryptionType != 0;
+
 		return;
 	}
 
 	uint32 uiIdentifier = String::unpackUint32(strFirst4Bytes, false);
 	bool bEncrypted = false;
+	string strFirst16Bytes = strFirst20Bytes.substr(0, 16);
 
 	if (uiIdentifier != 0xA94E2A52)
 	{
@@ -168,10 +186,13 @@ bool				IMGFormat::validate(void)
 // version
 EIMGVersion			IMGFormat::getVersion(void)
 {
+	/*
+	todo
 	if (m_EIMGVersion == IMG_UNKNOWN)
 	{
 		checkMetaDataIsLoaded();
 	}
+	*/
 	return m_EIMGVersion;
 }
 

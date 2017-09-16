@@ -152,6 +152,8 @@ private:
 	bxgi::EIMGVersion								m_EIMGVersion;
 	bxcf::EPlatform									m_EPlatform;
 	std::unordered_map<std::string, uint32>			m_umapExtensionCounts;
-	uint8											m_ucGameType;
-	uint8											m_bEncrypted : 1;
+	uint8											m_uiSubVersion		: 4;
+	uint8											m_uiEncryptionType	: 4;
+	uint8											m_ucGameType		: 3;
+	uint8											m_bEncrypted		: 1;
 };

@@ -75,7 +75,7 @@ void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntr
 		for (EntryClass *pFormatEntry : it.second)
 		{
 			pFormatEntry->unload();
-			delete pFormatEntry;
+			// todo - delete pFormatEntry;
 		}
 	}
 	m_umapSectionEntries.clear();

@@ -32,15 +32,15 @@ void			IDEEntry_2DFX::unserialize(void)
 	{
 		setFormatGames(GAME_FLAG_GTA_IV);
 		m_strModelName = pDataReader->readTokenString();
-		m_vecPosition = pDataReader->readVector3D();
+		m_vecPosition = pDataReader->readTokenVector3D();
 		m_uiUnknown1 = pDataReader->readTokenUint32();
-		m_vecRotation = pDataReader->readVector4D();
+		m_vecRotation = pDataReader->readTokenVector4D();
 	}
 	else
 	{
 		setFormatGames(GAME_FLAG_GTA_III | GAME_FLAG_GTA_VC);
 		m_uiObjectId = pDataReader->readTokenUint32();
-		m_vecPosition = pDataReader->readVector3D();
+		m_vecPosition = pDataReader->readTokenVector3D();
 		m_vecColour.x = pDataReader->readTokenUint32();
 		m_vecColour.y = pDataReader->readTokenUint32();
 		m_vecColour.z = pDataReader->readTokenUint32();
