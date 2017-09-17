@@ -640,7 +640,7 @@ void					IMGFormat::serializeVersion1(void)
 		m_reader.setSeek(pIMGEntry->getEntryOffset());
 		m_writer.writeString(m_reader.readString(pIMGEntry->getEntrySize()), uiEntryByteCountPadded);
 
-		//pIMGEntry->setEntryOffset(uiSeek);
+		pIMGEntry->setEntryOffset(Math::convertBytesToSectors(uiSeek));
 		uiSeek += uiEntryByteCountPadded;
 
 		Events::trigger(TASK_PROGRESS);
@@ -1063,7 +1063,7 @@ void					IMGFormat::getModelAndTextureSetNamesFromEntries(
 	{
 		if (pIMGEntry->isModelFile())
 		{
-			umapIMGTextureSetNames[pIMGEntry].push_back(String::toUpperCase(Path::removeFileExtension(pIMGEntry->getEntryName())));
+			umapIMGModelNames[pIMGEntry].push_back(String::toUpperCase(Path::removeFileExtension(pIMGEntry->getEntryName())));
 		}
 		else if (pIMGEntry->isTextureFile())
 		{
@@ -1685,7 +1685,7 @@ void					IMGFormat::split(vector<IMGEntry*>& vecIMGEntries, string& strOutPath, 
 
 	pIMGFile->serialize(strOutPath);
 
-	pIMGFile->closeOutput();
+	pIMGFile->closeOutput(); // todo - still needed?
 
 	pIMGFile->unload();
 	delete pIMGFile;
