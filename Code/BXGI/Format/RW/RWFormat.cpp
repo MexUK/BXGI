@@ -19,6 +19,12 @@ RWFormat::RWFormat(void) :
 	RWSectionContainer::setRWFormat(this);
 }
 
+RWFormat::RWFormat(string& strFilePathOrData, bool bStringIsFilePath) :
+	bxcf::Format(strFilePathOrData, bStringIsFilePath, true, bxcf::LITTLE_ENDIAN)
+{
+	RWSectionContainer::setRWFormat(this);
+}
+
 // serialization
 void					RWFormat::_unserialize(void)
 {

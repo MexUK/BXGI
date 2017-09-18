@@ -68,7 +68,7 @@ uint32					IMGEntry::getPaddedEntrySize(void)
 	return (uint32) (ceil(((float32) getEntrySize()) / 2048.0f) * 2048.0f);
 }
 
-void					IMGEntry::unserializeRWVersion(DataReader *pDataReader, string strFilePath, string strUncompressedEntryData)
+void					IMGEntry::unserializeRWVersion(DataReader *pDataReader, string strFilePath, string& strUncompressedEntryData)
 {
 	bool
 		bUseNewDataReader = false,
@@ -104,7 +104,7 @@ void					IMGEntry::unserializeRWVersion(DataReader *pDataReader, string strFileP
 	bEntryIsCompressed = isCompressed();
 	if (bEntryIsCompressed)
 	{
-		strUncompressedEntryData = getEntryData();
+		strUncompressedEntryData = getEntryData(); // todo - don't modify this string reference
 	}
 
 	switch (uiFileType)
@@ -129,7 +129,7 @@ void					IMGEntry::unserializeRWVersion(DataReader *pDataReader, string strFileP
 			// RW file - not compressed
 			if (bUseStringAsData)
 			{
-				setRawVersion(String::unpackUint32(strUncompressedEntryData.substr(8, 4)));
+				setRawVersion(String::unpackUint32(strUncompressedEntryData.substr(8, 4), false));
 			}
 			else
 			{
@@ -209,7 +209,7 @@ void					IMGEntry::unserializeRWVersion(DataReader *pDataReader, string strFileP
 	}
 }
 
-void					IMGEntry::setEntryData(string strEntryData, bool bIsNew)
+void					IMGEntry::setEntryData(string& strEntryData, bool bIsNew)
 {
 	//setEntryOffset(getIMGFile()->getNextEntryOffset()); // todo - this line is needed but getNextEntryOffset isnt defined yet
 	uint32 uiFUncompressedSize = (uint32)strEntryData.length();
@@ -286,6 +286,7 @@ void					IMGEntry::setEntryData(string strEntryData, bool bIsNew)
 	}
 	*/
 	setEntrySize((uint32)strEntryData.length());
+	unserializeRWVersion(nullptr, "", strEntryData);
 
 	string strFilePath = m_pIMGFile->getFilePath();
 	strFilePath = Path::replaceFileExtensionWithCase(strFilePath, "IMG");

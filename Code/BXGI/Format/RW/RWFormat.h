@@ -18,7 +18,7 @@ class bxgi::RWFormat : public bxcf::Format, public bxgi::RWSectionContainer
 {
 public:
 	RWFormat(void);
-	RWFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) : bxcf::Format(strFilePathOrData, bStringIsFilePath, true, bxcf::LITTLE_ENDIAN) {}
+	RWFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true);
 
 	void												setRWVersion(RWVersion* pRWVersion, bxgi::ERWSection ERWSectionValue = (bxgi::ERWSection)-1);	// Sets the RW version for all sections. Use -1 for ERWSectionValue to apply to all sections.
 	RWVersion*											getRWVersion(bxgi::ERWSection ERWSectionValue = (bxgi::ERWSection)-1);							// Sets the RW version for all sections. Use -1 for ERWSectionValue to apply to all sections.

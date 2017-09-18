@@ -28,7 +28,7 @@ public:
 	inline void				unserializeVersion3(bxgi::RG_IMGEntry_Version3 *pRGIMGEntry);
 	inline void				unserializeVersionFastman92(bxgi::IMGEntry_Fastman92 *pRawIMGEntry);
 
-	void					unserializeRWVersion(bxcf::DataReader *pDataReader = nullptr, std::string strFilePath = "", std::string strUncompressedEntryData = "");
+	void					unserializeRWVersion(bxcf::DataReader *pDataReader = nullptr, std::string strFilePath = "", std::string& strUncompressedEntryData = bxcf::g_strBlankString);
 
 	void					setIMGFile(bxgi::IMGFormat *pIMGFile) { m_pIMGFile = pIMGFile; }
 	bxgi::IMGFormat*		getIMGFile(void) { return m_pIMGFile; }
@@ -100,7 +100,7 @@ public:
 	void					setRWVersion(uint32 uiRWVersion) { m_uiRawVersion = uiRWVersion; } // todo
 	uint32					getRWVersion(void) { return m_uiRawVersion; } // todo
 
-	void					setEntryData(std::string strEntryData, bool bIsNew = false);
+	void					setEntryData(std::string& strEntryData, bool bIsNew = false);
 	std::string				getEntryData(void);
 	std::string				getEntrySubData(uint32 uiStart, uint32 uiLength);
 	//std::string				getEntryDecompressedData(void);
