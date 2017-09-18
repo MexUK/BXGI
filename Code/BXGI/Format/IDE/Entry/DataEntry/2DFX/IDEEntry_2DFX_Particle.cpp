@@ -44,7 +44,7 @@ void			IDEEntry_2DFX_Particle::unserialize(void)
 	{
 		setFormatType(0);
 		m_uiParticleType = pDataReader->readTokenUint32();
-		m_vecStrength = pDataReader->readVector3D();
+		m_vecStrength = pDataReader->readTokenVector3D();
 		m_fSize = pDataReader->readTokenFloat32();
 	}
 }

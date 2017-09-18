@@ -22,7 +22,7 @@ public:
 
 	void						unload(void) {}
 
-	void						unserialize(void);
+	bool						unserialize(void);
 	void						serialize(void);
 
 	uint32						calculateCollisionMeshVertexCount(void);

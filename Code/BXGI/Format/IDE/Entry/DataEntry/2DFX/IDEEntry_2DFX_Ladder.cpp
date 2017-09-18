@@ -22,9 +22,9 @@ void			IDEEntry_2DFX_Ladder::unserialize(void)
 	
 	IDEEntry_2DFX::unserialize();
 	
-	m_vecLadderStartPosition = pDataReader->readVector3D();
-	m_vecLadderEndPosition = pDataReader->readVector3D();
-	m_vecClimbDirectionPosition = pDataReader->readVector3D();
+	m_vecLadderStartPosition = pDataReader->readTokenVector3D();
+	m_vecLadderEndPosition = pDataReader->readTokenVector3D();
+	m_vecClimbDirectionPosition = pDataReader->readTokenVector3D();
 	m_uiFlags = pDataReader->readTokenUint32();
 }
 

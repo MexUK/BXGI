@@ -1,4 +1,5 @@
 #include "DATLoaderManager.h"
+#include "Format/DAT/Loader/DATLoaderFormat.h"
 #include "Static/String.h"
 #include "Static/StdVector.h"
 #include "Static/Debug.h"
@@ -11,6 +12,7 @@ DATLoaderManager::DATLoaderManager(void)
 {
 }
 
+// initialization
 void				DATLoaderManager::init(void)
 {
 }
@@ -18,6 +20,33 @@ void				DATLoaderManager::uninit(void)
 {
 }
 
+// IDE paths
+vector<string>		DATLoaderManager::getRelativeIDEFilePaths(vector<string>& vecDATFilePaths)
+{
+	vector<string> vecIDEFilePaths;
+	for (string& strDATFilePath : vecDATFilePaths)
+	{
+		DATLoaderFormat datFile(strDATFilePath);
+		if (datFile.unserialize())
+		{
+			StdVector::addToVector(vecIDEFilePaths, datFile.getRelativeIDEPaths());
+		}
+		datFile.unload();
+	}
+	return vecIDEFilePaths;
+}
+
+vector<string>		DATLoaderManager::getIDEFilePaths(string& strFolderPath, vector<string>& vecDATFilePaths)
+{
+	vector<string> vecIDEFilePaths = getRelativeIDEFilePaths(vecDATFilePaths);
+	for (string& strIDEFilePath : vecIDEFilePaths)
+	{
+		strIDEFilePath = strFolderPath + strIDEFilePath;
+	}
+	return vecIDEFilePaths;
+}
+
+// DAT entry type
 EDATLoaderEntryType DATLoaderManager::getDATEntryTypeFromString(string strType)
 {
 	strType = String::toUpperCase(strType);
@@ -50,6 +79,7 @@ EDATLoaderEntryType DATLoaderManager::getDATEntryTypeFromString(string strType)
 	return DAT_LOADER_UNKNOWN;
 }
 
+// game default DAT path
 string			DATLoaderManager::getDefaultGameDATSubPath(EPlatformedGame EPlatformedGameValue)
 {
 	switch (EPlatformedGameValue)

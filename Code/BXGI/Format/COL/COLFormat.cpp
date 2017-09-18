@@ -19,11 +19,17 @@ void				COLFormat::unload(void)
 // serialization
 void				COLFormat::_unserialize(void)
 {
-	while (!DataReader::get()->isEOF())
+	while (!m_reader.isEOF())
 	{
 		COLEntry *pCOLEntry = new COLEntry(this);
 		m_vecEntries.push_back(pCOLEntry);
-		pCOLEntry->unserialize();
+		if (!pCOLEntry->unserialize())
+		{
+			// EOF (multiple \0's)
+			m_vecEntries.erase(m_vecEntries.end() - 1);
+			delete pCOLEntry;
+			break;
+		}
 	}
 }
 

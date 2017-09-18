@@ -17,6 +17,9 @@ public:
 	void						init(void);
 	void						uninit(void);
 
-	static EDATLoaderEntryType	getDATEntryTypeFromString(std::string strType);
-	static std::string			getDefaultGameDATSubPath(bxgi::EPlatformedGame EPlatformedGameValue);
+	static std::vector<std::string>		getRelativeIDEFilePaths(std::vector<std::string>& vecDATFilePaths);
+	static std::vector<std::string>		getIDEFilePaths(std::string& strFolderPath, std::vector<std::string>& vecDATFilePaths);
+
+	static EDATLoaderEntryType			getDATEntryTypeFromString(std::string strType);
+	static std::string					getDefaultGameDATSubPath(bxgi::EPlatformedGame EPlatformedGameValue);
 };

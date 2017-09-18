@@ -22,7 +22,7 @@ void			IDEEntry_2DFX_Unknown1::unserialize(void)
 	IDEEntry_2DFX::unserialize();
 	
 	m_uiUnknown2 = pDataReader->readTokenUint32();
-	m_vecUnknown3 = pDataReader->readVector3D();
+	m_vecUnknown3 = pDataReader->readTokenVector3D();
 	m_uiUnknown4 = pDataReader->readTokenUint32();
 }
 

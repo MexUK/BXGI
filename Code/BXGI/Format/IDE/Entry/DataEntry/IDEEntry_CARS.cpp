@@ -107,7 +107,7 @@ void			IDEEntry_CARS::unserialize(void)
 			m_strAnimationFile2 = pDataReader->readTokenString();
 			m_uiSpawnFrequency = pDataReader->readTokenUint32();
 			m_uiMaxVehicleCountAtOneTime = pDataReader->readTokenUint32();
-			m_vecWheelRadius = pDataReader->readVector2D();
+			m_vecWheelRadius = pDataReader->readTokenVector2D();
 			m_fDirtLevel = pDataReader->readTokenFloat32();
 			m_uiLODMultiplier = pDataReader->readTokenUint32();
 			m_fSwankness = pDataReader->readTokenFloat32();

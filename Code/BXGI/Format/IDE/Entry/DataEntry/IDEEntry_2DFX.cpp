@@ -56,15 +56,15 @@ void			IDEEntry_2DFX::serialize(void)
 	if (doesSupportFormatGame(GAME_FLAG_GTA_IV))
 	{
 		pDataWriter->writeStringRef(m_strModelName);
-		pDataWriter->writeVector3D(m_vecPosition);
+		pDataWriter->writeTokenVector3D(m_vecPosition);
 		pDataWriter->writeUint32(m_uiUnknown1);
-		pDataWriter->writeVector4D(m_vecRotation);
+		pDataWriter->writeTokenVector4D(m_vecRotation);
 	}
 	else
 	{
 		pDataWriter->writeUint32(m_uiObjectId);
-		pDataWriter->writeVector3D(m_vecPosition);
-		pDataWriter->writeVector3ui32(m_vecColour);
+		pDataWriter->writeTokenVector3D(m_vecPosition);
+		pDataWriter->writeTokenVector3ui32(m_vecColour);
 		pDataWriter->writeUint32(m_uiUnknown1);
 		pDataWriter->writeUint32(m_ui2dfxType);
 	}

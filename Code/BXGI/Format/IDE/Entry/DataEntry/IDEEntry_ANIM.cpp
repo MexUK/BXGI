@@ -47,9 +47,9 @@ void			IDEEntry_ANIM::unserialize(void)
 		m_fDrawDistance = pDataReader->readTokenFloat32();
 		m_uiFlags = pDataReader->readTokenUint32();
 		m_uiUnknown1 = pDataReader->readTokenUint32();
-		m_vecBoundingBoxLowerLeftCorner = pDataReader->readVector3D();
-		m_vecBoundingBoxUpperRightCorner = pDataReader->readVector3D();
-		m_vecBoundingSphereCenterPosition = pDataReader->readVector3D();
+		m_vecBoundingBoxLowerLeftCorner = pDataReader->readTokenVector3D();
+		m_vecBoundingBoxUpperRightCorner = pDataReader->readTokenVector3D();
+		m_vecBoundingSphereCenterPosition = pDataReader->readTokenVector3D();
 		m_fBoundingSphereRadius = pDataReader->readTokenFloat32();
 		m_strLODModel = pDataReader->readTokenString();
 		break;

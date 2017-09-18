@@ -44,7 +44,7 @@ COLEntry::COLEntry(COLFormat *pCOLFile) :
 }
 
 // serialization
-void			COLEntry::unserialize(void)
+bool			COLEntry::unserialize(void)
 {
 	DataReader *pDataReader = &m_pCOLFile->m_reader;
 
@@ -52,7 +52,20 @@ void			COLEntry::unserialize(void)
 	setHeaderStartOffset((uint32)uiHeaderStartPosition);
 
 	// COL 1 2 3 & 4 header
-	setCOLVersion(COLManager::getCOLVersionFromFourCC(pDataReader->readString(4)));
+	string strVersionStamp = pDataReader->readString(4);
+	
+	string strFourZeros;
+	for (uint32 i = 0; i < 4; i++)
+	{
+		strFourZeros.append(1, '\0');
+	}
+
+	if (strVersionStamp == strFourZeros)
+	{
+		// EOF
+		return false;
+	}
+	setCOLVersion(COLManager::getCOLVersionFromFourCC(strVersionStamp));
 	if (getCOLVersion() == COL_UNKNOWN)
 	{
 		throw EXCEPTION_UNKNOWN_FORMAT;
@@ -194,9 +207,11 @@ void			COLEntry::unserialize(void)
 	if (!pDataReader->canSeekTo(getHeaderStartOffset() + uiEntrySize + 8))
 	{
 		// EOF
-		return;
+		return false;
 	}
+
 	pDataReader->setSeek(getHeaderStartOffset() + uiEntrySize + 8);
+	return true;
 }
 
 void			COLEntry::serialize(void)

@@ -22,8 +22,8 @@ void			IDEEntry_2DFX_Ped::unserialize(void)
 	IDEEntry_2DFX::unserialize();
 	
 	m_uiBehaviour = pDataReader->readTokenUint32();
-	m_vecUnknown2 = pDataReader->readVector3D();
-	m_vecPedRotation = pDataReader->readVector3D();
+	m_vecUnknown2 = pDataReader->readTokenVector3D();
+	m_vecPedRotation = pDataReader->readTokenVector3D();
 }
 
 void			IDEEntry_2DFX_Ped::serialize(void)

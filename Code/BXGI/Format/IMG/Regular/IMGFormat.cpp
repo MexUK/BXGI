@@ -1756,11 +1756,6 @@ void					IMGFormat::exportAll(string& strFolderPath)
 	m_reader.close();
 }
 
-void				IMGFormat::clone(string& strClonedIMGPath)
-{
-	serialize(strClonedIMGPath);
-}
-
 vector<IMGEntry*>		IMGFormat::getUnknownVersionEntries(void)
 {
 	vector<IMGEntry*> vecIMGEntries;

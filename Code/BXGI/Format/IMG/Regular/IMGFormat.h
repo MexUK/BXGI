@@ -114,7 +114,6 @@ public:
 
 	uint32											merge(std::string& strSecondIMGPath, std::vector<std::string>& vecImportedEntryNames);
 	void											split(std::vector<bxgi::IMGEntry*>& vecIMGEntries, std::string& strOutPath, EIMGVersion EIMGVersion);
-	void											clone(std::string& strClonedIMGPath);
 
 	void											exportSingle(bxgi::IMGEntry *pIMGEntry, std::string& strFolderPath);
 	void											exportMultiple(std::vector<bxgi::IMGEntry*>& vecIMGEntries, std::string strFolderPath);

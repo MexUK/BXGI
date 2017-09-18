@@ -41,7 +41,7 @@ void			IDEEntry_PATH_Node::unserialize(void)
 		m_uiNodeType = pDataReader->readTokenUint32();
 		m_uiNextNode = pDataReader->readTokenUint32();
 		m_uiIsCrossRoad = pDataReader->readTokenUint32();
-		m_vecPosition = pDataReader->readVector3D() / 16.0f;
+		m_vecPosition = pDataReader->readTokenVector3D() / 16.0f;
 		m_fUnknown1 = pDataReader->readTokenFloat32();
 		m_uiLeftLaneCount = pDataReader->readTokenUint32();
 		m_uiRightLaneCount = pDataReader->readTokenUint32();
