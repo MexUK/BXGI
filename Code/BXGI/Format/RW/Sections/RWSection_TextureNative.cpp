@@ -13,7 +13,7 @@ using namespace bxcf;
 using namespace bxgi;
 
 RWSection_TextureNative::RWSection_TextureNative(void) :
-	m_EPlatform(_PLATFORM_UNKNOWN),
+	m_uiPlatform(_PLATFORM_UNKNOWN),
 	m_bHasDiffuse(false),
 	m_bHasAlpha(false),
 	m_bPaletteIsUsed(false),
@@ -21,11 +21,11 @@ RWSection_TextureNative::RWSection_TextureNative(void) :
 	m_ucFilterFlags(0),
 	m_ucTextureWrapUV(0),
 	m_uiTXDRasterDataFormat(0),
-	m_ERasterDataFormat(RASTERDATAFORMAT_UNKNOWN),
+	m_uiRasterDataFormat(RASTERDATAFORMAT_UNKNOWN),
 	m_uiAlpha(0),
 	m_ucBPP(0),
 	m_ucRasterType(0),
-	m_EDXTCompressionType(DXT_NOT_COMPRESSED),
+	m_uiDXTCompressionType(DXT_NOT_COMPRESSED),
 	m_bCubeTexture(false),
 	m_bAutoMipMaps(false),
 	m_bIsNotRWCompatible(false),
@@ -47,7 +47,7 @@ void							RWSection_TextureNative::_unserialize(void)
 	pDataReader->setPeek(false);
 	pDataReader->setSeek(uiPreviousSeek);
 
-	m_EPlatform = TXDManager::getPlatformFromTXDPlatformId(uiPlatformId);
+	m_uiPlatform = TXDManager::getPlatformFromTXDPlatformId(uiPlatformId);
 
 	unserializeHeader();
 	unserializeBody();
@@ -61,7 +61,7 @@ void							RWSection_TextureNative::_serialize(void)
 
 void							RWSection_TextureNative::unserializeHeader(void)
 {
-	switch (m_EPlatform)
+	switch (m_uiPlatform)
 	{
 	case PLATFORM_PC:
 	case PLATFORM_XBOX:
@@ -81,7 +81,7 @@ void							RWSection_TextureNative::unserializeHeader(void)
 
 void							RWSection_TextureNative::unserializeBody(void)
 {
-	switch (m_EPlatform)
+	switch (m_uiPlatform)
 	{
 	case PLATFORM_PC:
 	case PLATFORM_XBOX:
@@ -97,7 +97,7 @@ void							RWSection_TextureNative::unserializeBody(void)
 
 void							RWSection_TextureNative::serializeHeader(void)
 {
-	switch (m_EPlatform)
+	switch (m_uiPlatform)
 	{
 	case PLATFORM_PC:
 	case PLATFORM_XBOX:
@@ -113,7 +113,7 @@ void							RWSection_TextureNative::serializeHeader(void)
 
 void							RWSection_TextureNative::serializeBody(void)
 {
-	switch (m_EPlatform)
+	switch (m_uiPlatform)
 	{
 	case PLATFORM_PC:
 	case PLATFORM_XBOX:
@@ -460,7 +460,7 @@ void							RWSection_TextureNative::serializeHeader_Direct3D(void)
 	if (m_uiPlatformId == 9)
 	{
 		// GTA SA
-		pDataWriter->writeString(ImageManager::getD3DFormatToPack(ImageManager::getD3DFormatFromRasterDataFormat(m_ERasterDataFormat)));
+		pDataWriter->writeString(ImageManager::getD3DFormatToPack(ImageManager::getD3DFormatFromRasterDataFormat(m_uiRasterDataFormat)));
 	}
 	else
 	{
@@ -751,11 +751,11 @@ void							RWSection_TextureNative::unclut(uint32 uiWidth, uint32 uiHeight)
 // raster data format
 void							RWSection_TextureNative::setRasterDataFormat(ERasterDataFormat ERasterDataFormatValue, bool bUpdatETXDRasterDataFormat)
 {
-	m_ERasterDataFormat = ERasterDataFormatValue;
+	m_uiRasterDataFormat = ERasterDataFormatValue;
 	if (bUpdatETXDRasterDataFormat)
 	{
 		m_uiTXDRasterDataFormat = TXDManager::getTXDRasterDataFormatFromRasterDataFormat(ERasterDataFormatValue);
-		m_EDXTCompressionType = ImageManager::getDXTCompressionTypeFromRasterDataFormat(ERasterDataFormatValue);
+		m_uiDXTCompressionType = ImageManager::getDXTCompressionTypeFromRasterDataFormat(ERasterDataFormatValue);
 	}
 }
 
@@ -805,7 +805,7 @@ ERasterDataFormat				RWSection_TextureNative::detectRasterDataFormat(void)
 	case TXDRASTERDATAFORMAT_565:
 	case TXDRASTERDATAFORMAT_1555:
 	case TXDRASTERDATAFORMAT_4444:
-		switch (m_EDXTCompressionType)
+		switch (m_uiDXTCompressionType)
 		{
 		case DXT_1:		return RASTERDATAFORMAT_DXT1;
 		case DXT_2:		return RASTERDATAFORMAT_DXT2;

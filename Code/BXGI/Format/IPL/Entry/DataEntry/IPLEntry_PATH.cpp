@@ -12,7 +12,7 @@ IPLEntry_PATH_Group*	IPLEntry_PATH::m_pLatestPathGroup = nullptr;
 
 IPLEntry_PATH::IPLEntry_PATH(IPLFormat *pIPLFormat, EIPLPathType EIPLPathTypeValue) :
 	IPLEntry_Data(pIPLFormat, IPL_SECTION_PATH),
-	m_EIPLPathType(EIPLPathTypeValue)
+	m_uiIPLPathType(EIPLPathTypeValue)
 {
 }
 

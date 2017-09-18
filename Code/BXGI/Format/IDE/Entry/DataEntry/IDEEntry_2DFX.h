@@ -18,8 +18,8 @@ public:
 	virtual void				unserialize(void);
 	virtual void				serialize(void);
 
-	void						set2DFXType(bxgi::E2DFXType E2DFXTypeValue) { m_E2DFXType = E2DFXTypeValue; }
-	bxgi::E2DFXType				get2DFXType(void) { return m_E2DFXType; }
+	void						set2DFXType(bxgi::E2DFXType E2DFXTypeValue) { m_ui2DFXType = E2DFXTypeValue; }
+	bxgi::E2DFXType				get2DFXType(void) { return m_ui2DFXType; }
 
 	void						setObjectId(uint32 uiObjectId) { m_uiObjectId = uiObjectId; }
 	uint32						getObjectId(void) { return m_uiObjectId; }
@@ -43,7 +43,7 @@ public:
 	bxcf::Vec4f&				getRotation(void) { return m_vecRotation; }
 
 private:
-	bxgi::E2DFXType				m_E2DFXType;
+	bxgi::E2DFXType				m_ui2DFXType;
 	bxcf::Vec3f					m_vecPosition; // GTA III era + GTA IV
 	uint32						m_ui2dfxType; // GTA III era + GTA IV
 	union

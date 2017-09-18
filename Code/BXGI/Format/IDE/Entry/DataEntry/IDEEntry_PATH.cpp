@@ -12,7 +12,7 @@ IDEEntry_PATH_Group*				IDEEntry_PATH::m_pLatestPathGroup = nullptr;
 
 IDEEntry_PATH::IDEEntry_PATH(IDEFormat *pIDEFormat, EIDEPathType EIDEPathTypeValue) :
 	IDEEntry_Data(pIDEFormat, IDE_SECTION_PATH),
-	m_EIDEPathType(EIDEPathTypeValue)
+	m_uiIDEPathType(EIDEPathTypeValue)
 {
 }
 

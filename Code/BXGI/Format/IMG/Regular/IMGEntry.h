@@ -66,9 +66,9 @@ public:
 	uint8					getCompression(void) { return m_uiFlags & 0xF; } // old
 	//bool					isCompressed(void) { return getCompression() != 0; } // old
 
-	void					setCompressionAlgorithmId(bxcf::ECompressionAlgorithm ECompressionAlgorithmValue) { m_ECompressionAlgorithm = ECompressionAlgorithmValue; }
-	bxcf::ECompressionAlgorithm		getCompressionAlgorithmId(void) { return m_ECompressionAlgorithm; }
-	inline bool				isCompressed(void) { return m_ECompressionAlgorithm != bxcf::COMPRESSION_UNKNOWN && m_ECompressionAlgorithm != bxcf::COMPRESSION_NONE; }
+	void					setCompressionAlgorithmId(bxcf::ECompressionAlgorithm ECompressionAlgorithmValue) { m_uiCompressionAlgorithm = ECompressionAlgorithmValue; }
+	bxcf::ECompressionAlgorithm		getCompressionAlgorithmId(void) { return m_uiCompressionAlgorithm; }
+	inline bool				isCompressed(void) { return m_uiCompressionAlgorithm != bxcf::COMPRESSION_UNKNOWN && m_uiCompressionAlgorithm != bxcf::COMPRESSION_NONE; }
 
 	void					setCompressionLevel(uint32 uiCompressionLevel) { m_uiCompressionLevel = uiCompressionLevel; }
 	uint32					getCompressionLevel(void) { return m_uiCompressionLevel; }
@@ -150,7 +150,7 @@ private:
 	uint8					m_bProtectedEntry : 1;
 	uint8					m_bIsEncrypted : 1;
 	uint32					m_uiFileCreationDate;
-	bxcf::ECompressionAlgorithm		m_ECompressionAlgorithm;
+	bxcf::ECompressionAlgorithm		m_uiCompressionAlgorithm;
 	uint32					m_uiCompressionLevel;
 	uint32					m_uiRawVersion;
 	bxcf::fileType::EFileType	m_uiFileType;
@@ -176,6 +176,6 @@ inline void					bxgi::IMGEntry::unserializeVersionFastman92(bxgi::IMGEntry_Fastm
 	m_uiEntryOffset = bxcf::Math::convertSectorsToBytes(pRawIMGEntry->m_uiOffsetInSectors);
 	m_uiEntrySize = bxcf::Math::convertSectorsToBytes(pRawIMGEntry->m_uiSizeInSectors);
 	m_uiUncompressedSize = bxcf::Math::convertSectorsToBytes(pRawIMGEntry->m_uiUncompressedSizeInSectors);
-	m_ECompressionAlgorithm = bxgi::IMGFormat::getCompressionAlgorithmIdFromFastman92CompressionAlgorithmId((bxgi::EIMGVersionFastman92CompressionAlgorithm)pRawIMGEntry->m_uiCompressionAlgorithmId);
+	m_uiCompressionAlgorithm = bxgi::IMGFormat::getCompressionAlgorithmIdFromFastman92CompressionAlgorithmId((bxgi::EIMGVersionFastman92CompressionAlgorithm)pRawIMGEntry->m_uiCompressionAlgorithmId);
 	m_strEntryName = bxcf::String::rtrimFromLeft(std::string((char*)pRawIMGEntry->m_strName));
 }

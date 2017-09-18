@@ -9,7 +9,7 @@ using namespace bxgi;
 
 WTDEntry::WTDEntry(void) :
 	m_uiD3DFormat(D3DFMT_UNKNOWN),
-	m_ERasterDataFormat(bxcf::RASTERDATAFORMAT_UNKNOWN),
+	m_uiRasterDataFormat(bxcf::RASTERDATAFORMAT_UNKNOWN),
 	m_uiRawDataOffset(0),
 	m_uiTextureHash(0),
 	m_ucLevels(0)
@@ -20,7 +20,7 @@ WTDEntry::WTDEntry(void) :
 
 void					WTDEntry::setRasterDataFormat(ERasterDataFormat ERasterDataFormatValue, bool bUpdateD3DFormat)
 {
-	m_ERasterDataFormat = ERasterDataFormatValue;
+	m_uiRasterDataFormat = ERasterDataFormatValue;
 	if (bUpdateD3DFormat)
 	{
 		m_uiD3DFormat = ImageManager::getD3DFormatFromRasterDataFormat(ERasterDataFormatValue);

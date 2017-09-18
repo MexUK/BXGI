@@ -46,7 +46,7 @@ public:
 	std::string										getIMGFilePath(void);
 	std::string										getDIRFilePath(void);
 
-	void											setVersion(bxgi::EIMGVersion EIMGVersion) { m_EIMGVersion = EIMGVersion; }
+	void											setVersion(bxgi::EIMGVersion EIMGVersion) { m_uiIMGVersion = EIMGVersion; }
 	inline bxgi::EIMGVersion						getVersion(void);
 
 	void											unserializERWVersions(void);
@@ -58,8 +58,8 @@ public:
 	void											setGameType(uint8 ucGameType) { m_ucGameType = ucGameType; }
 	uint8											getGameType(void) { return m_ucGameType; }
 
-	void											setPlatform(bxcf::EPlatform EPlatformValue) { m_EPlatform = EPlatformValue; }
-	bxcf::EPlatform									getPlatform(void) { return m_EPlatform; }
+	void											setPlatform(bxcf::EPlatform EPlatformValue) { m_uiPlatform = EPlatformValue; }
+	bxcf::EPlatform									getPlatform(void) { return m_uiPlatform; }
 
 	std::vector<bxcf::fileType::EFileType>			getFileTypes(void);
 	std::vector<std::string>						getFileTypesText(void);
@@ -148,8 +148,8 @@ private:
 	void											loadEntryExtensionCounts(void);
 
 private:
-	bxgi::EIMGVersion								m_EIMGVersion;
-	bxcf::EPlatform									m_EPlatform;
+	bxgi::EIMGVersion								m_uiIMGVersion;
+	bxcf::EPlatform									m_uiPlatform;
 	std::unordered_map<std::string, uint32>			m_umapExtensionCounts;
 	uint8											m_uiSubVersion		: 4;
 	uint8											m_uiEncryptionType	: 4;

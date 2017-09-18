@@ -23,7 +23,7 @@ public:
 	D3DFORMAT					getD3DFormat(void) { return m_uiD3DFormat; }
 
 	void						setRasterDataFormat(bxcf::ERasterDataFormat ERasterDataFormatValue, bool bUpdateD3DFormat = true);
-	bxcf::ERasterDataFormat		getRasterDataFormat(void) { return m_ERasterDataFormat; }
+	bxcf::ERasterDataFormat		getRasterDataFormat(void) { return m_uiRasterDataFormat; }
 
 	void						setImageSize(bool bIsWidth, uint16 usImageSize) { m_usImageSize[bIsWidth ? 0 : 1] = usImageSize; }
 	uint16						getImageSize(bool bIsWidth) { return m_usImageSize[bIsWidth ? 0 : 1]; }
@@ -42,7 +42,7 @@ public:
 private:
 	std::string					m_strEntryName;
 	D3DFORMAT					m_uiD3DFormat;
-	bxcf::ERasterDataFormat		m_ERasterDataFormat;
+	bxcf::ERasterDataFormat		m_uiRasterDataFormat;
 	uint32						m_uiRawDataOffset;
 	uint16						m_usImageSize[2];
 	uint8						m_ucLevels;

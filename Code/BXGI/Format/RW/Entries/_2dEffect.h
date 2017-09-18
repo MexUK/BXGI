@@ -25,8 +25,8 @@ public:
 	void							setPosition(bxcf::Vec3f& vecPosition) { m_vecPosition = vecPosition; }
 	bxcf::Vec3f&					getPosition(void) { return m_vecPosition; }
 
-	void							set2DFXType(E2DFXType E2DFXTypeValue) { m_E2DFXType = E2DFXTypeValue; }
-	E2DFXType						get2DFXType(void) { return m_E2DFXType; }
+	void							set2DFXType(E2DFXType E2DFXTypeValue) { m_ui2DFXType = E2DFXTypeValue; }
+	E2DFXType						get2DFXType(void) { return m_ui2DFXType; }
 
 	void							setRWFormat(RWFormat* pRWFormat) { m_pRWFormat = pRWFormat; }
 	RWFormat*						getRWFormat(void) { return m_pRWFormat; }
@@ -37,5 +37,5 @@ protected:
 
 private:
 	bxcf::Vec3f						m_vecPosition;
-	E2DFXType						m_E2DFXType;
+	E2DFXType						m_ui2DFXType;
 };

@@ -13,7 +13,7 @@ using namespace bxcf;
 using namespace bxgi;
 
 _2dEffect::_2dEffect(E2DFXType E2DFXTypeValue) :
-	m_E2DFXType(E2DFXTypeValue),
+	m_ui2DFXType(E2DFXTypeValue),
 	m_uiDataSize(0),
 	m_vecPosition{ 0.0f, 0.0f, 0.0f },
 	m_pRWFormat(nullptr)

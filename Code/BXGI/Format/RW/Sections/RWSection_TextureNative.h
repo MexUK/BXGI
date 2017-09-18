@@ -61,7 +61,7 @@ public:
 	uint32						getTXDRasterDataFormat(void) { return m_uiTXDRasterDataFormat; }
 
 	void						setRasterDataFormat(bxcf::ERasterDataFormat ERasterDataFormatValue, bool bUpdatETXDRasterDataFormat = true);
-	bxcf::ERasterDataFormat		getRasterDataFormat(void) { return m_ERasterDataFormat; }
+	bxcf::ERasterDataFormat		getRasterDataFormat(void) { return m_uiRasterDataFormat; }
 
 	void						setAlpha(uint32 uiAlpha) { m_uiAlpha = uiAlpha; }
 	uint32						getAlpha(void) { return m_uiAlpha; }
@@ -78,8 +78,8 @@ public:
 	void						setRasterType(uint8 ucRasterType) { m_ucRasterType = ucRasterType; }
 	uint8						getRasterType(void) { return m_ucRasterType; }
 
-	void						setDXTCompressionType(bxcf::EDXTCompressionType ECompressionAlgorithm) { m_EDXTCompressionType = ECompressionAlgorithm; }
-	bxcf::EDXTCompressionType	getDXTCompressionType(void) { return m_EDXTCompressionType; }
+	void						setDXTCompressionType(bxcf::EDXTCompressionType ECompressionAlgorithm) { m_uiDXTCompressionType = ECompressionAlgorithm; }
+	bxcf::EDXTCompressionType	getDXTCompressionType(void) { return m_uiDXTCompressionType; }
 
 	void						setCubeTexture(bool bCubeTexture) { m_bCubeTexture = bCubeTexture; }
 	bool						getCubeTexture(void) { return m_bCubeTexture; }
@@ -123,7 +123,7 @@ private:
 	void						unclut(uint32 uiWidth, uint32 uiHeight);
 	
 private:
-	bxcf::EPlatform				m_EPlatform;
+	bxcf::EPlatform				m_uiPlatform;
 
 	uint8						m_bHasDiffuse : 1;
 	uint8						m_bHasAlpha : 1;
@@ -135,12 +135,12 @@ private:
 	std::string					m_strDiffuseName;
 	std::string					m_strAlphaName;
 	uint32						m_uiTXDRasterDataFormat;
-	bxcf::ERasterDataFormat		m_ERasterDataFormat;
+	bxcf::ERasterDataFormat		m_uiRasterDataFormat;
 	uint32						m_uiAlpha;
 	bxcf::Vec2u					m_vecImageSize;
 	uint8						m_ucBPP;
 	uint8						m_ucRasterType;
-	bxcf::EDXTCompressionType	m_EDXTCompressionType;
+	bxcf::EDXTCompressionType	m_uiDXTCompressionType;
 	uint8						m_bCubeTexture : 1;
 	uint8						m_bAutoMipMaps : 1;
 	uint8						m_bIsNotRWCompatible : 1;

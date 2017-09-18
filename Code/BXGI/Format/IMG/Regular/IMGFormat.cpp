@@ -40,8 +40,8 @@ using namespace bxgi;
 
 IMGFormat::IMGFormat(void) :
 	Format(true, LITTLE_ENDIAN),
-	m_EIMGVersion(IMG_UNKNOWN),
-	m_EPlatform(PLATFORM_PC),
+	m_uiIMGVersion(IMG_UNKNOWN),
+	m_uiPlatform(PLATFORM_PC),
 	m_uiSubVersion(0),
 	m_uiEncryptionType(0),
 	m_ucGameType(0),
@@ -51,8 +51,8 @@ IMGFormat::IMGFormat(void) :
 
 IMGFormat::IMGFormat(std::string& strFilePathOrData, bool bStringIsFilePath) :
 	Format(strFilePathOrData, bStringIsFilePath, true, LITTLE_ENDIAN),
-	m_EIMGVersion(IMG_UNKNOWN),
-	m_EPlatform(PLATFORM_PC),
+	m_uiIMGVersion(IMG_UNKNOWN),
+	m_uiPlatform(PLATFORM_PC),
 	m_uiSubVersion(0),
 	m_uiEncryptionType(0),
 	m_ucGameType(0),
@@ -62,8 +62,8 @@ IMGFormat::IMGFormat(std::string& strFilePathOrData, bool bStringIsFilePath) :
 
 IMGFormat::IMGFormat(DataReader& reader) :
 	Format(reader, true, LITTLE_ENDIAN),
-	m_EIMGVersion(IMG_UNKNOWN),
-	m_EPlatform(PLATFORM_PC),
+	m_uiIMGVersion(IMG_UNKNOWN),
+	m_uiPlatform(PLATFORM_PC),
 	m_uiSubVersion(0),
 	m_uiEncryptionType(0),
 	m_ucGameType(0),
@@ -77,7 +77,7 @@ void				IMGFormat::readMetaData(void)
 	if (String::toUpperCase(Path::getFileExtension(m_strFilePath)) == "DIR")
 	{
 		// version 1
-		m_EIMGVersion = IMG_1;
+		m_uiIMGVersion = IMG_1;
 		m_uiEntryCount = (uint32)(m_reader.getSize() / 32);
 		return;
 	}
@@ -91,7 +91,7 @@ void				IMGFormat::readMetaData(void)
 	if (strFirst4Bytes == "VER2")
 	{
 		// version 2
-		m_EIMGVersion = IMG_2;
+		m_uiIMGVersion = IMG_2;
 		m_uiEntryCount = uiSecond4BytesUi;
 		return;
 	}
@@ -99,7 +99,7 @@ void				IMGFormat::readMetaData(void)
 	if (strFirst4Bytes == "VERF")
 	{
 		// version fastman92
-		m_EIMGVersion = IMG_FASTMAN92;
+		m_uiIMGVersion = IMG_FASTMAN92;
 		uint32 uiArchiveFlags = uiSecond4BytesUi;
 		string strAuthorName = String::rtrim(strFirst20Bytes.substr(8, 12));
 
@@ -133,7 +133,7 @@ void				IMGFormat::readMetaData(void)
 		if (uiSecond4BytesUi == 3)
 		{
 			// version 3
-			m_EIMGVersion = IMG_3;
+			m_uiIMGVersion = IMG_3;
 			m_uiEntryCount = String::unpackUint32(strFirst16Bytes.substr(8, 4), false);
 			m_bEncrypted = bEncrypted;
 			return;
@@ -153,7 +153,7 @@ void				IMGFormat::readMetaData(void)
 		}
 
 		// version 1
-		m_EIMGVersion = IMG_1;
+		m_uiIMGVersion = IMG_1;
 		m_uiEntryCount = (uint32)(m_reader.getSize() / 32);
 		return;
 	}
@@ -188,12 +188,12 @@ EIMGVersion			IMGFormat::getVersion(void)
 {
 	/*
 	todo
-	if (m_EIMGVersion == IMG_UNKNOWN)
+	if (m_uiIMGVersion == IMG_UNKNOWN)
 	{
 		checkMetaDataIsLoaded();
 	}
 	*/
-	return m_EIMGVersion;
+	return m_uiIMGVersion;
 }
 
 // unserialize
@@ -202,7 +202,7 @@ void				IMGFormat::_unserialize(void)
 	checkMetaDataIsLoaded();
 	m_reader.resetFileSeek();
 
-	switch (m_EIMGVersion)
+	switch (m_uiIMGVersion)
 	{
 	case IMG_1:
 		unserializeVersion1();
@@ -225,7 +225,7 @@ void				IMGFormat::_unserialize(void)
 		break;
 	}
 
-	if (m_EIMGVersion != IMG_3)
+	if (m_uiIMGVersion != IMG_3)
 	{
 		unserializERWVersions(); // todo - fix function name - capital e in name
 	}
@@ -282,7 +282,7 @@ void		IMGFormat::unserializeHeaderComponents(void)
 	//IMGPeekData imgPeekData = peekIMGData();
 	//setVersion(imgPeekData.getVersion());
 	//setEncrypted(imgPeekData.isEncrypted());
-	switch (m_EIMGVersion)
+	switch (m_uiIMGVersion)
 	{
 	case IMG_1:
 		//Timing::get()->start("unserializeVersion1");
@@ -593,7 +593,7 @@ void		IMGFormat::unserializeResourceTypes(void)
 // header & body serialization
 void		IMGFormat::serializeHeaderAndBodyComponents(void)
 {
-	switch (m_EIMGVersion)
+	switch (m_uiIMGVersion)
 	{
 	case IMG_1:
 		serializeVersion1();

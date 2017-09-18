@@ -15,8 +15,8 @@ public:
 	virtual void						unserialize(void);
 	virtual void						serialize(void);
 
-	void								setIDEPathType(bxgi::EIDEPathType EIDEPathTypeValue) { m_EIDEPathType = EIDEPathTypeValue; }
-	bxgi::EIDEPathType					getIDEPathType(void) { return m_EIDEPathType; }
+	void								setIDEPathType(bxgi::EIDEPathType EIDEPathTypeValue) { m_uiIDEPathType = EIDEPathTypeValue; }
+	bxgi::EIDEPathType					getIDEPathType(void) { return m_uiIDEPathType; }
 
 	static void							setLatestPathGroup(bxgi::IDEEntry_PATH_Group* pLatestPathGroup) { m_pLatestPathGroup = pLatestPathGroup; }
 	static bxgi::IDEEntry_PATH_Group*	getLatestPathGroup(void) { return m_pLatestPathGroup; }
@@ -24,5 +24,5 @@ public:
 private:
 	static bxgi::IDEEntry_PATH_Group*	m_pLatestPathGroup;
 
-	bxgi::EIDEPathType					m_EIDEPathType;
+	bxgi::EIDEPathType					m_uiIDEPathType;
 };

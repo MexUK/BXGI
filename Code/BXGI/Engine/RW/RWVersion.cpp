@@ -64,33 +64,43 @@ uint32						RWVersion::unpackVersionStamp(uint32 uiRWVersionPackedInt)
 
 string						RWVersion::unpackVersionStampAsString(uint32 uiRWVersionPackedInt)
 {
-	uint32 uiRWVersionUnpackedInt = unpackVersionStamp(uiRWVersionPackedInt);
-	string strStamp = "";
-	strStamp += String::toString((uiRWVersionUnpackedInt & 3221225472) >> 30);
-	strStamp += "." + String::toString((uiRWVersionUnpackedInt & 1006632960) >> 26);
-	strStamp += "." + String::toString((uiRWVersionUnpackedInt & 62914560) >> 22);
-	strStamp += "." + String::toString((uiRWVersionUnpackedInt & 4128768) >> 16);
+	string strStamp = "RW ";
+	if (uiRWVersionPackedInt & 0xFFFF0000)
+	{
+		uint32 uiRWVersionUnpackedInt = (uiRWVersionPackedInt >> 16) & 0xFFFF;
+		strStamp += String::toString(((uiRWVersionUnpackedInt & 0xC000) >> 14) + 3);
+		strStamp += "." + String::toString((uiRWVersionUnpackedInt & 0x3C00) >> 10);
+		strStamp += "." + String::toString((uiRWVersionUnpackedInt & 0x3C0) >> 6);
+		strStamp += "." + String::toString(uiRWVersionUnpackedInt & 0x3F);
+	}
+	else
+	{
+		uint32 uiRWVersionUnpackedInt = uiRWVersionPackedInt & 0xFFFF;
+		strStamp += String::toString((uiRWVersionUnpackedInt & 0xF00) >> 8);
+		strStamp += "." + String::toString((uiRWVersionUnpackedInt & 0xF0) >> 4);
+		strStamp += "." + String::toString(uiRWVersionUnpackedInt & 0xF);
+	}
 	return strStamp;
 }
 
 string						RWVersion::unpackVersionStampAsStringWithBuild(uint32 uiRWVersionPackedInt)
 {
-	uint32 uiRWVersionUnpackedInt = ((uiRWVersionPackedInt >> 16) & 0xFFFF);
-
 	string strStamp = "RW ";
-	if (uiRWVersionUnpackedInt == 0)
+	if (uiRWVersionPackedInt & 0xFFFF0000)
 	{
-		strStamp += String::toString((uiRWVersionUnpackedInt & 0xF00) >> 8);
-		strStamp += "." + String::toString((uiRWVersionUnpackedInt & 0xF0) >> 4);
-		strStamp += "." + String::toString(uiRWVersionUnpackedInt & 0xF);
-	}
-	else
-	{
+		uint32 uiRWVersionUnpackedInt = (uiRWVersionPackedInt >> 16) & 0xFFFF;
 		strStamp += String::toString(((uiRWVersionUnpackedInt & 0xC000) >> 14) + 3);
 		strStamp += "." + String::toString((uiRWVersionUnpackedInt & 0x3C00) >> 10);
 		strStamp += "." + String::toString((uiRWVersionUnpackedInt & 0x3C0) >> 6);
 		strStamp += "." + String::toString(uiRWVersionUnpackedInt & 0x3F);
 		strStamp += " (Build " + String::toString(uiRWVersionPackedInt & 0xFFFF) + ")";
+	}
+	else
+	{
+		uint32 uiRWVersionUnpackedInt = uiRWVersionPackedInt & 0xFFFF;
+		strStamp += String::toString((uiRWVersionUnpackedInt & 0xF00) >> 8);
+		strStamp += "." + String::toString((uiRWVersionUnpackedInt & 0xF0) >> 4);
+		strStamp += "." + String::toString(uiRWVersionUnpackedInt & 0xF);
 	}
 	return strStamp;
 }

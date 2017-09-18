@@ -8,7 +8,7 @@ using namespace bxgi;
 
 IDEEntry_2DFX::IDEEntry_2DFX(IDEFormat *pIDEFormat, E2DFXType E2DFXTypeValue) :
 	IDEEntry_Data(pIDEFormat, IDE_SECTION_2DFX),
-	m_E2DFXType(E2DFXTypeValue),
+	m_ui2DFXType(E2DFXTypeValue),
 	m_uiObjectId(0),
 	m_vecPosition{ 0.0f, 0.0f, 0.0f },
 	m_uiUnknown1(0),
