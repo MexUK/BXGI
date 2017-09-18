@@ -83,7 +83,7 @@ void				IMGFormat::readMetaData(void)
 	}
 
 	string
-		strFirst20Bytes = m_reader.read(21),
+		strFirst20Bytes = m_reader.readString(21),
 		strFirst4Bytes = strFirst20Bytes.substr(0, 4);
 	uint32
 		uiSecond4BytesUi = String::unpackUint32(strFirst20Bytes.substr(4, 4), false);
@@ -1756,10 +1756,9 @@ void					IMGFormat::exportAll(string& strFolderPath)
 	m_reader.close();
 }
 
-IMGFormat*				IMGFormat::clone(string& strClonedIMGPath)
+void				IMGFormat::clone(string& strClonedIMGPath)
 {
 	serialize(strClonedIMGPath);
-	return IMGManager::get()->unserializeFile(strClonedIMGPath);
 }
 
 vector<IMGEntry*>		IMGFormat::getUnknownVersionEntries(void)

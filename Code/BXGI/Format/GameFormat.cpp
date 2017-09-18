@@ -3,6 +3,7 @@
 #include "Engine/RAGE/RageManager.h"
 #include "Format/COL/COLManager.h"
 #include "Static/String.h"
+#include "Game/EGame.h"
 
 using namespace std;
 using namespace bxcf;

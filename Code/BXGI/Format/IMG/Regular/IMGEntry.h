@@ -9,6 +9,7 @@
 #include "Static/Math.h"
 #include "Static/String.h"
 #include "Format/IMG/Regular/IMGFormat.h"
+#include "Game/EGame.h"
 #include <string>
 
 class bxgi::RWVersion;

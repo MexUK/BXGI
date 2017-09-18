@@ -9,6 +9,7 @@
 #include "Format/COL/Parts/TFace.h"
 #include "Format/COL/Parts/TFaceGroup.h"
 #include "COLVersion.h"
+#include "Game/EGame.h"
 #include <string>
 #include <vector>
 
