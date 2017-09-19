@@ -16,9 +16,9 @@ public:
 	virtual void					serialize(void);
 
 	void							setIPLPathType(EIPLPathType EIPLPathTypeValue) { m_uiIPLPathType = EIPLPathTypeValue; }
-	bxgi::EIPLPathType					getIPLPathType(void) { return m_uiIPLPathType; }
+	bxgi::EIPLPathType				getIPLPathType(void) { return m_uiIPLPathType; }
 
-	static void						setLatestPathGroup(bxgi::IPLEntry_PATH_Group* pLatestPathGroup) { m_pLatestPathGroup = pLatestPathGroup; }
+	static void							setLatestPathGroup(bxgi::IPLEntry_PATH_Group* pLatestPathGroup) { m_pLatestPathGroup = pLatestPathGroup; }
 	static bxgi::IPLEntry_PATH_Group*	getLatestPathGroup(void) { return m_pLatestPathGroup; }
 
 private:

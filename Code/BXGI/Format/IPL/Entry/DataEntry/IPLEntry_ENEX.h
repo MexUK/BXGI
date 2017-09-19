@@ -16,19 +16,19 @@ public:
 	void						serialize(void);
 
 	void						setEntrancePosition(bxcf::Vec3f& vecEntrancePosition) { m_vecEntrancePosition = vecEntrancePosition; }
-	bxcf::Vec3f&					getEntrancePosition(void) { return m_vecEntrancePosition; }
+	bxcf::Vec3f&				getEntrancePosition(void) { return m_vecEntrancePosition; }
 
 	void						setRotation(float32 fRotation) { m_fRotation = fRotation; }
 	float32						getRotation(void) { return m_fRotation; }
 
 	void						setSize(bxcf::Vec2f& vecSize) { m_vecSize = vecSize; }
-	bxcf::Vec2f&					getSize(void) { return m_vecSize; }
+	bxcf::Vec2f&				getSize(void) { return m_vecSize; }
 
 	void						setConstant8(uint32 uiConstant8) { m_uiConstant8 = uiConstant8; }
 	uint32						getConstant8(void) { return m_uiConstant8; }
 
 	void						setExitPosition(bxcf::Vec3f& vecExitPosition) { m_vecExitPosition = vecExitPosition; }
-	bxcf::Vec3f&					getExitPosition(void) { return m_vecExitPosition; }
+	bxcf::Vec3f&				getExitPosition(void) { return m_vecExitPosition; }
 
 	void						setExitRotation(float32 fExitRotation) { m_fExitRotation = fExitRotation; }
 	float32						getExitRotation(void) { return m_fExitRotation; }

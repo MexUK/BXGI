@@ -31,13 +31,13 @@ public:
 	uint32						getInterior(void) { return m_uiInterior; }
 
 	void						setPosition(bxcf::Vec3f& vecPosition) { m_vecPosition = vecPosition; }
-	bxcf::Vec3f&					getPosition(void) { return m_vecPosition; }
+	bxcf::Vec3f&				getPosition(void) { return m_vecPosition; }
 
 	void						setScale(bxcf::Vec3f& vecScale) { m_vecScale = vecScale; }
-	bxcf::Vec3f&					getScale(void) { return m_vecScale; }
+	bxcf::Vec3f&				getScale(void) { return m_vecScale; }
 
 	void						setRotation(bxcf::Vec4f& vecRotation) { m_vecRotation = vecRotation; }
-	bxcf::Vec4f&					getRotation(void) { return m_vecRotation; }
+	bxcf::Vec4f&				getRotation(void) { return m_vecRotation; }
 
 	void						setLOD(int32 iLOD) { m_iLOD = iLOD; }
 	int32						getLOD(void) { return m_iLOD; }

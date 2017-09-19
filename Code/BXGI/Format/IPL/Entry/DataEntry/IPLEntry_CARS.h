@@ -21,7 +21,7 @@ public:
 	void						serialize_Binary(void);
 
 	void						setPosition(bxcf::Vec3f& vecPosition) { m_vecPosition = vecPosition; }
-	bxcf::Vec3f&					getPosition(void) { return m_vecPosition; }
+	bxcf::Vec3f&				getPosition(void) { return m_vecPosition; }
 
 	void						setZRotation(float32 zRotation) { zRotation = zRotation; } // in radians
 	float32						getZRotation(void) { return zRotation; } // in radians
@@ -50,7 +50,7 @@ public:
 private:
 	// GTA SA only
 	bxcf::Vec3f					m_vecPosition;
-	float32						zRotation; // in radians
+	float32						zRotation; // in radians // todo - add m_ prefix
 	int32						m_iVehicleModelId;
 	bxcf::Vec2i					m_iVehicleColour;
 	uint32						m_uiForceSpawn;

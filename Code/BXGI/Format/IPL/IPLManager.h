@@ -3,6 +3,9 @@
 #include "nsbxgi.h"
 #include "Format/FormatManager.h"
 #include "Object/Singleton.h"
+#include <string>
+#include <vector>
+#include <set>
 
 class bxgi::IPLFormat;
 
@@ -13,4 +16,9 @@ public:
 	
 	void					init(void);
 	void					uninit(void);
+
+	static void				getModelNamesFromFiles(
+		std::vector<std::string>& vecIPLFilePaths,
+		std::set<std::string>& stModelNames
+	);
 };

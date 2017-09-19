@@ -117,6 +117,7 @@ void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntr
 		{
 			pFormatEntry = createSectionEntry(eFormatSectionValue);
 			pFormatEntry->unserialize();
+			pFormatEntry->setEntryType(SECTION_LINES_ENTRY_SECTION);
 			setActiveReadSection(eFormatSectionValue);
 		}
 		else
@@ -129,6 +130,7 @@ void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntr
 				eFormatSectionValue = getActiveReadSection();
 				pFormatEntry = createDataEntry(eFormatSectionValue, detectSectionSpecificType(eFormatSectionValue));
 				pFormatEntry->unserialize();
+				pFormatEntry->setEntryType(SECTION_LINES_ENTRY_DATA);
 			}
 			catch (EExceptionCode)
 			{
@@ -140,6 +142,7 @@ void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntr
 				pFormatEntry = createOtherEntry();
 				pFormatEntry->setSectionType(getActiveReadSection());
 				pFormatEntry->unserialize();
+				pFormatEntry->setEntryType(SECTION_LINES_ENTRY_OTHER);
 			}
 			m_reader.setTokenModeEnabled(false);
 		}

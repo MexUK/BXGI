@@ -21,10 +21,10 @@ public:
 	uint32						getZoneType(void) { return m_uiZoneType; }
 
 	void						setBottomLeftPosition(bxcf::Vec3f& vecBottomLeftPosition) { m_vecBottomLeftPosition = vecBottomLeftPosition; }
-	bxcf::Vec3f&					getBottomLeftPosition(void) { return m_vecBottomLeftPosition; }
+	bxcf::Vec3f&				getBottomLeftPosition(void) { return m_vecBottomLeftPosition; }
 
 	void						setTopRightPosition(bxcf::Vec3f& vecTopRightPosition) { m_vecTopRightPosition = vecTopRightPosition; }
-	bxcf::Vec3f&					getTopRightPosition(void) { return m_vecTopRightPosition; }
+	bxcf::Vec3f&				getTopRightPosition(void) { return m_vecTopRightPosition; }
 
 	void						setLevel(uint32 uiLevel) { m_uiLevel = uiLevel; }
 	uint32						getLevel(void) { return m_uiLevel; }

@@ -17,7 +17,7 @@ public:
 	uint32						getWeaponId(void) { return m_uiWeaponId; }
 
 	void						setPosition(bxcf::Vec3f& vecPosition) { m_vecPosition = vecPosition; }
-	bxcf::Vec3f&					getPosition(void) { return m_vecPosition; }
+	bxcf::Vec3f&				getPosition(void) { return m_vecPosition; }
 
 private:
 	// GTA SA only

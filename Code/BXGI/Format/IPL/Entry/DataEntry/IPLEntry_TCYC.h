@@ -14,10 +14,10 @@ public:
 	void						serialize(void);
 
 	void						setPositionLower(bxcf::Vec3f& vecPositionLower) { m_vecPositionLower = vecPositionLower; }
-	bxcf::Vec3f&					getPositionLower(void) { return m_vecPositionLower; }
+	bxcf::Vec3f&				getPositionLower(void) { return m_vecPositionLower; }
 
 	void						setPositionUpper(bxcf::Vec3f& vecPositionUpper) { m_vecPositionUpper = vecPositionUpper; }
-	bxcf::Vec3f&					getPositionUpper(void) { return m_vecPositionUpper; }
+	bxcf::Vec3f&				getPositionUpper(void) { return m_vecPositionUpper; }
 
 	void						setUnknown1(uint32 uiUnknown1) { m_uiUnknown1 = uiUnknown1; }
 	uint32						getUnknown1(void) { return m_uiUnknown1; }

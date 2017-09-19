@@ -1,6 +1,6 @@
 #include "IDEManager.h"
-#include "IDEFormat.h"
-#include "EIDESection.h"
+#include "Format/IDE/IDEFormat.h"
+#include "Format/IDE/EIDESection.h"
 #include "Static/String.h"
 #include "Static/StdVector.h"
 #include "Static/Debug.h"
@@ -15,6 +15,7 @@ IDEManager::IDEManager(void)
 {
 }
 
+// initialization
 void			IDEManager::init(void)
 {
 }
@@ -23,7 +24,7 @@ void			IDEManager::uninit(void)
 }
 
 // entry fetching
-void				IDEManager::getModelAndTextureSetNamesFromFiles(
+void			IDEManager::getModelAndTextureSetNamesFromFiles(
 	vector<string>& vecIDEFilePaths,
 	set<string>& stModelNames,
 	set<string>& stTextureSetNames,
@@ -33,12 +34,8 @@ void				IDEManager::getModelAndTextureSetNamesFromFiles(
 {
 	for (string& strIDEFilePath : vecIDEFilePaths)
 	{
-		IDEFormat ideFormat;
-		ideFormat.setFilePath(strIDEFilePath);
-		ideFormat.open();
-		ideFormat.unserialize();
-		ideFormat.close();
-		if (ideFormat.doesHaveError())
+		IDEFormat ideFormat(strIDEFilePath);
+		if (!ideFormat.unserialize())
 		{
 			continue;
 		}
@@ -57,7 +54,7 @@ void				IDEManager::getModelAndTextureSetNamesFromFiles(
 }
 
 // entry fetching old
-vector<string>		IDEManager::getIDEEntryNamesWithoutExtension(vector<string> vecIDEPaths, bool bModelNames, bool bTXDNames)
+vector<string>	IDEManager::getIDEEntryNamesWithoutExtension(vector<string> vecIDEPaths, bool bModelNames, bool bTXDNames)
 {
 	vector<string> vecEntryNamesWithoutExtension;
 	IDEFormat *pIDEFile = nullptr;

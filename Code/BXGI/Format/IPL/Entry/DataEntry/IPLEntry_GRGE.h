@@ -16,13 +16,13 @@ public:
 	void						serialize(void);
 
 	void						setPosition(bxcf::Vec3f& vecPosition) { m_vecPosition = vecPosition; }
-	bxcf::Vec3f&					getPosition(void) { return m_vecPosition; }
+	bxcf::Vec3f&				getPosition(void) { return m_vecPosition; }
 
 	void						setLine(bxcf::Vec2f& vecLine) { m_vecLine = vecLine; }
-	bxcf::Vec2f&					getLine(void) { return m_vecLine; }
+	bxcf::Vec2f&				getLine(void) { return m_vecLine; }
 
 	void						setCubePosition(bxcf::Vec3f& vecCubePosition) { m_vecCubePosition = vecCubePosition; }
-	bxcf::Vec3f&					getCubePosition(void) { return m_vecCubePosition; }
+	bxcf::Vec3f&				getCubePosition(void) { return m_vecCubePosition; }
 
 	void						setGarageFlags(uint32 uiGarageFlags) { m_uiGarageFlags = uiGarageFlags; }
 	uint32						getGarageFlags(void) { return m_uiGarageFlags; }

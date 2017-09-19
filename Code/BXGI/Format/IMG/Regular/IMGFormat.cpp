@@ -1056,6 +1056,25 @@ void					IMGFormat::serializeVersion3_Unencrypted(void)
 }
 
 // entry fetching
+vector<IMGEntry*>		IMGFormat::getEntriesByNames(vector<string>& vecEntryNames)
+{
+	set<string> stEntryNames;
+	for (string& strEntryName : vecEntryNames)
+	{
+		stEntryNames.insert(String::toUpperCase(Path::removeFileExtension(strEntryName)));
+	}
+
+	vector<IMGEntry*> vecIMGEntries;
+	for (IMGEntry *pIMGEntry : getEntries())
+	{
+		if (stEntryNames.find(String::toUpperCase(Path::removeFileExtension(pIMGEntry->getEntryName()))) != stEntryNames.end())
+		{
+			vecIMGEntries.push_back(pIMGEntry);
+		}
+	}
+	return vecIMGEntries;
+}
+
 void					IMGFormat::getModelAndTextureSetNamesFromEntries(
 	unordered_map<IMGEntry*, vector<string>>& umapIMGModelNames,
 	unordered_map<IMGEntry*, vector<string>>& umapIMGTextureSetNames

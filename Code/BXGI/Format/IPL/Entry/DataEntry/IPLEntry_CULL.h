@@ -21,13 +21,13 @@ public:
 	uint32						getUnknown1(void) { return m_uiUnknown1; }
 
 	void						setCenterPosition(bxcf::Vec3f& vecCenterPosition) { m_vecCenterPosition = vecCenterPosition; }
-	bxcf::Vec3f&					getCenterPosition(void) { return m_vecCenterPosition; }
+	bxcf::Vec3f&				getCenterPosition(void) { return m_vecCenterPosition; }
 
 	void						setLowerLeftPosition(bxcf::Vec3f& vecLowerLeftPosition) { m_vecLowerLeftPosition = vecLowerLeftPosition; }
-	bxcf::Vec3f&					getLowerLeftPosition(void) { return m_vecLowerLeftPosition; }
+	bxcf::Vec3f&				getLowerLeftPosition(void) { return m_vecLowerLeftPosition; }
 
 	void						setUpperRightPosition(bxcf::Vec3f& vecUpperRightPosition) { m_vecUpperRightPosition = vecUpperRightPosition; }
-	bxcf::Vec3f&					getUpperRightPosition(void) { return m_vecUpperRightPosition; }
+	bxcf::Vec3f&				getUpperRightPosition(void) { return m_vecUpperRightPosition; }
 
 	void						setUnknown2(uint32 uiUnknown2) { m_uiUnknown2 = uiUnknown2; }
 	uint32						getUnknown2(void) { return m_uiUnknown2; }
@@ -48,7 +48,7 @@ public:
 	uint32						getBottom(void) { return m_uiBottom; }
 
 	void						setMirrorParameters(bxcf::Vec4f& vecMirrorParameters) { m_vecMirrorParameters = vecMirrorParameters; }
-	bxcf::Vec4f&					getMirrorParameters(void) { return m_vecMirrorParameters; }
+	bxcf::Vec4f&				getMirrorParameters(void) { return m_vecMirrorParameters; }
 
 private:
 	// GTA III era & GTA IV

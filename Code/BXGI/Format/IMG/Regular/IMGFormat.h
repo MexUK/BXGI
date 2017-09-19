@@ -68,6 +68,8 @@ public:
 	std::vector<std::string>						getFileVersions(void);
 	std::map<std::string, std::pair<uint32, bxcf::fileType::EFileType>, SortByStringKey>	getFileTypedVersionsAsMap(void);
 
+	std::vector<IMGEntry*>							getEntriesByNames(std::vector<std::string>& vecEntryNames);
+
 	void											getModelAndTextureSetNamesFromEntries(
 		std::unordered_map<IMGEntry*, std::vector<std::string>>& umapIMGModelNames,
 		std::unordered_map<IMGEntry*, std::vector<std::string>>& umapIMGTextureSetNames

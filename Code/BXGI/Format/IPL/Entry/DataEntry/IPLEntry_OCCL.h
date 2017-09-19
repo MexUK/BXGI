@@ -14,13 +14,13 @@ public:
 	void						serialize(void);
 
 	void						setMidPosition(bxcf::Vec2f& vecMidPosition) { m_vecMidPosition = vecMidPosition; }
-	bxcf::Vec2f&					getMidPosition(void) { return m_vecMidPosition; }
+	bxcf::Vec2f&				getMidPosition(void) { return m_vecMidPosition; }
 
 	void						setBottomHeightZ(float32 fBottomHeightZ) { m_fBottomHeightZ = fBottomHeightZ; }
 	float32						getBottomHeightZ(void) { return m_fBottomHeightZ; }
 
 	void						setWidth(bxcf::Vec2f& vecWidth) { m_vecWidth = vecWidth; }
-	bxcf::Vec2f&					getWidth(void) { return m_vecWidth; }
+	bxcf::Vec2f&				getWidth(void) { return m_vecWidth; }
 
 	void						setHeight(float32 fHeight) { m_fHeight = fHeight; }
 	float32						getHeight(void) { return m_fHeight; }

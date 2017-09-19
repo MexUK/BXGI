@@ -21,13 +21,13 @@ public:
 	uint32						getSoundId(void) { return m_uiSoundId; }
 
 	void						setLowerLeftPosition(bxcf::Vec3f& vecLowerLeftPosition) { m_vecLowerLeftPosition = vecLowerLeftPosition; }
-	bxcf::Vec3f&					getLowerLeftPosition(void) { return m_vecLowerLeftPosition; }
+	bxcf::Vec3f&				getLowerLeftPosition(void) { return m_vecLowerLeftPosition; }
 
 	void						setUpperRightPosition(bxcf::Vec3f& vecUpperRightPosition) { m_vecUpperRightPosition = vecUpperRightPosition; }
-	bxcf::Vec3f&					getUpperRightPosition(void) { return m_vecUpperRightPosition; }
+	bxcf::Vec3f&				getUpperRightPosition(void) { return m_vecUpperRightPosition; }
 
 	void						setCenterPosition(bxcf::Vec3f& vecCenterPosition) { m_vecCenterPosition = vecCenterPosition; }
-	bxcf::Vec3f&					getCenterPosition(void) { return m_vecCenterPosition; }
+	bxcf::Vec3f&				getCenterPosition(void) { return m_vecCenterPosition; }
 
 	void						setRadius(float32 fRadius) { m_fRadius = fRadius; }
 	float32						getRadius(void) { return m_fRadius; }
