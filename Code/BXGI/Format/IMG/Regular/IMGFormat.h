@@ -35,7 +35,7 @@ public:
 
 	void											unload(void) {}
 
-	void											readMetaData(void);
+	void											_readMetaData(void);
 
 	void											_unserialize(void);
 	void											_serialize(void);

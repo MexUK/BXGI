@@ -72,7 +72,7 @@ IMGFormat::IMGFormat(DataReader& reader) :
 }
 
 // meta data
-void				IMGFormat::readMetaData(void)
+void				IMGFormat::_readMetaData(void)
 {
 	if (String::toUpperCase(Path::getFileExtension(m_strFilePath)) == "DIR")
 	{
@@ -157,6 +157,8 @@ void				IMGFormat::readMetaData(void)
 		m_uiEntryCount = (uint32)(m_reader.getSize() / 32);
 		return;
 	}
+
+	throw EXCEPTION_UNKNOWN_FORMAT;
 }
 
 // validation

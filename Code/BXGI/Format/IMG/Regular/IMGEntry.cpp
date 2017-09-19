@@ -285,13 +285,27 @@ void					IMGEntry::setEntryData(string& strEntryData, bool bIsNew)
 		strEntryData = strOutputData2 + strOutputData;
 	}
 	*/
-	setEntrySize((uint32)strEntryData.length());
+	uint32
+		uiPreviousEntrySize = m_uiEntrySize,
+		uiNewEntrySize = (uint32)strEntryData.length(),
+		uiPreviousEntrySizeSectors = Math::convertBytesToSectors(uiPreviousEntrySize),
+		uiNewEntrySizeSectors = Math::convertBytesToSectors(uiNewEntrySize);
+
+	setEntrySize(uiNewEntrySize);
 	unserializeRWVersion(nullptr, "", strEntryData);
 
-	string strFilePath = m_pIMGFile->getFilePath();
-	strFilePath = Path::replaceFileExtensionWithCase(strFilePath, "IMG");
-
-	File::storeFileSubContent(strFilePath, strEntryData, getEntryOffset());
+	if (uiNewEntrySizeSectors <= uiPreviousEntrySizeSectors)
+	{
+		uint32 uiExtraPadByteCount = 2048 * (uiPreviousEntrySizeSectors - uiNewEntrySizeSectors);
+		strEntryData = String::zeroPad(strEntryData, uiExtraPadByteCount);
+		File::storeFileSubContent(m_pIMGFile->getIMGFilePath(), strEntryData, getEntryOffset());
+	}
+	else
+	{
+		uint32 uiNewEntryOffset = m_pIMGFile->getNextEntryOffset();
+		setEntryOffset(uiNewEntryOffset);
+		File::storeFileSubContent(m_pIMGFile->getIMGFilePath(), strEntryData, uiNewEntryOffset);
+	}
 }
 
 string					IMGEntry::getEntryData(void)
