@@ -18,7 +18,7 @@ void			IDEEntry_PATH_Group::unload(void)
 	for (IDEEntry *pIDEEntry : getEntries())
 	{
 		pIDEEntry->unload();
-		delete pIDEEntry;
+		// todo - delete pIDEEntry;
 	}
 }
 
