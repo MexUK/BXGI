@@ -18,7 +18,7 @@ void			IPLEntry_PATH_Group::unload(void)
 	for (IPLEntry *pIPLEntry : getEntries())
 	{
 		pIPLEntry->unload();
-		delete pIPLEntry;
+		// todo - delete pIPLEntry;
 	}
 }
 

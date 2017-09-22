@@ -114,7 +114,6 @@ void				RWSectionContainer::_unserialize(void)
 		}
 
 		// unserialize RW section
-		//Debug::log("Section ID: " + String::toString(uiRWSectionId));
 		uint64 uiByteCountBefore = pDataReader->getSeek();
 		pRWSection->_unserialize();
 		uint64 uiByteCountAfter = pDataReader->getSeek();

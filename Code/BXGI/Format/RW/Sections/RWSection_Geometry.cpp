@@ -186,6 +186,14 @@ void							RWSection_Geometry::_serialize(void)
 // texture diffuse name
 string							RWSection_Geometry::getTextureDiffuseName(void)
 {
+	if (getSectionsByType(RW_SECTION_TEXTURE).size() == 0)
+	{
+		return "";
+	}
+	if (getSectionsByType(RW_SECTION_TEXTURE)[0]->getSectionsByType(RW_SECTION_STRING).size() == 0)
+	{
+		return "";
+	}
 	return ((RWSection_String*)getSectionsByType(RW_SECTION_TEXTURE)[0]->getSectionsByType(RW_SECTION_STRING)[0])->getData();
 }
 
