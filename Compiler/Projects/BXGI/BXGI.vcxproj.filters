@@ -816,6 +816,18 @@
     <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Entries\_2dEffect.cpp">
       <Filter>Source Files\Format\RW\Entries</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersion1.cpp">
+      <Filter>Source Files\Format\IMG\Regular</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersion2.cpp">
+      <Filter>Source Files\Format\IMG\Regular</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersion3.cpp">
+      <Filter>Source Files\Format\IMG\Regular</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersionFastman92.cpp">
+      <Filter>Source Files\Format\IMG\Regular</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\BXGI\Event\EEvent.h">
@@ -1528,6 +1540,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Intermediate\DATEntry_Paths_General_Link.h">
       <Filter>Header Files\Format\DAT\Path\Entries\Intermediate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersion1.h">
+      <Filter>Header Files\Format\IMG\Regular</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersion2.h">
+      <Filter>Header Files\Format\IMG\Regular</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersion3.h">
+      <Filter>Header Files\Format\IMG\Regular</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersionFastman92.h">
+      <Filter>Header Files\Format\IMG\Fastman92</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

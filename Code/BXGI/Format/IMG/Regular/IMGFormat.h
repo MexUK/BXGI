@@ -11,6 +11,7 @@
 #include "Format/COL/ECOLVersion.h"
 #include "Platform/Hardware/EPlatform.h"
 #include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 #include <string>
 #include <vector>
 #include <map>
@@ -38,8 +39,13 @@ public:
 	void											_readMetaData(void);
 
 	void											_unserialize(void);
-	void											_serialize(void);
+	void											_serialize(void) {}
+
 	bool											validate(void);
+
+	static IMGFormat*								createIMGFormat(EIMGVersion uiIMGVersion);
+	static IMGFormat*								createIMGFormat(EIMGVersion uiIMGVersion, std::string& strIMGFilePath, bool bParam1IsFilePath = true);
+	static IMGFormat*								createIMGFormat(std::string& strIMGFilePath, bool bParam1IsFilePath = true);
 
 	std::string										readEntryContent(uint32 uiEntryIndex);
 
@@ -115,7 +121,7 @@ public:
 	void											unsetNewAndReplacedFlagForAllEntries(void);
 
 	uint32											merge(std::string& strSecondIMGPath, std::vector<std::string>& vecImportedEntryNames);
-	void											split(std::vector<bxgi::IMGEntry*>& vecIMGEntries, std::string& strOutPath, EIMGVersion EIMGVersion);
+	void											split(std::vector<bxgi::IMGEntry*>& vecIMGEntries, std::string& strOutPath, EIMGVersion uiIMGVersion);
 
 	void											exportSingle(bxgi::IMGEntry *pIMGEntry, std::string& strFolderPath);
 	void											exportMultiple(std::vector<bxgi::IMGEntry*>& vecIMGEntries, std::string strFolderPath);
@@ -125,23 +131,9 @@ public:
 	std::vector<bxgi::IMGEntry*>					getUnknownVersionEntries(void); // for IMG versions 1 and 2
 
 private:
-	void											unserializeHeaderComponents(void);
-	void											unserializeBodyComponents(void);
+	void											unserializeAppDataComponents(void);
 
-	void											serializeHeaderAndBodyComponents(void);
-	
-	void											unserializeVersion1(void);
-	void											unserializeVersion2(void);
-	void											unserializeVersion3_Encrypted(void);
-	void											unserializeVersion3_Unencrypted(void);
-	void											unserializeVersionFastman92(void);
-
-	void											serializeVersion1(void);
-	void											serializeVersion2(void);
-	void											serializeVersion3_Encrypted(void);
-	void											serializeVersion3_Unencrypted(void);
-	void											serializeVersionFastman92(void);
-
+protected:
 	uint32											getVersion3NamesLength(void);
 
 private:

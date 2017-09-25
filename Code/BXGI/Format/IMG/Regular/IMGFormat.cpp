@@ -6,10 +6,6 @@
 #include "Stream/DataWriter.h"
 #include "IMGManager.h"
 #include "Static/String.h"
-#include "Format/IMG/Regular/Raw/IMGFormat_Version2_Header1.h"
-#include "Format/IMG/Regular/Raw/IMGFormat_Version3_Header1.h"
-#include "Format/IMG/Regular/Raw/IMGEntry_Version1Or2.h"
-#include "Format/IMG/Regular/Raw/IMGEntry_Version3.h"
 #include "Exception/EExceptionCode.h"
 #include "Static/Path.h"
 #include "Format/COL/COLManager.h"
@@ -17,9 +13,6 @@
 #include "Engine/RW/RWManager.h"
 #include "Engine/RW/RWVersion.h"
 #include "Static/Memory.h"
-#include "Format/IMG/Fastman92/IMGFormat_VersionFastman92_Header1.h"
-#include "Format/IMG/Fastman92/IMGFormat_VersionFastman92_Header2.h"
-#include "Format/IMG/Fastman92/IMGEntry_Fastman92.h"
 #include "Engine/RAGE/RageManager.h"
 #include "Engine/RAGE/RageResourceTypeManager.h"
 #include "Static/File.h"
@@ -30,6 +23,10 @@
 #include "IMGEntry.h"
 #include "../BXCF/Event/EEvent.h"
 #include "Format/DFF/DFFFormat.h"
+#include "Format/IMG/Regular/IMGFormatVersion1.h"
+#include "Format/IMG/Regular/IMGFormatVersion2.h"
+#include "Format/IMG/Regular/IMGFormatVersion3.h"
+#include "Format/IMG/Regular/IMGFormatVersionFastman92.h"
 #include <set>
 #include <algorithm>
 
@@ -82,6 +79,20 @@ void				IMGFormat::_readMetaData(void)
 		return;
 	}
 
+	bool bFileWasOpened = false;
+	if (!m_reader.isFileOpen())
+	{
+		bFileWasOpened = m_reader.open(doesFormatUseBinaryData());
+	}
+
+	auto checkToCloseReader = [=](void)
+	{
+		if (bFileWasOpened)
+		{
+			m_reader.close();
+		}
+	};
+
 	string
 		strFirst20Bytes = m_reader.readString(21),
 		strFirst4Bytes = strFirst20Bytes.substr(0, 4);
@@ -93,6 +104,7 @@ void				IMGFormat::_readMetaData(void)
 		// version 2
 		m_uiIMGVersion = IMG_2;
 		m_uiEntryCount = uiSecond4BytesUi;
+		checkToCloseReader();
 		return;
 	}
 
@@ -112,6 +124,8 @@ void				IMGFormat::_readMetaData(void)
 		m_ucGameType = (uiArchiveFlags >> 8) & 7;
 
 		m_bEncrypted = m_uiEncryptionType != 0;
+
+		checkToCloseReader();
 
 		return;
 	}
@@ -136,6 +150,7 @@ void				IMGFormat::_readMetaData(void)
 			m_uiIMGVersion = IMG_3;
 			m_uiEntryCount = String::unpackUint32(strFirst16Bytes.substr(8, 4), false);
 			m_bEncrypted = bEncrypted;
+			checkToCloseReader();
 			return;
 		}
 	}
@@ -148,17 +163,32 @@ void				IMGFormat::_readMetaData(void)
 		m_strFilePath = strFilePathDIRExt; // temp
 		if (!m_reader.open(m_bFormatUsesBinaryData))
 		{
-			//throw new FAILED_TO_OPEN_FILE;
+			checkToCloseReader();
+			// todo throw new FAILED_TO_OPEN_FILE;
 			return;
 		}
 
 		// version 1
 		m_uiIMGVersion = IMG_1;
 		m_uiEntryCount = (uint32)(m_reader.getSize() / 32);
+		checkToCloseReader();
 		return;
 	}
 
+	checkToCloseReader();
 	throw EXCEPTION_UNKNOWN_FORMAT;
+}
+
+// serialization
+void				IMGFormat::_unserialize(void)
+{
+	checkMetaDataIsLoaded();
+	m_reader.resetFileSeek();
+
+	if (m_uiIMGVersion != IMG_3)
+	{
+		unserializERWVersions(); // todo - fix function name - capital e in name
+	}
 }
 
 // validation
@@ -185,52 +215,47 @@ bool				IMGFormat::validate(void)
 	return true;
 }
 
+// img format object creation
+IMGFormat*		IMGFormat::createIMGFormat(EIMGVersion uiIMGVersion)
+{
+	switch (uiIMGVersion)
+	{
+	case IMG_1:				return new IMGFormatVersion1;
+	case IMG_2:				return new IMGFormatVersion2;
+	case IMG_3:				return new IMGFormatVersion3;
+	case IMG_FASTMAN92:		return new IMGFormatVersionFastman92;
+	}
+	return nullptr;
+}
+
+IMGFormat*		IMGFormat::createIMGFormat(EIMGVersion uiIMGVersion, string& strIMGFilePath, bool bParam1IsFilePath)
+{
+	switch (uiIMGVersion)
+	{
+	case IMG_1:				return new IMGFormatVersion1(strIMGFilePath, bParam1IsFilePath);
+	case IMG_2:				return new IMGFormatVersion2(strIMGFilePath, bParam1IsFilePath);
+	case IMG_3:				return new IMGFormatVersion3(strIMGFilePath, bParam1IsFilePath);
+	case IMG_FASTMAN92:		return new IMGFormatVersionFastman92(strIMGFilePath, bParam1IsFilePath);
+	}
+	return nullptr;
+}
+
+IMGFormat*		IMGFormat::createIMGFormat(string& strIMGFilePath, bool bParam1IsFilePath)
+{
+	IMGFormat img(strIMGFilePath, bParam1IsFilePath);
+	img.checkMetaDataIsLoaded();
+	return createIMGFormat(img.getVersion(), strIMGFilePath, bParam1IsFilePath);
+}
+
 // version
 EIMGVersion			IMGFormat::getVersion(void)
 {
-	/*
-	todo
 	if (m_uiIMGVersion == IMG_UNKNOWN)
 	{
 		checkMetaDataIsLoaded();
 	}
-	*/
+
 	return m_uiIMGVersion;
-}
-
-// unserialize
-void				IMGFormat::_unserialize(void)
-{
-	checkMetaDataIsLoaded();
-	m_reader.resetFileSeek();
-
-	switch (m_uiIMGVersion)
-	{
-	case IMG_1:
-		unserializeVersion1();
-		break;
-	case IMG_2:
-		unserializeVersion2();
-		break;
-	case IMG_3:
-		if (isEncrypted())
-		{
-			unserializeVersion3_Encrypted();
-		}
-		else
-		{
-			unserializeVersion3_Unencrypted();
-		}
-		break;
-	case IMG_FASTMAN92:
-		unserializeVersionFastman92();
-		break;
-	}
-
-	if (m_uiIMGVersion != IMG_3)
-	{
-		unserializERWVersions(); // todo - fix function name - capital e in name
-	}
 }
 
 // read entry content, with try/catch
@@ -261,66 +286,15 @@ string		IMGFormat::getDIRFilePath(void)
 	return Path::replaceFileExtensionWithCase(m_strFilePath, "DIR");
 }
 
-
-
-
-
-
-
-
-
-
-
-
-// unserialization & serialization
-void		IMGFormat::_serialize(void)
-{
-	serializeHeaderAndBodyComponents();
-}
-
 // unserialization
-void		IMGFormat::unserializeHeaderComponents(void)
-{
-	//IMGPeekData imgPeekData = peekIMGData();
-	//setVersion(imgPeekData.getVersion());
-	//setEncrypted(imgPeekData.isEncrypted());
-	switch (m_uiIMGVersion)
-	{
-	case IMG_1:
-		//Timing::get()->start("unserializeVersion1");
-		unserializeVersion1();
-		//Timing::get()->stop();
-		break;
-	case IMG_2:
-		unserializeVersion2();
-		break;
-	case IMG_3:
-		if (isEncrypted())
-		{
-			unserializeVersion3_Encrypted();
-		}
-		else
-		{
-			unserializeVersion3_Unencrypted();
-		}
-		break;
-	case IMG_FASTMAN92:
-		unserializeVersionFastman92();
-		break;
-	}
-	loadEntryExtensionCounts();
-}
-
-void		IMGFormat::unserializeBodyComponents(void)
+void		IMGFormat::unserializeAppDataComponents(void) // todo - make virtual
 {
 	switch (getVersion())
 	{
 	case IMG_1:
 	case IMG_2:
 	case IMG_FASTMAN92:
-		//Timing::get()->start("unserializERWVersions");
 		unserializERWVersions();
-		//Timing::get()->stop();
 		break;
 	case IMG_3:
 		unserializeResourceTypes();
@@ -328,239 +302,8 @@ void		IMGFormat::unserializeBodyComponents(void)
 	}
 }
 
-// header unserialization
-void		IMGFormat::unserializeVersion1(void)
-{
-	// verify file size & fetch entry count
-	uint64 uiFileSize = m_reader.getDataLength();
-	if ((uiFileSize % 32) != 0)
-	{
-		throw EXCEPTION_INVALID_DATA_SIZE_MULTIPLE;
-	}
-
-	// load data from file into RG structs
-	RG_IMGEntry_Version1Or2
-		*pRGIMGEntries = m_reader.readStructMultiple<RG_IMGEntry_Version1Or2>(m_uiEntryCount),
-		*pRGIMGActiveEntry = pRGIMGEntries;
-
-	// copy RG structs into wrapper structs - so that we can use std::string for strings in our structs rather than char arrays
-	vector<IMGEntry*>& rvecIMGEntries = getEntries();
-	rvecIMGEntries.clear();
-	rvecIMGEntries.resize((unsigned int)m_uiEntryCount);
-
-	for (uint64 i = 0; i < m_uiEntryCount; i++)
-	{
-		IMGEntry *pIMGEntry = new IMGEntry;
-		rvecIMGEntries[(unsigned int)i] = pIMGEntry;
-		pIMGEntry->setIMGFile(this);
-		pIMGEntry->unserializeVersion1Or2(pRGIMGActiveEntry++);
-		pIMGEntry->setEntryExtension(String::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())));
-		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
-	}
-
-	// clean up
-	delete[] pRGIMGEntries;
-}
-
-void		IMGFormat::unserializeVersion2(void)
-{
-	// read header 1
-	RG_IMGFormat_Version2_Header1 *pHeader1 = m_reader.readStruct<RG_IMGFormat_Version2_Header1>();
-	uint32 uiEntryCount = pHeader1->m_uiEntryCount;
-
-	// load data from file into RG structs
-	RG_IMGEntry_Version1Or2
-		*pRGIMGEntries = m_reader.readStructMultiple<RG_IMGEntry_Version1Or2>(uiEntryCount),
-		*pRGIMGActiveEntry = pRGIMGEntries;
-
-	// copy RG structs into wrapper structs
-	vector<IMGEntry*>& rvecIMGEntries = getEntries();
-	rvecIMGEntries.clear();
-	rvecIMGEntries.resize(uiEntryCount);
-
-	for (uint64 i = 0; i < uiEntryCount; i++)
-	{
-		IMGEntry *pIMGEntry = new IMGEntry;
-		rvecIMGEntries[(unsigned int)i] = pIMGEntry;
-		pIMGEntry->setIMGFile(this);
-		pIMGEntry->unserializeVersion1Or2(pRGIMGActiveEntry++);
-		pIMGEntry->setEntryExtension(String::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())));
-		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
-	}
-
-	// clean up
-	delete pHeader1;
-	delete[] pRGIMGEntries;
-}
-
-void		IMGFormat::unserializeVersion3_Encrypted(void)
-{
-	DataReader *pDataReader2 = DataReader::get(1); // for unencrypted img header and unencrypted img table
-
-	// decrypt IMG header
-	string strIMGHeaderEncrypted = m_reader.readString(32); // padded with 12 bytes at the end
-	string strIMGHeaderUnencrypted = IMGManager::decryptVersion3IMGString(strIMGHeaderEncrypted); // padded with 12 bytes at the end too
-	//EDataStreamType ePreviousStreamType = pDataReader->getStreamType();
-
-	pDataReader2->setStreamType(DATA_STREAM_MEMORY);
-	pDataReader2->setData(strIMGHeaderUnencrypted);
-	pDataReader2->setSeek(0);
-
-	// read header 1
-	RG_IMGFormat_Version3_Header1 *pHeader1 = pDataReader2->readStruct<RG_IMGFormat_Version3_Header1>();
-	uint32 uiEntryCount = pHeader1->m_uiEntryCount;
-
-	// decrypt IMG table
-	uint32 uiRemainder = (pHeader1->m_uiTableSize % 16);
-	uint32 uiTablesLength = pHeader1->m_uiTableSize - uiRemainder;
-	
-	//pDataReader->setStreamType(ePreviousStreamType);
-	m_reader.setSeek(20);
-	
-	string strIMGTableEncrypted = m_reader.readString(uiTablesLength);
-	string strIMGBodyPartial = m_reader.readString(uiRemainder);
-	string strIMGTableUnencrypted = IMGManager::decryptVersion3IMGString(strIMGTableEncrypted) + strIMGBodyPartial;
-	
-	//pDataReader2->setStreamType(DATA_STREAM_MEMORY);
-	pDataReader2->setData(strIMGTableUnencrypted);
-	pDataReader2->setSeek(0);
-
-	RG_IMGEntry_Version3
-		*pRGIMGEntries = pDataReader2->readStructMultiple<RG_IMGEntry_Version3>(uiEntryCount),
-		*pRGIMGActiveEntry = pRGIMGEntries;
-	
-	// copy IMG tables RG structs into wrapper structs
-	vector<IMGEntry*>& rvecIMGEntries = getEntries();
-	rvecIMGEntries.clear();
-	rvecIMGEntries.resize(uiEntryCount);
-	
-	for (uint32 i = 0; i < uiEntryCount; i++)
-	{
-		IMGEntry *pIMGEntry = new IMGEntry;
-		rvecIMGEntries[i] = pIMGEntry;
-		pIMGEntry->setIMGFile(this);
-		pIMGEntry->unserializeVersion3(pRGIMGActiveEntry++);
-		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
-	}
-	
-	// read IMG entry names
-	//pDataReader->setStreamType(ePreviousStreamType);
-	//pDataReader->setSeek();
-	
-	for (uint32 i = 0; i < uiEntryCount; i++)
-	{
-		rvecIMGEntries[i]->setEntryName(pDataReader2->readStringUntilZero());
-		rvecIMGEntries[i]->setEntryExtension(String::toUpperCase(Path::getFileExtension(rvecIMGEntries[i]->getEntryName())));
-		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
-	}
-	
-	// restore
-	//pDataReader->setStreamType(ePreviousStreamType);
-	pDataReader2->reset();
-}
-
-void		IMGFormat::unserializeVersion3_Unencrypted(void)
-{
-	// read header 1
-	RG_IMGFormat_Version3_Header1 *pHeader1 = m_reader.readStruct<RG_IMGFormat_Version3_Header1>();
-	uint32 uiEntryCount = pHeader1->m_uiEntryCount;
-
-	// load data from file into RG structs
-	RG_IMGEntry_Version3
-		*pRGIMGEntries = m_reader.readStructMultiple<RG_IMGEntry_Version3>(uiEntryCount),
-		*pRGIMGActiveEntry = pRGIMGEntries;
-
-	// copy IMG tables RG structs into wrapper structs
-	vector<IMGEntry*>& rvecIMGEntries = getEntries();
-	rvecIMGEntries.clear();
-	rvecIMGEntries.resize(uiEntryCount);
-	
-	for (uint32 i = 0; i < uiEntryCount; i++)
-	{
-		IMGEntry *pIMGEntry = new IMGEntry;
-		rvecIMGEntries[i] = pIMGEntry;
-		pIMGEntry->setIMGFile(this);
-		pIMGEntry->unserializeVersion3(pRGIMGActiveEntry++);
-		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
-	}
-
-	// read IMG entry names
-	for (uint32 i = 0; i < uiEntryCount; i++)
-	{
-		rvecIMGEntries[i]->setEntryName(m_reader.readStringUntilZero());
-		rvecIMGEntries[i]->setEntryExtension(String::toUpperCase(Path::getFileExtension(rvecIMGEntries[i]->getEntryName())));
-		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
-	}
-
-	// clean up
-	delete pHeader1;
-	delete[] pRGIMGEntries;
-}
-
-void		IMGFormat::unserializeVersionFastman92(void)
-{
-	// read header 1
-	IMGFormat_VersionFastman92_Header1 *pHeader1 = m_reader.readStruct<IMGFormat_VersionFastman92_Header1>();
-	setGameType(pHeader1->m_uiGameId);
-
-	// verify header 1 data
-	if (pHeader1->m_uiFastman92IMGVersion != 1)
-	{
-		delete pHeader1;
-		throw EXCEPTION_UNSUPPORTED_FORMAT_VERSION;
-	}
-	if (pHeader1->m_uiEncryptionAlgorithmId != 0)
-	{
-		delete pHeader1;
-		setEncrypted(true);
-		throw EXCEPTION_UNKNOWN_ENCRYPTION_ALGORITHM_USED;
-	}
-	if (pHeader1->m_uiGameId != 0)
-	{
-		delete pHeader1;
-		throw EXCEPTION_UNSUPPORTED_GAME_USED;
-	}
-
-	// read header 2
-	IMGFormat_VersionFastman92_Header2 *pHeader2 = m_reader.readStruct<IMGFormat_VersionFastman92_Header2>();
-	uint32 uiEntryCount = pHeader2->m_uiEntryCount;
-
-	// verify header 2 data
-	if (pHeader2->m_uiCheck != 1)
-	{
-		delete pHeader1;
-		delete pHeader2;
-		throw EXCEPTION_FILE_INVALID;
-	}
-
-	// load data from file into raw structs
-	IMGEntry_Fastman92
-		*pRawIMGEntries = m_reader.readStructMultiple<IMGEntry_Fastman92>(uiEntryCount),
-		*pRawIMGActiveEntry = pRawIMGEntries;
-
-	// copy raw structs into wrapper structs
-	vector<IMGEntry*>& rvecIMGEntries = getEntries();
-	rvecIMGEntries.clear();
-	rvecIMGEntries.resize(uiEntryCount);
-
-	for (uint64 i = 0, j = uiEntryCount; i < j; i++)
-	{
-		IMGEntry *pIMGEntry = new IMGEntry;
-		rvecIMGEntries[(unsigned int)i] = pIMGEntry;
-		pIMGEntry->setIMGFile(this);
-		pIMGEntry->unserializeVersionFastman92(pRawIMGActiveEntry++);
-		pIMGEntry->setEntryExtension(String::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())));
-		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
-	}
-
-	// clean up
-	delete pHeader1;
-	delete pHeader2;
-	delete[] pRawIMGEntries;
-}
-
-// body unserialization
-void		IMGFormat::unserializERWVersions(void)
+// app-level-data unserialization
+void		IMGFormat::unserializERWVersions(void) // todo fix name(s) letter case
 {
 	bool bUseNewReader = getVersion() == IMG_1 && m_reader.getStreamType() == DATA_STREAM_FILE;
 	DataReader *pDataReader = bUseNewReader ? new DataReader : &m_reader;
@@ -587,472 +330,10 @@ void		IMGFormat::unserializERWVersions(void)
 		delete pDataReader;
 	}
 }
+
 void		IMGFormat::unserializeResourceTypes(void)
 {
 	// todo
-}
-
-// header & body serialization
-void		IMGFormat::serializeHeaderAndBodyComponents(void)
-{
-	switch (m_uiIMGVersion)
-	{
-	case IMG_1:
-		serializeVersion1();
-		break;
-	case IMG_2:
-		serializeVersion2();
-		break;
-	case IMG_3:
-		if (isEncrypted())
-		{
-			serializeVersion3_Encrypted();
-		}
-		else
-		{
-			serializeVersion3_Unencrypted();
-		}
-		break;
-	case IMG_FASTMAN92:
-		serializeVersionFastman92();
-		break;
-	}
-}
-void					IMGFormat::serializeVersion1(void)
-{
-	string
-		strDIRFilePathIn = getDIRFilePath(),
-		strIMGFilePathIn = getIMGFilePath(),
-		strIMGFilePathOut = m_writer.getFilePath(),
-		strDIRFilePathOut = Path::replaceFileExtensionWithCase(strIMGFilePathOut, "DIR");
-
-	// open IMG file to read from (IMG file to write to is already open in DataWriter)
-	if (m_reader.getStreamType() == DATA_STREAM_FILE)
-	{
-		m_reader.setFilePath(strIMGFilePathIn);
-		m_reader.open(true);
-	}
-
-	// write IMG data
-	uint32 uiSeek = 0;
-	for (auto pIMGEntry : getEntries())
-	{
-		uint32 uiEntryByteCountPadded = IMGFormat::getEntryPaddedSize(pIMGEntry->getEntrySize());
-
-		m_reader.setSeek(pIMGEntry->getEntryOffset());
-		m_writer.writeString(m_reader.readString(pIMGEntry->getEntrySize()), uiEntryByteCountPadded);
-
-		pIMGEntry->setEntryOffset(Math::convertBytesToSectors(uiSeek));
-		uiSeek += uiEntryByteCountPadded;
-
-		Events::trigger(TASK_PROGRESS);
-	}
-
-	if (m_reader.getStreamType() == DATA_STREAM_FILE)
-	{
-		// finalize IMG data reading
-		m_reader.close();
-	}
-	if (m_writer.getStreamType() == DATA_STREAM_FILE)
-	{
-		// finalize IMG data writing
-		m_writer.close();
-	}
-
-	if (m_reader.getStreamType() == DATA_STREAM_FILE)
-	{
-		// open DIR file to read from
-		m_reader.setFilePath(strDIRFilePathIn);
-		m_reader.open(true);
-	}
-	if (m_writer.getStreamType() == DATA_STREAM_FILE)
-	{
-		// open DIR file to write to
-		m_writer.setFilePath(strDIRFilePathOut);
-		m_writer.open(true);
-	}
-
-	// write DIR data
-	for (auto pIMGEntry : getEntries())
-	{
-		m_writer.writeUint32(pIMGEntry->getEntryOffsetInSectors());
-		m_writer.writeUint32(pIMGEntry->getEntrySizeInSectors());
-		m_writer.writeStringRef(pIMGEntry->getEntryName(), 24);
-
-		Events::trigger(TASK_PROGRESS);
-	}
-
-	// finalize DIR data reading/writing
-	if (m_reader.getStreamType() == DATA_STREAM_FILE)
-	{
-		m_reader.close();
-	}
-	if(m_writer.getStreamType() == DATA_STREAM_FILE)
-	{
-		m_writer.close(); // optionally called here, DataWriter::close() will be called by Format too.
-	}
-}
-
-void					IMGFormat::serializeVersion2(void)
-{
-	// fetch new seek positions for all IMG entries
-	uint32
-		uiEntryCount = getEntryCount(),
-		uiBodyStart = (uiEntryCount * 32) + 8,
-		uiSeek = Math::convertBytesToSectors(uiBodyStart),
-		i = 0;
-	vector<uint32> vecNewEntryPositions;
-	vecNewEntryPositions.resize(uiEntryCount);
-	for (IMGEntry *pIMGEntry : getEntries())
-	{
-		vecNewEntryPositions[i] = uiSeek;
-		uiSeek += pIMGEntry->getEntrySizeInSectors();
-		i++;
-	}
-
-	// open IMG file to read from (IMG file to write to is already open in DataWriter)
-	if (m_reader.getStreamType() == DATA_STREAM_FILE)
-	{
-		m_reader.setFilePath(getIMGFilePath());
-		m_reader.open(true);
-	}
-
-	// write IMG data - IMG header
-	m_writer.writeString("VER2");
-	m_writer.writeUint32(getEntryCount());
-
-	i = 0;
-	for (auto pIMGEntry : getEntries())
-	{
-		m_writer.writeUint32(vecNewEntryPositions[i++]);
-		m_writer.writeUint16((uint16)ceil((float)(pIMGEntry->getEntrySize() / (float)2048.0f)));
-		m_writer.writeUint16(0);
-		m_writer.writeStringRef(pIMGEntry->getEntryName(), 24);
-
-		Events::trigger(TASK_PROGRESS);
-	}
-
-	if ((uiBodyStart % 2048) != 0 && uiEntryCount > 0)
-	{
-		uint32 uiPadByteCount = 2048 - (uiBodyStart % 2048);
-		m_writer.writeString(uiPadByteCount);
-	}
-
-	// write IMG data - IMG body
-	i = 0;
-	for (auto pIMGEntry : getEntries())
-	{
-		m_reader.setSeek(pIMGEntry->getEntryOffset());
-		m_writer.writeString(m_reader.readString(pIMGEntry->getEntrySize()), IMGFormat::getEntryPaddedSize(pIMGEntry->getEntrySize()));
-
-		pIMGEntry->setEntryOffsetInSectors(vecNewEntryPositions[i++]);
-
-		Events::trigger(TASK_PROGRESS);
-	}
-
-	// finalize IMG data reading/writing
-	if (m_reader.getStreamType() == DATA_STREAM_FILE)
-	{
-		m_reader.close();
-	}
-	if(m_writer.getStreamType() == DATA_STREAM_FILE)
-	{
-		m_writer.close(); // optionally called here, DataWriter::close() will be called by Format too.
-	}
-}
-
-void					IMGFormat::serializeVersionFastman92(void)
-{
-	// fetch new seek positions for all IMG entries
-	uint32
-		uiEntryCount = getEntryCount(),
-		uiBodyStart = (uiEntryCount * 32) + 8,
-		uiSeek = Math::convertBytesToSectors(uiBodyStart),
-		i = 0;
-	vector<uint32> vecNewEntryPositions;
-	vecNewEntryPositions.resize(uiEntryCount);
-	for (IMGEntry *pIMGEntry : getEntries())
-	{
-		vecNewEntryPositions[i] = uiSeek;
-		uiSeek += pIMGEntry->getEntrySizeInSectors();
-		i++;
-	}
-
-	// open IMG file to read from (IMG file to write to is already open in DataWriter)
-	if (m_reader.getStreamType() == DATA_STREAM_FILE)
-	{
-		m_reader.setFilePath(getIMGFilePath());
-		m_reader.open(true);
-	}
-
-	// write IMG data - IMG header
-	string strIMGVersion = "VERF";
-	uint32 uiArchiveVersion = 1;
-	uint32 uiArchiveFlags = uiArchiveVersion;
-
-	m_writer.writeStringRef(strIMGVersion);
-	m_writer.writeUint32(uiArchiveFlags);
-	m_writer.writeString("fastman92", 12);
-	if (uiArchiveVersion == 1)
-	{
-		// write IMG data - IMG header
-		uint32 uiCheck = 1;
-		uint32 uiEntryCount = getEntryCount();
-		string strReserved1 = String::zeroPad(8);
-
-		m_writer.writeUint32(uiCheck);
-		m_writer.writeUint32(uiEntryCount);
-		m_writer.writeStringRef(strReserved1);
-
-		// write IMG data - IMG directory
-		i = 0;
-		for (auto pIMGEntry : getEntries())
-		{
-			uint32 uiEntryFlags = 0;
-			if (pIMGEntry->isCompressed())
-			{
-				uint32 uiCompressionValue = 0;
-				switch (pIMGEntry->getCompressionAlgorithmId())
-				{
-				case COMPRESSION_ZLIB:
-					uiCompressionValue = 1;
-					break;
-				case COMPRESSION_LZ4:
-					uiCompressionValue = 2;
-					break;
-				}
-				uiEntryFlags |= uiCompressionValue;
-			}
-			uint16 usUncompressedSizeInSectors = (uint16) ceil((float)pIMGEntry->getUncompressedSize() / (float)2048.0f);
-			uint16 usPackedSizeInSectors = (uint16) pIMGEntry->getEntrySizeInSectors();
-			uint16 usPaddedBytesCountInAlignedOriginalSize = (usUncompressedSizeInSectors * 2048) % 2048;
-			uint16 usPaddedBytesCountInAlignedPackedSize = (usPackedSizeInSectors * 2048) % 2048;
-
-			m_writer.writeUint32(vecNewEntryPositions[i++]);
-			m_writer.writeUint16(usUncompressedSizeInSectors);
-			m_writer.writeUint16(usPaddedBytesCountInAlignedOriginalSize);
-			m_writer.writeUint16(usPackedSizeInSectors);
-			m_writer.writeUint16(usPaddedBytesCountInAlignedPackedSize);
-			m_writer.writeUint32(uiEntryFlags);
-			m_writer.writeStringRef(pIMGEntry->getEntryName(), 40);
-			m_writer.writeString(8);
-
-			Events::trigger(TASK_PROGRESS);
-		}
-
-		if ((uiBodyStart % 2048) != 0 && uiEntryCount > 0)
-		{
-			uint32 uiPadByteCount = 2048 - (uiBodyStart % 2048);
-			m_writer.writeString(uiPadByteCount);
-		}
-
-		// write IMG data - IMG body
-		i = 0;
-		for (auto pIMGEntry : getEntries())
-		{
-			m_reader.setSeek(pIMGEntry->getEntryOffset());
-			m_writer.writeString(m_reader.readString(pIMGEntry->getEntrySize()), IMGFormat::getEntryPaddedSize(pIMGEntry->getEntrySize()));
-
-			pIMGEntry->setEntryOffsetInSectors(vecNewEntryPositions[i++]);
-
-			Events::trigger(TASK_PROGRESS);
-		}
-	}
-
-	// finalize IMG data reading/writing
-	if (m_reader.getStreamType() == DATA_STREAM_FILE)
-	{
-		m_reader.close();
-	}
-	if(m_writer.getStreamType() == DATA_STREAM_FILE)
-	{
-		m_writer.close(); // optionally called here, DataWriter::close() will be called by Format too.
-	}
-}
-
-void					IMGFormat::serializeVersion3_Encrypted(void)
-{
-	// fetch new seek positions for all IMG entries
-	uint32
-		uiEntryCount = getEntryCount(),
-		uiNamesLength = getVersion3NamesLength(),
-		uiPaddingStart = 20 + (16 * getEntryCount()) + uiNamesLength,
-		uiSeek = Math::convertBytesToSectors(uiPaddingStart),
-		i = 0;
-	vector<uint32> vecNewEntryPositions;
-	vecNewEntryPositions.resize(uiEntryCount);
-	for (IMGEntry *pIMGEntry : getEntries())
-	{
-		vecNewEntryPositions[i] = uiSeek;
-		uiSeek += pIMGEntry->getEntrySizeInSectors();
-		i++;
-	}
-
-	// open IMG file to read from (IMG file to write to is already open in DataWriter)
-	if (m_reader.getStreamType() == DATA_STREAM_FILE)
-	{
-		m_reader.setFilePath(getIMGFilePath());
-		m_reader.open(true);
-	}
-
-	// write IMG data - IMG header
-	EDataStreamType ePreviousStreamType = m_writer.getStreamType();
-	m_writer.setStreamType(DATA_STREAM_MEMORY);
-
-	uint32 uiTableByteCount = (uint32)(ceil(((float)((16 * getEntryCount()) + uiNamesLength)) / 2048.0) * 2048.0);
-
-	m_writer.writeUint32(0xA94E2A52);
-	m_writer.writeUint32(3);
-	m_writer.writeUint32(getEntryCount());
-	m_writer.writeUint32(uiTableByteCount);
-	m_writer.writeUint16(16);
-	m_writer.writeUint16(0);
-
-	// IMG file - table
-	for (auto pIMGEntry : getEntries())
-	{
-		m_writer.writeUint32(0);
-		m_writer.writeUint32(pIMGEntry->getRageResourceType() == nullptr ? 0 : pIMGEntry->getRageResourceType()->getIdentifier());
-		m_writer.writeUint32(pIMGEntry->getEntryOffsetInSectors());
-		m_writer.writeUint16((uint16)ceil(((float)pIMGEntry->getEntrySize()) / (float)2048.0f));
-
-		uint32 uiRemainder = pIMGEntry->getEntrySize() % 2048;
-		m_writer.writeUint16((uint16)(pIMGEntry->getFlags() | ((uint16)(uiRemainder == 0 ? 0 : (2048 - uiRemainder)))));
-
-		Events::trigger(TASK_PROGRESS);
-	}
-
-	string strEntryName;
-	for (auto pIMGEntry : getEntries())
-	{
-		strEntryName = pIMGEntry->getEntryName();
-		strEntryName.append("\0", 1);
-		m_writer.writeStringRef(strEntryName);
-	}
-
-	if ((uiPaddingStart % 2048) != 0 && uiEntryCount > 0)
-	{
-		uint32 uiPadByteCount = 2048 - (uiPaddingStart % 2048);
-		m_writer.writeString(uiPadByteCount);
-	}
-
-	// encrypt header and table
-	string strData = m_writer.getData();
-
-	string strHeader = IMGManager::encryptVersion3IMGString(strData.substr(0, 32));
-	string strTables = IMGManager::encryptVersion3IMGString(String::zeroPad(strData.substr(20), (strData.length() - 20) + (2048 - ((strData.length() - 20) % 2048))));
-
-	m_writer.setStreamType(ePreviousStreamType);
-	m_writer.setSeek(0);
-	m_writer.writeStringRef(strHeader);
-	m_writer.setSeek(20);
-	m_writer.writeStringRef(strTables);
-
-	// IMG file - body
-	i = 0;
-	for (auto pIMGEntry : getEntries())
-	{
-		m_reader.setSeek(pIMGEntry->getEntryOffset());
-		m_writer.writeString(m_reader.readString(pIMGEntry->getEntrySize()));
-
-		pIMGEntry->setEntryOffsetInSectors(vecNewEntryPositions[i++]);
-
-		Events::trigger(TASK_PROGRESS);
-	}
-
-	// finalize IMG data reading/writing
-	if (m_reader.getStreamType() == DATA_STREAM_FILE)
-	{
-		m_reader.close();
-	}
-	if(m_writer.getStreamType() == DATA_STREAM_FILE)
-	{
-		m_writer.close(); // optionally called here, DataWriter::close() will be called by Format too.
-	}
-}
-
-void					IMGFormat::serializeVersion3_Unencrypted(void)
-{
-	// fetch new seek positions for all IMG entries
-	uint32
-		uiEntryCount = getEntryCount(),
-		uiNamesLength = getVersion3NamesLength(),
-		uiBodyStart = 20 + (16 * getEntryCount()) + uiNamesLength,
-		uiSeek = Math::convertBytesToSectors(uiBodyStart),
-		i = 0;
-	vector<uint32> vecNewEntryPositions;
-	vecNewEntryPositions.resize(uiEntryCount);
-	for (IMGEntry *pIMGEntry : getEntries())
-	{
-		vecNewEntryPositions[i] = uiSeek;
-		uiSeek += pIMGEntry->getEntrySizeInSectors();
-		i++;
-	}
-
-	// open IMG file to read from (IMG file to write to is already open in DataWriter)
-	if (m_reader.getStreamType() == DATA_STREAM_FILE)
-	{
-		m_reader.setFilePath(getIMGFilePath());
-		m_reader.open(true);
-	}
-
-	// IMG file - header
-	m_writer.writeUint32(0xA94E2A52);
-	m_writer.writeUint32(3);
-	m_writer.writeUint32(getEntryCount());
-	m_writer.writeUint32((uint32)(ceil(((float)((16 * getEntryCount()) + uiNamesLength)) / 2048.0) * 2048));
-	m_writer.writeUint16(16);
-	m_writer.writeUint16(0);
-
-	// IMG file - table
-	for (auto pIMGEntry : getEntries())
-	{
-		m_writer.writeUint32(0);
-		m_writer.writeUint32((pIMGEntry->getRageResourceType() == nullptr ? 0 : pIMGEntry->getRageResourceType()->getIdentifier()));
-		m_writer.writeUint32(pIMGEntry->getEntryOffsetInSectors());
-		m_writer.writeUint16((uint16)ceil(((float)pIMGEntry->getEntrySize()) / (float)2048.0f));
-
-		uint32 uiRemainder = pIMGEntry->getEntrySize() % 2048;
-		m_writer.writeUint16((uint16)((pIMGEntry->getFlags() | ((uint16)(uiRemainder == 0 ? 0 : (2048 - uiRemainder))))));
-
-		Events::trigger(TASK_PROGRESS);
-	}
-
-	string strEntryName;
-	for (auto pIMGEntry : getEntries())
-	{
-		strEntryName = pIMGEntry->getEntryName();
-		strEntryName.append("\0", 1);
-		m_writer.writeStringRef(strEntryName);
-	}
-
-	if ((uiBodyStart % 2048) != 0 && uiEntryCount > 0)
-	{
-		uint32 uiPadByteCount = 2048 - (uiBodyStart % 2048);
-		m_writer.writeString(uiPadByteCount);
-	}
-
-	// IMG file - body
-	i = 0;
-	for (auto pIMGEntry : getEntries())
-	{
-		m_reader.setSeek(pIMGEntry->getEntryOffset());
-		m_writer.writeString(m_reader.readString(pIMGEntry->getEntrySize()));
-
-		pIMGEntry->setEntryOffsetInSectors(vecNewEntryPositions[i++]);
-
-		Events::trigger(TASK_PROGRESS);
-	}
-
-	// finalize IMG data reading/writing
-	if (m_reader.getStreamType() == DATA_STREAM_FILE)
-	{
-		m_reader.close();
-	}
-	if(m_writer.getStreamType() == DATA_STREAM_FILE)
-	{
-		m_writer.close(); // optionally called here, DataWriter::close() will be called by Format too.
-	}
 }
 
 // entry fetching
@@ -1621,11 +902,12 @@ uint32			IMGFormat::merge(string& strSecondIMGPath, vector<string>& vecImportedE
 	DataReader *pDataReader = &m_reader;
 
 	// parse second IMG file for entry information
-	IMGFormat imgFileIn(strSecondIMGPath);
-	imgFileIn.setFilePath(strSecondIMGPath);
-	if (!imgFileIn.unserialize())
+	IMGFormat *pIMGFileIn = createIMGFormat(strSecondIMGPath);
+	pIMGFileIn->setFilePath(strSecondIMGPath);
+	if (!pIMGFileIn->unserialize())
 	{
-		imgFileIn.unload();
+		pIMGFileIn->unload();
+		delete pIMGFileIn;
 		return 0;
 	}
 
@@ -1635,7 +917,7 @@ uint32			IMGFormat::merge(string& strSecondIMGPath, vector<string>& vecImportedE
 
 	// import entries from second IMG into first IMG
 	bool bVersion3IMG = getVersion() == IMG_3;
-	for (auto pInEntry : imgFileIn.getEntries())
+	for (auto pInEntry : pIMGFileIn->getEntries())
 	{
 		// entry header data
 		IMGEntry *pOutEntry = new IMGEntry(this);
@@ -1666,23 +948,23 @@ uint32			IMGFormat::merge(string& strSecondIMGPath, vector<string>& vecImportedE
 	// finalize
 	pDataReader->close();
 
-	uint32 uiImportedEntryCount = imgFileIn.getEntryCount();
-	imgFileIn.unload();
+	uint32 uiImportedEntryCount = pIMGFileIn->getEntryCount();
+	pIMGFileIn->unload();
 
 	return uiImportedEntryCount;
 }
 
-void					IMGFormat::split(vector<IMGEntry*>& vecIMGEntries, string& strOutPath, EIMGVersion EIMGVersion)
+void					IMGFormat::split(vector<IMGEntry*>& vecIMGEntries, string& strOutPath, EIMGVersion uiIMGVersion)
 {
-	IMGFormat *pIMGFile = new IMGFormat;
-	pIMGFile->setVersion(EIMGVersion);
+	IMGFormat *pIMGFile = createIMGFormat(uiIMGVersion);
+	pIMGFile->setVersion(uiIMGVersion);
 	
 	pIMGFile->setFilePath(getIMGFilePath()); // todo - rename to format::setInputPath()
 	pIMGFile->m_writer.setFilePath(strOutPath);
 
 	// todo - remove from here? pIMGFile->openFile(); // open input - todo - rename to openInputFile()
 
-	bool bVersion3IMG = EIMGVersion == IMG_3;
+	bool bVersion3IMG = uiIMGVersion == IMG_3;
 	for (auto pIMGEntry : vecIMGEntries)
 	{
 		IMGEntry *pIMGEntry2 = new IMGEntry(pIMGFile);
