@@ -19,14 +19,14 @@ IMGFormatVersionFastman92::IMGFormatVersionFastman92(void)
 }
 
 IMGFormatVersionFastman92::IMGFormatVersionFastman92(string strFilePathOrData, bool bParam1IsFilePath) :
-	IMGFormat(strFilePathOrData, bParam1IsFilePath)
+	IMGFormat(IMG_FASTMAN92, strFilePathOrData, bParam1IsFilePath)
 {
 }
 
 // serialization
 void					IMGFormatVersionFastman92::_unserialize(void)
 {
-	IMGFormat::_unserialize();
+	IMGFormat::_unserializeBefore();
 
 	// read header 1
 	IMGFormat_VersionFastman92_Header1 *pHeader1 = m_reader.readStruct<IMGFormat_VersionFastman92_Header1>();
@@ -86,6 +86,8 @@ void					IMGFormatVersionFastman92::_unserialize(void)
 	delete pHeader1;
 	delete pHeader2;
 	delete[] pRawIMGEntries;
+
+	IMGFormat::_unserializeAfter();
 }
 
 void					IMGFormatVersionFastman92::_serialize(void)

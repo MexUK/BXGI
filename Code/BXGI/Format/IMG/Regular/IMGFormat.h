@@ -31,6 +31,7 @@ class bxgi::IMGFormat : public bxcf::Format, public bxcf::VectorPool<bxgi::IMGEn
 {
 public:
 	IMGFormat(void);
+	IMGFormat(EIMGVersion uiIMGVersion, std::string& strFilePathOrData, bool bStringIsFilePath = true);
 	IMGFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true);
 	IMGFormat(bxcf::DataReader& reader);
 
@@ -38,8 +39,11 @@ public:
 
 	void											_readMetaData(void);
 
-	void											_unserialize(void);
+	void											_unserialize(void) {}
 	void											_serialize(void) {}
+
+	void											_unserializeBefore(void);
+	void											_unserializeAfter(void);
 
 	bool											validate(void);
 
@@ -52,7 +56,8 @@ public:
 	std::string										getIMGFilePath(void);
 	std::string										getDIRFilePath(void);
 
-	void											setVersion(bxgi::EIMGVersion EIMGVersion) { m_uiIMGVersion = EIMGVersion; }
+	void											setVersionDirect(bxgi::EIMGVersion uiIMGVersion) { m_uiIMGVersion = uiIMGVersion; }
+	IMGFormat*										setVersion(bxgi::EIMGVersion uiIMGVersion);
 	inline bxgi::EIMGVersion						getVersion(void);
 
 	void											unserializERWVersions(void);
@@ -63,6 +68,12 @@ public:
 
 	void											setGameType(uint8 ucGameType) { m_ucGameType = ucGameType; }
 	uint8											getGameType(void) { return m_ucGameType; }
+
+	void											setSubVersion(uint8 uiSubVersion) { m_uiSubVersion = uiSubVersion; }
+	uint8											getSubVersion(void) { return m_uiSubVersion; }
+
+	void											setEncryptionType(uint8 uiEncryptionType) { m_uiEncryptionType = uiEncryptionType; }
+	uint8											getEncryptionType(void) { return m_uiEncryptionType; }
 
 	void											setPlatform(bxcf::EPlatform EPlatformValue) { m_uiPlatform = EPlatformValue; }
 	bxcf::EPlatform									getPlatform(void) { return m_uiPlatform; }

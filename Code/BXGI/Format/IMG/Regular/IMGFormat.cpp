@@ -46,6 +46,17 @@ IMGFormat::IMGFormat(void) :
 {
 }
 
+IMGFormat::IMGFormat(EIMGVersion uiIMGVersion, std::string& strFilePathOrData, bool bStringIsFilePath) :
+	Format(strFilePathOrData, bStringIsFilePath, true, LITTLE_ENDIAN),
+	m_uiIMGVersion(uiIMGVersion),
+	m_uiPlatform(PLATFORM_PC),
+	m_uiSubVersion(0),
+	m_uiEncryptionType(0),
+	m_ucGameType(0),
+	m_bEncrypted(false)
+{
+}
+
 IMGFormat::IMGFormat(std::string& strFilePathOrData, bool bStringIsFilePath) :
 	Format(strFilePathOrData, bStringIsFilePath, true, LITTLE_ENDIAN),
 	m_uiIMGVersion(IMG_UNKNOWN),
@@ -180,11 +191,14 @@ void				IMGFormat::_readMetaData(void)
 }
 
 // serialization
-void				IMGFormat::_unserialize(void)
+void				IMGFormat::_unserializeBefore(void)
 {
 	checkMetaDataIsLoaded();
 	m_reader.resetFileSeek();
+}
 
+void				IMGFormat::_unserializeAfter(void)
+{
 	if (m_uiIMGVersion != IMG_3)
 	{
 		unserializERWVersions(); // todo - fix function name - capital e in name
@@ -248,6 +262,18 @@ IMGFormat*		IMGFormat::createIMGFormat(string& strIMGFilePath, bool bParam1IsFil
 }
 
 // version
+IMGFormat*			IMGFormat::setVersion(EIMGVersion uiIMGVersion)
+{
+	IMGFormat *pNewIMGFormat = createIMGFormat(uiIMGVersion);
+	pNewIMGFormat->setVersionDirect(uiIMGVersion);
+	pNewIMGFormat->setPlatform(getPlatform());
+	pNewIMGFormat->setSubVersion(getSubVersion());
+	pNewIMGFormat->setEncryptionType(getEncryptionType());
+	pNewIMGFormat->setGameType(getGameType());
+	pNewIMGFormat->setEncrypted(isEncrypted());
+	return pNewIMGFormat;
+}
+
 EIMGVersion			IMGFormat::getVersion(void)
 {
 	if (m_uiIMGVersion == IMG_UNKNOWN)
@@ -957,7 +983,6 @@ uint32			IMGFormat::merge(string& strSecondIMGPath, vector<string>& vecImportedE
 void					IMGFormat::split(vector<IMGEntry*>& vecIMGEntries, string& strOutPath, EIMGVersion uiIMGVersion)
 {
 	IMGFormat *pIMGFile = createIMGFormat(uiIMGVersion);
-	pIMGFile->setVersion(uiIMGVersion);
 	
 	pIMGFile->setFilePath(getIMGFilePath()); // todo - rename to format::setInputPath()
 	pIMGFile->m_writer.setFilePath(strOutPath);

@@ -17,14 +17,14 @@ IMGFormatVersion2::IMGFormatVersion2(void)
 }
 
 IMGFormatVersion2::IMGFormatVersion2(string strFilePathOrData, bool bParam1IsFilePath) :
-	IMGFormat(strFilePathOrData, bParam1IsFilePath)
+	IMGFormat(IMG_2, strFilePathOrData, bParam1IsFilePath)
 {
 }
 
 // serialization
 void					IMGFormatVersion2::_unserialize(void)
 {
-	IMGFormat::_unserialize();
+	IMGFormat::_unserializeBefore();
 
 	// read header 1
 	RG_IMGFormat_Version2_Header1 *pHeader1 = m_reader.readStruct<RG_IMGFormat_Version2_Header1>();
@@ -53,6 +53,8 @@ void					IMGFormatVersion2::_unserialize(void)
 	// clean up
 	delete pHeader1;
 	delete[] pRGIMGEntries;
+
+	IMGFormat::_unserializeAfter();
 }
 
 void					IMGFormatVersion2::_serialize(void)

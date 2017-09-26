@@ -17,14 +17,14 @@ IMGFormatVersion1::IMGFormatVersion1(void)
 }
 
 IMGFormatVersion1::IMGFormatVersion1(string strFilePathOrData, bool bParam1IsFilePath) :
-	IMGFormat(strFilePathOrData, bParam1IsFilePath)
+	IMGFormat(IMG_1, strFilePathOrData, bParam1IsFilePath)
 {
 }
 
 // serialization
 void					IMGFormatVersion1::_unserialize(void)
 {
-	IMGFormat::_unserialize();
+	IMGFormat::_unserializeBefore();
 
 	// verify file size & fetch entry count
 	uint64 uiFileSize = m_reader.getDataLength();
@@ -55,6 +55,8 @@ void					IMGFormatVersion1::_unserialize(void)
 
 	// clean up
 	delete[] pRGIMGEntries;
+
+	IMGFormat::_unserializeAfter();
 }
 
 void					IMGFormatVersion1::_serialize(void)

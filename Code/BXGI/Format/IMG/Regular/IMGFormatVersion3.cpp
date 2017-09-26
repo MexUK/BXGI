@@ -19,14 +19,14 @@ IMGFormatVersion3::IMGFormatVersion3(void)
 }
 
 IMGFormatVersion3::IMGFormatVersion3(string strFilePathOrData, bool bParam1IsFilePath) :
-	IMGFormat(strFilePathOrData, bParam1IsFilePath)
+	IMGFormat(IMG_3, strFilePathOrData, bParam1IsFilePath)
 {
 }
 
 // serialization
 void					IMGFormatVersion3::_unserialize(void)
 {
-	IMGFormat::_unserialize();
+	IMGFormat::_unserializeBefore();
 
 	if (isEncrypted())
 	{
@@ -130,6 +130,8 @@ void					IMGFormatVersion3::_unserialize(void)
 		delete pHeader1;
 		delete[] pRGIMGEntries;
 	}
+
+	IMGFormat::_unserializeAfter();
 }
 
 void					IMGFormatVersion3::_serialize(void)
