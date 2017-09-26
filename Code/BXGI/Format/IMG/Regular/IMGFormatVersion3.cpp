@@ -14,7 +14,8 @@ using namespace std;
 using namespace bxcf;
 using namespace bxgi;
 
-IMGFormatVersion3::IMGFormatVersion3(void)
+IMGFormatVersion3::IMGFormatVersion3(void) :
+	IMGFormat(IMG_3)
 {
 }
 
@@ -136,6 +137,8 @@ void					IMGFormatVersion3::_unserialize(void)
 
 void					IMGFormatVersion3::_serialize(void)
 {
+	bool bContainsAnEntry = getEntryCount() > 0;
+
 	if (isEncrypted())
 	{
 		// fetch new seek positions for all IMG entries
@@ -155,7 +158,7 @@ void					IMGFormatVersion3::_serialize(void)
 		}
 
 		// open IMG file to read from (IMG file to write to is already open in DataWriter)
-		if (m_reader.getStreamType() == DATA_STREAM_FILE)
+		if (m_reader.getStreamType() == DATA_STREAM_FILE && bContainsAnEntry)
 		{
 			m_reader.setFilePath(getIMGFilePath());
 			m_reader.open(true);
@@ -227,7 +230,7 @@ void					IMGFormatVersion3::_serialize(void)
 		}
 
 		// finalize IMG data reading/writing
-		if (m_reader.getStreamType() == DATA_STREAM_FILE)
+		if (m_reader.getStreamType() == DATA_STREAM_FILE && bContainsAnEntry)
 		{
 			m_reader.close();
 		}
@@ -255,7 +258,7 @@ void					IMGFormatVersion3::_serialize(void)
 		}
 
 		// open IMG file to read from (IMG file to write to is already open in DataWriter)
-		if (m_reader.getStreamType() == DATA_STREAM_FILE)
+		if (m_reader.getStreamType() == DATA_STREAM_FILE && bContainsAnEntry)
 		{
 			m_reader.setFilePath(getIMGFilePath());
 			m_reader.open(true);
@@ -310,7 +313,7 @@ void					IMGFormatVersion3::_serialize(void)
 		}
 
 		// finalize IMG data reading/writing
-		if (m_reader.getStreamType() == DATA_STREAM_FILE)
+		if (m_reader.getStreamType() == DATA_STREAM_FILE && bContainsAnEntry)
 		{
 			m_reader.close();
 		}

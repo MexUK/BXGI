@@ -11,7 +11,8 @@ using namespace std;
 using namespace bxcf;
 using namespace bxgi;
 
-IMGFormatVersion2::IMGFormatVersion2(void)
+IMGFormatVersion2::IMGFormatVersion2(void) :
+	IMGFormat(IMG_2)
 {
 }
 
@@ -73,8 +74,10 @@ void					IMGFormatVersion2::_serialize(void)
 		i++;
 	}
 
+	bool bContainsAnEntry = getEntryCount() > 0;
+
 	// open IMG file to read from (IMG file to write to is already open in DataWriter)
-	if (m_reader.getStreamType() == DATA_STREAM_FILE)
+	if (m_reader.getStreamType() == DATA_STREAM_FILE && bContainsAnEntry)
 	{
 		m_reader.setFilePath(getIMGFilePath());
 		m_reader.open(true);
@@ -114,7 +117,7 @@ void					IMGFormatVersion2::_serialize(void)
 	}
 
 	// finalize IMG data reading/writing
-	if (m_reader.getStreamType() == DATA_STREAM_FILE)
+	if (m_reader.getStreamType() == DATA_STREAM_FILE && bContainsAnEntry)
 	{
 		m_reader.close();
 	}

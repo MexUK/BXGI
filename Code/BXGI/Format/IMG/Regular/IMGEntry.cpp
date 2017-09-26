@@ -296,8 +296,8 @@ void					IMGEntry::setEntryData(string& strEntryData, bool bIsNew)
 
 	if (uiNewEntrySizeSectors <= uiPreviousEntrySizeSectors)
 	{
-		uint32 uiExtraPadByteCount = 2048 * (uiPreviousEntrySizeSectors - uiNewEntrySizeSectors);
-		strEntryData = String::zeroPad(strEntryData, uiExtraPadByteCount);
+		uint32 uiEntrySizePadded = 2048 * uiPreviousEntrySizeSectors;
+		strEntryData = String::zeroPad(strEntryData, uiEntrySizePadded);
 		File::storeFileSubContent(m_pIMGFile->getIMGFilePath(), strEntryData, getEntryOffset());
 	}
 	else

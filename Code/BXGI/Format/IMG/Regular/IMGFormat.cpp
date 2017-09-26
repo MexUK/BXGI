@@ -46,6 +46,17 @@ IMGFormat::IMGFormat(void) :
 {
 }
 
+IMGFormat::IMGFormat(EIMGVersion uiIMGVersion) :
+	Format(true, LITTLE_ENDIAN),
+	m_uiIMGVersion(uiIMGVersion),
+	m_uiPlatform(PLATFORM_PC),
+	m_uiSubVersion(0),
+	m_uiEncryptionType(0),
+	m_ucGameType(0),
+	m_bEncrypted(false)
+{
+}
+
 IMGFormat::IMGFormat(EIMGVersion uiIMGVersion, std::string& strFilePathOrData, bool bStringIsFilePath) :
 	Format(strFilePathOrData, bStringIsFilePath, true, LITTLE_ENDIAN),
 	m_uiIMGVersion(uiIMGVersion),
@@ -104,11 +115,34 @@ void				IMGFormat::_readMetaData(void)
 		}
 	};
 
+	if (!m_reader.canRead(12))
+	{
+		string strFilePathDIRExt = getDIRFilePath();
+		if (File::doesFileExist(strFilePathDIRExt))
+		{
+			m_reader.reset();
+			m_reader.setFilePath(strFilePathDIRExt);
+			m_strFilePath = strFilePathDIRExt; // temp
+			if (!m_reader.open(m_bFormatUsesBinaryData))
+			{
+				checkToCloseReader();
+				// todo throw new FAILED_TO_OPEN_FILE;
+				return;
+			}
+
+			// version 1
+			m_uiIMGVersion = IMG_1;
+			m_uiEntryCount = (uint32)(m_reader.getSize() / 32);
+			checkToCloseReader();
+			return;
+		}
+	}
+
 	string
-		strFirst20Bytes = m_reader.readString(20),
-		strFirst4Bytes = strFirst20Bytes.substr(0, 4);
+		strFirst8Bytes = m_reader.readString(8),
+		strFirst4Bytes = strFirst8Bytes.substr(0, 4);
 	uint32
-		uiSecond4BytesUi = String::unpackUint32(strFirst20Bytes.substr(4, 4), false);
+		uiSecond4BytesUi = String::unpackUint32(strFirst8Bytes.substr(4, 4), false);
 
 	if (strFirst4Bytes == "VER2")
 	{
@@ -118,6 +152,8 @@ void				IMGFormat::_readMetaData(void)
 		checkToCloseReader();
 		return;
 	}
+
+	string strFirst20Bytes = strFirst8Bytes + m_reader.readString(12);
 
 	if (strFirst4Bytes == "VERF")
 	{
@@ -257,7 +293,10 @@ IMGFormat*		IMGFormat::createIMGFormat(EIMGVersion uiIMGVersion, string& strIMGF
 IMGFormat*		IMGFormat::createIMGFormat(string& strIMGFilePath, bool bParam1IsFilePath)
 {
 	IMGFormat img(strIMGFilePath, bParam1IsFilePath);
-	img.checkMetaDataIsLoaded();
+	if (!img.checkMetaDataIsLoaded())
+	{
+		return nullptr;
+	}
 	return createIMGFormat(img.getVersion(), strIMGFilePath, bParam1IsFilePath);
 }
 

@@ -13,7 +13,8 @@ using namespace std;
 using namespace bxcf;
 using namespace bxgi;
 
-IMGFormatVersion1::IMGFormatVersion1(void)
+IMGFormatVersion1::IMGFormatVersion1(void) :
+	IMGFormat(IMG_1)
 {
 }
 
@@ -67,9 +68,11 @@ void					IMGFormatVersion1::_serialize(void)
 		strIMGFilePathIn = getIMGFilePath(),
 		strIMGFilePathOut = m_writer.getFilePath(),
 		strDIRFilePathOut = Path::replaceFileExtensionWithCase(strIMGFilePathOut.substr(0, strIMGFilePathOut.length() - 5), "DIR") + ".temp";
+	bool
+		bContainsAnEntry = getEntryCount() > 0;
 
 	// open IMG file to read from (IMG file to write to is already open in DataWriter)
-	if (m_reader.getStreamType() == DATA_STREAM_FILE)
+	if (m_reader.getStreamType() == DATA_STREAM_FILE && bContainsAnEntry)
 	{
 		m_reader.setFilePath(strIMGFilePathIn);
 		m_reader.open(true);
@@ -90,7 +93,7 @@ void					IMGFormatVersion1::_serialize(void)
 		Events::trigger(TASK_PROGRESS);
 	}
 
-	if (m_reader.getStreamType() == DATA_STREAM_FILE)
+	if (m_reader.getStreamType() == DATA_STREAM_FILE && bContainsAnEntry)
 	{
 		// finalize IMG data reading
 		m_reader.close();
@@ -101,7 +104,7 @@ void					IMGFormatVersion1::_serialize(void)
 		m_writer.close();
 	}
 
-	if (m_reader.getStreamType() == DATA_STREAM_FILE)
+	if (m_reader.getStreamType() == DATA_STREAM_FILE && bContainsAnEntry)
 	{
 		// open DIR file to read from
 		m_reader.setFilePath(strDIRFilePathIn);
@@ -125,7 +128,7 @@ void					IMGFormatVersion1::_serialize(void)
 	}
 
 	// finalize DIR data reading/writing
-	if (m_reader.getStreamType() == DATA_STREAM_FILE)
+	if (m_reader.getStreamType() == DATA_STREAM_FILE && bContainsAnEntry)
 	{
 		m_reader.close();
 	}

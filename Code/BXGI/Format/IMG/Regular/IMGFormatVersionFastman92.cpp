@@ -14,7 +14,8 @@ using namespace std;
 using namespace bxcf;
 using namespace bxgi;
 
-IMGFormatVersionFastman92::IMGFormatVersionFastman92(void)
+IMGFormatVersionFastman92::IMGFormatVersionFastman92(void) :
+	IMGFormat(IMG_FASTMAN92)
 {
 }
 
@@ -107,8 +108,10 @@ void					IMGFormatVersionFastman92::_serialize(void)
 		i++;
 	}
 
+	bool bContainsAnEntry = getEntryCount() > 0;
+
 	// open IMG file to read from (IMG file to write to is already open in DataWriter)
-	if (m_reader.getStreamType() == DATA_STREAM_FILE)
+	if (m_reader.getStreamType() == DATA_STREAM_FILE && bContainsAnEntry)
 	{
 		m_reader.setFilePath(getIMGFilePath());
 		m_reader.open(true);
@@ -189,7 +192,7 @@ void					IMGFormatVersionFastman92::_serialize(void)
 	}
 
 	// finalize IMG data reading/writing
-	if (m_reader.getStreamType() == DATA_STREAM_FILE)
+	if (m_reader.getStreamType() == DATA_STREAM_FILE && bContainsAnEntry)
 	{
 		m_reader.close();
 	}
