@@ -175,12 +175,12 @@ void					IMGFormatVersion3::_serialize(void)
 		m_writer.writeUint16(0);
 
 		// IMG file - table
-		for (auto pIMGEntry : getEntries())
+		for (IMGEntry *pIMGEntry : getEntries())
 		{
 			m_writer.writeUint32(0);
 			m_writer.writeUint32(pIMGEntry->getRageResourceType() == nullptr ? 0 : pIMGEntry->getRageResourceType()->getIdentifier());
 			m_writer.writeUint32(pIMGEntry->getEntryOffsetInSectors());
-			m_writer.writeUint16((uint16)ceil(((float)pIMGEntry->getEntrySize()) / (float)2048.0f));
+			m_writer.writeUint16(pIMGEntry->getEntrySizeInSectors());
 
 			uint32 uiRemainder = pIMGEntry->getEntrySize() % 2048;
 			m_writer.writeUint16((uint16)(pIMGEntry->getFlags() | ((uint16)(uiRemainder == 0 ? 0 : (2048 - uiRemainder)))));
@@ -189,7 +189,7 @@ void					IMGFormatVersion3::_serialize(void)
 		}
 
 		string strEntryName;
-		for (auto pIMGEntry : getEntries())
+		for (IMGEntry *pIMGEntry : getEntries())
 		{
 			strEntryName = pIMGEntry->getEntryName();
 			strEntryName.append("\0", 1);
@@ -216,7 +216,7 @@ void					IMGFormatVersion3::_serialize(void)
 
 		// IMG file - body
 		i = 0;
-		for (auto pIMGEntry : getEntries())
+		for (IMGEntry *pIMGEntry : getEntries())
 		{
 			m_reader.setSeek(pIMGEntry->getEntryOffset());
 			m_writer.writeString(m_reader.readString(pIMGEntry->getEntrySize()));
@@ -270,12 +270,12 @@ void					IMGFormatVersion3::_serialize(void)
 		m_writer.writeUint16(0);
 
 		// IMG file - table
-		for (auto pIMGEntry : getEntries())
+		for (IMGEntry *pIMGEntry : getEntries())
 		{
 			m_writer.writeUint32(0);
 			m_writer.writeUint32((pIMGEntry->getRageResourceType() == nullptr ? 0 : pIMGEntry->getRageResourceType()->getIdentifier()));
 			m_writer.writeUint32(pIMGEntry->getEntryOffsetInSectors());
-			m_writer.writeUint16((uint16)ceil(((float)pIMGEntry->getEntrySize()) / (float)2048.0f));
+			m_writer.writeUint16(pIMGEntry->getEntrySizeInSectors());
 
 			uint32 uiRemainder = pIMGEntry->getEntrySize() % 2048;
 			m_writer.writeUint16((uint16)((pIMGEntry->getFlags() | ((uint16)(uiRemainder == 0 ? 0 : (2048 - uiRemainder))))));
@@ -284,7 +284,7 @@ void					IMGFormatVersion3::_serialize(void)
 		}
 
 		string strEntryName;
-		for (auto pIMGEntry : getEntries())
+		for (IMGEntry *pIMGEntry : getEntries())
 		{
 			strEntryName = pIMGEntry->getEntryName();
 			strEntryName.append("\0", 1);
@@ -299,7 +299,7 @@ void					IMGFormatVersion3::_serialize(void)
 
 		// IMG file - body
 		i = 0;
-		for (auto pIMGEntry : getEntries())
+		for (IMGEntry *pIMGEntry : getEntries())
 		{
 			m_reader.setSeek(pIMGEntry->getEntryOffset());
 			m_writer.writeString(m_reader.readString(pIMGEntry->getEntrySize()));

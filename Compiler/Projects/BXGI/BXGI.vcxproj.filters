@@ -1130,9 +1130,6 @@
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Fastman92\IMGFormat_VersionFastman92_Header2.h">
       <Filter>Header Files\Format\IMG\Fastman92</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\Raw\IMGEntry_Version1Or2.h">
-      <Filter>Header Files\Format\IMG\Regular\Raw</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\Raw\IMGEntry_Version3.h">
       <Filter>Header Files\Format\IMG\Regular\Raw</Filter>
     </ClInclude>
@@ -1552,6 +1549,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersionFastman92.h">
       <Filter>Header Files\Format\IMG\Fastman92</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\Raw\IMGEntry_Version1.h">
+      <Filter>Header Files\Format\IMG\Regular\Raw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\Raw\IMGEntry_Version2.h">
+      <Filter>Header Files\Format\IMG\Regular\Raw</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

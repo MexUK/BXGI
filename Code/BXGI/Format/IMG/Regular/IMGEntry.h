@@ -3,7 +3,8 @@
 #include "nsbxgi.h"
 #include "Compression/ECompressionAlgorithm.h"
 #include "Format/EFileType.h"
-#include "Format/IMG/Regular/Raw/IMGEntry_Version1Or2.h"
+#include "Format/IMG/Regular/Raw/IMGEntry_Version1.h"
+#include "Format/IMG/Regular/Raw/IMGEntry_Version2.h"
 #include "Format/IMG/Regular/Raw/IMGEntry_Version3.h"
 #include "Format/IMG/Fastman92/IMGEntry_Fastman92.h"
 #include "Static/Math.h"
@@ -24,7 +25,8 @@ public:
 
 	void					unload(void) {}
 
-	inline void				unserializeVersion1Or2(bxgi::RG_IMGEntry_Version1Or2 *pRGIMGEntry);
+	inline void				unserializeVersion1(bxgi::RG_IMGEntry_Version1 *pRGIMGEntry);
+	inline void				unserializeVersion2(bxgi::RG_IMGEntry_Version2 *pRGIMGEntry);
 	inline void				unserializeVersion3(bxgi::RG_IMGEntry_Version3 *pRGIMGEntry);
 	inline void				unserializeVersionFastman92(bxgi::IMGEntry_Fastman92 *pRawIMGEntry);
 
@@ -156,10 +158,27 @@ private:
 	bxcf::fileType::EFileType	m_uiFileType;
 };
 
-inline void					bxgi::IMGEntry::unserializeVersion1Or2(bxgi::RG_IMGEntry_Version1Or2 *pRGIMGEntry)
+inline void					bxgi::IMGEntry::unserializeVersion1(bxgi::RG_IMGEntry_Version1 *pRGIMGEntry)
 {
 	m_uiEntryOffset = bxcf::Math::convertSectorsToBytes(pRGIMGEntry->m_uiOffsetInSectors);
 	m_uiEntrySize = bxcf::Math::convertSectorsToBytes(pRGIMGEntry->m_uiSizeInSectors);
+	m_strEntryName = bxcf::String::rtrimFromLeft(std::string((char*)pRGIMGEntry->m_szName));
+}
+
+inline void					bxgi::IMGEntry::unserializeVersion2(bxgi::RG_IMGEntry_Version2 *pRGIMGEntry)
+{
+	uint32 uiEntrySizeInSectors;
+	if (pRGIMGEntry->m_uiArchiveSizeInSectors != 0)
+	{
+		uiEntrySizeInSectors = pRGIMGEntry->m_uiArchiveSizeInSectors;
+	}
+	else
+	{
+		uiEntrySizeInSectors = pRGIMGEntry->m_uiStreamingSizeInSectors;
+	}
+
+	m_uiEntryOffset = bxcf::Math::convertSectorsToBytes(pRGIMGEntry->m_uiOffsetInSectors);
+	m_uiEntrySize = bxcf::Math::convertSectorsToBytes(uiEntrySizeInSectors);
 	m_strEntryName = bxcf::String::rtrimFromLeft(std::string((char*)pRGIMGEntry->m_szName));
 }
 

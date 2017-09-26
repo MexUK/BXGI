@@ -185,6 +185,7 @@
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersion2.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersion3.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersionFastman92.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\Raw\IMGEntry_Version2.h" />
     <ClInclude Include="..\..\..\Code\BXGI\nsbxgi.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Event\EEvent.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\GameFormat.h" />
@@ -338,7 +339,7 @@
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Fastman92\IMGFormat_VersionFastman92_Header1.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Fastman92\IMGFormat_VersionFastman92_Header2.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Fastman92\EIMGVersionFastman92CompressionAlgorithm.h" />
-    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\Raw\IMGEntry_Version1Or2.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\Raw\IMGEntry_Version1.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\Raw\IMGEntry_Version3.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\Raw\IMGFormat_Version2_Header1.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\Raw\IMGFormat_Version3_Header1.h" />

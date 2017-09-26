@@ -188,7 +188,8 @@ namespace bxgi
 	struct IMGFormat_VersionFastman92_Header1;
 	struct IMGFormat_VersionFastman92_Header2;
 	enum EIMGVersionFastman92CompressionAlgorithm;
-	struct RG_IMGEntry_Version1Or2;
+	struct RG_IMGEntry_Version1;
+	struct RG_IMGEntry_Version2;
 	struct RG_IMGEntry_Version3;
 	struct RG_IMGFormat_Version2_Header1;
 	struct RG_IMGFormat_Version3_Header1;

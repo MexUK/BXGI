@@ -1,5 +1,4 @@
 #include "IMGFormatVersion2.h"
-#include "Format/IMG/Regular/Raw/IMGEntry_Version1Or2.h"
 #include "Format/IMG/Regular/Raw/IMGFormat_Version2_Header1.h"
 #include "Format/IMG/Regular/IMGEntry.h"
 #include "Static/Math.h"
@@ -31,8 +30,8 @@ void					IMGFormatVersion2::_unserialize(void)
 	uint32 uiEntryCount = pHeader1->m_uiEntryCount;
 
 	// load data from file into RG structs
-	RG_IMGEntry_Version1Or2
-		*pRGIMGEntries = m_reader.readStructMultiple<RG_IMGEntry_Version1Or2>(uiEntryCount),
+	RG_IMGEntry_Version2
+		*pRGIMGEntries = m_reader.readStructMultiple<RG_IMGEntry_Version2>(uiEntryCount),
 		*pRGIMGActiveEntry = pRGIMGEntries;
 
 	// copy RG structs into wrapper structs
@@ -45,7 +44,7 @@ void					IMGFormatVersion2::_unserialize(void)
 		IMGEntry *pIMGEntry = new IMGEntry;
 		rvecIMGEntries[(unsigned int)i] = pIMGEntry;
 		pIMGEntry->setIMGFile(this);
-		pIMGEntry->unserializeVersion1Or2(pRGIMGActiveEntry++);
+		pIMGEntry->unserializeVersion2(pRGIMGActiveEntry++);
 		pIMGEntry->setEntryExtension(String::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())));
 		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
@@ -86,11 +85,11 @@ void					IMGFormatVersion2::_serialize(void)
 	m_writer.writeUint32(getEntryCount());
 
 	i = 0;
-	for (auto pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : getEntries())
 	{
 		m_writer.writeUint32(vecNewEntryPositions[i++]);
-		m_writer.writeUint16((uint16)ceil((float)(pIMGEntry->getEntrySize() / (float)2048.0f)));
-		m_writer.writeUint16(0);
+		m_writer.writeUint16(pIMGEntry->getEntrySizeInSectors());
+		m_writer.writeUint16(pIMGEntry->getEntrySizeInSectors());
 		m_writer.writeStringRef(pIMGEntry->getEntryName(), 24);
 
 		Events::trigger(TASK_PROGRESS);
@@ -104,10 +103,10 @@ void					IMGFormatVersion2::_serialize(void)
 
 	// write IMG data - IMG body
 	i = 0;
-	for (auto pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : getEntries())
 	{
 		m_reader.setSeek(pIMGEntry->getEntryOffset());
-		m_writer.writeString(m_reader.readString(pIMGEntry->getEntrySize()), IMGFormat::getEntryPaddedSize(pIMGEntry->getEntrySize()));
+		m_writer.writeString(m_reader.readString(pIMGEntry->getEntrySize()), pIMGEntry->getPaddedEntrySize());
 
 		pIMGEntry->setEntryOffsetInSectors(vecNewEntryPositions[i++]);
 

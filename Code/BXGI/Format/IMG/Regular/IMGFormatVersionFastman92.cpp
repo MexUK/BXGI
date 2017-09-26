@@ -135,7 +135,7 @@ void					IMGFormatVersionFastman92::_serialize(void)
 
 		// write IMG data - IMG directory
 		i = 0;
-		for (auto pIMGEntry : getEntries())
+		for (IMGEntry *pIMGEntry : getEntries())
 		{
 			uint32 uiEntryFlags = 0;
 			if (pIMGEntry->isCompressed())
@@ -152,7 +152,7 @@ void					IMGFormatVersionFastman92::_serialize(void)
 				}
 				uiEntryFlags |= uiCompressionValue;
 			}
-			uint16 usUncompressedSizeInSectors = (uint16)ceil((float)pIMGEntry->getUncompressedSize() / (float)2048.0f);
+			uint16 usUncompressedSizeInSectors = pIMGEntry->getEntrySizeInSectors();
 			uint16 usPackedSizeInSectors = (uint16)pIMGEntry->getEntrySizeInSectors();
 			uint16 usPaddedBytesCountInAlignedOriginalSize = (usUncompressedSizeInSectors * 2048) % 2048;
 			uint16 usPaddedBytesCountInAlignedPackedSize = (usPackedSizeInSectors * 2048) % 2048;
@@ -177,7 +177,7 @@ void					IMGFormatVersionFastman92::_serialize(void)
 
 		// write IMG data - IMG body
 		i = 0;
-		for (auto pIMGEntry : getEntries())
+		for (IMGEntry *pIMGEntry : getEntries())
 		{
 			m_reader.setSeek(pIMGEntry->getEntryOffset());
 			m_writer.writeString(m_reader.readString(pIMGEntry->getEntrySize()), IMGFormat::getEntryPaddedSize(pIMGEntry->getEntrySize()));

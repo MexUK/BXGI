@@ -4,7 +4,7 @@
 #include "Type/Types.h"
 
 #pragma pack(push, 1)
-struct bxgi::RG_IMGEntry_Version1Or2
+struct bxgi::RG_IMGEntry_Version1
 {
 	uint32			m_uiOffsetInSectors;
 	uint32			m_uiSizeInSectors;

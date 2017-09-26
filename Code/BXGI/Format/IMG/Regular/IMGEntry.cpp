@@ -65,7 +65,7 @@ void					IMGEntry::setEntrySize(uint32 uiEntrySize)
 
 uint32					IMGEntry::getPaddedEntrySize(void)
 {
-	return (uint32) (ceil(((float32) getEntrySize()) / 2048.0f) * 2048.0f);
+	return Math::convertSectorsToBytes(Math::convertBytesToSectors(m_uiEntrySize));
 }
 
 void					IMGEntry::unserializeRWVersion(DataReader *pDataReader, string strFilePath, string& strUncompressedEntryData)

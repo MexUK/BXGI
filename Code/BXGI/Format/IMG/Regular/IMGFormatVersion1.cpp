@@ -1,8 +1,9 @@
 #include "IMGFormatVersion1.h"
-#include "Format/IMG/Regular/Raw/IMGEntry_Version1Or2.h"
+#include "Format/IMG/Regular/Raw/IMGEntry_Version1.h"
 #include "Format/IMG/Regular/IMGEntry.h"
 #include "Exception/EExceptionCode.h"
 #include "Static/Math.h"
+#include "Static/File.h"
 #include "Static/Path.h"
 #include "Event/Events.h"
 #include "../BXCF/Event/EEvent.h"
@@ -34,8 +35,8 @@ void					IMGFormatVersion1::_unserialize(void)
 	}
 
 	// load data from file into RG structs
-	RG_IMGEntry_Version1Or2
-		*pRGIMGEntries = m_reader.readStructMultiple<RG_IMGEntry_Version1Or2>(m_uiEntryCount),
+	RG_IMGEntry_Version1
+		*pRGIMGEntries = m_reader.readStructMultiple<RG_IMGEntry_Version1>(m_uiEntryCount),
 		*pRGIMGActiveEntry = pRGIMGEntries;
 
 	// copy RG structs into wrapper structs - so that we can use std::string for strings in our structs rather than char arrays
@@ -48,7 +49,7 @@ void					IMGFormatVersion1::_unserialize(void)
 		IMGEntry *pIMGEntry = new IMGEntry;
 		rvecIMGEntries[(unsigned int)i] = pIMGEntry;
 		pIMGEntry->setIMGFile(this);
-		pIMGEntry->unserializeVersion1Or2(pRGIMGActiveEntry++);
+		pIMGEntry->unserializeVersion1(pRGIMGActiveEntry++);
 		pIMGEntry->setEntryExtension(String::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())));
 		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
@@ -65,7 +66,7 @@ void					IMGFormatVersion1::_serialize(void)
 		strDIRFilePathIn = getDIRFilePath(),
 		strIMGFilePathIn = getIMGFilePath(),
 		strIMGFilePathOut = m_writer.getFilePath(),
-		strDIRFilePathOut = Path::replaceFileExtensionWithCase(strIMGFilePathOut, "DIR");
+		strDIRFilePathOut = Path::replaceFileExtensionWithCase(strIMGFilePathOut.substr(0, strIMGFilePathOut.length() - 5), "DIR") + ".temp";
 
 	// open IMG file to read from (IMG file to write to is already open in DataWriter)
 	if (m_reader.getStreamType() == DATA_STREAM_FILE)
@@ -76,14 +77,14 @@ void					IMGFormatVersion1::_serialize(void)
 
 	// write IMG data
 	uint32 uiSeek = 0;
-	for (auto pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : getEntries())
 	{
-		uint32 uiEntryByteCountPadded = IMGFormat::getEntryPaddedSize(pIMGEntry->getEntrySize());
+		uint32 uiEntryByteCountPadded = pIMGEntry->getPaddedEntrySize();
 
 		m_reader.setSeek(pIMGEntry->getEntryOffset());
 		m_writer.writeString(m_reader.readString(pIMGEntry->getEntrySize()), uiEntryByteCountPadded);
 
-		pIMGEntry->setEntryOffset(Math::convertBytesToSectors(uiSeek));
+		pIMGEntry->setEntryOffset(uiSeek);
 		uiSeek += uiEntryByteCountPadded;
 
 		Events::trigger(TASK_PROGRESS);
@@ -114,7 +115,7 @@ void					IMGFormatVersion1::_serialize(void)
 	}
 
 	// write DIR data
-	for (auto pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : getEntries())
 	{
 		m_writer.writeUint32(pIMGEntry->getEntryOffsetInSectors());
 		m_writer.writeUint32(pIMGEntry->getEntrySizeInSectors());
@@ -131,5 +132,9 @@ void					IMGFormatVersion1::_serialize(void)
 	if (m_writer.getStreamType() == DATA_STREAM_FILE)
 	{
 		m_writer.close(); // optionally called here, DataWriter::close() will be called by Format too.
+
+		string strInputDIRFilePath = strDIRFilePathOut.substr(0, strDIRFilePathOut.length() - 5);
+		File::removeFile(strInputDIRFilePath);
+		File::renameFile(strDIRFilePathOut, strInputDIRFilePath);
 	}
 }

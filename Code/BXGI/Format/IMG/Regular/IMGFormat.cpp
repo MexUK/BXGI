@@ -105,7 +105,7 @@ void				IMGFormat::_readMetaData(void)
 	};
 
 	string
-		strFirst20Bytes = m_reader.readString(21),
+		strFirst20Bytes = m_reader.readString(20),
 		strFirst4Bytes = strFirst20Bytes.substr(0, 4);
 	uint32
 		uiSecond4BytesUi = String::unpackUint32(strFirst20Bytes.substr(4, 4), false);
@@ -331,29 +331,19 @@ void		IMGFormat::unserializeAppDataComponents(void) // todo - make virtual
 // app-level-data unserialization
 void		IMGFormat::unserializERWVersions(void) // todo fix name(s) letter case
 {
-	bool bUseNewReader = getVersion() == IMG_1 && m_reader.getStreamType() == DATA_STREAM_FILE;
-	DataReader *pDataReader = bUseNewReader ? new DataReader : &m_reader;
-
-	if (bUseNewReader) // todo - IMG_1 and data stream memory
+	if (m_reader.getStreamType() == DATA_STREAM_FILE && m_uiIMGVersion == IMG_1)
 	{
-		//pDataReader->close(); // close handle to DIR file
-
-		pDataReader->setStreamType(DATA_STREAM_FILE);
-		pDataReader->setFilePath(getIMGFilePath());
-		pDataReader->open(true); // open handle to IMG file (handle is closed in Format::unserializeVia*() methods
+		m_reader.reset();
+		m_reader.setFilePath(getIMGFilePath());
+		m_strFilePath = getIMGFilePath();
+		m_reader.open(true); // open handle to IMG file (handle is closed in Format::unserializeVia*() methods
 	}
 
 	for (IMGEntry *pIMGEntry : getEntries())
 	{
-		pIMGEntry->unserializeRWVersion(pDataReader);
+		pIMGEntry->unserializeRWVersion(&m_reader);
 
 		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
-	}
-
-	if (bUseNewReader) // todo - IMG_1 and data stream memory
-	{
-		pDataReader->close();
-		delete pDataReader;
 	}
 }
 
