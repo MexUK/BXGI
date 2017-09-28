@@ -9,5 +9,6 @@ enum bxgi::EIMGVersion
 	IMG_1,
 	IMG_2,
 	IMG_3,
-	IMG_FASTMAN92
+	IMG_FASTMAN92,
+	IMG_STORIES
 };

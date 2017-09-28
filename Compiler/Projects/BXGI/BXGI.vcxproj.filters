@@ -828,6 +828,9 @@
     <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersionFastman92.cpp">
       <Filter>Source Files\Format\IMG\Regular</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersionStories.cpp">
+      <Filter>Source Files\Format\IMG\Regular</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\BXGI\Event\EEvent.h">
@@ -1555,6 +1558,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\Raw\IMGEntry_Version2.h">
       <Filter>Header Files\Format\IMG\Regular\Raw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersionStories.h">
+      <Filter>Header Files\Format\IMG\Regular</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

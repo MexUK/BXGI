@@ -185,6 +185,7 @@
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersion2.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersion3.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersionFastman92.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersionStories.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\Raw\IMGEntry_Version2.h" />
     <ClInclude Include="..\..\..\Code\BXGI\nsbxgi.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Event\EEvent.h" />
@@ -400,6 +401,7 @@
     <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersion2.cpp" />
     <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersion3.cpp" />
     <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersionFastman92.cpp" />
+    <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersionStories.cpp" />
     <ClCompile Include="..\..\..\Code\BXGI\Format\RW\RWSectionDepthData.cpp" />
     <ClCompile Include="..\..\..\Code\BXGI\Format\RW\TextureEntry.cpp" />
     <ClCompile Include="..\..\..\Code\BXGI\Format\RW\Entries\RWEntry_BinMeshPLG_Mesh.cpp" />

@@ -181,6 +181,7 @@ namespace bxgi
 	class IMGFormatVersion2;
 	class IMGFormatVersion3;
 	class IMGFormatVersionFastman92;
+	class IMGFormatVersionStories;
 	class IMGManager;
 	enum EIMGEntryProperty;
 	enum EIMGVersion;
