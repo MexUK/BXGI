@@ -39,6 +39,7 @@ public:
 	inline uint32			getEntryOffset(void) { return m_uiEntryOffset; } // in bytes
 	void					setEntryOffsetInSectors(uint32 uiEntryOffsetInSectors) { m_uiEntryOffset = bxcf::Math::convertSectorsToBytes(uiEntryOffsetInSectors); } // in sectors (1 sector = 2048 bytes)
 	inline uint32			getEntryOffsetInSectors(void) { return bxcf::Math::convertBytesToSectors(m_uiEntryOffset); } // in sectors (1 sector = 2048 bytes)
+	uint32					getUndecryptedEntryOffset(void);
 
 	void					setEntrySize(uint32 uiEntrySize); // in bytes
 	inline uint32			getEntrySize(void) { return m_uiEntrySize; } // in bytes

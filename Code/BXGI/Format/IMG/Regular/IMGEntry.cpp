@@ -1,5 +1,6 @@
 #include "IMGEntry.h"
 #include "Format/IMG/Regular/IMGManager.h"
+#include "Format/IMG/Regular/IMGFormatVersion3.h"
 #include "Static/Path.h"
 #include "Static/File.h"
 #include "Static/Debug.h"
@@ -66,6 +67,11 @@ void					IMGEntry::setEntrySize(uint32 uiEntrySize)
 uint32					IMGEntry::getPaddedEntrySize(void)
 {
 	return Math::convertSectorsToBytes(Math::convertBytesToSectors(m_uiEntrySize));
+}
+
+uint32					IMGEntry::getUndecryptedEntryOffset(void)
+{
+	return m_uiEntryOffset - (((IMGFormatVersion3*)m_pIMGFile)->getUndecryptedPositionOffset());
 }
 
 void					IMGEntry::unserializeRWVersion(DataReader *pDataReader, string strFilePath, string& strUncompressedEntryData)

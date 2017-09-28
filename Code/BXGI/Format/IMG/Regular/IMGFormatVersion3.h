@@ -11,4 +11,10 @@ public:
 
 	void					_unserialize(void);
 	void					_serialize(void);
+
+	void					setUndecryptedPositionOffset(int32 iUndecryptedPositionOffset) { m_iUndecryptedPositionOffset = iUndecryptedPositionOffset; }
+	int32					getUndecryptedPositionOffset(void) { return m_iUndecryptedPositionOffset; }
+
+private:
+	int32					m_iUndecryptedPositionOffset;
 };

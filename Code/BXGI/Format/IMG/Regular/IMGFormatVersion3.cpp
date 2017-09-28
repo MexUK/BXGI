@@ -10,17 +10,21 @@
 #include "../BXCF/Event/EEvent.h"
 #include "../BXGI/Event/EEvent.h"
 
+#include "Static/Debug.h"
+
 using namespace std;
 using namespace bxcf;
 using namespace bxgi;
 
 IMGFormatVersion3::IMGFormatVersion3(void) :
-	IMGFormat(IMG_3)
+	IMGFormat(IMG_3),
+	m_iUndecryptedPositionOffset(0)
 {
 }
 
 IMGFormatVersion3::IMGFormatVersion3(string strFilePathOrData, bool bParam1IsFilePath) :
-	IMGFormat(IMG_3, strFilePathOrData, bParam1IsFilePath)
+	IMGFormat(IMG_3, strFilePathOrData, bParam1IsFilePath),
+	m_iUndecryptedPositionOffset(0)
 {
 }
 
@@ -89,6 +93,8 @@ void					IMGFormatVersion3::_unserialize(void)
 			rvecIMGEntries[i]->setEntryExtension(String::toUpperCase(Path::getFileExtension(rvecIMGEntries[i]->getEntryName())));
 			Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 		}
+
+		setUndecryptedPositionOffset((strIMGHeaderUnencrypted.length() + strIMGTableUnencrypted.length()) - (strIMGHeaderEncrypted.length() + strIMGTableEncrypted.length()));
 
 		// restore
 		//pDataReader->setStreamType(ePreviousStreamType);
@@ -167,6 +173,7 @@ void					IMGFormatVersion3::_serialize(void)
 		// write IMG data - IMG header
 		EDataStreamType ePreviousStreamType = m_writer.getStreamType();
 		m_writer.setStreamType(DATA_STREAM_MEMORY);
+		m_writer.reset();
 
 		uint32 uiTableByteCount = (uint32)(ceil(((float)((16 * getEntryCount()) + uiNamesLength)) / 2048.0) * 2048.0);
 
@@ -178,11 +185,12 @@ void					IMGFormatVersion3::_serialize(void)
 		m_writer.writeUint16(0);
 
 		// IMG file - table
+		i = 0;
 		for (IMGEntry *pIMGEntry : getEntries())
 		{
 			m_writer.writeUint32(0);
 			m_writer.writeUint32(pIMGEntry->getRageResourceType() == nullptr ? 0 : pIMGEntry->getRageResourceType()->getIdentifier());
-			m_writer.writeUint32(pIMGEntry->getEntryOffsetInSectors());
+			m_writer.writeUint32(vecNewEntryPositions[i++]);
 			m_writer.writeUint16(pIMGEntry->getEntrySizeInSectors());
 
 			uint32 uiRemainder = pIMGEntry->getEntrySize() % 2048;
@@ -208,13 +216,12 @@ void					IMGFormatVersion3::_serialize(void)
 		// encrypt header and table
 		string strData = m_writer.getData();
 
-		string strHeader = IMGManager::encryptVersion3IMGString(strData.substr(0, 32));
-		string strTables = IMGManager::encryptVersion3IMGString(String::zeroPad(strData.substr(20), (strData.length() - 20) + (2048 - ((strData.length() - 20) % 2048))));
+		string strHeader = IMGManager::encryptVersion3IMGString(strData.substr(0, 32)).substr(0, 20);
+		string strTables = IMGManager::encryptVersion3IMGString(String::zeroPad(strData.substr(20), strData.length())).substr(0, strData.length() - 20);
 
 		m_writer.setStreamType(ePreviousStreamType);
 		m_writer.setSeek(0);
 		m_writer.writeStringRef(strHeader);
-		m_writer.setSeek(20);
 		m_writer.writeStringRef(strTables);
 
 		// IMG file - body
@@ -222,7 +229,7 @@ void					IMGFormatVersion3::_serialize(void)
 		for (IMGEntry *pIMGEntry : getEntries())
 		{
 			m_reader.setSeek(pIMGEntry->getEntryOffset());
-			m_writer.writeString(m_reader.readString(pIMGEntry->getEntrySize()));
+			m_writer.writeString(m_reader.readString(pIMGEntry->getEntrySize()), pIMGEntry->getPaddedEntrySize());
 
 			pIMGEntry->setEntryOffsetInSectors(vecNewEntryPositions[i++]);
 
