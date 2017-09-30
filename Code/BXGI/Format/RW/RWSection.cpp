@@ -173,6 +173,7 @@ bool				RWSection::doesRWSectionContainStruct_BeforeInit(ERWSection ERWSectionVa
 		|| ERWSectionValue == RW_SECTION_GEOMETRY
 		|| ERWSectionValue == RW_SECTION_GEOMETRY_LIST
 		|| ERWSectionValue == RW_SECTION_FRAME_LIST
+		|| ERWSectionValue == RW_SECTION_LIGHT
 		|| ERWSectionValue == RW_SECTION_MATERIAL
 		|| ERWSectionValue == RW_SECTION_MATERIAL_LIST
 		|| ERWSectionValue == RW_SECTION_TEXTURE

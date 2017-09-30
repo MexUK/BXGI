@@ -105,6 +105,7 @@ void				RWSectionContainer::_unserialize(void)
 		*/
 		pRWSection->setRWFormat(m_pRWFormat);
 		pRWSection->setSectionId(ERWSectionValue);
+		//Debug::log("SECTION ID FOR RW PARSER = " + String::toString(ERWSectionValue));
 		pRWSection->setSectionSize(uiRWSectionSize);
 		pRWSection->setStructSectionSize(uiStructSectionSize);
 		pRWSection->setSectionRWVersion(uiRWSectionRWVersion);
@@ -136,6 +137,7 @@ void				RWSectionContainer::_unserialize(void)
 
 		// reset section depth
 		/*
+		todo
 		if (pParentRWSection->getSectionCountByType(RW_SECTION_EXTENSION) == 31) // temp
 		{
 			int a = 1;

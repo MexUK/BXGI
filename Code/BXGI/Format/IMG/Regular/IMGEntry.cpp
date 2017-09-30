@@ -28,6 +28,7 @@ IMGEntry::IMGEntry(void) :
 	m_bProtectedEntry(false),
 	m_uiFileCreationDate(0),
 	m_uiCompressionAlgorithm(COMPRESSION_NONE),
+	m_uiEncryptionAlgorithm(ENCRYPTION_NONE),
 	m_uiCompressionLevel(0),
 	m_bIsEncrypted(false),
 	m_pRageResourceType(nullptr),
@@ -384,6 +385,7 @@ string					IMGEntry::getEntrySubData(uint32 uiStart, uint32 uiLength)
 		uint32 uiLength2 = (uint32) ceil((float32)uiLength / (float32) ucZLibBlockSize) * ucZLibBlockSize;
 		uint32 uiStartOffset = uiStart - uiStart2;
 		/*
+		todo
 		Debug::log("uiStart: " + String::toString(uiStart));
 		Debug::log("uiLength: " + String::toString(uiLength));
 		Debug::log("uiStart2: " + String::toString(uiStart2));
@@ -533,16 +535,19 @@ IMGEntry*				IMGEntry::clone(IMGFormat *pIMGFile)
 
 bool					IMGEntry::canBeRead(void)
 {
-	if (getIMGFile()->isEncrypted())
+	// container encryption
+	if (getIMGFile()->isEncrypted() && getIMGFile()->getEncryptionType() == ENCRYPTION_UNKNOWN)
 	{
 		return false;
 	}
 
-	if (isEncrypted())
+	// container encryption
+	if (isEncrypted() && getEncryptionAlgorithmId() == ENCRYPTION_UNKNOWN)
 	{
 		return false;
 	}
 
+	// container compression
 	if (isCompressed() && getCompressionAlgorithmId() == COMPRESSION_UNKNOWN)
 	{
 		return false;

@@ -49,7 +49,7 @@ void							RWSection_Geometry::_unserialize(void)
 	m_uiVertexCount = pDataReader->readUint32();
 	m_uiFrameCount = pDataReader->readUint32();
 
-	if (RWVersion::unpackVersionStamp(m_uiSectionRWVersion) < 0x33000 )
+	if (RWVersion::unpackVersionStamp(m_uiSectionRWVersion) < 0x34000)
 	{
 		m_fAmbientColour = pDataReader->readFloat32();
 		m_fDiffuseColour = pDataReader->readFloat32();

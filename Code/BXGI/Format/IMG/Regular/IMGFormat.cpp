@@ -197,6 +197,7 @@ void				IMGFormat::_readMetaData(void)
 			m_uiIMGVersion = IMG_3;
 			m_uiEntryCount = String::unpackUint32(strFirst16Bytes.substr(8, 4), false);
 			m_bEncrypted = bEncrypted;
+			m_uiEncryptionType = ENCRYPTION_GTA_V3_IMG;
 			checkToCloseReader();
 			return;
 		}
@@ -799,11 +800,10 @@ unordered_map<IMGEntry*, string>	IMGFormat::getEntriesData(vector<IMGEntry*>& ve
 	{
 		return umapEntriesData;
 	}
-	
-	uint32 uiEntryIndex = 0;
+
 	for (IMGEntry *pIMGEntry : vecEntries)
 	{
-		umapEntriesData.insert(make_pair(pIMGEntry, readEntryContent(uiEntryIndex++)));
+		umapEntriesData.insert(make_pair(pIMGEntry, readEntryContent(getIndexByEntry(pIMGEntry))));
 	}
 	m_reader.close();
 	
@@ -1069,17 +1069,15 @@ void					IMGFormat::exportMultiple(vector<IMGEntry*>& vecIMGEntries, string strF
 	{
 		return;
 	}
-	
-	uint32 uiEntryIndex = 0;
+
 	for (IMGEntry *pIMGEntry : vecIMGEntries)
 	{
 		if (!pIMGEntry->canBeRead())
 		{
-			uiEntryIndex++;
 			continue;
 		}
 		
-		File::storeFile(strFolderPath + pIMGEntry->getEntryName(), readEntryContent(uiEntryIndex++), false, true);
+		File::storeFile(strFolderPath + pIMGEntry->getEntryName(), readEntryContent(getIndexByEntry(pIMGEntry)), false, true);
 		
 		Events::trigger(TASK_PROGRESS);
 	}

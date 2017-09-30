@@ -2,6 +2,7 @@
 
 #include "nsbxgi.h"
 #include "Compression/ECompressionAlgorithm.h"
+#include "Encryption/EEncryptionAlgorithm.h"
 #include "Format/EFileType.h"
 #include "Format/IMG/Regular/Raw/IMGEntry_Version1.h"
 #include "Format/IMG/Regular/Raw/IMGEntry_Version2.h"
@@ -69,15 +70,19 @@ public:
 	uint8					getCompression(void) { return m_uiFlags & 0xF; } // old
 	//bool					isCompressed(void) { return getCompression() != 0; } // old
 
-	void					setCompressionAlgorithmId(bxcf::ECompressionAlgorithm ECompressionAlgorithmValue) { m_uiCompressionAlgorithm = ECompressionAlgorithmValue; }
-	bxcf::ECompressionAlgorithm		getCompressionAlgorithmId(void) { return m_uiCompressionAlgorithm; }
 	inline bool				isCompressed(void) { return m_uiCompressionAlgorithm != bxcf::COMPRESSION_UNKNOWN && m_uiCompressionAlgorithm != bxcf::COMPRESSION_NONE; }
+
+	void							setCompressionAlgorithmId(bxcf::ECompressionAlgorithm ECompressionAlgorithmValue) { m_uiCompressionAlgorithm = ECompressionAlgorithmValue; }
+	bxcf::ECompressionAlgorithm		getCompressionAlgorithmId(void) { return m_uiCompressionAlgorithm; }
 
 	void					setCompressionLevel(uint32 uiCompressionLevel) { m_uiCompressionLevel = uiCompressionLevel; }
 	uint32					getCompressionLevel(void) { return m_uiCompressionLevel; }
 
 	void					setEncrypted(bool bIsEncrypted) { m_bIsEncrypted = bIsEncrypted; }
 	bool					isEncrypted(void) { return m_bIsEncrypted; }
+
+	void							setEncryptionAlgorithmId(bxcf::EEncryptionAlgorithm ECompressionAlgorithmValue) { m_uiEncryptionAlgorithm = ECompressionAlgorithmValue; }
+	bxcf::EEncryptionAlgorithm		getEncryptionAlgorithmId(void) { return m_uiEncryptionAlgorithm; }
 
 	void					setNewEntry(bool bNewEntry) { m_bNewEntry = bNewEntry; }
 	bool					isNewEntry(void) { return m_bNewEntry; }
@@ -154,6 +159,7 @@ private:
 	uint8					m_bIsEncrypted : 1;
 	uint32					m_uiFileCreationDate;
 	bxcf::ECompressionAlgorithm		m_uiCompressionAlgorithm;
+	bxcf::EEncryptionAlgorithm		m_uiEncryptionAlgorithm;
 	uint32					m_uiCompressionLevel;
 	uint32					m_uiRawVersion;
 	bxcf::fileType::EFileType	m_uiFileType;
