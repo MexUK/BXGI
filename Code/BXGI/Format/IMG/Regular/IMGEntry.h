@@ -61,25 +61,21 @@ public:
 	void					setFlags(uint32 usFlags) { m_uiFlags = usFlags; }
 	uint32					getFlags(void) { return m_uiFlags; }
 
-	void					setUncompressedSize(uint32 uiUncompressedSize) { m_uiUncompressedSize = uiUncompressedSize; } // in bytes
-	uint32					getUncompressedSize(void) { return m_uiUncompressedSize; } // in bytes
-	void					setUncompressedSizeInSectors(uint32 uiUncompressedSizeInSectors) { m_uiUncompressedSize = bxcf::Math::convertSectorsToBytes(uiUncompressedSizeInSectors); } // in sectors (1 sector = 2048 bytes)
-	uint32					getUncompressedSizeInSectors(void) { return bxcf::Math::convertBytesToSectors(m_uiUncompressedSize); } // in sectors (1 sector = 2048 bytes)
+	void							setUncompressedSize(uint32 uiUncompressedSize) { m_uiUncompressedSize = uiUncompressedSize; } // in bytes
+	uint32							getUncompressedSize(void) { return m_uiUncompressedSize; } // in bytes
+	void							setUncompressedSizeInSectors(uint32 uiUncompressedSizeInSectors) { m_uiUncompressedSize = bxcf::Math::convertSectorsToBytes(uiUncompressedSizeInSectors); } // in sectors (1 sector = 2048 bytes)
+	uint32							getUncompressedSizeInSectors(void) { return bxcf::Math::convertBytesToSectors(m_uiUncompressedSize); } // in sectors (1 sector = 2048 bytes)
 
-	void					setCompression(uint8 ucCompressionMethod) { m_uiFlags = (m_uiFlags & 4294967280) | ucCompressionMethod; } // old - todo - remove?
-	uint8					getCompression(void) { return m_uiFlags & 0xF; } // old
-	//bool					isCompressed(void) { return getCompression() != 0; } // old
-
-	inline bool				isCompressed(void) { return m_uiCompressionAlgorithm != bxcf::COMPRESSION_UNKNOWN && m_uiCompressionAlgorithm != bxcf::COMPRESSION_NONE; }
+	inline bool						isCompressed(void) { return m_uiCompressionAlgorithm != bxcf::COMPRESSION_UNKNOWN && m_uiCompressionAlgorithm != bxcf::COMPRESSION_NONE; }
 
 	void							setCompressionAlgorithmId(bxcf::ECompressionAlgorithm ECompressionAlgorithmValue) { m_uiCompressionAlgorithm = ECompressionAlgorithmValue; }
 	bxcf::ECompressionAlgorithm		getCompressionAlgorithmId(void) { return m_uiCompressionAlgorithm; }
 
-	void					setCompressionLevel(uint32 uiCompressionLevel) { m_uiCompressionLevel = uiCompressionLevel; }
-	uint32					getCompressionLevel(void) { return m_uiCompressionLevel; }
+	void							setCompressionLevel(uint32 uiCompressionLevel) { m_uiCompressionLevel = uiCompressionLevel; }
+	uint32							getCompressionLevel(void) { return m_uiCompressionLevel; }
 
-	void					setEncrypted(bool bIsEncrypted) { m_bIsEncrypted = bIsEncrypted; }
-	bool					isEncrypted(void) { return m_bIsEncrypted; }
+	void							setEncrypted(bool bIsEncrypted) { m_bIsEncrypted = bIsEncrypted; }
+	bool							isEncrypted(void) { return m_bIsEncrypted; }
 
 	void							setEncryptionAlgorithmId(bxcf::EEncryptionAlgorithm ECompressionAlgorithmValue) { m_uiEncryptionAlgorithm = ECompressionAlgorithmValue; }
 	bxcf::EEncryptionAlgorithm		getEncryptionAlgorithmId(void) { return m_uiEncryptionAlgorithm; }
@@ -108,11 +104,13 @@ public:
 	void					setRWVersion(uint32 uiRWVersion) { m_uiRawVersion = uiRWVersion; } // todo
 	uint32					getRWVersion(void) { return m_uiRawVersion; } // todo
 
-	void					setEntryData(std::string& strEntryData, bool bIsNew = false);
-	std::string				getEntryData(void);
+	void					setEntryData(std::string& strEntryData, bool bIsNew = false);	// takes uncmpressed data, and stores it compressed if the entry is marked as compressed
+	std::string				getEntryData(void);												// returns uncompressed data if the entry is marked as compressed
 	std::string				getEntrySubData(uint32 uiStart, uint32 uiLength);
-	//std::string				getEntryDecompressedData(void);
-	//std::string				getEntryCompressedData(void);
+
+	std::string				compressXBOXIMGEntry(std::string& strEntryData);
+	std::string				decompressXBOXIMGEntry(std::string& strEntryData);
+	std::string				addXBOXCompressionMetaData(std::string& strCompressedEntryData);
 
 	bool					canBeRead(void);
 
@@ -153,16 +151,16 @@ private:
 			uint32						m_uiUncompressedSize; // in bytes
 		};
 	};
-	uint8					m_bNewEntry : 1;
-	uint8					m_bReplacedEntry : 1;
-	uint8					m_bProtectedEntry : 1;
-	uint8					m_bIsEncrypted : 1;
-	uint32					m_uiFileCreationDate;
+	uint8							m_bNewEntry					: 1;
+	uint8							m_bReplacedEntry			: 1;
+	uint8							m_bProtectedEntry			: 1;
+	uint8							m_bIsEncrypted				: 1;
+	uint32							m_uiFileCreationDate;
 	bxcf::ECompressionAlgorithm		m_uiCompressionAlgorithm;
 	bxcf::EEncryptionAlgorithm		m_uiEncryptionAlgorithm;
-	uint32					m_uiCompressionLevel;
-	uint32					m_uiRawVersion;
-	bxcf::fileType::EFileType	m_uiFileType;
+	uint32							m_uiCompressionLevel;
+	uint32							m_uiRawVersion;
+	bxcf::fileType::EFileType		m_uiFileType;
 };
 
 inline void					bxgi::IMGEntry::unserializeVersion1(bxgi::RG_IMGEntry_Version1 *pRGIMGEntry)

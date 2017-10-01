@@ -236,9 +236,36 @@ void				IMGFormat::_unserializeBefore(void)
 
 void				IMGFormat::_unserializeAfter(void)
 {
+	if (m_uiIMGVersion == IMG_1)
+	{
+		checkXBOXCompressionStatusesForEntries();
+	}
 	if (m_uiIMGVersion != IMG_3)
 	{
 		unserializERWVersions(); // todo - fix function name - capital e in name
+	}
+}
+
+void				IMGFormat::checkXBOXCompressionStatusesForEntries(void)
+{
+	if (m_reader.getStreamType() == DATA_STREAM_FILE && m_uiIMGVersion == IMG_1)
+	{
+		m_reader.reset();
+		m_reader.setFilePath(getIMGFilePath());
+		m_strFilePath = getIMGFilePath();
+		m_reader.open(true); // open handle to IMG file (handle is closed in Format::unserializeVia*() methods
+	}
+
+	for (IMGEntry *pIMGEntry : getEntries())
+	{
+		m_reader.setSeek(pIMGEntry->getEntryOffset());
+		if (m_reader.readUint32() == 0x67A3A1CE)
+		{
+			// entry is compressed with LZO 1X 999
+			pIMGEntry->setCompressionAlgorithmId(COMPRESSION_LZO_1X_999);
+		}
+
+		//Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
 	}
 }
 

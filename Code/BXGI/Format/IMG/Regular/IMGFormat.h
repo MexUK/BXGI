@@ -142,9 +142,6 @@ public:
 	bool											doesContainEntryWithUnknownRWVersion(void); // for IMG versions 1 and 2 - todo - should it be changed to without RW to match function below - check func bodys
 	std::vector<bxgi::IMGEntry*>					getUnknownVersionEntries(void); // for IMG versions 1 and 2
 
-private:
-	void											unserializeAppDataComponents(void);
-
 protected:
 	uint32											getVersion3NamesLength(void);
 
@@ -152,6 +149,10 @@ private:
 	void											addEntryExtensionCount(std::string strEntryExtension);
 	void											removeEntryExtensionCount(std::string strEntryExtension);
 	void											loadEntryExtensionCounts(void);
+
+	void											unserializeAppDataComponents(void);
+
+	void											checkXBOXCompressionStatusesForEntries(void);
 
 private:
 	bxgi::EIMGVersion								m_uiIMGVersion;
