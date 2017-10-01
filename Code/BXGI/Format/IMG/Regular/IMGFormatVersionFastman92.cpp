@@ -80,7 +80,7 @@ void					IMGFormatVersionFastman92::_unserialize(void)
 		pIMGEntry->setIMGFile(this);
 		pIMGEntry->unserializeVersionFastman92(pRawIMGActiveEntry++);
 		pIMGEntry->setEntryExtension(String::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())));
-		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
+		Events::trigger(UNSERIALIZE_IMG_ENTRY, (IMGFormat*)this);
 	}
 
 	// clean up

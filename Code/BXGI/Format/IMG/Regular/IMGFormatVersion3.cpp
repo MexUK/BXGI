@@ -80,7 +80,7 @@ void					IMGFormatVersion3::_unserialize(void)
 			rvecIMGEntries[i] = pIMGEntry;
 			pIMGEntry->setIMGFile(this);
 			pIMGEntry->unserializeVersion3(pRGIMGActiveEntry++);
-			Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
+			Events::trigger(UNSERIALIZE_IMG_ENTRY, (IMGFormat*)this);
 		}
 
 		// read IMG entry names
@@ -91,7 +91,7 @@ void					IMGFormatVersion3::_unserialize(void)
 		{
 			rvecIMGEntries[i]->setEntryName(pDataReader2->readStringUntilZero());
 			rvecIMGEntries[i]->setEntryExtension(String::toUpperCase(Path::getFileExtension(rvecIMGEntries[i]->getEntryName())));
-			Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
+			Events::trigger(UNSERIALIZE_IMG_ENTRY, (IMGFormat*)this);
 		}
 
 		setUndecryptedPositionOffset((strIMGHeaderUnencrypted.length() + strIMGTableUnencrypted.length()) - (strIMGHeaderEncrypted.length() + strIMGTableEncrypted.length()));
@@ -122,7 +122,7 @@ void					IMGFormatVersion3::_unserialize(void)
 			rvecIMGEntries[i] = pIMGEntry;
 			pIMGEntry->setIMGFile(this);
 			pIMGEntry->unserializeVersion3(pRGIMGActiveEntry++);
-			Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
+			Events::trigger(UNSERIALIZE_IMG_ENTRY, (IMGFormat*)this);
 		}
 
 		// read IMG entry names
@@ -130,7 +130,7 @@ void					IMGFormatVersion3::_unserialize(void)
 		{
 			rvecIMGEntries[i]->setEntryName(m_reader.readStringUntilZero());
 			rvecIMGEntries[i]->setEntryExtension(String::toUpperCase(Path::getFileExtension(rvecIMGEntries[i]->getEntryName())));
-			Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
+			Events::trigger(UNSERIALIZE_IMG_ENTRY, (IMGFormat*)this);
 		}
 
 		// clean up
