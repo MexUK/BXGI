@@ -32,7 +32,8 @@ class bxgi::DATPathFormat : public bxcf::Format
 {
 public:
 	DATPathFormat(void);
-	
+	DATPathFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) : bxcf::Format(strFilePathOrData, bStringIsFilePath, true, bxcf::LITTLE_ENDIAN) {}
+
 	void												unload(void);
 
 	void												setPathsFormat(bxgi::EDATPathFormat eFormat) { m_header.m_uiPathsFormat = eFormat; }
@@ -57,8 +58,8 @@ public:
 	*/
 
 private:
-	void												unserialize(void);
-	void												serialize(void);
+	void												_unserialize(void);
+	void												_serialize(void);
 
 	void												unserializeDefault(void);
 	void												unserializeFastman92(void);

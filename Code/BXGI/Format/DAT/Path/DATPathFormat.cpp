@@ -23,7 +23,7 @@ void							DATPathFormat::unload(void)
 {
 }
 
-void							DATPathFormat::unserialize(void)
+void							DATPathFormat::_unserialize(void)
 {
 	setPathsFormat(detectPathsFormat());
 	switch (getPathsFormat())
@@ -33,7 +33,7 @@ void							DATPathFormat::unserialize(void)
 	}
 }
 
-void							DATPathFormat::serialize(void)
+void							DATPathFormat::_serialize(void)
 {
 	switch (getPathsFormat())
 	{
