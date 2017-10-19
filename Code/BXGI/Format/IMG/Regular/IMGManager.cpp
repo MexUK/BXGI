@@ -27,7 +27,7 @@ void			IMGManager::uninit(void)
 }
 
 // utility
-EIMGVersion		IMGManager::detectIMGVersion(string& strIMGFilePath, string& strHeader16B, bool& bIsEncryptedOut) // todo - still used?
+EIMGVersion		IMGManager::detectIMGVersion(string& strIMGFilePath, string strHeader16B, bool& bIsEncryptedOut) // todo - still used?
 {
 	bIsEncryptedOut = false;
 

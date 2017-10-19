@@ -19,7 +19,7 @@ public:
 
 	static uint32						getIMGEntryCount(std::string& strIMGFilePath, bxgi::EIMGVersion EIMGVersion = IMG_UNKNOWN);
 
-	static bxgi::EIMGVersion			detectIMGVersion(std::string& strIMGFilePath, std::string& strHeader16B = bxcf::g_strBlankString, bool& bIsEncryptedOut = bxcf::g_bDefaultBool);
+	static bxgi::EIMGVersion			detectIMGVersion(std::string& strIMGFilePath, std::string strHeader16B = "", bool& bIsEncryptedOut = bxcf::g_bDefaultBool);
 	static bool							detectIMGEncryptionState(std::string& strIMGFilePath);
 
 	static std::string					encryptVersion3IMGString(std::string strData);
