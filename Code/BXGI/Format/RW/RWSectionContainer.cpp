@@ -10,6 +10,8 @@
 #include "Stream/DataWriter.h"
 #include "Static/Debug.h"
 #include "Format/RW/RWFormat.h"
+#include "Event/Events.h"
+#include "Event/EEvent.h"
 
 using namespace std;
 using namespace bxcf;
@@ -119,6 +121,8 @@ void				RWSectionContainer::_unserialize(void)
 		pRWSection->_unserialize();
 		uint64 uiByteCountAfter = pDataReader->getSeek();
 		
+		Events::trigger(UNSERIALIZE_RW_SECTION, pRWSection);
+
 		uint32 uiByteCountDifference = (uint32)(uiByteCountAfter - uiByteCountBefore);
 		for (unsigned long i = 0; i < uiSectionDepth; i++)
 		{
