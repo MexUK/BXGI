@@ -42,7 +42,7 @@ string						RWVersion::getGamesAsString(void)
 	{
 		vecGames.push_back(pGameManager->getPlatformedGameText(uiPlatformedGame));
 	}
-	return String::join(vecGames, ",");
+	return String::join(vecGames, ", ");
 }
 
 // pack/unpack version
