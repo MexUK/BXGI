@@ -216,10 +216,8 @@ void							RWSection_TextureNative::unserializeHeader_PS2(void)
 	pDataReader->readUint32();
 	pDataReader->readUint32();
 
-	Vec2u vecImageSize;
 	m_vecImageSize.x = pDataReader->readUint32();
 	m_vecImageSize.y = pDataReader->readUint32();
-	setImageSize(vecImageSize);
 	setBPP((uint8)pDataReader->readUint32());
 	setTXDRasterDataFormat(pDataReader->readUint32());
 	uint32 uiTex0_a = pDataReader->readUint32();
@@ -550,10 +548,10 @@ string							RWSection_TextureNative::unserializeString(void)
 	uint32 uiSectionSize = pDataReader->readUint32();
 	pDataReader->readUint32();
 
-	pDataReader->setPeek(true);
+	//pDataReader->setPeek(true);
 	uint64 uiPreviousSeek = pDataReader->getSeek();
 	string strData = pDataReader->readStringUntilZero();
-	pDataReader->setPeek(false);
+	//pDataReader->setPeek(false);
 	pDataReader->setSeek(uiPreviousSeek);
 
 	uint32 uiStringLength;
