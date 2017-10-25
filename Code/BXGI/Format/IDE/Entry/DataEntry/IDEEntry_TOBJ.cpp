@@ -134,7 +134,7 @@ void			IDEEntry_TOBJ::unserialize(void)
 		m_vecDrawDistances.resize(m_uiClumpCount);
 		for (uint32 i = 0; i < m_uiClumpCount; i++)
 		{
-			m_vecDrawDistances[i] = pDataReader->readTokenFloat32();;
+			m_vecDrawDistances[i] = pDataReader->readTokenFloat32();
 		}
 		uiTokenIndex += m_uiClumpCount;
 

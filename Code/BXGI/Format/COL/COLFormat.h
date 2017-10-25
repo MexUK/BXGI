@@ -18,6 +18,8 @@ public:
 
 	void							unload(void);
 
+	void							_readMetaData(void) {} // todo
+
 	void							setCOLVersion(ECOLVersion uiCOLVersion);
 
 	std::vector<std::string>		getModelNames(void);
