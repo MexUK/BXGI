@@ -30,6 +30,8 @@ class bxgi::IMGEntry;
 class bxgi::IMGFormat : public bxcf::Format, public bxcf::VectorPool<bxgi::IMGEntry*>
 {
 public:
+	using bxcf::VectorPool<bxgi::IMGEntry*>::getEntryCount;
+
 	IMGFormat(void);
 	IMGFormat(EIMGVersion uiIMGVersion);
 	IMGFormat(EIMGVersion uiIMGVersion, std::string& strFilePathOrData, bool bStringIsFilePath = true);

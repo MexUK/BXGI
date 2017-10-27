@@ -13,6 +13,8 @@ class bxgi::COLVersion;
 class bxgi::COLFormat : public bxcf::Format, public bxcf::VectorPool<bxgi::COLEntry*>
 {
 public:
+	using bxcf::VectorPool<bxgi::COLEntry*>::getEntryCount;
+
 	COLFormat(void) : Format(true) {}
 	COLFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) : bxcf::Format(strFilePathOrData, bStringIsFilePath, true, bxcf::LITTLE_ENDIAN) {}
 

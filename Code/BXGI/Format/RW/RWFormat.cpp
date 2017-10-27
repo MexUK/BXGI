@@ -30,7 +30,7 @@ void					RWFormat::_unserialize(void)
 {
 	RWSectionContainer::_unserialize();
 
-	if (getEntryCount() > 0)
+	if (RWSectionContainer::getEntryCount() > 0)
 	{
 		setRWVersion(RWManager::get()->getVersionManager()->getEntryByVersionCC(getEntryByIndex(0)->getSectionRWVersion()));
 	}
@@ -53,7 +53,7 @@ void					RWFormat::_unserialize(void)
 void					RWFormat::_serialize(void)
 {
 	uint32 uiRWVersionCC;
-	if (getEntryCount() == 0)
+	if (RWSectionContainer::getEntryCount() == 0)
 	{
 		uiRWVersionCC = RWManager::get()->getVersionManager()->getEntryByVersionId(RW_3_4_0_3)->getRawVersion();
 	}

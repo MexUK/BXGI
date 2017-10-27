@@ -19,6 +19,8 @@ public:
 
 	std::map<SectionEnum, std::vector<EntryClass*>>&	getSectionEntries(void) { return m_umapSectionEntries; }
 
+	uint32												getEntryCount(void) { return 20; }
+
 	void												unserializeLine(void);
 
 	std::vector<std::string>							getModelNames(void);

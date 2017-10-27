@@ -18,6 +18,8 @@ public:
 
 	void									unload(void);
 
+	uint32									getEntryCount(void) { return 0; }
+
 	static bxgi::WDRBlock_Geometry*			convertIntermediateGeometryToWDRGeometry(bxgi::IntermediateGeometry *pGeneralGeometry);
 
 public:
