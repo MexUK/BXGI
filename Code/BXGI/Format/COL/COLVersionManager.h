@@ -7,6 +7,7 @@
 #include "Game/EGame.h"
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 class bxgi::COLVersion;
 
@@ -16,9 +17,10 @@ public:
 	void											init(void);
 	void											uninit(void);
 
-	COLVersion*									addVersion(ECOLVersion uiCOLVersion, std::string strVersionText, std::vector<EGame> vecGames = std::vector<EGame>());
+	COLVersion*										addVersion(ECOLVersion uiCOLVersion, std::string strVersionText, std::vector<EGame> vecGames = std::vector<EGame>());
 
 	std::string										getVersionText(uint32 uiRawVersion);
+	std::string										getGamesAsString(ECOLVersion uiCOLVersion);
 
 	bxgi::COLVersion*								getEntryByVersionId(bxgi::ECOLVersion ECOLVersionValue);
 

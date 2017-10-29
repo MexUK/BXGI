@@ -344,17 +344,17 @@ template<class FormatClass, class EntryClass, class DataEntryClass>
 bool						sortSectionLinesEntries_ObjectID(EntryClass *pFormatEntry1, EntryClass *pFormatEntry2) // todo - namespace
 {
 	// data lines
-	if (pFormatEntry1->getEntryType() == SECTION_LINES_ENTRY_DATA && pFormatEntry2->getEntryType() == SECTION_LINES_ENTRY_DATA)
+	if (pFormatEntry1->getEntryType() == bxgi::SECTION_LINES_ENTRY_DATA && pFormatEntry2->getEntryType() == bxgi::SECTION_LINES_ENTRY_DATA)
 	{
 		return ((DataEntryClass*)pFormatEntry1)->getObjectId() < ((DataEntryClass*)pFormatEntry2)->getObjectId();
 	}
 
 	// comments at top
-	if (pFormatEntry1->getEntryType() == SECTION_LINES_ENTRY_OTHER && pFormatEntry2->getEntryType() == SECTION_LINES_ENTRY_OTHER)
+	if (pFormatEntry1->getEntryType() == bxgi::SECTION_LINES_ENTRY_OTHER && pFormatEntry2->getEntryType() == bxgi::SECTION_LINES_ENTRY_OTHER)
 	{
 		return false;
 	}
-	else if (pFormatEntry1->getEntryType() == SECTION_LINES_ENTRY_OTHER)
+	else if (pFormatEntry1->getEntryType() == bxgi::SECTION_LINES_ENTRY_OTHER)
 	{
 		return true;
 	}

@@ -58,6 +58,21 @@ string											COLVersionManager::getVersionText(uint32 uiRawVersion)
 	}
 }
 
+// version games
+string								COLVersionManager::getGamesAsString(ECOLVersion uiCOLVersion)
+{
+	switch (uiCOLVersion)
+	{
+	case COL_1:		return "GTA III, GTA VC";
+	case COL_2:		return "GTA III, GTA VC, GTA SA (PS2)";
+	case COL_3:
+	case COL_4:
+					return "GTA III, GTA VC, GTA SA (PS2/PC/Xbox)";
+	default:
+					return "Unknown";
+	}
+}
+
 // entry fetching
 COLVersion*									COLVersionManager::getEntryByVersionId(ECOLVersion ECOLVersionValue)
 {

@@ -9,6 +9,7 @@
 class bxgi::DFFFormat : public bxgi::RWFormat
 {
 public:
+	DFFFormat(void) {}
 	DFFFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) : bxgi::RWFormat(strFilePathOrData, bStringIsFilePath) {}
 
 	bxgi::IntermediateModelFormat*									convertToIntermediateModelFormat(void);
