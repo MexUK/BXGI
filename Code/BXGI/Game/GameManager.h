@@ -19,7 +19,7 @@ public:
 
 	bxcf::VectorPool<bxgi::PlatformedGame*>&		getPlatformedGames(void) { return m_vecPlatformedGames; }
 
-	bxgi::Game*									addGame(bxgi::EGame uiGameId, std::string strGameName);
+	bxgi::Game*										addGame(bxgi::EGame uiGameId, std::string strGameName);
 	bxgi::PlatformedGame*							addPlatformedGame(bxgi::EPlatformedGame uiPlatformedGameId, std::string strGameName);
 
 	std::string										getGameName(bxgi::EGame uiGameId);

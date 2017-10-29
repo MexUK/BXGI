@@ -25,7 +25,10 @@ public:
 		std::vector<EIDESection>& vecTextureSections
 	);
 
-
-
 	static std::vector<std::string>		getIDEEntryNamesWithoutExtension(std::vector<std::string> vecIDEPaths, bool bModelNames = true, bool bTXDNames = true);
+
+	static std::string					getVersionText(uint32 uiFormatGames);
+
+	static std::vector<EGame>			getFormatGames(uint32 uiFormatGames);
+	static std::string					getFormatGamesAsString(uint32 uiFormatGames);
 };

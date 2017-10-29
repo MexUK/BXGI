@@ -10,6 +10,7 @@
 #include "Entry/IDEEntry_Other.h"
 #include "Entry/IDEEntry_Section.h"
 #include "Entry/IDEEntry_Data.h"
+#include "Format/IDE/Entry/DataEntry/IDEEntry_2DFX.h"
 #include <string>
 #include <vector>
 
@@ -57,7 +58,7 @@ std::vector<EntryClass2*>						bxgi::IDEFormat::getEntriesBySection(EIDESection 
 		std::vector<EntryClass2*> vecDerivedEntries;
 		for (EntryClass2* pIDEEntry : SectionLinesFormat::getEntriesBySection<EntryClass2>(EIDESectionValue))
 		{
-			if (((IDEEntry_2DFX*)pIDEEntry)->get2DFXType() == E2DFXTypeValue)
+			if (((bxgi::IDEEntry_2DFX*)pIDEEntry)->get2DFXType() == E2DFXTypeValue)
 			{
 				vecDerivedEntries.push_back(pIDEEntry);
 			}

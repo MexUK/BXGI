@@ -1,16 +1,18 @@
 #include "DATLoaderFormat.h"
 #include "DATLoaderEntry.h"
+#include "Static/String.h"
+#include "Static/StdVector.h"
 #include "Static/Path.h"
+#include "Static/File.h"
 #include "Format/IMG/Regular/IMGManager.h"
 #include "Format/IMG/Regular/IMGFormat.h"
 #include "Format/IDE/IDEManager.h"
 #include "Format/IDE/IDEFormat.h"
 #include "Format/IPL/IPLManager.h"
 #include "Format/IPL/IPLFormat.h"
-#include "Static/String.h"
 #include "Stream/DataReader.h"
-#include "Static/StdVector.h"
 #include "DATLoaderManager.h"
+#include "Game/EGame.h"
 
 using namespace std;
 using namespace bxcf;
@@ -19,6 +21,64 @@ using namespace bxgi;
 void					DATLoaderFormat::unload(void)
 {
 	removeAllEntries();
+}
+
+// format version
+uint32					DATLoaderFormat::getVersion(void)
+{
+	string strFileNameLower = String::toLowerCase(Path::getFileName(getFilePath()));
+	if (strFileNameLower == "gta3.dat")
+	{
+		return 1;
+	}
+	else if (strFileNameLower == "gta_vc.dat")
+	{
+		return 2;
+	}
+	else if (strFileNameLower == "gta.dat")
+	{
+		if (String::isIn(File::getFileContent(getFilePath()), ":"))
+		{
+			return 4;
+		}
+		else
+		{
+			return 3;
+		}
+	}
+	else
+	{
+		return -1;
+	}
+}
+
+// format game
+EGame					DATLoaderFormat::getGame(void)
+{
+	string strFileNameLower = String::toLowerCase(Path::getFileName(getFilePath()));
+	if (strFileNameLower == "gta3.dat")
+	{
+		return GTA_III;
+	}
+	else if (strFileNameLower == "gta_vc.dat")
+	{
+		return GTA_VC;
+	}
+	else if (strFileNameLower == "gta.dat")
+	{
+		if (String::isIn(File::getFileContent(getFilePath()), ":"))
+		{
+			return GTA_IV;
+		}
+		else
+		{
+			return GTA_SA;
+		}
+	}
+	else
+	{
+		return UNKNOWN_GAME;
+	}
 }
 
 // serialization

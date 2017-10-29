@@ -15,6 +15,8 @@ class bxgi::IPLFormat;
 class bxgi::DATLoaderFormat : public bxcf::Format, public bxcf::VectorPool<bxgi::DATLoaderEntry*>
 {
 public:
+	using bxcf::VectorPool<bxgi::DATLoaderEntry*>::getEntryCount;
+
 	DATLoaderFormat(void) : Format(false) {}
 	DATLoaderFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) : bxcf::Format(strFilePathOrData, bStringIsFilePath, false) {}
 
@@ -29,6 +31,9 @@ public:
 
 	template<class ManagerClass, class FormatClass>
 	std::vector<FormatClass*>					parseFiles(std::string strGameDirectoryPath, bxgi::EDATLoaderEntryType eType1, bxgi::EDATLoaderEntryType eType2 = DAT_LOADER_UNKNOWN);
+
+	uint32										getVersion(void);
+	EGame										getGame(void);
 
 private:
 	void										_unserialize(void);

@@ -26,6 +26,7 @@ void										GameManager::initGames(void)
 	addGame(GTA_III, "GTA III");
 	addGame(GTA_VC, "GTA VC");
 	addGame(GTA_SA, "GTA SA");
+	addGame(GTA_IV, "GTA IV");
 	addGame(MANHUNT, "Manhunt");
 	addGame(BULLY, "Bully");
 	addGame(SOL, "SOL");

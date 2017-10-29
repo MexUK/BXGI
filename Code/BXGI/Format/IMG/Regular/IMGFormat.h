@@ -128,7 +128,7 @@ public:
 	bxgi::IMGEntry*									getEntryByNameWithoutExtension(std::string& strEntryNameWithoutExtension); // case-insensitive
 	std::vector<std::string>						getEntryNames(void);
 	bxgi::IMGEntry*									getEntryByHighestOffset(void);
-	uint32											getEntryCountForName(std::string& strEntryName); // case-insensitive
+	uint32											getEntryCountForName(std::string& strEntryName, bool bWilcard = false, bool bWildcardIsLeftMatch = false); // case-insensitive
 	uint32											getEntryCountForCompressionType(bxcf::ECompressionAlgorithm ECompressionAlgorithmValue);
 
 	static uint32									getEntryPaddedSize(uint32 uiDataLength);

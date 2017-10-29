@@ -501,7 +501,7 @@ uint32					IMGFormat::getEntryExtensionCount(string strEntryExtension)
 void					IMGFormat::loadEntryExtensionCounts(void)
 {
 	m_umapExtensionCounts.clear();
-	for (auto pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : getEntries())
 	{
 		addEntryExtensionCount(pIMGEntry->getEntryExtension());
 	}
@@ -596,7 +596,7 @@ ECompressionAlgorithm								IMGFormat::getCompressionAlgorithmIdFromFastman92Co
 uint32			IMGFormat::getVersion3NamesLength(void)
 {
 	uint32 uiLength = 0;
-	for (auto pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : getEntries())
 	{
 		uiLength += pIMGEntry->getEntryName().length();
 	}
@@ -685,7 +685,7 @@ void					IMGFormat::addEntry(IMGEntry *pIMGEntry)
 
 void								IMGFormat::addEntries(vector<string>& vecEntryFilePaths)
 {
-	for (auto strEntryFilePath : vecEntryFilePaths)
+	for (string& strEntryFilePath : vecEntryFilePaths)
 	{
 		addEntryViaFile(strEntryFilePath);
 	}
@@ -694,7 +694,7 @@ void								IMGFormat::addEntries(vector<string>& vecEntryFilePaths)
 void								IMGFormat::addAllEntriesInFolder(string& strFolderPath)
 {
 	vector<string> vecFileNames = File::getFileNames(strFolderPath);
-	for (auto strFileName : vecFileNames)
+	for (string& strFileName : vecFileNames)
 	{
 		addEntryViaFile(strFileName);
 	}
@@ -749,7 +749,7 @@ uint32						IMGFormat::replaceEntries(vector<string>& vecPaths, vector<string>& 
 {
 	uint32 uiReplaceCount = 0;
 
-	for (auto strPath : vecPaths)
+	for (string& strPath : vecPaths)
 	{
 		string strNewEntryName = Path::getFileName(strPath);
 		IMGEntry *pIMGEntry = getEntryByName(strNewEntryName);
@@ -860,7 +860,7 @@ vector<IMGEntry*>		IMGFormat::getEntriesByName(string strText)
 {
 	strText = String::toUpperCase(strText);
 	vector<IMGEntry*> vecIMGEntries;
-	for (auto pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : getEntries())
 	{
 		if (String::isIn(String::toUpperCase(pIMGEntry->getEntryName()), strText))
 		{
@@ -875,7 +875,7 @@ vector<IMGEntry*>		IMGFormat::getEntriesByExtension(string strExtension, bool bW
 {
 	strExtension = String::toUpperCase(strExtension);
 	vector<IMGEntry*> vecIMGEntries;
-	for (auto pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : getEntries())
 	{
 		if (bWildcard)
 		{
@@ -899,7 +899,7 @@ vector<IMGEntry*>		IMGFormat::getEntriesByExtension(string strExtension, bool bW
 vector<IMGEntry*>		IMGFormat::getEntriesByVersion(uint32 uiFileTypeId, uint32 uiFileVersionId)
 {
 	vector<IMGEntry*> vecIMGEntries;
-	for (auto pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : getEntries())
 	{
 		if (pIMGEntry->getFileType() == uiFileTypeId && pIMGEntry->getRawVersion() == uiFileVersionId)
 		{
@@ -913,7 +913,7 @@ vector<IMGEntry*>		IMGFormat::getEntriesByVersion(uint32 uiFileTypeId, uint32 ui
 IMGEntry*				IMGFormat::getEntryByName(string& strEntryName)
 {
 	strEntryName = String::toUpperCase(strEntryName);
-	for (auto pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : getEntries())
 	{
 		if (strEntryName == String::toUpperCase(pIMGEntry->getEntryName()))
 		{
@@ -926,7 +926,7 @@ IMGEntry*				IMGFormat::getEntryByName(string& strEntryName)
 IMGEntry*				IMGFormat::getEntryByNameWithoutExtension(string& strEntryNameWithoutExtension)
 {
 	strEntryNameWithoutExtension = String::toUpperCase(strEntryNameWithoutExtension);
-	for (auto pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : getEntries())
 	{
 		if (strEntryNameWithoutExtension == String::toUpperCase(Path::removeFileExtension(pIMGEntry->getEntryName())))
 		{
@@ -940,7 +940,7 @@ IMGEntry*				IMGFormat::getEntryByHighestOffset(void)
 {
 	uint32 uiHighestOffset = 0;
 	IMGEntry *pHighestOffsetIMGEntry = nullptr;
-	for (auto pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : getEntries())
 	{
 		if (pIMGEntry->getEntryOffsetInSectors() >= uiHighestOffset)
 		{
@@ -951,15 +951,42 @@ IMGEntry*				IMGFormat::getEntryByHighestOffset(void)
 	return pHighestOffsetIMGEntry;
 }
 
-uint32			IMGFormat::getEntryCountForName(string& strEntryName)
+uint32			IMGFormat::getEntryCountForName(string& strEntryName, bool bWilcard, bool bWildcardIsLeftMatch)
 {
-	strEntryName = String::toUpperCase(strEntryName);
 	uint32 uiNameCount = 0;
-	for (auto pIMGEntry : getEntries())
+	string strEntryNameUpper = String::toUpperCase(strEntryName);
+	if (bWilcard)
 	{
-		if (strEntryName == String::toUpperCase(pIMGEntry->getEntryName()))
+		if (bWildcardIsLeftMatch)
 		{
-			uiNameCount++;
+			uint32 uiEntryNameMatchLength = strEntryNameUpper.length();
+			for (IMGEntry *pIMGEntry : getEntries())
+			{
+				if (String::toUpperCase(pIMGEntry->getEntryName().substr(0, uiEntryNameMatchLength)) == strEntryNameUpper)
+				{
+					uiNameCount++;
+				}
+			}
+		}
+		else
+		{
+			for (IMGEntry *pIMGEntry : getEntries())
+			{
+				if (String::isIn(String::toUpperCase(pIMGEntry->getEntryName()), strEntryNameUpper))
+				{
+					uiNameCount++;
+				}
+			}
+		}
+	}
+	else
+	{
+		for (IMGEntry *pIMGEntry : getEntries())
+		{
+			if (strEntryNameUpper == String::toUpperCase(pIMGEntry->getEntryName()))
+			{
+				uiNameCount++;
+			}
 		}
 	}
 	return uiNameCount;
@@ -967,7 +994,7 @@ uint32			IMGFormat::getEntryCountForName(string& strEntryName)
 
 void					IMGFormat::unsetNewAndReplacedFlagForAllEntries(void)
 {
-	for (auto pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : getEntries())
 	{
 		pIMGEntry->setNewEntry(false);
 		pIMGEntry->setReplacedEntry(false);
@@ -999,7 +1026,7 @@ uint32			IMGFormat::merge(string& strSecondIMGPath, vector<string>& vecImportedE
 
 	// import entries from second IMG into first IMG
 	bool bVersion3IMG = getVersion() == IMG_3;
-	for (auto pInEntry : pIMGFileIn->getEntries())
+	for (IMGEntry *pInEntry : pIMGFileIn->getEntries())
 	{
 		// entry header data
 		IMGEntry *pOutEntry = new IMGEntry(this);
@@ -1046,7 +1073,7 @@ void					IMGFormat::split(vector<IMGEntry*>& vecIMGEntries, string& strOutPath, 
 	// todo - remove from here? pIMGFile->openFile(); // open input - todo - rename to openInputFile()
 
 	bool bVersion3IMG = uiIMGVersion == IMG_3;
-	for (auto pIMGEntry : vecIMGEntries)
+	for (IMGEntry *pIMGEntry : vecIMGEntries)
 	{
 		IMGEntry *pIMGEntry2 = new IMGEntry(pIMGFile);
 		pIMGEntry2->setEntryName(pIMGEntry->getEntryName());
