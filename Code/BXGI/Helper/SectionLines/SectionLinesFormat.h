@@ -3,6 +3,8 @@
 #include "nsbxgi.h"
 #include "Format/Format.h"
 #include "Format/E2DFXType.h"
+#include "Event/Events.h"
+#include "../bxgi/Event/EEvent.h"
 #include <string>
 #include <vector>
 #include <map>
@@ -167,6 +169,7 @@ void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntr
 	m_reader.readAndStoreLines();
 	while (m_reader.iterateLines())
 	{
+		bxcf::Events::trigger(bxgi::EEvent::UNSERIALIZE_FILE_PROGRESS, &m_reader);
 		unserializeLine();
 	}
 }

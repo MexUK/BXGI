@@ -6,6 +6,8 @@
 #include "COLManager.h"
 #include "Static/Path.h"
 #include "Static/Debug.h"
+#include "Event/Events.h"
+#include "Event/EEvent.h"
 #include <algorithm>
 
 using namespace std;
@@ -33,6 +35,7 @@ void				COLFormat::_unserialize(void)
 			delete pCOLEntry;
 			break;
 		}
+		Events::trigger(UNSERIALIZE_FILE_PROGRESS, &m_reader);
 	}
 }
 

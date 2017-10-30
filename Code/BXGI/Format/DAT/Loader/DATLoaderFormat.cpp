@@ -87,6 +87,7 @@ void					DATLoaderFormat::_unserialize(void)
 	m_reader.readAndStoreLines();
 	while (m_reader.iterateLines())
 	{
+		Events::trigger(UNSERIALIZE_FILE_PROGRESS, &m_reader);
 		unserializeLine();
 	}
 }
