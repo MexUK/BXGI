@@ -240,7 +240,12 @@ void				IMGFormat::_unserializeAfter(void)
 	{
 		checkXBOXCompressionStatusesForEntries();
 	}
-	if (m_uiIMGVersion != IMG_3)
+
+	if (m_uiIMGVersion == IMG_3)
+	{
+		unserializeResourceTypes();
+	}
+	else
 	{
 		unserializERWVersions(); // todo - fix function name - capital e in name
 	}
@@ -416,7 +421,12 @@ void		IMGFormat::unserializERWVersions(void) // todo fix name(s) letter case
 
 void		IMGFormat::unserializeResourceTypes(void)
 {
-	// todo
+	for (IMGEntry *pIMGEntry : getEntries())
+	{
+		pIMGEntry->unserializeResourceType(&m_reader);
+
+		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
+	}
 }
 
 // entry fetching

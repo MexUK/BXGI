@@ -216,6 +216,11 @@ void					IMGEntry::unserializeRWVersion(DataReader *pDataReader, string strFileP
 	}
 }
 
+void					IMGEntry::unserializeResourceType(DataReader *pDataReader)
+{
+	m_uiFileType = GameFormat::getRageFileType(getEntryExtension());
+}
+
 void					IMGEntry::setEntryData(string& strEntryData, bool bIsNew)
 {
 	//setEntryOffset(getIMGFile()->getNextEntryOffset()); // todo - this line is needed but getNextEntryOffset isnt defined yet

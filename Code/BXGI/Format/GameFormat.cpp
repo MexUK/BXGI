@@ -66,3 +66,15 @@ EFileType		GameFormat::getRWFileType(string& strFileExtension)
 		return UNKNOWN;
 	}
 }
+
+EFileType		GameFormat::getRageFileType(string& strFileExtension)
+{
+	if (RageManager::isRageTextureExtension(strFileExtension))
+	{
+		return TEXTURE;
+	}
+	else
+	{
+		return UNKNOWN;
+	}
+}

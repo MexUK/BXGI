@@ -13,4 +13,5 @@ public:
 	static bool					isAnimationExtension(std::string& strFileExtension);
 
 	static bxcf::fileType::EFileType		getRWFileType(std::string& strFileExtension);
+	static bxcf::fileType::EFileType		getRageFileType(std::string& strFileExtension);
 };
