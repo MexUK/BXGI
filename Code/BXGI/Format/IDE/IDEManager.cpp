@@ -59,12 +59,11 @@ vector<string>					IDEManager::getIDEEntryNamesWithoutExtension(vector<string> v
 {
 	vector<string> vecEntryNamesWithoutExtension;
 	IDEFormat *pIDEFile = nullptr;
-	for (auto strIDEPath : vecIDEPaths)
+	for (string& strIDEPath : vecIDEPaths)
 	{
 		pIDEFile = IDEManager::get()->unserializeFile(strIDEPath);
-		if (pIDEFile->doesHaveError())
+		if (!pIDEFile)
 		{
-			pIDEFile->unload();
 			delete pIDEFile;
 			continue;
 		}
@@ -79,7 +78,8 @@ vector<string>					IDEManager::getIDEEntryNamesWithoutExtension(vector<string> v
 		{
 			vecTextureNames = pIDEFile->getTXDNames();
 		}
-		vecEntryNamesWithoutExtension = StdVector::combineVectors(vecEntryNamesWithoutExtension, StdVector::combineVectors(vecModelNames, vecTextureNames));
+		StdVector::addToVector(vecEntryNamesWithoutExtension, vecModelNames);
+		StdVector::addToVector(vecEntryNamesWithoutExtension, vecTextureNames);
 		pIDEFile->unload();
 		delete pIDEFile;
 	}

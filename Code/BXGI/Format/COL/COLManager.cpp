@@ -6,6 +6,7 @@
 #include "Static/File.h"
 #include "Localization/LocalizationManager.h"
 #include "Static/Debug.h"
+#include "Static/StdVector.h"
 
 using namespace std;
 using namespace bxcf;
@@ -142,4 +143,27 @@ bool											COLManager::isCollisionExtension(string& strFileExtension)
 {
 	string strExtensionUpper = String::toUpperCase(strFileExtension);
 	return strExtensionUpper == "COL";
+}
+
+// entry names
+vector<string>									COLManager::getEntryNames(vector<string> vecIDEPaths)
+{
+	vector<string> vecEntryNamesWithoutExtension;
+	COLFormat *pCOLFile = nullptr;
+	for (string& strIDEPath : vecIDEPaths)
+	{
+		pCOLFile = COLManager::get()->unserializeFile(strIDEPath);
+		if (!pCOLFile)
+		{
+			delete pCOLFile;
+			continue;
+		}
+		vector<string>
+			vecModelNames = pCOLFile->getModelNames();
+		StdVector::addToVector(vecEntryNamesWithoutExtension, vecModelNames);
+
+		pCOLFile->unload();
+		delete pCOLFile;
+	}
+	return StdVector::removeDuplicates(vecEntryNamesWithoutExtension);
 }

@@ -35,6 +35,8 @@ public:
 
 	static bool				isCollisionExtension(std::string& strFileExtension);
 
+	std::vector<std::string>		getEntryNames(std::vector<std::string> vecIDEPaths);
+
 private:
 	bxgi::COLVersionManager*		m_pVersionManager;
 	
