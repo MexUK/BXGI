@@ -29,7 +29,8 @@ RWFormat::RWFormat(string& strFilePathOrData, bool bStringIsFilePath) :
 void					RWFormat::_unserialize(void)
 {
 	RWSectionContainer::_unserialize();
-
+	loadTextureEntries();
+	
 	if (RWSectionContainer::getEntryCount() > 0)
 	{
 		setRWVersion(RWManager::get()->getVersionManager()->getEntryByVersionCC(getEntryByIndex(0)->getSectionRWVersion()));
@@ -133,7 +134,10 @@ void					RWFormat::loadTextureEntries(void)
 			if (pTextureEntry == nullptr)
 			{
 				pTextureEntry = new TextureEntry;
-				pTextureEntry->setRWTextureSection((RWSection_Texture*)getParentNode()->getParentNode());
+				if (getParentNode())
+				{
+					pTextureEntry->setRWTextureSection((RWSection_Texture*)getParentNode()->getParentNode());
+				}
 			}
 
 			if (bIsDiffuseTexture)
