@@ -26,6 +26,21 @@ TXDFormat::TXDFormat(void) :
 {
 }
 
+RWSection_TextureNative*			TXDFormat::addEntryViaFile(string& strEntryFilePath, string strEntryName)
+{
+	if (strEntryName == "")
+	{
+		strEntryName = Path::getFileName(strEntryFilePath);
+	}
+
+	return addTextureViaFile(strEntryFilePath, Path::removeFileExtension(strEntryName), Path::removeFileExtension(strEntryName) + "a");
+}
+
+RWSection_TextureNative*			TXDFormat::addEntryViaData(string& strEntryName, string& strEntryData)
+{
+	return addTextureViaData(strEntryData, Path::removeFileExtension(strEntryName), Path::removeFileExtension(strEntryName) + "a");
+}
+
 vector<RWSection_TextureNative*>	TXDFormat::getTextures(void)
 {
 	vector<RWSection*> vecRWSections = getSectionsByType(RW_SECTION_TEXTURE_NATIVE);
@@ -210,6 +225,12 @@ uint32		TXDFormat::getMaxTextureCountForGame(EPlatformedGame EPlatformedGame)
 		return 64;
 	}
 	return 0xFFFFFFFF;
+}
+
+RWSection_TextureNative*	TXDFormat::addTextureViaData(string& strFileData, string& strTextureDiffuseName, string strTextureAlphaName)
+{
+	// todo
+	return nullptr;
 }
 
 RWSection_TextureNative*	TXDFormat::addTextureViaFile(string& strFilePath, string& strTextureDiffuseName, string strTextureAlphaName)

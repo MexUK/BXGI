@@ -9,10 +9,11 @@
 #include "Format/RW/Entries/RWEntry_TextureNative_MipMap.h"
 #include "Type/Vector/Vec2u.h"
 #include "Platform/Hardware/EPlatform.h"
+#include "Format/FormatEntry.h"
 #include <string>
 #include <vector>
 
-class bxgi::RWSection_TextureNative : public bxgi::RWSection
+class bxgi::RWSection_TextureNative : public bxgi::RWSection, public bxcf::FormatEntry
 {
 public:
 	RWSection_TextureNative(void);

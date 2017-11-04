@@ -13,14 +13,14 @@ using namespace bxcf;
 using namespace bxgi;
 
 RWFormat::RWFormat(void) :
-	Format(true, bxcf::LITTLE_ENDIAN),
+	ContainerFormat(true, bxcf::LITTLE_ENDIAN),
 	m_pRWVersion(nullptr)
 {
 	RWSectionContainer::setRWFormat(this);
 }
 
 RWFormat::RWFormat(string& strFilePathOrData, bool bStringIsFilePath) :
-	bxcf::Format(strFilePathOrData, bStringIsFilePath, true, bxcf::LITTLE_ENDIAN)
+	bxcf::ContainerFormat(strFilePathOrData, bStringIsFilePath, true, bxcf::LITTLE_ENDIAN)
 {
 	RWSectionContainer::setRWFormat(this);
 }

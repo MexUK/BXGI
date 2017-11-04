@@ -2,7 +2,7 @@
 
 #include "nsbxgi.h"
 #include "Type/Types.h"
-#include "Format/Format.h"
+#include "Format/ContainerFormat.h"
 #include "RWSectionContainer.h"
 #include "Engine/RW/RWVersion.h"
 #include "Format/RW/ERWSection.h"
@@ -14,7 +14,7 @@ class bxgi::RWSection;
 class bxgi::_2dEffect;
 class bxgi::TextureEntry;
 
-class bxgi::RWFormat : public bxcf::Format, public bxgi::RWSectionContainer
+class bxgi::RWFormat : public bxcf::ContainerFormat, public bxgi::RWSectionContainer
 {
 public:
 	RWFormat(void);

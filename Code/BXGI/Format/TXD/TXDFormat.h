@@ -6,6 +6,7 @@
 #include "Game/EPlatformedGame.h"
 #include "Image/ERasterDataFormat.h"
 #include "Engine/RW/ERWVersion.h"
+#include "Format/RW/Sections/RWSection_TextureNative.h"
 #include <string>
 #include <vector>
 
@@ -18,6 +19,10 @@ public:
 	TXDFormat(void);
 	TXDFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) : bxgi::RWFormat(strFilePathOrData, bStringIsFilePath) {}
 
+	virtual bxgi::RWSection_TextureNative*			addEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "");
+	virtual bxgi::RWSection_TextureNative*			addEntryViaData(std::string& strEntryName, std::string& strEntryData);
+
+	bxgi::RWSection_TextureNative*					addTextureViaData(std::string& strFileData, std::string& strTextureDiffuseName, std::string strTextureAlphaName = "");
 	bxgi::RWSection_TextureNative*					addTextureViaFile(std::string& strFilePath, std::string& strTextureDiffuseName, std::string strTextureAlphaName = "");
 	std::vector<std::string>						getTextureNames(void);
 	std::vector<bxgi::RWSection_TextureNative*>		getTextures(void);

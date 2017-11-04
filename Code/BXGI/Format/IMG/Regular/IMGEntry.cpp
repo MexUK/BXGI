@@ -47,6 +47,7 @@ IMGEntry::IMGEntry(IMGFormat *pIMGFile) :
 	m_bProtectedEntry(false),
 	m_uiFileCreationDate(0),
 	m_uiCompressionAlgorithm(COMPRESSION_NONE),
+	m_uiEncryptionAlgorithm(ENCRYPTION_NONE),
 	m_uiCompressionLevel(0),
 	m_bIsEncrypted(false),
 	m_pRageResourceType(nullptr),
