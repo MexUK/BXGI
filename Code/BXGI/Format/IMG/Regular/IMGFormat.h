@@ -2,7 +2,7 @@
 
 #include "nsbxgi.h"
 #include "Type/Types.h"
-#include "Format/Format.h"
+#include "Format/ContainerFormat.h"
 #include "Pool/VectorPool.h"
 #include "EIMGVersion.h"
 #include "Engine/RW/ERWVersion.h"
@@ -12,6 +12,7 @@
 #include "Platform/Hardware/EPlatform.h"
 #include "Stream/DataReader.h"
 #include "Stream/DataWriter.h"
+#include "Format/IMG/Regular/IMGEntry.h"
 #include <string>
 #include <vector>
 #include <map>
@@ -27,7 +28,7 @@ struct SortByStringKey // todo - namespace
 
 class bxgi::IMGEntry;
 
-class bxgi::IMGFormat : public bxcf::Format, public bxcf::VectorPool<bxgi::IMGEntry*>
+class bxgi::IMGFormat : public bxcf::ContainerFormat, public bxcf::VectorPool<bxgi::IMGEntry*>
 {
 public:
 	using bxcf::VectorPool<bxgi::IMGEntry*>::getEntryCount;
@@ -104,8 +105,8 @@ public:
 
 	static bxcf::ECompressionAlgorithm				getCompressionAlgorithmIdFromFastman92CompressionAlgorithmId(EIMGVersionFastman92CompressionAlgorithm eFastman92CompressionAlgorithmId);
 
-	bxgi::IMGEntry*									addEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "");
-	bxgi::IMGEntry*									addEntryViaData(std::string& strEntryName, std::string& strEntryData);
+	virtual bxgi::IMGEntry*							addEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "");
+	virtual bxgi::IMGEntry*							addEntryViaData(std::string& strEntryName, std::string& strEntryData);
 	void											addEntry(bxgi::IMGEntry *pIMGEntry);
 	void											addEntries(std::vector<std::string>& vecEntryFilePaths);
 	void											addAllEntriesInFolder(std::string& strFolderPath);

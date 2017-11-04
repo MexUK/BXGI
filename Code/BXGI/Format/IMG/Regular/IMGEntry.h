@@ -10,15 +10,16 @@
 #include "Format/IMG/Fastman92/IMGEntry_Fastman92.h"
 #include "Static/Math.h"
 #include "Static/String.h"
-#include "Format/IMG/Regular/IMGFormat.h"
+//#include "Format/IMG/Regular/IMGFormat.h"
 #include "Game/EGame.h"
+#include "Format/FormatEntry.h"
 #include <string>
 
 class bxgi::RWVersion;
 class bxgi::COLVersion;
 class bxgi::RageResourceType;
 
-class bxgi::IMGEntry
+class bxgi::IMGEntry : public bxcf::FormatEntry
 {
 public:
 	IMGEntry(void);
@@ -26,10 +27,10 @@ public:
 
 	void					unload(void) {}
 
-	inline void				unserializeVersion1(bxgi::RG_IMGEntry_Version1 *pRGIMGEntry);
-	inline void				unserializeVersion2(bxgi::RG_IMGEntry_Version2 *pRGIMGEntry);
-	inline void				unserializeVersion3(bxgi::RG_IMGEntry_Version3 *pRGIMGEntry);
-	inline void				unserializeVersionFastman92(bxgi::IMGEntry_Fastman92 *pRawIMGEntry);
+	void					unserializeVersion1(bxgi::RG_IMGEntry_Version1 *pRGIMGEntry);
+	void					unserializeVersion2(bxgi::RG_IMGEntry_Version2 *pRGIMGEntry);
+	void					unserializeVersion3(bxgi::RG_IMGEntry_Version3 *pRGIMGEntry);
+	void					unserializeVersionFastman92(bxgi::IMGEntry_Fastman92 *pRawIMGEntry);
 
 	void					unserializeRWVersion(bxcf::DataReader *pDataReader = nullptr, std::string strFilePath = "", std::string& strUncompressedEntryData = bxcf::g_strBlankString);
 	void					unserializeResourceType(bxcf::DataReader *pDataReader = nullptr);
@@ -163,44 +164,3 @@ private:
 	uint32							m_uiRawVersion;
 	bxcf::fileType::EFileType		m_uiFileType;
 };
-
-inline void					bxgi::IMGEntry::unserializeVersion1(bxgi::RG_IMGEntry_Version1 *pRGIMGEntry)
-{
-	m_uiEntryOffset = bxcf::Math::convertSectorsToBytes(pRGIMGEntry->m_uiOffsetInSectors);
-	m_uiEntrySize = bxcf::Math::convertSectorsToBytes(pRGIMGEntry->m_uiSizeInSectors);
-	m_strEntryName = bxcf::String::rtrimFromLeft(std::string((char*)pRGIMGEntry->m_szName));
-}
-
-inline void					bxgi::IMGEntry::unserializeVersion2(bxgi::RG_IMGEntry_Version2 *pRGIMGEntry)
-{
-	uint32 uiEntrySizeInSectors;
-	if (pRGIMGEntry->m_uiArchiveSizeInSectors != 0)
-	{
-		uiEntrySizeInSectors = pRGIMGEntry->m_uiArchiveSizeInSectors;
-	}
-	else
-	{
-		uiEntrySizeInSectors = pRGIMGEntry->m_uiStreamingSizeInSectors;
-	}
-
-	m_uiEntryOffset = bxcf::Math::convertSectorsToBytes(pRGIMGEntry->m_uiOffsetInSectors);
-	m_uiEntrySize = bxcf::Math::convertSectorsToBytes(uiEntrySizeInSectors);
-	m_strEntryName = bxcf::String::rtrimFromLeft(std::string((char*)pRGIMGEntry->m_szName));
-}
-
-inline void					bxgi::IMGEntry::unserializeVersion3(bxgi::RG_IMGEntry_Version3 *pRGIMGEntry)
-{
-	setRageResourceTypeByIdentifier(pRGIMGEntry->m_uiRageResourceTypeIdentifier);
-	m_uiEntryOffset = bxcf::Math::convertSectorsToBytes(pRGIMGEntry->m_uiOffsetInSectors);
-	m_uiEntrySize = bxcf::Math::convertSectorsToBytes(pRGIMGEntry->m_usSizeInSectors) - (pRGIMGEntry->m_usFlags & 2047);
-	m_uiFlags = pRGIMGEntry->m_usFlags;
-}
-
-inline void					bxgi::IMGEntry::unserializeVersionFastman92(bxgi::IMGEntry_Fastman92 *pRawIMGEntry)
-{
-	m_uiEntryOffset = bxcf::Math::convertSectorsToBytes(pRawIMGEntry->m_uiOffsetInSectors);
-	m_uiEntrySize = bxcf::Math::convertSectorsToBytes(pRawIMGEntry->m_uiSizeInSectors);
-	m_uiUncompressedSize = bxcf::Math::convertSectorsToBytes(pRawIMGEntry->m_uiUncompressedSizeInSectors);
-	m_uiCompressionAlgorithm = bxgi::IMGFormat::getCompressionAlgorithmIdFromFastman92CompressionAlgorithmId((bxgi::EIMGVersionFastman92CompressionAlgorithm)pRawIMGEntry->m_uiCompressionAlgorithmId);
-	m_strEntryName = bxcf::String::rtrimFromLeft(std::string((char*)pRawIMGEntry->m_strName));
-}

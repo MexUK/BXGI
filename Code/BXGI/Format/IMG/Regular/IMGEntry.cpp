@@ -596,3 +596,44 @@ void					IMGEntry::replace(string& strFilePath)
 		}
 	}
 }
+
+void					bxgi::IMGEntry::unserializeVersion1(bxgi::RG_IMGEntry_Version1 *pRGIMGEntry)
+{
+	m_uiEntryOffset = bxcf::Math::convertSectorsToBytes(pRGIMGEntry->m_uiOffsetInSectors);
+	m_uiEntrySize = bxcf::Math::convertSectorsToBytes(pRGIMGEntry->m_uiSizeInSectors);
+	m_strEntryName = bxcf::String::rtrimFromLeft(std::string((char*)pRGIMGEntry->m_szName));
+}
+
+void					bxgi::IMGEntry::unserializeVersion2(bxgi::RG_IMGEntry_Version2 *pRGIMGEntry)
+{
+	uint32 uiEntrySizeInSectors;
+	if (pRGIMGEntry->m_uiArchiveSizeInSectors != 0)
+	{
+		uiEntrySizeInSectors = pRGIMGEntry->m_uiArchiveSizeInSectors;
+	}
+	else
+	{
+		uiEntrySizeInSectors = pRGIMGEntry->m_uiStreamingSizeInSectors;
+	}
+
+	m_uiEntryOffset = bxcf::Math::convertSectorsToBytes(pRGIMGEntry->m_uiOffsetInSectors);
+	m_uiEntrySize = bxcf::Math::convertSectorsToBytes(uiEntrySizeInSectors);
+	m_strEntryName = bxcf::String::rtrimFromLeft(std::string((char*)pRGIMGEntry->m_szName));
+}
+
+void					bxgi::IMGEntry::unserializeVersion3(bxgi::RG_IMGEntry_Version3 *pRGIMGEntry)
+{
+	setRageResourceTypeByIdentifier(pRGIMGEntry->m_uiRageResourceTypeIdentifier);
+	m_uiEntryOffset = bxcf::Math::convertSectorsToBytes(pRGIMGEntry->m_uiOffsetInSectors);
+	m_uiEntrySize = bxcf::Math::convertSectorsToBytes(pRGIMGEntry->m_usSizeInSectors) - (pRGIMGEntry->m_usFlags & 2047);
+	m_uiFlags = pRGIMGEntry->m_usFlags;
+}
+
+void					bxgi::IMGEntry::unserializeVersionFastman92(bxgi::IMGEntry_Fastman92 *pRawIMGEntry)
+{
+	m_uiEntryOffset = bxcf::Math::convertSectorsToBytes(pRawIMGEntry->m_uiOffsetInSectors);
+	m_uiEntrySize = bxcf::Math::convertSectorsToBytes(pRawIMGEntry->m_uiSizeInSectors);
+	m_uiUncompressedSize = bxcf::Math::convertSectorsToBytes(pRawIMGEntry->m_uiUncompressedSizeInSectors);
+	m_uiCompressionAlgorithm = bxgi::IMGFormat::getCompressionAlgorithmIdFromFastman92CompressionAlgorithmId((bxgi::EIMGVersionFastman92CompressionAlgorithm)pRawIMGEntry->m_uiCompressionAlgorithmId);
+	m_strEntryName = bxcf::String::rtrimFromLeft(std::string((char*)pRawIMGEntry->m_strName));
+}

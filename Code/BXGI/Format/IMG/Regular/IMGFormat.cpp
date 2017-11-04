@@ -36,7 +36,7 @@ using namespace bxcf::fileType;
 using namespace bxgi;
 
 IMGFormat::IMGFormat(void) :
-	Format(true, LITTLE_ENDIAN),
+	ContainerFormat(true, LITTLE_ENDIAN),
 	m_uiIMGVersion(IMG_UNKNOWN),
 	m_uiPlatform(PLATFORM_PC),
 	m_uiSubVersion(0),
@@ -47,7 +47,7 @@ IMGFormat::IMGFormat(void) :
 }
 
 IMGFormat::IMGFormat(EIMGVersion uiIMGVersion) :
-	Format(true, LITTLE_ENDIAN),
+	ContainerFormat(true, LITTLE_ENDIAN),
 	m_uiIMGVersion(uiIMGVersion),
 	m_uiPlatform(PLATFORM_PC),
 	m_uiSubVersion(0),
@@ -58,7 +58,7 @@ IMGFormat::IMGFormat(EIMGVersion uiIMGVersion) :
 }
 
 IMGFormat::IMGFormat(EIMGVersion uiIMGVersion, std::string& strFilePathOrData, bool bStringIsFilePath) :
-	Format(strFilePathOrData, bStringIsFilePath, true, LITTLE_ENDIAN),
+	ContainerFormat(strFilePathOrData, bStringIsFilePath, true, LITTLE_ENDIAN),
 	m_uiIMGVersion(uiIMGVersion),
 	m_uiPlatform(PLATFORM_PC),
 	m_uiSubVersion(0),
@@ -69,7 +69,7 @@ IMGFormat::IMGFormat(EIMGVersion uiIMGVersion, std::string& strFilePathOrData, b
 }
 
 IMGFormat::IMGFormat(std::string& strFilePathOrData, bool bStringIsFilePath) :
-	Format(strFilePathOrData, bStringIsFilePath, true, LITTLE_ENDIAN),
+	ContainerFormat(strFilePathOrData, bStringIsFilePath, true, LITTLE_ENDIAN),
 	m_uiIMGVersion(IMG_UNKNOWN),
 	m_uiPlatform(PLATFORM_PC),
 	m_uiSubVersion(0),
@@ -80,7 +80,7 @@ IMGFormat::IMGFormat(std::string& strFilePathOrData, bool bStringIsFilePath) :
 }
 
 IMGFormat::IMGFormat(DataReader& reader) :
-	Format(reader, true, LITTLE_ENDIAN),
+	ContainerFormat(reader, true, LITTLE_ENDIAN),
 	m_uiIMGVersion(IMG_UNKNOWN),
 	m_uiPlatform(PLATFORM_PC),
 	m_uiSubVersion(0),
