@@ -21,6 +21,9 @@ public:
 	void						_unserialize(void);
 	void						_serialize(void);
 	
+	void						setEntryName(std::string& strEntryName);
+	std::string&				getEntryName(void);
+
 	void						convertToGame(bxgi::EPlatformedGame EPlatformedGame, std::vector<std::string>& vecMipmapsRemoved);
 	void						convertToRasterDataFormat(bxcf::ERasterDataFormat ERasterDataFormatValue, std::vector<std::string>& vecMipmapsRemoved);
 

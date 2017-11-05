@@ -17,8 +17,8 @@ public:
 
 	void						unload(void) {}
 
-	void						setEntryName(std::string strEntryName) { m_strEntryName = strEntryName; }
-	std::string					getEntryName(void) { return m_strEntryName; }
+	void						setEntryName(std::string& strEntryName) { m_strEntryName = strEntryName; }
+	std::string&				getEntryName(void) { return m_strEntryName; }
 
 	void						setD3DFormat(D3DFORMAT eD3DFormat) { m_uiD3DFormat = eD3DFormat; }
 	D3DFORMAT					getD3DFormat(void) { return m_uiD3DFormat; }

@@ -4,6 +4,7 @@
 #include "Format/TXD/ETXDRasterDataFormat.h"
 #include "Format/TXD/TXDManager.h"
 #include "Static/String.h"
+#include "Static/Path.h"
 #include "Image/ImageManager.h"
 #include "Exception/EExceptionCode.h"
 #include "Format/RW/RWFormat.h"
@@ -909,4 +910,17 @@ void							RWSection_TextureNative::convertToRasterDataFormat(ERasterDataFormat 
 		setPaletteUsed(false);
 		setPaletteData(strPaletteData);
 	}
+}
+
+// entry name
+void						RWSection_TextureNative::setEntryName(string& strEntryName)
+{
+	string strEntryNameNoExt = Path::removeFileExtension(strEntryName);
+	setDiffuseName(strEntryNameNoExt);
+	setAlphaName(strEntryNameNoExt + "a");
+}
+
+string&						RWSection_TextureNative::getEntryName(void)
+{
+	return getDiffuseName();
 }
