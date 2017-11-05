@@ -242,7 +242,7 @@ void				RWSectionContainer::removeSectionByIndex(uint32 uiSectionIndex)
 		m_vecEntries.erase(it);
 	}
 	pRWSection->unload();
-	delete pRWSection;
+	// todo delete pRWSection;
 }
 
 // fetch section
