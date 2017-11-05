@@ -237,7 +237,8 @@ RWSection_TextureNative*	TXDFormat::addTextureViaFile(string& strFilePath, strin
 {
 	ImageFile *pImageFile = ImageManager::loadImageFromFile(strFilePath);
 
-	RWSection_TextureNative *pTexture = new RWSection_TextureNative;
+	RWSection_TextureNative *pTexture = (RWSection_TextureNative *)RWSection::creatERWSection(RW_SECTION_TEXTURE_NATIVE);
+	pTexture->setRWFormat(this);
 	pTexture->setBPP(32);
 	pTexture->setHasDiffuse(true);
 	pTexture->setDiffuseName(strTextureDiffuseName);
@@ -265,6 +266,7 @@ RWSection_TextureNative*	TXDFormat::addTextureViaFile(string& strFilePath, strin
 	pTexture->setPaletteUsed(false);
 	pTexture->setPaletteData(strPaletteData);
 	pTexture->setPlatformId(8);
+	pTexture->setPlatform(PLATFORM_PC);
 	pTexture->setTXDRasterDataFormat(TXDRASTERDATAFORMAT_8888);
 	pTexture->setRasterDataFormat(RASTERDATAFORMAT_BGRA32, false);
 	pTexture->setRasterType(0);
@@ -275,9 +277,16 @@ RWSection_TextureNative*	TXDFormat::addTextureViaFile(string& strFilePath, strin
 	pMipmap->setRasterData(pImageFile->m_strRasterDataBGRA32);
 	pTexture->getMipMaps().addEntry(pMipmap);
 
-	if (getSectionCountByType(RW_SECTION_GEOMETRY_LIST) > 0)
+	if (getSectionCountByType(RW_SECTION_TEXTURE_DICTIONARY) > 0)
 	{
-		getSectionsByType(RW_SECTION_GEOMETRY_LIST)[0]->addEntry(pTexture);
+		if (getSectionsByType(RW_SECTION_TEXTURE_DICTIONARY)[0]->getEntryCount() > 0 && getSectionsByType(RW_SECTION_TEXTURE_DICTIONARY)[0]->getLastEntry()->getSectionId() == RW_SECTION_EXTENSION)
+		{
+			getSectionsByType(RW_SECTION_TEXTURE_DICTIONARY)[0]->addEntryAtPosition(pTexture, getSectionsByType(RW_SECTION_TEXTURE_DICTIONARY)[0]->getEntryCount() - 1);
+		}
+		else
+		{
+			getSectionsByType(RW_SECTION_TEXTURE_DICTIONARY)[0]->addEntry(pTexture);
+		}
 	}
 
 	delete pImageFile;

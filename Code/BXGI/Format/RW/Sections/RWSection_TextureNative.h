@@ -46,6 +46,9 @@ public:
 	void						setPlatformId(uint32 uiPlatformId) { m_uiPlatformId = uiPlatformId; }
 	uint32						getPlatformId(void) { return m_uiPlatformId; }
 
+	void						setPlatform(bxcf::EPlatform uiPlatform) { m_uiPlatform = uiPlatform; }
+	bxcf::EPlatform				getPlatform(void) { return m_uiPlatform; }
+
 	void						setFilterFlags(uint8 ucFilterFlags) { m_ucFilterFlags = ucFilterFlags; }
 	uint8						getFilterFlags(void) { return m_ucFilterFlags; }
 
@@ -68,7 +71,7 @@ public:
 	uint32						getAlpha(void) { return m_uiAlpha; }
 
 	void						setImageSize(bxcf::Vec2u& vecImageSize) { m_vecImageSize = vecImageSize; }
-	bxcf::Vec2u&					getImageSize(void) { return m_vecImageSize; }
+	bxcf::Vec2u&				getImageSize(void) { return m_vecImageSize; }
 
 	void						setBPP(uint8 ucBPP) { m_ucBPP = ucBPP; }
 	uint8						getBPP(void) { return m_ucBPP; }

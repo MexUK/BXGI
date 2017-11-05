@@ -32,7 +32,7 @@ RWSection_TextureNative::RWSection_TextureNative(void) :
 	m_ucOriginalBPP(0),
 	m_uiMipMapCount(0)
 {
-	setSectionId(RW_SECTION_TEXTURE_DICTIONARY);
+	setSectionId(RW_SECTION_TEXTURE_NATIVE);
 	m_vecImageSize.x = 0;
 	m_vecImageSize.y = 0;
 }
