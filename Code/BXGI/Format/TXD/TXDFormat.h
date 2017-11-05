@@ -24,6 +24,10 @@ public:
 
 	bxgi::RWSection_TextureNative*					addTextureViaData(std::string& strFileData, std::string& strTextureDiffuseName, std::string strTextureAlphaName = "");
 	bxgi::RWSection_TextureNative*					addTextureViaFile(std::string& strFilePath, std::string& strTextureDiffuseName, std::string strTextureAlphaName = "");
+	
+	void											exportMultiple(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFolderPath);
+	void											exportAll(std::string& strFolderPath);
+	
 	std::vector<std::string>						getTextureNames(void);
 	std::vector<bxgi::RWSection_TextureNative*>		getTextures(void);
 

@@ -13,6 +13,7 @@
 #include "Format/RW/RWSection.h"
 
 using namespace std;
+using namespace bxcf;
 using namespace bxgi;
 
 // converting
@@ -42,4 +43,15 @@ vector<string>				DFFFormat::getModelNames(void)
 		vecModelNames.push_back(pFrame->getData());
 	}
 	return vecModelNames;
+}
+
+// export
+void						DFFFormat::exportMultiple(vector<FormatEntry*>& vecEntries, string& strFolderPath)
+{
+	// todo
+}
+
+void						DFFFormat::exportAll(string& strFolderPath)
+{
+	// todo
 }

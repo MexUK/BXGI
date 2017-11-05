@@ -3,13 +3,14 @@
 #include "nsbxgi.h"
 #include "WTDMipmap.h"
 #include "Pool/VectorPool.h"
+#include "Format/FormatEntry.h"
 #include "Image/ERasterDataFormat.h"
 #include "d3d9.h"
 #include <string>
 
 class bxgi::WTDMipmap;
 
-class bxgi::WTDEntry : public bxcf::VectorPool<bxgi::WTDMipmap*>
+class bxgi::WTDEntry : public bxcf::FormatEntry, public bxcf::VectorPool<bxgi::WTDMipmap*>
 {
 public:
 	WTDEntry(void);

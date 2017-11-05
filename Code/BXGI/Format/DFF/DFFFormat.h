@@ -16,6 +16,9 @@ public:
 	virtual bxgi::RWSection_TextureNative*							addEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "") { return nullptr; }
 	virtual bxgi::RWSection_TextureNative*							addEntryViaData(std::string& strEntryName, std::string& strEntryData) { return nullptr; }
 
+	void															exportMultiple(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFolderPath);
+	void															exportAll(std::string& strFolderPath);
+
 	bxgi::IntermediateModelFormat*									convertToIntermediateModelFormat(void);
 	std::vector<std::string>										getModelNames(void);
 };

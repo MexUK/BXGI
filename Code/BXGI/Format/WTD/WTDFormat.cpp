@@ -1,19 +1,24 @@
 #include "WTDFormat.h"
 #include "Static/File.h"
+#include "Static/String.h"
+#include "Static/Memory.h"
+#include "Static/Path.h"
 #include "Stream/DataWriter.h"
 #include "WTDManager.h"
-#include "Static/String.h"
 #include "Intermediate/Texture/IntermediateTextureFormat.h"
 #include "Intermediate/Texture/IntermediateTexture.h"
 #include "Intermediate/Texture/Data/IntermediateTextureMipmap.h"
 #include "Compression/CompressionManager.h"
 #include "Image/ImageManager.h"
 #include "Stream/DataReader.h"
-#include "Static/Memory.h"
 #include "Format/WTD/Raw/WTDFormat_Header1.h"
 #include "Format/WTD/Raw/WTDFormat_Header2.h"
 #include "Format/WTD/Raw/WTDEntry_RG.h"
 #include "Engine/RAGE/RageManager.h"
+#include "Image/ImageFile.h"
+#include "Event/Events.h"
+#include "../bxcf/Event/EEvent.h"
+#include "Format/Image/BMP/BMPFormat.h"
 
 using namespace std;
 using namespace bxcf;
@@ -31,6 +36,41 @@ void					WTDFormat::unload(void)
 		delete pWTDEntry;
 	}
 	getEntries().clear();
+}
+
+// add entry
+WTDEntry*				WTDFormat::addEntryViaFile(string& strEntryFilePath, string strEntryName)
+{
+	if (strEntryName == "")
+	{
+		strEntryName = Path::getFileName(strEntryFilePath);
+	}
+
+	ImageFile *pImageFile = ImageManager::loadImageFromFile(strEntryFilePath);
+
+	WTDEntry *pEntry = new WTDEntry;
+	pEntry->setEntryName(strEntryName);
+	pEntry->setD3DFormat(D3DFMT_A8R8G8B8);
+	pEntry->setRasterDataFormat(RASTERDATAFORMAT_BGRA32);
+	pEntry->setImageSize(true, pImageFile->m_uiImageWidth);
+	pEntry->setImageSize(false, pImageFile->m_uiImageHeight);
+	pEntry->setLevels(1);
+	pEntry->setTextureHash(0);
+
+	WTDMipmap *pMipMap = new WTDMipmap(pEntry);
+	pMipMap->setImageSize(true, pImageFile->m_uiImageWidth);
+	pMipMap->setImageSize(false, pImageFile->m_uiImageHeight);
+	pMipMap->setRasterData(pImageFile->m_strRasterDataBGRA32);
+	pEntry->addEntry(pMipMap);
+
+	addEntry(pEntry);
+	
+	return pEntry;
+}
+
+WTDEntry*				WTDFormat::addEntryViaData(string& strEntryName, string& strEntryData)
+{
+	return nullptr; // todo
 }
 
 // serialization
@@ -194,7 +234,7 @@ void					WTDFormat::_serialize(void)
 		uiTextureListOffset = 0
 	;
 	uint16
-		usTextureCount = 0,
+		usTextureCount = VectorPool::getEntryCount(),
 		usUnknown1 = 0,
 		usUnknown2 = 0,
 		usUnknown3 = 0
@@ -457,4 +497,69 @@ string					WTDFormat::getFourCCFromD3DFormat(D3DFORMAT d3dFormat)
 	case D3DFMT_DXT5:	return "DXT5";
 	}
 	return "Unkn";
+}
+
+void					WTDFormat::exportMultiple(vector<FormatEntry*>& vecEntries, string& strFolderPath)
+{
+	strFolderPath = Path::addSlashToEnd(strFolderPath);
+
+	m_reader.setFilePath(getFilePath());
+	if (!openFile())
+	{
+		return;
+	}
+
+	for (WTDEntry *pWTDEntry : (vector<WTDEntry*>&)vecEntries)
+	{
+		/*
+		todo
+		if (!pWTDEntry->canBeRead())
+		{
+			continue;
+		}
+		*/
+
+		File::storeFile(strFolderPath + pWTDEntry->getEntryName(), readEntryContent(getIndexByEntry(pWTDEntry)), false, true);
+
+		Events::trigger(TASK_PROGRESS);
+	}
+
+	m_reader.close();
+}
+
+void					WTDFormat::exportAll(string& strFolderPath)
+{
+	strFolderPath = Path::addSlashToEnd(strFolderPath);
+
+	m_reader.setFilePath(getFilePath());
+	if (!openFile())
+	{
+		return;
+	}
+
+	for (WTDEntry *pWTDEntry : (vector<WTDEntry*>&)getEntries())
+	{
+		WTDMipmap *pMipmap = pWTDEntry->getEntryByIndex(0);
+
+		BMPFormat *pBMPFile = new BMPFormat;
+		pBMPFile->setWidth(pMipmap->getImageSize(true));
+		pBMPFile->setHeight(pMipmap->getImageSize(false));
+		pBMPFile->setBPP(32);
+
+		pBMPFile->setRasterData(pMipmap->getRasterDataBGRA32());
+		pBMPFile->swapRows();
+
+		string strBMPFilePath = strFolderPath + "/" + pWTDEntry->getEntryName() + ".BMP";
+		strBMPFilePath = Path::getNextFileName(strBMPFilePath, 1, "-Mipmap");
+
+		pBMPFile->setBMPVersion(3);
+		pBMPFile->serialize(strBMPFilePath);
+
+		pBMPFile->unload();
+		delete pBMPFile;
+
+		Events::trigger(TASK_PROGRESS);
+	}
+
+	m_reader.close();
 }

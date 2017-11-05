@@ -139,7 +139,8 @@ public:
 	void											split(std::vector<bxgi::IMGEntry*>& vecIMGEntries, std::string& strOutPath, EIMGVersion uiIMGVersion);
 
 	void											exportSingle(bxgi::IMGEntry *pIMGEntry, std::string& strFolderPath);
-	void											exportMultiple(std::vector<bxgi::IMGEntry*>& vecIMGEntries, std::string strFolderPath);
+	void											exportMultiple(std::vector<bxcf::FormatEntry*>& vecIMGEntries, std::string& strFolderPath);
+	void											exportMultiple(std::vector<bxgi::IMGEntry*>& vecIMGEntries, std::string& strFolderPath);
 	void											exportAll(std::string& strFolderPath);
 
 	bool											doesContainEntryWithUnknownRWVersion(void); // for IMG versions 1 and 2 - todo - should it be changed to without RW to match function below - check func bodys

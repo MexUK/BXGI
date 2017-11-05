@@ -16,6 +16,9 @@
 #include "Image/ImageFile.h"
 #include "Format/RW/Sections/RWSection_TextureNative.h"
 #include "Type/Vector/Vec2u16.h"
+#include "Stream/DataReader.h"
+#include "Event/Events.h"
+#include "../bxcf/Event/EEvent.h"
 
 using namespace std;
 using namespace bxcf;
@@ -340,4 +343,78 @@ IntermediateTextureFormat*	TXDFormat::convertToIntermediateFormat(void)
 	}
 
 	return pGeneralTextureFile;
+}
+
+void						TXDFormat::exportMultiple(vector<FormatEntry*>& vecEntries, string& strFolderPath)
+{
+	strFolderPath = Path::addSlashToEnd(strFolderPath);
+
+	m_reader.setFilePath(getFilePath());
+	if (!openFile())
+	{
+		return;
+	}
+
+	for (RWSection_TextureNative *pTXDEntry : (vector<RWSection_TextureNative*>&)vecEntries)
+	{
+		RWEntry_TextureNative_MipMap *pMipmap = pTXDEntry->getMipMaps().getEntryByIndex(0);
+
+		BMPFormat *pBMPFile = new BMPFormat;
+		pBMPFile->setWidth(pMipmap->getImageSize().x);
+		pBMPFile->setHeight(pMipmap->getImageSize().y);
+		pBMPFile->setBPP(32);
+
+		pBMPFile->setRasterData(pMipmap->getRasterDataBGRA32());
+		pBMPFile->swapRows();
+
+		string strBMPFilePath = strFolderPath + "/" + pTXDEntry->getDiffuseName() + ".BMP";
+		strBMPFilePath = Path::getNextFileName(strBMPFilePath, 1, "-Mipmap");
+
+		pBMPFile->setBMPVersion(3);
+		pBMPFile->serialize(strBMPFilePath);
+
+		pBMPFile->unload();
+		delete pBMPFile;
+
+		Events::trigger(TASK_PROGRESS);
+	}
+
+	m_reader.close();
+}
+
+void						TXDFormat::exportAll(string& strFolderPath)
+{
+	strFolderPath = Path::addSlashToEnd(strFolderPath);
+
+	m_reader.setFilePath(getFilePath());
+	if (!openFile())
+	{
+		return;
+	}
+
+	for (RWSection_TextureNative *pTXDEntry : (vector<RWSection_TextureNative*>&)getSectionsByType(RW_SECTION_TEXTURE_NATIVE))
+	{
+		RWEntry_TextureNative_MipMap *pMipmap = pTXDEntry->getMipMaps().getEntryByIndex(0);
+
+		BMPFormat *pBMPFile = new BMPFormat;
+		pBMPFile->setWidth(pMipmap->getImageSize().x);
+		pBMPFile->setHeight(pMipmap->getImageSize().y);
+		pBMPFile->setBPP(32);
+
+		pBMPFile->setRasterData(pMipmap->getRasterDataBGRA32());
+		pBMPFile->swapRows();
+
+		string strBMPFilePath = strFolderPath + "/" + pTXDEntry->getDiffuseName() + ".BMP";
+		strBMPFilePath = Path::getNextFileName(strBMPFilePath, 1, "-Mipmap");
+
+		pBMPFile->setBMPVersion(3);
+		pBMPFile->serialize(strBMPFilePath);
+
+		pBMPFile->unload();
+		delete pBMPFile;
+
+		Events::trigger(TASK_PROGRESS);
+	}
+
+	m_reader.close();
 }

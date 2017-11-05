@@ -1124,7 +1124,12 @@ void					IMGFormat::exportSingle(IMGEntry *pIMGEntry, string& strFolderPath)
 	File::storeFile(strFolderPath + pIMGEntry->getEntryName(), pIMGEntry->getEntryData(), false, true);
 }
 
-void					IMGFormat::exportMultiple(vector<IMGEntry*>& vecIMGEntries, string strFolderPath)
+void					IMGFormat::exportMultiple(vector<IMGEntry*>& vecIMGEntries, string& strFolderPath)
+{
+	exportMultiple((vector<FormatEntry*>&)vecIMGEntries, strFolderPath);
+}
+
+void					IMGFormat::exportMultiple(vector<FormatEntry*>& vecIMGEntries, string& strFolderPath)
 {
 	strFolderPath = Path::addSlashToEnd(strFolderPath);
 
@@ -1134,7 +1139,7 @@ void					IMGFormat::exportMultiple(vector<IMGEntry*>& vecIMGEntries, string strF
 		return;
 	}
 
-	for (IMGEntry *pIMGEntry : vecIMGEntries)
+	for (IMGEntry *pIMGEntry : (vector<IMGEntry*>&)vecIMGEntries)
 	{
 		if (!pIMGEntry->canBeRead())
 		{

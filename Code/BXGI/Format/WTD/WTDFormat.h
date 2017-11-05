@@ -1,7 +1,7 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Format/Format.h"
+#include "Format/ContainerFormat.h"
 #include "Pool/VectorPool.h"
 #include "WTDEntry.h"
 #include "d3d9.h"
@@ -9,28 +9,37 @@
 
 class bxgi::IntermediateTextureFormat;
 
-class bxgi::WTDFormat : public bxcf::Format, public bxcf::VectorPool<bxgi::WTDEntry*>
+class bxgi::WTDFormat : public bxcf::ContainerFormat, public bxcf::VectorPool<bxgi::WTDEntry*>
 {
 public:
-	WTDFormat(void) : Format(true, bxcf::LITTLE_ENDIAN) {}
-	WTDFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) : bxcf::Format(strFilePathOrData, bStringIsFilePath, true, bxcf::LITTLE_ENDIAN) {}
+	WTDFormat(void) : ContainerFormat(true, bxcf::LITTLE_ENDIAN) {}
+	WTDFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) : bxcf::ContainerFormat(strFilePathOrData, bStringIsFilePath, true, bxcf::LITTLE_ENDIAN) {}
 
-	void						unload(void);
+	void											unload(void);
 
-	bxgi::IntermediateTextureFormat*	convertToIntermediateFormat(void);
+	virtual bxgi::WTDEntry*							addEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "");
+	virtual bxgi::WTDEntry*							addEntryViaData(std::string& strEntryName, std::string& strEntryData);
 
-	static uint32				getFileHeaderFlagsFromSystemAndGraphicsStreamSizes(uint32 uiSystemStreamSize, uint32 uiGraphicsStreamSize);
+	void											exportMultiple(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFolderPath);
+	void											exportAll(std::string& strFolderPath);
 
-	static std::string			getFourCCFromD3DFormat(D3DFORMAT d3dFormat);
-	static D3DFORMAT			getD3DFormatFromFourCC(std::string strFourCC);
+	std::vector<bxgi::WTDEntry*>					getSelectedEntries(void);
+	uint32											getSelectedEntryCount(void);
+
+	bxgi::IntermediateTextureFormat*				convertToIntermediateFormat(void);
+
+	static uint32									getFileHeaderFlagsFromSystemAndGraphicsStreamSizes(uint32 uiSystemStreamSize, uint32 uiGraphicsStreamSize);
+
+	static std::string								getFourCCFromD3DFormat(D3DFORMAT d3dFormat);
+	static D3DFORMAT								getD3DFormatFromFourCC(std::string strFourCC);
 
 private:
-	void						_unserialize(void);
-	void						_serialize(void);
+	void											_unserialize(void);
+	void											_serialize(void);
 
-	static uint32				getCompactSize(uint32 uiSize);
-	uint32						convertULongToOffset(uint32 uiValue);
-	uint32						convertULongToDataOffset(uint32 uiValue);
+	static uint32									getCompactSize(uint32 uiSize);
+	uint32											convertULongToOffset(uint32 uiValue);
+	uint32											convertULongToDataOffset(uint32 uiValue);
 
-	std::string					decompressWTDFormatData(uint32& uiSystemSegmentSize, uint32& uiGPUSegmentSize);
+	std::string										decompressWTDFormatData(uint32& uiSystemSegmentSize, uint32& uiGPUSegmentSize);
 };
