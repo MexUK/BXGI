@@ -13,7 +13,7 @@
 #include <string>
 #include <vector>
 
-class bxgi::RWSection_TextureNative : public bxgi::RWSection, public bxcf::FormatEntry
+class bxgi::RWSection_TextureNative : public bxcf::FormatEntry, public bxgi::RWSection
 {
 public:
 	RWSection_TextureNative(void);
