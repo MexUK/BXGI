@@ -19,6 +19,8 @@ public:
 	void															exportMultiple(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFolderPath);
 	void															exportAll(std::string& strFolderPath);
 
+	bxcf::FormatEntry*												getEntryByName(std::string& strEntryName); // case-insensitive
+
 	bxgi::IntermediateModelFormat*									convertToIntermediateModelFormat(void);
 	std::vector<std::string>										getModelNames(void);
 };

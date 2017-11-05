@@ -563,3 +563,22 @@ void					WTDFormat::exportAll(string& strFolderPath)
 
 	m_reader.close();
 }
+
+WTDEntry*				WTDFormat::getEntryByName(string& strEntryName)
+{
+	string
+		strEntryName2 = String::toUpperCase(strEntryName),
+		strEntryName2NoExt = String::toUpperCase(Path::removeFileExtension(strEntryName));
+	for (WTDEntry *pWTDEntry : getEntries())
+	{
+		if (strEntryName2 == String::toUpperCase(pWTDEntry->getEntryName()))
+		{
+			return pWTDEntry;
+		}
+		if (strEntryName2NoExt == String::toUpperCase(Path::removeFileExtension(pWTDEntry->getEntryName())))
+		{
+			return pWTDEntry;
+		}
+	}
+	return nullptr;
+}

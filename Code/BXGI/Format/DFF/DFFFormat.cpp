@@ -55,3 +55,10 @@ void						DFFFormat::exportAll(string& strFolderPath)
 {
 	// todo
 }
+
+// fetch entry
+FormatEntry*				DFFFormat::getEntryByName(string& strEntryName)
+{
+	// todo
+	return nullptr;
+}

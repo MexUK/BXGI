@@ -922,10 +922,16 @@ vector<IMGEntry*>		IMGFormat::getEntriesByVersion(uint32 uiFileTypeId, uint32 ui
 
 IMGEntry*				IMGFormat::getEntryByName(string& strEntryName)
 {
-	strEntryName = String::toUpperCase(strEntryName);
+	string
+		strEntryName2 = String::toUpperCase(strEntryName),
+		strEntryName2NoExt = String::toUpperCase(Path::removeFileExtension(strEntryName));
 	for (IMGEntry *pIMGEntry : getEntries())
 	{
-		if (strEntryName == String::toUpperCase(pIMGEntry->getEntryName()))
+		if (strEntryName2 == String::toUpperCase(pIMGEntry->getEntryName()))
+		{
+			return pIMGEntry;
+		}
+		if (strEntryName2NoExt == String::toUpperCase(Path::removeFileExtension(pIMGEntry->getEntryName())))
 		{
 			return pIMGEntry;
 		}

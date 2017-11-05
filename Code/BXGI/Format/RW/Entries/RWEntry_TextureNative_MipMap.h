@@ -23,7 +23,7 @@ public:
 	void						unload(void) {}
 
 	bool						canRasterDataBeConverted(void);
-	bxcf::ERasterDataFormat			getRasterDataFormat(void);
+	bxcf::ERasterDataFormat		getRasterDataFormat(void);
 	std::string					getRasterDataBGRA32(void);
 	std::string					getRasterDataRGBA32(void);
 
@@ -33,17 +33,17 @@ public:
 	std::string&				getRasterData(void) { return m_strRasterData; }
 
 	void						setImageSize(bxcf::Vec2u& vecImageSize) { m_vecImageSize = vecImageSize; }
-	bxcf::Vec2u&					getImageSize(void) { return m_vecImageSize; }
+	bxcf::Vec2u&				getImageSize(void) { return m_vecImageSize; }
 
 	void						setSwizzledImageSize(bxcf::Vec2u& vecSwizzledImageSize) { m_vecSwizzledImageSize = vecSwizzledImageSize; }
-	bxcf::Vec2u&					getSwizzledImageSize(void) { return m_vecSwizzledImageSize; }
+	bxcf::Vec2u&				getSwizzledImageSize(void) { return m_vecSwizzledImageSize; }
 
 	void						setTexture(RWSection_TextureNative *pTextureNative) { m_pTextureNative = pTextureNative; }
 	RWSection_TextureNative*	getTexture(void) { return m_pTextureNative; }
 
 private:
 	RWSection_TextureNative*	m_pTextureNative;
-	bxcf::Vec2u						m_vecImageSize;
-	bxcf::Vec2u						m_vecSwizzledImageSize;
+	bxcf::Vec2u					m_vecImageSize;
+	bxcf::Vec2u					m_vecSwizzledImageSize;
 	std::string					m_strRasterData;
 };

@@ -575,12 +575,12 @@ string					IMGEntry::getVersionText(void)
 void					IMGEntry::replace(string& strFilePath)
 {
 	string strFileName = Path::getFileName(strFilePath);
-
 	string strFileData = File::getFileContent(strFilePath);
 
 	setEntryName(strFileName);
 	setEntrySize(File::getFileSize(strFilePath));
 	setEntryOffset(m_pIMGFile->getNextEntryOffset());
+
 	if (m_pIMGFile->getVersion() == IMG_3)
 	{
 		// todo

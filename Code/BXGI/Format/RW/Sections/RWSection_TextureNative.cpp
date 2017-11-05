@@ -6,6 +6,7 @@
 #include "Static/String.h"
 #include "Static/Path.h"
 #include "Image/ImageManager.h"
+#include "Image/ImageFile.h"
 #include "Exception/EExceptionCode.h"
 #include "Format/RW/RWFormat.h"
 
@@ -923,4 +924,25 @@ void						RWSection_TextureNative::setEntryName(string& strEntryName)
 string&						RWSection_TextureNative::getEntryName(void)
 {
 	return getDiffuseName();
+}
+
+// replace
+void						RWSection_TextureNative::replace(string& strFilePath)
+{
+	ImageFile *pImageFile = ImageManager::loadImageFromFile(strFilePath);
+	if (!pImageFile)
+	{
+		return;
+	}
+
+	setImageSize(Vec2u(pImageFile->m_uiImageWidth, pImageFile->m_uiImageHeight));
+	setBPP(32);
+	setRasterDataFormat(RASTERDATAFORMAT_BGRA32);
+
+	getMipMaps().removeAllEntries();
+
+	RWEntry_TextureNative_MipMap *pMipMap = new RWEntry_TextureNative_MipMap(this);
+	pMipMap->setImageSize(Vec2u(pImageFile->m_uiImageWidth, pImageFile->m_uiImageHeight));
+	pMipMap->setRasterData(pImageFile->m_strRasterDataBGRA32);
+	getMipMaps().addEntry(pMipMap);
 }

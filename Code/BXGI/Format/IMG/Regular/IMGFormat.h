@@ -57,6 +57,8 @@ public:
 
 	std::string										readEntryContent(uint32 uiEntryIndex);
 
+	bxgi::IMGEntry*									getEntryByName(std::string& strEntryName); // case-insensitive
+
 	std::string										getIMGFilePath(void);
 	std::string										getDIRFilePath(void);
 
@@ -125,7 +127,6 @@ public:
 	std::vector<bxgi::IMGEntry*>					getEntriesByExtension(std::string strExtension, bool bWildcard = false); // case-insensitive
 	std::vector<bxgi::IMGEntry*>					getEntriesByVersion(uint32 uiFileTypeId, uint32 uiFileVersionId);
 
-	bxgi::IMGEntry*									getEntryByName(std::string& strEntryName); // case-insensitive
 	bxgi::IMGEntry*									getEntryByNameWithoutExtension(std::string& strEntryNameWithoutExtension); // case-insensitive
 	std::vector<std::string>						getEntryNames(void);
 	bxgi::IMGEntry*									getEntryByHighestOffset(void);

@@ -418,3 +418,23 @@ void						TXDFormat::exportAll(string& strFolderPath)
 
 	m_reader.close();
 }
+
+RWSection_TextureNative*	TXDFormat::getEntryByName(string& strEntryName)
+{
+	string
+		strEntryName2 = String::toUpperCase(strEntryName),
+		strEntryName2NoExt = String::toUpperCase(Path::removeFileExtension(strEntryName));
+	for (RWSection *pRWSection : getSectionsByType(RW_SECTION_TEXTURE_NATIVE))
+	{
+		RWSection_TextureNative *pTextureNative = (RWSection_TextureNative *)pRWSection;
+		if (strEntryName2 == String::toUpperCase(pTextureNative->getDiffuseName()) || strEntryName2 == String::toUpperCase(pTextureNative->getAlphaName()))
+		{
+			return pTextureNative;
+		}
+		if (strEntryName2NoExt == String::toUpperCase(Path::removeFileExtension(pTextureNative->getDiffuseName())) || strEntryName2NoExt == Path::removeFileExtension(String::toUpperCase(pTextureNative->getAlphaName())))
+		{
+			return pTextureNative;
+		}
+	}
+	return nullptr;
+}

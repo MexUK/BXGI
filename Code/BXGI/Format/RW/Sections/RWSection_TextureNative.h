@@ -24,13 +24,14 @@ public:
 	void						setEntryName(std::string& strEntryName);
 	std::string&				getEntryName(void);
 
+	void						replace(std::string& strFilePath);
+
 	void						convertToGame(bxgi::EPlatformedGame EPlatformedGame, std::vector<std::string>& vecMipmapsRemoved);
 	void						convertToRasterDataFormat(bxcf::ERasterDataFormat ERasterDataFormatValue, std::vector<std::string>& vecMipmapsRemoved);
 
 	bool						doesHaveValidTXDRasterDataFormat(void);
 	bxcf::ERasterDataFormat		detectRasterDataFormat(void);
 
-	uint32						getBodyLength(void);
 	void						unswizzlePS2Format(void);
 	
 	bxcf::VectorPool<bxgi::RWEntry_TextureNative_MipMap*>&	getMipMaps(void) { return m_vecMipMaps; }

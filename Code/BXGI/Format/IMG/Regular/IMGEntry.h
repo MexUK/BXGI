@@ -35,6 +35,8 @@ public:
 	void					unserializeRWVersion(bxcf::DataReader *pDataReader = nullptr, std::string strFilePath = "", std::string& strUncompressedEntryData = bxcf::g_strBlankString);
 	void					unserializeResourceType(bxcf::DataReader *pDataReader = nullptr);
 
+	void					replace(std::string& strFilePath);
+
 	void					setIMGFile(bxgi::IMGFormat *pIMGFile) { m_pIMGFile = pIMGFile; }
 	bxgi::IMGFormat*		getIMGFile(void) { return m_pIMGFile; }
 
@@ -135,8 +137,6 @@ public:
 	bool					doesHaveUnknownVersion(void); // checks for RW version (DFF/TXD) or COL version. Unknown file extension counts as unknown RW version. IPL files are skipped.
 
 	bxgi::IMGEntry*			clone(bxgi::IMGFormat *pIMGFile);
-
-	void					replace(std::string& strFilePath);
 
 private:
 	bxgi::IMGFormat*		m_pIMGFile;

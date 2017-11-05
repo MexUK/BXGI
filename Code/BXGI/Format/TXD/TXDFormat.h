@@ -28,6 +28,8 @@ public:
 	void											exportMultiple(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFolderPath);
 	void											exportAll(std::string& strFolderPath);
 	
+	bxgi::RWSection_TextureNative*					getEntryByName(std::string& strEntryName); // case-insensitive
+
 	std::vector<std::string>						getTextureNames(void);
 	std::vector<bxgi::RWSection_TextureNative*>		getTextures(void);
 

@@ -18,6 +18,11 @@ WTDEntry::WTDEntry(void) :
 	m_usImageSize[1] = 0;
 }
 
+void					WTDEntry::replace(string& strFilePath)
+{
+	// todo
+}
+
 void					WTDEntry::setRasterDataFormat(ERasterDataFormat ERasterDataFormatValue, bool bUpdateD3DFormat)
 {
 	m_uiRasterDataFormat = ERasterDataFormatValue;

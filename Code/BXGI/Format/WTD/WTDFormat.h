@@ -23,6 +23,8 @@ public:
 	void											exportMultiple(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFolderPath);
 	void											exportAll(std::string& strFolderPath);
 
+	bxgi::WTDEntry*									getEntryByName(std::string& strEntryName); // case-insensitive
+
 	std::vector<bxgi::WTDEntry*>					getSelectedEntries(void);
 	uint32											getSelectedEntryCount(void);
 
