@@ -13,6 +13,8 @@ class bxgi::WTDMipmap;
 class bxgi::WTDEntry : public bxcf::FormatEntry, public bxcf::VectorPool<bxgi::WTDMipmap*>
 {
 public:
+	using bxcf::VectorPool<bxgi::WTDMipmap*>::getEntries;
+
 	WTDEntry(void);
 
 	void						unload(void) {}
@@ -21,6 +23,12 @@ public:
 	std::string&				getEntryName(void) { return m_strEntryName; }
 
 	void						replace(std::string& strFilePath);
+
+	uint32						getIndex(void);
+	std::string					getEntryExtension(void);
+	uint32						getEntryOffset(void);
+	uint32						getEntrySize(void);
+	std::string					getVersionText(void);
 
 	void						setD3DFormat(D3DFORMAT eD3DFormat) { m_uiD3DFormat = eD3DFormat; }
 	D3DFORMAT					getD3DFormat(void) { return m_uiD3DFormat; }

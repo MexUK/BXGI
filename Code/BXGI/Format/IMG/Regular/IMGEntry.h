@@ -37,17 +37,21 @@ public:
 
 	void					replace(std::string& strFilePath);
 
+	uint32					getIndex(void);
+	inline std::string		getEntryExtension(void) { return m_strEntryExtension; }
+	inline uint32			getEntryOffset(void) { return m_uiEntryOffset; } // in bytes
+	inline uint32			getEntrySize(void) { return m_uiEntrySize; } // in bytes
+	std::string				getVersionText(void);
+
 	void					setIMGFile(bxgi::IMGFormat *pIMGFile) { m_pIMGFile = pIMGFile; }
 	bxgi::IMGFormat*		getIMGFile(void) { return m_pIMGFile; }
 
 	void					setEntryOffset(uint32 uiEntryOffsetInBytes) { m_uiEntryOffset = uiEntryOffsetInBytes; } // in bytes
-	inline uint32			getEntryOffset(void) { return m_uiEntryOffset; } // in bytes
 	void					setEntryOffsetInSectors(uint32 uiEntryOffsetInSectors) { m_uiEntryOffset = bxcf::Math::convertSectorsToBytes(uiEntryOffsetInSectors); } // in sectors (1 sector = 2048 bytes)
 	inline uint32			getEntryOffsetInSectors(void) { return bxcf::Math::convertBytesToSectors(m_uiEntryOffset); } // in sectors (1 sector = 2048 bytes)
 	uint32					getUndecryptedEntryOffset(void);
 
 	void					setEntrySize(uint32 uiEntrySize); // in bytes
-	inline uint32			getEntrySize(void) { return m_uiEntrySize; } // in bytes
 	uint32					getPaddedEntrySize(void); // in bytes
 	void					setEntrySizeInSectors(uint32 uiEntrySizeInSectors) { m_uiEntrySize = bxcf::Math::convertSectorsToBytes(uiEntrySizeInSectors); } // in sectors (1 sector = 2048 bytes)
 	inline uint32			getEntrySizeInSectors(void) { return bxcf::Math::convertBytesToSectors(getPaddedEntrySize()); } // in sectors (1 sector = 2048 bytes)
@@ -56,7 +60,6 @@ public:
 	inline std::string&		getEntryName(void) { return m_strEntryName; }  // dynamic length
 
 	inline void				setEntryExtension(std::string& strEntryExtension) { m_strEntryExtension = strEntryExtension; }
-	inline std::string&		getEntryExtension(void) { return m_strEntryExtension; }
 
 	void					setRageResourceTypeByIdentifier(uint32 uiResourceType);
 	void					setRageResourceType(bxgi::RageResourceType *pRageResourceType) { m_pRageResourceType = pRageResourceType; }
@@ -98,8 +101,6 @@ public:
 
 	inline void				setRawVersion(uint32 uiRawVersion) { m_uiRawVersion = uiRawVersion; }
 	inline uint32			getRawVersion(void) { return m_uiRawVersion; }
-
-	std::string				getVersionText(void);
 
 	void					setCOLVersion(bxgi::ECOLVersion uiCOLVersion) { m_uiRawVersion = uiCOLVersion; }
 	bxgi::ECOLVersion		getCOLVersion(void) { return (bxgi::ECOLVersion) m_uiRawVersion; }

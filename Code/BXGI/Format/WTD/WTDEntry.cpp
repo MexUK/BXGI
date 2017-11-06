@@ -23,6 +23,37 @@ void					WTDEntry::replace(string& strFilePath)
 	// todo
 }
 
+uint32					WTDEntry::getIndex(void)
+{
+	// return m_pFile->getIndexByEntry(this);
+	// todo
+	return 0;
+}
+
+string					WTDEntry::getEntryExtension(void)
+{
+	// todo
+	return "a";
+}
+
+uint32					WTDEntry::getEntryOffset(void)
+{
+	// todo
+	return 0;
+}
+
+uint32					WTDEntry::getEntrySize(void)
+{
+	// todo
+	return 0;
+}
+
+string					WTDEntry::getVersionText(void)
+{
+	// todo
+	return "b";
+}
+
 void					WTDEntry::setRasterDataFormat(ERasterDataFormat ERasterDataFormatValue, bool bUpdateD3DFormat)
 {
 	m_uiRasterDataFormat = ERasterDataFormatValue;

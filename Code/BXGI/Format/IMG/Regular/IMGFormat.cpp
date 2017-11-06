@@ -261,7 +261,7 @@ void				IMGFormat::checkXBOXCompressionStatusesForEntries(void)
 		m_reader.open(true); // open handle to IMG file (handle is closed in Format::unserializeVia*() methods
 	}
 
-	for (IMGEntry *pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 	{
 		m_reader.setSeek(pIMGEntry->getEntryOffset());
 		if (m_reader.readUint32() == 0x67A3A1CE)
@@ -411,7 +411,7 @@ void		IMGFormat::unserializERWVersions(void) // todo fix name(s) letter case
 		m_reader.open(true); // open handle to IMG file (handle is closed in Format::unserializeVia*() methods
 	}
 
-	for (IMGEntry *pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 	{
 		pIMGEntry->unserializeRWVersion(&m_reader);
 
@@ -421,7 +421,7 @@ void		IMGFormat::unserializERWVersions(void) // todo fix name(s) letter case
 
 void		IMGFormat::unserializeResourceTypes(void)
 {
-	for (IMGEntry *pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 	{
 		pIMGEntry->unserializeResourceType(&m_reader);
 
@@ -439,7 +439,7 @@ vector<IMGEntry*>		IMGFormat::getEntriesByNames(vector<string>& vecEntryNames)
 	}
 
 	vector<IMGEntry*> vecIMGEntries;
-	for (IMGEntry *pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 	{
 		if (stEntryNames.find(String::toUpperCase(Path::removeFileExtension(pIMGEntry->getEntryName()))) != stEntryNames.end())
 		{
@@ -454,7 +454,7 @@ void					IMGFormat::getModelAndTextureSetNamesFromEntries(
 	unordered_map<IMGEntry*, vector<string>>& umapIMGTextureSetNames
 )
 {
-	for (IMGEntry *pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 	{
 		if (pIMGEntry->isModelFile())
 		{
@@ -511,7 +511,7 @@ uint32					IMGFormat::getEntryExtensionCount(string strEntryExtension)
 void					IMGFormat::loadEntryExtensionCounts(void)
 {
 	m_umapExtensionCounts.clear();
-	for (IMGEntry *pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 	{
 		addEntryExtensionCount(pIMGEntry->getEntryExtension());
 	}
@@ -522,7 +522,7 @@ vector<EFileType>			IMGFormat::getFileTypes(void)
 	set<EFileType> setFileTypes;
 	vector<EFileType> vecFileTypes;
 	EFileType uiEntryType;
-	for (IMGEntry *pEntry : getEntries())
+	for (IMGEntry *pEntry : VectorPool::getEntries())
 	{
 		uiEntryType = pEntry->getFileType();
 		if (setFileTypes.count(uiEntryType) == 0)
@@ -554,7 +554,7 @@ vector<string>				IMGFormat::getFileVersions(void)
 	set<string> setFileVersions;
 	vector<string> vecFileVersions;
 	string strVersionText;
-	for (IMGEntry *pEntry : getEntries())
+	for (IMGEntry *pEntry : VectorPool::getEntries())
 	{
 		strVersionText = pEntry->getVersionText();
 		if (setFileVersions.count(strVersionText) == 0)
@@ -572,7 +572,7 @@ map<string, pair<uint32, EFileType>, SortByStringKey>		IMGFormat::getFileTypedVe
 	map<string, pair<uint32, EFileType>, SortByStringKey> mapFileTypedVersions;
 	set<string> setFileVersions;
 	string strVersionText;
-	for (IMGEntry *pEntry : getEntries())
+	for (IMGEntry *pEntry : VectorPool::getEntries())
 	{
 		strVersionText = pEntry->getVersionText();
 		if (setFileVersions.count(strVersionText) == 0)
@@ -606,7 +606,7 @@ ECompressionAlgorithm								IMGFormat::getCompressionAlgorithmIdFromFastman92Co
 uint32			IMGFormat::getVersion3NamesLength(void)
 {
 	uint32 uiLength = 0;
-	for (IMGEntry *pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 	{
 		uiLength += pIMGEntry->getEntryName().length();
 	}
@@ -825,7 +825,7 @@ IMGEntry*							IMGFormat::addOrReplaceEntryViaData(string& strEntryName, string
 
 unordered_map<IMGEntry*, string>	IMGFormat::getAllEntriesData(void)
 {
-	return getEntriesData(getEntries());
+	return getEntriesData(VectorPool::getEntries());
 }
 
 unordered_map<IMGEntry*, string>	IMGFormat::getEntriesData(vector<IMGEntry*>& vecEntries)
@@ -870,7 +870,7 @@ vector<IMGEntry*>		IMGFormat::getEntriesByName(string strText)
 {
 	strText = String::toUpperCase(strText);
 	vector<IMGEntry*> vecIMGEntries;
-	for (IMGEntry *pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 	{
 		if (String::isIn(String::toUpperCase(pIMGEntry->getEntryName()), strText))
 		{
@@ -885,7 +885,7 @@ vector<IMGEntry*>		IMGFormat::getEntriesByExtension(string strExtension, bool bW
 {
 	strExtension = String::toUpperCase(strExtension);
 	vector<IMGEntry*> vecIMGEntries;
-	for (IMGEntry *pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 	{
 		if (bWildcard)
 		{
@@ -909,7 +909,7 @@ vector<IMGEntry*>		IMGFormat::getEntriesByExtension(string strExtension, bool bW
 vector<IMGEntry*>		IMGFormat::getEntriesByVersion(uint32 uiFileTypeId, uint32 uiFileVersionId)
 {
 	vector<IMGEntry*> vecIMGEntries;
-	for (IMGEntry *pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 	{
 		if (pIMGEntry->getFileType() == uiFileTypeId && pIMGEntry->getRawVersion() == uiFileVersionId)
 		{
@@ -925,7 +925,7 @@ IMGEntry*				IMGFormat::getEntryByName(string& strEntryName)
 	string
 		strEntryName2 = String::toUpperCase(strEntryName),
 		strEntryName2NoExt = String::toUpperCase(Path::removeFileExtension(strEntryName));
-	for (IMGEntry *pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 	{
 		if (strEntryName2 == String::toUpperCase(pIMGEntry->getEntryName()))
 		{
@@ -942,7 +942,7 @@ IMGEntry*				IMGFormat::getEntryByName(string& strEntryName)
 IMGEntry*				IMGFormat::getEntryByNameWithoutExtension(string& strEntryNameWithoutExtension)
 {
 	strEntryNameWithoutExtension = String::toUpperCase(strEntryNameWithoutExtension);
-	for (IMGEntry *pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 	{
 		if (strEntryNameWithoutExtension == String::toUpperCase(Path::removeFileExtension(pIMGEntry->getEntryName())))
 		{
@@ -952,11 +952,26 @@ IMGEntry*				IMGFormat::getEntryByNameWithoutExtension(string& strEntryNameWitho
 	return nullptr;
 }
 
+vector<FormatEntry*>	IMGFormat::getAllEntries(void)
+{
+	vector<FormatEntry*> vecEntries;
+	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
+	{
+		vecEntries.push_back(pIMGEntry);
+	}
+	return vecEntries;
+}
+
+void					IMGFormat::swapEntries(FormatEntry *pEntry1, FormatEntry *pEntry2)
+{
+	VectorPool::swapEntries((IMGEntry*)pEntry1, (IMGEntry*)pEntry2);
+}
+
 IMGEntry*				IMGFormat::getEntryByHighestOffset(void)
 {
 	uint32 uiHighestOffset = 0;
 	IMGEntry *pHighestOffsetIMGEntry = nullptr;
-	for (IMGEntry *pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 	{
 		if (pIMGEntry->getEntryOffsetInSectors() >= uiHighestOffset)
 		{
@@ -976,7 +991,7 @@ uint32			IMGFormat::getEntryCountForName(string& strEntryName, bool bWilcard, bo
 		if (bWildcardIsLeftMatch)
 		{
 			uint32 uiEntryNameMatchLength = strEntryNameUpper.length();
-			for (IMGEntry *pIMGEntry : getEntries())
+			for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 			{
 				if (String::toUpperCase(pIMGEntry->getEntryName().substr(0, uiEntryNameMatchLength)) == strEntryNameUpper)
 				{
@@ -986,7 +1001,7 @@ uint32			IMGFormat::getEntryCountForName(string& strEntryName, bool bWilcard, bo
 		}
 		else
 		{
-			for (IMGEntry *pIMGEntry : getEntries())
+			for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 			{
 				if (String::isIn(String::toUpperCase(pIMGEntry->getEntryName()), strEntryNameUpper))
 				{
@@ -997,7 +1012,7 @@ uint32			IMGFormat::getEntryCountForName(string& strEntryName, bool bWilcard, bo
 	}
 	else
 	{
-		for (IMGEntry *pIMGEntry : getEntries())
+		for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 		{
 			if (strEntryNameUpper == String::toUpperCase(pIMGEntry->getEntryName()))
 			{
@@ -1010,7 +1025,7 @@ uint32			IMGFormat::getEntryCountForName(string& strEntryName, bool bWilcard, bo
 
 void					IMGFormat::unsetNewAndReplacedFlagForAllEntries(void)
 {
-	for (IMGEntry *pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 	{
 		pIMGEntry->setNewEntry(false);
 		pIMGEntry->setReplacedEntry(false);
@@ -1042,7 +1057,7 @@ uint32			IMGFormat::merge(string& strSecondIMGPath, vector<string>& vecImportedE
 
 	// import entries from second IMG into first IMG
 	bool bVersion3IMG = getVersion() == IMG_3;
-	for (IMGEntry *pInEntry : pIMGFileIn->getEntries())
+	for (IMGEntry *pInEntry : pIMGFileIn->VectorPool::getEntries())
 	{
 		// entry header data
 		IMGEntry *pOutEntry = new IMGEntry(this);
@@ -1171,7 +1186,7 @@ void					IMGFormat::exportAll(string& strFolderPath)
 	}
 	
 	uint32 uiEntryIndex = 0;
-	for (IMGEntry *pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 	{
 		if (!pIMGEntry->canBeRead())
 		{
@@ -1189,7 +1204,7 @@ void					IMGFormat::exportAll(string& strFolderPath)
 vector<IMGEntry*>		IMGFormat::getUnknownVersionEntries(void)
 {
 	vector<IMGEntry*> vecIMGEntries;
-	for (IMGEntry *pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 	{
 		if (pIMGEntry->doesHaveUnknownVersion())
 		{
@@ -1202,7 +1217,7 @@ vector<IMGEntry*>		IMGFormat::getUnknownVersionEntries(void)
 uint32			IMGFormat::getEntryCountForCompressionType(ECompressionAlgorithm ECompressionAlgorithmValue)
 {
 	uint32 uiCount = 0;
-	for (IMGEntry *pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 	{
 		if (pIMGEntry->getCompressionAlgorithmId() == ECompressionAlgorithmValue)
 		{
@@ -1217,7 +1232,7 @@ vector<string>			IMGFormat::getEntryNames(void)
 	vector<string> vecEntryNames;
 	vecEntryNames.resize(getEntryCount());
 	uint32 i = 0;
-	for (IMGEntry *pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 	{
 		vecEntryNames[i] = pIMGEntry->getEntryName();
 		++i;

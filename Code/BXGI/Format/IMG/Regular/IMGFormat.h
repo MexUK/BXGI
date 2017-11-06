@@ -32,6 +32,7 @@ class bxgi::IMGFormat : public bxcf::ContainerFormat, public bxcf::VectorPool<bx
 {
 public:
 	using bxcf::VectorPool<bxgi::IMGEntry*>::getEntryCount;
+	using bxcf::VectorPool<bxgi::IMGEntry*>::getEntries;
 
 	IMGFormat(void);
 	IMGFormat(EIMGVersion uiIMGVersion);
@@ -58,6 +59,10 @@ public:
 	std::string										readEntryContent(uint32 uiEntryIndex);
 
 	bxgi::IMGEntry*									getEntryByName(std::string& strEntryName); // case-insensitive
+
+	void											swapEntries(bxcf::FormatEntry *pEntry1, bxcf::FormatEntry *pEntry2);
+
+	std::vector<bxcf::FormatEntry*>					getAllEntries(void);
 
 	std::string										getIMGFilePath(void);
 	std::string										getDIRFilePath(void);

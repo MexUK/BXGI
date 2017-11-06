@@ -15,6 +15,7 @@
 #include "Image/ImageManager.h"
 #include "Image/ImageFile.h"
 #include "Format/RW/Sections/RWSection_TextureNative.h"
+#include "Format/RW/Sections/RWSection_TextureDictionary.h"
 #include "Type/Vector/Vec2u16.h"
 #include "Stream/DataReader.h"
 #include "Event/Events.h"
@@ -437,4 +438,20 @@ RWSection_TextureNative*	TXDFormat::getEntryByName(string& strEntryName)
 		}
 	}
 	return nullptr;
+}
+
+vector<FormatEntry*>		TXDFormat::getAllEntries(void)
+{
+	vector<FormatEntry*> vecEntries;
+	for (RWSection *pRWSection: getSectionsByType(RW_SECTION_TEXTURE_NATIVE))
+	{
+		vecEntries.push_back((RWSection_TextureNative*)pRWSection);
+	}
+	return vecEntries;
+}
+
+void						TXDFormat::swapEntries(FormatEntry *pEntry1, FormatEntry *pEntry2)
+{
+	RWSection_TextureDictionary *pTextureDictionary = (RWSection_TextureDictionary*)getSectionsByType(RW_SECTION_TEXTURE_DICTIONARY)[0];
+	pTextureDictionary->swapEntries((RWSection_TextureNative*)pEntry1, (RWSection_TextureNative*)pEntry2);
 }

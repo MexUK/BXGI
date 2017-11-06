@@ -12,6 +12,8 @@ class bxgi::IntermediateTextureFormat;
 class bxgi::WTDFormat : public bxcf::ContainerFormat, public bxcf::VectorPool<bxgi::WTDEntry*>
 {
 public:
+	using bxcf::VectorPool<bxgi::WTDEntry*>::getEntries;
+
 	WTDFormat(void) : ContainerFormat(true, bxcf::LITTLE_ENDIAN) {}
 	WTDFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) : bxcf::ContainerFormat(strFilePathOrData, bStringIsFilePath, true, bxcf::LITTLE_ENDIAN) {}
 
@@ -24,6 +26,10 @@ public:
 	void											exportAll(std::string& strFolderPath);
 
 	bxgi::WTDEntry*									getEntryByName(std::string& strEntryName); // case-insensitive
+
+	std::vector<bxcf::FormatEntry*>					getAllEntries(void);
+
+	void											swapEntries(bxcf::FormatEntry *pEntry1, bxcf::FormatEntry *pEntry2);
 
 	std::vector<bxgi::WTDEntry*>					getSelectedEntries(void);
 	uint32											getSelectedEntryCount(void);

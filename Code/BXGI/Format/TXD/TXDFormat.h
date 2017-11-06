@@ -30,6 +30,10 @@ public:
 	
 	bxgi::RWSection_TextureNative*					getEntryByName(std::string& strEntryName); // case-insensitive
 
+	std::vector<bxcf::FormatEntry*>					getAllEntries(void);
+
+	void											swapEntries(bxcf::FormatEntry *pEntry1, bxcf::FormatEntry *pEntry2);
+
 	std::vector<std::string>						getTextureNames(void);
 	std::vector<bxgi::RWSection_TextureNative*>		getTextures(void);
 

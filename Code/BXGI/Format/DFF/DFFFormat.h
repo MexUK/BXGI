@@ -21,6 +21,10 @@ public:
 
 	bxcf::FormatEntry*												getEntryByName(std::string& strEntryName); // case-insensitive
 
+	std::vector<bxcf::FormatEntry*>									getAllEntries(void);
+
+	void															swapEntries(bxcf::FormatEntry *pEntry1, bxcf::FormatEntry *pEntry2) {} // todo
+
 	bxgi::IntermediateModelFormat*									convertToIntermediateModelFormat(void);
 	std::vector<std::string>										getModelNames(void);
 };

@@ -70,7 +70,7 @@ void					IMGFormatVersion3::_unserialize(void)
 			*pRGIMGActiveEntry = pRGIMGEntries;
 
 		// copy IMG tables RG structs into wrapper structs
-		vector<IMGEntry*>& rvecIMGEntries = getEntries();
+		vector<IMGEntry*>& rvecIMGEntries = VectorPool::getEntries();
 		rvecIMGEntries.clear();
 		rvecIMGEntries.resize(uiEntryCount);
 
@@ -112,7 +112,7 @@ void					IMGFormatVersion3::_unserialize(void)
 			*pRGIMGActiveEntry = pRGIMGEntries;
 
 		// copy IMG tables RG structs into wrapper structs
-		vector<IMGEntry*>& rvecIMGEntries = getEntries();
+		vector<IMGEntry*>& rvecIMGEntries = VectorPool::getEntries();
 		rvecIMGEntries.clear();
 		rvecIMGEntries.resize(uiEntryCount);
 
@@ -156,7 +156,7 @@ void					IMGFormatVersion3::_serialize(void)
 			i = 0;
 		vector<uint32> vecNewEntryPositions;
 		vecNewEntryPositions.resize(uiEntryCount);
-		for (IMGEntry *pIMGEntry : getEntries())
+		for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 		{
 			vecNewEntryPositions[i] = uiSeek;
 			uiSeek += pIMGEntry->getEntrySizeInSectors();
@@ -186,7 +186,7 @@ void					IMGFormatVersion3::_serialize(void)
 
 		// IMG file - table
 		i = 0;
-		for (IMGEntry *pIMGEntry : getEntries())
+		for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 		{
 			m_writer.writeUint32(0);
 			m_writer.writeUint32(pIMGEntry->getRageResourceType() == nullptr ? 0 : pIMGEntry->getRageResourceType()->getIdentifier());
@@ -200,7 +200,7 @@ void					IMGFormatVersion3::_serialize(void)
 		}
 
 		string strEntryName;
-		for (IMGEntry *pIMGEntry : getEntries())
+		for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 		{
 			strEntryName = pIMGEntry->getEntryName();
 			strEntryName.append("\0", 1);
@@ -226,7 +226,7 @@ void					IMGFormatVersion3::_serialize(void)
 
 		// IMG file - body
 		i = 0;
-		for (IMGEntry *pIMGEntry : getEntries())
+		for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 		{
 			m_reader.setSeek(pIMGEntry->getEntryOffset());
 			m_writer.writeString(m_reader.readString(pIMGEntry->getEntrySize()), pIMGEntry->getPaddedEntrySize());
@@ -257,7 +257,7 @@ void					IMGFormatVersion3::_serialize(void)
 			i = 0;
 		vector<uint32> vecNewEntryPositions;
 		vecNewEntryPositions.resize(uiEntryCount);
-		for (IMGEntry *pIMGEntry : getEntries())
+		for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 		{
 			vecNewEntryPositions[i] = uiSeek;
 			uiSeek += pIMGEntry->getEntrySizeInSectors();
@@ -280,7 +280,7 @@ void					IMGFormatVersion3::_serialize(void)
 		m_writer.writeUint16(0);
 
 		// IMG file - table
-		for (IMGEntry *pIMGEntry : getEntries())
+		for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 		{
 			m_writer.writeUint32(0);
 			m_writer.writeUint32((pIMGEntry->getRageResourceType() == nullptr ? 0 : pIMGEntry->getRageResourceType()->getIdentifier()));
@@ -294,7 +294,7 @@ void					IMGFormatVersion3::_serialize(void)
 		}
 
 		string strEntryName;
-		for (IMGEntry *pIMGEntry : getEntries())
+		for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 		{
 			strEntryName = pIMGEntry->getEntryName();
 			strEntryName.append("\0", 1);
@@ -309,7 +309,7 @@ void					IMGFormatVersion3::_serialize(void)
 
 		// IMG file - body
 		i = 0;
-		for (IMGEntry *pIMGEntry : getEntries())
+		for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 		{
 			m_reader.setSeek(pIMGEntry->getEntryOffset());
 			m_writer.writeString(m_reader.readString(pIMGEntry->getEntrySize()));

@@ -41,7 +41,7 @@ void					IMGFormatVersion1::_unserialize(void)
 		*pRGIMGActiveEntry = pRGIMGEntries;
 
 	// copy RG structs into wrapper structs - so that we can use std::string for strings in our structs rather than char arrays
-	vector<IMGEntry*>& rvecIMGEntries = getEntries();
+	vector<IMGEntry*>& rvecIMGEntries = VectorPool::getEntries();
 	rvecIMGEntries.clear();
 	rvecIMGEntries.resize((unsigned int)m_uiEntryCount);
 
@@ -80,7 +80,7 @@ void					IMGFormatVersion1::_serialize(void)
 
 	// write IMG data
 	uint32 uiSeek = 0;
-	for (IMGEntry *pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 	{
 		uint32 uiEntryByteCountPadded = pIMGEntry->getPaddedEntrySize();
 
@@ -118,7 +118,7 @@ void					IMGFormatVersion1::_serialize(void)
 	}
 
 	// write DIR data
-	for (IMGEntry *pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 	{
 		m_writer.writeUint32(pIMGEntry->getEntryOffsetInSectors());
 		m_writer.writeUint32(pIMGEntry->getEntrySizeInSectors());

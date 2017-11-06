@@ -26,7 +26,7 @@ using namespace bxgi;
 
 void					WTDFormat::unload(void)
 {
-	for (auto pWTDEntry : getEntries())
+	for (auto pWTDEntry : VectorPool::getEntries())
 	{
 		for (auto pWTDMipmap : pWTDEntry->getEntries())
 		{
@@ -255,7 +255,7 @@ void					WTDFormat::_serialize(void)
 	pDataWriter2->writeUint16(usUnknown3);
 
 	// store texture hashes
-	for (auto pWTDEntry : getEntries())
+	for (auto pWTDEntry : VectorPool::getEntries())
 	{
 		pDataWriter2->writeUint32(pWTDEntry->getTextureHash());
 	}
@@ -340,9 +340,9 @@ void					WTDFormat::_serialize(void)
 
 	// store graphics stream
 	uint32 uiSystemStreamSize = pDataWriter2->getData().length();
-	for (auto pWTDEntry : getEntries())
+	for (auto pWTDEntry : VectorPool::getEntries())
 	{
-		for (auto pMipmap : pWTDEntry->getEntries())
+		for (auto pMipmap : pWTDEntry->VectorPool::getEntries())
 		{
 			pDataWriter2->writeStringRef(pMipmap->getRasterData());
 		}
@@ -376,7 +376,7 @@ IntermediateTextureFormat*		WTDFormat::convertToIntermediateFormat(void)
 {
 	IntermediateTextureFormat *pGeneralTextureFile = new IntermediateTextureFormat;
 
-	for (WTDEntry *pWTDEntry : getEntries())
+	for (WTDEntry *pWTDEntry : VectorPool::getEntries())
 	{
 		IntermediateTexture *pGeneralTexture = new IntermediateTexture;
 
@@ -388,7 +388,7 @@ IntermediateTextureFormat*		WTDFormat::convertToIntermediateFormat(void)
 		pGeneralTexture->setRasterDataFormat(ImageManager::getRasterDataFormatFromD3DFormat(pWTDEntry->getD3DFormat()));
 		pGeneralTexture->setSize(vecImageSize);
 
-		for (WTDMipmap *pWTDMipmap : pWTDEntry->getEntries())
+		for (WTDMipmap *pWTDMipmap : pWTDEntry->VectorPool::getEntries())
 		{
 			IntermediateTextureMipmap *pGeneralMipmap = new IntermediateTextureMipmap;
 
@@ -569,7 +569,7 @@ WTDEntry*				WTDFormat::getEntryByName(string& strEntryName)
 	string
 		strEntryName2 = String::toUpperCase(strEntryName),
 		strEntryName2NoExt = String::toUpperCase(Path::removeFileExtension(strEntryName));
-	for (WTDEntry *pWTDEntry : getEntries())
+	for (WTDEntry *pWTDEntry : VectorPool::getEntries())
 	{
 		if (strEntryName2 == String::toUpperCase(pWTDEntry->getEntryName()))
 		{
@@ -581,4 +581,19 @@ WTDEntry*				WTDFormat::getEntryByName(string& strEntryName)
 		}
 	}
 	return nullptr;
+}
+
+vector<FormatEntry*>	WTDFormat::getAllEntries(void)
+{
+	vector<FormatEntry*> vecEntries;
+	for (WTDEntry *pWTDEntry : VectorPool::getEntries())
+	{
+		vecEntries.push_back(pWTDEntry);
+	}
+	return vecEntries;
+}
+
+void					WTDFormat::swapEntries(FormatEntry *pEntry1, FormatEntry *pEntry2)
+{
+	swapEntries((WTDEntry*)pEntry1, (WTDEntry*)pEntry2);
 }

@@ -5,10 +5,13 @@
 #include "Format/TXD/TXDManager.h"
 #include "Static/String.h"
 #include "Static/Path.h"
+#include "Static/StdVector.h"
 #include "Image/ImageManager.h"
 #include "Image/ImageFile.h"
 #include "Exception/EExceptionCode.h"
 #include "Format/RW/RWFormat.h"
+#include "Engine/RW/RWManager.h"
+#include "Engine/RW/RWVersionManager.h"
 
 using namespace std;
 using namespace bxcf;
@@ -945,4 +948,39 @@ void						RWSection_TextureNative::replace(string& strFilePath)
 	pMipMap->setImageSize(Vec2u(pImageFile->m_uiImageWidth, pImageFile->m_uiImageHeight));
 	pMipMap->setRasterData(pImageFile->m_strRasterDataBGRA32);
 	getMipMaps().addEntry(pMipMap);
+}
+
+// fetch general property
+uint32						RWSection_TextureNative::getIndex(void)
+{
+	return StdVector::findKey(getRWFormat()->getSectionsByType(RW_SECTION_TEXTURE_NATIVE), (RWSection*)this);
+}
+
+string						RWSection_TextureNative::getEntryExtension(void)
+{
+	return "";
+}
+
+uint32						RWSection_TextureNative::getEntryOffset(void)
+{
+	// todo
+	return 0;
+}
+
+uint32						RWSection_TextureNative::getEntrySize(void)
+{
+	return m_uiSectionSize;
+}
+
+string						RWSection_TextureNative::getVersionText(void)
+{
+	RWVersion *pRWVersion = RWManager::get()->getVersionManager()->getEntryByVersionCC(getSectionRWVersion());
+	if (pRWVersion)
+	{
+		return pRWVersion->getVersionTextWithGames();
+	}
+	else
+	{
+		return RWVersion::unpackVersionStampAsStringWithBuild(getSectionRWVersion());
+	}
 }

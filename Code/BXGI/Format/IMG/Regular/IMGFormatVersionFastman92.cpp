@@ -69,7 +69,7 @@ void					IMGFormatVersionFastman92::_unserialize(void)
 		*pRawIMGActiveEntry = pRawIMGEntries;
 
 	// copy raw structs into wrapper structs
-	vector<IMGEntry*>& rvecIMGEntries = getEntries();
+	vector<IMGEntry*>& rvecIMGEntries = VectorPool::getEntries();
 	rvecIMGEntries.clear();
 	rvecIMGEntries.resize(uiEntryCount);
 
@@ -101,7 +101,7 @@ void					IMGFormatVersionFastman92::_serialize(void)
 		i = 0;
 	vector<uint32> vecNewEntryPositions;
 	vecNewEntryPositions.resize(uiEntryCount);
-	for (IMGEntry *pIMGEntry : getEntries())
+	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 	{
 		vecNewEntryPositions[i] = uiSeek;
 		uiSeek += pIMGEntry->getEntrySizeInSectors();
@@ -138,7 +138,7 @@ void					IMGFormatVersionFastman92::_serialize(void)
 
 		// write IMG data - IMG directory
 		i = 0;
-		for (IMGEntry *pIMGEntry : getEntries())
+		for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 		{
 			uint32 uiEntryFlags = 0;
 			if (pIMGEntry->isCompressed())
@@ -180,7 +180,7 @@ void					IMGFormatVersionFastman92::_serialize(void)
 
 		// write IMG data - IMG body
 		i = 0;
-		for (IMGEntry *pIMGEntry : getEntries())
+		for (IMGEntry *pIMGEntry : VectorPool::getEntries())
 		{
 			m_reader.setSeek(pIMGEntry->getEntryOffset());
 			m_writer.writeString(m_reader.readString(pIMGEntry->getEntrySize()), IMGFormat::getEntryPaddedSize(pIMGEntry->getEntrySize()));

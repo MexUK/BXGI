@@ -62,3 +62,11 @@ FormatEntry*				DFFFormat::getEntryByName(string& strEntryName)
 	// todo
 	return nullptr;
 }
+
+// fetch entries
+vector<FormatEntry*>		DFFFormat::getAllEntries(void)
+{
+	vector<FormatEntry*> vecEntries;
+	// todo
+	return vecEntries;
+}

@@ -26,6 +26,12 @@ public:
 
 	void						replace(std::string& strFilePath);
 
+	uint32						getIndex(void);
+	std::string					getEntryExtension(void);
+	uint32						getEntryOffset(void);
+	uint32						getEntrySize(void);
+	std::string					getVersionText(void);
+
 	void						convertToGame(bxgi::EPlatformedGame EPlatformedGame, std::vector<std::string>& vecMipmapsRemoved);
 	void						convertToRasterDataFormat(bxcf::ERasterDataFormat ERasterDataFormatValue, std::vector<std::string>& vecMipmapsRemoved);
 

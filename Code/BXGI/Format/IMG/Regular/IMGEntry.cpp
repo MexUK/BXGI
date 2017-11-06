@@ -598,6 +598,11 @@ void					IMGEntry::replace(string& strFilePath)
 	}
 }
 
+uint32					IMGEntry::getIndex(void)
+{
+	return getIMGFile()->getIndexByEntry(this);
+}
+
 void					bxgi::IMGEntry::unserializeVersion1(bxgi::RG_IMGEntry_Version1 *pRGIMGEntry)
 {
 	m_uiEntryOffset = bxcf::Math::convertSectorsToBytes(pRGIMGEntry->m_uiOffsetInSectors);
