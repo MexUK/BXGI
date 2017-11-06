@@ -10,6 +10,7 @@
 #include "Type/Vector/Vec2u.h"
 #include "Platform/Hardware/EPlatform.h"
 #include "Format/FormatEntry.h"
+#include "Format/EFileType.h"
 #include <string>
 #include <vector>
 
@@ -30,7 +31,12 @@ public:
 	std::string					getEntryExtension(void);
 	uint32						getEntryOffset(void);
 	uint32						getEntrySize(void);
+	uint32						getRawVersion(void);
 	std::string					getVersionText(void);
+
+	std::string					getEntryData(void) { return ""; } // todo
+
+	inline bxcf::fileType::EFileType	getFileType(void) { return bxcf::fileType::EFileType::IMAGE; }
 
 	void						convertToGame(bxgi::EPlatformedGame EPlatformedGame, std::vector<std::string>& vecMipmapsRemoved);
 	void						convertToRasterDataFormat(bxcf::ERasterDataFormat ERasterDataFormatValue, std::vector<std::string>& vecMipmapsRemoved);

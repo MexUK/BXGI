@@ -346,6 +346,12 @@ IntermediateTextureFormat*	TXDFormat::convertToIntermediateFormat(void)
 	return pGeneralTextureFile;
 }
 
+void						TXDFormat::exportSingle(FormatEntry *pEntry, string& strFolderPath)
+{
+	string strFolderPath2 = Path::addSlashToEnd(strFolderPath);
+	File::storeFile(strFolderPath2 + pEntry->getEntryName(), readEntryContent(pEntry->getIndex()), false, true);
+}
+
 void						TXDFormat::exportMultiple(vector<FormatEntry*>& vecEntries, string& strFolderPath)
 {
 	strFolderPath = Path::addSlashToEnd(strFolderPath);

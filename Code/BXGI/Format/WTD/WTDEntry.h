@@ -5,6 +5,7 @@
 #include "Pool/VectorPool.h"
 #include "Format/FormatEntry.h"
 #include "Image/ERasterDataFormat.h"
+#include "Format/EFileType.h"
 #include "d3d9.h"
 #include <string>
 
@@ -28,7 +29,12 @@ public:
 	std::string					getEntryExtension(void);
 	uint32						getEntryOffset(void);
 	uint32						getEntrySize(void);
+	uint32						getRawVersion(void) { return 0; } // todo
 	std::string					getVersionText(void);
+
+	std::string					getEntryData(void) { return ""; } // todo
+
+	inline bxcf::fileType::EFileType	getFileType(void) { return bxcf::fileType::EFileType::IMAGE; }
 
 	void						setD3DFormat(D3DFORMAT eD3DFormat) { m_uiD3DFormat = eD3DFormat; }
 	D3DFORMAT					getD3DFormat(void) { return m_uiD3DFormat; }

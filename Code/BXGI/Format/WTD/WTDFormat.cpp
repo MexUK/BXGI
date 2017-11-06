@@ -499,6 +499,12 @@ string					WTDFormat::getFourCCFromD3DFormat(D3DFORMAT d3dFormat)
 	return "Unkn";
 }
 
+void					WTDFormat::exportSingle(FormatEntry *pEntry, string& strFolderPath)
+{
+	string strFolderPath2 = Path::addSlashToEnd(strFolderPath);
+	File::storeFile(strFolderPath2 + pEntry->getEntryName(), readEntryContent(pEntry->getIndex()), false, true);
+}
+
 void					WTDFormat::exportMultiple(vector<FormatEntry*>& vecEntries, string& strFolderPath)
 {
 	strFolderPath = Path::addSlashToEnd(strFolderPath);

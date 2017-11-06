@@ -1,15 +1,16 @@
 #include "DFFFormat.h"
 #include "Format/RW/TextureEntry.h"
 #include "Static/String.h"
+#include "Static/File.h"
+#include "Static/Path.h"
+#include "Static/Debug.h"
 #include "Engine/RW/RWVersion.h"
 #include "Format/RW/Sections/RWSection_Geometry.h"
-#include "Static/File.h"
 #include "Intermediate/Model/IntermediateModel.h"
 #include "Format/RW/Sections/RWSection_ExtraVertColour.h"
 #include "Format/RW/Sections/RWSection_2dEffect.h"
 #include "Format/RW/Sections/RWSection_Extension.h"
 #include "Format/RW/Sections/RWSection_Frame.h"
-#include "Static/Debug.h"
 #include "Format/RW/RWSection.h"
 
 using namespace std;
@@ -46,6 +47,12 @@ vector<string>				DFFFormat::getModelNames(void)
 }
 
 // export
+void						DFFFormat::exportSingle(FormatEntry *pEntry, string& strFolderPath)
+{
+	string strFolderPath2 = Path::addSlashToEnd(strFolderPath);
+	File::storeFile(strFolderPath2 + pEntry->getEntryName(), readEntryContent(pEntry->getIndex()), false, true);
+}
+
 void						DFFFormat::exportMultiple(vector<FormatEntry*>& vecEntries, string& strFolderPath)
 {
 	// todo

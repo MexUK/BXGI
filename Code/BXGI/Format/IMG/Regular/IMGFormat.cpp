@@ -429,26 +429,6 @@ void		IMGFormat::unserializeResourceTypes(void)
 	}
 }
 
-// entry fetching
-vector<IMGEntry*>		IMGFormat::getEntriesByNames(vector<string>& vecEntryNames)
-{
-	set<string> stEntryNames;
-	for (string& strEntryName : vecEntryNames)
-	{
-		stEntryNames.insert(String::toUpperCase(Path::removeFileExtension(strEntryName)));
-	}
-
-	vector<IMGEntry*> vecIMGEntries;
-	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
-	{
-		if (stEntryNames.find(String::toUpperCase(Path::removeFileExtension(pIMGEntry->getEntryName()))) != stEntryNames.end())
-		{
-			vecIMGEntries.push_back(pIMGEntry);
-		}
-	}
-	return vecIMGEntries;
-}
-
 void					IMGFormat::getModelAndTextureSetNamesFromEntries(
 	unordered_map<IMGEntry*, vector<string>>& umapIMGModelNames,
 	unordered_map<IMGEntry*, vector<string>>& umapIMGTextureSetNames
@@ -866,60 +846,6 @@ uint32			IMGFormat::getNextEntryOffset(void)
 	return pIMGEntry->getEntryOffset() + pIMGEntry->getPaddedEntrySize();
 }
 
-vector<IMGEntry*>		IMGFormat::getEntriesByName(string strText)
-{
-	strText = String::toUpperCase(strText);
-	vector<IMGEntry*> vecIMGEntries;
-	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
-	{
-		if (String::isIn(String::toUpperCase(pIMGEntry->getEntryName()), strText))
-		{
-			vecIMGEntries.push_back(pIMGEntry);
-		}
-		Events::trigger(TASK_PROGRESS);
-	}
-	return vecIMGEntries;
-}
-
-vector<IMGEntry*>		IMGFormat::getEntriesByExtension(string strExtension, bool bWildcard)
-{
-	strExtension = String::toUpperCase(strExtension);
-	vector<IMGEntry*> vecIMGEntries;
-	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
-	{
-		if (bWildcard)
-		{
-			if (String::isIn(String::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())), strExtension))
-			{
-				vecIMGEntries.push_back(pIMGEntry);
-			}
-		}
-		else
-		{
-			if (String::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())) == strExtension)
-			{
-				vecIMGEntries.push_back(pIMGEntry);
-			}
-		}
-		Events::trigger(TASK_PROGRESS);
-	}
-	return vecIMGEntries;
-}
-
-vector<IMGEntry*>		IMGFormat::getEntriesByVersion(uint32 uiFileTypeId, uint32 uiFileVersionId)
-{
-	vector<IMGEntry*> vecIMGEntries;
-	for (IMGEntry *pIMGEntry : VectorPool::getEntries())
-	{
-		if (pIMGEntry->getFileType() == uiFileTypeId && pIMGEntry->getRawVersion() == uiFileVersionId)
-		{
-			vecIMGEntries.push_back(pIMGEntry);
-		}
-		Events::trigger(TASK_PROGRESS);
-	}
-	return vecIMGEntries;
-}
-
 IMGEntry*				IMGFormat::getEntryByName(string& strEntryName)
 {
 	string
@@ -1133,16 +1059,19 @@ void					IMGFormat::split(vector<IMGEntry*>& vecIMGEntries, string& strOutPath, 
 	delete pIMGFile;
 }
 
-void					IMGFormat::exportSingle(IMGEntry *pIMGEntry, string& strFolderPath)
+void					IMGFormat::exportSingle(FormatEntry *pEntry, string& strFolderPath)
 {
-	if (!pIMGEntry->canBeRead())
+	/*
+	todo
+
+	if (!pEntry->canBeRead())
 	{
 		return;
 	}
+	*/
 
-	strFolderPath = Path::addSlashToEnd(strFolderPath);
-
-	File::storeFile(strFolderPath + pIMGEntry->getEntryName(), pIMGEntry->getEntryData(), false, true);
+	string strFolderPath2 = Path::addSlashToEnd(strFolderPath);
+	File::storeFile(strFolderPath2 + pEntry->getEntryName(), readEntryContent(pEntry->getIndex()), false, true);
 }
 
 void					IMGFormat::exportMultiple(vector<IMGEntry*>& vecIMGEntries, string& strFolderPath)

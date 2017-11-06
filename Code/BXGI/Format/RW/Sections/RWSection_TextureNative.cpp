@@ -972,6 +972,11 @@ uint32						RWSection_TextureNative::getEntrySize(void)
 	return m_uiSectionSize;
 }
 
+uint32						RWSection_TextureNative::getRawVersion(void)
+{
+	return m_uiSectionRWVersion;
+}
+
 string						RWSection_TextureNative::getVersionText(void)
 {
 	RWVersion *pRWVersion = RWManager::get()->getVersionManager()->getEntryByVersionCC(getSectionRWVersion());

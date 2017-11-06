@@ -41,7 +41,12 @@ public:
 	inline std::string		getEntryExtension(void) { return m_strEntryExtension; }
 	inline uint32			getEntryOffset(void) { return m_uiEntryOffset; } // in bytes
 	inline uint32			getEntrySize(void) { return m_uiEntrySize; } // in bytes
+	inline uint32			getRawVersion(void) { return m_uiRawVersion; }
 	std::string				getVersionText(void);
+
+	std::string				getEntryData(void); // returns uncompressed data if the entry is marked as compressed
+
+	inline bxcf::fileType::EFileType	getFileType(void) { return m_uiFileType; }
 
 	void					setIMGFile(bxgi::IMGFormat *pIMGFile) { m_pIMGFile = pIMGFile; }
 	bxgi::IMGFormat*		getIMGFile(void) { return m_pIMGFile; }
@@ -100,7 +105,6 @@ public:
 	uint32					getFileCreationDate(void) { return m_uiFileCreationDate; }
 
 	inline void				setRawVersion(uint32 uiRawVersion) { m_uiRawVersion = uiRawVersion; }
-	inline uint32			getRawVersion(void) { return m_uiRawVersion; }
 
 	void					setCOLVersion(bxgi::ECOLVersion uiCOLVersion) { m_uiRawVersion = uiCOLVersion; }
 	bxgi::ECOLVersion		getCOLVersion(void) { return (bxgi::ECOLVersion) m_uiRawVersion; }
@@ -110,7 +114,6 @@ public:
 	uint32					getRWVersion(void) { return m_uiRawVersion; } // todo
 
 	void					setEntryData(std::string& strEntryData, bool bIsNew = false);	// takes uncmpressed data, and stores it compressed if the entry is marked as compressed
-	std::string				getEntryData(void);												// returns uncompressed data if the entry is marked as compressed
 	std::string				getEntrySubData(uint32 uiStart, uint32 uiLength);
 
 	std::string				compressXBOXIMGEntry(std::string& strEntryData);
@@ -131,7 +134,6 @@ public:
 	bool					isCollisionFile(void);
 	
 	inline void							setFileType(bxcf::fileType::EFileType uiFileType) { m_uiFileType = uiFileType; }
-	inline bxcf::fileType::EFileType	getFileType(void) { return m_uiFileType; }
 
 	void					applyCompression(bxcf::ECompressionAlgorithm ECompressionAlgorithmValue, uint32 uiCompressionLevel = 0);
 

@@ -58,6 +58,11 @@ public:
 
 	std::string										readEntryContent(uint32 uiEntryIndex);
 
+	void											exportSingle(bxcf::FormatEntry *pEntry, std::string& strFolderPath);
+	void											exportMultiple(std::vector<bxcf::FormatEntry*>& vecIMGEntries, std::string& strFolderPath);
+	void											exportMultiple(std::vector<bxgi::IMGEntry*>& vecIMGEntries, std::string& strFolderPath);
+	void											exportAll(std::string& strFolderPath);
+
 	bxgi::IMGEntry*									getEntryByName(std::string& strEntryName); // case-insensitive
 
 	void											swapEntries(bxcf::FormatEntry *pEntry1, bxcf::FormatEntry *pEntry2);
@@ -96,8 +101,6 @@ public:
 	std::vector<std::string>						getFileVersions(void);
 	std::map<std::string, std::pair<uint32, bxcf::fileType::EFileType>, SortByStringKey>	getFileTypedVersionsAsMap(void);
 
-	std::vector<IMGEntry*>							getEntriesByNames(std::vector<std::string>& vecEntryNames);
-
 	void											getModelAndTextureSetNamesFromEntries(
 		std::unordered_map<IMGEntry*, std::vector<std::string>>& umapIMGModelNames,
 		std::unordered_map<IMGEntry*, std::vector<std::string>>& umapIMGTextureSetNames
@@ -128,10 +131,6 @@ public:
 	std::unordered_map<bxgi::IMGEntry*, std::string>	getEntriesData(std::vector<bxgi::IMGEntry*>& vecEntries); // not recommended to be used, may use too much memory, better to iterate pIMGFile->getEntries()
 	uint32											getNextEntryOffset(void); // in bytes
 
-	std::vector<bxgi::IMGEntry*>					getEntriesByName(std::string strText); // case-insensitive, wildcard match
-	std::vector<bxgi::IMGEntry*>					getEntriesByExtension(std::string strExtension, bool bWildcard = false); // case-insensitive
-	std::vector<bxgi::IMGEntry*>					getEntriesByVersion(uint32 uiFileTypeId, uint32 uiFileVersionId);
-
 	bxgi::IMGEntry*									getEntryByNameWithoutExtension(std::string& strEntryNameWithoutExtension); // case-insensitive
 	std::vector<std::string>						getEntryNames(void);
 	bxgi::IMGEntry*									getEntryByHighestOffset(void);
@@ -143,11 +142,6 @@ public:
 
 	uint32											merge(std::string& strSecondIMGPath, std::vector<std::string>& vecImportedEntryNames);
 	void											split(std::vector<bxgi::IMGEntry*>& vecIMGEntries, std::string& strOutPath, EIMGVersion uiIMGVersion);
-
-	void											exportSingle(bxgi::IMGEntry *pIMGEntry, std::string& strFolderPath);
-	void											exportMultiple(std::vector<bxcf::FormatEntry*>& vecIMGEntries, std::string& strFolderPath);
-	void											exportMultiple(std::vector<bxgi::IMGEntry*>& vecIMGEntries, std::string& strFolderPath);
-	void											exportAll(std::string& strFolderPath);
 
 	bool											doesContainEntryWithUnknownRWVersion(void); // for IMG versions 1 and 2 - todo - should it be changed to without RW to match function below - check func bodys
 	std::vector<bxgi::IMGEntry*>					getUnknownVersionEntries(void); // for IMG versions 1 and 2

@@ -22,6 +22,7 @@ public:
 	virtual bxgi::WTDEntry*							addEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "");
 	virtual bxgi::WTDEntry*							addEntryViaData(std::string& strEntryName, std::string& strEntryData);
 
+	void											exportSingle(bxcf::FormatEntry *pEntry, std::string& strFolderPath);
 	void											exportMultiple(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFolderPath);
 	void											exportAll(std::string& strFolderPath);
 
