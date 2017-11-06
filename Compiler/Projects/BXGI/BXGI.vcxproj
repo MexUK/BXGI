@@ -181,6 +181,8 @@
     <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Intermediate\DATEntry_Paths_General_Link.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Intermediate\DATEntry_Paths_General_NaviNode.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\DAT\Path\Entries\Intermediate\DATEntry_Paths_General_PathNode.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\FormatVersion.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\FormatVersionManager.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersion1.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersion2.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersion3.h" />
@@ -396,6 +398,7 @@
     <ClInclude Include="..\..\..\Code\BXGI\Format\WTD\Raw\WTDFormat_Header2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\FormatVersionManager.cpp" />
     <ClCompile Include="..\..\..\Code\BXGI\Format\GameFormat.cpp" />
     <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersion1.cpp" />
     <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersion2.cpp" />

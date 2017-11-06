@@ -9,6 +9,8 @@ namespace bxgi
 	class GameManager;
 	class Game;
 	class PlatformedGame;
+	class FormatVersionManager;
+	struct FormatVersion;
 	enum EGame;
 	enum EGameFlag;
 	enum EPlatformedGame;
