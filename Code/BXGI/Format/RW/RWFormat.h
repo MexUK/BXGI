@@ -22,6 +22,10 @@ public:
 
 	void												_readMetaData(void) {} // todo
 
+	uint32												getRawVersion(void);
+
+
+
 	void												setRWVersion(RWVersion* pRWVersion, bxgi::ERWSection ERWSectionValue = (bxgi::ERWSection)-1);	// Sets the RW version for all sections. Use -1 for ERWSectionValue to apply to all sections.
 	RWVersion*											getRWVersion(bxgi::ERWSection ERWSectionValue = (bxgi::ERWSection)-1);							// Sets the RW version for all sections. Use -1 for ERWSectionValue to apply to all sections.
 

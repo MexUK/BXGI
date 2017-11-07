@@ -47,12 +47,15 @@ FormatVersion*			FormatVersionManager::addFormatVersion(EFileType uiFileType, ui
 }
 
 // fetch versions
-vector<string>			FormatVersionManager::getEntriesVersionsText(void)
+vector<string>			FormatVersionManager::getEntriesVersionsText(EFileType uiFileType)
 {
 	vector<string> vecEntriesVersionsText;
 	for (FormatVersion *pFormatVersion : getEntries())
 	{
-		vecEntriesVersionsText.push_back(pFormatVersion->m_strVersionText);
+		if (uiFileType == UNKNOWN || uiFileType == pFormatVersion->m_uiFileType)
+		{
+			vecEntriesVersionsText.push_back(pFormatVersion->m_strVersionText);
+		}
 	}
 	return vecEntriesVersionsText;
 }

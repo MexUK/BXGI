@@ -26,6 +26,11 @@ public:
 
 	void															swapEntries(bxcf::FormatEntry *pEntry1, bxcf::FormatEntry *pEntry2) {} // todo
 
+	void															merge(std::string& strFilePath) {} // todo
+	void															split(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFilePathOut, uint32 uiFileVersionOut) {} // todo
+
+
+
 	bxgi::IntermediateModelFormat*									convertToIntermediateModelFormat(void);
 	std::vector<std::string>										getModelNames(void);
 };

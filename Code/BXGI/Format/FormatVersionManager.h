@@ -3,6 +3,7 @@
 #include "nsbxgi.h"
 #include "Pool/VectorPool.h"
 #include "Object/Singleton.h"
+#include "Format/EFileType.h"
 #include <string>
 #include <vector>
 
@@ -14,7 +15,7 @@ public:
 
 	FormatVersion*				addFormatVersion(bxcf::fileType::EFileType uiFileType, uint32 uiRawVersion, std::string& strVersionText);
 
-	std::vector<std::string>	getEntriesVersionsText(void);
+	std::vector<std::string>	getEntriesVersionsText(bxcf::fileType::EFileType uiFileType = bxcf::fileType::EFileType::UNKNOWN);
 
 	FormatVersion*				getEntryByVersionText(std::string& strVersionText);
 };

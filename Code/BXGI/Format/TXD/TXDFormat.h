@@ -35,6 +35,11 @@ public:
 
 	void											swapEntries(bxcf::FormatEntry *pEntry1, bxcf::FormatEntry *pEntry2);
 
+	void											merge(std::string& strFilePath);
+	void											split(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFilePathOut, uint32 uiFileVersionOut) {} // todo
+
+
+
 	std::vector<std::string>						getTextureNames(void);
 	std::vector<bxgi::RWSection_TextureNative*>		getTextures(void);
 

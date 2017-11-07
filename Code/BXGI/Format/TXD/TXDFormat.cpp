@@ -461,3 +461,84 @@ void						TXDFormat::swapEntries(FormatEntry *pEntry1, FormatEntry *pEntry2)
 	RWSection_TextureDictionary *pTextureDictionary = (RWSection_TextureDictionary*)getSectionsByType(RW_SECTION_TEXTURE_DICTIONARY)[0];
 	pTextureDictionary->swapEntries((RWSection_TextureNative*)pEntry1, (RWSection_TextureNative*)pEntry2);
 }
+
+void						TXDFormat::merge(string& strFilePath)
+{
+	DataReader *pDataReader = &m_reader;
+
+	// parse second file for entry information
+	TXDFormat *pFileIn = TXDManager::unserializeFile(strFilePath);
+	pFileIn->setFilePath(strFilePath);
+	if (!pFileIn->unserialize())
+	{
+		pFileIn->unload();
+		delete pFileIn;
+		return;
+	}
+
+	// open second file to read entry body data from
+	pDataReader->setFilePath(getFilePath());
+	pDataReader->open(true);
+
+	// import entries from second file into first file
+	for (RWSection *pRWSection : pFileIn->getSectionsByType(RW_SECTION_TEXTURE_NATIVE))
+	{
+		RWSection_TextureNative *pInEntry = (RWSection_TextureNative *)pRWSection;
+
+		// entry data
+		RWSection_TextureNative *pOutEntry = new RWSection_TextureNative;
+		pOutEntry->set2dEffects(pInEntry->get2dEffects());
+		pOutEntry->setAlpha(pInEntry->getAlpha());
+		pOutEntry->setAlphaName(pInEntry->getAlphaName());
+		pOutEntry->setAutoMipMaps(pInEntry->getAutoMipMaps());
+		pOutEntry->setBPP(pInEntry->getBPP());
+		pOutEntry->setCubeTexture(pInEntry->getCubeTexture());
+		pOutEntry->setDiffuseName(pInEntry->getDiffuseName());
+		pOutEntry->setDVColours(pInEntry->getDVColours());
+		pOutEntry->setDXTCompressionType(pInEntry->getDXTCompressionType());
+		pOutEntry->setFilterFlags(pInEntry->getFilterFlags());
+		pOutEntry->setHasAlpha(pInEntry->doesHaveAlpha());
+		pOutEntry->setHasDiffuse(pInEntry->doesHaveDiffuse());
+		pOutEntry->setImageSize(pInEntry->getImageSize());
+		pOutEntry->setIsNotRWCompatible(pInEntry->getIsNotRWCompatible());
+		pOutEntry->setMipMapCount(pInEntry->getMipMapCount());
+		pOutEntry->setNVColours(pInEntry->getNVColours());
+		pOutEntry->setOriginalBPP(pInEntry->getOriginalBPP());
+		pOutEntry->setPaletteData(pInEntry->getPaletteData());
+		pOutEntry->setPaletteUsed(pInEntry->isPaletteUsed());
+		pOutEntry->setPlatform(pInEntry->getPlatform());
+		pOutEntry->setPlatformId(pInEntry->getPlatformId());
+		pOutEntry->setRasterDataFormat(pInEntry->getRasterDataFormat());
+		pOutEntry->setRasterType(pInEntry->getRasterType());
+		pOutEntry->setRWFormat(pInEntry->getRWFormat());
+		pOutEntry->setSectionHeaderSkipped(pInEntry->isSectionHeaderSkipped());
+		pOutEntry->setSectionId(pInEntry->getSectionId());
+		pOutEntry->setSectionRWVersion(pInEntry->getSectionRWVersion());
+		pOutEntry->setSectionSize(pInEntry->getSectionSize());
+		pOutEntry->setStructSectionSize(pInEntry->getStructSectionSize());
+		pOutEntry->setTextureWrapUV(pInEntry->getTextureWrapUV());
+		pOutEntry->setTXDRasterDataFormat(pInEntry->getTXDRasterDataFormat());
+		pOutEntry->setUnknownSection(pInEntry->isUnknownSection());
+
+		for (uint32 i = 0, j = pInEntry->getMipMapCount(); i < j; i++)
+		{
+			RWEntry_TextureNative_MipMap *pMipMapIn = pInEntry->getMipMaps().getEntryByIndex(i);
+			RWEntry_TextureNative_MipMap *pMipMapOut = new RWEntry_TextureNative_MipMap(pOutEntry);
+
+			pMipMapOut->setImageSize(pMipMapIn->getImageSize());
+			pMipMapOut->setRasterData(pMipMapIn->getRasterData());
+			pMipMapOut->setSwizzledImageSize(pMipMapIn->getSwizzledImageSize());
+
+			pOutEntry->getMipMaps().addEntry(pMipMapOut);
+		}
+
+		addEntry(pOutEntry);
+		m_uiEntryCount++;
+
+		Events::trigger(TASK_PROGRESS);
+	}
+
+	// finalize
+	pDataReader->close();
+	pFileIn->unload();
+}

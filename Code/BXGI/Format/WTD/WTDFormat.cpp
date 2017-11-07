@@ -603,3 +603,8 @@ void					WTDFormat::swapEntries(FormatEntry *pEntry1, FormatEntry *pEntry2)
 {
 	swapEntries((WTDEntry*)pEntry1, (WTDEntry*)pEntry2);
 }
+
+uint32					WTDFormat::getRawVersion(void)
+{
+	return 0;
+}

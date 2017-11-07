@@ -68,6 +68,18 @@ void					RWFormat::_serialize(void)
 	RWSectionContainer::_serialize();
 }
 
+uint32					RWFormat::getRawVersion(void)
+{
+	if (getRWVersion())
+	{
+		return getRWVersion()->getRawVersion();
+	}
+	else
+	{
+		return RWManager::get()->getVersionManager()->getEntryByVersionId(RW_3_4_0_3)->getRawVersion();
+	}
+}
+
 // RW version
 void									RWFormat::setRWVersion(RWVersion *pRWVersion, ERWSection ERWSectionValue)
 {

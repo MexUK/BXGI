@@ -32,6 +32,15 @@ public:
 
 	void											swapEntries(bxcf::FormatEntry *pEntry1, bxcf::FormatEntry *pEntry2);
 
+	uint32											getRawVersion(void);
+
+	void											merge(std::string& strFilePath) {} // todo
+	void											split(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFilePathOut, uint32 uiFileVersionOut) {} // todo
+
+
+
+
+
 	std::vector<bxgi::WTDEntry*>					getSelectedEntries(void);
 	uint32											getSelectedEntryCount(void);
 

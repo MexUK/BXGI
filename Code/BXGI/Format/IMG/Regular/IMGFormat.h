@@ -69,6 +69,15 @@ public:
 
 	std::vector<bxcf::FormatEntry*>					getAllEntries(void);
 
+	uint32											getRawVersion(void);
+
+	void											merge(std::string& strFilePath);
+	void											split(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFilePathOut, uint32 uiFileVersionOut);
+
+
+
+
+
 	std::string										getIMGFilePath(void);
 	std::string										getDIRFilePath(void);
 
@@ -139,9 +148,6 @@ public:
 
 	static uint32									getEntryPaddedSize(uint32 uiDataLength);
 	void											unsetNewAndReplacedFlagForAllEntries(void);
-
-	uint32											merge(std::string& strSecondIMGPath, std::vector<std::string>& vecImportedEntryNames);
-	void											split(std::vector<bxgi::IMGEntry*>& vecIMGEntries, std::string& strOutPath, EIMGVersion uiIMGVersion);
 
 	bool											doesContainEntryWithUnknownRWVersion(void); // for IMG versions 1 and 2 - todo - should it be changed to without RW to match function below - check func bodys
 	std::vector<bxgi::IMGEntry*>					getUnknownVersionEntries(void); // for IMG versions 1 and 2

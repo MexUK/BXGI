@@ -963,102 +963,6 @@ uint32			IMGFormat::getEntryPaddedSize(uint32 uiDataLength)
 	return (uint32)(ceil((float)uiDataLength / (float)2048.0f) * (float)2048.0f);
 }
 
-uint32			IMGFormat::merge(string& strSecondIMGPath, vector<string>& vecImportedEntryNames)
-{
-	DataReader *pDataReader = &m_reader;
-
-	// parse second IMG file for entry information
-	IMGFormat *pIMGFileIn = createIMGFormat(strSecondIMGPath);
-	pIMGFileIn->setFilePath(strSecondIMGPath);
-	if (!pIMGFileIn->unserialize())
-	{
-		pIMGFileIn->unload();
-		delete pIMGFileIn;
-		return 0;
-	}
-
-	// open second IMG file to read entry body data from
-	pDataReader->setFilePath(getFilePath());
-	pDataReader->open(true);
-
-	// import entries from second IMG into first IMG
-	bool bVersion3IMG = getVersion() == IMG_3;
-	for (IMGEntry *pInEntry : pIMGFileIn->VectorPool::getEntries())
-	{
-		// entry header data
-		IMGEntry *pOutEntry = new IMGEntry(this);
-		pOutEntry->setEntryName(pInEntry->getEntryName());
-		pOutEntry->setEntrySize(pInEntry->getEntrySize());
-		if (bVersion3IMG)
-		{
-			pOutEntry->setRageResourceType(pInEntry->getRageResourceType());
-			pOutEntry->setFlags(pInEntry->getFlags());
-		}
-		else
-		{
-			pOutEntry->setRWVersion(pInEntry->getRWVersion());
-		}
-		addEntry(pOutEntry);
-		m_uiEntryCount++;
-
-		// entry body data
-		pDataReader->setSeek(pInEntry->getEntryOffset());
-		string strEntryData = pDataReader->readString(pInEntry->getEntrySize());
-		pOutEntry->setEntryData(strEntryData, true);
-
-		vecImportedEntryNames.push_back(pOutEntry->getEntryName());
-
-		Events::trigger(TASK_PROGRESS);
-	}
-
-	// finalize
-	pDataReader->close();
-
-	uint32 uiImportedEntryCount = pIMGFileIn->getEntryCount();
-	pIMGFileIn->unload();
-
-	return uiImportedEntryCount;
-}
-
-void					IMGFormat::split(vector<IMGEntry*>& vecIMGEntries, string& strOutPath, EIMGVersion uiIMGVersion)
-{
-	IMGFormat *pIMGFile = createIMGFormat(uiIMGVersion);
-	
-	pIMGFile->setFilePath(getIMGFilePath()); // todo - rename to format::setInputPath()
-	pIMGFile->m_writer.setFilePath(strOutPath);
-
-	// todo - remove from here? pIMGFile->openFile(); // open input - todo - rename to openInputFile()
-
-	bool bVersion3IMG = uiIMGVersion == IMG_3;
-	for (IMGEntry *pIMGEntry : vecIMGEntries)
-	{
-		IMGEntry *pIMGEntry2 = new IMGEntry(pIMGFile);
-		pIMGEntry2->setEntryName(pIMGEntry->getEntryName());
-		pIMGEntry2->setEntryOffsetInSectors(pIMGEntry->getEntryOffsetInSectors());
-		pIMGEntry2->setEntrySize(pIMGEntry->getEntrySize());
-		pIMGFile->addEntry(pIMGEntry2);
-
-		if (bVersion3IMG)
-		{
-			pIMGEntry2->setRageResourceType(pIMGEntry->getRageResourceType());
-			pIMGEntry2->setFlags(pIMGEntry->getFlags());
-		}
-		else
-		{
-			pIMGEntry2->setRWVersion(pIMGEntry->getRWVersion());
-		}
-
-		Events::triggerConst(SPLIT_IMG_ENTRY, this);
-	}
-
-	pIMGFile->serialize(strOutPath);
-
-	pIMGFile->closeOutput(); // todo - still needed?
-
-	pIMGFile->unload();
-	delete pIMGFile;
-}
-
 void					IMGFormat::exportSingle(FormatEntry *pEntry, string& strFolderPath)
 {
 	/*
@@ -1167,4 +1071,103 @@ vector<string>			IMGFormat::getEntryNames(void)
 		++i;
 	}
 	return vecEntryNames;
+}
+
+uint32					IMGFormat::getRawVersion(void)
+{
+	return getVersion();
+}
+
+void					IMGFormat::merge(string& strFilePath)
+{
+	DataReader *pDataReader = &m_reader;
+
+	// parse second IMG file for entry information
+	IMGFormat *pIMGFileIn = createIMGFormat(strFilePath);
+	pIMGFileIn->setFilePath(strFilePath);
+	if (!pIMGFileIn->unserialize())
+	{
+		pIMGFileIn->unload();
+		delete pIMGFileIn;
+		return;
+	}
+
+	// open second IMG file to read entry body data from
+	pDataReader->setFilePath(getIMGFilePath());
+	pDataReader->open(true);
+
+	// import entries from second IMG into first IMG
+	bool bVersion3IMG = getVersion() == IMG_3;
+	for (IMGEntry *pInEntry : pIMGFileIn->VectorPool::getEntries())
+	{
+		// entry header data
+		IMGEntry *pOutEntry = new IMGEntry(this);
+		pOutEntry->setFileType(pInEntry->getFileType());
+		pOutEntry->setEntryExtension(pInEntry->getEntryExtension());
+		pOutEntry->setEntryName(pInEntry->getEntryName());
+		pOutEntry->setEntrySize(pInEntry->getEntrySize());
+		if (bVersion3IMG)
+		{
+			pOutEntry->setRageResourceType(pInEntry->getRageResourceType());
+			pOutEntry->setFlags(pInEntry->getFlags());
+		}
+		else
+		{
+			pOutEntry->setRawVersion(pInEntry->getRawVersion());
+		}
+		addEntry(pOutEntry);
+		m_uiEntryCount++;
+
+		// entry body data
+		pDataReader->setSeek(pInEntry->getEntryOffset());
+		string strEntryData = pDataReader->readString(pInEntry->getEntrySize());
+		pOutEntry->setEntryData(strEntryData, true);
+
+		Events::trigger(TASK_PROGRESS);
+	}
+
+	// finalize
+	pDataReader->close();
+	pIMGFileIn->unload();
+}
+
+void					IMGFormat::split(vector<FormatEntry*>& vecIMGEntries, string& strOutPath, uint32 uiIMGVersion)
+{
+	IMGFormat *pIMGFile = createIMGFormat((EIMGVersion)uiIMGVersion);
+
+	pIMGFile->setFilePath(getIMGFilePath()); // todo - rename to format::setInputPath()
+	pIMGFile->m_writer.setFilePath(strOutPath);
+
+	// todo - remove from here? pIMGFile->openFile(); // open input - todo - rename to openInputFile()
+
+	bool bVersion3IMG = uiIMGVersion == IMG_3;
+	for (FormatEntry *pEntry : vecIMGEntries)
+	{
+		IMGEntry *pIMGEntry = (IMGEntry*)pEntry;
+
+		IMGEntry *pIMGEntry2 = new IMGEntry(pIMGFile);
+		pIMGEntry2->setEntryName(pIMGEntry->getEntryName());
+		pIMGEntry2->setEntryOffsetInSectors(pIMGEntry->getEntryOffsetInSectors());
+		pIMGEntry2->setEntrySize(pIMGEntry->getEntrySize());
+		pIMGFile->addEntry(pIMGEntry2);
+
+		if (bVersion3IMG)
+		{
+			pIMGEntry2->setRageResourceType(pIMGEntry->getRageResourceType());
+			pIMGEntry2->setFlags(pIMGEntry->getFlags());
+		}
+		else
+		{
+			pIMGEntry2->setRWVersion(pIMGEntry->getRWVersion());
+		}
+
+		Events::triggerConst(SPLIT_IMG_ENTRY, this);
+	}
+
+	pIMGFile->serialize(strOutPath);
+
+	pIMGFile->closeOutput(); // todo - still needed?
+
+	pIMGFile->unload();
+	delete pIMGFile;
 }

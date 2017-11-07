@@ -28,7 +28,7 @@ void				RWSectionContainer::unload(void)
 	for (RWSection *pRWSection : getEntries())
 	{
 		pRWSection->unload();
-		delete pRWSection;
+		// todo delete pRWSection;
 	}
 }
 
