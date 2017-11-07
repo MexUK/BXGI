@@ -30,6 +30,17 @@ TXDFormat::TXDFormat(void) :
 {
 }
 
+void								TXDFormat::_unserialize(void)
+{
+	RWFormat::_unserialize();
+	m_vecTextures = (vector<FormatEntry*>&)getTextures();
+}
+
+void								TXDFormat::_serialize(void)
+{
+	RWFormat::_serialize();
+}
+
 RWSection_TextureNative*			TXDFormat::addEntryViaFile(string& strEntryFilePath, string strEntryName)
 {
 	if (strEntryName == "")

@@ -29,6 +29,7 @@ public:
 	bxgi::WTDEntry*									getEntryByName(std::string& strEntryName); // case-insensitive
 
 	std::vector<bxcf::FormatEntry*>					getAllEntries(void);
+	std::vector<bxcf::FormatEntry*>&				getEntriesRef(void) { return (std::vector<bxcf::FormatEntry*>&)m_vecEntries; }
 
 	void											swapEntries(bxcf::FormatEntry *pEntry1, bxcf::FormatEntry *pEntry2);
 

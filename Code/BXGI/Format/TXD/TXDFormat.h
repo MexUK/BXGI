@@ -32,6 +32,7 @@ public:
 	bxgi::RWSection_TextureNative*					getEntryByName(std::string& strEntryName); // case-insensitive
 
 	std::vector<bxcf::FormatEntry*>					getAllEntries(void);
+	std::vector<bxcf::FormatEntry*>&				getEntriesRef(void) { return (std::vector<bxcf::FormatEntry*>&)m_vecTextures; }
 
 	void											swapEntries(bxcf::FormatEntry *pEntry1, bxcf::FormatEntry *pEntry2);
 
@@ -62,6 +63,11 @@ public:
 	uint16									getDeviceId(void) { return m_usDeviceId; }
 
 private:
+	void									_unserialize(void);
+	void									_serialize(void);
+
+private:
 	std::vector<bxgi::EPlatformedGame>		m_vecGames;
 	uint16									m_usDeviceId;
+	std::vector<bxcf::FormatEntry*>			m_vecTextures;
 };

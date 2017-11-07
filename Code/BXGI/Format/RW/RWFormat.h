@@ -45,10 +45,11 @@ public:
 	void												setPlatformedGames(std::vector<bxgi::EPlatformedGame> vecGames) { m_vecGames = vecGames; }
 	std::vector<bxgi::EPlatformedGame>&					getPlatformedGames(void) { return m_vecGames; }
 
-private:
-	void												_unserialize(void);
-	void												_serialize(void);
+protected:
+	virtual void										_unserialize(void);
+	virtual void										_serialize(void);
 
+private:
 	void												loadTextureEntries(void);
 
 private:

@@ -68,6 +68,7 @@ public:
 	void											swapEntries(bxcf::FormatEntry *pEntry1, bxcf::FormatEntry *pEntry2);
 
 	std::vector<bxcf::FormatEntry*>					getAllEntries(void);
+	std::vector<bxcf::FormatEntry*>&				getEntriesRef(void) { return (std::vector<bxcf::FormatEntry*>&)m_vecEntries; }
 
 	uint32											getRawVersion(void);
 

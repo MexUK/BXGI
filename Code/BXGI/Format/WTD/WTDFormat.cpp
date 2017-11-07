@@ -601,7 +601,7 @@ vector<FormatEntry*>	WTDFormat::getAllEntries(void)
 
 void					WTDFormat::swapEntries(FormatEntry *pEntry1, FormatEntry *pEntry2)
 {
-	swapEntries((WTDEntry*)pEntry1, (WTDEntry*)pEntry2);
+	VectorPool::swapEntries((WTDEntry*)pEntry1, (WTDEntry*)pEntry2);
 }
 
 uint32					WTDFormat::getRawVersion(void)

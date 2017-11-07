@@ -23,6 +23,7 @@ public:
 	bxcf::FormatEntry*												getEntryByName(std::string& strEntryName); // case-insensitive
 
 	std::vector<bxcf::FormatEntry*>									getAllEntries(void);
+	std::vector<bxcf::FormatEntry*>&								getEntriesRef(void) { return (std::vector<bxcf::FormatEntry*>&)m_vecTextures; }
 
 	void															swapEntries(bxcf::FormatEntry *pEntry1, bxcf::FormatEntry *pEntry2) {} // todo
 
@@ -33,4 +34,7 @@ public:
 
 	bxgi::IntermediateModelFormat*									convertToIntermediateModelFormat(void);
 	std::vector<std::string>										getModelNames(void);
+
+private:
+	std::vector<bxcf::FormatEntry*>									m_vecTextures;
 };
