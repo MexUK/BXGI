@@ -19,6 +19,7 @@
 #include "Event/Events.h"
 #include "../bxcf/Event/EEvent.h"
 #include "Format/Image/BMP/BMPFormat.h"
+#include "Exception/EExceptionCode.h"
 
 using namespace std;
 using namespace bxcf;
@@ -525,7 +526,34 @@ void					WTDFormat::exportMultiple(vector<FormatEntry*>& vecEntries, string& str
 		}
 		*/
 
-		File::storeFile(strFolderPath + pWTDEntry->getEntryName(), readEntryContent(getIndexByEntry(pWTDEntry)), false, true);
+		WTDMipmap *pMipmap = pWTDEntry->getEntryByIndex(0);
+
+		BMPFormat *pBMPFile = new BMPFormat;
+		pBMPFile->setWidth(pMipmap->getImageSize(true));
+		pBMPFile->setHeight(pMipmap->getImageSize(false));
+		pBMPFile->setBPP(32);
+
+		pBMPFile->setRasterData(pMipmap->getRasterDataBGRA32());
+		pBMPFile->swapRows();
+
+		string strBMPFilePath = strFolderPath + "/" + pWTDEntry->getEntryName() + ".BMP";
+		strBMPFilePath = Path::getNextFileName(strBMPFilePath, 1, "-Mipmap");
+
+		pBMPFile->setBMPVersion(3);
+		pBMPFile->serialize(strBMPFilePath);
+
+		pBMPFile->unload();
+		delete pBMPFile;
+
+		/*
+		todo
+		string strFileNameOut = pWTDEntry->getEntryName();
+		if (Path::getFileExtension(strFileNameOut) == "")
+		{
+			strFileNameOut += ".bmp";
+		}
+		File::storeFile(strFolderPath + strFileNameOut, readEntryContent(getIndexByEntry(pWTDEntry)), false, true);
+		*/
 
 		Events::trigger(TASK_PROGRESS);
 	}
@@ -607,4 +635,77 @@ void					WTDFormat::swapEntries(FormatEntry *pEntry1, FormatEntry *pEntry2)
 uint32					WTDFormat::getRawVersion(void)
 {
 	return 0;
+}
+
+// read entry content, with try/catch
+string					WTDFormat::readEntryContent(uint32 uiEntryIndex)
+{
+	string strEntryData;
+	try
+	{
+		WTDEntry *pWTDEntry = getEntryByIndex(uiEntryIndex);
+		m_reader.setSeek(pWTDEntry->getRawDataOffset());
+		strEntryData = m_reader.readString(pWTDEntry->getEntrySize());
+	}
+	catch (EExceptionCode uiErrorCode)
+	{
+		m_ucErrorCode = uiErrorCode;
+	}
+	return strEntryData;
+}
+
+// merge
+void					WTDFormat::merge(string& strFilePath)
+{
+	DataReader *pDataReader = &m_reader;
+
+	// parse second file for entry information
+	WTDFormat *pFileIn = WTDManager::unserializeFile(strFilePath);
+	pFileIn->setFilePath(strFilePath);
+	if (!pFileIn->unserialize())
+	{
+		pFileIn->unload();
+		delete pFileIn;
+		return;
+	}
+
+	// open second file to read entry body data from
+	pDataReader->setFilePath(getFilePath());
+	pDataReader->open(true);
+
+	// import entries from second file into first file
+	for (WTDEntry *pInEntry : pFileIn->getEntries())
+	{
+		// entry data
+		WTDEntry *pOutEntry = new WTDEntry;
+		pOutEntry->setD3DFormat(pInEntry->getD3DFormat());
+		pOutEntry->setEntryName(pInEntry->getEntryName());
+		pOutEntry->setImageSize(true, pInEntry->getImageSize(true));
+		pOutEntry->setImageSize(false, pInEntry->getImageSize(false));
+		pOutEntry->setLevels(pInEntry->getLevels());
+		pOutEntry->setRasterDataFormat(pInEntry->getRasterDataFormat());
+		pOutEntry->setRawDataOffset(pInEntry->getRawDataOffset());
+		pOutEntry->setTextureHash(pInEntry->getTextureHash());
+
+		for (uint32 i = 0, j = pInEntry->getEntryCount(); i < j; i++)
+		{
+			WTDMipmap *pMipMapIn = pInEntry->getEntryByIndex(i);
+			WTDMipmap *pMipMapOut = new WTDMipmap(pOutEntry);
+
+			pMipMapOut->setImageSize(true, pMipMapIn->getImageSize(true));
+			pMipMapOut->setImageSize(false, pMipMapIn->getImageSize(false));
+			pMipMapOut->setRasterData(pMipMapIn->getRasterData());
+
+			pOutEntry->addEntry(pMipMapOut);
+		}
+
+		addEntry(pOutEntry);
+		m_uiEntryCount++;
+
+		Events::trigger(TASK_PROGRESS);
+	}
+
+	// finalize
+	pDataReader->close();
+	pFileIn->unload();
 }
