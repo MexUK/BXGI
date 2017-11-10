@@ -107,6 +107,10 @@ void					IMGEntry::unserializeRWVersion(DataReader *pDataReader, string strFileP
 	string strVersionCharacter;
 
 	uiFileType = GameFormat::getRWFileType(getEntryExtension());
+	if (!uiFileType)
+	{
+		uiFileType = GameFormat::getRageFileType(getEntryExtension());
+	}
 	setFileType(uiFileType);
 
 	bEntryIsCompressed = isCompressed();

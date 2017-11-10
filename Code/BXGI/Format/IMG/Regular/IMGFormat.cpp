@@ -618,6 +618,7 @@ IMGEntry*							IMGFormat::addEntryViaFile(string& strEntryFilePath, string strE
 	{
 		pIMGEntry->setRageResourceType(RageManager::get()->getResourceTypeManager()->getResourceTypeByFileExtension(Path::getFileExtension(pIMGEntry->getEntryName())));
 		pIMGEntry->setFlags((uint16)IMGEntry::getVersion3IMGSizeDeduction(pIMGEntry->getEntrySize()));
+		pIMGEntry->unserializeResourceType();
 	}
 	else
 	{
