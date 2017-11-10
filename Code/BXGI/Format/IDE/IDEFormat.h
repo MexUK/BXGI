@@ -36,6 +36,8 @@ public:
 
 	uint32										detectSectionSpecificType(EIDESection EIDESectionValue);
 
+	uint32										getFormatGames(void);
+
 private:
 	void										_unserialize(void);
 	void										_serialize(void);
