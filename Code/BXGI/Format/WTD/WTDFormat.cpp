@@ -356,7 +356,7 @@ void					WTDFormat::_serialize(void)
 	//pDataWriter->setSeek(0);
 
 	uint32
-		uiMagicNumber = 0x52534305, // R S C 0x05
+		uiMagicNumber = 0x05435352, // R S C 0x05
 		uiType = 0x08,
 		uiFlags = getFileHeaderFlagsFromSystemAndGraphicsStreamSizes(uiSystemStreamSize, uiGraphicsStreamSize);
 	;
@@ -708,4 +708,52 @@ void					WTDFormat::merge(string& strFilePath)
 	// finalize
 	pDataReader->close();
 	pFileIn->unload();
+}
+
+// split
+void					WTDFormat::split(vector<FormatEntry*>& vecEntries, string& strOutPath, uint32 uiVersion)
+{
+	WTDFormat *pNewFile = new WTDFormat(strOutPath, true);
+
+	pNewFile->setFilePath(getFilePath()); // todo - rename to format::setInputPath()
+	pNewFile->m_writer.setFilePath(strOutPath);
+
+	for (FormatEntry *pEntry : vecEntries)
+	{
+		WTDEntry *pInEntry = (WTDEntry*)pEntry;
+
+		// entry data
+		WTDEntry *pOutEntry = new WTDEntry;
+		pOutEntry->setD3DFormat(pInEntry->getD3DFormat());
+		pOutEntry->setEntryName(pInEntry->getEntryName());
+		pOutEntry->setImageSize(true, pInEntry->getImageSize(true));
+		pOutEntry->setImageSize(false, pInEntry->getImageSize(false));
+		pOutEntry->setLevels(pInEntry->getLevels());
+		pOutEntry->setRasterDataFormat(pInEntry->getRasterDataFormat());
+		pOutEntry->setRawDataOffset(pInEntry->getRawDataOffset());
+		pOutEntry->setTextureHash(pInEntry->getTextureHash());
+
+		for (uint32 i = 0, j = pInEntry->getEntryCount(); i < j; i++)
+		{
+			WTDMipmap *pMipMapIn = pInEntry->getEntryByIndex(i);
+			WTDMipmap *pMipMapOut = new WTDMipmap(pOutEntry);
+
+			pMipMapOut->setImageSize(true, pMipMapIn->getImageSize(true));
+			pMipMapOut->setImageSize(false, pMipMapIn->getImageSize(false));
+			pMipMapOut->setRasterData(pMipMapIn->getRasterData());
+
+			pOutEntry->addEntry(pMipMapOut);
+		}
+
+		pNewFile->addEntry(pOutEntry);
+
+		Events::trigger(TASK_PROGRESS);
+	}
+
+	pNewFile->serialize(strOutPath);
+
+	pNewFile->closeOutput(); // todo - still needed?
+
+	pNewFile->unload();
+	delete pNewFile;
 }

@@ -83,6 +83,11 @@ void					WTDEntry::setRasterDataFormat(ERasterDataFormat ERasterDataFormatValue,
 
 void					WTDEntry::stripNameHeaderAndFooter(void)
 {
+	if (getEntryName() == "")
+	{
+		return;
+	}
+
 	string strEntryName = getEntryName().substr(6);
 	strEntryName = strEntryName.substr(0, strEntryName.length() - 4);
 	setEntryName(strEntryName);

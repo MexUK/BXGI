@@ -16,8 +16,10 @@
 #include "Image/ImageFile.h"
 #include "Format/RW/Sections/RWSection_TextureNative.h"
 #include "Format/RW/Sections/RWSection_TextureDictionary.h"
+#include "Format/RW/Sections/RWSection_Extension.h"
 #include "Type/Vector/Vec2u16.h"
 #include "Stream/DataReader.h"
+#include "Stream/DataWriter.h"
 #include "Event/Events.h"
 #include "../bxcf/Event/EEvent.h"
 
@@ -552,4 +554,88 @@ void						TXDFormat::merge(string& strFilePath)
 	// finalize
 	pDataReader->close();
 	pFileIn->unload();
+}
+
+// split
+void						TXDFormat::split(vector<FormatEntry*>& vecEntries, string& strOutPath, uint32 uiVersion)
+{
+	TXDFormat *pNewFile = new TXDFormat(strOutPath, true);
+
+	pNewFile->setFilePath(getFilePath()); // todo - rename to format::setInputPath()
+	pNewFile->m_writer.setFilePath(strOutPath);
+
+	// todo - remove from here? pIMGFile->openFile(); // open input - todo - rename to openInputFile()
+
+	RWSection_TextureDictionary *pTextureDictionary = new RWSection_TextureDictionary;
+	pTextureDictionary->setRWFormat(pNewFile);
+	pNewFile->addEntry(pTextureDictionary);
+
+	for (FormatEntry *pEntry : vecEntries)
+	{
+		RWSection_TextureNative *pInEntry = (RWSection_TextureNative *)pEntry;
+
+		// entry data
+		RWSection_TextureNative *pOutEntry = new RWSection_TextureNative;
+		pOutEntry->setRWFormat(pNewFile);
+		pOutEntry->set2dEffects(pInEntry->get2dEffects());
+		pOutEntry->setAlpha(pInEntry->getAlpha());
+		pOutEntry->setAlphaName(pInEntry->getAlphaName());
+		pOutEntry->setAutoMipMaps(pInEntry->getAutoMipMaps());
+		pOutEntry->setBPP(pInEntry->getBPP());
+		pOutEntry->setCubeTexture(pInEntry->getCubeTexture());
+		pOutEntry->setDiffuseName(pInEntry->getDiffuseName());
+		pOutEntry->setDVColours(pInEntry->getDVColours());
+		pOutEntry->setDXTCompressionType(pInEntry->getDXTCompressionType());
+		pOutEntry->setFilterFlags(pInEntry->getFilterFlags());
+		pOutEntry->setHasAlpha(pInEntry->doesHaveAlpha());
+		pOutEntry->setHasDiffuse(pInEntry->doesHaveDiffuse());
+		pOutEntry->setImageSize(pInEntry->getImageSize());
+		pOutEntry->setIsNotRWCompatible(pInEntry->getIsNotRWCompatible());
+		pOutEntry->setMipMapCount(pInEntry->getMipMapCount());
+		pOutEntry->setNVColours(pInEntry->getNVColours());
+		pOutEntry->setOriginalBPP(pInEntry->getOriginalBPP());
+		pOutEntry->setPaletteData(pInEntry->getPaletteData());
+		pOutEntry->setPaletteUsed(pInEntry->isPaletteUsed());
+		pOutEntry->setPlatform(pInEntry->getPlatform());
+		pOutEntry->setPlatformId(pInEntry->getPlatformId());
+		pOutEntry->setRasterDataFormat(pInEntry->getRasterDataFormat());
+		pOutEntry->setRasterType(pInEntry->getRasterType());
+		pOutEntry->setRWFormat(pInEntry->getRWFormat());
+		pOutEntry->setSectionHeaderSkipped(pInEntry->isSectionHeaderSkipped());
+		pOutEntry->setSectionId(pInEntry->getSectionId());
+		pOutEntry->setSectionRWVersion(pInEntry->getSectionRWVersion());
+		pOutEntry->setSectionSize(pInEntry->getSectionSize());
+		pOutEntry->setStructSectionSize(pInEntry->getStructSectionSize());
+		pOutEntry->setTextureWrapUV(pInEntry->getTextureWrapUV());
+		pOutEntry->setTXDRasterDataFormat(pInEntry->getTXDRasterDataFormat());
+		pOutEntry->setUnknownSection(pInEntry->isUnknownSection());
+
+		for (uint32 i = 0, j = pInEntry->getMipMapCount(); i < j; i++)
+		{
+			RWEntry_TextureNative_MipMap *pMipMapIn = pInEntry->getMipMaps().getEntryByIndex(i);
+			RWEntry_TextureNative_MipMap *pMipMapOut = new RWEntry_TextureNative_MipMap(pOutEntry);
+
+			pMipMapOut->setImageSize(pMipMapIn->getImageSize());
+			pMipMapOut->setRasterData(pMipMapIn->getRasterData());
+			pMipMapOut->setSwizzledImageSize(pMipMapIn->getSwizzledImageSize());
+
+			pOutEntry->getMipMaps().addEntry(pMipMapOut);
+		}
+
+		pTextureDictionary->addEntry(pOutEntry);
+		m_uiEntryCount++;
+
+		Events::trigger(TASK_PROGRESS);
+	}
+
+	RWSection_Extension *pExtension = new RWSection_Extension;
+	pExtension->setRWFormat(pNewFile);
+	pTextureDictionary->addEntry(pExtension);
+
+	pNewFile->serialize(strOutPath);
+
+	pNewFile->closeOutput(); // todo - still needed?
+
+	pNewFile->unload();
+	delete pNewFile;
 }

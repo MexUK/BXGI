@@ -36,7 +36,7 @@ public:
 	uint32											getRawVersion(void);
 
 	void											merge(std::string& strFilePath);
-	void											split(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFilePathOut, uint32 uiFileVersionOut) {} // todo
+	void											split(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFilePathOut, uint32 uiFileVersionOut);
 
 	std::string										readEntryContent(uint32 uiEntryIndex);
 
