@@ -1,6 +1,8 @@
 #include "WTDEntry.h"
 #include "Static/String.h"
 #include "Image/ImageManager.h"
+#include "Image/ImageFile.h"
+#include "Format/WTD/WTDMipmap.h"
 #include "Static/Debug.h"
 
 using namespace std;
@@ -20,7 +22,23 @@ WTDEntry::WTDEntry(void) :
 
 void					WTDEntry::replace(string& strFilePath)
 {
-	// todo
+	ImageFile *pImageFile = ImageManager::loadImageFromFile(strFilePath);
+	if (!pImageFile)
+	{
+		return;
+	}
+
+	setImageSize(true, pImageFile->m_uiImageWidth);
+	setImageSize(false, pImageFile->m_uiImageHeight);
+	setRasterDataFormat(RASTERDATAFORMAT_BGRA32);
+
+	removeAllEntries();
+
+	WTDMipmap *pMipMap = new WTDMipmap(this);
+	pMipMap->setImageSize(true, pImageFile->m_uiImageWidth);
+	pMipMap->setImageSize(false, pImageFile->m_uiImageHeight);
+	pMipMap->setRasterData(pImageFile->m_strRasterDataBGRA32);
+	addEntry(pMipMap);
 }
 
 uint32					WTDEntry::getIndex(void)

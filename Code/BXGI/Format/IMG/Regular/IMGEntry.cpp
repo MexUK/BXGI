@@ -585,21 +585,7 @@ void					IMGEntry::replace(string& strFilePath)
 	setEntrySize(File::getFileSize(strFilePath));
 	setEntryOffset(m_pIMGFile->getNextEntryOffset());
 
-	if (m_pIMGFile->getVersion() == IMG_3)
-	{
-		// todo
-	}
-	else
-	{
-		if (strFileData.length() >= 12)
-		{
-			unserializeRWVersion(nullptr, "", strFileData.substr(0, 12));
-		}
-		else
-		{
-			setRawVersion(0);
-		}
-	}
+	setEntryData(strFileData, false);
 }
 
 uint32					IMGEntry::getIndex(void)
