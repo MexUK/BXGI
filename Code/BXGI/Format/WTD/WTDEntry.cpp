@@ -88,6 +88,11 @@ void					WTDEntry::stripNameHeaderAndFooter(void)
 		return;
 	}
 
+	if (getEntryName().find(':', 0) == string::npos)
+	{
+		return;
+	}
+
 	string strEntryName = getEntryName().substr(6);
 	strEntryName = strEntryName.substr(0, strEntryName.length() - 4);
 	setEntryName(strEntryName);

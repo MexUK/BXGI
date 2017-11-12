@@ -3,6 +3,7 @@
 #include "Static/String.h"
 #include "Static/Memory.h"
 #include "Static/Path.h"
+#include "Static/Math.h"
 #include "Stream/DataWriter.h"
 #include "WTDManager.h"
 #include "Intermediate/Texture/IntermediateTextureFormat.h"
@@ -227,12 +228,13 @@ void					WTDFormat::_serialize(void)
 
 	// store system stream
 	uint32
-		uiVTable = 0,
-		uiBlockMapOffset = 0,
+		uiVTable = 6902660,
+		uiBlockMapOffset = 32,
 		uiParentDictionary = 0,
 		uiUsageCount = 0,
-		uiHashTableOffset = 0,
-		uiTextureListOffset = 0
+		uiHashTableOffset = sizeof(RG_WTDFormat_Header2),
+		uiInfoOffetsOffset = uiHashTableOffset + (VectorPool::getEntryCount() * 4),
+		uiTextureListOffset = uiInfoOffetsOffset + (VectorPool::getEntryCount() * 4)
 	;
 	uint16
 		usTextureCount = VectorPool::getEntryCount(),
@@ -251,40 +253,57 @@ void					WTDFormat::_serialize(void)
 	pDataWriter2->writeUint16(usTextureCount);
 	pDataWriter2->writeUint16(usUnknown1);
 
-	pDataWriter2->writeUint32(RageManager::getPackedOffset(uiTextureListOffset));
+	pDataWriter2->writeUint32(RageManager::getPackedOffset(uiInfoOffetsOffset));
 	pDataWriter2->writeUint16(usUnknown2);
 	pDataWriter2->writeUint16(usUnknown3);
 
 	// store texture hashes
-	for (auto pWTDEntry : VectorPool::getEntries())
+	for (WTDEntry *pWTDEntry : getEntries())
 	{
 		pDataWriter2->writeUint32(pWTDEntry->getTextureHash());
 	}
 
+	// store info offsets
+	uint32 i = 0;
+	for (WTDEntry *pWTDEntry : getEntries())
+	{
+		pDataWriter2->writeUint32(RageManager::getPackedOffset(uiTextureListOffset + (i * sizeof(RG_WTDEntry))));
+		i++;
+	}
+
+	// calculate total names part length
+	uint32 uiTotalNamesPartLength = VectorPool::getEntryCount();
+	for (WTDEntry *pWTDEntry : getEntries())
+	{
+		uiTotalNamesPartLength += pWTDEntry->getEntryName().length();
+	}
+
 	// store texture info
+	uint32 uiTextureNamesOffset = uiTextureListOffset + (usTextureCount * sizeof(RG_WTDEntry));
+	uint32 uiStringLengthSoFar = 0;
+	uint32 uiAccumulatingRawDataOffset = 0;
 	for (uint32 i = 0; i < usTextureCount; i++)
 	{
+		WTDEntry
+			*pWTDEntry = m_vecEntries[i];
 		uint32
 			uiVTable2 = 0,
 			uiBlockMapOffset2 = 0,
 			uiUnknown4 = 0,
 			uiUnknown5 = 0,
 			uiUnknown6 = 0,
-			uiNameOffset = 0,
+			uiNameOffset = uiTextureNamesOffset + uiStringLengthSoFar,
 			uiUnknown7 = 0,
 			uiPrevTextureInfoOffset = 0,
 			uiNextTextureInfoOffset = 0,
-			uiRawDataOffset = 0,
+			uiRawDataOffset = uiAccumulatingRawDataOffset,
 			uiUnknown14 = 0
 		;
 		uint16
-			usWidth = 0,
-			usHeight = 0,
 			usStrideSize = 0
 		;
 		uint8
-			ucType = 0,
-			ucLevels = 0
+			ucType = 0
 		;
 		float
 			fUnknown8 = 0.0f,
@@ -308,13 +327,13 @@ void					WTDFormat::_serialize(void)
 
 		pDataWriter2->writeUint32(uiUnknown7);
 
-		pDataWriter2->writeUint16(usWidth);
-		pDataWriter2->writeUint16(usHeight);
+		pDataWriter2->writeUint16(pWTDEntry->getImageSize(true));
+		pDataWriter2->writeUint16(pWTDEntry->getImageSize(false));
 		pDataWriter2->writeString(getFourCCFromD3DFormat(eD3DFormat));
 
 		pDataWriter2->writeUint16(usStrideSize);
 		pDataWriter2->writeUint8(ucType);
-		pDataWriter2->writeUint8(ucLevels);
+		pDataWriter2->writeUint8(pWTDEntry->getLevels());
 
 		pDataWriter2->writeFloat32(fUnknown8);
 		pDataWriter2->writeFloat32(fUnknown9);
@@ -329,21 +348,30 @@ void					WTDFormat::_serialize(void)
 		pDataWriter2->writeUint32(RageManager::getPackedOffset(uiRawDataOffset));
 
 		pDataWriter2->writeUint32(uiUnknown14);
+
+		uiStringLengthSoFar += m_vecEntries[i]->getEntryName().length() + 1;
+		uiAccumulatingRawDataOffset += WTDManager::getImageDataSize(pWTDEntry, false);
 	}
 
 	// store texture names
-	for (auto pWTDEntry : getEntries())
+	for (WTDEntry *pWTDEntry : getEntries())
 	{
 		string strEntryName = pWTDEntry->getEntryName();
 		strEntryName.append("\0", 1);
 		pDataWriter2->writeStringRef(strEntryName);
 	}
 
+	// padding to multiple of 4096
+	if (4096 - (pDataWriter2->getData().length() % 4096))
+	{
+		pDataWriter2->writeString(String::zeroPad(4096 - (pDataWriter2->getData().length() % 4096)));
+	}
+
 	// store graphics stream
 	uint32 uiSystemStreamSize = pDataWriter2->getData().length();
-	for (auto pWTDEntry : VectorPool::getEntries())
+	for (WTDEntry *pWTDEntry : VectorPool::getEntries())
 	{
-		for (auto pMipmap : pWTDEntry->VectorPool::getEntries())
+		for (WTDMipmap*pMipmap : pWTDEntry->VectorPool::getEntries())
 		{
 			pDataWriter2->writeStringRef(pMipmap->getRasterData());
 		}
@@ -413,6 +441,7 @@ IntermediateTextureFormat*		WTDFormat::convertToIntermediateFormat(void)
 uint32				WTDFormat::getFileHeaderFlagsFromSystemAndGraphicsStreamSizes(uint32 uiSystemStreamSize, uint32 uiGraphicsStreamSize)
 {
 	return (getCompactSize(uiSystemStreamSize) & 0x7FFF) | (getCompactSize(uiGraphicsStreamSize) & 0x7FFF) << 15 | 3 << 30;
+	//return ((uiSystemStreamSize & 0x7FF) >> ((uiSystemStreamSize << 11) - 8)) | ((uiGraphicsStreamSize << 15) >> ((uiGraphicsStreamSize << 26) - 8));
 }
 
 uint32				WTDFormat::getCompactSize(uint32 uiSize)
@@ -444,6 +473,11 @@ string						WTDFormat::decompressWTDFormatData(uint32& uiSystemSegmentSize, uint
 
 	uiSystemSegmentSize = (pHeader1->m_uiFlags & 0x7FF) << (((pHeader1->m_uiFlags >> 11) & 0xF) + 8);
 	uiGPUSegmentSize = ((pHeader1->m_uiFlags >> 15) & 0x7FF) << (((pHeader1->m_uiFlags >> 26) & 0xF) + 8);
+
+	if (uiSystemSegmentSize == 0)
+	{
+		uiSystemSegmentSize = 4096;
+	}
 
 	delete pHeader1;
 
