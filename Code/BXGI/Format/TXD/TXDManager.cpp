@@ -4,6 +4,7 @@
 #include <DXGIFormat.h>
 #include "TXDManager.h"
 #include "TXDFormat.h"
+#include "Format/RW/Sections/RWSection_TextureDictionary.h"
 #include "Format/RW/Sections/RWSection_TextureNative.h"
 #include "Stream/DataReader.h"
 #include "Static/String.h"
@@ -43,6 +44,11 @@ TXDFormat*				TXDManager::createFormat(void)
 	RWSection *pExtension1 = pTextureDictionary->addSection(RW_SECTION_EXTENSION, RW_3_4_0_3); // todo - make RW version not fixed
 	RWSection *pExtension2 = pTXDFile->addSection(RW_SECTION_EXTENSION, RW_3_4_0_3); // todo - make RW version not fixed
 
+	pTextureDictionary->setRWFormat(pTXDFile);
+	pTextureNative->setRWFormat(pTXDFile);
+	pExtension1->setRWFormat(pTXDFile);
+	pExtension2->setRWFormat(pTXDFile);
+
 	return pTXDFile;
 }
 
@@ -51,13 +57,18 @@ TXDFormat*				TXDManager::convertIntermediateTextureFileToTXDFile(IntermediateTe
 	TXDFormat *pTXDFile = createFormat();
 	pTXDFile->setRWVersion(RWManager::get()->getVersionManager()->getRWVersionFromGame(PC_GTA_SA));
 
+	RWSection_TextureDictionary *pTextureDictionary = (RWSection_TextureDictionary*)pTXDFile->getSectionsByType(RW_SECTION_TEXTURE_DICTIONARY)[0];
+	pTextureDictionary->removeAllEntries();
+
 	for (IntermediateTexture *pGeneralTexture : pGeneralTextureFile->getEntries())
 	{
 		RWSection_TextureNative *pTexture = new RWSection_TextureNative;
+		pTexture->setRWFormat(pTXDFile);
 
 		string strAlphaName = "";
 
 		// struct TextureFormat
+		pTexture->setPlatform(PLATFORM_PC);
 		pTexture->setPlatformId(9);
 		pTexture->setFilterFlags(0);
 		pTexture->setTextureWrapUV(0);
@@ -125,7 +136,7 @@ TXDFormat*				TXDManager::convertIntermediateTextureFileToTXDFile(IntermediateTe
 			pTexture->getMipMaps().addEntry(pMipmap);
 		}
 
-		pTXDFile->getTextures().push_back(pTexture);
+		pTextureDictionary->addEntry(pTexture);
 	}
 
 	return pTXDFile;
