@@ -156,7 +156,7 @@ void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntr
 	pFormatEntry->setComment(strComment);
 
 	// store entry in Format object
-	if (pFormatEntry->getEntryType() != SECTION_LINES_ENTRY_SECTION)
+	if (pFormatEntry->getEntryType() != SECTION_LINES_ENTRY_SECTION && pFormatEntry->getEntryType() != SECTION_LINES_ENTRY_OTHER)
 	{
 		//getSectionEntries().rbegin()->second.push_back(pFormatEntry);
 		m_umapSectionEntries[pFormatEntry->getSectionType()].push_back(pFormatEntry);
@@ -180,11 +180,18 @@ void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntr
 	DataWriter *pDataWriter = &m_writer;
 	for (auto it : getSectionEntries())
 	{
+		pDataWriter->writeString(String::toLowerCase(getSectionText(it.first)));
+		pDataWriter->writeString("\n");
+
 		for (EntryClass *pFormatEntry : it.second)
 		{
 			pFormatEntry->serialize();
+			pDataWriter->writeLineTokens();
 			pDataWriter->writeString("\n");
 		}
+
+		pDataWriter->writeString("end");
+		pDataWriter->writeString("\n");
 	}
 }
 
