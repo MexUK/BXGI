@@ -1,21 +1,22 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Format/Format.h"
+#include "Format/ContainerFormat.h"
 #include "Format/E2DFXType.h"
 #include "Event/Events.h"
 #include "../bxgi/Event/EEvent.h"
+#include "Static/String.h"
 #include <string>
 #include <vector>
 #include <map>
 #include <algorithm>
 
 template<class FormatClass, class EntryClass, typename SectionEnum, class OtherEntryClass, class SectionEntryClass, class DataEntryClass>
-class bxgi::SectionLinesFormat : public bxcf::Format
+class bxgi::SectionLinesFormat : public bxcf::ContainerFormat
 {
 public:
 	SectionLinesFormat(void);
-	SectionLinesFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) : bxcf::Format(strFilePathOrData, bStringIsFilePath, false) {}
+	SectionLinesFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) : bxcf::ContainerFormat(strFilePathOrData, bStringIsFilePath, false) {}
 
 	virtual void										unload(void);
 
@@ -48,6 +49,25 @@ public:
 
 	virtual uint32										detectSectionSpecificType(SectionEnum eFormatSectionValue) = 0;
 
+	// ContainerFormat
+
+	bxcf::FormatEntry*									addEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "") { return nullptr; } // todo
+	bxcf::FormatEntry*									addEntryViaData(std::string& strEntryName, std::string& strEntryData) { return nullptr; }; // todo
+
+	void												exportSingle(bxcf::FormatEntry* pEntry, std::string& strFolderPath);
+	void												exportMultiple(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFolderPath) {} // todo
+	void												exportAll(std::string& strFolderPath) {} // todo
+
+	std::vector<bxcf::FormatEntry*>						getAllEntries(void);
+	std::vector<bxcf::FormatEntry*>&					getEntriesRef(void);
+
+	void												swapEntries(bxcf::FormatEntry *pEntry1, bxcf::FormatEntry *pEntry2) {} // todo
+
+	uint32												getRawVersion(void) { return 0; } // todo
+
+	void												merge(std::string& strFilePath) {} // todo
+	void												split(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFilePathOut, uint32 uiFileVersionOut) {} // todo
+
 protected:
 	void												unserializeText(void);
 	void												serializeText(void);
@@ -58,6 +78,7 @@ private:
 
 private:
 	std::map<SectionEnum, std::vector<EntryClass*>>		m_umapSectionEntries;
+	std::vector<EntryClass*>							m_vecEntries;
 	SectionEnum											m_uiActiveReadSection;
 };
 
@@ -66,7 +87,7 @@ private:
 
 template<class FormatClass, class EntryClass, typename SectionEnum, class OtherEntryClass, class SectionEntryClass, class DataEntryClass>
 bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntryClass, SectionEntryClass, DataEntryClass>::SectionLinesFormat(void) :
-	Format(false),
+	ContainerFormat(false),
 	m_uiActiveReadSection((SectionEnum)0)
 {
 }
@@ -381,3 +402,32 @@ void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntr
 		std::sort(it.second.begin(), it.second.end(), sortSectionLinesEntries_ObjectID<FormatClass, EntryClass, DataEntryClass>);
 	}
 };
+
+// ContainerFormat
+
+template<class FormatClass, class EntryClass, typename SectionEnum, class OtherEntryClass, class SectionEntryClass, class DataEntryClass>
+std::vector<bxcf::FormatEntry*>						bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntryClass, SectionEntryClass, DataEntryClass>::getAllEntries(void)
+{
+	std::vector<bxcf::FormatEntry*> vecEntries;
+	for (auto it : m_umapSectionEntries)
+	{
+		for (EntryClass *pIDEEntry : it.second)
+		{
+			vecEntries.push_back(pIDEEntry);
+		}
+	}
+	return vecEntries;
+}
+
+template<class FormatClass, class EntryClass, typename SectionEnum, class OtherEntryClass, class SectionEntryClass, class DataEntryClass>
+std::vector<bxcf::FormatEntry*>&					bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntryClass, SectionEntryClass, DataEntryClass>::getEntriesRef(void)
+{
+	return (std::vector<bxcf::FormatEntry*>&) m_vecEntries;
+}
+
+template<class FormatClass, class EntryClass, typename SectionEnum, class OtherEntryClass, class SectionEntryClass, class DataEntryClass>
+void												bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntryClass, SectionEntryClass, DataEntryClass>::exportSingle(bxcf::FormatEntry* pEntry, std::string& strFolderPath)
+{
+	bxgi::SectionLinesEntry<FormatClass, SectionEnum> *pLineEntry = (bxgi::SectionLinesEntry<FormatClass, SectionEnum>*) pEntry;
+	bxcf::String::setClipboardText(pLineEntry->getEntryData());
+}
