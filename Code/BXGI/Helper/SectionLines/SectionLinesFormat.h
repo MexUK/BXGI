@@ -149,7 +149,7 @@ void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntr
 		{
 			// line is a data line
 			m_reader.setTokenModeEnabled(true);
-			m_reader.setLineTokens(String::split(String::replace(strActiveLine, ",", ""), " "));
+			m_reader.setLineTokens(String::split(String::replace(String::replace(strActiveLine, ",", " "), "\t", " "), " "));
 			try
 			{
 				eFormatSectionValue = getActiveReadSection();

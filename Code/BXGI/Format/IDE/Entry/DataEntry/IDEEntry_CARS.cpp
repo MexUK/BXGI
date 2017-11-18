@@ -31,28 +31,16 @@ IDEEntry_CARS::IDEEntry_CARS(IDEFormat *pIDEFormat) :
 void			IDEEntry_CARS::unserialize(void)
 {
 	DataReader *pDataReader = &m_pFormat->m_reader;
+	uint32 uiTokenCount = pDataReader->getLineTokens().size();
 
-	switch (pDataReader->getLineTokens().size())
+	switch (uiTokenCount)
 	{
-	case 12: // GTA III
+	case 10: // GTA III & GTA VC
+	case 11:
+	case 12:
+	case 13:
 		setFormatType(0);
-		setFormatGames(GAME_FLAG_GTA_III);
-		m_uiObjectId = pDataReader->readTokenUint32();
-		m_strModelName = pDataReader->readTokenString();
-		m_strTXDName = pDataReader->readTokenString();
-		m_strVehicleType = pDataReader->readTokenString();
-		m_strHandlingId = pDataReader->readTokenString();
-		m_strGameName = pDataReader->readTokenString();
-		m_strVehicleClass = pDataReader->readTokenString();
-		m_uiSpawnFrequency = pDataReader->readTokenUint32();
-		m_uiUnknown1 = pDataReader->readTokenUint32();
-		m_uiUnknown2 = pDataReader->readTokenUint32();
-		m_uiWheelModelId = pDataReader->readTokenUint32();
-		m_fWheelScale = pDataReader->readTokenFloat32();
-		break;
-	case 13: // GTA VC
-		setFormatType(1);
-		setFormatGames(GAME_FLAG_GTA_VC);
+		setFormatGames(GAME_FLAG_GTA_III | GAME_FLAG_GTA_VC);
 		m_uiObjectId = pDataReader->readTokenUint32();
 		m_strModelName = pDataReader->readTokenString();
 		m_strTXDName = pDataReader->readTokenString();
@@ -63,9 +51,21 @@ void			IDEEntry_CARS::unserialize(void)
 		m_strVehicleClass = pDataReader->readTokenString();
 		m_uiSpawnFrequency = pDataReader->readTokenUint32();
 		m_uiUnknown1 = pDataReader->readTokenUint32();
-		m_uiUnknown2 = pDataReader->readTokenUint32();
-		m_uiWheelModelId = pDataReader->readTokenUint32();
-		m_fWheelScale = pDataReader->readTokenFloat32();
+		
+		if (uiTokenCount >= 11)
+		{
+			m_uiUnknown2 = pDataReader->readTokenUint32();
+			if (uiTokenCount >= 12)
+			{
+				m_uiWheelModelId = pDataReader->readTokenUint32();
+				if (uiTokenCount >= 13)
+				{
+					setFormatType(1);
+					setFormatGames(GAME_FLAG_GTA_VC);
+					m_fWheelScale = pDataReader->readTokenFloat32();
+				}
+			}
+		}
 		break;
 	case 15: // GTA SA or GTA IV
 	{
