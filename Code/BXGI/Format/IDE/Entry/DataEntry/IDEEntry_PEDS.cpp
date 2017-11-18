@@ -22,7 +22,7 @@ void			IDEEntry_PEDS::unserialize(void)
 
 	uint32 uiLineTokenCount = pDataReader->getLineTokens().size();
 	bool bMatchFound = false;
-	if (uiLineTokenCount == 7 || uiLineTokenCount == 11 || uiLineTokenCount == 15)
+	if (uiLineTokenCount == 7 || uiLineTokenCount == 9 || uiLineTokenCount == 10 || uiLineTokenCount == 14)
 	{
 		// GTA III, GTA VC, GTA SA
 		bMatchFound = true;
@@ -36,16 +36,26 @@ void			IDEEntry_PEDS::unserialize(void)
 		m_strAnimationGroup = pDataReader->readTokenString();
 		m_uiCarsCanDrive = pDataReader->readTokenUint32();
 
-		if (uiLineTokenCount == 11 || uiLineTokenCount == 15)
+		if (uiLineTokenCount == 9 || uiLineTokenCount == 10 || uiLineTokenCount == 14)
 		{
 			// GTA VC, GTA SA
 			setFormatType(1);
 			setFormatGames(GAME_FLAG_GTA_VC | GAME_FLAG_GTA_SA);
+			
+			if (uiLineTokenCount == 14)
+			{
+				// GTA SA
+				m_strFlags = pDataReader->readTokenString();
+			}
+
 			m_strAnimationFile = pDataReader->readTokenString();
 			m_vecPreferredRadioStations.x = pDataReader->readTokenUint32();
-			m_vecPreferredRadioStations.y = pDataReader->readTokenUint32();
+			if (uiLineTokenCount == 10 || uiLineTokenCount == 14)
+			{
+				m_vecPreferredRadioStations.y = pDataReader->readTokenUint32();
+			}
 
-			if (uiLineTokenCount == 15)
+			if (uiLineTokenCount == 14)
 			{
 				// GTA SA
 				setFormatType(2);
@@ -105,6 +115,10 @@ void			IDEEntry_PEDS::serialize(void)
 		pDataWriter->writeToken(m_uiCarsCanDrive);
 		if (getFormatType() >= 1)
 		{
+			if (getFormatType() == 2)
+			{
+				pDataWriter->writeToken(m_strFlags);
+			}
 			pDataWriter->writeToken(m_strAnimationFile);
 			pDataWriter->writeToken(m_vecPreferredRadioStations.x);
 			pDataWriter->writeToken(m_vecPreferredRadioStations.y);

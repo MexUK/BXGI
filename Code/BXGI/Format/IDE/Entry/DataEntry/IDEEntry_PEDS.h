@@ -83,8 +83,11 @@ private:
 	std::string					m_strDefaultPedType;
 	std::string					m_strAnimationGroup;
 	std::string					m_strAnimationFile;
-	bxcf::Vec2u				m_vecPreferredRadioStations;
+	bxcf::Vec2u					m_vecPreferredRadioStations;
 	std::string					m_strVoices[2];
+
+	// GTA SA & GTA IV
+	std::string					m_strFlags; // hex
 
 	// GTA III era only
 	uint32						m_uiObjectId;
@@ -99,7 +102,6 @@ private:
 	std::string					m_strGesturePhoneGroup;
 	std::string					m_strFacialGroup;
 	std::string					m_strVisemeGroup;
-	std::string					m_strFlags; // hex
 	std::string					m_strBlendShapeFile;
 	std::string					m_strAudioType;
 	std::string					m_strFirstVoice;
