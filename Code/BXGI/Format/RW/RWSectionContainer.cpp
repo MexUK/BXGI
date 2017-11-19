@@ -48,7 +48,12 @@ void				RWSectionContainer::_unserialize(void)
 	{
 		// read section header
 		uint32
-			uiRWSectionId = pDataReader->readUint32(),
+			uiRWSectionId = pDataReader->readUint32();
+		if (uiRWSectionId == 0)
+		{
+			break;
+		}
+		uint32
 			uiRWSectionSize = pDataReader->readUint32(),
 			uiRWSectionRWVersion = pDataReader->readUint32();
 		ERWSection ERWSectionValue = (ERWSection)uiRWSectionId;
@@ -124,6 +129,14 @@ void				RWSectionContainer::_unserialize(void)
 		Events::trigger(UNSERIALIZE_RW_SECTION, pRWSection);
 
 		uint32 uiByteCountDifference = (uint32)(uiByteCountAfter - uiByteCountBefore);
+
+		if (uiByteCountDifference < uiStructSectionSize)
+		{
+			uint32 uiByteCountRemaining = uiStructSectionSize - uiByteCountDifference;
+			uiByteCountDifference += uiByteCountRemaining;
+			pDataReader->readString(uiByteCountRemaining);
+		}
+
 		for (unsigned long i = 0; i < uiSectionDepth; i++)
 		{
 			vecByteCountsRead[i] += uiByteCountDifference;

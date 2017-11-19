@@ -22,9 +22,8 @@ void							RWSection_ExtraVertColour::_unserialize(void)
 	m_uiMagicNumber = pDataReader->readUint32();
 
 	RWFormat *pRWFormat = getRWFormat();
-	RWSection *pLatestClump = pRWFormat->getLatestClump();
 	//uint32 uiGeometryVertexCount = ((RWSection_Geometry*)pRWSection_ExtraVertColour->getParentNode()->getParentNode())->getVertexColours().size();
-	uint32 uiGeometryVertexCount = pLatestClump->getSectionsByType(RW_SECTION_GEOMETRY).size() > 0 ? ((RWSection_Geometry*)(pLatestClump->getSectionsByType(RW_SECTION_GEOMETRY)[0]))->getVertexColours().size() : 0;
+	uint32 uiGeometryVertexCount = pRWFormat->getSectionsByType(RW_SECTION_GEOMETRY).size() > 0 ? ((RWSection_Geometry*)(pRWFormat->getSectionsByType(RW_SECTION_GEOMETRY)[0]))->getVertexColours().size() : 0;
 	m_vecNightVertexColours.resize(uiGeometryVertexCount);
 	for (uint32 i = 0; i < uiGeometryVertexCount; i++)
 	{
