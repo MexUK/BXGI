@@ -4,6 +4,7 @@
 #include "Image/ImageFile.h"
 #include "Format/WTD/WTDMipmap.h"
 #include "Static/Debug.h"
+#include "Format/Image/BMP/BMPFormat.h"
 
 using namespace std;
 using namespace bxcf;
@@ -96,4 +97,20 @@ void					WTDEntry::stripNameHeaderAndFooter(void)
 	string strEntryName = getEntryName().substr(6);
 	strEntryName = strEntryName.substr(0, strEntryName.length() - 4);
 	setEntryName(strEntryName);
+}
+
+string					WTDEntry::getEntryData(void)
+{
+	WTDMipmap *pMipmap = getEntryByIndex(0);
+
+	BMPFormat *pBMPFile = new BMPFormat;
+	pBMPFile->setWidth(pMipmap->getImageSize(true));
+	pBMPFile->setHeight(pMipmap->getImageSize(false));
+	pBMPFile->setBPP(32);
+
+	pBMPFile->setRasterData(pMipmap->getRasterDataBGRA32());
+	pBMPFile->swapRows();
+
+	pBMPFile->setBMPVersion(3);
+	return pBMPFile->serialize();
 }

@@ -32,7 +32,7 @@ public:
 	uint32						getRawVersion(void) { return 0; } // todo
 	std::string					getVersionText(void);
 
-	std::string					getEntryData(void) { return ""; } // todo
+	std::string					getEntryData(void);
 
 	inline bxcf::fileType::EFileType	getFileType(void) { return bxcf::fileType::EFileType::IMAGE; }
 
