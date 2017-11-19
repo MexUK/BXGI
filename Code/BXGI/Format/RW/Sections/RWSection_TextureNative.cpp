@@ -12,6 +12,7 @@
 #include "Format/RW/RWFormat.h"
 #include "Engine/RW/RWManager.h"
 #include "Engine/RW/RWVersionManager.h"
+#include "Format/Image/BMP/BMPFormat.h"
 
 using namespace std;
 using namespace bxcf;
@@ -988,4 +989,20 @@ string						RWSection_TextureNative::getVersionText(void)
 	{
 		return RWVersion::unpackVersionStampAsStringWithBuild(getSectionRWVersion());
 	}
+}
+
+string						RWSection_TextureNative::getEntryData(void)
+{
+	RWEntry_TextureNative_MipMap *pMipmap = getMipMaps().getEntryByIndex(0);
+
+	BMPFormat *pBMPFile = new BMPFormat;
+	pBMPFile->setWidth(pMipmap->getImageSize().x);
+	pBMPFile->setHeight(pMipmap->getImageSize().y);
+	pBMPFile->setBPP(32);
+
+	pBMPFile->setRasterData(pMipmap->getRasterDataBGRA32());
+	pBMPFile->swapRows();
+
+	pBMPFile->setBMPVersion(3);
+	return pBMPFile->serialize();
 }
