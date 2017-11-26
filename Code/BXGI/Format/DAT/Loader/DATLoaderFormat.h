@@ -37,7 +37,7 @@ public:
 
 private:
 	void										_unserialize(void);
-	void										_serialize(void) {} // todo
+	void										_serialize(void);
 
 	void										unserializeLine(void);
 };

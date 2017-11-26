@@ -834,6 +834,9 @@
     <ClCompile Include="..\..\..\Code\BXGI\Format\FormatVersionManager.cpp">
       <Filter>Source Files\Format</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Loader\DATLoaderEntry.cpp">
+      <Filter>Source Files\Format\DAT\Loader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\BXGI\Event\EEvent.h">

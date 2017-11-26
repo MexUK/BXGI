@@ -398,6 +398,7 @@
     <ClInclude Include="..\..\..\Code\BXGI\Format\WTD\Raw\WTDFormat_Header2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Code\BXGI\Format\DAT\Loader\DATLoaderEntry.cpp" />
     <ClCompile Include="..\..\..\Code\BXGI\Format\FormatVersionManager.cpp" />
     <ClCompile Include="..\..\..\Code\BXGI\Format\GameFormat.cpp" />
     <ClCompile Include="..\..\..\Code\BXGI\Format\IMG\Regular\IMGFormatVersion1.cpp" />

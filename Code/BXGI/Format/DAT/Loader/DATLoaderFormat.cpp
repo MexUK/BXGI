@@ -92,9 +92,25 @@ void					DATLoaderFormat::_unserialize(void)
 	}
 }
 
+void					DATLoaderFormat::_serialize(void)
+{
+	m_writer.setLineTokenDelimiter(string(" "));
+	for (DATLoaderEntry *pDATEntry : getEntries())
+	{
+		pDATEntry->serialize();
+		m_writer.writeLineTokens();
+		m_writer.writeString("\n");
+	}
+	m_writer.setLineTokenDelimiter(string(", "));
+}
+
 void					DATLoaderFormat::unserializeLine(void)
 {
-	string strLine = *m_reader.getActiveLine();
+	string
+		strLine = *m_reader.getActiveLine(),
+		strLineClean = strLine;
+
+	DATLoaderEntry *pDATLoaderEntry = new DATLoaderEntry(this);
 
 	// remove comment from end of line
 	string strComment = "";
@@ -102,30 +118,34 @@ void					DATLoaderFormat::unserializeLine(void)
 	if (uiCommentPosition != string::npos)
 	{
 		strComment = strLine.substr(uiCommentPosition);
-		strLine = strLine.substr(0, uiCommentPosition);
+		strLineClean = strLine.substr(0, uiCommentPosition);
 	}
 
-	if (strLine == "")
+	if (strLineClean == "")
 	{
 		// blank line
+		pDATLoaderEntry->setEntryType(DAT_LOADER_UNKNOWN);
+		pDATLoaderEntry->setEntryValues(deque<string>({ strLine }));
 	}
 
-	else if (String::ltrim(strLine).c_str()[0] == '#')
+	else if (String::ltrim(strLineClean).c_str()[0] == '#')
 	{
 		// line is a comment
+		pDATLoaderEntry->setEntryType(DAT_LOADER_UNKNOWN);
+		pDATLoaderEntry->setEntryValues(deque<string>({ strLine }));
 	}
 
 	else
 	{
 		// parse line
-		deque<string> deqTokens = StdVector::convertVectorToDeque(String::split(strLine, " "));
+		deque<string> deqTokens = StdVector::convertVectorToDeque(String::split(strLineClean, " "));
 
-		DATLoaderEntry *pDATLoaderEntry = new DATLoaderEntry;
 		pDATLoaderEntry->setEntryType(DATLoaderManager::getDATEntryTypeFromString(deqTokens[0]));
 		deqTokens.pop_front();
 		pDATLoaderEntry->setEntryValues(deqTokens);
-		addEntry(pDATLoaderEntry);
 	}
+
+	addEntry(pDATLoaderEntry);
 }
 
 // item unserialization
