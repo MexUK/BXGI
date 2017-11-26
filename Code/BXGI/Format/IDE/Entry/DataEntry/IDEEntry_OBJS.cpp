@@ -78,7 +78,6 @@ void			IDEEntry_OBJS::unserialize(void)
 		m_uiObjectId = pDataReader->readTokenUint32();
 		m_strModelName = pDataReader->readTokenString();
 		m_strTXDName = pDataReader->readTokenString();
-		m_uiClumpCount = pDataReader->readTokenUint32();
 		m_vecDrawDistances.push_back(pDataReader->readTokenFloat32());
 		m_uiFlags = pDataReader->readTokenUint32();
 		break;
