@@ -219,3 +219,34 @@ vector<string>			DATLoaderFormat::getRelativeIPLPaths(void)
 	}
 	return vecRelativeIDEPaths;
 }
+
+// add entries
+DATLoaderEntry*				DATLoaderFormat::addEntryViaFile(string& strEntryFilePath, string strEntryName)
+{
+	if (strEntryName == "")
+	{
+		strEntryName = Path::getFileName(strEntryFilePath);
+	}
+
+	return addEntryViaData(strEntryName, File::getFileContent(strEntryFilePath, doesFormatUseBinaryData()));
+}
+
+DATLoaderEntry*				DATLoaderFormat::addEntryViaData(string& strEntryName, string& strEntryData)
+{
+	DATLoaderFormat dat;
+	dat.unserializeData<DATLoaderFormat>(strEntryData);
+
+	DATLoaderEntry *pDATEntry = nullptr;
+	for (DATLoaderEntry *pDATEntryInput : dat.getEntries())
+	{
+		pDATEntry = new DATLoaderEntry(this);
+
+		pDATEntry->setEntryType(pDATEntryInput->getEntryType());
+		pDATEntry->setEntryValues(pDATEntryInput->getEntryValues());
+
+		m_uiEntryCount++;
+		addEntry(pDATEntry);
+	}
+
+	return pDATEntry;
+}

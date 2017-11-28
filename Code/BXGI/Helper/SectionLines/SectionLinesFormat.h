@@ -76,9 +76,11 @@ private:
 	void												setActiveReadSection(SectionEnum eActiveReadSection) { m_uiActiveReadSection = eActiveReadSection; }
 	SectionEnum											getActiveReadSection(void) { return m_uiActiveReadSection; }
 
+protected:
+	std::vector<EntryClass*>							m_vecEntries;
+
 private:
 	std::map<SectionEnum, std::vector<EntryClass*>>		m_umapSectionEntries;
-	std::vector<EntryClass*>							m_vecEntries;
 	SectionEnum											m_uiActiveReadSection;
 };
 

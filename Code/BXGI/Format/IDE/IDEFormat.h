@@ -38,6 +38,27 @@ public:
 
 	uint32										getFormatGames(void);
 
+	// ContainerFormat virtuals
+	bxgi::IDEEntry*								addEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "");
+	bxgi::IDEEntry*								addEntryViaData(std::string& strEntryName, std::string& strEntryData);
+
+	void										exportSingle(bxcf::FormatEntry *pEntry, std::string& strFolderPath) {}
+	void										exportMultiple(std::vector<bxcf::FormatEntry*>& vecIMGEntries, std::string& strFolderPath) {}
+	void										exportAll(std::string& strFolderPath) {}
+
+	std::vector<bxcf::FormatEntry*>				getAllEntries(void) { return (std::vector<bxcf::FormatEntry*>)(std::vector<bxcf::FormatEntry*>&)m_vecEntries; }
+	std::vector<bxcf::FormatEntry*>&			getEntriesRef(void) { return (std::vector<bxcf::FormatEntry*>&)m_vecEntries; }
+
+	void										swapEntries(bxcf::FormatEntry *pEntry1, bxcf::FormatEntry *pEntry2) {}
+
+	uint32										getRawVersion(void) { return -1; }
+
+	void										merge(std::string& strFilePath);
+	void										split(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFilePathOut, uint32 uiFileVersionOut) {}
+
+	// IDEFormat continued
+	void										mergeViaData(std::string& strFileData);
+
 private:
 	void										_unserialize(void);
 	void										_serialize(void);

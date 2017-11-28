@@ -1,24 +1,24 @@
 #pragma once
 
 #include "nsbxgi.h"
-#include "Format/Format.h"
+#include "Format/ContainerFormat.h"
 #include "Pool/VectorPool.h"
 #include "EDATLoaderEntryType.h"
+#include "DATLoaderEntry.h"
 #include <string>
 #include <vector>
 
-class bxgi::DATLoaderEntry;
 class bxgi::IMGFormat;
 class bxgi::IDEFormat;
 class bxgi::IPLFormat;
 
-class bxgi::DATLoaderFormat : public bxcf::Format, public bxcf::VectorPool<bxgi::DATLoaderEntry*>
+class bxgi::DATLoaderFormat : public bxcf::ContainerFormat, public bxcf::VectorPool<bxgi::DATLoaderEntry*>
 {
 public:
 	using bxcf::VectorPool<bxgi::DATLoaderEntry*>::getEntryCount;
 
-	DATLoaderFormat(void) : Format(false) {}
-	DATLoaderFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) : bxcf::Format(strFilePathOrData, bStringIsFilePath, false) {}
+	DATLoaderFormat(void) : ContainerFormat(false) {}
+	DATLoaderFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) : ContainerFormat(strFilePathOrData, bStringIsFilePath, false) {}
 
 	void										unload(void);
 
@@ -34,6 +34,26 @@ public:
 
 	uint32										getVersion(void);
 	EGame										getGame(void);
+
+	// ContainerFormat virtuals
+	bxgi::DATLoaderEntry*						addEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "");
+	bxgi::DATLoaderEntry*						addEntryViaData(std::string& strEntryName, std::string& strEntryData);
+
+	void										exportSingle(bxcf::FormatEntry *pEntry, std::string& strFolderPath) {}
+	void										exportMultiple(std::vector<bxcf::FormatEntry*>& vecIMGEntries, std::string& strFolderPath) {}
+	void										exportAll(std::string& strFolderPath) {}
+
+	std::vector<bxcf::FormatEntry*>				getAllEntries(void) { return (std::vector<bxcf::FormatEntry*>)(std::vector<bxcf::FormatEntry*>&)m_vecEntries; }
+	std::vector<bxcf::FormatEntry*>&			getEntriesRef(void) { return (std::vector<bxcf::FormatEntry*>&)m_vecEntries; }
+
+	void										swapEntries(bxcf::FormatEntry *pEntry1, bxcf::FormatEntry *pEntry2) {}
+
+	uint32										getRawVersion(void) { return -1; }
+
+	void										merge(std::string& strFilePath) {}
+	void										split(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFilePathOut, uint32 uiFileVersionOut) {}
+
+	// DATLoaderFormat continued
 
 private:
 	void										_unserialize(void);

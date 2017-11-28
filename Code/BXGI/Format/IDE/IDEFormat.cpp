@@ -36,6 +36,8 @@
 #include "Helper/SectionLines/ESectionLinesEntryType.h"
 // todo #include "CDataType.h"
 #include "Static/String.h"
+#include "Static/Path.h"
+#include "Static/File.h"
 #include "Exception/EExceptionCode.h"
 #include <unordered_map>
 
@@ -406,4 +408,66 @@ uint32						IDEFormat::getFormatGames(void)
 		}
 	}
 	return 0;
+}
+
+// add entries
+IDEEntry*					IDEFormat::addEntryViaFile(string& strEntryFilePath, string strEntryName)
+{
+	if (strEntryName == "")
+	{
+		strEntryName = Path::getFileName(strEntryFilePath);
+	}
+
+	merge(strEntryFilePath);
+	return nullptr;
+}
+
+IDEEntry*					IDEFormat::addEntryViaData(string& strEntryName, string& strEntryData)
+{
+	mergeViaData(strEntryData);
+	return nullptr;
+}
+
+// merge
+void						IDEFormat::merge(string& strFilePath)
+{
+	mergeViaData(File::getFileContent(strFilePath));
+}
+
+void						IDEFormat::mergeViaData(string& strFileData)
+{
+	/*
+	IDEFormat ideToImport(strFileData, false);
+	if (!ideToImport.unserialize())
+	{
+		return;
+	}
+
+	for (auto a : ideToImport.getSectionEntries())
+	{
+		for (auto b : a.second)
+		{
+			b.
+		}
+	}
+
+
+
+
+
+	DATLoaderFormat dat;
+	dat.unserializeData<DATLoaderFormat>(strFileData);
+
+	DATLoaderEntry *pDATEntry = nullptr;
+	for (DATLoaderEntry *pDATEntryInput : dat.getEntries())
+	{
+		pDATEntry = new DATLoaderEntry(this);
+
+		pDATEntry->setEntryType(pDATEntryInput->getEntryType());
+		pDATEntry->setEntryValues(pDATEntryInput->getEntryValues());
+
+		m_uiEntryCount++;
+		addEntry(pDATEntry);
+	}
+	*/
 }
