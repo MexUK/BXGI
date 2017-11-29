@@ -5,6 +5,7 @@
 #include "Format/E2DFXType.h"
 #include "Event/Events.h"
 #include "../bxgi/Event/EEvent.h"
+#include "Pool/VectorPool.h"
 #include "Static/String.h"
 #include <string>
 #include <vector>
@@ -68,6 +69,11 @@ public:
 	void												merge(std::string& strFilePath) {} // todo
 	void												split(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFilePathOut, uint32 uiFileVersionOut) {} // todo
 
+
+
+
+	bxcf::VectorPool<EntryClass*>						getEntries(void) { return m_vecEntries; }
+
 protected:
 	void												unserializeText(void);
 	void												serializeText(void);
@@ -77,7 +83,7 @@ private:
 	SectionEnum											getActiveReadSection(void) { return m_uiActiveReadSection; }
 
 protected:
-	std::vector<EntryClass*>							m_vecEntries;
+	bxcf::VectorPool<EntryClass*>						m_vecEntries;
 
 private:
 	std::map<SectionEnum, std::vector<EntryClass*>>		m_umapSectionEntries;

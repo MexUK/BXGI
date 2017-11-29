@@ -1,6 +1,7 @@
 #pragma once
 
 #include "nsbxgi.h"
+#include "nsbxcf.h"
 #include "Type/Types.h"
 #include "Game/EGameFlag.h"
 #include <string>
@@ -14,9 +15,14 @@ public:
 	void						addFormatGame(bxgi::EGameFlag EGameFlagValue) { m_uiFormatGames |= EGameFlagValue; }
 	void						removeFormatGame(bxgi::EGameFlag EGameFlagValue) { m_uiFormatGames &= ~EGameFlagValue; }
 
+	virtual void				setObjectId(void) {}
 	virtual uint32				getObjectId(void) { return -1; }
-	virtual std::string&		getModelName(void) { static std::string strBlank = ""; return strBlank; }
-	virtual std::string&		getTXDName(void) { static std::string strBlank = ""; return strBlank; }
+
+	virtual void				setModelName(std::string& strModelName) {}
+	virtual std::string&		getModelName(void) { return bxcf::g_strBlankString; }
+	
+	virtual void				setTXDName(void) {}
+	virtual std::string&		getTXDName(void) { return bxcf::g_strBlankString; }
 
 private:
 	uint32						m_uiFormatGames;

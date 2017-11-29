@@ -16,6 +16,22 @@ public:
 	IDEEntry(IDEFormat *pIDEFormat);
 
 	// FormatEntry
+	void									setEntryName(std::string& strEntryName);
+	std::string&							getEntryName(void);
 
-	inline bxcf::fileType::EFileType	getFileType(void) { return bxcf::fileType::EFileType::ITEM_DEFINITION; }
+	void									replace(std::string& strFilePath);
+
+	uint32									getIndex(void);
+	std::string								getEntryExtension(void);
+	uint32									getEntryOffset(void);
+	uint32									getEntrySize(void);
+	uint32									getRawVersion(void);
+	std::string								getVersionText(void);
+
+	std::string								getEntryData(void);
+
+	inline bxcf::fileType::EFileType		getFileType(void) { return bxcf::fileType::EFileType::ITEM_DEFINITION; }
+
+	// IDEEntry continued
+	std::string								serializeData(void);
 };
