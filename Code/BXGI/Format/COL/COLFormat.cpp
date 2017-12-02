@@ -86,7 +86,7 @@ void				COLFormat::checkToFixPEDSDotCOL(void)
 // COL version
 void				COLFormat::setCOLVersion(ECOLVersion uiCOLVersion)
 {
-	for (auto pCOLEntry : getEntries())
+	for (COLEntry *pCOLEntry : getEntries())
 	{
 		pCOLEntry->setCOLVersion(uiCOLVersion);
 	}
@@ -96,7 +96,7 @@ void				COLFormat::setCOLVersion(ECOLVersion uiCOLVersion)
 vector<string>		COLFormat::getModelNames(void)
 {
 	vector<string> vecModelNames;
-	for (auto pCOLEntry : getEntries())
+	for (COLEntry *pCOLEntry : getEntries())
 	{
 		vecModelNames.push_back(pCOLEntry->getModelName());
 	}
@@ -107,7 +107,7 @@ vector<string>		COLFormat::getModelNames(void)
 COLEntry*			COLFormat::getEntryByName(string strName)
 {
 	strName = String::toUpperCase(strName);
-	for (auto pCOLEntry : getEntries())
+	for (COLEntry *pCOLEntry : getEntries())
 	{
 		if (strName == String::toUpperCase(pCOLEntry->getModelName()))
 		{
@@ -122,7 +122,7 @@ vector<COLEntry*>	COLFormat::getEntriesByModelName(string strModelName)
 {
 	vector<COLEntry*> vecCOLEntries;
 	strModelName = String::toUpperCase(strModelName);
-	for (auto pCOLEntry : getEntries())
+	for (COLEntry *pCOLEntry : getEntries())
 	{
 		if (String::toUpperCase(pCOLEntry->getModelName()) == strModelName)
 		{
