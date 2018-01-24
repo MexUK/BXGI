@@ -410,12 +410,12 @@ string					IMGEntry::addXBOXCompressionMetaData(string& strCompressedEntryData)
 
 void					IMGEntry::saveEntry(string strFilePath)
 {
-	File::storeFile(strFilePath, getEntryData(), false, true);
+	File::setBinaryFile(strFilePath, getEntryData());
 }
 
 void					IMGEntry::saveEntryByMemory(string strFilePath, string& strEntryData)
 {
-	File::storeFile(strFilePath, strEntryData, false, true);
+	File::setBinaryFile(strFilePath, strEntryData);
 }
 
 uint32					IMGEntry::getEntryDataPadLength(uint32 uiUnpaddedDataLength)
@@ -579,7 +579,7 @@ string					IMGEntry::getVersionText(void)
 void					IMGEntry::replace(string& strFilePath)
 {
 	string strFileName = Path::getFileName(strFilePath);
-	string strFileData = File::getFileContent(strFilePath);
+	string strFileData = File::getBinaryFile(strFilePath);
 
 	setEntryName(strFileName);
 	setEntrySize(File::getFileSize(strFilePath));

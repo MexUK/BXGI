@@ -6,6 +6,7 @@
 #include "Static/Path.h"
 #include "Static/File.h"
 #include "Encryption/AES/Rijndael/Rijndael.h"
+#include "Encryption/EncryptionManager.h"
 #include "Static/Debug.h"
 #include "Format/COL/COLManager.h"
 #include "Compression/ECompressionAlgorithm.h"
@@ -65,14 +66,14 @@ EIMGVersion		IMGManager::detectIMGVersion(string& strIMGFilePath, string strHead
 		{
 			if (uiFileSize >= 16)
 			{
-				strHeader16B = File::getFileSubContent(strIMGFilePath, 0, 16, true);
+				strHeader16B = File::getPartialBinaryFile(strIMGFilePath, 0, 16, true);
 			}
 		}
 		if (strHeader16B == "")
 		{
 			if (uiFileSize >= 4)
 			{
-				strHeader4B = File::getFileSubContent(strIMGFilePath, 0, 4, true);
+				strHeader4B = File::getPartialBinaryFile(strIMGFilePath, 0, 4, true);
 			}
 		}
 		else
@@ -112,7 +113,7 @@ EIMGVersion		IMGManager::detectIMGVersion(string& strIMGFilePath, string strHead
 
 bool			IMGManager::detectIMGEncryptionState(string& strIMGFilePath)
 {
-	string strHeader16B = File::getFileSubContent(strIMGFilePath, 0, 16, true);
+	string strHeader16B = File::getPartialBinaryFile(strIMGFilePath, 0, 16, true);
 	string strHeader4B = strHeader16B.substr(0, 4);
 
 	// version 3
@@ -143,23 +144,23 @@ uint32	IMGManager::getIMGEntryCount(string& strIMGFilePath, EIMGVersion eVersion
 	}
 	else if (eVersion == IMG_2)
 	{
-		return String::unpackUint32(File::getFileSubContent(strIMGFilePath, 0, 8, true).substr(4, 4), false);
+		return String::unpackUint32(File::getPartialBinaryFile(strIMGFilePath, 0, 8, true).substr(4, 4), false);
 	}
 	else if (eVersion == IMG_3)
 	{
 		if (detectIMGEncryptionState(strIMGFilePath))
 		{
-			string strHeader16B = File::getFileSubContent(strIMGFilePath, 0, 16, true);
+			string strHeader16B = File::getPartialBinaryFile(strIMGFilePath, 0, 16, true);
 			return String::unpackUint32(IMGManager::decryptVersion3IMGString(strHeader16B).substr(8, 4), false);
 		}
 		else
 		{
-			return String::unpackUint32(File::getFileSubContent(strIMGFilePath, 0, 12, true).substr(8, 4), false);
+			return String::unpackUint32(File::getPartialBinaryFile(strIMGFilePath, 0, 12, true).substr(8, 4), false);
 		}
 	}
 	else if (eVersion == IMG_FASTMAN92)
 	{
-		string strHeader28B = File::getFileSubContent(strIMGFilePath, 0, 28, true);
+		string strHeader28B = File::getPartialBinaryFile(strIMGFilePath, 0, 28, true);
 		return String::unpackUint32(strHeader28B.substr(24, 4), false);
 	}
 	else
@@ -170,119 +171,21 @@ uint32	IMGManager::getIMGEntryCount(string& strIMGFilePath, EIMGVersion eVersion
 
 string			IMGManager::encryptVersion3IMGString(string strData)
 {
+	string strKey = "\x1a\xb5\x6f\xed\x7e\xc3\xff\x1\x22\x7b\x69\x15\x33\x97\x5d\xce\x47\xd7\x69\x65\x3f\xf7\x75\x42\x6a\x96\xcd\x6d\x53\x7\x56\x5d";
 	for (uint32 i = 0; i < 16; i++)
 	{
-		CRijndael enc;
-		enc.MakeKey("\x1a\xb5\x6f\xed\x7e\xc3\xff\x1\x22\x7b\x69\x15\x33\x97\x5d\xce\x47\xd7\x69\x65\x3f\xf7\x75\x42\x6a\x96\xcd\x6d\x53\x7\x56\x5d",
-			"\x1a\xb5\x6f\xed\x7e\xc3\xff\x1\x22\x7b\x69\x15\x33\x97\x5d\xce\x47\xd7\x69\x65\x3f\xf7\x75\x42\x6a\x96\xcd\x6d\x53\x7\x56\x5d",
-			32,
-			16);
-
-		char *szOutData = new char[strData.length() + 1];
-		//enc.DecryptBlock(strData.c_str(), szOutData);
-		enc.Encrypt(strData.c_str(), szOutData, strData.length(), CRijndael::ECB);
-		szOutData[strData.length()] = '\0';
-		uint32 uiLength = strData.length();
-		strData = "";
-		strData.resize(0);
-		strData.append(szOutData, uiLength);
-		delete[] szOutData;
+		strData = EncryptionManager::encryptAESECB(strData, strKey);
 	}
 	return strData;
 }
 string			IMGManager::decryptVersion3IMGString(string strData)
 {
-	///*
-	char sz[1024];
-	sprintf_s(sz, "strData length: %u", strData.length());
-	//Debug::log(sz);
-
-	/*
+	string strKey = "\x1a\xb5\x6f\xed\x7e\xc3\xff\x1\x22\x7b\x69\x15\x33\x97\x5d\xce\x47\xd7\x69\x65\x3f\xf7\x75\x42\x6a\x96\xcd\x6d\x53\x7\x56\x5d";
 	for (uint32 i = 0; i < 16; i++)
 	{
-		CRijndael enc;
-		enc.MakeKey("\x1a\xb5\x6f\xed\x7e\xc3\xff\x1\x22\x7b\x69\x15\x33\x97\x5d\xce\x47\xd7\x69\x65\x3f\xf7\x75\x42\x6a\x96\xcd\x6d\x53\x7\x56\x5d",
-			"\x1a\xb5\x6f\xed\x7e\xc3\xff\x1\x22\x7b\x69\x15\x33\x97\x5d\xce\x47\xd7\x69\x65\x3f\xf7\x75\x42\x6a\x96\xcd\x6d\x53\x7\x56\x5d",
-			32,
-			16);
-		char *szOutData = new char[strData.length() + 1];
-		uint32 uiDataLength = strData.length();
-		string strNewData = "";
-		for (uint32 i2 = 0; i2 < (strData.length() / 16); i2++)
-		{
-			string strSubData = strData.substr(i2 * 16, 16);
-			enc.DecryptBlock(strSubData.c_str(), szOutData);
-			//enc.Decrypt(strData.c_str(), szOutData, strData.length(), CRijndael::ECB);
-			//szOutData[strData.length()] = '\0';
-			strNewData.append(szOutData, 16);
-		}
-		strData = "";
-		strData.append(strNewData.c_str(), uiDataLength);
-		delete[] szOutData;
+		strData = EncryptionManager::decryptAESECB(strData, strKey);
 	}
-	*/
-	///*
-	for (uint32 i = 0; i < 16; i++)
-	{
-		CRijndael enc;
-		enc.MakeKey("\x1a\xb5\x6f\xed\x7e\xc3\xff\x1\x22\x7b\x69\x15\x33\x97\x5d\xce\x47\xd7\x69\x65\x3f\xf7\x75\x42\x6a\x96\xcd\x6d\x53\x7\x56\x5d",
-			"\x1a\xb5\x6f\xed\x7e\xc3\xff\x1\x22\x7b\x69\x15\x33\x97\x5d\xce\x47\xd7\x69\x65\x3f\xf7\x75\x42\x6a\x96\xcd\x6d\x53\x7\x56\x5d",
-			32,
-			16);
-
-		char *szOutData = new char[strData.length() + 1];
-		//enc.DecryptBlock(strData.c_str(), szOutData);
-		enc.Decrypt(strData.c_str(), szOutData, strData.length(), CRijndael::ECB);
-		szOutData[strData.length()] = '\0';
-		uint32 uiLength = strData.length();
-		strData = "";
-		strData.resize(0);
-		strData.append(szOutData, uiLength);
-		delete [] szOutData;
-	}
-	//*/
 	return strData;
-	//*/
-	/*
-	strData = strData.substr(0, 20);
-	string recovered;
-
-	for (uint32 i = 0; i < 16; i++)
-	{
-		Debug::log("DECRYPTION LOOP");
-		AutoSeededRandomPool prng;
-
-		//byte* key_s = (byte*)"\x1a\xb5\x6f\xed\x7e\xc3\xff\x1\x22\x7b\x69\x15\x33\x97\x5d\xce\x47\xd7\x69\x65\x3f\xf7\x75\x42\x6a\x96\xcd\x6d\x53\x7\x56\x5d";
-		//SecByteBlock key(key_s, 32);
-		byte key[33] = "\x1a\xb5\x6f\xed\x7e\xc3\xff\x1\x22\x7b\x69\x15\x33\x97\x5d\xce\x47\xd7\x69\x65\x3f\xf7\x75\x42\x6a\x96\xcd\x6d\x53\x7\x56\x5d";
-		//prng.GenerateBlock(key, 32);
-		
-		try
-		{
-			ECB_Mode< AES >::Decryption d;
-			d.SetKey(key, 32);
-
-			// The StreamTransformationFilter removes
-			//  padding as required.
-			StringSource s(strData, true,
-				//new CryptoPP::HexDecoder(
-					new StreamTransformationFilter(d,
-						new StringSink(recovered)
-					) // StreamTransformationFilter
-				//)
-			); // StringSource
-		}
-		catch (const CryptoPP::Exception& e)
-		{
-			Debug::log(e.what());
-			exit(1);
-		}
-
-		strData = recovered;
-	}
-
-	return recovered;
-	*/
 }
 
 vector<string>		IMGManager::getDefaultGameIMGSubPaths(EPlatformedGame EPlatformedGameValue)

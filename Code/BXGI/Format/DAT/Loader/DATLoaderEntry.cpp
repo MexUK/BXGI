@@ -18,7 +18,7 @@ void						DATLoaderEntry::serialize(void)
 {
 	DataWriter *pDataWriter = &m_pFormat->m_writer;
 
-	if (m_uiEntryType == DAT_LOADER_UNKNOWN)
+	if (m_uiEntryType2 == DAT_LOADER_UNKNOWN)
 	{
 		pDataWriter->writeTokenString(m_deqValues[0]);
 	}
@@ -35,7 +35,7 @@ void						DATLoaderEntry::serialize(void)
 // entry type text
 string						DATLoaderEntry::getEntryTypeText(void)
 {
-	switch (m_uiEntryType)
+	switch (m_uiEntryType2)
 	{
 	case DAT_LOADER_IMG:		return "IMG";
 	case DAT_LOADER_CDIMAGE:	return "CDIMAGE";

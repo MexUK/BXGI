@@ -537,7 +537,7 @@ string					WTDFormat::getFourCCFromD3DFormat(D3DFORMAT d3dFormat)
 void					WTDFormat::exportSingle(FormatEntry *pEntry, string& strFolderPath)
 {
 	string strFolderPath2 = Path::addSlashToEnd(strFolderPath);
-	File::storeFile(strFolderPath2 + pEntry->getEntryName(), readEntryContent(pEntry->getIndex()), false, true);
+	File::setBinaryFile(strFolderPath2 + pEntry->getEntryName(), readEntryContent(pEntry->getIndex()));
 }
 
 void					WTDFormat::exportMultiple(vector<FormatEntry*>& vecEntries, string& strFolderPath)
@@ -586,7 +586,7 @@ void					WTDFormat::exportMultiple(vector<FormatEntry*>& vecEntries, string& str
 		{
 			strFileNameOut += ".bmp";
 		}
-		File::storeFile(strFolderPath + strFileNameOut, readEntryContent(getIndexByEntry(pWTDEntry)), false, true);
+		File::setBinaryFile(strFolderPath + strFileNameOut, readEntryContent(getIndexByEntry(pWTDEntry)));
 		*/
 
 		Events::trigger(TASK_PROGRESS);

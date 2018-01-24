@@ -20,8 +20,8 @@ public:
 	void									setVersionId(bxgi::ERWVersion uiVersionId) { m_uiVersionId = uiVersionId; }
 	bxgi::ERWVersion						getVersionId(void) { return m_uiVersionId; }
 
-	void									setFileType(bxcf::fileType::EFileType uiFileType) { m_uiFileType = uiFileType; }
-	bxcf::fileType::EFileType				getFileType(void) { return m_uiFileType; }
+	void									setEntryType(bxcf::fileType::EFileType uiEntryType) { m_uiEntryType = uiEntryType; }
+	bxcf::fileType::EFileType				getEntryType(void) { return m_uiEntryType; }
 
 	void									setPlatformedGames(std::vector<bxgi::EPlatformedGame>& vecPlatformedGames) { m_vecPlatformedGames = vecPlatformedGames; }
 	std::vector<bxgi::EPlatformedGame>&		getPlatformedGames(void) { return m_vecPlatformedGames; }
@@ -41,6 +41,6 @@ public:
 private:
 	uint32									m_uiRawVersion;				// e.g. 0x00000302
 	bxgi::ERWVersion						m_uiVersionId;				// e.g. 0
-	bxcf::fileType::EFileType				m_uiFileType;				// e.g. MODEL
+	bxcf::fileType::EFileType				m_uiEntryType;				// e.g. MODEL
 	std::vector<EPlatformedGame>			m_vecPlatformedGames;		// e.g. PC_GTA_III, PC_GTA_VC
 };

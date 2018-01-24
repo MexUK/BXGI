@@ -40,7 +40,7 @@ RWVersion*										RWVersionManager::addVersion(uint32 uiRawVersion, ERWVersion
 	RWVersion *pRWVersion = new RWVersion;
 	pRWVersion->setRawVersion(uiRawVersion);
 	pRWVersion->setVersionId(uiVersionId);
-	pRWVersion->setFileType(uiFileType);
+	pRWVersion->setEntryType(uiFileType);
 	pRWVersion->setPlatformedGames(vecPlatformedGames);
 	addEntry(pRWVersion);
 	return pRWVersion;

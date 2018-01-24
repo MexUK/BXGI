@@ -50,7 +50,7 @@ vector<string>				DFFFormat::getModelNames(void)
 void						DFFFormat::exportSingle(FormatEntry *pEntry, string& strFolderPath)
 {
 	string strFolderPath2 = Path::addSlashToEnd(strFolderPath);
-	File::storeFile(strFolderPath2 + pEntry->getEntryName(), readEntryContent(pEntry->getIndex()), false, true);
+	File::setBinaryFile(strFolderPath2 + pEntry->getEntryName(), readEntryContent(pEntry->getIndex()));
 }
 
 void						DFFFormat::exportMultiple(vector<FormatEntry*>& vecEntries, string& strFolderPath)

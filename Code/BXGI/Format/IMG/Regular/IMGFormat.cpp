@@ -504,7 +504,7 @@ vector<EFileType>			IMGFormat::getFileTypes(void)
 	EFileType uiEntryType;
 	for (IMGEntry *pEntry : VectorPool::getEntries())
 	{
-		uiEntryType = pEntry->getFileType();
+		uiEntryType = pEntry->getEntryType();
 		if (setFileTypes.count(uiEntryType) == 0)
 		{
 			setFileTypes.insert(uiEntryType);
@@ -558,7 +558,7 @@ map<string, pair<uint32, EFileType>, SortByStringKey>		IMGFormat::getFileTypedVe
 		if (setFileVersions.count(strVersionText) == 0)
 		{
 			setFileVersions.insert(strVersionText);
-			mapFileTypedVersions[strVersionText] = pair<uint32, EFileType>(pEntry->getRawVersion(), pEntry->getFileType());
+			mapFileTypedVersions[strVersionText] = pair<uint32, EFileType>(pEntry->getRawVersion(), pEntry->getEntryType());
 		}
 	}
 	return mapFileTypedVersions;
@@ -601,7 +601,7 @@ IMGEntry*							IMGFormat::addEntryViaFile(string& strEntryFilePath, string strE
 		strEntryName = Path::getFileName(strEntryFilePath);
 	}
 
-	string strEntryData = File::getFileContent(strEntryFilePath);
+	string strEntryData = File::getBinaryFile(strEntryFilePath);
 
 	IMGEntry *pIMGEntry = new IMGEntry(this);
 
@@ -714,7 +714,7 @@ void								IMGFormat::removeAllEntries(void)
 
 IMGEntry*							IMGFormat::replaceEntryViaFile(string& strEntryName, string& strEntryFilePath, string strNewEntryName)
 {
-	string strEntryData = File::getFileContent(strEntryFilePath);
+	string strEntryData = File::getBinaryFile(strEntryFilePath);
 	IMGEntry *pIMGEntry = replaceEntryViaData(strEntryName, strEntryData, strNewEntryName);
 	pIMGEntry->setFileCreationDate(File::getFileCreationDate(strEntryFilePath));
 	return pIMGEntry;
@@ -751,7 +751,7 @@ uint32						IMGFormat::replaceEntries(vector<string>& vecPaths, vector<string>& 
 		}
 
 		// body
-		string strFileContent = File::getFileContent(strPath);
+		string strFileContent = File::getBinaryFile(strPath);
 		uint32 uiFileSize = strFileContent.length();
 		pIMGEntry->setEntryData(strFileContent);
 
@@ -976,7 +976,7 @@ void					IMGFormat::exportSingle(FormatEntry *pEntry, string& strFolderPath)
 	*/
 
 	string strFolderPath2 = Path::addSlashToEnd(strFolderPath);
-	File::storeFile(strFolderPath2 + pEntry->getEntryName(), readEntryContent(pEntry->getIndex()), false, true);
+	File::setBinaryFile(strFolderPath2 + pEntry->getEntryName(), readEntryContent(pEntry->getIndex()));
 }
 
 void					IMGFormat::exportMultiple(vector<IMGEntry*>& vecIMGEntries, string& strFolderPath)
@@ -1001,7 +1001,7 @@ void					IMGFormat::exportMultiple(vector<FormatEntry*>& vecIMGEntries, string& 
 			continue;
 		}
 		
-		File::storeFile(strFolderPath + pIMGEntry->getEntryName(), readEntryContent(getIndexByEntry(pIMGEntry)), false, true);
+		File::setBinaryFile(strFolderPath + pIMGEntry->getEntryName(), readEntryContent(getIndexByEntry(pIMGEntry)));
 		
 		Events::trigger(TASK_PROGRESS);
 	}
@@ -1028,7 +1028,7 @@ void					IMGFormat::exportAll(string& strFolderPath)
 			continue;
 		}
 		
-		File::storeFile(strFolderPath + pIMGEntry->getEntryName(), readEntryContent(uiEntryIndex++), false, true);
+		File::setBinaryFile(strFolderPath + pIMGEntry->getEntryName(), readEntryContent(uiEntryIndex++));
 		
 		Events::trigger(TASK_PROGRESS);
 	}
@@ -1103,7 +1103,7 @@ void					IMGFormat::merge(string& strFilePath)
 	{
 		// entry header data
 		IMGEntry *pOutEntry = new IMGEntry(this);
-		pOutEntry->setFileType(pInEntry->getFileType());
+		pOutEntry->setFileType(pInEntry->getEntryType());
 		pOutEntry->setEntryExtension(pInEntry->getEntryExtension());
 		pOutEntry->setEntryName(pInEntry->getEntryName());
 		pOutEntry->setEntrySize(pInEntry->getEntrySize());

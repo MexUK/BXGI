@@ -15,5 +15,5 @@ public:
 
 	// FormatEntry
 
-	inline bxcf::fileType::EFileType	getFileType(void) { return bxcf::fileType::EFileType::ITEM_PLACEMENT; }
+	inline bxcf::fileType::EFileType	getEntryType(void) { return bxcf::fileType::EFileType::ITEM_PLACEMENT; }
 };

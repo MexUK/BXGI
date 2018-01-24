@@ -37,7 +37,7 @@ uint32					DATLoaderFormat::getVersion(void)
 	}
 	else if (strFileNameLower == "gta.dat")
 	{
-		if (String::isIn(File::getFileContent(getFilePath()), ":"))
+		if (String::isIn(File::getTextFile(getFilePath()), ":"))
 		{
 			return 4;
 		}
@@ -66,7 +66,7 @@ EGame					DATLoaderFormat::getGame(void)
 	}
 	else if (strFileNameLower == "gta.dat")
 	{
-		if (String::isIn(File::getFileContent(getFilePath()), ":"))
+		if (String::isIn(File::getTextFile(getFilePath()), ":"))
 		{
 			return GTA_IV;
 		}
@@ -124,14 +124,14 @@ void					DATLoaderFormat::unserializeLine(void)
 	if (strLineClean == "")
 	{
 		// blank line
-		pDATLoaderEntry->setEntryType(DAT_LOADER_UNKNOWN);
+		pDATLoaderEntry->setEntryType2(DAT_LOADER_UNKNOWN);
 		pDATLoaderEntry->setEntryValues(deque<string>({ strLine }));
 	}
 
 	else if (String::ltrim(strLineClean).c_str()[0] == '#')
 	{
 		// line is a comment
-		pDATLoaderEntry->setEntryType(DAT_LOADER_UNKNOWN);
+		pDATLoaderEntry->setEntryType2(DAT_LOADER_UNKNOWN);
 		pDATLoaderEntry->setEntryValues(deque<string>({ strLine }));
 	}
 
@@ -140,7 +140,7 @@ void					DATLoaderFormat::unserializeLine(void)
 		// parse line
 		deque<string> deqTokens = StdVector::convertVectorToDeque(String::split(strLineClean, " "));
 
-		pDATLoaderEntry->setEntryType(DATLoaderManager::getDATEntryTypeFromString(deqTokens[0]));
+		pDATLoaderEntry->setEntryType2(DATLoaderManager::getDATEntryTypeFromString(deqTokens[0]));
 		deqTokens.pop_front();
 		pDATLoaderEntry->setEntryValues(deqTokens);
 	}
@@ -228,7 +228,7 @@ DATLoaderEntry*				DATLoaderFormat::addEntryViaFile(string& strEntryFilePath, st
 		strEntryName = Path::getFileName(strEntryFilePath);
 	}
 
-	return addEntryViaData(strEntryName, File::getFileContent(strEntryFilePath, doesFormatUseBinaryData()));
+	return addEntryViaData(strEntryName, File::getTextFile(strEntryFilePath));
 }
 
 DATLoaderEntry*				DATLoaderFormat::addEntryViaData(string& strEntryName, string& strEntryData)
@@ -241,7 +241,7 @@ DATLoaderEntry*				DATLoaderFormat::addEntryViaData(string& strEntryName, string
 	{
 		pDATEntry = new DATLoaderEntry(this);
 
-		pDATEntry->setEntryType(pDATEntryInput->getEntryType());
+		pDATEntry->setEntryType2(pDATEntryInput->getEntryType2());
 		pDATEntry->setEntryValues(pDATEntryInput->getEntryValues());
 
 		m_uiEntryCount++;

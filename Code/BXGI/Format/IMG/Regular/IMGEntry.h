@@ -46,7 +46,7 @@ public:
 
 	std::string				getEntryData(void); // returns uncompressed data if the entry is marked as compressed
 
-	inline bxcf::fileType::EFileType	getFileType(void) { return m_uiFileType; }
+	inline bxcf::fileType::EFileType	getEntryType(void) { return m_uiFileType; }
 
 	void					setIMGFile(bxgi::IMGFormat *pIMGFile) { m_pIMGFile = pIMGFile; }
 	bxgi::IMGFormat*		getIMGFile(void) { return m_pIMGFile; }

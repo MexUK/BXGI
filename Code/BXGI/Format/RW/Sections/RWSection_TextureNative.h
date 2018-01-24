@@ -36,7 +36,7 @@ public:
 
 	std::string					getEntryData(void);
 
-	inline bxcf::fileType::EFileType	getFileType(void) { return bxcf::fileType::EFileType::IMAGE; }
+	inline bxcf::fileType::EFileType	getEntryType(void) { return bxcf::fileType::EFileType::IMAGE; }
 
 	void						convertToGame(bxgi::EPlatformedGame EPlatformedGame, std::vector<std::string>& vecMipmapsRemoved);
 	void						convertToRasterDataFormat(bxcf::ERasterDataFormat ERasterDataFormatValue, std::vector<std::string>& vecMipmapsRemoved);

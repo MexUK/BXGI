@@ -30,7 +30,7 @@ public:
 
 	std::string								getEntryData(void);
 
-	inline bxcf::fileType::EFileType		getFileType(void) { return bxcf::fileType::EFileType::ITEM_DEFINITION; }
+	inline bxcf::fileType::EFileType		getEntryType(void) { return bxcf::fileType::EFileType::ITEM_DEFINITION; }
 
 	// IDEEntry continued
 	std::string								serializeData(void);

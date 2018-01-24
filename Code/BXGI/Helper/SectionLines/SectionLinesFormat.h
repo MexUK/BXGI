@@ -150,7 +150,7 @@ void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntr
 		{
 			pFormatEntry = createSectionEntry(eFormatSectionValue);
 			pFormatEntry->unserialize();
-			pFormatEntry->setEntryType(SECTION_LINES_ENTRY_SECTION);
+			pFormatEntry->setEntryType2(SECTION_LINES_ENTRY_SECTION);
 			setActiveReadSection(eFormatSectionValue);
 		}
 		else
@@ -163,7 +163,7 @@ void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntr
 				eFormatSectionValue = getActiveReadSection();
 				pFormatEntry = createDataEntry(eFormatSectionValue, detectSectionSpecificType(eFormatSectionValue));
 				pFormatEntry->unserialize();
-				pFormatEntry->setEntryType(SECTION_LINES_ENTRY_DATA);
+				pFormatEntry->setEntryType2(SECTION_LINES_ENTRY_DATA);
 			}
 			catch (EExceptionCode)
 			{
@@ -175,7 +175,7 @@ void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntr
 				pFormatEntry = createOtherEntry();
 				pFormatEntry->setSectionType(getActiveReadSection());
 				pFormatEntry->unserialize();
-				pFormatEntry->setEntryType(SECTION_LINES_ENTRY_OTHER);
+				pFormatEntry->setEntryType2(SECTION_LINES_ENTRY_OTHER);
 			}
 			m_reader.setTokenModeEnabled(false);
 		}
@@ -242,7 +242,7 @@ template<class FormatClass, class EntryClass, typename SectionEnum, class OtherE
 OtherEntryClass*	bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntryClass, SectionEntryClass, DataEntryClass>::createOtherEntry(void)
 {
 	OtherEntryClass *pFormatEntry = new OtherEntryClass((FormatClass*)this);
-	pFormatEntry->setEntryType(SECTION_LINES_ENTRY_OTHER);
+	pFormatEntry->setEntryType2(SECTION_LINES_ENTRY_OTHER);
 	return pFormatEntry;
 }
 
@@ -250,7 +250,7 @@ template<class FormatClass, class EntryClass, typename SectionEnum, class OtherE
 SectionEntryClass*	bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntryClass, SectionEntryClass, DataEntryClass>::createSectionEntry(SectionEnum eFormatSectionValue)
 {
 	SectionEntryClass *pFormatEntry = new SectionEntryClass((FormatClass*)this);
-	pFormatEntry->setEntryType(SECTION_LINES_ENTRY_SECTION);
+	pFormatEntry->setEntryType2(SECTION_LINES_ENTRY_SECTION);
 	pFormatEntry->setSectionType(eFormatSectionValue);
 	return pFormatEntry;
 }

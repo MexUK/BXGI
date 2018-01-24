@@ -21,8 +21,8 @@ public:
 	void						setFormat(DATLoaderFormat *pFormat) { m_pFormat = pFormat; }
 	DATLoaderFormat*			getFormat(void) { return m_pFormat; }
 
-	void						setEntryType(EDATLoaderEntryType eEntryType) { m_uiEntryType = eEntryType; }
-	EDATLoaderEntryType			getEntryType(void) { return m_uiEntryType; }
+	void						setEntryType2(EDATLoaderEntryType eEntryType2) { m_uiEntryType2 = eEntryType2; }
+	EDATLoaderEntryType			getEntryType2(void) { return m_uiEntryType2; }
 
 	void						setEntryValues(std::deque<std::string>& deqValues) { m_deqValues = deqValues; }
 	std::deque<std::string>&	getEntryValues(void) { return m_deqValues; }
@@ -42,12 +42,12 @@ public:
 
 	std::string					getEntryData(void) { return ""; }
 
-	bxcf::fileType::EFileType	getFileType(void) { return bxcf::fileType::EFileType::DAT_LOADER; } // todo rename to getEntryType
+	bxcf::fileType::EFileType	getEntryType(void) { return bxcf::fileType::EFileType::DAT_LOADER; } // todo rename to getEntryType
 
 	// DATLoaderEntry continued
 
 private:
 	DATLoaderFormat*			m_pFormat;
-	EDATLoaderEntryType			m_uiEntryType;
+	EDATLoaderEntryType			m_uiEntryType2;
 	std::deque<std::string>		m_deqValues;
 };

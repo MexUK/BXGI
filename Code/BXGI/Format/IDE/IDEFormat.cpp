@@ -431,7 +431,7 @@ IDEEntry*					IDEFormat::addEntryViaData(string& strEntryName, string& strEntryD
 // merge
 void						IDEFormat::merge(string& strFilePath)
 {
-	mergeViaData(File::getFileContent(strFilePath));
+	mergeViaData(File::getTextFile(strFilePath));
 }
 
 void						IDEFormat::mergeViaData(string& strFileData)

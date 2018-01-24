@@ -10,7 +10,7 @@ public:
 	IDEEntry_Data(bxgi::IDEFormat *pIDEFormat, bxgi::EIDESection EIDESectionValue) :
 		IDEEntry(pIDEFormat)
 	{
-		setEntryType(SECTION_LINES_ENTRY_DATA);
+		setEntryType2(SECTION_LINES_ENTRY_DATA);
 		setSectionType(EIDESectionValue);
 	};
 };

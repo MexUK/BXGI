@@ -12,7 +12,7 @@ class bxgi::SectionLinesEntry : public bxcf::FormatEntry
 public:
 	SectionLinesEntry(FormatClass *pFormat) :
 		m_pFormat(pFormat),
-		m_uiEntryType(SECTION_LINES_ENTRY_UNKNOWN),
+		m_uiEntryType2(SECTION_LINES_ENTRY_UNKNOWN),
 		m_uiSectionType((SectionEnum)0),
 		m_ucFormatType(0)
 	{
@@ -26,8 +26,8 @@ public:
 	void							setFormat(FormatClass* pFormat) { m_pFormat = pFormat; }
 	FormatClass*					getFormat(void) { return m_pFormat; }
 
-	void							setEntryType(bxgi::ESectionLinesEntryType eEntryType) { m_uiEntryType = eEntryType; }
-	bxgi::ESectionLinesEntryType	getEntryType(void) { return m_uiEntryType; }
+	void							setEntryType2(bxgi::ESectionLinesEntryType eEntryType) { m_uiEntryType2 = eEntryType; }
+	bxgi::ESectionLinesEntryType	getEntryType2(void) { return m_uiEntryType2; }
 
 	void							setSectionType(SectionEnum eSectionValue) { m_uiSectionType = eSectionValue; }
 	SectionEnum						getSectionType(void) { return m_uiSectionType; }
@@ -58,7 +58,7 @@ protected:
 	FormatClass*					m_pFormat;
 
 private:
-	bxgi::ESectionLinesEntryType	m_uiEntryType;
+	bxgi::ESectionLinesEntryType	m_uiEntryType2;
 	SectionEnum						m_uiSectionType;
 	std::string						m_strComment;
 	uint8							m_ucFormatType;

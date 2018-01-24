@@ -12,7 +12,7 @@ using namespace bxgi;
 RWVersion::RWVersion(void) :
 	m_uiRawVersion(0),
 	m_uiVersionId(UNKNOWN_RW_VERSION),
-	m_uiFileType(fileType::UNKNOWN)
+	m_uiEntryType(fileType::UNKNOWN)
 {
 }
 
