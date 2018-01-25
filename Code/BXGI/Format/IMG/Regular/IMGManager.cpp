@@ -66,14 +66,14 @@ EIMGVersion		IMGManager::detectIMGVersion(string& strIMGFilePath, string strHead
 		{
 			if (uiFileSize >= 16)
 			{
-				strHeader16B = File::getPartialBinaryFile(strIMGFilePath, 0, 16, true);
+				strHeader16B = File::getPartialBinaryFile(strIMGFilePath, 0, 16);
 			}
 		}
 		if (strHeader16B == "")
 		{
 			if (uiFileSize >= 4)
 			{
-				strHeader4B = File::getPartialBinaryFile(strIMGFilePath, 0, 4, true);
+				strHeader4B = File::getPartialBinaryFile(strIMGFilePath, 0, 4);
 			}
 		}
 		else
@@ -113,7 +113,7 @@ EIMGVersion		IMGManager::detectIMGVersion(string& strIMGFilePath, string strHead
 
 bool			IMGManager::detectIMGEncryptionState(string& strIMGFilePath)
 {
-	string strHeader16B = File::getPartialBinaryFile(strIMGFilePath, 0, 16, true);
+	string strHeader16B = File::getPartialBinaryFile(strIMGFilePath, 0, 16);
 	string strHeader4B = strHeader16B.substr(0, 4);
 
 	// version 3
@@ -144,23 +144,23 @@ uint32	IMGManager::getIMGEntryCount(string& strIMGFilePath, EIMGVersion eVersion
 	}
 	else if (eVersion == IMG_2)
 	{
-		return String::unpackUint32(File::getPartialBinaryFile(strIMGFilePath, 0, 8, true).substr(4, 4), false);
+		return String::unpackUint32(File::getPartialBinaryFile(strIMGFilePath, 0, 8).substr(4, 4), false);
 	}
 	else if (eVersion == IMG_3)
 	{
 		if (detectIMGEncryptionState(strIMGFilePath))
 		{
-			string strHeader16B = File::getPartialBinaryFile(strIMGFilePath, 0, 16, true);
+			string strHeader16B = File::getPartialBinaryFile(strIMGFilePath, 0, 16);
 			return String::unpackUint32(IMGManager::decryptVersion3IMGString(strHeader16B).substr(8, 4), false);
 		}
 		else
 		{
-			return String::unpackUint32(File::getPartialBinaryFile(strIMGFilePath, 0, 12, true).substr(8, 4), false);
+			return String::unpackUint32(File::getPartialBinaryFile(strIMGFilePath, 0, 12).substr(8, 4), false);
 		}
 	}
 	else if (eVersion == IMG_FASTMAN92)
 	{
-		string strHeader28B = File::getPartialBinaryFile(strIMGFilePath, 0, 28, true);
+		string strHeader28B = File::getPartialBinaryFile(strIMGFilePath, 0, 28);
 		return String::unpackUint32(strHeader28B.substr(24, 4), false);
 	}
 	else

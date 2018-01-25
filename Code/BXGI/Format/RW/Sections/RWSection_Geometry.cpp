@@ -290,7 +290,7 @@ IntermediateGeometry*			RWSection_Geometry::convertToIntermediateGeometry(void)
 		}
 		if (m_uiFlags & 8)
 		{
-			vertexData.setColour(vecVertexColours[i].convertToUint32());
+			vertexData.setColour(vecVertexColours[i].convertToUint32(true));
 		}
 		if ((m_uiFlags & 4) || (m_uiFlags & 128))
 		{

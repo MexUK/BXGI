@@ -270,19 +270,19 @@ void					IMGEntry::setEntryData(string& strEntryData, bool bIsNew)
 	{
 		uint32 uiEntrySizePadded = 2048 * uiPreviousEntrySizeSectors;
 		strEntryData = String::zeroPad(strEntryData, uiEntrySizePadded);
-		File::storeFileSubContent(m_pIMGFile->getIMGFilePath(), strEntryData, getEntryOffset());
+		File::setPartialBinaryFile(m_pIMGFile->getIMGFilePath(), strEntryData, getEntryOffset());
 	}
 	else
 	{
 		uint32 uiNewEntryOffset = m_pIMGFile->getNextEntryOffset();
 		setEntryOffset(uiNewEntryOffset);
-		File::storeFileSubContent(m_pIMGFile->getIMGFilePath(), strEntryData, uiNewEntryOffset);
+		File::setPartialBinaryFile(m_pIMGFile->getIMGFilePath(), strEntryData, uiNewEntryOffset);
 	}
 }
 
 string					IMGEntry::getEntryData(void)
 {
-	string strEntryData = File::getFileSubContent(getIMGFile()->getIMGFilePath(), getEntryOffset(), getEntrySize(), true);
+	string strEntryData = File::getPartialBinaryFile(getIMGFile()->getIMGFilePath(), getEntryOffset(), getEntrySize());
 
 	if (isCompressed())
 	{
@@ -314,7 +314,7 @@ string					IMGEntry::getEntrySubData(uint32 uiStart, uint32 uiLength)
 		uint32 uiLength2 = (uint32) ceil((float32)uiLength / (float32) ucZLibBlockSize) * ucZLibBlockSize;
 		uint32 uiStartOffset = uiStart - uiStart2;
 
-		string strEntrySubData = File::getFileSubContent(strIMGFilePath, getEntryOffset() + uiStart2, uiLength2, true);
+		string strEntrySubData = File::getPartialBinaryFile(strIMGFilePath, getEntryOffset() + uiStart2, uiLength2);
 		switch (getCompressionAlgorithmId())
 		{
 		case COMPRESSION_ZLIB:			return CompressionManager::decompressZLib(strEntrySubData, getUncompressedSize());
@@ -326,7 +326,7 @@ string					IMGEntry::getEntrySubData(uint32 uiStart, uint32 uiLength)
 	else
 	{
 		// not compressed
-		return File::getFileSubContent(strIMGFilePath, getEntryOffset() + uiStart, uiLength, true);
+		return File::getPartialBinaryFile(strIMGFilePath, getEntryOffset() + uiStart, uiLength);
 	}
 }
 
