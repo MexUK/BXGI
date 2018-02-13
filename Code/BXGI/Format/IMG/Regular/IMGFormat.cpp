@@ -519,12 +519,26 @@ vector<string>				IMGFormat::getFileTypesText(void)
 	return StdVector::mapSorted(getFileTypes(), Format::getFileTypeText);
 }
 
-map<string, EFileType, SortByStringKey>		IMGFormat::getFileTypesAsMap(void)
+map<string, EFileType, SortByStringKey>		IMGFormat::getFileTypesAsMap(bool bIncludePercentages)
 {
+	unordered_map<EFileType, uint32> umapFileTypeCounts;
+	for (IMGEntry *pIMGEntry : getEntries())
+	{
+		if (umapFileTypeCounts.count(pIMGEntry->getEntryType()) == 0)
+		{
+			umapFileTypeCounts[pIMGEntry->getEntryType()] = 1;
+		}
+		else
+		{
+			umapFileTypeCounts[pIMGEntry->getEntryType()]++;
+		}
+	}
+
 	map<string, EFileType, SortByStringKey> mapFileTypes;
 	for (EFileType uiFileType : getFileTypes())
 	{
-		mapFileTypes[Format::getFileTypeText(uiFileType)] = uiFileType;
+		string strVersionText2 = bIncludePercentages ? (" (" + String::toString(umapFileTypeCounts[uiFileType]) + ", " + String::toString(ceil((((float32)umapFileTypeCounts[uiFileType] / (float32)m_uiEntryCount) * 100.0f))) + "%)") : "";
+		mapFileTypes[Format::getFileTypeText(uiFileType) + strVersionText2] = uiFileType;
 	}
 	return mapFileTypes;
 }
@@ -547,8 +561,35 @@ vector<string>				IMGFormat::getFileVersions(void)
 	return vecFileVersions;
 }
 
-map<string, pair<uint32, EFileType>, SortByStringKey>		IMGFormat::getFileTypedVersionsAsMap(void)
+map<string, pair<uint32, EFileType>, SortByStringKey>		IMGFormat::getFileTypedVersionsAsMap(bool bIncludePercentages)
 {
+	unordered_map<EFileType, unordered_map<uint32, uint32>> umapFileVersionCounts;
+	for (IMGEntry *pIMGEntry : getEntries())
+	{
+		if (umapFileVersionCounts.count(pIMGEntry->getEntryType()) == 0)
+		{
+			if (umapFileVersionCounts[pIMGEntry->getEntryType()].count(pIMGEntry->getRawVersion()) == 0)
+			{
+				umapFileVersionCounts[pIMGEntry->getEntryType()][pIMGEntry->getRawVersion()] = 1;
+			}
+			else
+			{
+				umapFileVersionCounts[pIMGEntry->getEntryType()][pIMGEntry->getRawVersion()]++;
+			}
+		}
+		else
+		{
+			if (umapFileVersionCounts[pIMGEntry->getEntryType()].count(pIMGEntry->getRawVersion()) == 0)
+			{
+				umapFileVersionCounts[pIMGEntry->getEntryType()][pIMGEntry->getRawVersion()] = 1;
+			}
+			else
+			{
+				umapFileVersionCounts[pIMGEntry->getEntryType()][pIMGEntry->getRawVersion()]++;
+			}
+		}
+	}
+
 	map<string, pair<uint32, EFileType>, SortByStringKey> mapFileTypedVersions;
 	set<string> setFileVersions;
 	string strVersionText;
@@ -557,6 +598,9 @@ map<string, pair<uint32, EFileType>, SortByStringKey>		IMGFormat::getFileTypedVe
 		strVersionText = pEntry->getVersionText();
 		if (setFileVersions.count(strVersionText) == 0)
 		{
+			string strVersionText2 = bIncludePercentages ? (" (" + String::toString(umapFileVersionCounts[pEntry->getEntryType()][pEntry->getRawVersion()]) + ", " + String::toString(ceil((((float32)umapFileVersionCounts[pEntry->getEntryType()][pEntry->getRawVersion()] / (float32)m_uiEntryCount) * 100.0f))) + "%)") : "";
+			strVersionText += strVersionText2;
+			
 			setFileVersions.insert(strVersionText);
 			mapFileTypedVersions[strVersionText] = pair<uint32, EFileType>(pEntry->getRawVersion(), pEntry->getEntryType());
 		}

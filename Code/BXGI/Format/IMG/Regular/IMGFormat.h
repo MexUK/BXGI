@@ -106,10 +106,10 @@ public:
 
 	std::vector<bxcf::fileType::EFileType>			getFileTypes(void);
 	std::vector<std::string>						getFileTypesText(void);
-	std::map<std::string, bxcf::fileType::EFileType, SortByStringKey>	getFileTypesAsMap(void);
+	std::map<std::string, bxcf::fileType::EFileType, SortByStringKey>	getFileTypesAsMap(bool bIncludePercentages = false);
 
 	std::vector<std::string>						getFileVersions(void);
-	std::map<std::string, std::pair<uint32, bxcf::fileType::EFileType>, SortByStringKey>	getFileTypedVersionsAsMap(void);
+	std::map<std::string, std::pair<uint32, bxcf::fileType::EFileType>, SortByStringKey>	getFileTypedVersionsAsMap(bool bIncludePercentages = false);
 
 	void											getModelAndTextureSetNamesFromEntries(
 		std::unordered_map<IMGEntry*, std::vector<std::string>>& umapIMGModelNames,
