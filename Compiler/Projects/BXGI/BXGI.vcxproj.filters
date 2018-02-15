@@ -1574,5 +1574,11 @@
     <ClInclude Include="..\..\..\Code\BXGI\Format\FormatVersion.h">
       <Filter>Header Files\Format</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TLine.h">
+      <Filter>Header Files\Format\COL\Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TCone.h">
+      <Filter>Header Files\Format\COL\Parts</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

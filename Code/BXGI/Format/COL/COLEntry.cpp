@@ -17,16 +17,18 @@ COLEntry::COLEntry(COLFormat *pCOLFile) :
 	m_uiFileSize(0),
 	m_usModelId(0),
 
+	m_uiCollisionLineCount(0),
+	m_uiCollisionConeCount(0),
 	m_uiCollisionSphereCount(0),
 	m_uiCollisionBoxCount(0),
 	m_uiCollisionMeshFaceCount(0),
 	m_uiCollisionMeshVertexCount(0),
-	m_uiCollisionConeCount(0),
 	m_uiCollisionMeshFaceGroupCount(0),
 	m_uiFlags(0),
+	m_uiCollisionLinesOffset(0),
+	m_uiCollisionConesOffset(0),
 	m_uiCollisionSpheresOffset(0),
 	m_uiCollisionBoxesOffset(0),
-	m_uiCollisionConesOffset(0),
 	m_uiCollisionMeshVerticesOffset(0),
 	m_uiCollisionMeshFacesOffset(0),
 	m_uiTrianglePlanesOffset(0),
@@ -117,12 +119,29 @@ bool			COLEntry::unserialize(void)
 		setCollisionSphereCount(pDataReader->readUint16());
 		setCollisionBoxCount(pDataReader->readUint16());
 		setCollisionMeshFaceCount(pDataReader->readUint16());
-		setCollisionConeCount(pDataReader->readUint8());
-		uint8 ucPadding1 = pDataReader->readUint8(); // 1 byte padding
+		uint8 uiLineOrConeCount = pDataReader->readUint8();
+		uint8 uiPadding1 = pDataReader->readUint8(); // 1 byte padding
 		setFlags(pDataReader->readUint32());
+
+		if (doesUseCones())
+		{
+			setCollisionConeCount(uiLineOrConeCount);
+		}
+		else
+		{
+			setCollisionLineCount(uiLineOrConeCount);
+		}
+
 		setCollisionSpheresOffset(pDataReader->readUint32());
 		setCollisionBoxesOffset(pDataReader->readUint32());
-		setCollisionConesOffset(pDataReader->readUint32());
+		if (doesUseCones())
+		{
+			setCollisionConesOffset(pDataReader->readUint32());
+		}
+		else
+		{
+			setCollisionLinesOffset(pDataReader->readUint32());
+		}
 		setCollisionMeshVerticesOffset(pDataReader->readUint32());
 		setCollisionMeshFacesOffset(pDataReader->readUint32());
 		setTrianglePlanesOffset(pDataReader->readUint32());
@@ -183,6 +202,17 @@ bool			COLEntry::unserialize(void)
 
 		pDataReader->setSeek(getHeaderStartOffset() + 4 + getCollisionBoxesOffset());
 		parseCollisionBoxes();
+
+		if (doesUseCones())
+		{
+			pDataReader->setSeek(getHeaderStartOffset() + 4 + getCollisionConesOffset());
+			parseCollisionCones();
+		}
+		else
+		{
+			pDataReader->setSeek(getHeaderStartOffset() + 4 + getCollisionLinesOffset());
+			parseCollisionLines();
+		}
 
 		pDataReader->setSeek(getHeaderStartOffset() + 4 + getCollisionMeshVerticesOffset());
 		parseCollisionMeshVertices();
@@ -257,10 +287,10 @@ void			COLEntry::serializeHeader_Versions2_3_4(void)
 	uint32 uiCollisionBoxesOffset = uiCollisionSpheresOffset + m_uiCollisionSphereCount;
 
 	// calculate collision cones array offset
-	uint32 uiCollisionConesOffset = uiCollisionBoxesOffset + m_uiCollisionBoxCount;
+	uint32 uiCollisionConesOrLinesOffset = uiCollisionBoxesOffset + m_uiCollisionBoxCount;
 
 	// calculate collision mesh vertices array offset
-	uint32 uiCollisionMeshVerticesOffset = uiCollisionConesOffset + m_uiCollisionConeCount;
+	uint32 uiCollisionMeshVerticesOffset = uiCollisionConesOrLinesOffset + m_uiCollisionConeCount;
 
 	// allow for potential padding
 	uint32 uiNextPropertyOffset = 0;
@@ -311,7 +341,14 @@ void			COLEntry::serializeHeader_Versions2_3_4(void)
 
 	setCollisionSpheresOffset(uiCollisionSpheresOffset);
 	setCollisionBoxesOffset(uiCollisionBoxesOffset);
-	setCollisionConesOffset(uiCollisionConesOffset);
+	if (doesUseCones())
+	{
+		setCollisionConesOffset(uiCollisionConesOrLinesOffset);
+	}
+	else
+	{
+		setCollisionLinesOffset(uiCollisionConesOrLinesOffset);
+	}
 	setCollisionMeshVerticesOffset(uiCollisionMeshVerticesOffset);
 	setCollisionMeshFacesOffset(uiCollisionMeshFacesOffset);
 	setTrianglePlanesOffset(uiTrianglePlanesOffset);
@@ -322,12 +359,19 @@ void			COLEntry::serializeHeader_Versions2_3_4(void)
 	pDataWriter->writeUint16((uint16)m_uiCollisionSphereCount);
 	pDataWriter->writeUint16((uint16)m_uiCollisionBoxCount);
 	pDataWriter->writeUint16((uint16)m_uiCollisionMeshFaceCount);
-	pDataWriter->writeUint8((uint8)m_uiCollisionConeCount);
+	if (doesUseCones())
+	{
+		pDataWriter->writeUint8((uint8)m_uiCollisionConeCount);
+	}
+	else
+	{
+		pDataWriter->writeUint8((uint8)m_uiCollisionLineCount);
+	}
 	pDataWriter->writeUint8(0); // 1 byte padding
 	pDataWriter->writeUint32(getFlagsForPacking());
 	pDataWriter->writeUint32(uiCollisionSpheresOffset);
 	pDataWriter->writeUint32(uiCollisionBoxesOffset);
-	pDataWriter->writeUint32(uiCollisionConesOffset);
+	pDataWriter->writeUint32(uiCollisionConesOrLinesOffset);
 	pDataWriter->writeUint32(uiCollisionMeshVerticesOffset);
 	pDataWriter->writeUint32(uiCollisionMeshFacesOffset);
 	pDataWriter->writeUint32(uiTrianglePlanesOffset);
@@ -373,7 +417,14 @@ void			COLEntry::serializeBody_Versions2_3_4(void)
 
 	storeCollisionSpheres();
 	storeCollisionBoxes();
-	//storeCollisionCones();
+	if (doesUseCones())
+	{
+		storeCollisionCones();
+	}
+	else
+	{
+		storeCollisionLines();
+	}
 	storeCollisionMeshVertices();
 
 	if (((m_uiCollisionMeshVertexCount * 6) % 4) != 0)
@@ -479,6 +530,43 @@ void					COLEntry::parseBoundingObjects(void)
 		boundingObjects.m_vecCenter.y = pDataReader->readFloat32();
 		boundingObjects.m_vecCenter.z = pDataReader->readFloat32();
 		boundingObjects.m_fRadius = pDataReader->readFloat32();
+	}
+}
+void					COLEntry::parseCollisionLines(void)
+{
+	if (getCOLVersion() == COL_1)
+	{
+		return;
+	}
+
+	DataReader *pDataReader = &m_pCOLFile->m_reader;
+	vector<TLine>& vecLines = getCollisionLines();
+
+	for (uint32 i = 0, j = getCollisionLineCount(); i < j; i++)
+	{
+		TLine line;
+		line.m_vecPosition1 = pDataReader->readVector3D();
+		line.m_vecPosition2 = pDataReader->readVector3D();
+		vecLines.push_back(line);
+	}
+}
+void					COLEntry::parseCollisionCones(void)
+{
+	if (getCOLVersion() == COL_1)
+	{
+		return;
+	}
+
+	DataReader *pDataReader = &m_pCOLFile->m_reader;
+	vector<TCone>& vecCones = getCollisionCones();
+
+	for (uint32 i = 0, j = getCollisionConeCount(); i < j; i++)
+	{
+		TCone cone;
+		cone.m_vecPosition = pDataReader->readVector3D();
+		cone.m_fLength = pDataReader->readFloat32();
+		cone.m_fRadius = pDataReader->readFloat32();
+		vecCones.push_back(cone);
 	}
 }
 void					COLEntry::parseCollisionSpheres(void)
@@ -692,6 +780,27 @@ void				COLEntry::storeCollisionSpheres(void)
 			pDataWriter->writeUint8(sphere.m_surface.m_ucBrightness);
 			pDataWriter->writeUint8(sphere.m_surface.m_ucLight);
 		}
+	}
+}
+void				COLEntry::storeCollisionLines(void)
+{
+	DataWriter *pDataWriter = &m_pCOLFile->m_writer;
+
+	for (TLine& line : getCollisionLines())
+	{
+		pDataWriter->writeVector3D(line.m_vecPosition1);
+		pDataWriter->writeVector3D(line.m_vecPosition2);
+	}
+}
+void				COLEntry::storeCollisionCones(void)
+{
+	DataWriter *pDataWriter = &m_pCOLFile->m_writer;
+
+	for (TCone& cone : getCollisionCones())
+	{
+		pDataWriter->writeVector3D(cone.m_vecPosition);
+		pDataWriter->writeFloat32(cone.m_fLength);
+		pDataWriter->writeFloat32(cone.m_fRadius);
 	}
 }
 void				COLEntry::storeCollisionBoxes(void)
@@ -926,4 +1035,50 @@ void			COLEntry::applyCollisionMeshVerticesOffset(Vec3f vecAxisOffsets)
 		vecVertex.y += vecAxisOffsets.y;
 		vecVertex.z += vecAxisOffsets.z;
 	}
+}
+
+// version support
+bool			COLEntry::areLinesSupported(void)
+{
+	return true;
+}
+
+bool			COLEntry::areConesSupported(void)
+{
+	return m_uiCOLVersion >= 3;
+}
+
+bool			COLEntry::areFaceGroupsSupported(void)
+{
+	return m_uiCOLVersion >= 2;
+}
+
+bool			COLEntry::areShadowMeshesSupported(void)
+{
+	return m_uiCOLVersion >= 3;
+}
+
+bool			COLEntry::isLightIntensitySupported(void)
+{
+	return m_uiCOLVersion >= 2;
+}
+
+bool			COLEntry::isDataCompressionSupported(void)
+{
+	return m_uiCOLVersion >= 2;
+}
+
+bool			COLEntry::isClumpCollisionSupported(void)
+{
+	return m_uiCOLVersion == 3;
+}
+
+bool			COLEntry::doesUseCones(void)
+{
+	return (getFlags() & 1) == 1;
+}
+
+bool			COLEntry::doesUseFaceGroups(void)
+{
+	return (getFlags() & 8) == 8;
 }

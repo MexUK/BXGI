@@ -153,8 +153,10 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TBounds.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TBox.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TCone.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TFace.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TFaceGroup.h" />
+    <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TLine.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TSphere.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TSurface.h" />
     <ClInclude Include="..\..\..\Code\BXGI\Format\COL\Parts\TVertex.h" />

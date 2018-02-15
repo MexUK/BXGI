@@ -8,6 +8,8 @@
 #include "Format/COL/Parts/TVertex.h"
 #include "Format/COL/Parts/TFace.h"
 #include "Format/COL/Parts/TFaceGroup.h"
+#include "Format/COL/Parts/TLine.h"
+#include "Format/COL/Parts/TCone.h"
 #include "COLVersion.h"
 #include "Game/EGame.h"
 #include <string>
@@ -18,7 +20,7 @@ class bxgi::COLFormat;
 class bxgi::COLEntry
 {
 public:
-								COLEntry(bxgi::COLFormat *pCOLFile);
+	COLEntry(bxgi::COLFormat *pCOLFile);
 
 	void						unload(void) {}
 
@@ -31,6 +33,8 @@ public:
 	void						applyCollisionMeshVerticesOffset(bxcf::Vec3f vecAxisOffsets);
 
 	TBounds&					getBoundingObjects(void) { return m_boundingObjects; }
+	std::vector<TLine>&			getCollisionLines(void) { return m_vecCollisionLines; }
+	std::vector<TCone>&			getCollisionCones(void) { return m_vecCollisionCones; }
 	std::vector<TSphere>&		getCollisionSpheres(void) { return m_vecCollisionSpheres; }
 	std::vector<TBox>&			getCollisionBoxes(void) { return m_vecCollisionBoxes; }
 	std::vector<TVertex>&		getCollisionMeshVertices(void) { return m_vecCollisionMeshVertices; }
@@ -50,6 +54,8 @@ public:
 	uint32						getShadowMeshFacesByteCount(void) { return m_uiShadowMeshFaceCount * 8; }
 
 	void						parseBoundingObjects(void);
+	void						parseCollisionLines(void);
+	void						parseCollisionCones(void);
 	void						parseCollisionSpheres(void);
 	void						parseCollisionBoxes(void);
 	void						parseCollisionMeshVertices(void);
@@ -59,6 +65,8 @@ public:
 	void						parseShadowMeshFaces(void);
 
 	void						storeBoundingObjects(void);
+	void						storeCollisionLines(void);
+	void						storeCollisionCones(void);
 	void						storeCollisionSpheres(void);
 	void						storeCollisionBoxes(void);
 	void						storeCollisionMeshVertices(void);
@@ -82,6 +90,12 @@ public:
 	void				setTBounds(std::string strTBounds) { m_strTBounds = strTBounds; }
 	std::string			getTBounds(void) { return m_strTBounds; }
 
+	void				setCollisionLineCount(uint32 uiCollisionLineCount) { m_uiCollisionLineCount = uiCollisionLineCount; }
+	uint32				getCollisionLineCount(void) { return m_uiCollisionLineCount; }
+
+	void				setCollisionConeCount(uint32 uiCollisionConeCount) { m_uiCollisionConeCount = uiCollisionConeCount; }
+	uint32				getCollisionConeCount(void) { return m_uiCollisionConeCount; }
+
 	void				setCollisionSphereCount(uint32 uiCollisionSphereCount) { m_uiCollisionSphereCount = uiCollisionSphereCount; }
 	uint32				getCollisionSphereCount(void) { return m_uiCollisionSphereCount; }
 
@@ -94,23 +108,23 @@ public:
 	void				setCollisionMeshVertexCount(uint32 uiCollisionMeshVertexCount) { m_uiCollisionMeshVertexCount = uiCollisionMeshVertexCount; }
 	uint32				getCollisionMeshVertexCount(void) { return m_uiCollisionMeshVertexCount; }
 
-	void				setCollisionConeCount(uint32 uiCollisionConeCount) { m_uiCollisionConeCount = uiCollisionConeCount; }
-	uint32				getCollisionConeCount(void) { return m_uiCollisionConeCount; }
-
 	void				setCollisionMeshFaceGroupCount(uint32 uiCollisionMeshFaceGroupCount) { m_uiCollisionMeshFaceGroupCount = uiCollisionMeshFaceGroupCount; }
 	uint32				getCollisionMeshFaceGroupCount(void) { return m_uiCollisionMeshFaceGroupCount; }
 
 	void				setFlags(uint32 uiFlags) { m_uiFlags = uiFlags; }
 	uint32				getFlags(void) { return m_uiFlags; }
 
+	void				setCollisionLinesOffset(uint32 uiCollisionLinesOffset) { m_uiCollisionLinesOffset = uiCollisionLinesOffset; }
+	uint32				getCollisionLinesOffset(void) { return m_uiCollisionLinesOffset; }
+
+	void				setCollisionConesOffset(uint32 uiCollisionConesOffset) { m_uiCollisionConesOffset = uiCollisionConesOffset; }
+	uint32				getCollisionConesOffset(void) { return m_uiCollisionConesOffset; }
+
 	void				setCollisionSpheresOffset(uint32 uiCollisionSpheresOffset) { m_uiCollisionSpheresOffset = uiCollisionSpheresOffset; }
 	uint32				getCollisionSpheresOffset(void) { return m_uiCollisionSpheresOffset; }
 
 	void				setCollisionBoxesOffset(uint32 uiCollisionBoxesOffset) { m_uiCollisionBoxesOffset = uiCollisionBoxesOffset; }
 	uint32				getCollisionBoxesOffset(void) { return m_uiCollisionBoxesOffset; }
-
-	void				setCollisionConesOffset(uint32 uiCollisionConesOffset) { m_uiCollisionConesOffset = uiCollisionConesOffset; }
-	uint32				getCollisionConesOffset(void) { return m_uiCollisionConesOffset; }
 
 	void				setCollisionMeshVerticesOffset(uint32 uiCollisionMeshVerticesOffset) { m_uiCollisionMeshVerticesOffset = uiCollisionMeshVerticesOffset; }
 	uint32				getCollisionMeshVerticesOffset(void) { return m_uiCollisionMeshVerticesOffset; }
@@ -142,6 +156,16 @@ public:
 	void				setHeaderStartOffset(uint32 uiHeaderStartOffset) { m_uiHeaderStartOffset = uiHeaderStartOffset; }
 	uint32				getHeaderStartOffset(void) { return m_uiHeaderStartOffset; }
 
+	bool				areLinesSupported(void);
+	bool				areConesSupported(void);
+	bool				areFaceGroupsSupported(void);
+	bool				areShadowMeshesSupported(void);
+	bool				isLightIntensitySupported(void);
+	bool				isDataCompressionSupported(void);
+	bool				isClumpCollisionSupported(void);
+	bool				doesUseCones(void);
+	bool				doesUseFaceGroups(void);
+
 private:
 	void				serializeHeader_Versions2_3_4(void);
 
@@ -160,16 +184,18 @@ private:
 	uint16					m_usModelId;
 	std::string				m_strTBounds;
 
+	uint32					m_uiCollisionLinesOffset;
+	uint32					m_uiCollisionConesOffset;
+	uint32					m_uiCollisionLineCount;
+	uint32					m_uiCollisionConeCount;
 	uint32					m_uiCollisionSphereCount;
 	uint32					m_uiCollisionBoxCount;
 	uint32					m_uiCollisionMeshVertexCount;
 	uint32					m_uiCollisionMeshFaceCount;
 	uint32					m_uiCollisionMeshFaceGroupCount;
-	uint32					m_uiCollisionConeCount;
 	uint32					m_uiFlags;
 	uint32					m_uiCollisionSpheresOffset;
 	uint32					m_uiCollisionBoxesOffset;
-	uint32					m_uiCollisionConesOffset;
 	uint32					m_uiCollisionMeshVerticesOffset;
 	uint32					m_uiCollisionMeshFacesOffset;
 	uint32					m_uiTrianglePlanesOffset;
@@ -184,6 +210,8 @@ private:
 
 	uint32					m_uiHeaderStartOffset;
 
+	std::vector<TLine>		m_vecCollisionLines;
+	std::vector<TCone>		m_vecCollisionCones;
 	std::vector<TSphere>	m_vecCollisionSpheres;
 	std::vector<TBox>		m_vecCollisionBoxes;
 	std::vector<TVertex>	m_vecCollisionMeshVertices;

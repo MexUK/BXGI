@@ -70,6 +70,8 @@ namespace bxgi
 	class COLVersion;
 	class COLVersionManager;
 	enum ECOLVersion;
+	struct TLine;
+	struct TCone;
 	struct TBounds;
 	struct TSurface;
 	struct TSphere;
