@@ -75,6 +75,49 @@ WTDEntry*				WTDFormat::addEntryViaData(string& strEntryName, string& strEntryDa
 	return nullptr; // todo
 }
 
+WTDEntry*				WTDFormat::replaceEntryViaFile(string& strEntryFilePath, string strExistingEntryName, string strNewEntryName)
+{
+	if (strExistingEntryName == "")
+	{
+		strExistingEntryName = Path::getFileName(strEntryFilePath);
+	}
+
+	WTDEntry *pExistingWTDEntry = getEntryByName(strExistingEntryName);
+	if (!pExistingWTDEntry)
+	{
+		return nullptr;
+	}
+
+	uint32 uiExistingEntryIndex = getIndexByEntry(pExistingWTDEntry);
+
+	ImageFile *pImageFile = ImageManager::loadImageFromFile(strEntryFilePath);
+
+	WTDEntry *pEntry = new WTDEntry; // todo - repeated code
+	pEntry->setEntryName(strNewEntryName);
+	pEntry->setD3DFormat(D3DFMT_A8R8G8B8);
+	pEntry->setRasterDataFormat(RASTERDATAFORMAT_BGRA32);
+	pEntry->setImageSize(true, pImageFile->m_uiImageWidth);
+	pEntry->setImageSize(false, pImageFile->m_uiImageHeight);
+	pEntry->setLevels(1);
+	pEntry->setTextureHash(0);
+
+	WTDMipmap *pMipMap = new WTDMipmap(pEntry);
+	pMipMap->setImageSize(true, pImageFile->m_uiImageWidth);
+	pMipMap->setImageSize(false, pImageFile->m_uiImageHeight);
+	pMipMap->setRasterData(pImageFile->m_strRasterDataBGRA32);
+	pEntry->addEntry(pMipMap);
+
+	setEntryByIndex(uiExistingEntryIndex, pEntry);
+
+	return pEntry;
+}
+
+WTDEntry*				WTDFormat::replaceEntryViaData(string& strEntryData, string strExistingEntryName, string strNewEntryName)
+{
+	// todo
+	return nullptr;
+}
+
 // serialization
 void					WTDFormat::_unserialize(void)
 {

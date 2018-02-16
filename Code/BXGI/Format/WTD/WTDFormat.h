@@ -21,6 +21,8 @@ public:
 
 	virtual bxgi::WTDEntry*							addEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "");
 	virtual bxgi::WTDEntry*							addEntryViaData(std::string& strEntryName, std::string& strEntryData);
+	bxgi::WTDEntry*									replaceEntryViaFile(std::string& strEntryFilePath, std::string strExistingEntryName = "", std::string strNewEntryName = "");
+	bxgi::WTDEntry*									replaceEntryViaData(std::string& strEntryData, std::string strExistingEntryName, std::string strNewEntryName = "");
 
 	void											exportSingle(bxcf::FormatEntry *pEntry, std::string& strFolderPath);
 	void											exportMultiple(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFolderPath);

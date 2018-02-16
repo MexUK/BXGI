@@ -250,3 +250,15 @@ DATLoaderEntry*				DATLoaderFormat::addEntryViaData(string& strEntryName, string
 
 	return pDATEntry;
 }
+
+DATLoaderEntry*				DATLoaderFormat::replaceEntryViaFile(string& strEntryFilePath, string strExistingEntryName, string strNewEntryName)
+{
+	// todo
+	return nullptr;
+}
+
+DATLoaderEntry*				DATLoaderFormat::replaceEntryViaData(string& strEntryData, string strExistingEntryName, string strNewEntryName)
+{
+	// todo
+	return nullptr;
+}

@@ -58,6 +58,32 @@ RWSection_TextureNative*			TXDFormat::addEntryViaData(string& strEntryName, stri
 	return addTextureViaData(strEntryData, Path::removeFileExtension(strEntryName), Path::removeFileExtension(strEntryName) + "a");
 }
 
+RWSection_TextureNative*			TXDFormat::replaceEntryViaFile(string& strEntryFilePath, string strExistingEntryName, string strNewEntryName)
+{
+	if (strExistingEntryName == "")
+	{
+		strExistingEntryName = Path::getFileName(strEntryFilePath);
+	}
+
+	RWSection_TextureNative *pExistingTextureNative = getEntryByName(strExistingEntryName);
+	if(!pExistingTextureNative)
+	{
+		return nullptr;
+	}
+	uint32 uiExistingEntryIndex = pExistingTextureNative->getIndex();
+
+	RWSection_TextureNative *pNewTextureNative = addTextureViaFile(strEntryFilePath, Path::removeFileExtension(strExistingEntryName), Path::removeFileExtension(strNewEntryName) + "a", false);
+	getSectionsByType(RW_SECTION_TEXTURE_DICTIONARY)[0]->setEntryByIndex(uiExistingEntryIndex, pNewTextureNative);
+
+	return pNewTextureNative;
+}
+
+RWSection_TextureNative*			TXDFormat::replaceEntryViaData(string& strEntryData, string strExistingEntryName, string strNewEntryName)
+{
+	// todo
+	return nullptr;
+}
+
 vector<RWSection_TextureNative*>	TXDFormat::getTextures(void)
 {
 	vector<RWSection*> vecRWSections = getSectionsByType(RW_SECTION_TEXTURE_NATIVE);
@@ -250,7 +276,7 @@ RWSection_TextureNative*	TXDFormat::addTextureViaData(string& strFileData, strin
 	return nullptr;
 }
 
-RWSection_TextureNative*	TXDFormat::addTextureViaFile(string& strFilePath, string& strTextureDiffuseName, string strTextureAlphaName)
+RWSection_TextureNative*	TXDFormat::addTextureViaFile(string& strFilePath, string& strTextureDiffuseName, string strTextureAlphaName, bool bAppendToDictionary)
 {
 	ImageFile *pImageFile = ImageManager::loadImageFromFile(strFilePath);
 
@@ -294,15 +320,18 @@ RWSection_TextureNative*	TXDFormat::addTextureViaFile(string& strFilePath, strin
 	pMipmap->setRasterData(pImageFile->m_strRasterDataBGRA32);
 	pTexture->getMipMaps().addEntry(pMipmap);
 
-	if (getSectionCountByType(RW_SECTION_TEXTURE_DICTIONARY) > 0)
+	if (bAppendToDictionary)
 	{
-		if (getSectionsByType(RW_SECTION_TEXTURE_DICTIONARY)[0]->getEntryCount() > 0 && getSectionsByType(RW_SECTION_TEXTURE_DICTIONARY)[0]->getLastEntry()->getSectionId() == RW_SECTION_EXTENSION)
+		if (getSectionCountByType(RW_SECTION_TEXTURE_DICTIONARY) > 0)
 		{
-			getSectionsByType(RW_SECTION_TEXTURE_DICTIONARY)[0]->addEntryAtPosition(pTexture, getSectionsByType(RW_SECTION_TEXTURE_DICTIONARY)[0]->getEntryCount() - 1);
-		}
-		else
-		{
-			getSectionsByType(RW_SECTION_TEXTURE_DICTIONARY)[0]->addEntry(pTexture);
+			if (getSectionsByType(RW_SECTION_TEXTURE_DICTIONARY)[0]->getEntryCount() > 0 && getSectionsByType(RW_SECTION_TEXTURE_DICTIONARY)[0]->getLastEntry()->getSectionId() == RW_SECTION_EXTENSION)
+			{
+				getSectionsByType(RW_SECTION_TEXTURE_DICTIONARY)[0]->addEntryAtPosition(pTexture, getSectionsByType(RW_SECTION_TEXTURE_DICTIONARY)[0]->getEntryCount() - 1);
+			}
+			else
+			{
+				getSectionsByType(RW_SECTION_TEXTURE_DICTIONARY)[0]->addEntry(pTexture);
+			}
 		}
 	}
 

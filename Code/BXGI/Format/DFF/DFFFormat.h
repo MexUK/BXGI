@@ -13,8 +13,10 @@ public:
 	DFFFormat(void) {}
 	DFFFormat(std::string& strFilePathOrData, bool bStringIsFilePath = true) : bxgi::RWFormat(strFilePathOrData, bStringIsFilePath) {}
 
-	virtual bxgi::RWSection_TextureNative*							addEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "") { return nullptr; }
-	virtual bxgi::RWSection_TextureNative*							addEntryViaData(std::string& strEntryName, std::string& strEntryData) { return nullptr; }
+	virtual bxgi::RWSection_TextureNative*							addEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "") { return nullptr; } // todo
+	virtual bxgi::RWSection_TextureNative*							addEntryViaData(std::string& strEntryName, std::string& strEntryData) { return nullptr; } // todo
+	bxgi::RWSection_TextureNative*									replaceEntryViaFile(std::string& strEntryFilePath, std::string strExistingEntryName = "", std::string strNewEntryName = "") { return nullptr; } // todo
+	bxgi::RWSection_TextureNative*									replaceEntryViaData(std::string& strEntryData, std::string strExistingEntryName, std::string strNewEntryName = "") { return nullptr; } // todo
 
 	void															exportSingle(bxcf::FormatEntry *pEntry, std::string& strFolderPath);
 	void															exportMultiple(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFolderPath);

@@ -54,6 +54,8 @@ public:
 
 	bxcf::FormatEntry*									addEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "") { return nullptr; } // todo
 	bxcf::FormatEntry*									addEntryViaData(std::string& strEntryName, std::string& strEntryData) { return nullptr; }; // todo
+	bxcf::FormatEntry*									replaceEntryViaFile(std::string& strEntryFilePath, std::string strExistingEntryName = "", std::string strNewEntryName = "") { return nullptr; } // todo
+	bxcf::FormatEntry*									replaceEntryViaData(std::string& strEntryData, std::string strExistingEntryName, std::string strNewEntryName = "") { return nullptr; } // todo
 
 	void												exportSingle(bxcf::FormatEntry* pEntry, std::string& strFolderPath);
 	void												exportMultiple(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFolderPath) {} // todo

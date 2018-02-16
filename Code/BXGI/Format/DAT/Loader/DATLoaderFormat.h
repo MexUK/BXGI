@@ -38,6 +38,8 @@ public:
 	// ContainerFormat virtuals
 	bxgi::DATLoaderEntry*						addEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "");
 	bxgi::DATLoaderEntry*						addEntryViaData(std::string& strEntryName, std::string& strEntryData);
+	bxgi::DATLoaderEntry*						replaceEntryViaFile(std::string& strEntryFilePath, std::string strExistingEntryName = "", std::string strNewEntryName = "");
+	bxgi::DATLoaderEntry*						replaceEntryViaData(std::string& strEntryData, std::string strExistingEntryName, std::string strNewEntryName = "");
 
 	void										exportSingle(bxcf::FormatEntry *pEntry, std::string& strFolderPath) {}
 	void										exportMultiple(std::vector<bxcf::FormatEntry*>& vecIMGEntries, std::string& strFolderPath) {}

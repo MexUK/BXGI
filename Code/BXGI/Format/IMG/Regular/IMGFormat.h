@@ -127,15 +127,13 @@ public:
 
 	virtual bxgi::IMGEntry*							addEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "");
 	virtual bxgi::IMGEntry*							addEntryViaData(std::string& strEntryName, std::string& strEntryData);
-	//virtual bxgi::IMGEntry*							replaceEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "");
-	//virtual bxgi::IMGEntry*							replaceEntryViaData(std::string& strEntryName, std::string& strEntryData);
+	bxgi::IMGEntry*									replaceEntryViaFile(std::string& strEntryFilePath, std::string strExistingEntryName = "", std::string strNewEntryName = "");
+	bxgi::IMGEntry*									replaceEntryViaData(std::string& strEntryData, std::string strExistingEntryName, std::string strNewEntryName = "");
 	void											addEntry(bxgi::IMGEntry *pIMGEntry);
 	void											addEntries(std::vector<std::string>& vecEntryFilePaths);
 	void											addAllEntriesInFolder(std::string& strFolderPath);
 	void											removeEntry(bxgi::IMGEntry *pIMGEntry);
 	void											removeAllEntries(void);
-	bxgi::IMGEntry*									replaceEntryViaFile(std::string& strEntryName, std::string& strEntryFilePath, std::string strNewEntryName = "");
-	bxgi::IMGEntry*									replaceEntryViaData(std::string& strEntryName, std::string& strEntryData, std::string strNewEntryName = "");
 	uint32											replaceEntries(std::vector<std::string>& vecPaths, std::vector<std::string>& vecReplacedEntryNames, std::vector<IMGEntry*>& vecReplacedEntries);
 	bxgi::IMGEntry*									addOrReplaceEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "");
 	bxgi::IMGEntry*									addOrReplaceEntryViaData(std::string& strEntryName, std::string& strEntryData);

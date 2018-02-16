@@ -21,9 +21,11 @@ public:
 
 	virtual bxgi::RWSection_TextureNative*			addEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "");
 	virtual bxgi::RWSection_TextureNative*			addEntryViaData(std::string& strEntryName, std::string& strEntryData);
+	bxgi::RWSection_TextureNative*					replaceEntryViaFile(std::string& strEntryFilePath, std::string strExistingEntryName = "", std::string strNewEntryName = "");
+	bxgi::RWSection_TextureNative*					replaceEntryViaData(std::string& strEntryData, std::string strExistingEntryName, std::string strNewEntryName = "");
 
 	bxgi::RWSection_TextureNative*					addTextureViaData(std::string& strFileData, std::string& strTextureDiffuseName, std::string strTextureAlphaName = "");
-	bxgi::RWSection_TextureNative*					addTextureViaFile(std::string& strFilePath, std::string& strTextureDiffuseName, std::string strTextureAlphaName = "");
+	bxgi::RWSection_TextureNative*					addTextureViaFile(std::string& strFilePath, std::string& strTextureDiffuseName, std::string strTextureAlphaName = "", bool bAppendToDictionary = true);
 	
 	void											exportSingle(bxcf::FormatEntry *pEntry, std::string& strFolderPath);
 	void											exportMultiple(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFolderPath);

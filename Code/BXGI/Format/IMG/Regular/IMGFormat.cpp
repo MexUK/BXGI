@@ -704,6 +704,36 @@ IMGEntry*							IMGFormat::addEntryViaData(string& strEntryName, string& strEntr
 	return pIMGEntry;
 }
 
+IMGEntry*							IMGFormat::replaceEntryViaFile(string& strEntryFilePath, string strExistingEntryName, string strNewEntryName)
+{
+	string strEntryData = File::getBinaryFile(strEntryFilePath);
+	IMGEntry *pIMGEntry = replaceEntryViaData(strEntryData, strExistingEntryName, strNewEntryName);
+	pIMGEntry->setFileCreationDate(File::getFileCreationDate(strEntryFilePath));
+	return pIMGEntry;
+}
+
+IMGEntry*							IMGFormat::replaceEntryViaData(string& strEntryData, string strExistingEntryName, string strNewEntryName)
+{
+	// fetch entry
+	IMGEntry *pIMGEntry = getEntryByName(strExistingEntryName);
+	if (!pIMGEntry)
+	{
+		return nullptr;
+	}
+
+	// check to update entry name
+	if (strNewEntryName != "")
+	{
+		pIMGEntry->setEntryName(strNewEntryName);
+	}
+
+	// update entry data
+	pIMGEntry->setEntryData(strEntryData);
+
+	// return entry
+	return pIMGEntry;
+}
+
 void					IMGFormat::addEntry(IMGEntry *pIMGEntry)
 {
 	VectorPool::addEntry(pIMGEntry);
@@ -754,30 +784,6 @@ void								IMGFormat::removeAllEntries(void)
 {
 	VectorPool::removeAllEntries();
 	m_uiEntryCount = 0;
-}
-
-IMGEntry*							IMGFormat::replaceEntryViaFile(string& strEntryName, string& strEntryFilePath, string strNewEntryName)
-{
-	string strEntryData = File::getBinaryFile(strEntryFilePath);
-	IMGEntry *pIMGEntry = replaceEntryViaData(strEntryName, strEntryData, strNewEntryName);
-	pIMGEntry->setFileCreationDate(File::getFileCreationDate(strEntryFilePath));
-	return pIMGEntry;
-}
-IMGEntry*							IMGFormat::replaceEntryViaData(string& strEntryName, string& strEntryData, string strNewEntryName)
-{
-	IMGEntry *pIMGEntry = getEntryByName(strEntryName);
-	if (!pIMGEntry)
-	{
-		return nullptr;
-	}
-
-	if (strNewEntryName != "")
-	{
-		pIMGEntry->setEntryName(strNewEntryName);
-	}
-
-	pIMGEntry->setEntryData(strEntryData);
-	return pIMGEntry;
 }
 
 uint32						IMGFormat::replaceEntries(vector<string>& vecPaths, vector<string>& vecReplacedEntryNames, vector<IMGEntry*>& vecReplacedEntries)
