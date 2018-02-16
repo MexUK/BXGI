@@ -127,6 +127,8 @@ public:
 
 	virtual bxgi::IMGEntry*							addEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "");
 	virtual bxgi::IMGEntry*							addEntryViaData(std::string& strEntryName, std::string& strEntryData);
+	//virtual bxgi::IMGEntry*							replaceEntryViaFile(std::string& strEntryFilePath, std::string strEntryName = "");
+	//virtual bxgi::IMGEntry*							replaceEntryViaData(std::string& strEntryName, std::string& strEntryData);
 	void											addEntry(bxgi::IMGEntry *pIMGEntry);
 	void											addEntries(std::vector<std::string>& vecEntryFilePaths);
 	void											addAllEntriesInFolder(std::string& strFolderPath);
