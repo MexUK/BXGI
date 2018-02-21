@@ -75,6 +75,8 @@ public:
 	void											merge(std::string& strFilePath);
 	void											split(std::vector<bxcf::FormatEntry*>& vecEntries, std::string& strFilePathOut, uint32 uiFileVersionOut);
 
+	bool											doFormatEntriesContainFileExtension(void) { return true; }
+
 
 
 

@@ -49,13 +49,14 @@ RWSection_TextureNative*			TXDFormat::addEntryViaFile(string& strEntryFilePath, 
 	{
 		strEntryName = Path::getFileName(strEntryFilePath);
 	}
+	strEntryName = Path::removeFileExtension(strEntryName);
 
-	return addTextureViaFile(strEntryFilePath, Path::removeFileExtension(strEntryName), Path::removeFileExtension(strEntryName) + "a");
+	return addTextureViaFile(strEntryFilePath, strEntryName, strEntryName + "a");
 }
 
 RWSection_TextureNative*			TXDFormat::addEntryViaData(string& strEntryName, string& strEntryData)
 {
-	return addTextureViaData(strEntryData, Path::removeFileExtension(strEntryName), Path::removeFileExtension(strEntryName) + "a");
+	return addTextureViaData(strEntryData, strEntryName, strEntryName + "a");
 }
 
 RWSection_TextureNative*			TXDFormat::replaceEntryViaFile(string& strEntryFilePath, string strExistingEntryName, string strNewEntryName)
@@ -65,6 +66,8 @@ RWSection_TextureNative*			TXDFormat::replaceEntryViaFile(string& strEntryFilePa
 		strExistingEntryName = Path::getFileName(strEntryFilePath);
 	}
 
+	strNewEntryName = Path::removeFileExtension(strNewEntryName);
+	
 	RWSection_TextureNative *pExistingTextureNative = getEntryByName(strExistingEntryName);
 	if(!pExistingTextureNative)
 	{
@@ -72,7 +75,7 @@ RWSection_TextureNative*			TXDFormat::replaceEntryViaFile(string& strEntryFilePa
 	}
 	uint32 uiExistingEntryIndex = pExistingTextureNative->getIndex();
 
-	RWSection_TextureNative *pNewTextureNative = addTextureViaFile(strEntryFilePath, Path::removeFileExtension(strExistingEntryName), Path::removeFileExtension(strNewEntryName) + "a", false);
+	RWSection_TextureNative *pNewTextureNative = addTextureViaFile(strEntryFilePath, strNewEntryName, strNewEntryName + "a", false);
 	getSectionsByType(RW_SECTION_TEXTURE_DICTIONARY)[0]->setEntryByIndex(uiExistingEntryIndex, pNewTextureNative);
 
 	return pNewTextureNative;

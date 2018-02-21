@@ -71,5 +71,6 @@ private:
 private:
 	std::vector<bxgi::EPlatformedGame>		m_vecGames;
 	uint16									m_usDeviceId;
+public: // todo
 	std::vector<bxcf::FormatEntry*>			m_vecTextures;
 };
