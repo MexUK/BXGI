@@ -796,7 +796,7 @@ uint32						IMGFormat::replaceEntries(vector<string>& vecPaths, vector<string>& 
 		IMGEntry *pIMGEntry = getEntryByName(strNewEntryName);
 		if (!pIMGEntry)
 		{
-			Events::triggerConst(REPLACE_IMG_ENTRY_SKIPPED_ENTRY, this);
+			Events::trigger(REPLACE_IMG_ENTRY_SKIPPED_ENTRY, this);
 			continue;
 		}
 
@@ -821,7 +821,7 @@ uint32						IMGFormat::replaceEntries(vector<string>& vecPaths, vector<string>& 
 		vecReplacedEntryNames.push_back(strNewEntryName);
 		vecReplacedEntries.push_back(pIMGEntry);
 
-		Events::triggerConst(REPLACE_IMG_ENTRY, this);
+		Events::trigger(REPLACE_IMG_ENTRY, this);
 	}
 
 	return uiReplaceCount;
@@ -1212,7 +1212,7 @@ void					IMGFormat::split(vector<FormatEntry*>& vecIMGEntries, string& strOutPat
 			pIMGEntry2->setRWVersion(pIMGEntry->getRWVersion());
 		}
 
-		Events::triggerConst(SPLIT_IMG_ENTRY, this);
+		Events::trigger(SPLIT_IMG_ENTRY, this);
 	}
 
 	pIMGFile->serialize(strOutPath);
