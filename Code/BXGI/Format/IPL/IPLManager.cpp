@@ -39,6 +39,6 @@ void			IPLManager::getModelNamesFromFiles(
 			stModelNames.insert(String::toUpperCase(strModelName));
 		}
 
-		Events::trigger(TASK_PROGRESS);
+		Events::triggerDefault(TASK_PROGRESS);
 	}
 }

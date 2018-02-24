@@ -126,7 +126,7 @@ void				RWSectionContainer::_unserialize(void)
 		pRWSection->_unserialize();
 		uint64 uiByteCountAfter = pDataReader->getSeek();
 		
-		Events::trigger(UNSERIALIZE_RW_SECTION, pRWSection);
+		Events::triggerDefault(UNSERIALIZE_RW_SECTION, pRWSection);
 
 		uint32 uiByteCountDifference = (uint32)(uiByteCountAfter - uiByteCountBefore);
 

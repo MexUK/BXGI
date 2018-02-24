@@ -415,7 +415,7 @@ void		IMGFormat::unserializERWVersions(void) // todo fix name(s) letter case
 	{
 		pIMGEntry->unserializeRWVersion(&m_reader);
 
-		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
+		Events::triggerDefault(UNSERIALIZE_IMG_ENTRY, this);
 	}
 }
 
@@ -425,7 +425,7 @@ void		IMGFormat::unserializeResourceTypes(void)
 	{
 		pIMGEntry->unserializeResourceType(&m_reader);
 
-		Events::trigger(UNSERIALIZE_IMG_ENTRY, this);
+		Events::triggerDefault(UNSERIALIZE_IMG_ENTRY, this);
 	}
 }
 
@@ -445,7 +445,7 @@ void					IMGFormat::getModelAndTextureSetNamesFromEntries(
 			umapIMGTextureSetNames[pIMGEntry].push_back(String::toUpperCase(Path::removeFileExtension(pIMGEntry->getEntryName())));
 		}
 
-		Events::trigger(TASK_PROGRESS);
+		Events::triggerDefault(TASK_PROGRESS);
 	}
 }
 
@@ -738,13 +738,13 @@ void					IMGFormat::addEntry(IMGEntry *pIMGEntry)
 {
 	VectorPool::addEntry(pIMGEntry);
 
-	Events::trigger(ADD_IMG_ENTRY, pIMGEntry);
+	Events::triggerDefault(ADD_IMG_ENTRY, pIMGEntry);
 
 	string strEntryExtension = Path::getFileExtension(pIMGEntry->getEntryName());
 	addEntryExtensionCount(strEntryExtension);
 	if (getEntryExtensionCount(strEntryExtension) == 1)
 	{
-		Events::trigger(ADD_IMG_ENTRY_FILE_EXTENSION, pIMGEntry);
+		Events::triggerDefault(ADD_IMG_ENTRY_FILE_EXTENSION, pIMGEntry);
 	}
 }
 
@@ -771,10 +771,10 @@ void								IMGFormat::removeEntry(IMGEntry *pIMGEntry)
 	removeEntryExtensionCount(strEntryExtension);
 	if (getEntryExtensionCount(strEntryExtension) == 0)
 	{
-		Events::trigger(REMOVE_IMG_ENTRY_FILE_EXTENSION, pIMGEntry);
+		Events::triggerDefault(REMOVE_IMG_ENTRY_FILE_EXTENSION, pIMGEntry);
 	}
 
-	Events::trigger(REMOVE_IMG_ENTRY, pIMGEntry);
+	Events::triggerDefault(REMOVE_IMG_ENTRY, pIMGEntry);
 
 	VectorPool::removeEntry(pIMGEntry);
 	m_uiEntryCount--;
@@ -796,7 +796,7 @@ uint32						IMGFormat::replaceEntries(vector<string>& vecPaths, vector<string>& 
 		IMGEntry *pIMGEntry = getEntryByName(strNewEntryName);
 		if (!pIMGEntry)
 		{
-			Events::trigger(REPLACE_IMG_ENTRY_SKIPPED_ENTRY, this);
+			Events::triggerDefault(REPLACE_IMG_ENTRY_SKIPPED_ENTRY, this);
 			continue;
 		}
 
@@ -821,7 +821,7 @@ uint32						IMGFormat::replaceEntries(vector<string>& vecPaths, vector<string>& 
 		vecReplacedEntryNames.push_back(strNewEntryName);
 		vecReplacedEntries.push_back(pIMGEntry);
 
-		Events::trigger(REPLACE_IMG_ENTRY, this);
+		Events::triggerDefault(REPLACE_IMG_ENTRY, this);
 	}
 
 	return uiReplaceCount;
@@ -1053,7 +1053,7 @@ void					IMGFormat::exportMultiple(vector<FormatEntry*>& vecIMGEntries, string& 
 		
 		File::setBinaryFile(strFolderPath + pIMGEntry->getEntryName(), readEntryContent(getIndexByEntry(pIMGEntry)));
 		
-		Events::trigger(TASK_PROGRESS);
+		Events::triggerDefault(TASK_PROGRESS);
 	}
 
 	m_reader.close();
@@ -1080,7 +1080,7 @@ void					IMGFormat::exportAll(string& strFolderPath)
 		
 		File::setBinaryFile(strFolderPath + pIMGEntry->getEntryName(), readEntryContent(uiEntryIndex++));
 		
-		Events::trigger(TASK_PROGRESS);
+		Events::triggerDefault(TASK_PROGRESS);
 	}
 	m_reader.close();
 }
@@ -1174,7 +1174,7 @@ void					IMGFormat::merge(string& strFilePath)
 		string strEntryData = pDataReader->readString(pInEntry->getEntrySize());
 		pOutEntry->setEntryData(strEntryData, true);
 
-		Events::trigger(TASK_PROGRESS);
+		Events::triggerDefault(TASK_PROGRESS);
 	}
 
 	// finalize
@@ -1212,7 +1212,7 @@ void					IMGFormat::split(vector<FormatEntry*>& vecIMGEntries, string& strOutPat
 			pIMGEntry2->setRWVersion(pIMGEntry->getRWVersion());
 		}
 
-		Events::trigger(SPLIT_IMG_ENTRY, this);
+		Events::triggerDefault(SPLIT_IMG_ENTRY, this);
 	}
 
 	pIMGFile->serialize(strOutPath);

@@ -80,7 +80,7 @@ void					IMGFormatVersionFastman92::_unserialize(void)
 		pIMGEntry->setIMGFile(this);
 		pIMGEntry->unserializeVersionFastman92(pRawIMGActiveEntry++);
 		pIMGEntry->setEntryExtension(String::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())));
-		Events::trigger(UNSERIALIZE_IMG_ENTRY, (IMGFormat*)this);
+		Events::triggerDefault(UNSERIALIZE_IMG_ENTRY, (IMGFormat*)this);
 	}
 
 	// clean up
@@ -169,7 +169,7 @@ void					IMGFormatVersionFastman92::_serialize(void)
 			m_writer.writeStringRef(pIMGEntry->getEntryName(), 40);
 			m_writer.writeString(8);
 
-			Events::trigger(TASK_PROGRESS);
+			Events::triggerDefault(TASK_PROGRESS);
 		}
 
 		if ((uiBodyStart % 2048) != 0 && uiEntryCount > 0)
@@ -187,7 +187,7 @@ void					IMGFormatVersionFastman92::_serialize(void)
 
 			pIMGEntry->setEntryOffsetInSectors(vecNewEntryPositions[i++]);
 
-			Events::trigger(TASK_PROGRESS);
+			Events::triggerDefault(TASK_PROGRESS);
 		}
 	}
 

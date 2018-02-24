@@ -35,7 +35,7 @@ void				COLFormat::_unserialize(void)
 			delete pCOLEntry;
 			break;
 		}
-		Events::trigger(UNSERIALIZE_FILE_PROGRESS, &m_reader);
+		Events::triggerDefault(UNSERIALIZE_FILE_PROGRESS, &m_reader);
 	}
 }
 

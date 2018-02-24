@@ -632,7 +632,7 @@ void					WTDFormat::exportMultiple(vector<FormatEntry*>& vecEntries, string& str
 		File::setBinaryFile(strFolderPath + strFileNameOut, readEntryContent(getIndexByEntry(pWTDEntry)));
 		*/
 
-		Events::trigger(TASK_PROGRESS);
+		Events::triggerDefault(TASK_PROGRESS);
 	}
 
 	m_reader.close();
@@ -669,7 +669,7 @@ void					WTDFormat::exportAll(string& strFolderPath)
 		pBMPFile->unload();
 		delete pBMPFile;
 
-		Events::trigger(TASK_PROGRESS);
+		Events::triggerDefault(TASK_PROGRESS);
 	}
 
 	m_reader.close();
@@ -779,7 +779,7 @@ void					WTDFormat::merge(string& strFilePath)
 		addEntry(pOutEntry);
 		m_uiEntryCount++;
 
-		Events::trigger(TASK_PROGRESS);
+		Events::triggerDefault(TASK_PROGRESS);
 	}
 
 	// finalize
@@ -824,7 +824,7 @@ void					WTDFormat::split(vector<FormatEntry*>& vecEntries, string& strOutPath, 
 
 		pNewFile->addEntry(pOutEntry);
 
-		Events::trigger(TASK_PROGRESS);
+		Events::triggerDefault(TASK_PROGRESS);
 	}
 
 	pNewFile->serialize(strOutPath);

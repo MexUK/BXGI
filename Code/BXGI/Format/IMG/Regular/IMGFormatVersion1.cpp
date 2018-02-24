@@ -52,7 +52,7 @@ void					IMGFormatVersion1::_unserialize(void)
 		pIMGEntry->setIMGFile(this);
 		pIMGEntry->unserializeVersion1(pRGIMGActiveEntry++);
 		pIMGEntry->setEntryExtension(String::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())));
-		Events::trigger(UNSERIALIZE_IMG_ENTRY, (IMGFormat*)this);
+		Events::triggerDefault(UNSERIALIZE_IMG_ENTRY, (IMGFormat*)this);
 	}
 
 	// clean up
@@ -90,7 +90,7 @@ void					IMGFormatVersion1::_serialize(void)
 		pIMGEntry->setEntryOffset(uiSeek);
 		uiSeek += uiEntryByteCountPadded;
 
-		Events::trigger(TASK_PROGRESS);
+		Events::triggerDefault(TASK_PROGRESS);
 	}
 
 	if (m_reader.getStreamType() == DATA_STREAM_FILE && bContainsAnEntry)
@@ -124,7 +124,7 @@ void					IMGFormatVersion1::_serialize(void)
 		m_writer.writeUint32(pIMGEntry->getEntrySizeInSectors());
 		m_writer.writeStringRef(pIMGEntry->getEntryName(), 24);
 
-		Events::trigger(TASK_PROGRESS);
+		Events::triggerDefault(TASK_PROGRESS);
 	}
 
 	// finalize DIR data reading/writing

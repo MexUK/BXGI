@@ -80,7 +80,7 @@ void					IMGFormatVersion3::_unserialize(void)
 			rvecIMGEntries[i] = pIMGEntry;
 			pIMGEntry->setIMGFile(this);
 			pIMGEntry->unserializeVersion3(pRGIMGActiveEntry++);
-			Events::trigger(UNSERIALIZE_IMG_ENTRY, (IMGFormat*)this);
+			Events::triggerDefault(UNSERIALIZE_IMG_ENTRY, (IMGFormat*)this);
 		}
 
 		// read IMG entry names
@@ -91,7 +91,7 @@ void					IMGFormatVersion3::_unserialize(void)
 		{
 			rvecIMGEntries[i]->setEntryName(pDataReader2->readStringUntilZero());
 			rvecIMGEntries[i]->setEntryExtension(String::toUpperCase(Path::getFileExtension(rvecIMGEntries[i]->getEntryName())));
-			Events::trigger(UNSERIALIZE_IMG_ENTRY, (IMGFormat*)this);
+			Events::triggerDefault(UNSERIALIZE_IMG_ENTRY, (IMGFormat*)this);
 		}
 
 		setUndecryptedPositionOffset((strIMGHeaderUnencrypted.length() + strIMGTableUnencrypted.length()) - (strIMGHeaderEncrypted.length() + strIMGTableEncrypted.length()));
@@ -122,7 +122,7 @@ void					IMGFormatVersion3::_unserialize(void)
 			rvecIMGEntries[i] = pIMGEntry;
 			pIMGEntry->setIMGFile(this);
 			pIMGEntry->unserializeVersion3(pRGIMGActiveEntry++);
-			Events::trigger(UNSERIALIZE_IMG_ENTRY, (IMGFormat*)this);
+			Events::triggerDefault(UNSERIALIZE_IMG_ENTRY, (IMGFormat*)this);
 		}
 
 		// read IMG entry names
@@ -130,7 +130,7 @@ void					IMGFormatVersion3::_unserialize(void)
 		{
 			rvecIMGEntries[i]->setEntryName(m_reader.readStringUntilZero());
 			rvecIMGEntries[i]->setEntryExtension(String::toUpperCase(Path::getFileExtension(rvecIMGEntries[i]->getEntryName())));
-			Events::trigger(UNSERIALIZE_IMG_ENTRY, (IMGFormat*)this);
+			Events::triggerDefault(UNSERIALIZE_IMG_ENTRY, (IMGFormat*)this);
 		}
 
 		// clean up
@@ -196,7 +196,7 @@ void					IMGFormatVersion3::_serialize(void)
 			uint32 uiRemainder = pIMGEntry->getEntrySize() % 2048;
 			m_writer.writeUint16((uint16)(pIMGEntry->getFlags() | ((uint16)(uiRemainder == 0 ? 0 : (2048 - uiRemainder)))));
 
-			Events::trigger(TASK_PROGRESS);
+			Events::triggerDefault(TASK_PROGRESS);
 		}
 
 		string strEntryName;
@@ -233,7 +233,7 @@ void					IMGFormatVersion3::_serialize(void)
 
 			pIMGEntry->setEntryOffsetInSectors(vecNewEntryPositions[i++]);
 
-			Events::trigger(TASK_PROGRESS);
+			Events::triggerDefault(TASK_PROGRESS);
 		}
 
 		// finalize IMG data reading/writing
@@ -290,7 +290,7 @@ void					IMGFormatVersion3::_serialize(void)
 			uint32 uiRemainder = pIMGEntry->getEntrySize() % 2048;
 			m_writer.writeUint16((uint16)((pIMGEntry->getFlags() | ((uint16)(uiRemainder == 0 ? 0 : (2048 - uiRemainder))))));
 
-			Events::trigger(TASK_PROGRESS);
+			Events::triggerDefault(TASK_PROGRESS);
 		}
 
 		string strEntryName;
@@ -316,7 +316,7 @@ void					IMGFormatVersion3::_serialize(void)
 
 			pIMGEntry->setEntryOffsetInSectors(vecNewEntryPositions[i++]);
 
-			Events::trigger(TASK_PROGRESS);
+			Events::triggerDefault(TASK_PROGRESS);
 		}
 
 		// finalize IMG data reading/writing

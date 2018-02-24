@@ -50,7 +50,7 @@ void							IDEManager::getModelAndTextureSetNamesFromFiles(
 			stTextureSetNames.insert(String::toUpperCase(strTextureSetName));
 		}
 
-		Events::trigger(TASK_PROGRESS);
+		Events::triggerDefault(TASK_PROGRESS);
 	}
 }
 

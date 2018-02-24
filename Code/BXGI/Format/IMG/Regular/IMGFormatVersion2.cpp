@@ -47,7 +47,7 @@ void					IMGFormatVersion2::_unserialize(void)
 		pIMGEntry->setIMGFile(this);
 		pIMGEntry->unserializeVersion2(pRGIMGActiveEntry++);
 		pIMGEntry->setEntryExtension(String::toUpperCase(Path::getFileExtension(pIMGEntry->getEntryName())));
-		Events::trigger(UNSERIALIZE_IMG_ENTRY, (IMGFormat*)this);
+		Events::triggerDefault(UNSERIALIZE_IMG_ENTRY, (IMGFormat*)this);
 	}
 
 	// clean up
@@ -95,7 +95,7 @@ void					IMGFormatVersion2::_serialize(void)
 		m_writer.writeUint16(pIMGEntry->getEntrySizeInSectors());
 		m_writer.writeStringRef(pIMGEntry->getEntryName(), 24);
 
-		Events::trigger(TASK_PROGRESS);
+		Events::triggerDefault(TASK_PROGRESS);
 	}
 
 	if ((uiBodyStart % 2048) != 0 && uiEntryCount > 0)
@@ -113,7 +113,7 @@ void					IMGFormatVersion2::_serialize(void)
 
 		pIMGEntry->setEntryOffsetInSectors(vecNewEntryPositions[i++]);
 
-		Events::trigger(TASK_PROGRESS);
+		Events::triggerDefault(TASK_PROGRESS);
 	}
 
 	// finalize IMG data reading/writing

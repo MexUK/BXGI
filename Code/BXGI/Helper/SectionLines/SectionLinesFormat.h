@@ -200,7 +200,7 @@ void				bxgi::SectionLinesFormat<FormatClass, EntryClass, SectionEnum, OtherEntr
 	m_reader.readAndStoreLines();
 	while (m_reader.iterateLines())
 	{
-		bxcf::Events::trigger(bxgi::EEvent::UNSERIALIZE_FILE_PROGRESS, &m_reader);
+		bxcf::Events::triggerDefault(bxgi::EEvent::UNSERIALIZE_FILE_PROGRESS, &m_reader);
 		unserializeLine();
 	}
 }

@@ -428,7 +428,7 @@ void						TXDFormat::exportMultiple(vector<FormatEntry*>& vecEntries, string& st
 		pBMPFile->unload();
 		delete pBMPFile;
 
-		Events::trigger(TASK_PROGRESS);
+		Events::triggerDefault(TASK_PROGRESS);
 	}
 
 	m_reader.close();
@@ -465,7 +465,7 @@ void						TXDFormat::exportAll(string& strFolderPath)
 		pBMPFile->unload();
 		delete pBMPFile;
 
-		Events::trigger(TASK_PROGRESS);
+		Events::triggerDefault(TASK_PROGRESS);
 	}
 
 	m_reader.close();
@@ -580,7 +580,7 @@ void						TXDFormat::merge(string& strFilePath)
 		addEntry(pOutEntry);
 		m_uiEntryCount++;
 
-		Events::trigger(TASK_PROGRESS);
+		Events::triggerDefault(TASK_PROGRESS);
 	}
 
 	// finalize
@@ -657,7 +657,7 @@ void						TXDFormat::split(vector<FormatEntry*>& vecEntries, string& strOutPath,
 		pTextureDictionary->addEntry(pOutEntry);
 		m_uiEntryCount++;
 
-		Events::trigger(TASK_PROGRESS);
+		Events::triggerDefault(TASK_PROGRESS);
 	}
 
 	RWSection_Extension *pExtension = new RWSection_Extension;
