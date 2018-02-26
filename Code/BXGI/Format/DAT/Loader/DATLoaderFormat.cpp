@@ -173,7 +173,7 @@ vector<FormatClass*>	DATLoaderFormat::parseFiles(string strGameDirectoryPath, ED
 
 	for (auto pDATEntry : getEntries())
 	{
-		if (pDATEntry->getEntryType() == eType1 || (eType2 != DAT_LOADER_UNKNOWN && pDATEntry->getEntryType() == eType2))
+		if (pDATEntry->getEntryType2() == eType1 || (eType2 != DAT_LOADER_UNKNOWN && pDATEntry->getEntryType2() == eType2))
 		{
 			string strFormatPath = strGameDirectoryPath + Path::removeSlashFromFront(pDATEntry->getEntryValues()[0]);
 			FormatClass *pFormat = ManagerClass::get()->unserializeFile(strFormatPath);
