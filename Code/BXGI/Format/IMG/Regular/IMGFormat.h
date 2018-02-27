@@ -44,8 +44,8 @@ public:
 
 	void											_readMetaData(void);
 
-	void											_unserialize(void) {}
-	void											_serialize(void) {}
+	virtual void									_unserialize(void) {}
+	virtual void									_serialize(void) {}
 
 	void											_unserializeBefore(void);
 	void											_unserializeAfter(void);

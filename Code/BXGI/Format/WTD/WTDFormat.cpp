@@ -203,7 +203,7 @@ void					WTDFormat::_unserialize(void)
 		pWTDEntry->stripNameHeaderAndFooter();
 		pWTDEntry->setImageSize(true, pWTDEntry_RG->m_usWidth);
 		pWTDEntry->setImageSize(false, pWTDEntry_RG->m_usHeight);
-		pWTDEntry->setD3DFormat(getD3DFormatFromFourCC((char*)&pWTDEntry_RG->m_ucD3DFormat));
+		pWTDEntry->setD3DFormat(getD3DFormatFromFourCC(string((char*)&pWTDEntry_RG->m_ucD3DFormat, 4)));
 		pWTDEntry->setRasterDataFormat(ImageManager::getRasterDataFormatFromD3DFormat(pWTDEntry->getD3DFormat()), false);
 		pWTDEntry->setLevels(pWTDEntry_RG->m_ucLevels);
 		pWTDEntry->setRawDataOffset(pWTDEntry_RG->m_uiRawDataOffset);
